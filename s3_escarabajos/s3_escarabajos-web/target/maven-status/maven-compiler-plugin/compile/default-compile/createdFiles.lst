@@ -1,0 +1,5 @@
+co\edu\uniandes\csw\escarabajos\resources\RestConfig.class
+co\edu\uniandes\csw\escarabajos\resources\CityResource.class
+co\edu\uniandes\csw\escarabajos\dtos\CityDetailDTO.class
+co\edu\uniandes\csw\escarabajos\dtos\CityDTO.class
+co\edu\uniandes\csw\escarabajos\mappers\BusinessLogicExceptionMapper.class
