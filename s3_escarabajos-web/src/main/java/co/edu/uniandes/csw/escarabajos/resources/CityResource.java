@@ -101,7 +101,7 @@ public class CityResource {
      */
     @GET
     public List<CityDetailDTO> getCities() {
-        return new ArrayList<>();
+        return new ArrayList<CityDetailDTO>();
     }
 
     /**
