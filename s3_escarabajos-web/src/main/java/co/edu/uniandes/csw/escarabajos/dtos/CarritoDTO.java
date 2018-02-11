@@ -6,9 +6,42 @@
 package co.edu.uniandes.csw.escarabajos.dtos;
 
 /**
+ * CarritoDTO Objeto de transferencia de datos del . Los DTO
+ * contienen las representaciones de los JSON que se transfieren entre el
+ * cliente y el servidor.
+ *
+ * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ * <pre>
+ *   {
+ *      "items": [
+ *      {"id": number,
+ *      "categoria: string,
+ *      "marca": string,
+ *      "color: string,
+ *      "precio": double,
+ *      "usada: boolean}
+ *      ]
+ *   }
+ * </pre> Por ejemplo una bicicleta se representa asi:<br>
+ *
+ * <pre>
+ *
+ *   {
+ *      "items": [
+ *      {"id": 1,
+ *      "categoria: BMX,
+ *      "marca": We the People,
+ *      "color: Negro,
+ *      "precio": 3.499,
+ *      "usada: false}
+ *      ]
+ *   }
+ *
+ * </pre>
  *
  * @author Mateo
  */
+
 public class CarritoDTO {
     
     //-----------------------------------------------------------
@@ -24,8 +57,11 @@ public class CarritoDTO {
     // Constructor
     //-----------------------------------------------------------
     
-    public CarritoDTO(double precioTotal) {
-        this.precioTotal = precioTotal;
+    /**
+     * Constructor por defecto
+     */
+    public CarritoDTO() {
+        
     }
 
     //-----------------------------------------------------------

@@ -68,7 +68,6 @@ public class BicicletaDTO {
         this.precio = bici.getPrecio();
         this.color = bici.getColor();
         this.usada = bici.getUsada();
-
     }
 
     public Long getId() {

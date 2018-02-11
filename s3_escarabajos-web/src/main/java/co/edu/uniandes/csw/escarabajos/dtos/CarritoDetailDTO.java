@@ -34,8 +34,8 @@ public class CarritoDetailDTO extends CarritoDTO {
     // Constructor
     //-----------------------------------------------------------
     
-    public CarritoDetailDTO(ArrayList<BicicletaDTO> items) {
-        this.items = items;
+    public CarritoDetailDTO() {
+        
     }
     
     //-----------------------------------------------------------
