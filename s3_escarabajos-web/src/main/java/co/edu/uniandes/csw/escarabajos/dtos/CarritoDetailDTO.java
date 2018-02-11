@@ -8,10 +8,12 @@ package co.edu.uniandes.csw.escarabajos.dtos;
 import java.util.ArrayList;
 
 /**
- *
+ * Clase que extiende de {@link CarritoDTO} para manejar la transformacion entre
+ * los objetos JSON y las Entidades de la base de datos. Para conocer el
+ * contenido de la ciudad vaya a la documentacion de {@link CarritoDTO}
  * @author Mateo
  */
-public class CarritoDetailDTO {
+public class CarritoDetailDTO extends CarritoDTO {
     
     //-----------------------------------------------------------
     // Atributos
