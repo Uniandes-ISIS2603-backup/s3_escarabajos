@@ -6,10 +6,57 @@
 package co.edu.uniandes.csw.escarabajos.dtos;
 
 /**
+ * CarritoDTO Objeto de transferencia de datos del . Los DTO
+ * contienen las representaciones de los JSON que se transfieren entre el
+ * cliente y el servidor.
+ *
+ * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ * <pre>
+ *   {
+ *      "dineroTransaccion": double,
+ *      "numeroTarjeta": int,
+ *      "tipo": String
+ *      ]
+ *   }
+ * </pre> Por ejemplo una bicicleta se representa asi:<br>
+ *
+ * <pre>
+ *
+ *   {
+ *      "dineroTransaccion": 100000,
+ *      "numeroTarjeta": 1018505033,
+ *      "tipo": "Tarjeta de Credito"
+ *   }
+ *
+ * </pre>
  *
  * @author Mateo
  */
 public class MedioPagoDTO {
+    
+    //-----------------------------------------------------------
+    // Conctantes
+    //-----------------------------------------------------------
+    
+    /**
+     * modela el tipo de pago por pse
+     */
+    public final static String TIPO_PSE = "pse";
+    
+    /**
+     * modela el tipo de pago por paypal
+     */
+    public final static String TIPO_PAYPAL = "paypal";
+    
+    /**
+     * modela el tipo de pago por tarjeta de credito
+     */
+    public final static String TIPO_TARJETA_CREDITO = "tarjeta de credito";
+    
+    /**
+     * modela el tipo de pago por tarjeta debito
+     */
+    public final static String TIPO_TARJETA_DEBITO = "tarjeta debito";
     
     //-----------------------------------------------------------
     // Atributos
