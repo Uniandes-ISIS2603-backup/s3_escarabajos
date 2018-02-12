@@ -23,3 +23,5 @@ hs_err_pid*
 /escarabajos-back/target/
 /escarabajos-web/target/
 /target/
+/s3_escarabajos-back/target/
+/s3_escarabajos-web/target/
