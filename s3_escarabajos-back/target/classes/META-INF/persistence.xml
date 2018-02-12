@@ -4,6 +4,7 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <jta-data-source>java:app/jdbc/EscarabajosDB</jta-data-source>
     <class>co.edu.uniandes.csw.escarabajos.entities.CityEntity</class>
+    <class>co.edu.uniandes.csw.escarabajos.entities.TransferenciaEntity</class>
     <properties>
       <property name="eclipselink.logging.level" value="FINE"/>
       <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
