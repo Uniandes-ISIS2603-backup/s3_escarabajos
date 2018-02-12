@@ -1,6 +1,7 @@
 co\edu\uniandes\csw\escarabajos\exceptions\BusinessLogicException.class
 co\edu\uniandes\csw\escarabajos\entities\BaseEntity.class
 co\edu\uniandes\csw\escarabajos\entities\VendedorEntity.class
+co\edu\uniandes\csw\escarabajos\entities\TransferenciaEntity.class
 co\edu\uniandes\csw\escarabajos\entities\CityEntity.class
 co\edu\uniandes\csw\escarabajos\entities\BicicletaUsadaEntity.class
 co\edu\uniandes\csw\escarabajos\entities\BicicletaEntity.class

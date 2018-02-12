@@ -1,7 +1,9 @@
 co\edu\uniandes\csw\escarabajos\dtos\MedioPagoDetailDTO.class
+co\edu\uniandes\csw\escarabajos\dtos\TransferenciaDTO.class
 co\edu\uniandes\csw\escarabajos\dtos\BicicletaDTO.class
 co\edu\uniandes\csw\escarabajos\dtos\CarritoDetailDTO.class
 co\edu\uniandes\csw\escarabajos\resources\RestConfig.class
+co\edu\uniandes\csw\escarabajos\dtos\TransferenciaDetailDTO.class
 co\edu\uniandes\csw\escarabajos\dtos\CityDetailDTO.class
 co\edu\uniandes\csw\escarabajos\dtos\BicicletaUsadaEnVentaDTO.class
 co\edu\uniandes\csw\escarabajos\dtos\CarritoDTO.class
