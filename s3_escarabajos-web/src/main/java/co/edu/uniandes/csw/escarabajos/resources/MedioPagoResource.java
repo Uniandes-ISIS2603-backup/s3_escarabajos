@@ -23,11 +23,11 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 /**
- * <pre>Clase que implementa el recurso "MetodoPago".
- * URL: /api/transacciones/MedioPago
+ * <pre>Clase que implementa el recurso "MedioPago".
+ * URL: /api/transacciones/mediopago
  * </pre>
  * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta "/api" y
- * este recurso tiene la ruta "MetodoPago".</i>
+ * este recurso tiene la ruta "mediopago".</i>
  *
  * <h2>Anotaciones </h2>
  * <pre>
