@@ -11,7 +11,7 @@ package co.edu.uniandes.csw.escarabajos.dtos;
  * contenido de la ciudad vaya a la documentacion de {@link MedioPagoDTO}
  * @author Mateo
  */
-public class MedioPagoDetailDTO {
+public class MedioPagoDetailDTO extends MedioPagoDTO {
     
     //-----------------------------------------------------------
     // Atributos
@@ -20,6 +20,11 @@ public class MedioPagoDetailDTO {
     //-----------------------------------------------------------
     // Constructor
     //-----------------------------------------------------------
+    
+    public MedioPagoDetailDTO(){
+        
+        super();
+    }
     
     //-----------------------------------------------------------
     // Getters and Setters

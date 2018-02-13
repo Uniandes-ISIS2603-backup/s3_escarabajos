@@ -35,7 +35,7 @@ public class CarritoDetailDTO extends CarritoDTO {
     //-----------------------------------------------------------
     
     public CarritoDetailDTO() {
-        
+        super();
     }
     
     //-----------------------------------------------------------

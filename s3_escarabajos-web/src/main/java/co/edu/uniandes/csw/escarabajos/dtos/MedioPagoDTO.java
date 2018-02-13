@@ -81,10 +81,8 @@ public class MedioPagoDTO {
     //-----------------------------------------------------------
     
     
-    public MedioPagoDTO(double dineroTransaccion, int numeroTarjeta, String tipo) {
-        this.dineroTransaccion = dineroTransaccion;
-        this.numeroTarjeta = numeroTarjeta;
-        this.tipo = tipo;
+    public MedioPagoDTO() {
+        
     }
 
     //-----------------------------------------------------------
