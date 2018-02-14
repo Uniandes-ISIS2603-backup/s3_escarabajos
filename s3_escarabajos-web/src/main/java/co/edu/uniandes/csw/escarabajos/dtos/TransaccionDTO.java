@@ -10,14 +10,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import co.edu.uniandes.csw.escarabajos.entities.TransferenciaEntity;
+import co.edu.uniandes.csw.escarabajos.entities.TransaccionEntity;
 
 /**
  *
  * @author jp.carreno
  */
 @Entity
-public class TransferenciaDTO{
+public class TransaccionDTO{
 
     @Id
     private Long id;
@@ -51,7 +51,7 @@ public class TransferenciaDTO{
     /**
      * Constructor por defecto
      */
-    public TransferenciaDTO() {
+    public TransaccionDTO() {
 
     }
 
@@ -61,7 +61,7 @@ public class TransferenciaDTO{
      *
      * @param bici: Es la entidad que se va a convertir a DTO
      */
-    public TransferenciaDTO(TransferenciaEntity transfer) {
+    public TransaccionDTO(TransaccionEntity transfer) {
         this.id = transfer.getId();
         this.usuarioT = transfer.getUsuario();
         this.dineroT = transfer.getDinero();
@@ -72,8 +72,8 @@ public class TransferenciaDTO{
      *
      * @return Un Entity con los valores del DTO
      */
-    public TransferenciaEntity toEntity() {
-        TransferenciaEntity entity = new TransferenciaEntity();
+    public TransaccionEntity toEntity() {
+        TransaccionEntity entity = new TransaccionEntity();
         entity.setId(this.id);
         entity.setDinero(this.dineroT);
         entity.setUsuario(this.usuarioT);

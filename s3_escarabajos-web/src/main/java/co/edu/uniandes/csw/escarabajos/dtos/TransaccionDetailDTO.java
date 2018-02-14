@@ -5,7 +5,7 @@
  */
 package co.edu.uniandes.csw.escarabajos.dtos;
 
-import co.edu.uniandes.csw.escarabajos.entities.TransferenciaEntity;
+import co.edu.uniandes.csw.escarabajos.entities.TransaccionEntity;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,12 +17,12 @@ import javax.persistence.Id;
  * @author jp.carreno
  */
 @Entity
-public class TransferenciaDetailDTO extends TransferenciaDTO {
+public class TransaccionDetailDTO extends TransaccionDTO {
 
     /**
      * Constructor por defecto
      */
-    public TransferenciaDetailDTO() {
+    public TransaccionDetailDTO() {
     }
 
     /**
@@ -30,7 +30,7 @@ public class TransferenciaDetailDTO extends TransferenciaDTO {
      *
      * @param entity La entidad de bicicleta a partir de la cual se construye el objeto
      */
-    public TransferenciaDetailDTO(TransferenciaEntity entity) {
+    public TransaccionDetailDTO(TransaccionEntity entity) {
         super(entity);
     }
 
@@ -40,8 +40,8 @@ public class TransferenciaDetailDTO extends TransferenciaDTO {
      * @return  La entidad construida a partir del DTO.
      */
     @Override
-    public TransferenciaEntity toEntity() {
-        TransferenciaEntity biciE = super.toEntity();
+    public TransaccionEntity toEntity() {
+        TransaccionEntity biciE = super.toEntity();
         return biciE;
     }
     

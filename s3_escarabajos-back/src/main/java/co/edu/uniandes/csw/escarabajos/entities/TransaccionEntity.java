@@ -16,7 +16,7 @@ import javax.persistence.Id;
  * @author jp.carreno
  */
 @Entity
-public class TransferenciaEntity implements Serializable {
+public class TransaccionEntity implements Serializable {
 
     @Id
     private Long id;

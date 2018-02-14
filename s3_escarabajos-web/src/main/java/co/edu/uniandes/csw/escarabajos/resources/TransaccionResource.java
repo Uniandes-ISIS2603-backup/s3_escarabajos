@@ -5,7 +5,7 @@
  */
 package co.edu.uniandes.csw.escarabajos.resources;
 
-import co.edu.uniandes.csw.escarabajos.dtos.TransferenciaDetailDTO;
+import co.edu.uniandes.csw.escarabajos.dtos.TransaccionDetailDTO;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,36 +28,36 @@ import javax.ws.rs.Produces;
  *
  * @author jp.carreno
  */
-@Path("transferencias")
+@Path("transacciones")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
 
-public class TransferenciaResource {
+public class TransaccionResource {
     
      /**
-     * <h1>POST /api/bicis : Crear una transferencia.</h1>
+     * <h1>POST /api/bicis : Crear una transaccion.</h1>
      * 
-     * <pre>Cuerpo de petición: JSON {@link TransferenciaDetailDTO}.
+     * <pre>Cuerpo de petición: JSON {@link TransaccionDetailDTO}.
      * 
-     * Crea una nueva transferencia con la informacion que se recibe en el cuerpo 
+     * Crea una nueva transaccion con la informacion que se recibe en el cuerpo 
      * de la petición y se regresa un objeto identico con un id auto-generado 
      * por la base de datos.
      * 
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Creó la nueva transferencia .
+     * 200 OK Creó la nueva transaccion .
      * </code>
      * <code style="color: #c7254e; background-color: #f9f2f4;">
      * 412 Precodition Failed: Ya existe la transferencia.
      * </code>
      * </pre>
-     * @param transferencia {@link TransferenciaDetailDTO} - La transferencia que se desea guardar.
-     * @return JSON {@link TransferenciaDetailDTO}  - La transferencia guardada con el atributo id autogenerado.
+     * @param transferencia {@link TransaccionDetailDTO} - La transaccion que se desea guardar.
+     * @return JSON {@link TransaccionDetailDTO}  - La transferencia guardada con el atributo id autogenerado.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la transferencia.
      */
     @POST
-    public TransferenciaDetailDTO createBicicleta(TransferenciaDetailDTO transferencia) throws BusinessLogicException {
+    public TransaccionDetailDTO createBicicleta(TransaccionDetailDTO transferencia) throws BusinessLogicException {
         return transferencia;
     }
 
@@ -70,11 +70,11 @@ public class TransferenciaResource {
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Devuelve todas las transferencias de la aplicacion.</code> 
      * </pre>
-     * @return JSONArray {@link TransferenciaDetailDTO} - Las transferencias encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
+     * @return JSONArray {@link TransaccionDetailDTO} - Las transferencias encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
      */
     @GET
-    public List<TransferenciaDetailDTO> getTransferencias() {
-        return new ArrayList<TransferenciaDetailDTO>();
+    public List<TransaccionDetailDTO> getTransferencias() {
+        return new ArrayList<TransaccionDetailDTO>();
     }
     
    /**
@@ -91,11 +91,11 @@ public class TransferenciaResource {
      * </code> 
      * </pre>
      * @param id Identificador de la transferencia que se esta buscando. Este debe ser una cadena de dígitos.
-     * @return JSON {@link TransferenciaDetailDTO} - La transferencia buscada
+     * @return JSON {@link TransaccionDetailDTO} - La transferencia buscada
      */
     @GET
     @Path("{id: \\d+}")
-    public TransferenciaDetailDTO getTransferencia(@PathParam("id") Long id) {
+    public TransaccionDetailDTO getTransferencia(@PathParam("id") Long id) {
         return null;
     }
     
@@ -113,13 +113,13 @@ public class TransferenciaResource {
      * </code> 
      * </pre>
      * @param id Identificador de la transferencia que se desea actualizar.Este debe ser una cadena de dígitos.
-     * @param city {@link TransferenciaDetailDTO} La transferencia que se desea guardar.
-     * @return JSON {@link TransferenciaDetailDTO} - La transferencia guardada.
+     * @param city {@link TransaccionDetailDTO} La transferencia que se desea guardar.
+     * @return JSON {@link TransaccionDetailDTO} - La transferencia guardada.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar la transferencia porque ya existe una con ese nombre.
      */
     @PUT
     @Path("{id: \\d+}")
-    public TransferenciaDetailDTO updateTransferencia(@PathParam("id") Long id, TransferenciaDetailDTO city) throws BusinessLogicException {
+    public TransaccionDetailDTO updateTransferencia(@PathParam("id") Long id, TransaccionDetailDTO city) throws BusinessLogicException {
         return city;
     }
     
