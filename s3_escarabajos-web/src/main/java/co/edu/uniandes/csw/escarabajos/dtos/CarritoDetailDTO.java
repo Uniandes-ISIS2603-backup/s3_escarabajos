@@ -22,7 +22,7 @@ public class CarritoDetailDTO extends CarritoDTO {
     /**
      * modela los items que el cliente va a comprar
      */
-    private ArrayList<BicicletaDTO> items;
+    private ArrayList<ItemDTO> items;
     
     /**
      * modela el cliente dueo del carrito;
@@ -43,11 +43,11 @@ public class CarritoDetailDTO extends CarritoDTO {
     //-----------------------------------------------------------
     
     
-    public ArrayList<BicicletaDTO> getItems() {
+    public ArrayList<ItemDTO> getItems() {
         return items;
     }
     
-    public void setItems(ArrayList<BicicletaDTO> items) {
+    public void setItems(ArrayList<ItemDTO> items) {
         this.items = items;
     }
 
