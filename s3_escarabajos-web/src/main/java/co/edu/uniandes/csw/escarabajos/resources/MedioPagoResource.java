@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.csw.escarabajos.resources;
 
-import co.edu.uniandes.csw.escarabajos.dtos.CityDetailDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.MedioPagoDetailDTO;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.mappers.BusinessLogicExceptionMapper;
@@ -64,8 +63,8 @@ public class MedioPagoResource {
      * 404 Not Found No existe una transaccion con el id dado.
      */
     @GET
-    public List<CityDetailDTO> getCities() {
-        return new ArrayList<CityDetailDTO>();
+    public List<MedioPagoDetailDTO> getMedioPago() {
+        return new ArrayList<MedioPagoDetailDTO>();
     }
     
 }
