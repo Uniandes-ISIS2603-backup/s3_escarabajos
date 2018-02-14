@@ -7,7 +7,6 @@ package co.edu.uniandes.csw.escarabajos.resources;
 
 import co.edu.uniandes.csw.escarabajos.dtos.BicicletaDetailDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.CarritoDetailDTO;
-import co.edu.uniandes.csw.escarabajos.dtos.CityDetailDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.ClienteDetailDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.ItemDetailDTO;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
@@ -85,8 +84,8 @@ public class ItemResource {
      * @return JSONArray {@link ItemDTO} - Los items que hay en el carrito. Si no hay ninguno retorna una lista vacía.
      */
     @GET
-    public List<CityDetailDTO> getItems() {
-        return new ArrayList<CityDetailDTO>();
+    public List<ItemDetailDTO> getItems() {
+        return new ArrayList<ItemDetailDTO>();
     }
     
      /**
@@ -107,7 +106,7 @@ public class ItemResource {
      */
     @GET
     @Path("{id2: \\d+}")
-    public CityDetailDTO getItem(@PathParam("id2") Long id) {
+    public ItemDetailDTO getItem(@PathParam("id2") Long id) {
         return null;
     }
     

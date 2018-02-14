@@ -7,7 +7,6 @@ package co.edu.uniandes.csw.escarabajos.resources;
 
 import co.edu.uniandes.csw.escarabajos.dtos.BicicletaDetailDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.CarritoDetailDTO;
-import co.edu.uniandes.csw.escarabajos.dtos.CityDetailDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.ClienteDetailDTO;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.mappers.BusinessLogicExceptionMapper;
