@@ -45,9 +45,10 @@ import javax.ws.rs.Produces;
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
-public class ItemResource {
+public class ItemResource 
+{
     
-         /**
+        /**
      * <h1>POST /api/cliente/{id}/carrito/items : Agrega un item al carrito del cliente.</h1>
      * 
      * <pre>Cuerpo de petición: JSON {@link ItemDetailDTO}.

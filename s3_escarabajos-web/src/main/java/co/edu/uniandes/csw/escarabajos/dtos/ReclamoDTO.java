@@ -28,7 +28,7 @@ public class ReclamoDTO
      * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
      * la entidad que viene de argumento.
      *
-     * @param bici: Es la entidad que se va a convertir a DTO
+     * @param recl: Es la entidad que se va a convertir a DTO
      */
     public ReclamoDTO(ReclamoEntity recl) {
         this.id = recl.getId();
