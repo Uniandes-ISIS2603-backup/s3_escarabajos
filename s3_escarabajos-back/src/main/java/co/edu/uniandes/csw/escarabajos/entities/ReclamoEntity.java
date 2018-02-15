@@ -20,6 +20,7 @@ import javax.persistence.Id;
 public class ReclamoEntity implements Serializable
 {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private List<String> pics;
     private String mensaje;

@@ -14,6 +14,7 @@ public class CalificacionDTO
 {
     private String comentario;
     private double puntaje;
+    private Long id;
     
     public CalificacionDTO()
     {}
@@ -22,6 +23,7 @@ public class CalificacionDTO
     {
         comentario = cal.getComentario();
         puntaje = cal.getPuntaje();
+        id = cal.getId();
     }
         public String getComentario()
     {
@@ -44,6 +46,7 @@ public class CalificacionDTO
         CalificacionEntity e = new CalificacionEntity();
         e.setComentario(comentario);
         e.setPuntaje(puntaje);
+        e.setId(this.id);
         return e;
     }
 }

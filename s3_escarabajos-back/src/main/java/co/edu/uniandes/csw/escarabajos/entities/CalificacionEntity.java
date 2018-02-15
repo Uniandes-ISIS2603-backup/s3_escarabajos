@@ -7,6 +7,9 @@ package co.edu.uniandes.csw.escarabajos.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 /**
  *
  * @author n.gaitan
@@ -14,7 +17,13 @@ import javax.persistence.Entity;
 @Entity
 public class CalificacionEntity extends BaseEntity implements Serializable
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
+    public Long id;
+
     public String comentario;
+    
     public double puntaje;
     
     public String getComentario()
@@ -32,5 +41,14 @@ public class CalificacionEntity extends BaseEntity implements Serializable
     public void setComentario(String com)
     {
         comentario = com;
+    }
+       public Long getId() 
+    {
+        return id;
+    }
+
+    public void setId(Long id) 
+    {
+        this.id = id;
     }
 }
