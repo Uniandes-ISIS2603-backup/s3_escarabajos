@@ -23,7 +23,7 @@ import co.edu.uniandes.csw.escarabajos.dtos.CalificacionDetailDTO;
  * URL: /api/calificaciones
  * </pre>
  * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta "/api" y
- * este recurso tiene la ruta "reclamos".</i>
+ * este recurso tiene la ruta "calificaciones".</i>
  *
  * <h2>Anotaciones </h2>
  * <pre>
@@ -34,7 +34,7 @@ import co.edu.uniandes.csw.escarabajos.dtos.CalificacionDetailDTO;
   * @author n.gaitan
  */
 
-@Path("reclamos")
+@Path("calificaciones")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
@@ -62,8 +62,8 @@ public class CalificacionResource
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe un reclamo.
      */
     @POST
-    public CalificacionDetailDTO createCalificacion(CalificacionDetailDTO reclamo) throws BusinessLogicException {
-        return reclamo;
+    public CalificacionDetailDTO createCalificacion(CalificacionDetailDTO calificacion) throws BusinessLogicException {
+        return calificacion;
     }
 
     /**
@@ -118,8 +118,8 @@ public class CalificacionResource
      * </code> 
      * </pre>
      * @param id Identificador de la calificacion que se desea actualizar.Este debe ser una cadena de dígitos.
-     * @param calificacion {@link CalificacionDetailDTO} El reclamo que se desea guardar.
-     * @return JSON {@link CalificacionDetailDTO} - El reclamo guardada.
+     * @param calificacion {@link CalificacionDetailDTO} La calificacion que se desea guardar.
+     * @return JSON {@link CalificacionDetailDTO} - La calificacion guardada.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar la calificacion porque ya existe una con ese id.
      */
     @PUT

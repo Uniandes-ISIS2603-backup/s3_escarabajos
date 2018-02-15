@@ -22,10 +22,10 @@ import javax.ws.rs.Produces;
 
 /**
  * <pre>Clase que implementa el recurso "reclamos".
- * URL: /api/bicis
+ * URL: /api/reclamos
  * </pre>
  * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta "/api" y
- * este recurso tiene la ruta "bicis".</i>
+ * este recurso tiene la ruta "reclamos".</i>
  *
  * <h2>Anotaciones </h2>
  * <pre>
