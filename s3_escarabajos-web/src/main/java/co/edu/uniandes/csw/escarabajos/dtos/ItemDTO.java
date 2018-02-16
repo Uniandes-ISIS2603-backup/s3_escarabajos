@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.escarabajos.dtos;
+
 /**
  * ItemDTO Objeto de transferencia de datos de los items del carrito .Los DTO
  * contienen las representaciones de los JSON que se transfieren entre el
@@ -33,7 +34,7 @@ public class ItemDTO {
     /**
      * modela cuantos items de este tipo estan en el carrito
      */
-    private int cantidad;
+    private Integer cantidad;
  
     //-----------------------------------------------------------
     // Constructor
@@ -50,11 +51,11 @@ public class ItemDTO {
     // Getters and Setters
     //-----------------------------------------------------------
 
-    public int getCantidad() {
+    public Integer getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
     

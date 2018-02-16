@@ -49,7 +49,7 @@ public class ItemResource
 {
     
         /**
-     * <h1>POST /api/cliente/{id}/carrito/items : Agrega un item al carrito del cliente.</h1>
+     * <h1>POST /api/clientes/{id}/carrito/items : Agrega un item al carrito del cliente.</h1>
      * 
      * <pre>Cuerpo de petición: JSON {@link ItemDetailDTO}.
      * 
@@ -63,14 +63,15 @@ public class ItemResource
      * 412 Precodition Failed: El item no se encuentra en el inventario.
      * </code>
      * </pre>
-     * @return JSON {@link ItemDTO}  - El item que se agrego al carrito.
+     * @param item {@link ItemDetailDTO} - El item que se desea guardar.
+     * @return JSON {@link ItemDetailDTO}  - El item guardado con el atributo id autogenerado.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica.
      */
     
     @POST
-    public CarritoDetailDTO agregarItem(){
+    public ItemDetailDTO agregarItem( ItemDetailDTO item ){
         
-        return null;
+        return item;
     }
     
     /**

@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.escarabajos.dtos;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Clase que extiende de {@link CarritoDTO} para manejar la transformacion entre
@@ -22,20 +23,19 @@ public class CarritoDetailDTO extends CarritoDTO {
     /**
      * modela los items que el cliente va a comprar
      */
-    private ArrayList<ItemDTO> items;
+    private List<ItemDTO> items;
     
     /**
      * modela el cliente dueo del carrito;
      * @param items
      */
-    //private ClienteDTO cliente;
+    private ClienteDTO cliente;
     
     //-----------------------------------------------------------
     // Constructor
     //-----------------------------------------------------------
     
     public CarritoDetailDTO() {
-        super();
     }
     
     //-----------------------------------------------------------
@@ -43,7 +43,7 @@ public class CarritoDetailDTO extends CarritoDTO {
     //-----------------------------------------------------------
     
     
-    public ArrayList<ItemDTO> getItems() {
+    public List<ItemDTO> getItems() {
         return items;
     }
     

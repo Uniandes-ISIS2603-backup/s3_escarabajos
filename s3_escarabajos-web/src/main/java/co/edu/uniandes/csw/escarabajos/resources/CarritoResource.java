@@ -47,7 +47,7 @@ import javax.ws.rs.Produces;
 public class CarritoResource {
     
      /**
-     * <h1>POST /api/cliente/{id}/carrito : Agrega el carrito.</h1>
+     * <h1>POST /api/clientes/{id}/carrito : Agrega el carrito.</h1>
      * 
      * <pre>Cuerpo de petición: JSON {@link CarritoDetailDTO}.
      * 
@@ -69,6 +69,40 @@ public class CarritoResource {
     public CarritoDetailDTO agregarCarrito(){
         
         return null;
+    }
+    
+     /**
+     * <h1>GET /api/clientes/{id}/carrito : Obtener el carrito del cliente.</h1>
+     * 
+     * <pre>Busca y devuelve el carrito del cliente.
+     * 
+     * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Devueve el carrito del cliente.</code> 
+     * </pre>
+     * @return JSONArray {@link CarritoDetailDTO} - El carrito del cliente.
+     */
+    @GET
+    public List<CarritoDetailDTO> getCarrito() {
+        return new ArrayList<CarritoDetailDTO>();
+    }
+    
+     /**
+     * <h1>PUT /api/clientes/{id}/carrito : Actualizar el carrito del cliente.</h1>
+     * <pre>Cuerpo de petición: JSON {@link CarritoDetailDTO}.
+     * 
+     * Actualiza el carrito del cliente.
+     * 
+     * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Actualiza el carrito del cliente. Retorna un objeto identico.</code> 
+     * </pre>
+     * @return JSON {@link CarritoDetailDTO} - El carrito actualizado.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar el carrito.
+     */
+    @PUT
+    public CarritoDetailDTO updateCity(CarritoDetailDTO carrito) throws BusinessLogicException {
+        return carrito;
     }
     
     /**

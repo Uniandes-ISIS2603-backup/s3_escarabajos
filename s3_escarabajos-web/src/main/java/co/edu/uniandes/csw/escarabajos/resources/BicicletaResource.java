@@ -80,7 +80,7 @@ public class BicicletaResource {
     }
     
    /**
-     * <h1>GET /api/bicicletas/{id} : Obtener bicicleta por id.</h1>
+     * <h1>GET /api/bicis/{id} : Obtener bicicleta por id.</h1>
      * 
      * <pre>Busca la bicicleta con el id asociado recibido en la URL y la devuelve.
      * 
@@ -102,7 +102,7 @@ public class BicicletaResource {
     }
     
     /**
-     * <h1>PUT /api/bicicletas/{id} : Actualizar bicicleta con el id dado.</h1>
+     * <h1>PUT /api/bicis/{id} : Actualizar bicicleta con el id dado.</h1>
      * <pre>Cuerpo de petición: JSON {@link BicicletaDetailDTO}.
      * 
      * Actualiza la bicicleta con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
@@ -126,7 +126,7 @@ public class BicicletaResource {
     }
     
     /**
-     * <h1>DELETE /api/bicicletas/{id} : Borrar bicicleta por id.</h1>
+     * <h1>DELETE /api/bicis/{id} : Borrar bicicleta por id.</h1>
      * 
      * <pre>Borra la bicicleta con el id asociado recibido en la URL.
      * 

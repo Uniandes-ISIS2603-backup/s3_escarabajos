@@ -18,7 +18,5 @@ public class ItemDetailDTO extends ItemDTO{
     //-----------------------------------------------------------
     
     public ItemDetailDTO() {
-        
-        super();
     }
 }
