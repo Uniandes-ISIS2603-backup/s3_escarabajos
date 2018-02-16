@@ -16,6 +16,24 @@ import javax.persistence.Entity;
 public class BicicletaUsadaEntity extends BicicletaEntity implements Serializable {
 
     private String facturaOriginal;
+    private String estado;
+    private double precioDeReventa;
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public double getPrecioDeReventa() {
+        return precioDeReventa;
+    }
+
+    public void setPrecioDeReventa(double precioDeReventa) {
+        this.precioDeReventa = precioDeReventa;
+    }
 
     public String getFacturaOriginal() {
         return facturaOriginal;

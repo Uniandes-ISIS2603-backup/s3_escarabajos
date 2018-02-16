@@ -46,6 +46,8 @@ public class BicicletaUsadaEnVentaDTO extends BicicletaDTO {
      * Representa la imagen de la factura original del vendedor.
      */
     private String facturaOriginal;
+    private String estado;
+    private double precioDeReventa;
 
     /**
      * Por defecto.
@@ -62,9 +64,26 @@ public class BicicletaUsadaEnVentaDTO extends BicicletaDTO {
      */
     public BicicletaUsadaEnVentaDTO(BicicletaUsadaEntity bici) {
         this.facturaOriginal = bici.getFacturaOriginal();
+        this.precioDeReventa = bici.getPrecioDeReventa();
+        this.estado = bici.getEstado();
     }
 
-    
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public double getPrecioDeReventa() {
+        return precioDeReventa;
+    }
+
+    public void setPrecioDeReventa(double precioDeReventa) {
+        this.precioDeReventa = precioDeReventa;
+    }
+
     public String getFacturaOriginal() {
         return facturaOriginal;
     }
@@ -81,6 +100,8 @@ public class BicicletaUsadaEnVentaDTO extends BicicletaDTO {
     public BicicletaUsadaEntity toEntity() {
         BicicletaUsadaEntity entity = new BicicletaUsadaEntity();
         entity.setFacturaOriginal(this.facturaOriginal);
+        entity.setPrecioDeReventa(this.precioDeReventa);
+        entity.setEstado(this.estado);
 
         return entity;
     }
