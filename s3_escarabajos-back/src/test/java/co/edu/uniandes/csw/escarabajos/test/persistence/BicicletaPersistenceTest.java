@@ -1,4 +1,4 @@
-package co.edu.uniandes.csw.company.test.persistence;
+package co.edu.uniandes.csw.escarabajos.test.persistence;
 
 import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
 import co.edu.uniandes.csw.escarabajos.persistence.BicicletaPersistence;
