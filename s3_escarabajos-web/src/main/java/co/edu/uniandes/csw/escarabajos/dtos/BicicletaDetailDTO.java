@@ -12,7 +12,8 @@ import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
  * @author c.santacruza
  */
 public class BicicletaDetailDTO extends BicicletaDTO {
-     /**
+
+    /**
      * Constructor por defecto
      */
     public BicicletaDetailDTO() {
@@ -21,7 +22,8 @@ public class BicicletaDetailDTO extends BicicletaDTO {
     /**
      * Constructor para transformar un Entity a un DTO
      *
-     * @param entity La entidad de bicicleta a partir de la cual se construye el objeto
+     * @param entity La entidad de bicicleta a partir de la cual se construye el
+     * objeto
      */
     public BicicletaDetailDTO(BicicletaEntity entity) {
         super(entity);
@@ -30,7 +32,7 @@ public class BicicletaDetailDTO extends BicicletaDTO {
     /**
      * Transformar un DTO a un Entity
      *
-     * @return  La entidad construida a partir del DTO.
+     * @return La entidad construida a partir del DTO.
      */
     @Override
     public BicicletaEntity toEntity() {

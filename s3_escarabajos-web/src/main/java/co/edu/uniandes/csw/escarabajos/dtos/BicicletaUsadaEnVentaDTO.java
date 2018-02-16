@@ -5,63 +5,56 @@
  */
 package co.edu.uniandes.csw.escarabajos.dtos;
 
-
 import co.edu.uniandes.csw.escarabajos.entities.BicicletaUsadaEntity;
 
 /**
- * BicicletaUsadaEnVentaDTO Objeto de transferencia de datos de BicicletasUsadasEnVenta. Los DTO contienen las
- * represnetaciones de los JSON que se transfieren entre el cliente y el
- * servidor.
- * 
+ * BicicletaUsadaEnVentaDTO Objeto de transferencia de datos de
+ * BicicletasUsadasEnVenta. Los DTO contienen las represnetaciones de los JSON
+ * que se transfieren entre el cliente y el servidor.
+ *
  * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
  * <pre>
  *   {
  *      "id": number,
- *      "name: string,
- *      "facturaOriginal": string,
- *      "precioVenta": double
+ *      "categoria: string,
+ *      "marca": string,
+ *      "color: string,
+ *      "precio": double,
+ *      "usada: boolean,
+ *      "facturaOriginal" : string,
+ *      "precioVenta" : double
  *   }
- * </pre>
- * Por ejemplo una bicicletaUsadaEnVenta se representa asi:<br>
+ * </pre> Por ejemplo una bicicletaUsadaEnVenta se representa asi:<br>
  * <pre>
- * 
  *   {
- *      
- *      
+ *      "id": 1,
+ *      "categoria: BMX,
+ *      "marca": We the People,
+ *      "color: Negro,
+ *      "precio": 2.50,
+ *      "usada: true
+ *      "facturaOriginal" : "https://cloud10.todocoleccion.online/facturas-antiguas/tc/2010/05/15/19344998.jpg"
  *   }
  *
  * </pre>
- * @author Andres
+ *
+ * @author c.santacruza
  */
-public class BicicletaUsadaEnVentaDTO {
-     //-----------------------------------------------------------
-    // Atributos
-    //-----------------------------------------------------------
-    
+public class BicicletaUsadaEnVentaDTO extends BicicletaDTO {
+
     /**
-     * Representa la factura original del vendedor. 
+     * Representa la imagen de la factura original del vendedor.
      */
     private String facturaOriginal;
-    
-    
-    /**
-     * Modela el precio que la bicicleta le costo a la tienda.
-     */
-    private double precioVenta;
-    
-    //-----------------------------------------------------------
-    // Constructor
-    //-----------------------------------------------------------
-    
+
     /**
      * Por defecto.
      */
-    public BicicletaUsadaEnVentaDTO()
-    {
-        
+    public BicicletaUsadaEnVentaDTO() {
+
     }
-    
-     /**
+
+    /**
      * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
      * la entidad que viene de argumento.
      *
@@ -69,13 +62,9 @@ public class BicicletaUsadaEnVentaDTO {
      */
     public BicicletaUsadaEnVentaDTO(BicicletaUsadaEntity bici) {
         this.facturaOriginal = bici.getFacturaOriginal();
-        this.precioVenta = bici.getPrecioVenta();
     }
-    
-    //-----------------------------------------------------------
-    // Getters & Setters
-    //-----------------------------------------------------------
 
+    
     public String getFacturaOriginal() {
         return facturaOriginal;
     }
@@ -84,14 +73,6 @@ public class BicicletaUsadaEnVentaDTO {
         this.facturaOriginal = facturaOriginal;
     }
 
-    public double getPrecioVenta() {
-        return precioVenta;
-    }
-
-    public void setPrecioVenta(double precioVenta) {
-        this.precioVenta = precioVenta;
-    }
-    
     /**
      * Convertir DTO a Entity
      *
@@ -100,9 +81,8 @@ public class BicicletaUsadaEnVentaDTO {
     public BicicletaUsadaEntity toEntity() {
         BicicletaUsadaEntity entity = new BicicletaUsadaEntity();
         entity.setFacturaOriginal(this.facturaOriginal);
-        entity.setPrecioVenta(this.precioVenta);
-        
+
         return entity;
     }
-    
+
 }

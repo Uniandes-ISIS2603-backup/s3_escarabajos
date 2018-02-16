@@ -8,19 +8,16 @@ package co.edu.uniandes.csw.escarabajos.entities;
 import java.io.Serializable;
 import javax.persistence.Entity;
 
-
 /**
  *
- * @author Andres
+ * @author c.santacruza
  */
 @Entity
-public class BicicletaUsadaEntity extends BaseEntity implements Serializable  {
-    
- private String facturaOriginal;
- 
-  private double precioVenta;
-  
-  public String getFacturaOriginal() {
+public class BicicletaUsadaEntity extends BicicletaEntity implements Serializable {
+
+    private String facturaOriginal;
+
+    public String getFacturaOriginal() {
         return facturaOriginal;
     }
 
@@ -28,12 +25,4 @@ public class BicicletaUsadaEntity extends BaseEntity implements Serializable  {
         this.facturaOriginal = facturaOriginal;
     }
 
-    public double getPrecioVenta() {
-        return precioVenta;
-    }
-
-    public void setPrecioVenta(double precioVenta) {
-        this.precioVenta = precioVenta;
-    }
-    
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.uniandes.csw.escarabajos.resources;
 
 import co.edu.uniandes.csw.escarabajos.dtos.BicicletaDetailDTO;
@@ -120,14 +115,14 @@ public class BicicletaResource {
      * </code> 
      * </pre>
      * @param id Identificador de la bicicleta que se desea actualizar.Este debe ser una cadena de dígitos.
-     * @param city {@link BicicletaDetailDTO} La bicicleta que se desea guardar.
+     * @param bici {@link BicicletaDetailDTO} La bicicleta que se desea guardar.
      * @return JSON {@link BicicletaDetailDTO} - La bicicleta guardada.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar la bicicleta porque ya existe una con ese nombre.
      */
     @PUT
     @Path("{id: \\d+}")
-    public BicicletaDetailDTO updateBicicleta(@PathParam("id") Long id, BicicletaDetailDTO city) throws BusinessLogicException {
-        return city;
+    public BicicletaDetailDTO updateBicicleta(@PathParam("id") Long id, BicicletaDetailDTO bici) throws BusinessLogicException {
+        return bici;
     }
     
     /**

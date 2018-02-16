@@ -27,7 +27,7 @@ import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
  * <pre>
  *
  *   {
-*       "id": 1,
+ *      "id": 1,
  *      "categoria: BMX,
  *      "marca": We the People,
  *      "color: Negro,
