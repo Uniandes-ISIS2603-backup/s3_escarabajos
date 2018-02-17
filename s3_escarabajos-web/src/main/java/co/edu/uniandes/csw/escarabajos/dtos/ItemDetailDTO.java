@@ -6,17 +6,9 @@
 package co.edu.uniandes.csw.escarabajos.dtos;
 
 /**
- * Clase que extiende de {@link ItemDTO} para manejar la transformacion entre
- * los objetos JSON y las Entidades de la base de datos. Para conocer el
- * contenido de la ciudad vaya a la documentacion de {@link ItemDTO}
- * @author Mateo
+ *
+ * @author af.varon
  */
-public class ItemDetailDTO extends ItemDTO{
-   
-    //-----------------------------------------------------------
-    // Constructor
-    //-----------------------------------------------------------
+public class ItemDetailDTO {
     
-    public ItemDetailDTO() {
-    }
 }

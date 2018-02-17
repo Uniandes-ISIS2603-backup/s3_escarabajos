@@ -24,6 +24,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
+
+//Esta clase no se actualizo a la nueva version de item que se refiere a la super clase de los productos de la tienda ya que esta clase no se puede instanciar sola, por esta razon no se puede buscar un item que no haga parte de una de sus subclases.
 /**
  * <pre>Clase que implementa el recurso "items".
  * URL: /api/cliente/{id}/carrito/items
@@ -45,7 +47,7 @@ import javax.ws.rs.Produces;
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
-public class ItemResource 
+public class ItemResourceSINACTUALIZAR 
 {
     
         /**

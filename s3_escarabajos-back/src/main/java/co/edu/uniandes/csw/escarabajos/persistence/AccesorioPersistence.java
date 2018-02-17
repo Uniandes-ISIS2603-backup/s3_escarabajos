@@ -40,6 +40,14 @@ public class AccesorioPersistence {
     public void delete(AccesorioEntity accesorio){
        em.remove(accesorio);
     }
+    
+    /**
+     * Busca si hay algun accesorio con el nombre que se envía de argumento
+     *
+     * @param name: Nombre del accesorio que se está buscando
+     * @return null si no existe ningun accesorio con el nombre del argumento. Si
+     * existe alguno devuelve el primero.
+     */
     public AccesorioEntity findByName(String name){
          TypedQuery query = em.createQuery("Select e From AccesorioEntity e where e.name = :name", AccesorioEntity.class);
         // Se remplaza el placeholder ":name" con el valor del argumento 

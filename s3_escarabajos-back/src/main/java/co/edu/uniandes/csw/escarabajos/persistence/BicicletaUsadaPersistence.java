@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.csw.escarabajos.persistence;
 
-import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
 import co.edu.uniandes.csw.escarabajos.entities.BicicletaUsadaEntity;
 import java.util.List;
 import java.util.logging.Logger;

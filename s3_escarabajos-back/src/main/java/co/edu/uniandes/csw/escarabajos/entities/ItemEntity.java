@@ -13,22 +13,62 @@ import javax.persistence.Id;
 
 /**
  *
- * @author
+ * @author Andres 
  */
 @Entity
-class ItemEntity implements Serializable {
-
+public class ItemEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+     
+    private double precio;
+    
+    private String[] album;
 
+    /**
+     * @return the id
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * @param id the id to set
+     */
     public void setId(Long id) {
         this.id = id;
     }
+
+    /**
+     * @return the precio
+     */
+    public double getPrecio() {
+        return precio;
+    }
+
+    /**
+     * @param precio the precio to set
+     */
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    /**
+     * @return the album
+     */
+    public String[] getAlbum() {
+        return album;
+    }
+
+    /**
+     * @param album the album to set
+     */
+    public void setAlbum(String[] album) {
+        this.album = album;
+    }
+
+    
+
     
     
 }

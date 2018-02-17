@@ -7,39 +7,92 @@ package co.edu.uniandes.csw.escarabajos.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 /**
  *
- * @author n.gaitan
+ * @author Andres
  */
 @Entity
-public class ModeloEntity extends BaseEntity implements Serializable
+public class ModeloEntity implements Serializable
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String referencia;
     private String marca;
+    private String tipoModelo;
     private double calificacionMedia;
+   
     
-    public String getReferencia()
-    {
+    
+    /**
+     * @return the tipoModelo
+     */
+    public String getTipoModelo() {
+        return tipoModelo;
+    }
+    /**
+     * @param tipoModelo the tipoModelo to set
+     */
+    public void setTipoModelo(String tipoModelo) {
+        this.tipoModelo = tipoModelo;
+    }
+
+    /**
+     * @return the referencia
+     */
+    public String getReferencia() {
         return referencia;
     }
-    public String getMarca()
-    {
-        return marca;
-    }
-    public double getCalificacionMedia()
-    {
-        return calificacionMedia;
-    }
-    public void setReferencia(String referencia)
-    {
+
+    /**
+     * @param referencia the referencia to set
+     */
+    public void setReferencia(String referencia) {
         this.referencia = referencia;
     }
-    public void setMarca(String marca)
-    {
+
+    /**
+     * @return the marca
+     */
+    public String getMarca() {
+        return marca;
+    }
+
+    /**
+     * @param marca the marca to set
+     */
+    public void setMarca(String marca) {
         this.marca = marca;
     }
-    public void setCalificacionMedia(double cal)
-    {
-        this.calificacionMedia = cal;
+
+    /**
+     * @return the calificacionMedia
+     */
+    public double getCalificacionMedia() {
+        return calificacionMedia;
+    }
+
+    /**
+     * @param calificacionMedia the calificacionMedia to set
+     */
+    public void setCalificacionMedia(double calificacionMedia) {
+        this.calificacionMedia = calificacionMedia;
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
 }

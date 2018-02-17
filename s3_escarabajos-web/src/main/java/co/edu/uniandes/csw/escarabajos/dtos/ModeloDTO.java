@@ -16,8 +16,9 @@ import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
  *   {
  *      "marca": String,
  *      "referencia": String,
- *      "calificacionMedia": double
- *      ]
+ *      "calificacionMedia": double,
+ *      "tipoModelo":String
+ *      
  *   }
  * </pre> Por ejemplo un modelo se representa asi:<br>
  *
@@ -26,18 +27,23 @@ import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
  *   {
  *      "marca": "BMXTREME",
  *      "referencia": "BMEXTREME-MTN-2017",
- *      "calificacionMedia": 4.52
+ *      "calificacionMedia": 4.52,
+ *      "tipoModelo": "Accesorio"
  *   }
  *
  * </pre>
  *
- * @author n.gaitan
+ * @author Andres
  */
 public class ModeloDTO
 {
    //-----------------------------------------------------------
    // Atributos
    //-----------------------------------------------------------
+     /**
+     * Atributo que modela el id unico del modelo
+     */
+    private Long id;
     /**
      * Atributo que modela la marca del modelo
      */
@@ -51,8 +57,9 @@ public class ModeloDTO
      */
     private double calificacionMedia;
     /**
-     * Constructor por defecto
+     * Atributo que modela la el tipo de modelo
      */
+    private String tipoModelo;
      
    //-----------------------------------------------------------
    // Constructores
@@ -72,13 +79,16 @@ public class ModeloDTO
      */
     public ModeloDTO(ModeloEntity modelo) 
     {
+        this.id = modelo.getId();
         this.marca = modelo.getMarca();
         this.referencia = modelo.getReferencia();
         this.calificacionMedia = modelo.getCalificacionMedia();
+        this.tipoModelo = modelo.getTipoModelo();
     }
    //-----------------------------------------------------------
    // Métodos
    //-----------------------------------------------------------
+    
      public String getReferencia()
     {
         return referencia;
@@ -103,6 +113,35 @@ public class ModeloDTO
     {
         this.calificacionMedia = cal;
     }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the tipoModelo
+     */
+    public String getTipoModelo() {
+        return tipoModelo;
+    }
+
+    /**
+     * @param tipoModelo the tipoModelo to set
+     */
+    public void setTipoModelo(String tipoModelo) {
+        this.tipoModelo = tipoModelo;
+    }
+    
      /**
      * Convertir DTO a Entity
      *
@@ -110,9 +149,11 @@ public class ModeloDTO
      */
     public ModeloEntity toEntity() {
         ModeloEntity entity = new ModeloEntity();
+        entity.setId(this.id);
         entity.setCalificacionMedia(this.calificacionMedia);
         entity.setMarca(this.marca);
         entity.setReferencia(this.referencia);
+        entity.setTipoModelo(this.getTipoModelo());
         return entity;
     }
 }
