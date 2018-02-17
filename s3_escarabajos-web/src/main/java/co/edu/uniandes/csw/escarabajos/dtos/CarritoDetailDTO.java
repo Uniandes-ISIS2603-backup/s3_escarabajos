@@ -26,10 +26,14 @@ public class CarritoDetailDTO extends CarritoDTO {
     private List<ItemDTO> items;
     
     /**
-     * modela el cliente dueo del carrito;
-     * @param items
+     * modela el cliente dueño del carrito;
      */
     private ClienteDTO cliente;
+    
+    /**
+     * modela la factura que genera el carrito cuando se va a comprar.
+     */
+    private TransaccionDTO factura;
     
     //-----------------------------------------------------------
     // Constructor
@@ -42,13 +46,28 @@ public class CarritoDetailDTO extends CarritoDTO {
     // Getters and Setters
     //-----------------------------------------------------------
     
-    
     public List<ItemDTO> getItems() {
         return items;
     }
     
     public void setItems(ArrayList<ItemDTO> items) {
         this.items = items;
+    }
+
+    public ClienteDTO getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(ClienteDTO cliente) {
+        this.cliente = cliente;
+    }
+
+    public TransaccionDTO getFactura() {
+        return factura;
+    }
+
+    public void setFactura(TransaccionDTO factura) {
+        this.factura = factura;
     }
 
 }
