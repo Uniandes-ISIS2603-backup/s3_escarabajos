@@ -5,7 +5,7 @@
  */
 package co.edu.uniandes.csw.escarabajos.resources;
 
-import co.edu.uniandes.csw.escarabajos.dtos.TransaccionDetailDTO;
+import co.edu.uniandes.csw.escarabajos.dtos.FacturaDetailDTO;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -33,12 +33,12 @@ import javax.ws.rs.Produces;
 @Consumes("application/json")
 @RequestScoped
 
-public class TransaccionResource {
+public class FacturaResource {
     
      /**
      * <h1>POST /api/bicis : Crear una transaccion.</h1>
      * 
-     * <pre>Cuerpo de petición: JSON {@link TransaccionDetailDTO}.
+     * <pre>Cuerpo de petición: JSON {@link FacturaDetailDTO}.
      * 
      * Crea una nueva transaccion con la informacion que se recibe en el cuerpo 
      * de la petición y se regresa un objeto identico con un id auto-generado 
@@ -52,12 +52,12 @@ public class TransaccionResource {
      * 412 Precodition Failed: Ya existe la transferencia.
      * </code>
      * </pre>
-     * @param transferencia {@link TransaccionDetailDTO} - La transaccion que se desea guardar.
-     * @return JSON {@link TransaccionDetailDTO}  - La transferencia guardada con el atributo id autogenerado.
+     * @param transferencia {@link FacturaDetailDTO} - La transaccion que se desea guardar.
+     * @return JSON {@link FacturaDetailDTO}  - La transferencia guardada con el atributo id autogenerado.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la transferencia.
      */
     @POST
-    public TransaccionDetailDTO createBicicleta(TransaccionDetailDTO transferencia) throws BusinessLogicException {
+    public FacturaDetailDTO createBicicleta(FacturaDetailDTO transferencia) throws BusinessLogicException {
         return transferencia;
     }
 
@@ -70,11 +70,11 @@ public class TransaccionResource {
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Devuelve todas las transferencias de la aplicacion.</code> 
      * </pre>
-     * @return JSONArray {@link TransaccionDetailDTO} - Las transferencias encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
+     * @return JSONArray {@link FacturaDetailDTO} - Las transferencias encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
      */
     @GET
-    public List<TransaccionDetailDTO> getTransferencias() {
-        return new ArrayList<TransaccionDetailDTO>();
+    public List<FacturaDetailDTO> getTransferencias() {
+        return new ArrayList<FacturaDetailDTO>();
     }
     
    /**
@@ -91,11 +91,11 @@ public class TransaccionResource {
      * </code> 
      * </pre>
      * @param id Identificador de la transferencia que se esta buscando. Este debe ser una cadena de dígitos.
-     * @return JSON {@link TransaccionDetailDTO} - La transferencia buscada
+     * @return JSON {@link FacturaDetailDTO} - La transferencia buscada
      */
     @GET
     @Path("{id: \\d+}")
-    public TransaccionDetailDTO getTransferencia(@PathParam("id") Long id) {
+    public FacturaDetailDTO getTransferencia(@PathParam("id") Long id) {
         return null;
     }
     
@@ -113,13 +113,13 @@ public class TransaccionResource {
      * </code> 
      * </pre>
      * @param id Identificador de la transferencia que se desea actualizar.Este debe ser una cadena de dígitos.
-     * @param city {@link TransaccionDetailDTO} La transferencia que se desea guardar.
-     * @return JSON {@link TransaccionDetailDTO} - La transferencia guardada.
+     * @param city {@link FacturaDetailDTO} La transferencia que se desea guardar.
+     * @return JSON {@link FacturaDetailDTO} - La transferencia guardada.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar la transferencia porque ya existe una con ese nombre.
      */
     @PUT
     @Path("{id: \\d+}")
-    public TransaccionDetailDTO updateTransferencia(@PathParam("id") Long id, TransaccionDetailDTO city) throws BusinessLogicException {
+    public FacturaDetailDTO updateTransferencia(@PathParam("id") Long id, FacturaDetailDTO city) throws BusinessLogicException {
         return city;
     }
     

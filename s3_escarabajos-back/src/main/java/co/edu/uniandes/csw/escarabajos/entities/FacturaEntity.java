@@ -7,29 +7,17 @@ package co.edu.uniandes.csw.escarabajos.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 /**
  *
  * @author jp.carreno
  */
 @Entity
-public class TransaccionEntity implements Serializable {
+public class FacturaEntity extends BaseEntity implements Serializable {
 
-    @Id
-    private Long id;
+    
     private String dineroT;
     private String usuarioT;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getDinero() {
         return dineroT;

@@ -9,7 +9,7 @@ package co.edu.uniandes.csw.escarabajos.dtos;
  * Clase que extiende de {@link MedioPagoDTO} para manejar la transformacion entre
  * los objetos JSON y las Entidades de la base de datos. Para conocer el
  * contenido de la ciudad vaya a la documentacion de {@link MedioPagoDTO}
- * @author Mateo
+ * @author jp.carreno
  */
 public class MedioPagoDetailDTO extends MedioPagoDTO {
     
@@ -22,8 +22,6 @@ public class MedioPagoDetailDTO extends MedioPagoDTO {
     //-----------------------------------------------------------
     
     public MedioPagoDetailDTO(){
-        
-        super();
     }
     
     //-----------------------------------------------------------

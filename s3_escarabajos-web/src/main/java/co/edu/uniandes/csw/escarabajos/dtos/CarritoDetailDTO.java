@@ -33,7 +33,7 @@ public class CarritoDetailDTO extends CarritoDTO {
     /**
      * modela la factura que genera el carrito cuando se va a comprar.
      */
-    private TransaccionDTO factura;
+    private FacturaDTO factura;
     
     //-----------------------------------------------------------
     // Constructor
@@ -62,11 +62,11 @@ public class CarritoDetailDTO extends CarritoDTO {
         this.cliente = cliente;
     }
 
-    public TransaccionDTO getFactura() {
+    public FacturaDTO getFactura() {
         return factura;
     }
 
-    public void setFactura(TransaccionDTO factura) {
+    public void setFactura(FacturaDTO factura) {
         this.factura = factura;
     }
 

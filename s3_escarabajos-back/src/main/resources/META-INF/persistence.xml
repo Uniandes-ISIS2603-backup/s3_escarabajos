@@ -3,7 +3,9 @@
   <persistence-unit name="EscarabajosPU" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <jta-data-source>java:app/jdbc/EscarabajosDB</jta-data-source>
-    <class>co.edu.uniandes.csw.escarabajos.entities.TransaccionEntity</class>
+    <class>co.edu.uniandes.csw.escarabajos.entities.FacturaEntity</class>
+    <class>co.edu.uniandes.csw.escarabajos.entities.MedioPagoEntity</class>
+    <class>co.edu.uniandes.csw.escarabajos.persistence.FacturaPersistence</class>
     <properties>
       <property name="eclipselink.logging.level" value="FINE"/>
       <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>

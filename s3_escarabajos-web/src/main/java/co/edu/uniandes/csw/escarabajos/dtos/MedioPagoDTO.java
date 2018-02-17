@@ -30,12 +30,12 @@ package co.edu.uniandes.csw.escarabajos.dtos;
  *
  * </pre>
  *
- * @author Mateo
+ * @author jp.carreno
  */
 public class MedioPagoDTO {
     
     //-----------------------------------------------------------
-    // Conctantes
+    // Constantes
     //-----------------------------------------------------------
     
     /**
