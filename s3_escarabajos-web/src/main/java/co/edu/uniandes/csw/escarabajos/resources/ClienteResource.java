@@ -40,18 +40,18 @@ public class ClienteResource {
     /**
      * <h1>POST /api/clientes : Crear una cliente.</h1>
      * 
-     * <pre>Cuerpo de petición: JSON {@link CityDetailDTO}.
+     * <pre>Cuerpo de petición: JSON {@link ClienteDetailDTO}.
      * 
-     * Crea una nueva ciudad con la informacion que se recibe en el cuerpo 
+     * Crea un nuevo cliente con la informacion que se recibe en el cuerpo 
      * de la petición y se regresa un objeto identico con un id auto-generado 
      * por la base de datos.
      * 
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Creó la nueva ciudad .
+     * 200 OK Creó el nuevo cliente .
      * </code>
      * <code style="color: #c7254e; background-color: #f9f2f4;">
-     * 412 Precodition Failed: Ya existe la ciudad.
+     * 412 Precodition Failed: Ya existe el cliente.
      * </code>
      * </pre>
      * @param cliente {@link ClienteDetailDTO} - 
@@ -63,15 +63,15 @@ public class ClienteResource {
         return cliente;
     }
     /**
-     * <h1>GET /api/clientes : Obtener todas las clientes.</h1>
+     * <h1>GET /api/clientes : Obtener todos las clientes.</h1>
      * 
-     * <pre>Busca y devuelve todas las clientes que existen en la aplicacion.
+     * <pre>Busca y devuelve todas los clientes que existen en la aplicacion.
      * 
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Devuelve todas las ciudades de la aplicacion.</code> 
+     * 200 OK Devuelve todas los clientes de la aplicacion.</code> 
      * </pre>
-     * @return JSONArray {@link CityDetailDTO} - Las ciudades encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
+     * @return JSONArray {@link ClienteDetailDTO} - Los clientes encontrados en la aplicación. Si no hay ninguna retorna una lista vacía.
      */
     @GET
     public List<ClienteDetailDTO> getClientes() {
@@ -79,7 +79,7 @@ public class ClienteResource {
     }
     
      /**
-     * <h1>GET /api/cliente/{id} : Obtener cliente por id.</h1>
+     * <h1>GET /api/clientes/{id} : Obtener cliente por id.</h1>
      * 
      * <pre>Busca cliente con el id asociado recibido en la URL y la devuelve.
      * 
@@ -91,8 +91,8 @@ public class ClienteResource {
      * 404 Not Found No existe un cliente con el id dado.
      * </code> 
      * </pre>
-     * @param id Identificador de la ciudad que se esta buscando. Este debe ser una cadena de dígitos.
-     * @return JSON {@link ClienteDetailDTO} - La ciudad buscada
+     * @param id Identificador del cliente que se esta buscando. Este debe ser una cadena de dígitos.
+     * @return JSON {@link ClienteDetailDTO} - El cliente buscado
      */
     @GET
     @Path("{id: \\d+}")
@@ -102,21 +102,21 @@ public class ClienteResource {
     
      /**
      * <h1>PUT /api/clientes/{id} : Actualizar cliente con el id dado.</h1>
-     * <pre>Cuerpo de petición: JSON {@link CityDetailDTO}.
+     * <pre>Cuerpo de petición: JSON {@link ClienteDetailDTO}.
      * 
-     * Actualiza la ciudad con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
+     * Actualiza el cliente con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
      * 
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Actualiza la ciudad con el id dado con la información enviada como parámetro. Retorna un objeto identico.</code> 
+     * 200 OK Actualiza el cliente con el id dado con la información enviada como parámetro. Retorna un objeto identico.</code> 
      * <code style="color: #c7254e; background-color: #f9f2f4;">
-     * 404 Not Found. No existe una ciudad con el id dado.
+     * 404 Not Found. No existe un cliente con el id dado.
      * </code> 
      * </pre>
-     * @param id Identificador de la ciudad que se desea actualizar.Este debe ser una cadena de dígitos.
+     * @param id Identificador del cliente que se desea actualizar.Este debe ser una cadena de dígitos.
      * @param cliente {@link ClienteDetailDTO} 
      * @return JSON {@link ClienteDetailDTO} -
-     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar la ciudad porque ya existe una con ese nombre.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar el cliente porque ya existe otro con ese nombre.
      */
     @PUT
     @Path("{id: \\d+}")
@@ -125,7 +125,7 @@ public class ClienteResource {
     }
     
     /**
-     * <h1>DELETE /api/cities/{id} : Borrar cliente por id.</h1>
+     * <h1>DELETE /api/clientes/{id} : Borrar cliente por id.</h1>
      * 
      * <pre>Borra cliente con el id asociado recibido en la URL.
      * 

@@ -5,8 +5,6 @@
  */
 package co.edu.uniandes.csw.escarabajos.resources;
 
-import co.edu.uniandes.csw.escarabajos.dtos.ClienteDTO;
-import co.edu.uniandes.csw.escarabajos.dtos.ClienteDetailDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.VendedorDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.VendedorDetailDTO;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
@@ -27,36 +25,36 @@ public class VendedorResource {
     /**
      * <h1>POST /api/vendedores : Crear un vendedor.</h1>
      * 
-     * <pre>Cuerpo de petición: JSON {@link CityDetailDTO}.
+     * <pre>Cuerpo de petición: JSON {@link VendedorDetailDTO}.
      * 
-     * Crea una nueva ciudad con la informacion que se recibe en el cuerpo 
+     * Crea un nuevo vendedor con la informacion que se recibe en el cuerpo 
      * de la petición y se regresa un objeto identico con un id auto-generado 
      * por la base de datos.
      * 
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Creó la nueva ciudad .
+     * 200 OK Creó el nuevo vendedor .
      * </code>
      * <code style="color: #c7254e; background-color: #f9f2f4;">
-     * 412 Precodition Failed: Ya existe la ciudad.
+     * 412 Precodition Failed: Ya existe el vendedor.
      * </code>
      * </pre>
      * @param vendedor {@link VendedorDetailDTO} - 
      * @return JSON {@link VendedorDetailDTO}  - 
-     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la ciudad.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe el vendedor.
      */
     @POST
-    public VendedorDTO createVendedor(VendedorDetailDTO cliente) throws BusinessLogicException {
-        return cliente;
+    public VendedorDTO createVendedor(VendedorDetailDTO vendedor) throws BusinessLogicException {
+        return vendedor;
     }
     /**
-     * <h1>GET /api/clientes : Obtener todas las vendedores.</h1>
+     * <h1>GET /api/vendedores : Obtener todas las vendedores.</h1>
      * 
      * <pre>Busca y devuelve todas las vendedores que existen en la aplicacion.
      * 
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Devuelve todas las ciudades de la aplicacion.</code> 
+     * 200 OK Devuelve todas las vendedores de la aplicacion.</code> 
      * </pre>
      * @return JSONArray {@link VendedorDetailDTO} - 
      */
@@ -66,20 +64,20 @@ public class VendedorResource {
     }
     
      /**
-     * <h1>GET /api/vendedor/{id} : Obtener vendedor por id.</h1>
+     * <h1>GET /api/vendedores/{id} : Obtener vendedor por id.</h1>
      * 
      * <pre>Busca vendedor con el id asociado recibido en la URL y la devuelve.
      * 
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Devuelve cliente correspondiente al id.
+     * 200 OK Devuelve vendedor correspondiente al id.
      * </code> 
      * <code style="color: #c7254e; background-color: #f9f2f4;">
-     * 404 Not Found No existe un cliente con el id dado.
+     * 404 Not Found No existe un vendedor con el id dado.
      * </code> 
      * </pre>
-     * @param id Identificador de la vendedor que se esta buscando. Este debe ser una cadena de dígitos.
-     * @return JSON {@link VendedorDetailDTO} - La ciudad buscada
+     * @param id Identificador del vendedor que se esta buscando. Este debe ser una cadena de dígitos.
+     * @return JSON {@link VendedorDetailDTO} - el vendedor buscado
      */
     @GET
     @Path("{id: \\d+}")
@@ -88,22 +86,22 @@ public class VendedorResource {
     }
     
      /**
-     * <h1>PUT /api/vendedores/{id} : Actualizar cliente con el id dado.</h1>
-     * <pre>Cuerpo de petición: JSON {@link CityDetailDTO}.
+     * <h1>PUT /api/vendedores/{id} : Actualizar vendedor con el id dado.</h1>
+     * <pre>Cuerpo de petición: JSON {@link VendedorDetailDTO}.
      * 
-     * Actualiza la ciudad con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
+     * Actualiza el vendedor con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
      * 
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Actualiza la ciudad con el id dado con la información enviada como parámetro. Retorna un objeto identico.</code> 
+     * 200 OK Actualiza el vendedor con el id dado con la información enviada como parámetro. Retorna un objeto identico.</code> 
      * <code style="color: #c7254e; background-color: #f9f2f4;">
-     * 404 Not Found. No existe una ciudad con el id dado.
+     * 404 Not Found. No existe un vendedor con el id dado.
      * </code> 
      * </pre>
-     * @param id Identificador de la ciudad que se desea actualizar.Este debe ser una cadena de dígitos.
-     * @param cliente {@link ClienteDetailDTO} 
-     * @return JSON {@link ClienteDetailDTO} -
-     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar la ciudad porque ya existe una con ese nombre.
+     * @param id Identificador del vendedor que se desea actualizar.Este debe ser una cadena de dígitos.
+     * @param cliente {@link VendedorDetailDTO} 
+     * @return JSON {@link VendedorDetailDTO} -
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar el vendedor porque ya existe uno con ese nombre.
      */
     @PUT
     @Path("{id: \\d+}")
@@ -118,9 +116,9 @@ public class VendedorResource {
      * 
      * Códigos de respuesta:<br>
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Elimina la ciudad correspondiente al id dado.</code>
+     * 200 OK Elimina el vendedor correspondiente al id dado.</code>
      * <code style="color: #c7254e; background-color: #f9f2f4;">
-     * 404 Not Found. No existe una ciudad con el id dado.
+     * 404 Not Found. No existe un vendedor con el id dado.
      * </code>
      * </pre>
      * @param id Identificador de vendedor que se desea borrar. Este debe ser una cadena de dígitos.
