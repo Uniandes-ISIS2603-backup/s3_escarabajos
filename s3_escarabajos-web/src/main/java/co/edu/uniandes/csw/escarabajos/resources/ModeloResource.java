@@ -63,7 +63,7 @@ public class ModeloResource {
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe el modelo.
      */
     @POST
-    public ModeloDetailDTO createCity(ModeloDetailDTO modelo) throws BusinessLogicException {
+    public ModeloDetailDTO createModelo(ModeloDetailDTO modelo) throws BusinessLogicException {
         return modelo;
     }
 

@@ -63,7 +63,7 @@ public class AcessorioResource {
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe el accesorio.
      */
     @POST
-    public AccesorioDetailDTO createCity(AccesorioDetailDTO accesorio) throws BusinessLogicException {
+    public AccesorioDetailDTO createAccesorio(AccesorioDetailDTO accesorio) throws BusinessLogicException {
         return accesorio;
     }
 
