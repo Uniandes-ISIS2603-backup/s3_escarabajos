@@ -26,7 +26,7 @@ public class CarritoPersistence {
     
     private static final Logger LOGGER = Logger.getLogger(CarritoPersistence.class.getName());
 
-    @PersistenceContext(unitName = "CompanyPU")
+    @PersistenceContext(unitName = "EscarabajosPU")
     protected EntityManager em;
     
     //--------------------------------------------------------------

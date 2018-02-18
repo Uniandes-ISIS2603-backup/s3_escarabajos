@@ -5,32 +5,20 @@
  */
 package co.edu.uniandes.csw.escarabajos.dtos;
 
-import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+
+
 import co.edu.uniandes.csw.escarabajos.entities.FacturaEntity;
 
 /**
  *
  * @author jp.carreno
  */
-@Entity
 public class FacturaDTO{
 
-    @Id
-    private Long id;
+
     private String usuarioT;
     private String dineroT;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getUsuarioT() {
         return usuarioT;
@@ -59,12 +47,11 @@ public class FacturaDTO{
      * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
      * la entidad que viene de argumento.
      *
-     * @param bici: Es la entidad que se va a convertir a DTO
+     * @param factura: Es la entidad que se va a convertir a DTO
      */
-    public FacturaDTO(FacturaEntity transfer) {
-        this.id = transfer.getId();
-        this.usuarioT = transfer.getUsuario();
-        this.dineroT = transfer.getDinero();
+    public FacturaDTO(FacturaEntity factura) {
+        this.usuarioT = factura.getUsuario();
+        this.dineroT = factura.getDinero();
     }
     
     /**
@@ -74,7 +61,6 @@ public class FacturaDTO{
      */
     public FacturaEntity toEntity() {
         FacturaEntity entity = new FacturaEntity();
-        entity.setId(this.id);
         entity.setDinero(this.dineroT);
         entity.setUsuario(this.usuarioT);
 
