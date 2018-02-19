@@ -52,7 +52,7 @@ public class MedioPagoPersistenceTest {
      * se van a probar.
      */
     @Inject
-    private MedioPagoPersistence facturaPersistence;
+    private MedioPagoPersistence medioPagoPersistence;
 
     /**
      * Contexto de Persostencia que se va autilizar para acceder a la Base de
@@ -130,14 +130,14 @@ public class MedioPagoPersistenceTest {
     public void createMedioPagoTest() {
         PodamFactory factory = new PodamFactoryImpl();
         MedioPagoEntity newEntity = factory.manufacturePojo(MedioPagoEntity.class);
-        MedioPagoEntity result = facturaPersistence.create(newEntity);
+        MedioPagoEntity result = medioPagoPersistence.create(newEntity);
 
         Assert.assertNotNull(result);
 
         MedioPagoEntity entity = em.find(MedioPagoEntity.class, result.getId());
 
         Assert.assertEquals(newEntity.getName(), entity.getName());
-         Assert.assertEquals(newEntity.getDineroT(), entity.getDineroT());
+        Assert.assertTrue(newEntity.getDineroT()- entity.getDineroT() == 0);
         Assert.assertEquals(newEntity.getNumeroTarjeta(), entity.getNumeroTarjeta());
         Assert.assertEquals(newEntity.getTipo(), entity.getTipo());
     }
@@ -149,7 +149,7 @@ public class MedioPagoPersistenceTest {
      */
     @Test
     public void getMedioPagosTest() {
-        List<MedioPagoEntity> list = facturaPersistence.findAll();
+        List<MedioPagoEntity> list = medioPagoPersistence.findAll();
         Assert.assertEquals(data.size(), list.size());
         for (MedioPagoEntity ent : list) {
             boolean found = false;
@@ -170,10 +170,10 @@ public class MedioPagoPersistenceTest {
     @Test
     public void getMedioPagoTest() {
         MedioPagoEntity entity = data.get(0);
-        MedioPagoEntity newEntity = facturaPersistence.find(entity.getId());
+        MedioPagoEntity newEntity = medioPagoPersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getName(), newEntity.getName());
-        Assert.assertEquals(newEntity.getDineroT(), entity.getDineroT());
+        Assert.assertTrue(newEntity.getDineroT()- entity.getDineroT() == 0);
         Assert.assertEquals(newEntity.getNumeroTarjeta(), entity.getNumeroTarjeta());
         Assert.assertEquals(newEntity.getTipo(), entity.getTipo());
     }
@@ -186,7 +186,7 @@ public class MedioPagoPersistenceTest {
     @Test
     public void deleteMedioPagoTest() {
         MedioPagoEntity entity = data.get(0);
-        facturaPersistence.delete(entity.getId());
+        medioPagoPersistence.delete(entity.getId());
         MedioPagoEntity deleted = em.find(MedioPagoEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
@@ -204,15 +204,15 @@ public class MedioPagoPersistenceTest {
 
         newEntity.setId(entity.getId());
 
-        facturaPersistence.update(newEntity);
+        medioPagoPersistence.update(newEntity);
 
         MedioPagoEntity resp = em.find(MedioPagoEntity.class, entity.getId());
 
         Assert.assertEquals(newEntity.getName(), resp.getName());
-        Assert.assertEquals(newEntity.getDineroT(), entity.getDineroT());
-        Assert.assertEquals(newEntity.getNumeroTarjeta(), entity.getNumeroTarjeta());
-        Assert.assertEquals(newEntity.getTipo(), entity.getTipo());
-    }  
+        Assert.assertTrue(newEntity.getDineroT()- resp.getDineroT() == 0);
+        Assert.assertEquals(newEntity.getNumeroTarjeta(), resp.getNumeroTarjeta());
+        Assert.assertEquals(newEntity.getTipo(), resp.getTipo());
+    } 
 }
 
 

@@ -16,10 +16,10 @@ import javax.persistence.Entity;
 public class FacturaEntity extends BaseEntity implements Serializable {
 
     
-    private String dineroT;
+    private double dineroT;
     private String usuarioT;
 
-    public String getDinero() {
+    public double getDinero() {
         return dineroT;
     }
 
@@ -27,7 +27,7 @@ public class FacturaEntity extends BaseEntity implements Serializable {
         return usuarioT;
     }
 
-    public void setDinero(String dineroT) {
+    public void setDinero(double dineroT) {
         this.dineroT = dineroT;
     }
 

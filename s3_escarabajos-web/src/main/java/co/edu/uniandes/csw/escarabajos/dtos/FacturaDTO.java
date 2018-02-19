@@ -18,13 +18,13 @@ public class FacturaDTO{
 
 
     private String usuarioT;
-    private String dineroT;
+    private double dineroT;
 
     public String getUsuarioT() {
         return usuarioT;
     }
 
-    public String getDineroT() {
+    public double getDineroT() {
         return dineroT;
     }
 
@@ -32,7 +32,7 @@ public class FacturaDTO{
         this.usuarioT = usuarioT;
     }
 
-    public void setDineroT(String dineroT) {
+    public void setDineroT(double dineroT) {
         this.dineroT = dineroT;
     }
     
