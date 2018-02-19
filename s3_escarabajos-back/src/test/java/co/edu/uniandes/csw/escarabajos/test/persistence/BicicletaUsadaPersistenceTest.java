@@ -132,7 +132,7 @@ public class BicicletaUsadaPersistenceTest {
 
         Assert.assertEquals(newEntity.getEstado(), entity.getEstado());
         Assert.assertEquals(newEntity.getFacturaOriginal(), entity.getFacturaOriginal());
-        Assert.assertEquals(newEntity.getPrecioDeReventa(), entity.getPrecioDeReventa());
+        Assert.assertTrue(newEntity.getPrecioDeReventa()- entity.getPrecioDeReventa() == 0);
     }
 
     /**
@@ -168,7 +168,7 @@ public class BicicletaUsadaPersistenceTest {
         
         Assert.assertEquals(newEntity.getEstado(), entity.getEstado());
         Assert.assertEquals(newEntity.getFacturaOriginal(), entity.getFacturaOriginal());
-        Assert.assertEquals(newEntity.getPrecioDeReventa(), entity.getPrecioDeReventa());
+        Assert.assertTrue(newEntity.getPrecioDeReventa()- entity.getPrecioDeReventa() == 0);
     }
 
     /**
@@ -179,7 +179,7 @@ public class BicicletaUsadaPersistenceTest {
     @Test
     public void deleteBicicletaTest() {
         BicicletaUsadaEntity entity = data.get(0);
-        biciPersistence.delete( biciPersistence.find(entity.getId()));
+        biciPersistence.delete(entity.getId());
         BicicletaUsadaEntity deleted = em.find(BicicletaUsadaEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
@@ -202,8 +202,8 @@ public class BicicletaUsadaPersistenceTest {
         BicicletaUsadaEntity resp = em.find(BicicletaUsadaEntity.class, entity.getId());
 
        
-        Assert.assertEquals(newEntity.getEstado(), entity.getEstado());
-        Assert.assertEquals(newEntity.getFacturaOriginal(), entity.getFacturaOriginal());
-        Assert.assertEquals(newEntity.getPrecioDeReventa(), entity.getPrecioDeReventa());
+        Assert.assertEquals(newEntity.getEstado(), resp.getEstado());
+        Assert.assertEquals(newEntity.getFacturaOriginal(), resp.getFacturaOriginal());  
+        Assert.assertTrue(newEntity.getPrecioDeReventa()- resp.getPrecioDeReventa() == 0);
     }
 }

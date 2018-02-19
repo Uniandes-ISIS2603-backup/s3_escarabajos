@@ -34,19 +34,20 @@ public class BicicletaUsadaPersistence {
         return em.find(BicicletaUsadaEntity.class,id);
     }
     
-    public void delete(BicicletaUsadaEntity bici){
+    public void delete(Long id){
+        BicicletaUsadaEntity bici = find(id);
        em.remove(bici);
     }
-    public BicicletaUsadaEntity findByName(String name){
-         TypedQuery query = em.createQuery("Select e From BicicletaUsadaEntity e where e.name = :name", BicicletaUsadaEntity.class);
+    public BicicletaUsadaEntity findEstado(String estado){
+         TypedQuery query = em.createQuery("Select e From BicicletaUsadaEntity e where e.estado = :estado", BicicletaUsadaEntity.class);
         // Se remplaza el placeholder ":name" con el valor del argumento 
-        query = query.setParameter("name", name);
+        query = query.setParameter("estado", estado);
         // Se invoca el query se obtiene la lista resultado
-        List<BicicletaUsadaEntity> sameName = query.getResultList();
-        if (sameName.isEmpty()) {
+        List<BicicletaUsadaEntity> sameEstado = query.getResultList();
+        if (sameEstado.isEmpty()) {
             return null;
         } else {
-            return sameName.get(0);
+            return sameEstado.get(0);
         }
     }
     

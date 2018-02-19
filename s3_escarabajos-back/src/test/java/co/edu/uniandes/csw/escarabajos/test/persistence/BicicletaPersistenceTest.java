@@ -25,6 +25,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class BicicletaPersistenceTest {
+
     /**
      *
      * @return Devuelve el jar que Arquillian va a desplegar en el Glassfish
@@ -131,8 +132,12 @@ public class BicicletaPersistenceTest {
         BicicletaEntity entity = em.find(BicicletaEntity.class, result.getId());
 
         Assert.assertEquals(newEntity.getCategoria(), entity.getCategoria());
-        Assert.assertSame(newEntity.getCategoria(), entity.getUsada());
-        Assert.assertEquals(newEntity.getCategoria(), entity.getColor());
+        if(newEntity.getUsada()== true){
+            Assert.assertTrue(entity.getUsada());
+        }else{
+            Assert.assertFalse(entity.getUsada());
+        }
+        Assert.assertEquals(newEntity.getColor(), entity.getColor());
     }
 
     /**
@@ -165,10 +170,14 @@ public class BicicletaPersistenceTest {
         BicicletaEntity entity = data.get(0);
         BicicletaEntity newEntity = biciPersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
-        
+
         Assert.assertEquals(newEntity.getCategoria(), entity.getCategoria());
-        Assert.assertSame(newEntity.getCategoria(), entity.getUsada());
-        Assert.assertEquals(newEntity.getCategoria(), entity.getColor());
+        if(newEntity.getUsada()== true){
+            Assert.assertTrue(entity.getUsada());
+        }else{
+            Assert.assertFalse(entity.getUsada());
+        }
+        Assert.assertEquals(newEntity.getColor(), entity.getColor());
     }
 
     /**
@@ -179,7 +188,7 @@ public class BicicletaPersistenceTest {
     @Test
     public void deleteBicicletaTest() {
         BicicletaEntity entity = data.get(0);
-        biciPersistence.delete( biciPersistence.find(entity.getId()));
+        biciPersistence.delete(entity.getId());
         BicicletaEntity deleted = em.find(BicicletaEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
@@ -201,9 +210,12 @@ public class BicicletaPersistenceTest {
 
         BicicletaEntity resp = em.find(BicicletaEntity.class, entity.getId());
 
-       
-        Assert.assertEquals(newEntity.getCategoria(), entity.getCategoria());
-        Assert.assertSame(newEntity.getCategoria(), entity.getUsada());
-        Assert.assertEquals(newEntity.getCategoria(), entity.getColor());
+        Assert.assertEquals(newEntity.getCategoria(), resp.getCategoria());
+        if(newEntity.getUsada()== true){
+            Assert.assertTrue(resp.getUsada());
+        }else{
+            Assert.assertFalse(resp.getUsada());
+        }
+        Assert.assertEquals(newEntity.getColor(), resp.getColor());
     }
 }

@@ -70,8 +70,9 @@ public class BicicletaPersistence {
          return em.merge(entity);
     }
     
-    public void delete(BicicletaEntity entity) {
-        em.remove(entity);
+    public void delete(Long id) {
+         BicicletaEntity bici = find(id);
+       em.remove(bici);
     }
     
 }
