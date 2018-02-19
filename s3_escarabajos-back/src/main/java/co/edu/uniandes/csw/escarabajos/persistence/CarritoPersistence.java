@@ -33,9 +33,9 @@ public class CarritoPersistence {
     // Metodos CRUD
     //--------------------------------------------------------------
 
-    public CarritoPersistence find(Long clienteId) {
+    public CarritoEntity find(Long clienteId) {
         LOGGER.log(Level.INFO, "Consultando carrito del cliente con id={0}", clienteId);
-        return em.find(CarritoPersistence.class, clienteId);
+        return em.find(CarritoEntity.class, clienteId);
     }
     
     public CarritoEntity create(CarritoEntity entity) {

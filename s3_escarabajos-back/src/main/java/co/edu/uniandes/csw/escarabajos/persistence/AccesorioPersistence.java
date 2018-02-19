@@ -7,68 +7,58 @@ package co.edu.uniandes.csw.escarabajos.persistence;
 
 import co.edu.uniandes.csw.escarabajos.entities.AccesorioEntity;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import javax.persistence.Query;
 
 /**
  *
- * @author Andres
+ * @author Mateo
  */
+@Stateless
 public class AccesorioPersistence {
-    
-    public static final Logger LOGGER = Logger.getLogger(AccesorioPersistence.class.getName());
-    
+
+    //--------------------------------------------------------------
+    // Atributos
+    //--------------------------------------------------------------
+    private static final Logger LOGGER = Logger.getLogger(CarritoPersistence.class.getName());
+
     @PersistenceContext(unitName = "EscarabajosPU")
     protected EntityManager em;
+
+    //--------------------------------------------------------------
+    // Metodos CRUD
+    //--------------------------------------------------------------
     
-    /**
-     *
-     * @param entity objeto accesorio que se creará en la base de datos
-     * @return devuelve la entidad creada con un id dado por la base de datos.
-     */
-    public AccesorioEntity create(AccesorioEntity entity){
+    public AccesorioEntity find(Long id) {
+        LOGGER.log(Level.INFO, "Consultando accesorio con id={0}", id);
+        return em.find(AccesorioEntity.class, id);
+    }
+
+    public List<AccesorioEntity> findAll() {
+        LOGGER.info("Consultando todos los accesorios");
+        Query q = em.createQuery("select u from AccesorioEntity u");
+        return q.getResultList();
+    }
+
+    public AccesorioEntity create(AccesorioEntity entity) {
+        LOGGER.info("Creando un accesorio nuevo");
         em.persist(entity);
+        LOGGER.info("Accesorio creado");
         return entity;
     }
 
-    public AccesorioEntity find(Long id){
-        return em.find(AccesorioEntity.class,id);
+    public AccesorioEntity update(AccesorioEntity entity) {
+        LOGGER.log(Level.INFO, "Actualizando accesorio con id={0}", entity.getId());
+        return em.merge(entity);
+    }
+    public void delete(Long id) {
+        LOGGER.log(Level.INFO, "Borrando accesorio con id={0}", id);
+        AccesorioEntity entity = em.find(AccesorioEntity.class, id);
+        em.remove(entity);
     }
     
-    public void delete(AccesorioEntity accesorio){
-       em.remove(accesorio);
-    }
-    
-    /**
-     * Busca si hay algun accesorio con el nombre que se envía de argumento
-     *
-     * @param name: Nombre del accesorio que se está buscando
-     * @return null si no existe ningun accesorio con el nombre del argumento. Si
-     * existe alguno devuelve el primero.
-     */
-    public AccesorioEntity findByName(String name){
-         TypedQuery query = em.createQuery("Select e From AccesorioEntity e where e.name = :name", AccesorioEntity.class);
-        // Se remplaza el placeholder ":name" con el valor del argumento 
-        query = query.setParameter("name", name);
-        // Se invoca el query se obtiene la lista resultado
-        List<AccesorioEntity> sameName = query.getResultList();
-        if (sameName.isEmpty()) {
-            return null;
-        } else {
-            return sameName.get(0);
-        }
-    }
-    
-     public List<AccesorioEntity> findAll() {
-        LOGGER.info("Consultando todas los Accesorios");
-        TypedQuery query = em.createQuery("select u from AccesorioEntity u", AccesorioEntity.class);
-        return query.getResultList();
-    }
-     
-     public AccesorioEntity update(AccesorioEntity accesorio){
-        return  em.merge(accesorio);
-     }
 }
-

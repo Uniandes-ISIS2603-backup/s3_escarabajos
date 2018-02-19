@@ -25,7 +25,6 @@ public class CarritoEntity implements Serializable{
     
     private Double precioTotal;
     
-    
     //----------------------------------------------------
     // Getters y Setters
     //----------------------------------------------------
