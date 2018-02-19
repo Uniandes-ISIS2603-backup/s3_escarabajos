@@ -1,7 +1,7 @@
 package co.edu.uniandes.csw.escarabajos.test.persistence;
 
-import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
-import co.edu.uniandes.csw.escarabajos.persistence.BicicletaPersistence;
+import co.edu.uniandes.csw.escarabajos.entities.BicicletaUsadaEntity;
+import co.edu.uniandes.csw.escarabajos.persistence.BicicletaUsadaPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -24,7 +24,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author c.santacruza
  */
 @RunWith(Arquillian.class)
-public class BicicletaPersistenceTest {
+public class BicicletaUsadaPersistenceTest {
     /**
      *
      * @return Devuelve el jar que Arquillian va a desplegar en el Glassfish
@@ -35,8 +35,8 @@ public class BicicletaPersistenceTest {
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
-                .addPackage(BicicletaEntity.class.getPackage())
-                .addPackage(BicicletaPersistence.class.getPackage())
+                .addPackage(BicicletaUsadaEntity.class.getPackage())
+                .addPackage(BicicletaUsadaPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -46,7 +46,7 @@ public class BicicletaPersistenceTest {
      * se van a probar.
      */
     @Inject
-    private BicicletaPersistence biciPersistence;
+    private BicicletaUsadaPersistence biciPersistence;
 
     /**
      * Contexto de Persistencia que se va a utilizar para acceder a la Base de
@@ -91,13 +91,13 @@ public class BicicletaPersistenceTest {
      *
      */
     private void clearData() {
-        em.createQuery("delete from BicicletaEntity").executeUpdate();
+        em.createQuery("delete from BicicletaUsadaEntity").executeUpdate();
     }
 
     /**
      *
      */
-    private List<BicicletaEntity> data = new ArrayList<BicicletaEntity>();
+    private List<BicicletaUsadaEntity> data = new ArrayList<BicicletaUsadaEntity>();
 
     /**
      * Inserta los datos iniciales para el correcto funcionamiento de las
@@ -108,7 +108,7 @@ public class BicicletaPersistenceTest {
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
-            BicicletaEntity entity = factory.manufacturePojo(BicicletaEntity.class);
+            BicicletaUsadaEntity entity = factory.manufacturePojo(BicicletaUsadaEntity.class);
 
             em.persist(entity);
             data.add(entity);
@@ -123,16 +123,16 @@ public class BicicletaPersistenceTest {
     @Test
     public void createBicicletaTest() {
         PodamFactory factory = new PodamFactoryImpl();
-        BicicletaEntity newEntity = factory.manufacturePojo(BicicletaEntity.class);
-        BicicletaEntity result = biciPersistence.create(newEntity);
+        BicicletaUsadaEntity newEntity = factory.manufacturePojo(BicicletaUsadaEntity.class);
+        BicicletaUsadaEntity result = biciPersistence.create(newEntity);
 
         Assert.assertNotNull(result);
 
-        BicicletaEntity entity = em.find(BicicletaEntity.class, result.getId());
+        BicicletaUsadaEntity entity = em.find(BicicletaUsadaEntity.class, result.getId());
 
-        Assert.assertEquals(newEntity.getCategoria(), entity.getCategoria());
-        Assert.assertSame(newEntity.getCategoria(), entity.getUsada());
-        Assert.assertEquals(newEntity.getCategoria(), entity.getColor());
+        Assert.assertEquals(newEntity.getEstado(), entity.getEstado());
+        Assert.assertEquals(newEntity.getFacturaOriginal(), entity.getFacturaOriginal());
+        Assert.assertEquals(newEntity.getPrecioDeReventa(), entity.getPrecioDeReventa());
     }
 
     /**
@@ -142,11 +142,11 @@ public class BicicletaPersistenceTest {
      */
     @Test
     public void getBicicletasTest() {
-        List<BicicletaEntity> list = biciPersistence.findAll();
+        List<BicicletaUsadaEntity> list = biciPersistence.findAll();
         Assert.assertEquals(data.size(), list.size());
-        for (BicicletaEntity ent : list) {
+        for (BicicletaUsadaEntity ent : list) {
             boolean found = false;
-            for (BicicletaEntity entity : data) {
+            for (BicicletaUsadaEntity entity : data) {
                 if (ent.getId().equals(entity.getId())) {
                     found = true;
                 }
@@ -162,13 +162,13 @@ public class BicicletaPersistenceTest {
      */
     @Test
     public void getBicicletaTest() {
-        BicicletaEntity entity = data.get(0);
-        BicicletaEntity newEntity = biciPersistence.find(entity.getId());
+        BicicletaUsadaEntity entity = data.get(0);
+        BicicletaUsadaEntity newEntity = biciPersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
         
-        Assert.assertEquals(newEntity.getCategoria(), entity.getCategoria());
-        Assert.assertSame(newEntity.getCategoria(), entity.getUsada());
-        Assert.assertEquals(newEntity.getCategoria(), entity.getColor());
+        Assert.assertEquals(newEntity.getEstado(), entity.getEstado());
+        Assert.assertEquals(newEntity.getFacturaOriginal(), entity.getFacturaOriginal());
+        Assert.assertEquals(newEntity.getPrecioDeReventa(), entity.getPrecioDeReventa());
     }
 
     /**
@@ -178,9 +178,9 @@ public class BicicletaPersistenceTest {
      */
     @Test
     public void deleteBicicletaTest() {
-        BicicletaEntity entity = data.get(0);
+        BicicletaUsadaEntity entity = data.get(0);
         biciPersistence.delete( biciPersistence.find(entity.getId()));
-        BicicletaEntity deleted = em.find(BicicletaEntity.class, entity.getId());
+        BicicletaUsadaEntity deleted = em.find(BicicletaUsadaEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
 
@@ -191,19 +191,19 @@ public class BicicletaPersistenceTest {
      */
     @Test
     public void updateBicicletaTest() {
-        BicicletaEntity entity = data.get(0);
+        BicicletaUsadaEntity entity = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
-        BicicletaEntity newEntity = factory.manufacturePojo(BicicletaEntity.class);
+        BicicletaUsadaEntity newEntity = factory.manufacturePojo(BicicletaUsadaEntity.class);
 
         newEntity.setId(entity.getId());
 
         biciPersistence.update(newEntity);
 
-        BicicletaEntity resp = em.find(BicicletaEntity.class, entity.getId());
+        BicicletaUsadaEntity resp = em.find(BicicletaUsadaEntity.class, entity.getId());
 
        
-        Assert.assertEquals(newEntity.getCategoria(), entity.getCategoria());
-        Assert.assertSame(newEntity.getCategoria(), entity.getUsada());
-        Assert.assertEquals(newEntity.getCategoria(), entity.getColor());
+        Assert.assertEquals(newEntity.getEstado(), entity.getEstado());
+        Assert.assertEquals(newEntity.getFacturaOriginal(), entity.getFacturaOriginal());
+        Assert.assertEquals(newEntity.getPrecioDeReventa(), entity.getPrecioDeReventa());
     }
 }

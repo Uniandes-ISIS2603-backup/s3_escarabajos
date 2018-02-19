@@ -63,6 +63,7 @@ public class BicicletaUsadaEnVentaDTO extends BicicletaDTO {
      * @param bici: Es la entidad que se va a convertir a DTO
      */
     public BicicletaUsadaEnVentaDTO(BicicletaUsadaEntity bici) {
+        super(bici);
         this.facturaOriginal = bici.getFacturaOriginal();
         this.precioDeReventa = bici.getPrecioDeReventa();
         this.estado = bici.getEstado();
@@ -99,6 +100,7 @@ public class BicicletaUsadaEnVentaDTO extends BicicletaDTO {
      */
     public BicicletaUsadaEntity toEntity() {
         BicicletaUsadaEntity entity = new BicicletaUsadaEntity();
+        super.toEntity(entity);
         entity.setFacturaOriginal(this.facturaOriginal);
         entity.setPrecioDeReventa(this.precioDeReventa);
         entity.setEstado(this.estado);

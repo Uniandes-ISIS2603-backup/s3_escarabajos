@@ -59,6 +59,7 @@ public class BicicletaDTO extends ItemDTO{
      * @param bici: Es la entidad que se va a convertir a DTO
      */
     public BicicletaDTO(BicicletaEntity bici) {
+        super(bici);
         this.categoria = bici.getCategoria();
         this.color = bici.getColor();
         this.usada = bici.getUsada();
@@ -95,6 +96,7 @@ public class BicicletaDTO extends ItemDTO{
      */
     public BicicletaEntity toEntity() {
         BicicletaEntity entity = new BicicletaEntity();
+        super.toEntity(entity);
         entity.setCategoria(this.categoria);
         entity.setColor(this.color);
         entity.setUsada(this.usada);
