@@ -13,7 +13,7 @@ import javax.persistence.Entity;
  * @author Andres
  */
 @Entity
-public class AccesorioEntity extends ItemEntity {
+public class AccesorioEntity extends ItemEntity implements Serializable{
     
     /**
      * Variable que representa el tipo de accesorio (Casco, Silla,...).
