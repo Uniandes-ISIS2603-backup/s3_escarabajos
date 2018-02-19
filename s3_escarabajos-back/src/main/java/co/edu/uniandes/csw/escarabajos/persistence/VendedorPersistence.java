@@ -74,7 +74,9 @@ public class VendedorPersistence {
          return em.merge(entity);
     }
     
-    public void delete(VendedorEntity entity) {
+    public void delete(Long id) {
+         LOGGER.log(Level.INFO, "Borrando vendedor con id={0}", id);
+        VendedorEntity entity = em.find(VendedorEntity.class, id);
         em.remove(entity);
     }
 }
