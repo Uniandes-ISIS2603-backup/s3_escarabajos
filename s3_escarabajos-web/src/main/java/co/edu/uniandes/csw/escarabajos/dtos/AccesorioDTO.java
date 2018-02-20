@@ -55,6 +55,7 @@ public class AccesorioDTO extends ItemDTO {
      * @param entity: Es la entidad que se va a convertir a DTO
      */
     public AccesorioDTO(AccesorioEntity entity) {
+       super(entity);
        this.tipoAccesorio = entity.getTipoAcessorio();
        this.descripcion = entity.getDescripcion();
        

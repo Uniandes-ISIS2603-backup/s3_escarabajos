@@ -6,10 +6,15 @@
 package co.edu.uniandes.csw.escarabajos.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 /**
  *
  * @author Andres
@@ -24,9 +29,16 @@ public class ModeloEntity implements Serializable
     private String marca;
     private String tipoModelo;
     private double calificacionMedia;
+    
+    @PodamExclude
+    @OneToMany(mappedBy = "modelo", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<ItemEntity> reviews = new ArrayList<ItemEntity>();
    
     
-    
+    public ModeloEntity()
+    {
+        
+    }
     /**
      * @return the tipoModelo
      */

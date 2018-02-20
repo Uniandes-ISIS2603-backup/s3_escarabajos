@@ -130,7 +130,7 @@ public class ItemPersistenceTest {
 
         ItemEntity entity = em.find(ItemEntity.class, result.getId());
 
-        Assert.assertEquals(newEntity.getId(), entity.getId());
+        Assert.assertEquals(newEntity.getPrecio(), entity.getPrecio());
     }
 
     /**

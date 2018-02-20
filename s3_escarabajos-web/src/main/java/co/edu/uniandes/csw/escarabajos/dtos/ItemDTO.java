@@ -55,7 +55,6 @@ public class ItemDTO{
        this.id = entity.getId();
        this.precio = entity.getPrecio();
        this.album = entity.getAlbum();
-       
     }
 
       /**
