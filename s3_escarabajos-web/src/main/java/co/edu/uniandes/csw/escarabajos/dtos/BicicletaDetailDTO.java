@@ -8,6 +8,34 @@ package co.edu.uniandes.csw.escarabajos.dtos;
 import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
 
 /**
+ * BicicletaDetailDTO Objeto de transferencia de datos de Bicicletas. Los DetailDTO
+ * contienen las representaciones de los JSON que se transfieren entre el
+ * cliente y el servidor.
+ *
+ * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ * <pre>
+ *   {
+ *      "id": number,
+ *      "categoria: string,
+ *      "marca": string,
+ *      "color: string,
+ *      "precio": double,
+ *      "usada: boolean
+ *   }
+ * </pre> Por ejemplo una bicicleta se representa asi:<br>
+ *
+ * <pre>
+ *
+ *   {
+ *      "id": 1,
+ *      "categoria": BMX,
+ *      "marca": We the People,
+ *      "color": Negro,
+ *      "precio": 3.499,
+ *      "usada": false
+ *   }
+ *
+ * </pre>
  *
  * @author c.santacruza
  */
