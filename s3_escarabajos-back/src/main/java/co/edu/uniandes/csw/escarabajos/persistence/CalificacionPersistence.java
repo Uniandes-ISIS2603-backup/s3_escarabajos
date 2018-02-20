@@ -62,4 +62,9 @@ public class CalificacionPersistence
     {
         em.remove(entity);
     }
+        public void delete(Long id) 
+    {
+        
+        em.remove(find(id));
+    }
 }

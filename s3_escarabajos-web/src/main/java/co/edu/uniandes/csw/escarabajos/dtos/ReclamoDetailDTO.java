@@ -13,11 +13,16 @@ import co.edu.uniandes.csw.escarabajos.entities.ReclamoEntity;
 public class ReclamoDetailDTO extends ReclamoDTO
 {
     /**
+     * Constructor vacio
+     */
+    public ReclamoDetailDTO(){}
+    /**
      * Constructor para transformar un Entity a un DTO
      *
      * @param entity La entidad de modelo a partir de la cual se construye el objeto
      */
-    public ReclamoDetailDTO(ReclamoEntity entity) {
+    public ReclamoDetailDTO(ReclamoEntity entity) 
+    {
         super(entity);
     }
         /**

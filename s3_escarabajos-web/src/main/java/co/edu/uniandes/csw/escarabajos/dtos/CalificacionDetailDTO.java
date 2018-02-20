@@ -11,6 +11,14 @@ import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
  */
 public class CalificacionDetailDTO extends CalificacionDTO
 {
+    /**
+     * Constructor por defecto
+     */
+    public CalificacionDetailDTO(){};
+    /**
+     * Constructor a partir de una entity
+     * @param entity entidad que contiene la informacion
+     */
     public CalificacionDetailDTO(CalificacionEntity entity) 
     {
         super(entity);

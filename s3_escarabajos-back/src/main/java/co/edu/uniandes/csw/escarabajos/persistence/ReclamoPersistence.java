@@ -61,4 +61,8 @@ public class ReclamoPersistence
     {
         em.remove(entity);
     }
+    public void delete(Long id)
+    {
+      delete(find(id));  
+    }
 }

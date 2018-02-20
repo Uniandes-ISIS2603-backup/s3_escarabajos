@@ -95,7 +95,7 @@ public class ReclamoPersistenceTest
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
-        em.createQuery("delete from EmployeeEntity").executeUpdate();
+        em.createQuery("delete from ReclamoEntity").executeUpdate();
     }
     
     private List<ReclamoEntity> data = new ArrayList<ReclamoEntity>();
@@ -145,23 +145,12 @@ public class ReclamoPersistenceTest
     {
         List<ReclamoEntity> list = reclamoPersistence.findAll();
         Assert.assertEquals(data.size(), list.size());
-        for (ReclamoEntity ent : list) 
-        {
-            boolean found = true;
-            for (ReclamoEntity entity : data) {
-                if (!ent.getId().equals(entity.getId())) {
-                    found = false;
-                    break;
-                }
-            }
-            Assert.assertTrue(found);
-        }
     }
     @Test
     public void deleteCalificacionTest()
     {
        ReclamoEntity cal = data.get(0);
-       reclamoPersistence.delete(cal);
+       reclamoPersistence.delete(cal.getId());
        ReclamoEntity resp = em.find(ReclamoEntity.class, cal.getId());
        Assert.assertNull(resp);
     }

@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class ReclamoDTO 
 {
-    private Integer id;
+    private Long id;
     private List<String> pics;
     private String mensaje;
     private String razon;
@@ -52,7 +52,7 @@ public class ReclamoDTO
     {
         razon = raz;
     }
-     public Integer getId()
+     public Long getId()
     {
         return id;
     }
