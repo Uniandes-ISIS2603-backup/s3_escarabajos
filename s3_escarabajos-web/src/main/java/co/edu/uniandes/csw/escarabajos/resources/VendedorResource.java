@@ -10,17 +10,36 @@ import co.edu.uniandes.csw.escarabajos.dtos.VendedorDetailDTO;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.enterprise.context.RequestScoped;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 
 /**
+ * <pre>Clase que implementa el recurso "vendedores".
+ * URL: /api/vendedores
+ * </pre>
+ * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta "/api" y
+ * este recurso tiene la ruta "vendedores".</i>
  *
- * @author s.beltran
+ * <h2>Anotaciones </h2>
+ * <pre>
+ * Path: indica la dirección después de "api" para acceder al recurso
+ * Produces/Consumes: indica que los servicios definidos en este recurso reciben y devuelven objetos en formato JSON
+ * RequestScoped: Inicia una transacción desde el llamado de cada método (servicio). 
+ * </pre>
+ * @author s.beltran  
+ * @version 1.0
  */
+@Path("vendedores")
+@Produces("application/json")
+@Consumes("application/json")
+@RequestScoped
 public class VendedorResource {
     /**
      * <h1>POST /api/vendedores : Crear un vendedor.</h1>
@@ -39,8 +58,8 @@ public class VendedorResource {
      * 412 Precodition Failed: Ya existe el vendedor.
      * </code>
      * </pre>
-     * @param vendedor {@link VendedorDetailDTO} - 
-     * @return JSON {@link VendedorDetailDTO}  - 
+     * @param vendedor {@link VendedorDetailDTO} - El vendedor que se va guardar.
+     * @return JSON {@link VendedorDetailDTO}  - el vendedor guardado con el atributo id autogenerado.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe el vendedor.
      */
     @POST

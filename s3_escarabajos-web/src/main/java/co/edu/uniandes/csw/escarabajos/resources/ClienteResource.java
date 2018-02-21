@@ -33,8 +33,20 @@ import javax.ws.rs.Produces;
 @Consumes("application/json")
 @RequestScoped
 /**
+ * <pre>Clase que implementa el recurso "clientes".
+ * URL: /api/clientes
+ * </pre>
+ * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta "/api" y
+ * este recurso tiene la ruta "clientes".</i>
  *
- * @author s.beltran
+ * <h2>Anotaciones </h2>
+ * <pre>
+ * Path: indica la dirección después de "api" para acceder al recurso
+ * Produces/Consumes: indica que los servicios definidos en este recurso reciben y devuelven objetos en formato JSON
+ * RequestScoped: Inicia una transacción desde el llamado de cada método (servicio). 
+ * </pre>
+ * @author s.beltran  
+ * @version 1.0
  */
 public class ClienteResource {
     /**
@@ -54,8 +66,8 @@ public class ClienteResource {
      * 412 Precodition Failed: Ya existe el cliente.
      * </code>
      * </pre>
-     * @param cliente {@link ClienteDetailDTO} - 
-     * @return JSON {@link ClienteDetailDTO}  - 
+     * @param cliente {@link ClienteDetailDTO} - el cliente que se desea guardar.
+     * @return JSON {@link ClienteDetailDTO}  - el cliente guardado con el atributo id autogenerado.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la ciudad.
      */
     @POST
