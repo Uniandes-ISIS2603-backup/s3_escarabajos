@@ -80,6 +80,7 @@ public class AccesorioDTO extends ItemDTO {
      *
      * @return Un Entity con los valores del DTO
      */
+    @Override
     public AccesorioEntity toEntity() {
         AccesorioEntity entity = new AccesorioEntity();
         super.toEntity(entity);         //Recoge la informacion que esta en la super clase y la agrega al entity

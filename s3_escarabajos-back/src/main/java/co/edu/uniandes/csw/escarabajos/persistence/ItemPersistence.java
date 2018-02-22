@@ -37,8 +37,8 @@ public class ItemPersistence {
         return em.find(ItemEntity.class,id);
     }
     
-    public void delete(ItemEntity item){
-       em.remove(item);
+    public void delete(Long id){
+       em.remove(id);
     }
     
     /**

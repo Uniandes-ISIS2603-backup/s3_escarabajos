@@ -37,9 +37,6 @@ import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
  */
 public class ModeloDTO
 {
-   //-----------------------------------------------------------
-   // Atributos
-   //-----------------------------------------------------------
      /**
      * Atributo que modela el id unico del modelo
      */
@@ -61,9 +58,6 @@ public class ModeloDTO
      */
     private String tipoModelo;
      
-   //-----------------------------------------------------------
-   // Constructores
-   //-----------------------------------------------------------
     /**
      * Constructor por defecto
      */

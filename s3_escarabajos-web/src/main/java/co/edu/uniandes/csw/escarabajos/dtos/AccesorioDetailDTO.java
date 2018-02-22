@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.escarabajos.dtos;
 
 import co.edu.uniandes.csw.escarabajos.entities.AccesorioEntity;
 
+
+//ESTA CLASE NO DEBERIA EXSISTIR YA QUE ACCESORIO NO TIENE RELACIONES CON NADA.
 /**
  * Clase que extiende de {@link AccesorioDTO} para manejar la transformacion entre
  * los objetos JSON y las Entidades de la base de datos. Para conocer el

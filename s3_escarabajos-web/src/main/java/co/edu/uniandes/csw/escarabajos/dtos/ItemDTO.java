@@ -34,7 +34,7 @@ import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
  * </pre>
  * @author Andres
  */
-public class ItemDTO{
+public class ItemDTO {
  
     private Long id;
     private double precio;
@@ -68,5 +68,22 @@ public class ItemDTO{
        entity.setPrecio(this.precio);
        entity.setAlbum(this.album);
         return entity;
+    }
+    
+     /**
+     * Convertir DTO a Entity
+     * mira cual es su instancia y llama al toEntity de la clase hijo. 
+     * 
+     * @return Un Entity con los valores del DTO
+     */
+    public ItemEntity toEntity(){
+        ItemEntity respuesta = null;
+        if (this instanceof AccesorioDTO) {
+           respuesta = ((AccesorioDTO)this).toEntity();
+        }
+        else if (this instanceof BicicletaDTO) {
+           respuesta = ((BicicletaDTO)this).toEntity();
+        }
+        return respuesta;
     }
 }

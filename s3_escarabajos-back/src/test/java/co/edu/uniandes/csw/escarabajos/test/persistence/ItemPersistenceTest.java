@@ -175,7 +175,7 @@ public class ItemPersistenceTest {
     @Test
     public void deleteItemTest() {
         ItemEntity entity = data.get(0);
-        itemPersistence.delete( itemPersistence.find(entity.getId()));
+        itemPersistence.delete(entity.getId());
         ItemEntity deleted = em.find(ItemEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }

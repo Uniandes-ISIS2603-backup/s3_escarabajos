@@ -74,6 +74,20 @@ public class ItemEntity implements Serializable {
         this.album = album;
     }
 
+    /**
+     * @return the modelo
+     */
+    public ModeloEntity getModelo() {
+        return modelo;
+    }
+
+    /**
+     * @param modelo the modelo to set
+     */
+    public void setModelo(ModeloEntity modelo) {
+        this.modelo = modelo;
+    }
+
     
 
     
