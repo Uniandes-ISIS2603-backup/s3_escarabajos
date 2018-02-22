@@ -21,17 +21,12 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
- * @author Andres
+ * @modelo Andres
  */
 @RunWith(Arquillian.class)
 public class ModeloPersistenceTest {
-    /**
-     *
-     * @return Devuelve el jar que Arquillian va a desplegar en el Glassfish
-     * embebido. El jar contiene las clases de Modelo, el descriptor de la
-     * base de datos y el archivo beans.xml para resolver la inyección de
-     * dependencias.
-     */
+
+
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -41,34 +36,25 @@ public class ModeloPersistenceTest {
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
 
-    /**
-     * Inyección de la dependencia a la clase ModeloPersistence cuyos métodos
-     * se van a probar.
-     */
+ 
     @Inject
     private ModeloPersistence modeloPersistence;
 
-    /**
-     * Contexto de Persistencia que se va a utilizar para acceder a la Base de
-     * datos por fuera de los métodos que se están probando.
-     */
+ 
     @PersistenceContext
     private EntityManager em;
 
-    /**
-     * Variable para martcar las transacciones del em anterior cuando se
-     * crean/borran datos para las pruebas.
-     */
+  
     @Inject
     UserTransaction utx;
 
     /**
      * Configuración inicial de la prueba.
      *
-     *
+     * 
      */
     @Before
-    public void setUp() {
+    public void configTest() {
         try {
             utx.begin();
             em.joinTransaction();
@@ -88,37 +74,35 @@ public class ModeloPersistenceTest {
     /**
      * Limpia las tablas que están implicadas en la prueba.
      *
-     *
+     * 
      */
     private void clearData() {
         em.createQuery("delete from ModeloEntity").executeUpdate();
     }
 
     /**
-     *
+     * 
      */
     private List<ModeloEntity> data = new ArrayList<ModeloEntity>();
 
     /**
-     * Inserta los datos iniciales para el correcto funcionamiento de las
-     * pruebas.
+     * Inserta los datos iniciales para el correcto funcionamiento de las pruebas.
      *
-     *
+     * 
      */
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
             ModeloEntity entity = factory.manufacturePojo(ModeloEntity.class);
-
+            
             em.persist(entity);
             data.add(entity);
         }
     }
-
     /**
      * Prueba para crear un Modelo.
      *
-     *
+     * 
      */
     @Test
     public void createModeloTest() {
@@ -130,14 +114,15 @@ public class ModeloPersistenceTest {
 
         ModeloEntity entity = em.find(ModeloEntity.class, result.getId());
 
-        Assert.assertEquals(newEntity.getId(), entity.getId());
+        Assert.assertEquals(newEntity.getReferencia(), entity.getReferencia());
     }
 
     /**
      * Prueba para consultar la lista de Modelos.
      *
-     *
+     * 
      */
+    
     @Test
     public void getModelosTest() {
         List<ModeloEntity> list = modeloPersistence.findAll();
@@ -156,26 +141,26 @@ public class ModeloPersistenceTest {
     /**
      * Prueba para consultar un Modelo.
      *
-     *
+     * 
      */
     @Test
     public void getModeloTest() {
         ModeloEntity entity = data.get(0);
         ModeloEntity newEntity = modeloPersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
-        
-        Assert.assertEquals(newEntity.getMarca(), entity.getMarca());
+        Assert.assertEquals(entity.getReferencia(), newEntity.getReferencia());
+        Assert.assertEquals(entity.getCalificacionMedia(), newEntity.getCalificacionMedia());
     }
 
     /**
      * Prueba para eliminar un Modelo.
      *
-     *
+     * 
      */
     @Test
     public void deleteModeloTest() {
         ModeloEntity entity = data.get(0);
-        modeloPersistence.delete( modeloPersistence.find(entity.getId()));
+        modeloPersistence.delete(entity.getId());
         ModeloEntity deleted = em.find(ModeloEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
@@ -183,7 +168,7 @@ public class ModeloPersistenceTest {
     /**
      * Prueba para actualizar un Modelo.
      *
-     *
+     * 
      */
     @Test
     public void updateModeloTest() {
@@ -193,11 +178,10 @@ public class ModeloPersistenceTest {
 
         newEntity.setId(entity.getId());
 
-       modeloPersistence.update(newEntity);
+        modeloPersistence.update(newEntity);
 
         ModeloEntity resp = em.find(ModeloEntity.class, entity.getId());
 
-       
-        Assert.assertEquals(newEntity.getReferencia(), entity.getReferencia());
+        Assert.assertEquals(newEntity.getReferencia(), resp.getReferencia());
     }
 }

@@ -19,61 +19,87 @@ import javax.persistence.TypedQuery;
  */
 public class ModeloPersistence {
     
-    private static final Logger LOGGER = Logger.getLogger(ModeloPersistence.class.getName());
-
+    public static final Logger LOGGER = Logger.getLogger(ModeloPersistence.class.getName());
+    
     @PersistenceContext(unitName = "EscarabajosPU")
     protected EntityManager em;
-
+   
     /**
-     *
+     * Crea un autor en la base de datos
      * @param entity objeto modelo que se creará en la base de datos
      * @return devuelve la entidad creada con un id dado por la base de datos.
      */
     public ModeloEntity create(ModeloEntity entity) {
         LOGGER.info("Creando un modelo nuevo");
+        /* Note que hacemos uso de un método propio de EntityManager para persistir la author en la base de datos.
+        Es similar a "INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1, value2, value3, ...);" en SQL.
+         */
         em.persist(entity);
-        LOGGER.info("Creando un modelo nuevo");
+        LOGGER.info("Creando una author nueva");
         return entity;
     }
 
     /**
-     * Busca si hay algun modelo con el nombre que se envía de argumento
+     * Actualiza una author.
      *
-     * @param name: Nombre del modelo que se está buscando
-     * @return null si no existe ningun modelo con el nombre del argumento. Si
-     * existe alguno devuelve el primero.
+     * @param entity: el modelo que viene con los nuevos cambios. Por ejemplo
+     * el nombre pudo cambiar. En ese caso, se haria uso del método update.
+     * @return un modelo con los cambios aplicados.
      */
-    public ModeloEntity findByName(String name) {
-        LOGGER.log(Level.INFO, "Consultando city por nombre ", name);
-
-        // Se crea un query para buscar modelos con el nombre que recibe el método como argumento. ":name" es un placeholder que debe ser remplazado
-        TypedQuery query = em.createQuery("Select e From ModeloEntity e where e.name = :name",ModeloEntity.class);
-        // Se remplaza el placeholder ":name" con el valor del argumento 
-        query = query.setParameter("name", name);
-        // Se invoca el query se obtiene la lista resultado
-        List<ModeloEntity> sameName = query.getResultList();
-        if (sameName.isEmpty()) {
-            return null;
-        } else {
-            return sameName.get(0);
-        }
+    public ModeloEntity update(ModeloEntity entity) {
+        LOGGER.log(Level.INFO, "Actualizando modelo con id={0}", entity.getId());
+        /* Note que hacemos uso de un método propio del EntityManager llamado merge() que recibe como argumento
+        el modelo con los cambios, esto es similar a 
+        "UPDATE table_name SET column1 = value1, column2 = value2, ... WHERE condition;" en SQL.
+         */
+        return em.merge(entity);
     }
 
-    public List<ModeloEntity> findAll() {
-        LOGGER.info("Consultando todos los modelos");
-        TypedQuery query = em.createQuery("select u from ModeloEntity u", ModeloEntity.class);
-        return query.getResultList();
+    /**
+     * Borra un modelo de la base de datos recibiendo como argumento el id
+     * de la author
+     *
+     * @param id: id correspondiente a el modelo a borrar.
+     */
+    public void delete(Long id) {
+
+        LOGGER.log(Level.INFO, "Borrando modelo con id={0}", id);
+        // Se hace uso de mismo método que esta explicado en public ModeloEntity find(Long id) para obtener el modelo a borrar.
+        ModeloEntity entity = em.find(ModeloEntity.class, id);
+        /* Note que una vez obtenido el objeto desde la base de datos llamado "entity", volvemos hacer uso de un método propio del
+        EntityManager para eliminar de la base de datos el objeto que encontramos y queremos borrar.
+        Es similar a "delete from ModeloEntity where id=id;" - "DELETE FROM table_name WHERE condition;" en SQL.*/
+        em.remove(entity);
+
     }
 
+    /**
+     * Busca si hay algun modelo con el id que se envía de argumento
+     *
+     * @param id: id correspondiente a el modelo buscado.
+     * @return un author.
+     */
     public ModeloEntity find(Long id) {
+        LOGGER.log(Level.INFO, "Consultando modelo con id={0}", id);
+        /* Note que se hace uso del metodo "find" propio del EntityManager, el cual recibe como argumento 
+        el tipo de la clase y el objeto que nos hara el filtro en la base de datos en este caso el "id"
+        Suponga que es algo similar a "select * from ModeloEntity where id=id;" - "SELECT * FROM table_name WHERE condition;" en SQL.
+         */
         return em.find(ModeloEntity.class, id);
     }
 
-    public ModeloEntity update(ModeloEntity entity) {
-         return em.merge(entity);
-    }
-    
-    public void delete(ModeloEntity entity) {
-        em.remove(entity);
+    /**
+     * Devuelve todas las authores de la base de datos.
+     *
+     * @return una lista con todas las authores que encuentre en la base de
+     * datos, "select u from AuthorEntity u" es como un "select * from
+     * AuthorEntity;" - "SELECT * FROM table_name" en SQL.
+     */
+    public List<ModeloEntity> findAll() {
+        LOGGER.info("Consultando todas los modelos");
+        // Se crea un query para buscar todas los modelos en la base de datos.
+        TypedQuery query = em.createQuery("select u from ModeloEntity u", ModeloEntity.class);
+        // Note que en el query se hace uso del método getResultList() que obtiene una lista de modelos.
+        return query.getResultList();
     }
 }
