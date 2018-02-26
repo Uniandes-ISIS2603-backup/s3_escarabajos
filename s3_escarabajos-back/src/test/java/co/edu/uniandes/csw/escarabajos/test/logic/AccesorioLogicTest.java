@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.escarabajos.test.logicaf;
+package co.edu.uniandes.csw.escarabajos.test.logic;
 
 import co.edu.uniandes.csw.escarabajos.ejb.AccesorioLogic;
 import co.edu.uniandes.csw.escarabajos.entities.AccesorioEntity;

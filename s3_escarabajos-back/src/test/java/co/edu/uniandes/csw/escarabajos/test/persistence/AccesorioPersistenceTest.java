@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.escarabajos.persistence;
+package co.edu.uniandes.csw.escarabajos.test.persistence;
 
 import co.edu.uniandes.csw.escarabajos.entities.AccesorioEntity;
+import co.edu.uniandes.csw.escarabajos.persistence.AccesorioPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
