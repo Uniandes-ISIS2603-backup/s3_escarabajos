@@ -11,10 +11,13 @@ package co.edu.uniandes.csw.escarabajos.entities;
  */
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class ReclamoEntity implements Serializable
@@ -26,6 +29,12 @@ public class ReclamoEntity implements Serializable
     private String mensaje;
     private String razon;
     
+    @ManyToOne( cascade = CascadeType.PERSIST )
+    private FacturaEntity modelo;
+    
+   @OneToMany( cascade = CascadeType.PERSIST )
+    private ClienteEntity cliente;
+   
     public String getMensaje()
     {
         return mensaje;

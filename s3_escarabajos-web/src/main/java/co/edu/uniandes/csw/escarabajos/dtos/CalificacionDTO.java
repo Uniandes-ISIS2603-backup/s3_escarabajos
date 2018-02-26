@@ -12,20 +12,39 @@ import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
  */
 public class CalificacionDTO 
 {
-    private String comentario;
-    private double puntaje;
-    private Long id;
+    /**
+     * Comentario dado por el usuario.
+     */
+    String comentario;
+    /**
+     * Puntaje dado por el usuario.
+     */
+    double puntaje;
+    /**
+     * Identificador de la calificación
+     */
+    Long id;
     
+    /**
+     * Constructor por defecto
+     */
     public CalificacionDTO()
     {}
-    
+    /**
+     * Constructor que comienza a partir de una entity
+     * @param cal entidad de la se saca la información
+     */
     public CalificacionDTO(CalificacionEntity cal)
     {
         comentario = cal.getComentario();
         puntaje = cal.getPuntaje();
         id = cal.getId();
     }
-        public String getComentario()
+    /**
+     * Método para obtener el comentario
+     * @return el comentario
+     */
+    public String getComentario()
     {
         return comentario;
     }

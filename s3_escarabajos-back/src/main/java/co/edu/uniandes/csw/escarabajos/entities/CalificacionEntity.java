@@ -6,10 +6,12 @@
 package co.edu.uniandes.csw.escarabajos.entities;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 /**
  *
  * @author n.gaitan
@@ -20,11 +22,16 @@ public class CalificacionEntity extends BaseEntity implements Serializable
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     
-    public Long id;
-
-    public String comentario;
+    private String comentario;
     
-    public double puntaje;
+    private double puntaje;
+    
+    @ManyToOne( cascade = CascadeType.PERSIST )
+    private ModeloEntity modelo;
+    
+        
+   @ManyToOne( cascade = CascadeType.PERSIST )
+    private ClienteEntity cliente;
     
     public String getComentario()
     {
@@ -41,14 +48,5 @@ public class CalificacionEntity extends BaseEntity implements Serializable
     public void setComentario(String com)
     {
         comentario = com;
-    }
-       public Long getId() 
-    {
-        return id;
-    }
-
-    public void setId(Long id) 
-    {
-        this.id = id;
     }
 }

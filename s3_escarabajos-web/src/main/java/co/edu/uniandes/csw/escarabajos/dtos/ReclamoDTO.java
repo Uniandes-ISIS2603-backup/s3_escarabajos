@@ -15,11 +15,14 @@ import java.util.List;
  */
 public class ReclamoDTO 
 {
-    private Long id;
-    private List<String> pics;
-    private String mensaje;
-    private String razon;
+    Long id;
+    List<String> pics;
+    String mensaje;
+    String razon;
    
+    /**
+     * Constructor por defecto
+     */
     public ReclamoDTO()
     {
         pics = new ArrayList<String>();
