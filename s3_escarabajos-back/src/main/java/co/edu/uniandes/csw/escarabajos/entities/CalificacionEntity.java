@@ -49,4 +49,21 @@ public class CalificacionEntity extends BaseEntity implements Serializable
     {
         comentario = com;
     }
+
+    public ModeloEntity getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(ModeloEntity modelo) {
+        this.modelo = modelo;
+    }
+
+    public ClienteEntity getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(ClienteEntity cliente) {
+        this.cliente = cliente;
+    }
+    
 }

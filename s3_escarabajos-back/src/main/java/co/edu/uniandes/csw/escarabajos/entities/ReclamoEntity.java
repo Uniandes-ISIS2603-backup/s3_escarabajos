@@ -12,6 +12,7 @@ package co.edu.uniandes.csw.escarabajos.entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,13 +26,14 @@ public class ReclamoEntity implements Serializable
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ElementCollection
     private List<String> pics;
     private String mensaje;
     private String razon;
     
     @ManyToOne( cascade = CascadeType.PERSIST )
-    private FacturaEntity modelo;
-    
+    private FacturaEntity facuta;
+
    @OneToMany( cascade = CascadeType.PERSIST )
     private ClienteEntity cliente;
    
@@ -66,6 +68,22 @@ public class ReclamoEntity implements Serializable
     public void setPics(List<String> pics)
     {
         this.pics = pics;
+    }
+
+    public FacturaEntity getFacuta() {
+        return facuta;
+    }
+
+    public void setFacuta(FacturaEntity facuta) {
+        this.facuta = facuta;
+    }
+
+    public ClienteEntity getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(ClienteEntity cliente) {
+        this.cliente = cliente;
     }
      
 }
