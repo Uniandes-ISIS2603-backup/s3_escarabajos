@@ -46,7 +46,7 @@ public class CarritoPersistence {
     }
     
     public CarritoEntity update(CarritoEntity entity) {
-        LOGGER.log(Level.INFO, "Actualizando carrito con id={0}", entity.getId());
+        LOGGER.log(Level.INFO, "Actualizando carrito con id={0}", entity.getIdCliente());
         return em.merge(entity);
     }
 }
