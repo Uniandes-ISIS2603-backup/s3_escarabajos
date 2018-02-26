@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.escarabajos.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -24,9 +25,46 @@ public class ClienteEntity extends BaseEntity implements Serializable {
     
     @OneToOne(mappedBy="carrito")
     private CarritoEntity carrito;
+
+    @OneToMany(mappedBy="factura")
+    private FacturaEntity factura;
     
-     @OneToMany
-    private BicicletaUsadaEntity bicicletaUsada;
+    @OneToMany(mappedBy="medioPago")
+    private MedioPagoEntity medioPago;
+    
+    @OneToMany(mappedBy="calificacion")
+    private CalificacionEntity calificacion;
+    
+    @OneToMany(mappedBy="reclamo")
+    private ReclamoEntity reclamo;
+    
+    public FacturaEntity getFactura(){
+        return factura;
+    }
+    public void setFactura(FacturaEntity factura){
+        this.factura = factura;
+    }
+    
+     public MedioPagoEntity getMedioPago(){
+        return medioPago;
+    }
+    public void setMedioPago(MedioPagoEntity medioPago){
+        this.medioPago = medioPago;
+    }
+    
+    public CalificacionEntity getCalificacion(){
+        return calificacion;
+    }
+    public void setCalificacion(CalificacionEntity calificacion){
+        this.calificacion = calificacion;
+    }
+    
+    public ReclamoEntity getReclamo(){
+        return reclamo;
+    }
+    public void setReclamo(ReclamoEntity reclamo){
+        this.reclamo = reclamo;
+    }
     
     public CarritoEntity getCarrito(){
         return carrito;
