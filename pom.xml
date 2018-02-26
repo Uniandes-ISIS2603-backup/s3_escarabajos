@@ -8,7 +8,10 @@
     <packaging>pom</packaging>
     <name>s3_escarabajos</name>
  
-    <modules></modules>
+    <modules>
+        <module>s3_escarabajos-back</module>
+        <module>s3_escarabajos-web</module>
+    </modules>
     <repositories>
         <repository>
             <id>csw-releases</id>
