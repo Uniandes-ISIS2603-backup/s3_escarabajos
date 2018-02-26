@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.escarabajos.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -20,6 +22,18 @@ public class ClienteEntity extends BaseEntity implements Serializable {
     private String usuario;
     private int cedula;
     
+    @OneToOne(mappedBy="carrito")
+    private CarritoEntity carrito;
+    
+     @OneToMany
+    private BicicletaUsadaEntity bicicletaUsada;
+    
+    public CarritoEntity getCarrito(){
+        return carrito;
+    }
+    public void setCarrito(CarritoEntity carrito){
+        this.carrito = carrito;
+    }
     public String getNombre(){
         return nombre;
     }
