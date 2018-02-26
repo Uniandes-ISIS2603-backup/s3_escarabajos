@@ -34,7 +34,7 @@ public class ReclamoEntity implements Serializable
     @ManyToOne( cascade = CascadeType.PERSIST )
     private FacturaEntity facuta;
 
-   @OneToMany( cascade = CascadeType.PERSIST )
+   @ManyToOne( cascade = CascadeType.PERSIST )
     private ClienteEntity cliente;
    
     public String getMensaje()
