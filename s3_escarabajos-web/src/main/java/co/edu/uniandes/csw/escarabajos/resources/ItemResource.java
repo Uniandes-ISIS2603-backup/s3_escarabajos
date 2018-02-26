@@ -68,7 +68,7 @@ public class ItemResource {
     @POST
     public ItemDetailDTO createItem(ItemDetailDTO item) throws BusinessLogicException {
         //ESTE METODO NO SE DEBE CREAR ya que una instancia de item no deberia existir sola
-          return new ItemDetailDTO(itemLogic.createItem(item.toEntity()));
+          return null;//new ItemDetailDTO(itemLogic.createItem(item.toEntity()));
     }
 
     /**
@@ -84,7 +84,7 @@ public class ItemResource {
      */
     @GET
     public List<ItemDetailDTO> getItems() {
-       return listItemEntity2DetailDTO(itemLogic.getItems());
+       return null;// listItemEntity2DetailDTO(itemLogic.getItems());
     }
     
    /**
@@ -106,11 +106,11 @@ public class ItemResource {
     @GET
     @Path("{id: \\d+}")
     public ItemDetailDTO getItem(@PathParam("id") long id) {
-         ItemEntity entity = itemLogic.getItem(id);
+      /*   ItemEntity entity = itemLogic.getItem(id);
         if (entity == null) {
             throw new WebApplicationException("El recurso /items/" + id + " no existe.", 404);
-        }
-        return new ItemDetailDTO(entity);
+        }*/
+        return null;//new ItemDetailDTO(entity);
     }
     
     /**
@@ -134,12 +134,13 @@ public class ItemResource {
     @PUT
     @Path("{id: \\d+}")
     public ItemDetailDTO updateItem(@PathParam("id") Long id, ItemDetailDTO item) throws BusinessLogicException {
-        item.setId(id);
+       /* item.setId(id);
         ItemEntity entity = itemLogic.getItem(id);
         if (entity == null) {
             throw new WebApplicationException("El recurso /items/" + id + " no existe.", 404);
         }
-        return new ItemDetailDTO(itemLogic.updateItem(id, item.toEntity()));
+        return new ItemDetailDTO(itemLogic.updateItem(id, item.toEntity()));*/
+       return null;
     }
     
     /**
@@ -159,18 +160,19 @@ public class ItemResource {
     @DELETE
     @Path("{id: \\d+}")
      public void deleteItem(@PathParam("id") Long id) {
-        ItemEntity entity = itemLogic.getItem(id);
+       /* ItemEntity entity = itemLogic.getItem(id);
         if (entity == null) {
             throw new WebApplicationException("El recurso /items/" + id + " no existe.", 404);
         }
-        itemLogic.deleteItem(id);
+        itemLogic.deleteItem(id);*/
     }
     
      private List<ItemDetailDTO> listItemEntity2DetailDTO(List<ItemEntity> entityList) {
-        List<ItemDetailDTO> list = new ArrayList<>();
+      /*  List<ItemDetailDTO> list = new ArrayList<>();
         for (ItemEntity entity : entityList) {
             list.add(new ItemDetailDTO(entity));
         }
-        return list;
+        return list;*/
+      return null;
     }
 }

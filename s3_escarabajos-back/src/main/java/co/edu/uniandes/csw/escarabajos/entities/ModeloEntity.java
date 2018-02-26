@@ -34,10 +34,10 @@ public class ModeloEntity implements Serializable
     @OneToMany(mappedBy = "modelo", cascade = CascadeType.PERSIST, orphanRemoval = true)
    private List<ItemEntity> items = new ArrayList<ItemEntity>();
     
-   /* @PodamExclude
+   @PodamExclude
     @OneToMany(mappedBy = "modelo", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
-   */
+   
     
     public ModeloEntity()
     {

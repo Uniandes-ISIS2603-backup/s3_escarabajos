@@ -72,7 +72,8 @@ public class ModeloResource {
      */
     @POST
     public ModeloDetailDTO createModelo(ModeloDetailDTO modelo) throws BusinessLogicException {
-       return new ModeloDetailDTO(modeloLogic.createModelo(modelo.toEntity()));
+       //return new ModeloDetailDTO(modeloLogic.createModelo(modelo.toEntity()));
+       return null;
     }
 
     /**
@@ -88,7 +89,7 @@ public class ModeloResource {
      */
     @GET
     public List<ModeloDetailDTO> getModelos() {
-          return listModeloEntity2DetailDTO(modeloLogic.getModelos());
+          return null;//return listModeloEntity2DetailDTO(modeloLogic.getModelos());
     }
 
     /**
@@ -110,11 +111,12 @@ public class ModeloResource {
     @GET
     @Path("{id: \\d+}")
     public ModeloDetailDTO getModelo(@PathParam("id") Long id) {
-         ModeloEntity entity = modeloLogic.getModelo(id);
+       /*  ModeloEntity entity = modeloLogic.getModelo(id);
         if (entity == null) {
             throw new WebApplicationException("El recurso /modelos/" + id + " no existe.", 404);
         }
-        return new ModeloDetailDTO(entity);
+        return new ModeloDetailDTO(entity);*/
+       return null;
     }
     
     /**
@@ -138,12 +140,14 @@ public class ModeloResource {
     @PUT
     @Path("{id: \\d+}")
     public ModeloDetailDTO updateModelo(@PathParam("id") Long id, ModeloDetailDTO modelo) throws BusinessLogicException {
-         modelo.setId(id);
+       /*  modelo.setId(id);
         ModeloEntity entity = modeloLogic.getModelo(id);
         if (entity == null) {
             throw new WebApplicationException("El recurso /modelos/" + id + " no existe.", 404);
         }
         return new ModeloDetailDTO(modeloLogic.updateModelo(id, modelo.toEntity()));
+        */
+       return null;
     }
     
     
@@ -165,11 +169,11 @@ public class ModeloResource {
     @DELETE
     @Path("{id: \\d+}")
      public void deleteModelo(@PathParam("id") Long id) {
-        ModeloEntity entity = modeloLogic.getModelo(id);
+       /* ModeloEntity entity = modeloLogic.getModelo(id);
         if (entity == null) {
             throw new WebApplicationException("El recurso /modelos/" + id + " no existe.", 404);
         }
-        modeloLogic.deleteModelo(id);
+        modeloLogic.deleteModelo(id);*/
     }
      
      /**
@@ -181,7 +185,7 @@ public class ModeloResource {
      * 
      * @param id El ID del modelo con respecto al cual se accede al servicio.
      * @return El servicio de items para ese modelo en paricular.
-     */
+     
     @Path("{id: \\d+}/items")
     public Class<ModeloItemsResource> getModeloItemsResource(@PathParam("id") Long id) {
         ModeloEntity entity = modeloLogic.getModelo(id);
@@ -189,13 +193,14 @@ public class ModeloResource {
             throw new WebApplicationException("El recurso /modelos/" + id + "/items no existe", 404);
         }
         return ModeloItemsResource.class;
-    }
+    }*/
     
     private List<ModeloDetailDTO> listModeloEntity2DetailDTO(List<ModeloEntity> entityList) {
-        List<ModeloDetailDTO> list = new ArrayList<>();
+        /*List<ModeloDetailDTO> list = new ArrayList<>();
         for (ModeloEntity entity : entityList) {
             list.add(new ModeloDetailDTO(entity));
         }
-        return list;
+        return list;*/
+        return null;
     }
 }

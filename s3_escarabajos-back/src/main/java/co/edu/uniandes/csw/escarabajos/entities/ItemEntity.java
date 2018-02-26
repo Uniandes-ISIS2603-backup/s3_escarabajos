@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.escarabajos.entities;
 
 import java.io.Serializable;
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,7 +27,8 @@ public class ItemEntity implements Serializable {
     private Long id;
      
     private double precio;
-    
+  
+    @ElementCollection  
     private String[] album;
     
     @PodamExclude
