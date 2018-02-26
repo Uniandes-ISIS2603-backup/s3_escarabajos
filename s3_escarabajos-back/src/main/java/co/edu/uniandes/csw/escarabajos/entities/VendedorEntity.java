@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.escarabajos.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -18,6 +19,16 @@ public class VendedorEntity extends BaseEntity implements Serializable{
     private String direccion;
     private String telefono;
     private String factura;
+    
+    @OneToMany
+    private BicicletaUsadaEntity bicicletaUsada;
+    
+    public BicicletaUsadaEntity getBicicletaUsada(){
+        return bicicletaUsada;
+    }
+    public void setBicicletaUsada(BicicletaUsadaEntity bicicletaUsada){
+        this.bicicletaUsada = bicicletaUsada;
+    }
     
     public String getDireccion(){
         return direccion;
