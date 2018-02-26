@@ -6,10 +6,13 @@
 package co.edu.uniandes.csw.escarabajos.resources;
 
 import co.edu.uniandes.csw.escarabajos.dtos.ModeloDetailDTO;
+import co.edu.uniandes.csw.escarabajos.ejb.ModeloLogic;
+import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -18,6 +21,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 
 /**
  * <pre>Clase que implementa el recurso "modelos".
@@ -41,6 +45,10 @@ import javax.ws.rs.Produces;
 @RequestScoped
 public class ModeloResource {
 
+    
+    @Inject
+    ModeloLogic modeloLogic;
+    
     /**
      * <h1>POST /api/modelos : Crear un modelo.</h1>
      * 
@@ -64,7 +72,7 @@ public class ModeloResource {
      */
     @POST
     public ModeloDetailDTO createModelo(ModeloDetailDTO modelo) throws BusinessLogicException {
-        return modelo;
+       return new ModeloDetailDTO(modeloLogic.createModelo(modelo.toEntity()));
     }
 
     /**
@@ -80,7 +88,7 @@ public class ModeloResource {
      */
     @GET
     public List<ModeloDetailDTO> getModelos() {
-        return new ArrayList<>();
+          return listModeloEntity2DetailDTO(modeloLogic.getModelos());
     }
 
     /**
@@ -102,7 +110,11 @@ public class ModeloResource {
     @GET
     @Path("{id: \\d+}")
     public ModeloDetailDTO getModelo(@PathParam("id") Long id) {
-        return null;
+         ModeloEntity entity = modeloLogic.getModelo(id);
+        if (entity == null) {
+            throw new WebApplicationException("El recurso /modelos/" + id + " no existe.", 404);
+        }
+        return new ModeloDetailDTO(entity);
     }
     
     /**
@@ -126,8 +138,15 @@ public class ModeloResource {
     @PUT
     @Path("{id: \\d+}")
     public ModeloDetailDTO updateModelo(@PathParam("id") Long id, ModeloDetailDTO modelo) throws BusinessLogicException {
-        return modelo;
+         modelo.setId(id);
+        ModeloEntity entity = modeloLogic.getModelo(id);
+        if (entity == null) {
+            throw new WebApplicationException("El recurso /modelos/" + id + " no existe.", 404);
+        }
+        return new ModeloDetailDTO(modeloLogic.updateModelo(id, modelo.toEntity()));
     }
+    
+    
     
     /**
      * <h1>DELETE /api/modelo/{id} : Borrar modelo por id.</h1>
@@ -146,6 +165,37 @@ public class ModeloResource {
     @DELETE
     @Path("{id: \\d+}")
      public void deleteModelo(@PathParam("id") Long id) {
-        // Void
+        ModeloEntity entity = modeloLogic.getModelo(id);
+        if (entity == null) {
+            throw new WebApplicationException("El recurso /modelos/" + id + " no existe.", 404);
+        }
+        modeloLogic.deleteModelo(id);
+    }
+     
+     /**
+     * Conexión con el servicio de items para un modelo. {@link ModeloItemsResource}
+     * 
+     * Este método conecta la ruta de /modelos con las rutas de /items que dependen
+     * del modelo, es una redirección al servicio que maneja el segmento de la 
+     * URL que se encarga de los items.
+     * 
+     * @param id El ID del modelo con respecto al cual se accede al servicio.
+     * @return El servicio de items para ese modelo en paricular.
+     */
+    @Path("{id: \\d+}/items")
+    public Class<ModeloItemsResource> getModeloItemsResource(@PathParam("id") Long id) {
+        ModeloEntity entity = modeloLogic.getModelo(id);
+        if (entity == null) {
+            throw new WebApplicationException("El recurso /modelos/" + id + "/items no existe", 404);
+        }
+        return ModeloItemsResource.class;
+    }
+    
+    private List<ModeloDetailDTO> listModeloEntity2DetailDTO(List<ModeloEntity> entityList) {
+        List<ModeloDetailDTO> list = new ArrayList<>();
+        for (ModeloEntity entity : entityList) {
+            list.add(new ModeloDetailDTO(entity));
+        }
+        return list;
     }
 }

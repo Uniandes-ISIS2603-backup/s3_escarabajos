@@ -32,12 +32,12 @@ public class ModeloEntity implements Serializable
     
     @PodamExclude
     @OneToMany(mappedBy = "modelo", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<ItemEntity> items = new ArrayList<ItemEntity>();
+   private List<ItemEntity> items = new ArrayList<ItemEntity>();
     
-    @PodamExclude
+   /* @PodamExclude
     @OneToMany(mappedBy = "modelo", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
-   
+   */
     
     public ModeloEntity()
     {
@@ -124,19 +124,5 @@ public class ModeloEntity implements Serializable
      */
     public void setItems(List<ItemEntity> items) {
         this.items = items;
-    }
-
-    /**
-     * @return the calificaciones
-     */
-    public List<CalificacionEntity> getCalificaciones() {
-        return calificaciones;
-    }
-
-    /**
-     * @param calificaciones the calificaciones to set
-     */
-    public void setCalificaciones(List<CalificacionEntity> calificaciones) {
-        this.calificaciones = calificaciones;
     }
 }

@@ -31,16 +31,16 @@ public class ItemPersistence {
      */
     public ItemEntity create(ItemEntity entity) {
         LOGGER.info("Creando un item nuevo");
-        /* Note que hacemos uso de un método propio de EntityManager para persistir la author en la base de datos.
+        /* Note que hacemos uso de un método propio de EntityManager para persistir el item en la base de datos.
         Es similar a "INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1, value2, value3, ...);" en SQL.
          */
         em.persist(entity);
-        LOGGER.info("Creando una author nueva");
+        LOGGER.info("Creando un item nuevo");
         return entity;
     }
 
     /**
-     * Actualiza una author.
+     * Actualiza un item.
      *
      * @param entity: el item que viene con los nuevos cambios. Por ejemplo
      * el nombre pudo cambiar. En ese caso, se haria uso del método update.
@@ -57,7 +57,7 @@ public class ItemPersistence {
 
     /**
      * Borra un item de la base de datos recibiendo como argumento el id
-     * de la author
+     * del item
      *
      * @param id: id correspondiente a el item a borrar.
      */
@@ -77,7 +77,7 @@ public class ItemPersistence {
      * Busca si hay algun item con el id que se envía de argumento
      *
      * @param id: id correspondiente a el item buscado.
-     * @return un author.
+     * @return un item.
      */
     public ItemEntity find(Long id) {
         LOGGER.log(Level.INFO, "Consultando item con id={0}", id);
@@ -89,15 +89,15 @@ public class ItemPersistence {
     }
 
     /**
-     * Devuelve todas las authores de la base de datos.
+     * Devuelve todos los items de la base de datos.
      *
-     * @return una lista con todas las authores que encuentre en la base de
-     * datos, "select u from AuthorEntity u" es como un "select * from
-     * AuthorEntity;" - "SELECT * FROM table_name" en SQL.
+     * @return una lista con todos lositems que encuentre en la base de
+     * datos, "select u from ItemEntity u" es como un "select * from
+     * ItemEntity;" - "SELECT * FROM table_name" en SQL.
      */
     public List<ItemEntity> findAll() {
-        LOGGER.info("Consultando todas los items");
-        // Se crea un query para buscar todas los items en la base de datos.
+        LOGGER.info("Consultando todos los items");
+        // Se crea un query para buscar todos los items en la base de datos.
         TypedQuery query = em.createQuery("select u from ItemEntity u", ItemEntity.class);
         // Note que en el query se hace uso del método getResultList() que obtiene una lista de items.
         return query.getResultList();

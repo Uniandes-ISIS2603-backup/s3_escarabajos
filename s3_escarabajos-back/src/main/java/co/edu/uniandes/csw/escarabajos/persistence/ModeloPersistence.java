@@ -31,16 +31,16 @@ public class ModeloPersistence {
      */
     public ModeloEntity create(ModeloEntity entity) {
         LOGGER.info("Creando un modelo nuevo");
-        /* Note que hacemos uso de un método propio de EntityManager para persistir la author en la base de datos.
+        /* Note que hacemos uso de un método propio de EntityManager para persistir el modelo en la base de datos.
         Es similar a "INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1, value2, value3, ...);" en SQL.
          */
         em.persist(entity);
-        LOGGER.info("Creando una author nueva");
+        LOGGER.info("Creando un modelo nuevo");
         return entity;
     }
 
     /**
-     * Actualiza una author.
+     * Actualiza un modelo.
      *
      * @param entity: el modelo que viene con los nuevos cambios. Por ejemplo
      * el nombre pudo cambiar. En ese caso, se haria uso del método update.
@@ -57,7 +57,7 @@ public class ModeloPersistence {
 
     /**
      * Borra un modelo de la base de datos recibiendo como argumento el id
-     * de la author
+     * del modelo
      *
      * @param id: id correspondiente a el modelo a borrar.
      */
@@ -77,7 +77,7 @@ public class ModeloPersistence {
      * Busca si hay algun modelo con el id que se envía de argumento
      *
      * @param id: id correspondiente a el modelo buscado.
-     * @return un author.
+     * @return un modelo.
      */
     public ModeloEntity find(Long id) {
         LOGGER.log(Level.INFO, "Consultando modelo con id={0}", id);
@@ -89,15 +89,15 @@ public class ModeloPersistence {
     }
 
     /**
-     * Devuelve todas las authores de la base de datos.
+     * Devuelve todos los modelos de la base de datos.
      *
-     * @return una lista con todas las authores que encuentre en la base de
-     * datos, "select u from AuthorEntity u" es como un "select * from
-     * AuthorEntity;" - "SELECT * FROM table_name" en SQL.
+     * @return una lista con todos losmodelos que encuentre en la base de
+     * datos, "select u from ModeloEntity u" es como un "select * from
+     * ModeloEntity;" - "SELECT * FROM table_name" en SQL.
      */
     public List<ModeloEntity> findAll() {
-        LOGGER.info("Consultando todas los modelos");
-        // Se crea un query para buscar todas los modelos en la base de datos.
+        LOGGER.info("Consultando todos los modelos");
+        // Se crea un query para buscar todos los modelos en la base de datos.
         TypedQuery query = em.createQuery("select u from ModeloEntity u", ModeloEntity.class);
         // Note que en el query se hace uso del método getResultList() que obtiene una lista de modelos.
         return query.getResultList();

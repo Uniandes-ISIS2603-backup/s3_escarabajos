@@ -64,9 +64,9 @@ public class ItemDTO {
      * @return Un Entity con los valores del DTO
      */
     public ItemEntity toEntity(ItemEntity entity) {
-       entity.setId(this.id);
-       entity.setPrecio(this.precio);
-       entity.setAlbum(this.album);
+       entity.setId(this.getId());
+       entity.setPrecio(this.getPrecio());
+       entity.setAlbum(this.getAlbum());
         return entity;
     }
     
@@ -85,5 +85,47 @@ public class ItemDTO {
            respuesta = ((BicicletaDTO)this).toEntity();
         }
         return respuesta;
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the precio
+     */
+    public double getPrecio() {
+        return precio;
+    }
+
+    /**
+     * @param precio the precio to set
+     */
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    /**
+     * @return the album
+     */
+    public String[] getAlbum() {
+        return album;
+    }
+
+    /**
+     * @param album the album to set
+     */
+    public void setAlbum(String[] album) {
+        this.album = album;
     }
 }

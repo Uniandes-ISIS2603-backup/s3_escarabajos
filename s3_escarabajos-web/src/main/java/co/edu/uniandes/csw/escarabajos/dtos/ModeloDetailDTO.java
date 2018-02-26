@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.escarabajos.dtos;
-import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
+//import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import java.util.ArrayList;
@@ -40,17 +40,17 @@ public class ModeloDetailDTO extends ModeloDTO
     public ModeloDetailDTO(ModeloEntity entity) {
         super(entity);
         if (entity.getItems() != null) {
-            items = new ArrayList<>();
+            //items = new ArrayList<>();
             for (ItemEntity entityItem : entity.getItems()) {
-                items.add(new ItemDTO(entityItem));
+              //  items.add(new ItemDTO(entityItem));
             }
         }
-        if (entity.getCalificaciones()!= null) {
+        /*if (entity.getCalificaciones()!= null) {
             calificaciones = new ArrayList<>();
             for (CalificacionEntity entityCalificacion : entity.getCalificaciones()) {
                 calificaciones.add(new CalificacionDTO(entityCalificacion));
             }
-        }
+        }*/
     }
         /**
      * Transformar un DTO a un Entity
@@ -63,17 +63,17 @@ public class ModeloDetailDTO extends ModeloDTO
         if (getItems() != null) {
             List<ItemEntity> itemsEntity = new ArrayList<>();
             for (ItemDTO dtoItem : getItems()) {
-                itemsEntity.add(dtoItem.toEntity());
+              //  itemsEntity.add(dtoItem.toEntity());
             }
-            modelo.setItems(itemsEntity);
+           // modelo.setItems(itemsEntity);
         }
-        if (getCalificaciones() != null) {
+       /* if (getCalificaciones() != null) {
             List<CalificacionEntity> calificacionesEntity = new ArrayList<>();
             for (CalificacionDTO dtoCalificacion : getCalificaciones()) {
                 calificacionesEntity.add(dtoCalificacion.toEntity());
             }
             modelo.setCalificaciones(calificacionesEntity);
-        }
+        }*/
         
         return modelo;
     }
