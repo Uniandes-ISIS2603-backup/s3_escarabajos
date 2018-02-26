@@ -9,8 +9,8 @@
     <name>s3_escarabajos</name>
  
     <modules>
-        <module>s3_escarabajos-web</module>
         <module>s3_escarabajos-back</module>
+        <module>s3_escarabajos-web</module>
     </modules>
     <repositories>
         <repository>
