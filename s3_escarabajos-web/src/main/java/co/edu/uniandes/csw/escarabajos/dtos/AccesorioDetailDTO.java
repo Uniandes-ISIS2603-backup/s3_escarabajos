@@ -17,6 +17,7 @@ import co.edu.uniandes.csw.escarabajos.entities.AccesorioEntity;
  */
 public class AccesorioDetailDTO extends AccesorioDTO {
 
+    
     /**
      * Constructor por defecto
      */

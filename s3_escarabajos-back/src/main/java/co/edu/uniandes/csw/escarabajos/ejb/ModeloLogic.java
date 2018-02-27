@@ -95,7 +95,7 @@ public class ModeloLogic {
     public ItemEntity addItem(Long itemId, Long modeloId) {
         ModeloEntity modeloEntity = getModelo(modeloId);
         ItemEntity itemEntity = itemLogic.getItem(itemId);
-        itemEntity.setModelo(modeloEntity);
+        //itemEntity.setModelo(modeloEntity);
         return itemEntity;
     }
 
@@ -108,8 +108,8 @@ public class ModeloLogic {
     public void removeItem(Long itemId, Long modeloId) {
         ModeloEntity modeloEntity = getModelo(modeloId);
         ItemEntity item = itemLogic.getItem(itemId);
-        item.setModelo(null);
-        modeloEntity.getItems().remove(item);
+        //item.setModelo(null);
+        //modeloEntity.getItems().remove(item);
     }
 
     /**
@@ -124,12 +124,12 @@ public class ModeloLogic {
         List<ItemEntity> itemList = itemLogic.getItems();
         for (ItemEntity item : itemList) {
             if (items.contains(item)) {
-                item.setModelo(modelo);
-            } else if (item.getModelo() != null && item.getModelo().equals(modelo)) {
-                item.setModelo(null);
+            //    item.setModelo(modelo);
+           // } else if (item.getModelo() != null && item.getModelo().equals(modelo)) {
+          //      item.setModelo(null);
             }
         }
-        modelo.setItems(items);
+        //modelo.setItems(items);
         return items;
     }
 
@@ -140,7 +140,8 @@ public class ModeloLogic {
      * @return La lista de items de el modelo
      */
     public List<ItemEntity> getItems(Long modeloId) {
-        return getModelo(modeloId).getItems();
+        return null;
+        //return getModelo(modeloId).getItems();
     }
 
     /**
@@ -152,12 +153,12 @@ public class ModeloLogic {
      * @throws BusinessLogicException Si el item no se encuentra en el modelo
      */
     public ItemEntity getItem(Long modeloId, Long itemId) throws BusinessLogicException {
-        List<ItemEntity> items = getModelo(modeloId).getItems();
+        //List<ItemEntity> items = getModelo(modeloId).getItems();
         ItemEntity item = itemLogic.getItem(itemId);
-        int index = items.indexOf(item);
-        if (index >= 0) {
-            return items.get(index);
-        }
+       // int index = items.indexOf(item);
+        //if (index >= 0) {
+         //   return items.get(index);
+        //}
         throw new BusinessLogicException("El item no está asociado a el modelo");
 
     }
@@ -172,6 +173,6 @@ public class ModeloLogic {
      *
      */
     public List<ItemEntity> listItems(Long modeloId) {
-        return getModelo(modeloId).getItems();
+        return null;//return getModelo(modeloId).getItems();
     }
 }

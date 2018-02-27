@@ -10,6 +10,7 @@ package co.edu.uniandes.csw.escarabajos.entities;
  * @author n.gaitan
  */
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
@@ -19,6 +20,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 
 @Entity
 public class ReclamoEntity implements Serializable
@@ -26,8 +28,10 @@ public class ReclamoEntity implements Serializable
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ElementCollection
-    private List<String> pics;
+    @PodamExclude
+    @OneToMany(mappedBy = "item", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<FotoEntity> album = new ArrayList<FotoEntity>();
+    
     private String mensaje;
     private String razon;
     
@@ -61,14 +65,6 @@ public class ReclamoEntity implements Serializable
      {
          this.id = id;
      }
-    public List<String> getPics()
-    {
-        return pics;
-    }
-    public void setPics(List<String> pics)
-    {
-        this.pics = pics;
-    }
 
     public FacturaEntity getFacuta() {
         return facuta;
@@ -84,6 +80,20 @@ public class ReclamoEntity implements Serializable
 
     public void setCliente(ClienteEntity cliente) {
         this.cliente = cliente;
+    }
+
+    /**
+     * @return the album
+     */
+    public List<FotoEntity> getAlbum() {
+        return album;
+    }
+
+    /**
+     * @param album the album to set
+     */
+    public void setAlbum(List<FotoEntity> album) {
+        this.album = album;
     }
      
 }

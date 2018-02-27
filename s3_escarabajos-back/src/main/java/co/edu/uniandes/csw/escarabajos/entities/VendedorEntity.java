@@ -6,8 +6,10 @@
 package co.edu.uniandes.csw.escarabajos.entities;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -20,7 +22,8 @@ public class VendedorEntity extends BaseEntity implements Serializable{
     private String telefono;
     private String factura;
     
-    @OneToMany
+    @PodamExclude
+    @OneToMany(mappedBy = "vendedor", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private BicicletaUsadaEntity bicicletaUsada;
     
     public BicicletaUsadaEntity getBicicletaUsada(){

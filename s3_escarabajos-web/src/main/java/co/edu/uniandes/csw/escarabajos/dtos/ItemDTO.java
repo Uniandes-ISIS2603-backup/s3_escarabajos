@@ -5,7 +5,11 @@
  */
 package co.edu.uniandes.csw.escarabajos.dtos;
 
+import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
+import co.edu.uniandes.csw.escarabajos.entities.FotoEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * ItemDTO Objeto de transferencia de datos de Accesorios. Los DTO contienen las
@@ -34,11 +38,14 @@ import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
  * </pre>
  * @author Andres
  */
-public class ItemDTO {
+public abstract class ItemDTO {
  
     private Long id;
     private double precio;
-    private String[] album;
+    
+    private long modeloId;
+    
+    private List<FotoDTO> album;
     /**
      * Constructor por defecto
      */
@@ -54,9 +61,15 @@ public class ItemDTO {
     public ItemDTO(ItemEntity entity) {
        this.id = entity.getId();
        this.precio = entity.getPrecio();
-       this.album = entity.getAlbum();
+       this.modeloId = entity.getModeloId();
+       if (entity.getAlbum()!= null) {
+            album = new ArrayList<>();
+            for (FotoEntity entityFoto : entity.getAlbum()) {
+               album.add(new FotoDTO(entityFoto));
+            }
+        }
     }
-
+    public abstract ItemEntity toEntity();
       /**
      * Convertir DTO a Entity
      *
@@ -66,27 +79,17 @@ public class ItemDTO {
     public ItemEntity toEntity(ItemEntity entity) {
        entity.setId(this.getId());
        entity.setPrecio(this.getPrecio());
-       entity.setAlbum(this.getAlbum());
+       entity.setModeloId(this.getModeloId());
+        if (getAlbum()!= null) {
+            List<FotoEntity> fotoEntity = new ArrayList<>();
+            for (FotoDTO dtoFoto : getAlbum()) {
+                fotoEntity.add(dtoFoto.toEntity());
+            }
+            entity.setAlbum(fotoEntity);
+        }
         return entity;
     }
     
-     /**
-     * Convertir DTO a Entity
-     * mira cual es su instancia y llama al toEntity de la clase hijo. 
-     * 
-     * @return Un Entity con los valores del DTO
-     */
-    public ItemEntity toEntity(){
-        ItemEntity respuesta = null;
-        if (this instanceof AccesorioDTO) {
-           respuesta = ((AccesorioDTO)this).toEntity();
-        }
-        else if (this instanceof BicicletaDTO) {
-           respuesta = ((BicicletaDTO)this).toEntity();
-        }
-        return respuesta;
-    }
-
     /**
      * @return the id
      */
@@ -115,17 +118,33 @@ public class ItemDTO {
         this.precio = precio;
     }
 
+
     /**
      * @return the album
      */
-    public String[] getAlbum() {
+    public List<FotoDTO> getAlbum() {
         return album;
     }
 
     /**
      * @param album the album to set
      */
-    public void setAlbum(String[] album) {
+    public void setAlbum(List<FotoDTO> album) {
         this.album = album;
     }
+
+    /**
+     * @return the modeloId
+     */
+    public long getModeloId() {
+        return modeloId;
+    }
+
+    /**
+     * @param modeloId the modeloId to set
+     */
+    public void setModeloId(long modeloId) {
+        this.modeloId = modeloId;
+    }
+
 }

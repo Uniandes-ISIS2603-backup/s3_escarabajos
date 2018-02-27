@@ -94,6 +94,7 @@ public class BicicletaDTO extends ItemDTO{
      *
      * @return Un Entity con los valores del DTO
      */
+    @Override
     public BicicletaEntity toEntity() {
         BicicletaEntity entity = new BicicletaEntity();
         super.toEntity(entity);

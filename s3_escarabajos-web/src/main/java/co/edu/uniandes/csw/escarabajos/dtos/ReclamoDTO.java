@@ -16,7 +16,6 @@ import java.util.List;
 public class ReclamoDTO 
 {
     Long id;
-    List<String> pics;
     String mensaje;
     String razon;
    
@@ -25,7 +24,7 @@ public class ReclamoDTO
      */
     public ReclamoDTO()
     {
-        pics = new ArrayList<String>();
+       
     }
      /**
      * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
@@ -35,7 +34,6 @@ public class ReclamoDTO
      */
     public ReclamoDTO(ReclamoEntity recl) {
         this.id = recl.getId();
-        this.pics = recl.getPics();
         this.mensaje = recl.getMensaje();
         this.razon = recl.getRazon();
     }
@@ -59,19 +57,10 @@ public class ReclamoDTO
     {
         return id;
     }
-    public List<String> getPics()
-    {
-        return pics;
-    }
-    public void setPics(List<String> pics)
-    {
-        this.pics = pics;
-    }
     public ReclamoEntity toEntity()
     {
         ReclamoEntity entity = new ReclamoEntity();
         entity.setMensaje(this.mensaje);
-        entity.setPics(this.pics);
         entity.setId(this.id);
         entity.setRazon(this.razon);
         return entity;

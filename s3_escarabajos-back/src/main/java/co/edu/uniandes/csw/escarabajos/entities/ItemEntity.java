@@ -6,14 +6,15 @@
 package co.edu.uniandes.csw.escarabajos.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
-import javax.persistence.ElementCollection;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -25,16 +26,21 @@ public class ItemEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-     
+    
     private double precio;
-  
-    @ElementCollection  
-    private String[] album;
     
     @PodamExclude
     @ManyToOne(cascade = CascadeType.PERSIST)
     private ModeloEntity modelo;
+     
+    
+    @PodamExclude
+    @OneToMany(mappedBy = "item", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<FotoEntity> album = new ArrayList<FotoEntity>();
 
+    private long modeloId;
+    
+    
     /**
      * @return the id
      */
@@ -64,20 +70,6 @@ public class ItemEntity implements Serializable {
     }
 
     /**
-     * @return the album
-     */
-    public String[] getAlbum() {
-        return album;
-    }
-
-    /**
-     * @param album the album to set
-     */
-    public void setAlbum(String[] album) {
-        this.album = album;
-    }
-
-    /**
      * @return the modelo
      */
     public ModeloEntity getModelo() {
@@ -91,8 +83,32 @@ public class ItemEntity implements Serializable {
         this.modelo = modelo;
     }
 
-    
+    /**
+     * @return the album
+     */
+    public List<FotoEntity> getAlbum() {
+        return album;
+    }
 
-    
-    
+    /**
+     * @param album the album to set
+     */
+    public void setAlbum(List<FotoEntity> album) {
+        this.album = album;
+    }
+
+    /**
+     * @return the modeloId
+     */
+    public long getModeloId() {
+        return modeloId;
+    }
+
+    /**
+     * @param modeloId the modeloId to set
+     */
+    public void setModeloId(long modeloId) {
+        this.modeloId = modeloId;
+    }
+ 
 }

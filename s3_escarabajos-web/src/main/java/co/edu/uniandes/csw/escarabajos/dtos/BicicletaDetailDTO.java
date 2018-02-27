@@ -41,6 +41,11 @@ import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
  */
 public class BicicletaDetailDTO extends BicicletaDTO {
 
+    /*
+    * Relación a un modelo
+     */
+    private ModeloDTO modelo;
+    
     /**
      * Constructor por defecto
      */
@@ -55,6 +60,11 @@ public class BicicletaDetailDTO extends BicicletaDTO {
      */
     public BicicletaDetailDTO(BicicletaEntity entity) {
         super(entity);
+        if (entity.getModelo()!= null) {
+            this.modelo = new ModeloDTO(entity.getModelo());
+        } else {
+            entity.setModelo(null);
+        }
     }
 
     /**
@@ -65,6 +75,23 @@ public class BicicletaDetailDTO extends BicicletaDTO {
     @Override
     public BicicletaEntity toEntity() {
         BicicletaEntity biciE = super.toEntity();
+        if (this.getModelo() != null) {
+            biciE.setModelo(this.getModelo().toEntity());
+        }
         return biciE;
+    }
+
+    /**
+     * @return the modelo
+     */
+    public ModeloDTO getModelo() {
+        return modelo;
+    }
+
+    /**
+     * @param modelo the modelo to set
+     */
+    public void setModelo(ModeloDTO modelo) {
+        this.modelo = modelo;
     }
 }

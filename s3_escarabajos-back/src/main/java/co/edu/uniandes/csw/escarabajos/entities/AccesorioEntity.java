@@ -6,7 +6,10 @@
 package co.edu.uniandes.csw.escarabajos.entities;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -24,6 +27,7 @@ public class AccesorioEntity extends ItemEntity implements Serializable{
      * Descripcion del accesorio.
      */
     private String descripcion;
+     
 
     /**
      * @return the tipoAcessorio
@@ -53,5 +57,4 @@ public class AccesorioEntity extends ItemEntity implements Serializable{
         this.descripcion = descripcion;
     }
 
-   
 }

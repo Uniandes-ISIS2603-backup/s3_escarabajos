@@ -42,6 +42,8 @@ public class AccesorioDTO extends ItemDTO {
  
     private String tipoAccesorio;
     private String descripcion;
+    
+    
     /**
      * Constructor por defecto
      */

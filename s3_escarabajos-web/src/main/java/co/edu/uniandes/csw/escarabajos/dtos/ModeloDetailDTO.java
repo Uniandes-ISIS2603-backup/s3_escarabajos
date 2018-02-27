@@ -5,6 +5,9 @@
  */
 package co.edu.uniandes.csw.escarabajos.dtos;
 //import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
+import co.edu.uniandes.csw.escarabajos.entities.AccesorioEntity;
+import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
+import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import java.util.ArrayList;
@@ -39,43 +42,65 @@ public class ModeloDetailDTO extends ModeloDTO
      */
     public ModeloDetailDTO(ModeloEntity entity) {
         super(entity);
-        if (entity.getItems() != null) {
-            //items = new ArrayList<>();
-            for (ItemEntity entityItem : entity.getItems()) {
-              //  items.add(new ItemDTO(entityItem));
+        if (entity.getItems()!= null) {
+            items = new ArrayList<>();
+            for (ItemEntity entityItem: entity.getItems()) {
+                if (entityItem instanceof AccesorioEntity) {
+                   items.add(new AccesorioDTO((AccesorioEntity)entityItem)); 
+                }
+                else if (entityItem instanceof BicicletaEntity) {
+                   items.add(new BicicletaDTO((BicicletaEntity)entityItem)); 
+                }
             }
         }
-        /*if (entity.getCalificaciones()!= null) {
+        if (entity.getCalificaciones()!= null) {
             calificaciones = new ArrayList<>();
             for (CalificacionEntity entityCalificacion : entity.getCalificaciones()) {
                 calificaciones.add(new CalificacionDTO(entityCalificacion));
             }
-        }*/
+        }
     }
         /**
      * Transformar un DTO a un Entity
      *
      * @return  La entidad construida a partir del DTO.
      */
+    @Override
     public ModeloEntity toEntity()
     {
         ModeloEntity modelo = super.toEntity();
-        if (getItems() != null) {
+         if (getItems() != null) {
             List<ItemEntity> itemsEntity = new ArrayList<>();
             for (ItemDTO dtoItem : getItems()) {
-              //  itemsEntity.add(dtoItem.toEntity());
+                itemsEntity.add(dtoItem.toEntity());
             }
-           // modelo.setItems(itemsEntity);
+            modelo.setItems(itemsEntity);
         }
-       /* if (getCalificaciones() != null) {
+       if (getCalificaciones() != null) {
             List<CalificacionEntity> calificacionesEntity = new ArrayList<>();
             for (CalificacionDTO dtoCalificacion : getCalificaciones()) {
                 calificacionesEntity.add(dtoCalificacion.toEntity());
             }
             modelo.setCalificaciones(calificacionesEntity);
-        }*/
+        }
         
         return modelo;
+    }
+
+   
+
+    /**
+     * @return the calificaciones
+     */
+    public List<CalificacionDTO> getCalificaciones() {
+        return calificaciones;
+    }
+
+    /**
+     * @param calificaciones the calificaciones to set
+     */
+    public void setCalificaciones(List<CalificacionDTO> calificaciones) {
+        this.calificaciones = calificaciones;
     }
 
     /**
@@ -92,18 +117,6 @@ public class ModeloDetailDTO extends ModeloDTO
         this.items = items;
     }
 
-    /**
-     * @return the calificaciones
-     */
-    public List<CalificacionDTO> getCalificaciones() {
-        return calificaciones;
-    }
-
-    /**
-     * @param calificaciones the calificaciones to set
-     */
-    public void setCalificaciones(List<CalificacionDTO> calificaciones) {
-        this.calificaciones = calificaciones;
-    }
+    
     
 }

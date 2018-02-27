@@ -50,8 +50,8 @@ public class FacturaDTO{
      * @param factura: Es la entidad que se va a convertir a DTO
      */
     public FacturaDTO(FacturaEntity factura) {
-        this.usuarioT = factura.getUsuario();
-        this.dineroT = factura.getDinero();
+        this.usuarioT = factura.getUsuarioT();
+        this.dineroT = factura.getDineroT();
     }
     
     /**
@@ -61,8 +61,8 @@ public class FacturaDTO{
      */
     public FacturaEntity toEntity() {
         FacturaEntity entity = new FacturaEntity();
-        entity.setDinero(this.dineroT);
-        entity.setUsuario(this.usuarioT);
+        entity.setDineroT(this.dineroT);
+        entity.setUsuarioT(this.usuarioT);
 
         return entity;
     }

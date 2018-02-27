@@ -113,7 +113,7 @@ public class ModeloLogicTest {
             em.persist(entity);
             data.add(entity);
             if (i == 0) {
-                itemsData.get(i).setModelo(entity);
+               // itemsData.get(i).setModelo(entity);
             }
         }
     }

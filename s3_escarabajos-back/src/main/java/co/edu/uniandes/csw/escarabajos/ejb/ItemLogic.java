@@ -56,6 +56,7 @@ public class ItemLogic {
         if (item == null) {
             LOGGER.log(Level.SEVERE, "El item con el id {0} no existe", id);
         }
+        
         LOGGER.log(Level.INFO, "Termina proceso de consultar item con id={0}", id);
         return item;
     }

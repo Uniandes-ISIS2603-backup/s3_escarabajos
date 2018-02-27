@@ -17,8 +17,7 @@ public class BicicletaEntity extends ItemEntity implements Serializable  {
     private String categoria;
     private String color;
     private Boolean usada;
-
-
+    
     public String getCategoria() {
         return categoria;
     }
@@ -41,10 +40,6 @@ public class BicicletaEntity extends ItemEntity implements Serializable  {
 
     public void setUsada(Boolean usada) {
         this.usada = usada;
-    }
-    
-    
-    
-    
+    }    
     
 }

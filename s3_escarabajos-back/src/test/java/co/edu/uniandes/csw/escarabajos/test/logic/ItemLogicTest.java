@@ -108,7 +108,7 @@ public class ItemLogicTest {
         
         for (int i = 0; i < 3; i++) {
             ItemEntity entity = factory.manufacturePojo(ItemEntity.class);
-            entity.setModelo(modeloData.get(1));
+           // entity.setModelo(modeloData.get(1));
             em.persist(entity);
             data.add(entity);
         }
