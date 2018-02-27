@@ -27,18 +27,18 @@ public class ItemEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private double precio;
+    private Double precio;
     
     @PodamExclude
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private ModeloEntity modelo;
      
     
     @PodamExclude
-    @OneToMany(mappedBy = "item", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<FotoEntity> album = new ArrayList<FotoEntity>();
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
+    private List<FotoEntity> album = new ArrayList<>();
 
-    private long modeloId;
+    private Long modeloId;
     
     
     /**

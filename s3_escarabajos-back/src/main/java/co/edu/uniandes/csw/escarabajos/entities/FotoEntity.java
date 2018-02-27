@@ -27,11 +27,11 @@ public class FotoEntity implements Serializable {
    private String descripcion;
    
    @PodamExclude
-   @ManyToOne(cascade = CascadeType.PERSIST)
+   @ManyToOne
    private ItemEntity item;
    
    @PodamExclude
-   @ManyToOne(cascade = CascadeType.PERSIST)
+   @ManyToOne
    private ReclamoEntity reclamo;
     /**
      * @return the id
