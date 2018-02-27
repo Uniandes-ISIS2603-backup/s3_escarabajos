@@ -9,6 +9,9 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 import javax.persistence.ManyToOne;
 /**
@@ -16,8 +19,11 @@ import javax.persistence.ManyToOne;
  * @author n.gaitan
  */
 @Entity
-public class CalificacionEntity extends BaseEntity implements Serializable
+public class CalificacionEntity  implements Serializable
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     
     private String comentario;
     
@@ -26,8 +32,7 @@ public class CalificacionEntity extends BaseEntity implements Serializable
     @ManyToOne( cascade = CascadeType.PERSIST )
     private ModeloEntity modelo;
     
-        
-   @ManyToOne( cascade = CascadeType.PERSIST )
+    @ManyToOne( cascade = CascadeType.PERSIST )
     private ClienteEntity cliente;
     
     public String getComentario()
@@ -56,11 +61,32 @@ public class CalificacionEntity extends BaseEntity implements Serializable
     }
 
     public ClienteEntity getClientes() {
-        return cliente;
+        return getCliente();
     }
 
     public void setCliente(ClienteEntity cliente) {
         this.cliente = cliente;
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the cliente
+     */
+    public ClienteEntity getCliente() {
+        return cliente;
     }
     
 }

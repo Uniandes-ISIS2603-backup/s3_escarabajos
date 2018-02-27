@@ -6,18 +6,26 @@
 package co.edu.uniandes.csw.escarabajos.entities;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
  * @author jp.carreno
  */
 @Entity
-public class MedioPagoEntity extends BaseEntity implements Serializable {
+public class MedioPagoEntity implements Serializable {
    
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     
     private double dineroT;
     
@@ -25,8 +33,8 @@ public class MedioPagoEntity extends BaseEntity implements Serializable {
     
     private String tipo;
     
-    
-    @ManyToOne
+    @PodamExclude
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private ClienteEntity cliente;
     
     
@@ -101,6 +109,20 @@ public class MedioPagoEntity extends BaseEntity implements Serializable {
      */
     public void setFactura(FacturaEntity factura) {
         this.factura = factura;
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
     
 }

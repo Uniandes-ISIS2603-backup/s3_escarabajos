@@ -109,7 +109,6 @@ public class ModeloPersistenceTest {
         PodamFactory factory = new PodamFactoryImpl();
         ModeloEntity newEntity = factory.manufacturePojo(ModeloEntity.class);
         ModeloEntity result = modeloPersistence.create(newEntity);
-
         Assert.assertNotNull(result);
 
         ModeloEntity entity = em.find(ModeloEntity.class, result.getId());
@@ -149,7 +148,7 @@ public class ModeloPersistenceTest {
         ModeloEntity newEntity = modeloPersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getReferencia(), newEntity.getReferencia());
-        Assert.assertEquals(entity.getCalificacionMedia(), newEntity.getCalificacionMedia());
+        Assert.assertTrue(entity.getCalificacionMedia() == newEntity.getCalificacionMedia());
     }
 
     /**

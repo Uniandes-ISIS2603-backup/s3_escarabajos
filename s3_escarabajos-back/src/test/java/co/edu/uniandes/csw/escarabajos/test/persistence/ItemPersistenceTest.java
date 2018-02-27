@@ -130,6 +130,6 @@ public class ItemPersistenceTest {
         ItemEntity entity = data.get(0);
         ItemEntity newEntity = itemPersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
-       // Assert.assertEquals(entity.getPrecio(), newEntity.getPrecio());
+        Assert.assertTrue(entity.getPrecio()== newEntity.getPrecio());
     }
 }

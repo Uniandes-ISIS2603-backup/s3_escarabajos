@@ -136,8 +136,6 @@ public class MedioPagoPersistenceTest {
 
         MedioPagoEntity entity = em.find(MedioPagoEntity.class, result.getId());
 
-        Assert.assertEquals(newEntity.getName(), entity.getName());
-        Assert.assertTrue(newEntity.getDineroT()- entity.getDineroT() == 0);
         Assert.assertEquals(newEntity.getNumeroTarjeta(), entity.getNumeroTarjeta());
         Assert.assertEquals(newEntity.getTipo(), entity.getTipo());
     }
@@ -172,8 +170,7 @@ public class MedioPagoPersistenceTest {
         MedioPagoEntity entity = data.get(0);
         MedioPagoEntity newEntity = medioPagoPersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getName(), newEntity.getName());
-        Assert.assertTrue(newEntity.getDineroT()- entity.getDineroT() == 0);
+ 
         Assert.assertEquals(newEntity.getNumeroTarjeta(), entity.getNumeroTarjeta());
         Assert.assertEquals(newEntity.getTipo(), entity.getTipo());
     }
@@ -208,8 +205,6 @@ public class MedioPagoPersistenceTest {
 
         MedioPagoEntity resp = em.find(MedioPagoEntity.class, entity.getId());
 
-        Assert.assertEquals(newEntity.getName(), resp.getName());
-        Assert.assertTrue(newEntity.getDineroT()- resp.getDineroT() == 0);
         Assert.assertEquals(newEntity.getNumeroTarjeta(), resp.getNumeroTarjeta());
         Assert.assertEquals(newEntity.getTipo(), resp.getTipo());
     } 

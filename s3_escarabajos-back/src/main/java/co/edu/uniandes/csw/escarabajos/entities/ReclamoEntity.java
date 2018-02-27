@@ -13,7 +13,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,9 +22,14 @@ import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 
 @Entity
-public class ReclamoEntity extends BaseEntity implements Serializable
+public class ReclamoEntity  implements Serializable
 
 {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
     @PodamExclude
     @OneToMany(mappedBy = "reclamo", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<FotoEntity> album = new ArrayList<FotoEntity>();
@@ -83,6 +87,20 @@ public class ReclamoEntity extends BaseEntity implements Serializable
      */
     public void setAlbum(List<FotoEntity> album) {
         this.album = album;
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
      
 }
