@@ -28,15 +28,16 @@ public class ReclamoEntity implements Serializable
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     @PodamExclude
-    @OneToMany(mappedBy = "item", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "reclamo", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<FotoEntity> album = new ArrayList<FotoEntity>();
     
     private String mensaje;
     private String razon;
     
     @ManyToOne( cascade = CascadeType.PERSIST )
-    private FacturaEntity facuta;
+    private FacturaEntity factura;
 
    @ManyToOne( cascade = CascadeType.PERSIST )
     private ClienteEntity cliente;
@@ -66,12 +67,12 @@ public class ReclamoEntity implements Serializable
          this.id = id;
      }
 
-    public FacturaEntity getFacuta() {
-        return facuta;
+    public FacturaEntity getFactura() {
+        return factura;
     }
 
-    public void setFacuta(FacturaEntity facuta) {
-        this.facuta = facuta;
+    public void setFactura(FacturaEntity factura) {
+        this.factura = factura;
     }
 
     public ClienteEntity getCliente() {

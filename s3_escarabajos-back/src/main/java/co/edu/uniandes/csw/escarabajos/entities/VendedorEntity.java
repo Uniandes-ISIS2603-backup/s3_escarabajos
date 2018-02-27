@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.escarabajos.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -24,13 +25,13 @@ public class VendedorEntity extends BaseEntity implements Serializable{
     
     @PodamExclude
     @OneToMany(mappedBy = "vendedor", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private BicicletaUsadaEntity bicicletaUsada;
+    private List<BicicletaUsadaEntity> bicicletasUsadas;
     
-    public BicicletaUsadaEntity getBicicletaUsada(){
-        return bicicletaUsada;
+    public List<BicicletaUsadaEntity> getBicicletasUsadas(){
+        return bicicletasUsadas;
     }
-    public void setBicicletaUsada(BicicletaUsadaEntity bicicletaUsada){
-        this.bicicletaUsada = bicicletaUsada;
+    public void setBicicletaUsada(List<BicicletaUsadaEntity> bicicletasUsadas){
+        this.bicicletasUsadas = bicicletasUsadas;
     }
     
     public String getDireccion(){

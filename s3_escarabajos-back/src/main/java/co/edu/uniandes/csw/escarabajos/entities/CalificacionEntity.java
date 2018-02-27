@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.escarabajos.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,8 +20,6 @@ import javax.persistence.ManyToOne;
 @Entity
 public class CalificacionEntity extends BaseEntity implements Serializable
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     
     private String comentario;
     
@@ -58,7 +57,7 @@ public class CalificacionEntity extends BaseEntity implements Serializable
         this.modelo = modelo;
     }
 
-    public ClienteEntity getCliente() {
+    public ClienteEntity getClientes() {
         return cliente;
     }
 

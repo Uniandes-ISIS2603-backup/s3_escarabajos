@@ -27,13 +27,13 @@ public class FacturaEntity extends BaseEntity implements Serializable {
     private double dineroT;
     private String usuarioT;
     @PodamExclude
-    @OneToMany(mappedBy = "Factura", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "factura", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<ReclamoEntity> reclamos;
     
-    @OneToOne(mappedBy = "Factura")
+    @OneToOne(mappedBy = "factura")
     private MedioPagoEntity medioDePago;
     
-    @OneToOne(mappedBy = "Factura")
+    @OneToOne(mappedBy = "factura")
     private CarritoEntity carrito;
     
     @ManyToOne

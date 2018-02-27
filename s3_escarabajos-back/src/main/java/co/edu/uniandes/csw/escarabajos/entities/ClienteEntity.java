@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.escarabajos.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -23,47 +24,47 @@ public class ClienteEntity extends BaseEntity implements Serializable {
     private String usuario;
     private int cedula;
     
-    @OneToOne(mappedBy="carrito")
+    @OneToOne(mappedBy="cliente")
     private CarritoEntity carrito;
 
-    @OneToMany(mappedBy="factura")
-    private FacturaEntity factura;
+    @OneToMany(mappedBy="cliente")
+    private List<FacturaEntity> facturas;
     
-    @OneToMany(mappedBy="medioPago")
-    private MedioPagoEntity medioPago;
+    @OneToMany(mappedBy="cliente")
+    private List<MedioPagoEntity> mediosPago;
     
-    @OneToMany(mappedBy="calificacion")
-    private CalificacionEntity calificacion;
+    @OneToMany(mappedBy="cliente")
+    private List<CalificacionEntity> calificaciones;
     
-    @OneToMany(mappedBy="reclamo")
-    private ReclamoEntity reclamo;
+    @OneToMany(mappedBy="cliente")
+    private List<ReclamoEntity> reclamos;
     
-    public FacturaEntity getFactura(){
-        return factura;
+    public List<FacturaEntity> getFacturas(){
+        return facturas;
     }
-    public void setFactura(FacturaEntity factura){
-        this.factura = factura;
-    }
-    
-     public MedioPagoEntity getMedioPago(){
-        return medioPago;
-    }
-    public void setMedioPago(MedioPagoEntity medioPago){
-        this.medioPago = medioPago;
+    public void setFacturas(List<FacturaEntity> facturas){
+        this.facturas = facturas;
     }
     
-    public CalificacionEntity getCalificacion(){
-        return calificacion;
+     public List<MedioPagoEntity> getMediosPago(){
+        return mediosPago;
     }
-    public void setCalificacion(CalificacionEntity calificacion){
-        this.calificacion = calificacion;
+    public void setMediosPago(List<MedioPagoEntity> mediosPago){
+        this.mediosPago = mediosPago;
     }
     
-    public ReclamoEntity getReclamo(){
-        return reclamo;
+    public List<CalificacionEntity> getCalificaciones(){
+        return calificaciones;
     }
-    public void setReclamo(ReclamoEntity reclamo){
-        this.reclamo = reclamo;
+    public void setCalificaciones(List<CalificacionEntity> calificaciones){
+        this.calificaciones = calificaciones;
+    }
+    
+    public List<ReclamoEntity> getReclamos(){
+        return reclamos;
+    }
+    public void setReclamos(List<ReclamoEntity> reclamos){
+        this.reclamos = reclamos;
     }
     
     public CarritoEntity getCarrito(){
