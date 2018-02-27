@@ -18,7 +18,18 @@ public class BicicletaUsadaEntity extends BicicletaEntity implements Serializabl
     private String facturaOriginal;
     private String estado;
     private double precioDeReventa;
+    private VendedorEntity vendedor;
 
+    public VendedorEntity getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(VendedorEntity vendedor) {
+        this.vendedor = vendedor;
+    }
+    
+    
+    
     public String getEstado() {
         return estado;
     }
