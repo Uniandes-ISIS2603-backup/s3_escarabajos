@@ -140,7 +140,7 @@ public class AccesorioPersistenceTest {
      * Test of find method, of class AccesorioPersistence.
      */
     @Test
-    public void testFind() throws Exception {
+    public void testFind() {
         
         AccesorioEntity entity = data.get(0);
         AccesorioEntity newEntity = persistence.find(entity.getId());

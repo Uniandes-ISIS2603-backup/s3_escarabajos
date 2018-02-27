@@ -124,7 +124,7 @@ public class CarritoPersistenceTest {
      * Test of find method, of class CarritoPersistence.
      */
     @Test
-    public void testFind() throws Exception {
+    public void testFind() {
         
         CarritoEntity entity = data.get(0);
         CarritoEntity newEntity = persistence.find(entity.getIdCliente());
@@ -136,7 +136,7 @@ public class CarritoPersistenceTest {
      * Test of create method, of class CarritoPersistence.
      */
     @Test
-    public void testCreate() throws Exception {
+    public void testCreate()  {
         PodamFactory factory = new PodamFactoryImpl();
         CarritoEntity newEntity = factory.manufacturePojo(CarritoEntity.class);
         CarritoEntity result = persistence.create(newEntity);
