@@ -15,7 +15,6 @@ import java.util.List;
  */
 public class ReclamoDTO 
 {
-    Long id;
     String mensaje;
     String razon;
    
@@ -33,7 +32,6 @@ public class ReclamoDTO
      * @param recl: Es la entidad que se va a convertir a DTO
      */
     public ReclamoDTO(ReclamoEntity recl) {
-        this.id = recl.getId();
         this.mensaje = recl.getMensaje();
         this.razon = recl.getRazon();
     }
@@ -53,15 +51,10 @@ public class ReclamoDTO
     {
         razon = raz;
     }
-     public Long getId()
-    {
-        return id;
-    }
     public ReclamoEntity toEntity()
     {
         ReclamoEntity entity = new ReclamoEntity();
         entity.setMensaje(this.mensaje);
-        entity.setId(this.id);
         entity.setRazon(this.razon);
         return entity;
     }

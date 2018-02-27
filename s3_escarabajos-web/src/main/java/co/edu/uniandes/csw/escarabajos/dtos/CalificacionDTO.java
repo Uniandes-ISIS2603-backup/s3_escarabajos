@@ -20,10 +20,6 @@ public class CalificacionDTO
      * Puntaje dado por el usuario.
      */
     double puntaje;
-    /**
-     * Identificador de la calificación
-     */
-    Long id;
     
     /**
      * Constructor por defecto
@@ -38,7 +34,6 @@ public class CalificacionDTO
     {
         comentario = cal.getComentario();
         puntaje = cal.getPuntaje();
-        id = cal.getId();
     }
     /**
      * Método para obtener el comentario
@@ -65,7 +60,6 @@ public class CalificacionDTO
         CalificacionEntity e = new CalificacionEntity();
         e.setComentario(comentario);
         e.setPuntaje(puntaje);
-        e.setId(this.id);
         return e;
     }
 }

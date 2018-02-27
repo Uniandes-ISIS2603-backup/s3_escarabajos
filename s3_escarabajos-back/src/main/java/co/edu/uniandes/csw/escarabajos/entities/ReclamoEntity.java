@@ -23,12 +23,9 @@ import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 
 @Entity
-public class ReclamoEntity implements Serializable
+public class ReclamoEntity extends BaseEntity implements Serializable
+
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
     @PodamExclude
     @OneToMany(mappedBy = "reclamo", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<FotoEntity> album = new ArrayList<FotoEntity>();
@@ -58,15 +55,6 @@ public class ReclamoEntity implements Serializable
     {
         razon = raz;
     }
-     public Long getId()
-    {
-        return id;
-    }
-     public void setId(Long id)
-     {
-         this.id = id;
-     }
-
     public FacturaEntity getFactura() {
         return factura;
     }
