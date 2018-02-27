@@ -18,11 +18,15 @@ import co.edu.uniandes.csw.escarabajos.entities.BicicletaUsadaEntity;
  *      "id": number,
  *      "categoria: string,
  *      "marca": string,
- *      "color: string,
+ *      "color": string,
  *      "precio": double,
- *      "usada: boolean,
+ *      "usada": boolean,
  *      "facturaOriginal" : string,
- *      "precioVenta" : double
+ *      "precioVenta" : double,
+ *      "vendedor" : {
+ *                  "direccion": string,
+ *                  "telefono": string
+ *                  }
  *   }
  * </pre> Por ejemplo una bicicletaUsadaEnVenta se representa asi:<br>
  * <pre>
@@ -34,6 +38,10 @@ import co.edu.uniandes.csw.escarabajos.entities.BicicletaUsadaEntity;
  *      "precio": 2.50,
  *      "usada: true
  *      "facturaOriginal" : "https://cloud10.todocoleccion.online/facturas-antiguas/tc/2010/05/15/19344998.jpg"
+ *      "vendedor" : {
+ *                  "direccion": "Calle 39 c Sur #82-56",
+ *                  "telefono": "4542024"
+ *                  }
  *   }
  *
  * </pre>
