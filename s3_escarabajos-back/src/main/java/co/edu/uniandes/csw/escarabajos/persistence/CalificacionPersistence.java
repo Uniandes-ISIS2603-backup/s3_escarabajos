@@ -64,7 +64,6 @@ public class CalificacionPersistence
     }
         public void delete(Long id) 
     {
-        
         em.remove(find(id));
     }
 }
