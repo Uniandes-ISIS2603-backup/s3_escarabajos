@@ -28,15 +28,15 @@ public class ModeloEntity implements Serializable
     private String referencia;
     private String marca;
     private String tipoModelo;
-    private double calificacionMedia;
+    private Double calificacionMedia;
     
     @PodamExclude
-    @OneToMany(mappedBy = "modelo", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<ItemEntity> items = new ArrayList<ItemEntity>();
+    @OneToMany(mappedBy = "modelo", cascade = CascadeType.ALL)
+    private List<ItemEntity> items = new ArrayList<>();
   
     @PodamExclude
-    @OneToMany(mappedBy = "modelo", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
+    @OneToMany(mappedBy = "modelo", cascade = CascadeType.ALL)
+    private List<CalificacionEntity> calificaciones = new ArrayList<>();
    
     
     public ModeloEntity()

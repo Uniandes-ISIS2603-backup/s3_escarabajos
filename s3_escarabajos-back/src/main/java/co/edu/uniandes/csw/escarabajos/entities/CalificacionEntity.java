@@ -27,12 +27,12 @@ public class CalificacionEntity  implements Serializable
     
     private String comentario;
     
-    private double puntaje;
+    private Double puntaje;
     
-    @ManyToOne( cascade = CascadeType.PERSIST )
+    @ManyToOne
     private ModeloEntity modelo;
     
-    @ManyToOne( cascade = CascadeType.PERSIST )
+    @ManyToOne
     private ClienteEntity cliente;
     
     public String getComentario()

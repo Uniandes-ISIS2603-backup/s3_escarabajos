@@ -83,7 +83,7 @@ public class ModeloPersistenceTest {
     /**
      * 
      */
-    private List<ModeloEntity> data = new ArrayList<ModeloEntity>();
+    private List<ModeloEntity> data = new ArrayList<>();
 
     /**
      * Inserta los datos iniciales para el correcto funcionamiento de las pruebas.
