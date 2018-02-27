@@ -43,7 +43,7 @@ public abstract class ItemDTO {
     private Long id;
     private double precio;
     
-    private long modeloId;
+    private Long modeloId;
     
     private List<FotoDTO> album;
     /**
