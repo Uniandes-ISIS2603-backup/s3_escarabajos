@@ -56,9 +56,9 @@ public class CalificacionLogic
     }
     public CalificacionEntity find(Long id)
     {
-        LOGGER.info("Inicia el proceso de eliminar una calificaciòn.");
+        LOGGER.info("Inicia el proceso de buscar una calificaciòn.");
         CalificacionEntity answ = calificacionPersistence.find(id);
-        LOGGER.info("Termina el proceso de eliminar una calificaciòn.");
+        LOGGER.info("Termina el proceso de buscar una calificaciòn.");
         return answ;
     }    
     public void delete(CalificacionEntity ent)
@@ -75,9 +75,9 @@ public class CalificacionLogic
     }
     public List<CalificacionEntity> findAll()
     {
-        LOGGER.info("Inicia el proceso de eliminar una calificaciòn.");
+        LOGGER.info("Inicia el proceso de buscar todas las calificaciones.");
         List<CalificacionEntity> answ = calificacionPersistence.findAll();
-        LOGGER.info("Termina el proceso de eliminar una calificaciòn.");
+        LOGGER.info("Termina el proceso de buscar todas las calificaciones.");
         return answ;
     }
     
