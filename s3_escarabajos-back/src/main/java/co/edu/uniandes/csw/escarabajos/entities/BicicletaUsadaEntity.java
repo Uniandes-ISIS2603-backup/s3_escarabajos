@@ -25,6 +25,8 @@ public class BicicletaUsadaEntity extends BicicletaEntity implements Serializabl
     @ManyToOne(cascade = CascadeType.PERSIST)
     private ModeloEntity modelo;
     
+    @PodamExclude
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private VendedorEntity vendedor;
 
     public VendedorEntity getVendedor() {

@@ -9,6 +9,9 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -21,23 +24,33 @@ import uk.co.jemos.podam.common.PodamExclude;
  * @author jp.carreno
  */
 @Entity
-public class FacturaEntity extends BaseEntity implements Serializable {
+public class FacturaEntity implements Serializable {
 
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private double dineroT;
     private String usuarioT;
     @PodamExclude
-    @OneToMany(mappedBy = "factura", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "Factura", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<ReclamoEntity> reclamos;
     
-    @OneToOne(mappedBy = "factura")
+    @PodamExclude
+    @OneToOne(mappedBy = "Factura")
     private MedioPagoEntity medioDePago;
     
-    @OneToOne(mappedBy = "factura")
+    @PodamExclude
+    @OneToOne(mappedBy = "Factura")
     private CarritoEntity carrito;
     
+    @PodamExclude
     @ManyToOne
     private ClienteEntity cliente;
+    
+    @PodamExclude
+    @ManyToOne
+    private VendedorEntity vendedor;
 
     /**
      * @return the dineroT
@@ -122,6 +135,34 @@ public class FacturaEntity extends BaseEntity implements Serializable {
      */
     public void setMedioDePago(MedioPagoEntity medioDePago) {
         this.medioDePago = medioDePago;
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the vendedor
+     */
+    public VendedorEntity getVendedor() {
+        return vendedor;
+    }
+
+    /**
+     * @param vendedor the vendedor to set
+     */
+    public void setVendedor(VendedorEntity vendedor) {
+        this.vendedor = vendedor;
     }
 
     
