@@ -48,13 +48,13 @@ import co.edu.uniandes.csw.escarabajos.entities.BicicletaUsadaEntity;
  *
  * @author c.santacruza
  */
-public class BicicletaUsadaEnVentaDetailDTO extends BicicletaUsadaEnVentaDTO {
+public class BicicletaUsadaDetailDTO extends BicicletaUsadaDTO {
 
     private VendedorDTO vendedor;
     /**
      * Constructor por defecto
      */
-    public BicicletaUsadaEnVentaDetailDTO() {
+    public BicicletaUsadaDetailDTO() {
     }
 
     /**
@@ -63,7 +63,7 @@ public class BicicletaUsadaEnVentaDetailDTO extends BicicletaUsadaEnVentaDTO {
      * @param entity La entidad de bicicletaUsadaEnVenta a partir de la cual se
      * construye el objeto
      */
-    public BicicletaUsadaEnVentaDetailDTO(BicicletaUsadaEntity entity) {
+    public BicicletaUsadaDetailDTO(BicicletaUsadaEntity entity) {
         super(entity);
         entity.setVendedor(this.getVendedor().toEntity());
     }

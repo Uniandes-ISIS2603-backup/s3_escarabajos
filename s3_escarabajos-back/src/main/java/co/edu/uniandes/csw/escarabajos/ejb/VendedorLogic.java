@@ -28,8 +28,8 @@ public class VendedorLogic {
      public VendedorEntity createCliente(VendedorEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de vendedor");
         // Verifica la regla de negocio que dice que no puede haber dos vendedores con el mismo nombre
-        if (persistence.findByName(entity.getName()) != null) {
-            throw new BusinessLogicException("Ya existe un vendedor con el nombre \"" + entity.getName() + "\"");
+        if (persistence.findByName(entity.getNombre()) != null) {
+            throw new BusinessLogicException("Ya existe un vendedor con el nombre \"" + entity.getNombre() + "\"");
         }
         // Invoca la persistencia para crear el vendedor
         persistence.create(entity);
@@ -50,8 +50,8 @@ public class VendedorLogic {
     }
 
     public VendedorEntity updateVendedor(VendedorEntity entity) throws BusinessLogicException  {
-        if (persistence.findByName(entity.getName()) != null) {
-            throw new BusinessLogicException("Ya existe un vendedor con el nombre \"" + entity.getName() + "\"");
+        if (persistence.findByName(entity.getNombre()) != null) {
+            throw new BusinessLogicException("Ya existe un vendedor con el nombre \"" + entity.getNombre()+ "\"");
         }
         return persistence.update(entity);
     }

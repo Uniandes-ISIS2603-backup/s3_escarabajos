@@ -14,14 +14,12 @@ import co.edu.uniandes.csw.escarabajos.entities.VendedorEntity;
 public class VendedorDTO {
     private String direccion;
     private String telefono;
-    private String factura;
     
     public VendedorDTO(){
         
     }
     public VendedorDTO(VendedorEntity vendedor){
         this.direccion = vendedor.getDireccion();
-        this.factura = vendedor.getFactura();
         this.telefono = vendedor.getTelefono();
     }
     public String getDireccion(){
@@ -36,17 +34,9 @@ public class VendedorDTO {
     public void setTelefono(String telefono){
         this.telefono = telefono;
     }
-    public String getFactura(){
-        return factura;
-    }
-    public void setFactura(String factura){
-        this.factura = factura;
-    }
-    
     public VendedorEntity toEntity(){
         VendedorEntity entity = new VendedorEntity();
         entity.setDireccion(this.direccion);
-        entity.setFactura(this.factura);
         entity.setTelefono(this.telefono);
         return entity;
     }

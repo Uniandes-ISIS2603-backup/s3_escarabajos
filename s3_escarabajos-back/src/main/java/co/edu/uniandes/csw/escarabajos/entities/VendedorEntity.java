@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.escarabajos.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -17,21 +18,21 @@ import uk.co.jemos.podam.common.PodamExclude;
  * @author s.beltran
  */
 @Entity
-public class VendedorEntity extends BaseEntity implements Serializable{
+public class VendedorEntity extends ClienteEntity implements Serializable{
      
     private String direccion;
     private String telefono;
-    private String factura;
+    
     
     @PodamExclude
     @OneToMany(mappedBy = "vendedor", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<BicicletaUsadaEntity> bicicletasUsadas;
+    private List<FacturaEntity> ventas = new ArrayList<FacturaEntity>();
     
-    public List<BicicletaUsadaEntity> getBicicletasUsadas(){
-        return bicicletasUsadas;
-    }
-    public void setBicicletaUsada(List<BicicletaUsadaEntity> bicicletasUsadas){
-        this.bicicletasUsadas = bicicletasUsadas;
+    @PodamExclude
+    @OneToMany(mappedBy = "vendedor", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<BicicletaUsadaEntity> bicicletasUsadas = new ArrayList<BicicletaUsadaEntity>();
+
+    public VendedorEntity() {
     }
     
     public String getDireccion(){
@@ -46,10 +47,36 @@ public class VendedorEntity extends BaseEntity implements Serializable{
     public void setTelefono(String telefono){
         this.telefono = telefono;
     }
-    public String getFactura(){
-        return factura;
+
+    
+    
+    /**
+     * @return the bicicletasUsadas
+     */
+    public List<BicicletaUsadaEntity> getBicicletasUsadas() {
+        return bicicletasUsadas;
     }
-    public void setFactura(String factura){
-        this.factura = factura;
+
+    /**
+     * @param bicicletasUsadas the bicicletasUsadas to set
+     */
+    public void setBicicletasUsadas(List<BicicletaUsadaEntity> bicicletasUsadas) {
+        this.bicicletasUsadas = bicicletasUsadas;
     }
+
+    /**
+     * @return the ventas
+     */
+    public List<FacturaEntity> getVentas() {
+        return ventas;
+    }
+
+    /**
+     * @param ventas the ventas to set
+     */
+    public void setVentas(List<FacturaEntity> ventas) {
+        this.ventas = ventas;
+    }
+
+    
 }

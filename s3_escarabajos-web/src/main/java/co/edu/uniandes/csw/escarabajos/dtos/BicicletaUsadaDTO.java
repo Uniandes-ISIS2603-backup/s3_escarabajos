@@ -40,7 +40,7 @@ import co.edu.uniandes.csw.escarabajos.entities.BicicletaUsadaEntity;
  *
  * @author c.santacruza
  */
-public class BicicletaUsadaEnVentaDTO extends BicicletaDTO {
+public class BicicletaUsadaDTO extends BicicletaDTO {
 
     /**
      * Representa la imagen de la factura original del vendedor.
@@ -52,7 +52,7 @@ public class BicicletaUsadaEnVentaDTO extends BicicletaDTO {
     /**
      * Por defecto.
      */
-    public BicicletaUsadaEnVentaDTO() {
+    public BicicletaUsadaDTO() {
 
     }
 
@@ -62,7 +62,7 @@ public class BicicletaUsadaEnVentaDTO extends BicicletaDTO {
      *
      * @param bici: Es la entidad que se va a convertir a DTO
      */
-    public BicicletaUsadaEnVentaDTO(BicicletaUsadaEntity bici) {
+    public BicicletaUsadaDTO(BicicletaUsadaEntity bici) {
         super(bici);
         this.facturaOriginal = bici.getFacturaOriginal();
         this.precioDeReventa = bici.getPrecioDeReventa();

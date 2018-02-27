@@ -6,67 +6,53 @@
 package co.edu.uniandes.csw.escarabajos.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
  * @author s.beltran
  */
 @Entity
-public class ClienteEntity extends BaseEntity implements Serializable {
+public class ClienteEntity implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nombre;
     private String correo;
     private String usuario;
     private int cedula;
     
-    @OneToOne(mappedBy="cliente")
+    @PodamExclude
+    @OneToOne(mappedBy = "Cliente")
     private CarritoEntity carrito;
 
-    @OneToMany(mappedBy="cliente")
-    private List<FacturaEntity> facturas;
+    @PodamExclude
+    @OneToMany(mappedBy = "Cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<FacturaEntity> compras = new ArrayList<FacturaEntity>();
     
-    @OneToMany(mappedBy="cliente")
-    private List<MedioPagoEntity> mediosPago;
+    @PodamExclude
+    @OneToMany(mappedBy = "Cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<MedioPagoEntity> mediosPago = new ArrayList<MedioPagoEntity>();
     
-    @OneToMany(mappedBy="cliente")
-    private List<CalificacionEntity> calificaciones;
+    @PodamExclude
+    @OneToMany(mappedBy = "Cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
     
-    @OneToMany(mappedBy="cliente")
-    private List<ReclamoEntity> reclamos;
+    @PodamExclude
+    @OneToMany(mappedBy = "Cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<ReclamoEntity> reclamos = new ArrayList<ReclamoEntity>();
     
-    public List<FacturaEntity> getFacturas(){
-        return facturas;
-    }
-    public void setFacturas(List<FacturaEntity> facturas){
-        this.facturas = facturas;
-    }
-    
-     public List<MedioPagoEntity> getMediosPago(){
-        return mediosPago;
-    }
-    public void setMediosPago(List<MedioPagoEntity> mediosPago){
-        this.mediosPago = mediosPago;
-    }
-    
-    public List<CalificacionEntity> getCalificaciones(){
-        return calificaciones;
-    }
-    public void setCalificaciones(List<CalificacionEntity> calificaciones){
-        this.calificaciones = calificaciones;
-    }
-    
-    public List<ReclamoEntity> getReclamos(){
-        return reclamos;
-    }
-    public void setReclamos(List<ReclamoEntity> reclamos){
-        this.reclamos = reclamos;
-    }
-    
+   
     public CarritoEntity getCarrito(){
         return carrito;
     }
@@ -97,4 +83,74 @@ public class ClienteEntity extends BaseEntity implements Serializable {
     public void setCedula(int cedula){
         this.cedula = cedula;
     } 
+
+    /**
+     * @return the compras
+     */
+    public List<FacturaEntity> getCompras() {
+        return compras;
+    }
+
+    /**
+     * @param compras the compras to set
+     */
+    public void setCompras(List<FacturaEntity> compras) {
+        this.compras = compras;
+    }
+
+    /**
+     * @return the mediosPago
+     */
+    public List<MedioPagoEntity> getMediosPago() {
+        return mediosPago;
+    }
+
+    /**
+     * @param mediosPago the mediosPago to set
+     */
+    public void setMediosPago(List<MedioPagoEntity> mediosPago) {
+        this.mediosPago = mediosPago;
+    }
+
+    /**
+     * @return the calificaciones
+     */
+    public List<CalificacionEntity> getCalificaciones() {
+        return calificaciones;
+    }
+
+    /**
+     * @param calificaciones the calificaciones to set
+     */
+    public void setCalificaciones(List<CalificacionEntity> calificaciones) {
+        this.calificaciones = calificaciones;
+    }
+
+    /**
+     * @return the reclamos
+     */
+    public List<ReclamoEntity> getReclamos() {
+        return reclamos;
+    }
+
+    /**
+     * @param reclamos the reclamos to set
+     */
+    public void setReclamos(List<ReclamoEntity> reclamos) {
+        this.reclamos = reclamos;
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

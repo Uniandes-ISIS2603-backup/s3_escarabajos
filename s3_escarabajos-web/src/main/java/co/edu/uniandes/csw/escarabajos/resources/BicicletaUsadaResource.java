@@ -1,6 +1,6 @@
 package co.edu.uniandes.csw.escarabajos.resources;
 
-import co.edu.uniandes.csw.escarabajos.dtos.BicicletaUsadaEnVentaDetailDTO;
+import co.edu.uniandes.csw.escarabajos.dtos.BicicletaUsadaDetailDTO;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,13 +34,12 @@ import javax.ws.rs.Produces;
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
-
-public class BicicletaUsadaEnVentaResource {
+public class BicicletaUsadaResource {
     
      /**
      * <h1>POST /api/bicisUsadas : Crear una bicicleta usada.</h1>
      * 
-     * <pre>Cuerpo de petición: JSON {@link BicicletaUsadaEnVentaDetailDTO}.
+     * <pre>Cuerpo de petición: JSON {@link BicicletaUsadaDetailDTO}.
      * 
      * Crea una nueva bicicleta usada con la informacion que se recibe en el cuerpo 
      * de la petición y se regresa un objeto identico con un id auto-generado 
@@ -54,12 +53,12 @@ public class BicicletaUsadaEnVentaResource {
      * 412 Precodition Failed: Ya existe la bicicleta usada.
      * </code>
      * </pre>
-     * @param bici {@link BicicletaUsadaEnVentaDetailDTO} - La bicicleta usada que se desea guardar.
-     * @return JSON {@link BicicletaUsadaEnVentaDetailDTO}  - La bicicleta usada guardada con el atributo id autogenerado.
+     * @param bici {@link BicicletaUsadaDetailDTO} - La bicicleta usada que se desea guardar.
+     * @return JSON {@link BicicletaUsadaDetailDTO}  - La bicicleta usada guardada con el atributo id autogenerado.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la bicicleta usada.
      */
     @POST
-    public BicicletaUsadaEnVentaDetailDTO createBicicletaUsada(BicicletaUsadaEnVentaDetailDTO bici) throws BusinessLogicException {
+    public BicicletaUsadaDetailDTO createBicicletaUsada(BicicletaUsadaDetailDTO bici) throws BusinessLogicException {
         return bici;
     }
 
@@ -72,11 +71,11 @@ public class BicicletaUsadaEnVentaResource {
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Devuelve todas las bicicletas usadas de la aplicacion.</code> 
      * </pre>
-     * @return JSONArray {@link BicicletaUsadaEnVentaDetailDTO} - Las bicicletas usadas encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
+     * @return JSONArray {@link BicicletaUsadaDetailDTO} - Las bicicletas usadas encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
      */
     @GET
-    public List<BicicletaUsadaEnVentaDetailDTO> getBicicletaUsadas() {
-        return new ArrayList<BicicletaUsadaEnVentaDetailDTO>();
+    public List<BicicletaUsadaDetailDTO> getBicicletaUsadas() {
+        return new ArrayList<BicicletaUsadaDetailDTO>();
     }
     
    /**
@@ -93,17 +92,17 @@ public class BicicletaUsadaEnVentaResource {
      * </code> 
      * </pre>
      * @param id Identificador de la bicicleta usada que se esta buscando. Este debe ser una cadena de dígitos.
-     * @return JSON {@link BicicletaUsadaEnVentaDetailDTO} - La bicicleta usada buscada
+     * @return JSON {@link BicicletaUsadaDetailDTO} - La bicicleta usada buscada
      */
     @GET
     @Path("{id: \\d+}")
-    public BicicletaUsadaEnVentaDetailDTO getBicicletaUsada(@PathParam("id") Long id) {
+    public BicicletaUsadaDetailDTO getBicicletaUsada(@PathParam("id") Long id) {
         return null;
     }
     
     /**
      * <h1>PUT /api/bicisUsadas/{id} : Actualizar bicicleta usada con el id dado.</h1>
-     * <pre>Cuerpo de petición: JSON {@link BicicletaUsadaEnVentaDetailDTO}.
+     * <pre>Cuerpo de petición: JSON {@link BicicletaUsadaDetailDTO}.
      * 
      * Actualiza la bicicleta usada con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
      * 
@@ -115,13 +114,13 @@ public class BicicletaUsadaEnVentaResource {
      * </code> 
      * </pre>
      * @param id Identificador de la bicicleta usada que se desea actualizar.Este debe ser una cadena de dígitos.
-     * @param bici {@link BicicletaUsadaEnVentaDetailDTO} La bicicleta usada que se desea guardar.
-     * @return JSON {@link BicicletaUsadaEnVentaDetailDTO} - La bicicleta usada guardada.
+     * @param bici {@link BicicletaUsadaDetailDTO} La bicicleta usada que se desea guardar.
+     * @return JSON {@link BicicletaUsadaDetailDTO} - La bicicleta usada guardada.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar la bicicleta usada porque ya existe una con ese nombre.
      */
     @PUT
     @Path("{id: \\d+}")
-    public BicicletaUsadaEnVentaDetailDTO updateBicicletaUsada(@PathParam("id") Long id, BicicletaUsadaEnVentaDetailDTO bici) throws BusinessLogicException {
+    public BicicletaUsadaDetailDTO updateBicicletaUsada(@PathParam("id") Long id, BicicletaUsadaDetailDTO bici) throws BusinessLogicException {
         return bici;
     }
     
