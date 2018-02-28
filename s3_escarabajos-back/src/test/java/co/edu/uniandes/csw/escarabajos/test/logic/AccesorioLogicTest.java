@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.escarabajos.test.logic;
 
 import co.edu.uniandes.csw.escarabajos.ejb.AccesorioLogic;
 import co.edu.uniandes.csw.escarabajos.entities.AccesorioEntity;
+import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.escarabajos.persistence.AccesorioPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -17,7 +19,9 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
@@ -46,8 +50,8 @@ public class AccesorioLogicTest {
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(AccesorioEntity.class.getPackage())
-                .addPackage(AccesorioEntity.class.getPackage())
-                .addPackage(AccesorioEntity.class.getPackage())
+                .addPackage(AccesorioLogic.class.getPackage())
+                .addPackage(AccesorioPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -80,8 +84,7 @@ public class AccesorioLogicTest {
      *
      */
     private void clearData() {
-        em.createQuery("delete from BookEntity").executeUpdate();
-        em.createQuery("delete from EditorialEntity").executeUpdate();
+        em.createQuery("delete from AccesorioEntity").executeUpdate();
     }
 
     /**
@@ -100,5 +103,59 @@ public class AccesorioLogicTest {
             data.add(entity);
         }
     }
+    
+    @Test
+    public void createAccesorioTest() throws BusinessLogicException{
+        
+        AccesorioEntity newEntity = factory.manufacturePojo(AccesorioEntity.class);
+        AccesorioEntity result = logic.createAccesorio(newEntity);
+        Assert.assertNotNull(result);
+        AccesorioEntity entity = em.find(AccesorioEntity.class, result.getId());
+    }
+    
+    @Test
+    public void updateAccesorioTest() throws BusinessLogicException {
+        
+        AccesorioEntity entity = data.get(0);
+        AccesorioEntity pojoEntity = factory.manufacturePojo(AccesorioEntity.class);
 
+        pojoEntity.setId(entity.getId());
+
+        logic.updateAccesorio(pojoEntity);
+
+        AccesorioEntity resp = em.find(AccesorioEntity.class, entity.getId());
+
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+    }
+
+    @Test
+    public void deleteAccesorioTest() {
+        AccesorioEntity entity = data.get(0);
+        logic.deleteAccesorio(entity);
+        AccesorioEntity deleted = em.find(AccesorioEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
+    
+    @Test
+    public void getAccesoriosTest() {
+        List<AccesorioEntity> list = logic.getAccesorios();
+        Assert.assertEquals(data.size(), list.size());
+        for (AccesorioEntity entity : list) {
+            boolean found = false;
+            for (AccesorioEntity storedEntity : data) {
+                if (entity.getId().equals(storedEntity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+    
+    @Test
+    public void getAccesorioTest() {
+        AccesorioEntity entity = data.get(0);
+        AccesorioEntity resultEntity = logic.getAccesorio(entity.getId());
+        Assert.assertNotNull(resultEntity);
+        Assert.assertEquals(entity.getId(), resultEntity.getId());
+    }
 }

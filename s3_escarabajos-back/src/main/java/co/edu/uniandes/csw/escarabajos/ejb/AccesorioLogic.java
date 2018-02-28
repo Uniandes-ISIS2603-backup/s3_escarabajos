@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.escarabajos.ejb;
 import co.edu.uniandes.csw.escarabajos.entities.AccesorioEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.AccesorioPersistence;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
@@ -51,5 +52,22 @@ public class AccesorioLogic {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el Accesorio con id={0}", entity.getId());    
         persistence.delete(entity.getId());
         LOGGER.log(Level.INFO, "Termina proceso de borrar el Accesorio con id={0}", entity.getId());
+    }
+    
+    public List<AccesorioEntity> getAccesorios() {
+        LOGGER.info("Inicia proceso de consultar todos los accesorios");
+        List<AccesorioEntity> accesorios = persistence.findAll();
+        LOGGER.info("Termina proceso de consultar todos los accesorios");
+        return accesorios;
+    }
+
+    public AccesorioEntity getAccesorio(Long id) {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar el accesorio con id={0}", id);
+        AccesorioEntity accesorio = persistence.find(id);
+        if (accesorio == null) {
+            LOGGER.log(Level.SEVERE, "El accesorio con el id {0} no existe", id);
+        }
+        LOGGER.log(Level.INFO, "Termina proceso de consultar accesorio con id={0}", id);
+        return accesorio;
     }
 }

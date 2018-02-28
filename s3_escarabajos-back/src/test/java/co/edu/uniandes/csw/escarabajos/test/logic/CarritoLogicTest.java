@@ -7,8 +7,12 @@ package co.edu.uniandes.csw.escarabajos.test.logic;
 
 import co.edu.uniandes.csw.escarabajos.ejb.CarritoLogic;
 import co.edu.uniandes.csw.escarabajos.entities.CarritoEntity;
+import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.escarabajos.persistence.CarritoPersistence;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,7 +21,9 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
@@ -46,8 +52,8 @@ public class CarritoLogicTest {
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(CarritoEntity.class.getPackage())
-                .addPackage(CarritoEntity.class.getPackage())
-                .addPackage(CarritoEntity.class.getPackage())
+                .addPackage(CarritoLogic.class.getPackage())
+                .addPackage(CarritoPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -100,6 +106,30 @@ public class CarritoLogicTest {
             
             data.add(entity);
         }
+    }
+    
+    @Test
+    public void findCarritoTest() {
+        
+        CarritoEntity entity = data.get(0);
+        CarritoEntity resultEntity = logic.findCarrito(entity.getId());
+        Assert.assertNotNull(resultEntity);
+        Assert.assertEquals(entity.getId(), resultEntity.getId());
+    }
+    
+    @Test
+    public void updateCarritoTest() throws BusinessLogicException {
+        
+        CarritoEntity entity = data.get(0);
+        CarritoEntity pojoEntity = factory.manufacturePojo(CarritoEntity.class);
+
+        pojoEntity.setId(entity.getId());
+
+        logic.updateCarrito(pojoEntity);
+            
+        CarritoEntity resp = em.find(CarritoEntity.class, entity.getId());
+
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
     }
 
 }
