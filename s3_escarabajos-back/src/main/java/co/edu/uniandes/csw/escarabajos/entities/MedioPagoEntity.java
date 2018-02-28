@@ -38,7 +38,7 @@ public class MedioPagoEntity implements Serializable {
     @ManyToOne
     private ClienteEntity cliente;
     
-    
+    @PodamExclude
     @OneToOne
     private FacturaEntity factura;
 

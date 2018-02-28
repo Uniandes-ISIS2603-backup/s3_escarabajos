@@ -36,11 +36,11 @@ public class FacturaEntity implements Serializable {
     @OneToMany(mappedBy = "Factura", cascade = CascadeType.ALL)
     private List<ReclamoEntity> reclamos;
     
-    
+    @PodamExclude
     @OneToOne(mappedBy = "Factura")
     private MedioPagoEntity medioDePago;
     
-    
+    @PodamExclude
     @OneToOne(mappedBy = "Factura")
     private CarritoEntity carrito;
     

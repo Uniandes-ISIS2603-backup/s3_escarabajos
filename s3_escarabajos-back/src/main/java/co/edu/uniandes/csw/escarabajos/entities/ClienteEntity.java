@@ -32,7 +32,7 @@ public class ClienteEntity implements Serializable {
     private String correo;
     private String usuario;
     private Integer cedula;
-    
+    @PodamExclude
     @OneToOne(mappedBy = "Cliente")
     private CarritoEntity carrito;
 

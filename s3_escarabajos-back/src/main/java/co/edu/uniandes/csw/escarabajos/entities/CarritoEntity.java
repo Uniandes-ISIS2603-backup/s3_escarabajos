@@ -37,10 +37,10 @@ public class CarritoEntity implements Serializable{
     @PodamExclude
     @OneToMany(cascade = CascadeType.PERSIST)
     private ArrayList<ItemEntity> items;
-    
+    @PodamExclude
     @OneToOne
     private ClienteEntity cliente;
-    
+    @PodamExclude
     @OneToOne
     private FacturaEntity factura;    
     
