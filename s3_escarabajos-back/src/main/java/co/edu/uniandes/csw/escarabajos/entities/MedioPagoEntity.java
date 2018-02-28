@@ -28,14 +28,14 @@ public class MedioPagoEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private double dineroT;
+    private Double dineroT;
     
-    private int numeroTarjeta;
+    private Integer numeroTarjeta;
     
     private String tipo;
     
     @PodamExclude
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private ClienteEntity cliente;
     
     

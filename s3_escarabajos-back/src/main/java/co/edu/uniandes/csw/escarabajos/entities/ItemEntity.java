@@ -35,8 +35,7 @@ public class ItemEntity implements Serializable {
     private ModeloEntity modelo;
      
     
-    @PodamExclude
-    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<FotoEntity> album = new ArrayList<>();
 
     private Long modeloId;

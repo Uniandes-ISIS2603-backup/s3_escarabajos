@@ -31,55 +31,22 @@ public class FacturaEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private double dineroT;
-    private String usuarioT;
+    private Double dinero;
     @PodamExclude
-    @OneToMany(mappedBy = "Factura", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "Factura", cascade = CascadeType.ALL)
     private List<ReclamoEntity> reclamos;
     
-    @PodamExclude
+    
     @OneToOne(mappedBy = "Factura")
     private MedioPagoEntity medioDePago;
     
-    @PodamExclude
+    
     @OneToOne(mappedBy = "Factura")
     private CarritoEntity carrito;
     
     @PodamExclude
     @ManyToOne
     private ClienteEntity cliente;
-    
-    @PodamExclude
-    @ManyToOne
-    private VendedorEntity vendedor;
-
-    /**
-     * @return the dineroT
-     */
-    public double getDineroT() {
-        return dineroT;
-    }
-
-    /**
-     * @param dineroT the dineroT to set
-     */
-    public void setDineroT(double dineroT) {
-        this.dineroT = dineroT;
-    }
-
-    /**
-     * @return the usuarioT
-     */
-    public String getUsuarioT() {
-        return usuarioT;
-    }
-
-    /**
-     * @param usuarioT the usuarioT to set
-     */
-    public void setUsuarioT(String usuarioT) {
-        this.usuarioT = usuarioT;
-    }
 
     /**
      * @return the reclamos
@@ -151,21 +118,6 @@ public class FacturaEntity implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
-    /**
-     * @return the vendedor
-     */
-    public VendedorEntity getVendedor() {
-        return vendedor;
-    }
-
-    /**
-     * @param vendedor the vendedor to set
-     */
-    public void setVendedor(VendedorEntity vendedor) {
-        this.vendedor = vendedor;
-    }
-
     
      @Override
     public boolean equals(Object obj) {
@@ -179,7 +131,7 @@ public class FacturaEntity implements Serializable {
             return false;
         }
         final FacturaEntity other = (FacturaEntity) obj;
-        return Objects.equals(this.id, other.id);
+        return Objects.equals(this.getId(), other.getId());
     }
 
     @Override
@@ -188,5 +140,19 @@ public class FacturaEntity implements Serializable {
             return this.getId().hashCode();
         }
         return super.hashCode();
+    }
+
+    /**
+     * @return the dinero
+     */
+    public Double getDinero() {
+        return dinero;
+    }
+
+    /**
+     * @param dinero the dinero to set
+     */
+    public void setDinero(Double dinero) {
+        this.dinero = dinero;
     }
 }

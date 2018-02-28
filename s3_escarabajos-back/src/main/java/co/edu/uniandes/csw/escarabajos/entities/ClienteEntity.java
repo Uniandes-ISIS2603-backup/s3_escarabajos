@@ -31,9 +31,8 @@ public class ClienteEntity implements Serializable {
     private String nombre;
     private String correo;
     private String usuario;
-    private int cedula;
+    private Integer cedula;
     
-    @PodamExclude
     @OneToOne(mappedBy = "Cliente")
     private CarritoEntity carrito;
 

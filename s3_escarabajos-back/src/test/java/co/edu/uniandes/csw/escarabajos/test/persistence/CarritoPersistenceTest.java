@@ -127,9 +127,9 @@ public class CarritoPersistenceTest {
     public void testFind() {
         
         CarritoEntity entity = data.get(0);
-        CarritoEntity newEntity = persistence.find(entity.getIdCliente());
+        CarritoEntity newEntity = persistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getIdCliente(), newEntity.getIdCliente());
+        Assert.assertEquals(entity.getId(), newEntity.getId());
     }
 
     /**
@@ -142,9 +142,9 @@ public class CarritoPersistenceTest {
         CarritoEntity result = persistence.create(newEntity);
 
         Assert.assertNotNull(result);
-        CarritoEntity entity = em.find(CarritoEntity.class, result.getIdCliente());
+        CarritoEntity entity = em.find(CarritoEntity.class, result.getId());
         Assert.assertNotNull(entity);
-        Assert.assertEquals(newEntity.getIdCliente(), entity.getIdCliente());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
     }
 
     /**
@@ -156,13 +156,13 @@ public class CarritoPersistenceTest {
         PodamFactory factory = new PodamFactoryImpl();
         CarritoEntity newEntity = factory.manufacturePojo(CarritoEntity.class);
 
-        newEntity.setIdCliente(entity.getIdCliente());
+        newEntity.setId(entity.getId());
 
         persistence.update(newEntity);
 
-        CarritoEntity resp = em.find(CarritoEntity.class, entity.getIdCliente());
+        CarritoEntity resp = em.find(CarritoEntity.class, entity.getId());
 
-        Assert.assertEquals(newEntity.getIdCliente(), resp.getIdCliente());
+        Assert.assertEquals(newEntity.getId(), resp.getId());
     }
     
 }

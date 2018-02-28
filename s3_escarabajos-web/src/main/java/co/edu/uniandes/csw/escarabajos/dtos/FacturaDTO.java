@@ -16,24 +16,14 @@ import co.edu.uniandes.csw.escarabajos.entities.FacturaEntity;
  */
 public class FacturaDTO{
 
+    private Double dinero;
 
-    private String usuarioT;
-    private double dineroT;
-
-    public String getUsuarioT() {
-        return usuarioT;
+    public double getDinero() {
+        return dinero;
     }
 
-    public double getDineroT() {
-        return dineroT;
-    }
-
-    public void setUsuarioT(String usuarioT) {
-        this.usuarioT = usuarioT;
-    }
-
-    public void setDineroT(double dineroT) {
-        this.dineroT = dineroT;
+    public void setDinero(double dinero) {
+        this.dinero = dinero;
     }
     
     /**
@@ -50,8 +40,7 @@ public class FacturaDTO{
      * @param factura: Es la entidad que se va a convertir a DTO
      */
     public FacturaDTO(FacturaEntity factura) {
-        this.usuarioT = factura.getUsuarioT();
-        this.dineroT = factura.getDineroT();
+        this.dinero = factura.getDinero();
     }
     
     /**
@@ -61,8 +50,7 @@ public class FacturaDTO{
      */
     public FacturaEntity toEntity() {
         FacturaEntity entity = new FacturaEntity();
-        entity.setDineroT(this.dineroT);
-        entity.setUsuarioT(this.usuarioT);
+        entity.setDinero(this.dinero);
 
         return entity;
     }

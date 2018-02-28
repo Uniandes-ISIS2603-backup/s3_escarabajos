@@ -9,7 +9,6 @@ import co.edu.uniandes.csw.escarabajos.ejb.ItemLogic;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
-import co.edu.uniandes.csw.escarabajos.persistence.ItemPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -55,7 +54,6 @@ public class ItemLogicTest {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(ItemEntity.class.getPackage())
                 .addPackage(ItemLogic.class.getPackage())
-                .addPackage(ItemPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -116,25 +114,6 @@ public class ItemLogicTest {
     }
 
     /**
-     * Prueba para crear un Item
-     *
-     *
-     */
-    @Test
-    public void createItemTest() {
-        ItemEntity newEntity = factory.manufacturePojo(ItemEntity.class);
-        ItemEntity result = null;
-        try {
-            result = itemLogic.createItem(newEntity);
-        } catch (BusinessLogicException ex) {
-            fail();
-        }
-        Assert.assertNotNull(result);
-        ItemEntity entity = em.find(ItemEntity.class, result.getId());
-        Assert.assertEquals(newEntity.getId(), entity.getId());
-    }
-
-    /**
      * Prueba para consultar la lista de Items
      *
      *
@@ -165,43 +144,6 @@ public class ItemLogicTest {
         ItemEntity resultEntity = itemLogic.getItem(entity.getId());
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
-    }
-
-    /**
-     * Prueba para eliminar un Item
-     *
-     *
-     */
-    @Test
-    public void deleteItemTest() {
-        ItemEntity entity = data.get(0);
-        itemLogic.deleteItem(entity.getId());
-        ItemEntity deleted = em.find(ItemEntity.class, entity.getId());
-        Assert.assertNull(deleted);
-    }
-
-    /**
-     * Prueba para actualizar un Item
-     *
-     *
-     */
-    @Test
-    public void updateItemTest() {
-        ItemEntity entity = data.get(0);
-        ItemEntity pojoEntity = factory.manufacturePojo(ItemEntity.class);
-
-        pojoEntity.setId(entity.getId());
-
-        try{
-            itemLogic.updateItem(entity.getId(),pojoEntity);
-        }
-        catch(BusinessLogicException e){
-            Assert.fail();
-        }
-
-        ItemEntity resp = em.find(ItemEntity.class, entity.getId());
-
-        Assert.assertEquals(pojoEntity.getId(), resp.getId());
     }
 
 }

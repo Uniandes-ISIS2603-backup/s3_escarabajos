@@ -38,10 +38,12 @@ public class ReclamoEntity  implements Serializable
     private String mensaje;
     private String razon;
     
+    @PodamExclude
     @ManyToOne( cascade = CascadeType.PERSIST )
     private FacturaEntity factura;
 
-   @ManyToOne( cascade = CascadeType.PERSIST )
+    @PodamExclude
+    @ManyToOne( cascade = CascadeType.PERSIST )
     private ClienteEntity cliente;
    
     public String getMensaje()

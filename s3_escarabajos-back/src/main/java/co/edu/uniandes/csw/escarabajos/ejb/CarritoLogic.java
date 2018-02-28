@@ -37,8 +37,8 @@ public class CarritoLogic {
     
     public CarritoEntity updateCarrito( CarritoEntity entity ) throws BusinessLogicException{
         
-        if (persistence.find(entity.getIdCliente()) == null) {
-            throw new BusinessLogicException("No existe un carrito con el idCliente" + entity.getIdCliente()+ "\"");
+        if (persistence.find(entity.getId()) == null) {
+            throw new BusinessLogicException("No existe un carrito con el idCliente" + entity.getId()+ "\"");
         }
         return persistence.update(entity);
     }

@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import javax.persistence.ManyToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 /**
  *
  * @author n.gaitan
@@ -30,9 +31,11 @@ public class CalificacionEntity  implements Serializable
     
     private Double puntaje;
     
+    @PodamExclude
     @ManyToOne
     private ModeloEntity modelo;
     
+    @PodamExclude
     @ManyToOne
     private ClienteEntity cliente;
     
