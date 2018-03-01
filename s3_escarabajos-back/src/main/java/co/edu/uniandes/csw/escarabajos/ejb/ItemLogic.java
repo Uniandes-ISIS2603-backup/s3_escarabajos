@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.escarabajos.ejb;
 import co.edu.uniandes.csw.escarabajos.entities.*;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,26 +24,30 @@ public class ItemLogic {
     
     private static final Logger LOGGER = Logger.getLogger(ItemLogic.class.getName());
 
-    /**
-     * Variable para acceder a la persistencia de items de la aplicación. Es una inyección de dependencias.
-     */
     @Inject
-   // private ItemPersistence persistence;
-
-    //@Inject
-    //private AccesorioLogic accLogic;
+    private AccesorioPersistence accPers;
     
-    //@Inject
-    //private BicicletaLogic biciLogic;
+    @Inject
+    private BicicletaPersistence biciPers;
+    
+    @Inject 
+    private ModeloPersistence modeloPers;
+    
     /**
      * Devuelve todos los items que hay en la base de datos.
      * @return Lista de entidades de tipo item.
      */
     public List<ItemEntity> getItems() {
+        ArrayList<ItemEntity> items = new ArrayList<ItemEntity>();
         LOGGER.info("Inicia proceso de consultar todos los items");
-      //  List<ItemEntity> items = persistence.findAll();
+        for (ItemEntity bicicleta : biciPers.findAll()) {
+         items.add(bicicleta);
+        }
+        for (ItemEntity accesorio : accPers.findAll()) {
+         items.add(accesorio);
+        }
         LOGGER.info("Termina proceso de consultar todos los items");
-        return null;
+        return items;
     }
 
     /**
@@ -52,16 +57,26 @@ public class ItemLogic {
      */
     public ItemEntity getItem(Long id) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar item con id={0}", id);
-        /*ItemEntity item = persistence.find(id);
+        ItemEntity item = biciPers.find(id);
+        if (item == null) {
+            item = accPers.find(id);
+        }
         if (item == null) {
             LOGGER.log(Level.SEVERE, "El item con el id {0} no existe", id);
         }
-        
-        LOGGER.log(Level.INFO, "Termina proceso de consultar item con id={0}", id);*/
-        return null;
+        LOGGER.log(Level.INFO, "Termina proceso de consultar item con id={0}", id);
+        return item;
     }
-
-
-
-
+    
+    public void verificarItem(ItemEntity entity) throws BusinessLogicException{
+        if (entity.getPrecio()<0) {
+            throw new BusinessLogicException("El item no debe tener un precio negativo");
+        }
+        ModeloEntity modelo = modeloPers.find(entity.getModeloId());
+        if (modelo == null) {
+            throw new BusinessLogicException("El item debe tener un modelo");
+        }
+        
+    }
+    
 }
