@@ -50,8 +50,8 @@ public class ClienteLogic {
     }
 
     public ClienteEntity updateCliente(ClienteEntity entity) throws BusinessLogicException  {
-        if (persistence.findByName(entity.getNombre()) != null) {
-            throw new BusinessLogicException("Ya existe un cliente con el nombre \"" + entity.getNombre() + "\"");
+        if (persistence.find(entity.getId()) == null) {
+            throw new BusinessLogicException("No existe un cliente con el id \"");
         }
         return persistence.update(entity);
     }

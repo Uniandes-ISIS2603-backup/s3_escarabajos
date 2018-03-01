@@ -50,8 +50,8 @@ public class VendedorLogic {
     }
 
     public VendedorEntity updateVendedor(VendedorEntity entity) throws BusinessLogicException  {
-        if (persistence.findByName(entity.getNombre()) != null) {
-            throw new BusinessLogicException("Ya existe un vendedor con el nombre \"" + entity.getNombre()+ "\"");
+        if (persistence.find(entity.getId()) == null) {
+            throw new BusinessLogicException("No existe un vendedor con el id \"");
         }
         return persistence.update(entity);
     }
