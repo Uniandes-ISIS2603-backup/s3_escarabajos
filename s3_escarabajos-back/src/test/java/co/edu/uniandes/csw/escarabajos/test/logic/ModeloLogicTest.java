@@ -11,6 +11,7 @@ import java.util.List;
 
 
 import co.edu.uniandes.csw.escarabajos.ejb.ModeloLogic;
+import co.edu.uniandes.csw.escarabajos.entities.AccesorioEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
@@ -93,6 +94,7 @@ public class ModeloLogicTest {
      */
     private void clearData() {
          em.createQuery("delete from ItemEntity").executeUpdate();
+          em.createQuery("delete from AccesorioEntity").executeUpdate();
         em.createQuery("delete from ModeloEntity").executeUpdate();
     }
 
@@ -104,7 +106,7 @@ public class ModeloLogicTest {
      */
     private void insertData() {
         for (int i = 0; i < 3; i++) {
-            ItemEntity items = factory.manufacturePojo(ItemEntity.class);
+            AccesorioEntity items = factory.manufacturePojo(AccesorioEntity.class);
             em.persist(items);
             itemsData.add(items);
         }
@@ -113,7 +115,7 @@ public class ModeloLogicTest {
             em.persist(entity);
             data.add(entity);
             if (i == 0) {
-               // itemsData.get(i).setModelo(entity);
+                itemsData.get(i).setModeloId(entity.getId());
             }
         }
     }

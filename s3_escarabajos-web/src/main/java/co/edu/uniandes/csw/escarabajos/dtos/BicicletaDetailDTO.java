@@ -60,11 +60,12 @@ public class BicicletaDetailDTO extends BicicletaDTO {
      */
     public BicicletaDetailDTO(BicicletaEntity entity) {
         super(entity);
-        if (entity.getModelo()!= null) {
+       /* if (entity.getModelo()!= null) {
             this.modelo = new ModeloDTO(entity.getModelo());
         } else {
             entity.setModelo(null);
-        }
+        }*/ 
+       //ESTO NO HACE FALTA ITEM YA LO HACE
     }
 
     /**
@@ -75,9 +76,9 @@ public class BicicletaDetailDTO extends BicicletaDTO {
     @Override
     public BicicletaEntity toEntity() {
         BicicletaEntity biciE = super.toEntity();
-        if (this.getModelo() != null) {
+       /* if (this.getModelo() != null) {
             biciE.setModelo(this.getModelo().toEntity());
-        }
+        }*/
         return biciE;
     }
 
