@@ -133,9 +133,10 @@ public class FacturaPersistenceTest {
         FacturaEntity result = facturaPersistence.create(newEntity);
 
         Assert.assertNotNull(result);
-
+        
         FacturaEntity entity = em.find(FacturaEntity.class, result.getId());
         Assert.assertEquals(newEntity.getCliente(), entity.getCliente());
+        Assert.assertTrue(newEntity.getDinero().equals( entity.getDinero()));
     }
 
     /**

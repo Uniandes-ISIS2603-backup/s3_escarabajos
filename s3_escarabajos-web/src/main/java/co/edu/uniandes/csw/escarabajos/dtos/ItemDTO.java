@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.escarabajos.dtos;
-
-import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
 import co.edu.uniandes.csw.escarabajos.entities.FotoEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import java.util.ArrayList;
@@ -146,5 +144,4 @@ public abstract class ItemDTO {
     public void setModeloId(long modeloId) {
         this.modeloId = modeloId;
     }
-
 }
