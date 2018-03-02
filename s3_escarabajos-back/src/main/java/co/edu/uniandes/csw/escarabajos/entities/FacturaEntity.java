@@ -41,10 +41,6 @@ public class FacturaEntity implements Serializable {
     private MedioPagoEntity medioDePago;
     
     @PodamExclude
-    @OneToOne(mappedBy = "Factura")
-    private CarritoEntity carrito;
-    
-    @PodamExclude
     @ManyToOne
     private ClienteEntity cliente;
 
@@ -60,21 +56,6 @@ public class FacturaEntity implements Serializable {
      */
     public void setReclamos(List<ReclamoEntity> reclamos) {
         this.reclamos = reclamos;
-    }
-
-    
-    /**
-     * @return the carrito
-     */
-    public CarritoEntity getCarrito() {
-        return carrito;
-    }
-
-    /**
-     * @param carrito the carrito to set
-     */
-    public void setCarrito(CarritoEntity carrito) {
-        this.carrito = carrito;
     }
 
     /**

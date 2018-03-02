@@ -165,4 +165,11 @@ public class CarritoPersistenceTest {
         Assert.assertEquals(newEntity.getId(), resp.getId());
     }
     
+    @Test
+    public void deleteCarritoTest() {
+        CarritoEntity entity = data.get(0);
+        persistence.deleteCarrito(entity.getId());
+        CarritoEntity deleted = em.find(CarritoEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
 }

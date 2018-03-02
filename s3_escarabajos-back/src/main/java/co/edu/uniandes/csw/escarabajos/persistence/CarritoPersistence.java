@@ -49,4 +49,11 @@ public class CarritoPersistence {
         LOGGER.log(Level.INFO, "Actualizando carrito con id={0}", entity.getId());
         return em.merge(entity);
     }
+    
+    public void deleteCarrito(Long id){
+        
+        LOGGER.log(Level.INFO, "Borrando carrito con id={0}", id);
+        CarritoEntity entity = em.find(CarritoEntity.class, id);
+        em.remove(entity);
+    }
 }

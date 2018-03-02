@@ -32,18 +32,15 @@ public class CarritoEntity implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private Double precioTotal;
+    private Double precioTotal=0.0;
     
     @PodamExclude
     @OneToMany(cascade = CascadeType.PERSIST)
-    private ArrayList<ItemEntity> items;
+    private ArrayList<ItemEntity> items = new ArrayList<ItemEntity>();
     @PodamExclude
     @OneToOne
     private ClienteEntity cliente;
-    @PodamExclude
-    @OneToOne
-    private FacturaEntity factura;    
-    
+       
     //----------------------------------------------------
     // Getters y Setters
     //----------------------------------------------------
@@ -70,14 +67,6 @@ public class CarritoEntity implements Serializable{
 
     public void setCliente(ClienteEntity cliente) {
         this.cliente = cliente;
-    }
-
-    public FacturaEntity getFactura() {
-        return factura;
-    }
-
-    public void setFactura(FacturaEntity factura) {
-        this.factura = factura;
     }
 
     /**
