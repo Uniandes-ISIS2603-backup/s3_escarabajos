@@ -57,7 +57,7 @@ public class BicicletaPersistence {
     }
 
     public List<BicicletaEntity> findAll() {
-        LOGGER.info("Consultando todas las cities");
+        LOGGER.info("Consultando todas las bicicletas");
         TypedQuery query = em.createQuery("select u from BicicletaEntity u", BicicletaEntity.class);
         return query.getResultList();
     }
@@ -75,4 +75,10 @@ public class BicicletaPersistence {
        em.remove(bici);
     }
     
+    public List<BicicletaEntity> findByModelo(Long id){
+        LOGGER.log(Level.INFO, "Consultando las bicicletas por modelo ", id);
+        TypedQuery query = em.createQuery("Select e From BicicletaEntity e where e.id = :id", BicicletaEntity.class);
+        query = query.setParameter("id", id);
+        return query.getResultList();
+    }
 }

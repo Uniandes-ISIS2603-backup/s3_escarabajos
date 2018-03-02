@@ -13,6 +13,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -60,5 +61,10 @@ public class AccesorioPersistence {
         AccesorioEntity entity = em.find(AccesorioEntity.class, id);
         em.remove(entity);
     }
-    
+     public List<AccesorioEntity> findByModelo(Long id){
+        LOGGER.log(Level.INFO, "Consultando las accesorios por modelo ", id);
+        TypedQuery query = em.createQuery("Select e From AccesorioEntity e where e.id = :id", AccesorioEntity.class);
+        query = query.setParameter("id", id);
+        return query.getResultList();
+    }
 }

@@ -32,7 +32,7 @@ public class ModeloEntity implements Serializable
     private Double calificacionMedia;
     
     @PodamExclude
-    @OneToMany(mappedBy = "modelo", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<ItemEntity> items = new ArrayList<>();
   
     @PodamExclude

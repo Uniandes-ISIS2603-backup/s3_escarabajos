@@ -14,9 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -30,12 +28,7 @@ public class ItemEntity implements Serializable {
     
     private Double precio;
     
-    @PodamExclude
-    @ManyToOne
-    private ModeloEntity modelo;
-     
-    
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "item", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<FotoEntity> album = new ArrayList<>();
 
     private Long modeloId;
@@ -67,20 +60,6 @@ public class ItemEntity implements Serializable {
      */
     public void setPrecio(double precio) {
         this.precio = precio;
-    }
-
-    /**
-     * @return the modelo
-     */
-    public ModeloEntity getModelo() {
-        return modelo;
-    }
-
-    /**
-     * @param modelo the modelo to set
-     */
-    public void setModelo(ModeloEntity modelo) {
-        this.modelo = modelo;
     }
 
     /**
