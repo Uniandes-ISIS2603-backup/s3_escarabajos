@@ -25,6 +25,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class BicicletaUsadaPersistenceTest {
+
     /**
      *
      * @return Devuelve el jar que Arquillian va a desplegar en el Glassfish
@@ -132,7 +133,6 @@ public class BicicletaUsadaPersistenceTest {
 
         Assert.assertEquals(newEntity.getEstado(), entity.getEstado());
         Assert.assertEquals(newEntity.getFacturaOriginal(), entity.getFacturaOriginal());
-        Assert.assertTrue(newEntity.getPrecioDeReventa()- entity.getPrecioDeReventa() == 0);
     }
 
     /**
@@ -165,10 +165,9 @@ public class BicicletaUsadaPersistenceTest {
         BicicletaUsadaEntity entity = data.get(0);
         BicicletaUsadaEntity newEntity = biciPersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
-        
+
         Assert.assertEquals(newEntity.getEstado(), entity.getEstado());
         Assert.assertEquals(newEntity.getFacturaOriginal(), entity.getFacturaOriginal());
-        Assert.assertTrue(newEntity.getPrecioDeReventa()- entity.getPrecioDeReventa() == 0);
     }
 
     /**
@@ -201,9 +200,7 @@ public class BicicletaUsadaPersistenceTest {
 
         BicicletaUsadaEntity resp = em.find(BicicletaUsadaEntity.class, entity.getId());
 
-       
         Assert.assertEquals(newEntity.getEstado(), resp.getEstado());
-        Assert.assertEquals(newEntity.getFacturaOriginal(), resp.getFacturaOriginal());  
-        Assert.assertTrue(newEntity.getPrecioDeReventa()- resp.getPrecioDeReventa() == 0);
+        Assert.assertEquals(newEntity.getFacturaOriginal(), resp.getFacturaOriginal());
     }
 }

@@ -20,11 +20,9 @@ public class BicicletaUsadaEntity extends BicicletaEntity implements Serializabl
 
     private String facturaOriginal;
     private String estado;
-    private double precioDeReventa;
     @PodamExclude
     @ManyToOne(cascade = CascadeType.PERSIST)
     private ModeloEntity modelo;
-    
     @PodamExclude
     @ManyToOne(cascade = CascadeType.PERSIST)
     private VendedorEntity vendedor;
@@ -36,23 +34,13 @@ public class BicicletaUsadaEntity extends BicicletaEntity implements Serializabl
     public void setVendedor(VendedorEntity vendedor) {
         this.vendedor = vendedor;
     }
-    
-    
-    
+
     public String getEstado() {
         return estado;
     }
 
     public void setEstado(String estado) {
         this.estado = estado;
-    }
-
-    public double getPrecioDeReventa() {
-        return precioDeReventa;
-    }
-
-    public void setPrecioDeReventa(double precioDeReventa) {
-        this.precioDeReventa = precioDeReventa;
     }
 
     public String getFacturaOriginal() {
@@ -63,4 +51,13 @@ public class BicicletaUsadaEntity extends BicicletaEntity implements Serializabl
         this.facturaOriginal = facturaOriginal;
     }
 
+    public ModeloEntity getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(ModeloEntity modelo) {
+        this.modelo = modelo;
+    }
+
+    
 }
