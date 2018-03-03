@@ -5,10 +5,8 @@
  */
 package co.edu.uniandes.csw.escarabajos.test.logic;
 
-
 import java.util.ArrayList;
 import java.util.List;
-
 
 import co.edu.uniandes.csw.escarabajos.ejb.ModeloLogic;
 import co.edu.uniandes.csw.escarabajos.entities.AccesorioEntity;
@@ -50,11 +48,9 @@ public class ModeloLogicTest {
     private UserTransaction utx;
 
     private List<ModeloEntity> data = new ArrayList<ModeloEntity>();
-    
+
     private List<ItemEntity> itemsData = new ArrayList();
-    
-    
-    
+
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -93,8 +89,8 @@ public class ModeloLogicTest {
      *
      */
     private void clearData() {
-         em.createQuery("delete from ItemEntity").executeUpdate();
-          em.createQuery("delete from AccesorioEntity").executeUpdate();
+        em.createQuery("delete from ItemEntity").executeUpdate();
+        em.createQuery("delete from AccesorioEntity").executeUpdate();
         em.createQuery("delete from ModeloEntity").executeUpdate();
     }
 
@@ -132,7 +128,7 @@ public class ModeloLogicTest {
         Assert.assertNotNull(result);
         ModeloEntity entity = em.find(ModeloEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
-        
+
     }
 
     /**
@@ -176,7 +172,11 @@ public class ModeloLogicTest {
     @Test
     public void deleteModeloTest() {
         ModeloEntity entity = data.get(0);
-        modeloLogic.deleteModelo(entity.getId());
+        try {
+            modeloLogic.deleteModelo(entity.getId());
+        } catch (BusinessLogicException e) {
+            Assert.fail();
+        }
         ModeloEntity deleted = em.find(ModeloEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
