@@ -8,11 +8,13 @@ package co.edu.uniandes.csw.escarabajos.resources;
 import co.edu.uniandes.csw.escarabajos.dtos.BicicletaDetailDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.CarritoDetailDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.ClienteDetailDTO;
+import co.edu.uniandes.csw.escarabajos.ejb.CarritoLogic;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.mappers.BusinessLogicExceptionMapper;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 
 import javax.ws.rs.DELETE;
@@ -46,6 +48,9 @@ import javax.ws.rs.Produces;
 @RequestScoped
 public class CarritoResource {
     
+    @Inject
+    CarritoLogic logic;
+    
      /**
      * <h1>POST /api/clientes/{id}/carrito : Agrega el carrito.</h1>
      * 
@@ -66,9 +71,9 @@ public class CarritoResource {
      */
     
     @POST
-    public CarritoDetailDTO agregarCarrito(){
-        
-        return null;
+    public CarritoDetailDTO agregarCarrito( CarritoDetailDTO carrito ){
+                
+        return new CarritoDetailDTO(logic.createCarrito(carrito.toEntity()));
     }
     
      /**
@@ -83,8 +88,9 @@ public class CarritoResource {
      * @return JSONArray {@link CarritoDetailDTO} - El carrito del cliente.
      */
     @GET
-    public List<CarritoDetailDTO> getCarrito() {
-        return new ArrayList<CarritoDetailDTO>();
+    public CarritoDetailDTO getCarrito( Long id ) {
+        
+        return new CarritoDetailDTO(logic.findCarrito(id));
     }
     
      /**
@@ -102,7 +108,7 @@ public class CarritoResource {
      */
     @PUT
     public CarritoDetailDTO updateCity(CarritoDetailDTO carrito) throws BusinessLogicException {
-        return carrito;
+        return new CarritoDetailDTO( logic.updateCarrito(carrito.toEntity()) );
     }
     
     /**
@@ -120,7 +126,7 @@ public class CarritoResource {
      */
     @DELETE
     @Path("{id2: \\d+}")
-     public void deleteBicicleta() {
-        // Void
+     public void deleteCarrito(@PathParam("id") Long id) {
+        logic.deleteCarrito(id);
     }
 }

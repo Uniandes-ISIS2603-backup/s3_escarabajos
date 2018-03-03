@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.escarabajos.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -36,7 +37,7 @@ public class CarritoEntity implements Serializable{
     
     @PodamExclude
     @OneToMany(cascade = CascadeType.PERSIST)
-    private ArrayList<ItemEntity> items = new ArrayList<ItemEntity>();
+    private List<ItemEntity> items = new ArrayList<ItemEntity>();
     @PodamExclude
     @OneToOne
     private ClienteEntity cliente;
@@ -53,11 +54,11 @@ public class CarritoEntity implements Serializable{
         this.precioTotal = precioTotal;
     }
     
-        public ArrayList<ItemEntity> getItems() {
+    public List<ItemEntity> getItems() {
         return items;
     }
 
-    public void setItems(ArrayList<ItemEntity> items) {
+    public void setItems(List<ItemEntity> items) {
         this.items = items;
     }
 

@@ -28,7 +28,7 @@ public class CarritoLogic {
     @Inject
     private CarritoPersistence persistence;
     
-    public CarritoEntity createCarrito(CarritoEntity entity) throws BusinessLogicException {
+    public CarritoEntity createCarrito(CarritoEntity entity){
         LOGGER.info("Inicia proceso de creación del carrito");
         persistence.create(entity);
         LOGGER.info("Termina proceso de creación de carrito");

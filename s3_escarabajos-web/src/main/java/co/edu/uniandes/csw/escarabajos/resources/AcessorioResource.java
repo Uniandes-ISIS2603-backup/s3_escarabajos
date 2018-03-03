@@ -5,11 +5,14 @@
  */
 package co.edu.uniandes.csw.escarabajos.resources;
 
-import co.edu.uniandes.csw.escarabajos.dtos.AccesorioDetailDTO;
+import co.edu.uniandes.csw.escarabajos.dtos.AccesorioDTO;
+import co.edu.uniandes.csw.escarabajos.ejb.AccesorioLogic;
+import co.edu.uniandes.csw.escarabajos.entities.AccesorioEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -40,6 +43,9 @@ import javax.ws.rs.Produces;
 @Consumes("application/json")
 @RequestScoped
 public class AcessorioResource {
+    
+    @Inject
+    AccesorioLogic logic;
 
     /**
      * <h1>POST /api/accesorios : Crear un accesorio.</h1>
@@ -63,8 +69,8 @@ public class AcessorioResource {
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe el accesorio.
      */
     @POST
-    public AccesorioDetailDTO createAccesorio(AccesorioDetailDTO accesorio) throws BusinessLogicException {
-        return accesorio;
+    public AccesorioDTO createAccesorio(AccesorioDTO accesorio) throws BusinessLogicException {
+        return new AccesorioDTO(logic.createAccesorio(accesorio.toEntity()));
     }
 
     /**
@@ -79,8 +85,8 @@ public class AcessorioResource {
      * @return JSONArray {@link AccesorioDetailDTO} - Los accesorios encontrados en la aplicación. Si no hay ninguno retorna una lista vacía.
      */
     @GET
-    public List<AccesorioDetailDTO> getAccesorios() {
-        return new ArrayList<>();
+    public List<AccesorioDTO> getAccesorios() {
+        return listBookEntity2DetailDTO(logic.getAccesorios());
     }
 
     /**
@@ -101,8 +107,8 @@ public class AcessorioResource {
      */
     @GET
     @Path("{id: \\d+}")
-    public AccesorioDetailDTO getAccesorio(@PathParam("id") Long id) {
-        return null;
+    public AccesorioDTO getAccesorio(@PathParam("id") Long id) {
+        return new AccesorioDTO( logic.getAccesorio(id) );
     }
     
     /**
@@ -125,8 +131,8 @@ public class AcessorioResource {
      */
     @PUT
     @Path("{id: \\d+}")
-    public AccesorioDetailDTO updateAccesorio(@PathParam("id") Long id, AccesorioDetailDTO accesorio) throws BusinessLogicException {
-        return accesorio;
+    public AccesorioDTO updateAccesorio(@PathParam("id") Long id, AccesorioDTO accesorio) throws BusinessLogicException {
+        return new AccesorioDTO( logic.updateAccesorio(accesorio.toEntity()) );
     }
     
     /**
@@ -146,6 +152,14 @@ public class AcessorioResource {
     @DELETE
     @Path("{id: \\d+}")
      public void deleteAccesorio(@PathParam("id") Long id) {
-        // Void
+        logic.deleteAccesorio(id);
+    }
+     
+    private List<AccesorioDTO> listBookEntity2DetailDTO(List<AccesorioEntity> entityList) {
+        List<AccesorioDTO> list = new ArrayList<>();
+        for (AccesorioEntity entity : entityList) {
+            list.add(new AccesorioDTO(entity));
+        }
+        return list;
     }
 }

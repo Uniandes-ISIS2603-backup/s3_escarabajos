@@ -47,11 +47,11 @@ public class AccesorioLogic {
         return persistence.update(entity);
     }
     
-    public void deleteAccesorio( AccesorioEntity entity ){
+    public void deleteAccesorio( Long id ){
         
-        LOGGER.log(Level.INFO, "Inicia proceso de borrar el Accesorio con id={0}", entity.getId());    
-        persistence.delete(entity.getId());
-        LOGGER.log(Level.INFO, "Termina proceso de borrar el Accesorio con id={0}", entity.getId());
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar el Accesorio con id={0}", id);    
+        persistence.delete(id);
+        LOGGER.log(Level.INFO, "Termina proceso de borrar el Accesorio con id={0}", id);
     }
     
     public List<AccesorioEntity> getAccesorios() {
