@@ -69,9 +69,9 @@ public class ReclamoLogic
      }
     public ReclamoEntity find(Long id)
     {
-        LOGGER.info("Inicia el proceso de buscar un reclamo.");
+        LOGGER.info("Inicia el proceso de buscar un calificaciòn.");
         ReclamoEntity answ = reclamoPersistence.find(id);
-        LOGGER.info("Termina el proceso de buscar un reclamo.");
+        LOGGER.info("Termina el proceso de buscar un calificaciòn.");
         return answ;
     }    
     public void delete(ReclamoEntity ent)
