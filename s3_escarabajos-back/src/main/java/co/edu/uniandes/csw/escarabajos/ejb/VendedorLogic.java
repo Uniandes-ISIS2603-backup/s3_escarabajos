@@ -5,8 +5,10 @@
  */
 package co.edu.uniandes.csw.escarabajos.ejb;
 
+import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 import co.edu.uniandes.csw.escarabajos.entities.VendedorEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.escarabajos.persistence.ClientePersistence;
 import co.edu.uniandes.csw.escarabajos.persistence.VendedorPersistence;
 import java.util.List;
 import java.util.logging.Level;
@@ -25,15 +27,20 @@ public class VendedorLogic {
     @Inject
     private VendedorPersistence persistence; // Variable para acceder a la persistencia de la aplicación. Es una inyección de dependencias.
 
-     public VendedorEntity createCliente(VendedorEntity entity) throws BusinessLogicException {
+    @Inject
+    private ClienteLogic logicCliente;
+    
+     public VendedorEntity createVendedor(VendedorEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de vendedor");
-        // Verifica la regla de negocio que dice que no puede haber dos vendedores con el mismo nombre
-        if (persistence.findByName(entity.getNombre()) != null) {
-            throw new BusinessLogicException("Ya existe un vendedor con el nombre \"" + entity.getNombre() + "\"");
+
+        ClienteEntity cliente = logicCliente.getCliente(entity.getId());
+        if (cliente == null) {
+            throw new BusinessLogicException("No existe un vendedor con el id \"" + entity.getId() + "\"");
         }
+        
         // Invoca la persistencia para crear el vendedor
         persistence.create(entity);
-        LOGGER.info("Termina proceso de creación de cliente");
+        LOGGER.info("Termina proceso de creación de vendedor");
         return entity;
     }
 

@@ -17,8 +17,9 @@ import java.util.List;
 public class VendedorDetailDTO extends VendedorDTO{
     
     
-     private List<BicicletaUsadaDTO> bicicletasUsadas;
+    private List<BicicletaUsadaDTO> bicicletasUsadas;
      
+    //TODO poner todo lo que tiene podamexclude
     public VendedorDetailDTO(){
         
     }

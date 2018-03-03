@@ -46,6 +46,7 @@ public class ClienteLogic {
     }
 
     public ClienteEntity getCliente(Long id) {
+        
         return persistence.find(id);
     }
 

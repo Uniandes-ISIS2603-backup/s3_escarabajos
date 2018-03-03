@@ -8,6 +8,34 @@ package co.edu.uniandes.csw.escarabajos.dtos;
 import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 
 /**
+ * CarritoDTO Objeto de transferencia de datos del . Los DTO
+ * contienen las representaciones de los JSON que se transfieren entre el
+ * cliente y el servidor.
+ *
+ * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ * <pre>
+ *   {
+ *      [{
+  "id": 1,
+  "nombre": String,
+  "correo": String,
+  "usuario": String,
+  "cedula": Integer
+}
+ *   }
+ * </pre> Por ejemplo un cliente se representa asi:<br>
+ *
+ * <pre>
+ *
+ *   [{
+  "id": 1,
+  "nombre": "Ariel",
+  "correo": "asnar0@discuz.net",
+  "usuario": "␣",
+  "cedula": "8643803030"
+}
+ *
+ * </pre>
  *
  * @author s.beltran
  */

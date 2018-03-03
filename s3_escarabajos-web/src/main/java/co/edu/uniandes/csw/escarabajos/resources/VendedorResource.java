@@ -66,6 +66,7 @@ public class VendedorResource {
     public VendedorDTO createVendedor(VendedorDetailDTO vendedor) throws BusinessLogicException {
         return vendedor;
     }
+    //TODO ALGO CON RESOURCE
     /**
      * <h1>GET /api/vendedores : Obtener todas las vendedores.</h1>
      * 

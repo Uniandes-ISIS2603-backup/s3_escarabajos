@@ -5,6 +5,8 @@
  */
 package co.edu.uniandes.csw.escarabajos.dtos;
 
+import co.edu.uniandes.csw.escarabajos.entities.MedioPagoEntity;
+
 /**
  * CarritoDTO Objeto de transferencia de datos del . Los DTO
  * contienen las representaciones de los JSON que se transfieren entre el
@@ -88,6 +90,9 @@ public class MedioPagoDTO {
     //-----------------------------------------------------------
     // Getters and Setters
     //-----------------------------------------------------------
+
+    MedioPagoDTO(MedioPagoEntity entityMediosPago) {
+    }
     
     
     public double getDineroTransaccion() {
@@ -112,6 +117,11 @@ public class MedioPagoDTO {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    //Falta hacerlo TODO
+    MedioPagoEntity toEntity() {
+        return null;
     }
     
     

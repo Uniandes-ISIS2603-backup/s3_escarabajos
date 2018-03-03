@@ -38,7 +38,7 @@ public class ClienteEntity implements Serializable {
 
     @PodamExclude
     @OneToMany(mappedBy = "Cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<FacturaEntity> compras = new ArrayList<FacturaEntity>();
+    private List<FacturaEntity> facturas = new ArrayList<FacturaEntity>();
     
     @PodamExclude
     @OneToMany(mappedBy = "Cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
@@ -52,6 +52,10 @@ public class ClienteEntity implements Serializable {
     @OneToMany(mappedBy = "Cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<ReclamoEntity> reclamos = new ArrayList<ReclamoEntity>();
     
+    @PodamExclude
+    @OneToMany( cascade = CascadeType.ALL)
+    private List<ItemEntity> listaDeseos = new ArrayList<ItemEntity>();
+     
    
     public CarritoEntity getCarrito(){
         return carrito;
@@ -87,15 +91,15 @@ public class ClienteEntity implements Serializable {
     /**
      * @return the compras
      */
-    public List<FacturaEntity> getCompras() {
-        return compras;
+    public List<FacturaEntity> getFacturas() {
+        return facturas;
     }
 
     /**
-     * @param compras the compras to set
+     * @param facturas the compras to set
      */
-    public void setCompras(List<FacturaEntity> compras) {
-        this.compras = compras;
+    public void setFacturas(List<FacturaEntity> facturas) {
+        this.facturas = facturas;
     }
 
     /**
@@ -175,5 +179,19 @@ public class ClienteEntity implements Serializable {
             return this.getId().hashCode();
         }
         return super.hashCode();
+    }
+
+    /**
+     * @return the listaDeseos
+     */
+    public List<ItemEntity> getListaDeseos() {
+        return listaDeseos;
+    }
+
+    /**
+     * @param listaDeseos the listaDeseos to set
+     */
+    public void setListaDeseos(List<ItemEntity> listaDeseos) {
+        this.listaDeseos = listaDeseos;
     }
 }
