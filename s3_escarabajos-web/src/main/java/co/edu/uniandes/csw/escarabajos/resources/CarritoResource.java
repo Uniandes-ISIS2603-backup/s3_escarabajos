@@ -42,7 +42,7 @@ import javax.ws.rs.Produces;
  * @version 1.0
  */
 
-@Path("clientes/{id: \\d+}/carrito")
+@Path("clientes/{idCliente: \\d+}/carrito")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped

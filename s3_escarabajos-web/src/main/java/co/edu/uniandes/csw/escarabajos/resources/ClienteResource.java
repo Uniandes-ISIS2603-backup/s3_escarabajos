@@ -12,12 +12,16 @@ import javax.ws.rs.Produces;
 
 import co.edu.uniandes.csw.escarabajos.dtos.ClienteDetailDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.ClienteDTO;
+import co.edu.uniandes.csw.escarabajos.ejb.CarritoLogic;
+import co.edu.uniandes.csw.escarabajos.ejb.ClienteLogic;
+import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.mappers.BusinessLogicExceptionMapper;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 
 import javax.ws.rs.DELETE;
@@ -27,6 +31,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 
 @Path("clientes")
 @Produces("application/json")
@@ -70,6 +75,10 @@ public class ClienteResource {
      * @return JSON {@link ClienteDetailDTO}  - el cliente guardado con el atributo id autogenerado.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la ciudad.
      */
+    
+    @Inject
+    ClienteLogic logic;
+    
     @POST
     public ClienteDTO createCliente(ClienteDetailDTO cliente) throws BusinessLogicException {
         return cliente;
@@ -154,5 +163,14 @@ public class ClienteResource {
     @Path("{id: \\d+}")
      public void deleteCliente(@PathParam("id") Long id) {
         // Void
+    }
+     
+    @Path("{idCliente: \\d+}/carrito")
+    public Class<CarritoResource> getClienteCarrito(@PathParam("idCliente") Long idCliente) {
+        ClienteEntity entity = logic.getCliente(idCliente);
+        if (entity == null) {
+            throw new WebApplicationException("El recurso /clientes/" + idCliente + "/carrito no existe.", 404);
+        }
+        return CarritoResource.class;
     }
 }
