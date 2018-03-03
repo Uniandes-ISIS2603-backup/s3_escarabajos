@@ -5,7 +5,8 @@
  */
 package co.edu.uniandes.csw.escarabajos.ejb;
 
-import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
+import co.edu.uniandes.csw.escarabajos.entities.*;
+import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.CalificacionPersistence;
 import java.util.logging.Logger;
@@ -24,11 +25,17 @@ public class CalificacionLogic
     @Inject
     private CalificacionPersistence calificacionPersistence;
    
+    @Inject
+    private ModeloLogic modeloLogic;
+    
+    @Inject
+    private ClienteLogic clienteLogic;
+            
     private boolean isInRange(double pValue)
     {
         return pValue >= 0 && pValue <= 5;
     }
-    public CalificacionEntity crearCalificacion(CalificacionEntity cal)throws BusinessLogicException
+    public CalificacionEntity crearCalificacion(CalificacionEntity cal, Long modeloId, Long clienteId)throws BusinessLogicException
     {
         if(!isInRange(cal.getPuntaje()))
         {
@@ -38,9 +45,14 @@ public class CalificacionLogic
         {
             throw new BusinessLogicException("Por favor ingrese un comentario");
         }
+        ModeloEntity model = modeloLogic.getModelo(modeloId);
+        ClienteEntity cliente = clienteLogic.getCliente(clienteId);
+        cal.setModelo(model);
+        cal.setCliente(cliente);
+        model.setCalificacionMedia(getCalificacionMedia(modeloId));
         return calificacionPersistence.create(cal);
     }
-    public CalificacionEntity updateCalificacion(CalificacionEntity cal)throws BusinessLogicException
+    public CalificacionEntity updateCalificacion(CalificacionEntity cal, Long modeloId, Long clienteId)throws BusinessLogicException
     {
         LOGGER.info("Inicia el proceso de actualizar una calificaciòn.");
          if(!isInRange(cal.getPuntaje()))
@@ -52,6 +64,11 @@ public class CalificacionLogic
             throw new BusinessLogicException("Por favor ingrese un comentario");
         }
         LOGGER.info("Termina correctamente el proceso de actualizar una calificacion");
+        ModeloEntity model = modeloLogic.getModelo(modeloId);
+        ClienteEntity cliente = clienteLogic.getCliente(clienteId);
+        cal.setModelo(model);
+        cal.setCliente(cliente);
+        model.setCalificacionMedia(getCalificacionMedia(modeloId));
         return calificacionPersistence.update(cal);
     }
     public CalificacionEntity find(Long id)
@@ -79,6 +96,41 @@ public class CalificacionLogic
         List<CalificacionEntity> answ = calificacionPersistence.findAll();
         LOGGER.info("Termina el proceso de buscar todas las calificaciones.");
         return answ;
+    }
+    public List<CalificacionEntity> getCalificacionesPorModelo(Long modeloId)
+    {
+        LOGGER.info("Inicia el proceso de buscar todas las calificaciones del modelo " + modeloId);
+        List<CalificacionEntity> cals = calificacionPersistence.getCalificacionesPorModelo(modeloId);
+        LOGGER.info("Termina el proceso de buscar todas las calificaciones del modelo " + modeloId);
+        return cals;
+    }
+     public List<CalificacionEntity> getCalificacionesPorCliente(Long clienteId)
+    {
+        LOGGER.info("Inicia el proceso de buscar todas las calificaciones del modelo " + clienteId);
+        List<CalificacionEntity> cals = calificacionPersistence.getCalificacionesPorCliente(clienteId);
+        LOGGER.info("Termina el proceso de buscar todas las calificaciones del modelo " + clienteId);
+        return cals;
+    }
+      public List<CalificacionEntity> getCalificacionesPorClienteAndModelo(Long clienteId, Long modeloId)
+    {
+        LOGGER.info("Inicia el proceso de buscar todas las calificaciones del modelo " + modeloId + " y el cliente " + clienteId);
+        List<CalificacionEntity> cals = calificacionPersistence.getCalificacionesPorClienteAndModelo(clienteId, modeloId);
+        LOGGER.info("Termina el proceso de buscar todas las calificaciones del modelo " + modeloId);
+        return cals;
+    }
+    public double getCalificacionMedia(Long modeloId) throws BusinessLogicException
+    {
+        List<CalificacionEntity> cals = getCalificacionesPorModelo(modeloId);
+        if(cals == null || cals.isEmpty())
+        {
+            return -1;
+        }
+        double answer = 0;
+        for(int i = 0; i < cals.size(); i++)
+        {
+            answer += cals.get(i).getPuntaje();
+        }
+        return answer/cals.size();
     }
     
 }

@@ -62,8 +62,30 @@ public class CalificacionPersistence
     {
         em.remove(entity);
     }
-        public void delete(Long id) 
+    public void delete(Long id) 
     {
         em.remove(find(id));
     }
+    public List<CalificacionEntity> getCalificacionesPorModelo(Long modeloId) 
+    {
+        TypedQuery<CalificacionEntity> q = em.createQuery("select p from CalificacionEntity p where (p.modelo.id = :modeloid)", CalificacionEntity.class);
+        q.setParameter("modeloid", modeloId);
+        List<CalificacionEntity> results = q.getResultList();
+        return results;
+    }
+    public List<CalificacionEntity> getCalificacionesPorCliente(Long clienteId) 
+    {
+        TypedQuery<CalificacionEntity> q = em.createQuery("select p from CalificacionEntity p where (p.cliente.id = :clienteid)", CalificacionEntity.class);
+        q.setParameter("clienteid", clienteId);
+        List<CalificacionEntity> results = q.getResultList();
+        return results;
+    }
+    public List<CalificacionEntity> getCalificacionesPorClienteAndModelo(Long clienteId, Long modeloId) 
+    {
+        TypedQuery<CalificacionEntity> q = em.createQuery("select p from CalificacionEntity p where (p.cliente.id = :clienteid)", CalificacionEntity.class);
+        q.setParameter("clienteid", clienteId);
+        List<CalificacionEntity> results = q.getResultList();
+        return results;
+    }
+   
 }

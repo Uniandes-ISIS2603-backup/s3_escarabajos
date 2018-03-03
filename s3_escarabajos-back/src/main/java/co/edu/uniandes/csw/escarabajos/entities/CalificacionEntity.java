@@ -32,7 +32,7 @@ public class CalificacionEntity  implements Serializable
     private Double puntaje;
     
     @PodamExclude
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private ModeloEntity modelo;
     
     @PodamExclude
