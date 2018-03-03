@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.escarabajos.dtos.ModeloDetailDTO;
 import co.edu.uniandes.csw.escarabajos.ejb.ModeloLogic;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -20,6 +21,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 
 /**
  * <pre>Clase que implementa el recurso "modelos".
@@ -70,8 +72,7 @@ public class ModeloResource {
      */
     @POST
     public ModeloDetailDTO createModelo(ModeloDetailDTO modelo) throws BusinessLogicException {
-       //return new ModeloDetailDTO(modeloLogic.createModelo(modelo.toEntity()));
-       return null;
+       return new ModeloDetailDTO(modeloLogic.createModelo(modelo.toEntity()));
     }
 
     /**
@@ -87,7 +88,7 @@ public class ModeloResource {
      */
     @GET
     public List<ModeloDetailDTO> getModelos() {
-          return null;//return listModeloEntity2DetailDTO(modeloLogic.getModelos());
+         return listModeloEntity2DetailDTO(modeloLogic.getModelos());
     }
 
     /**
@@ -105,16 +106,16 @@ public class ModeloResource {
      * </pre>
      * @param id Identificador del modelo que se esta buscando. Este debe ser una cadena de dígitos.
      * @return JSON {@link ModeloDetailDTO} - El modelo buscado
+     * throws WebApplicationException {@link WebApplicationExceptionMapper} - Error de lógica que se genera cuando no se encuentra el modelo
      */
     @GET
     @Path("{id: \\d+}")
     public ModeloDetailDTO getModelo(@PathParam("id") Long id) {
-       /*  ModeloEntity entity = modeloLogic.getModelo(id);
+        ModeloEntity entity = modeloLogic.getModelo(id);
         if (entity == null) {
             throw new WebApplicationException("El recurso /modelos/" + id + " no existe.", 404);
         }
-        return new ModeloDetailDTO(entity);*/
-       return null;
+        return new ModeloDetailDTO(entity);
     }
     
     /**
@@ -138,14 +139,12 @@ public class ModeloResource {
     @PUT
     @Path("{id: \\d+}")
     public ModeloDetailDTO updateModelo(@PathParam("id") Long id, ModeloDetailDTO modelo) throws BusinessLogicException {
-       /*  modelo.setId(id);
+        modelo.setId(id);
         ModeloEntity entity = modeloLogic.getModelo(id);
         if (entity == null) {
             throw new WebApplicationException("El recurso /modelos/" + id + " no existe.", 404);
         }
         return new ModeloDetailDTO(modeloLogic.updateModelo(id, modelo.toEntity()));
-        */
-       return null;
     }
     
     
@@ -167,11 +166,11 @@ public class ModeloResource {
     @DELETE
     @Path("{id: \\d+}")
      public void deleteModelo(@PathParam("id") Long id) {
-       /* ModeloEntity entity = modeloLogic.getModelo(id);
+      ModeloEntity entity = modeloLogic.getModelo(id);
         if (entity == null) {
             throw new WebApplicationException("El recurso /modelos/" + id + " no existe.", 404);
         }
-        modeloLogic.deleteModelo(id);*/
+        modeloLogic.deleteModelo(id);
     }
      
      /**
@@ -183,7 +182,8 @@ public class ModeloResource {
      * 
      * @param id El ID del modelo con respecto al cual se accede al servicio.
      * @return El servicio de items para ese modelo en paricular.
-     
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} - Error de lógica que se genera cuando no se encuentra el modelo.
+     */
     @Path("{id: \\d+}/items")
     public Class<ModeloItemsResource> getModeloItemsResource(@PathParam("id") Long id) {
         ModeloEntity entity = modeloLogic.getModelo(id);
@@ -191,14 +191,13 @@ public class ModeloResource {
             throw new WebApplicationException("El recurso /modelos/" + id + "/items no existe", 404);
         }
         return ModeloItemsResource.class;
-    }*/
+    }
     
     private List<ModeloDetailDTO> listModeloEntity2DetailDTO(List<ModeloEntity> entityList) {
-        /*List<ModeloDetailDTO> list = new ArrayList<>();
+        List<ModeloDetailDTO> list = new ArrayList<>();
         for (ModeloEntity entity : entityList) {
             list.add(new ModeloDetailDTO(entity));
         }
-        return list;*/
-        return null;
+        return list;
     }
 }

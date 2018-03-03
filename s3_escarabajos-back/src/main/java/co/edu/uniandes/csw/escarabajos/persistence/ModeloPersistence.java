@@ -50,10 +50,6 @@ public class ModeloPersistence {
      */
     public ModeloEntity update(ModeloEntity entity) {
         LOGGER.log(Level.INFO, "Actualizando modelo con id={0}", entity.getId());
-        /* Note que hacemos uso de un método propio del EntityManager llamado merge() que recibe como argumento
-        el modelo con los cambios, esto es similar a 
-        "UPDATE table_name SET column1 = value1, column2 = value2, ... WHERE condition;" en SQL.
-         */
         return em.merge(entity);
     }
 
@@ -64,13 +60,8 @@ public class ModeloPersistence {
      * @param id: id correspondiente a el modelo a borrar.
      */
     public void delete(Long id) {
-
         LOGGER.log(Level.INFO, "Borrando modelo con id={0}", id);
-        // Se hace uso de mismo método que esta explicado en public ModeloEntity find(Long id) para obtener el modelo a borrar.
         ModeloEntity entity = em.find(ModeloEntity.class, id);
-        /* Note que una vez obtenido el objeto desde la base de datos llamado "entity", volvemos hacer uso de un método propio del
-        EntityManager para eliminar de la base de datos el objeto que encontramos y queremos borrar.
-        Es similar a "delete from ModeloEntity where id=id;" - "DELETE FROM table_name WHERE condition;" en SQL.*/
         em.remove(entity);
 
     }
@@ -83,10 +74,6 @@ public class ModeloPersistence {
      */
     public ModeloEntity find(Long id) {
         LOGGER.log(Level.INFO, "Consultando modelo con id={0}", id);
-        /* Note que se hace uso del metodo "find" propio del EntityManager, el cual recibe como argumento 
-        el tipo de la clase y el objeto que nos hara el filtro en la base de datos en este caso el "id"
-        Suponga que es algo similar a "select * from ModeloEntity where id=id;" - "SELECT * FROM table_name WHERE condition;" en SQL.
-         */
         return em.find(ModeloEntity.class, id);
     }
 

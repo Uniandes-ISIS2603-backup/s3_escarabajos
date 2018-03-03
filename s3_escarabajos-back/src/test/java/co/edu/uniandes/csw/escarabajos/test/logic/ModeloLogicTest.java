@@ -172,11 +172,7 @@ public class ModeloLogicTest {
     @Test
     public void deleteModeloTest() {
         ModeloEntity entity = data.get(0);
-        try {
-            modeloLogic.deleteModelo(entity.getId());
-        } catch (BusinessLogicException e) {
-            Assert.fail();
-        }
+        modeloLogic.deleteModelo(entity.getId());
         ModeloEntity deleted = em.find(ModeloEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
