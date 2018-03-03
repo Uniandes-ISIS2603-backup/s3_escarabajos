@@ -32,7 +32,8 @@ public class FotoLogic {
     private ReclamoLogic reclamoLogic;
 
     /**
-     * Obtiene la lista de los registros de fotos que pertenecen a un item/Reclamo.
+     * Obtiene la lista de los registros de fotos que pertenecen a un
+     * item/Reclamo.
      *
      * @param id id del Item/Reclamo el cual es padre de las fotos.
      * @param tipo RECLAMO o ITEM dependiendo delo que se quiera buscar
@@ -65,7 +66,6 @@ public class FotoLogic {
         return respuesta;
     }
 
-   
     /**
      * Obtiene los datos de una instancia de foto a partir de su ID. La
      * existencia del elemento padre item/reclamo se debe garantizar.
@@ -76,14 +76,12 @@ public class FotoLogic {
      * @return Instancia de FotoEntity con los datos de la foto consultada.
      *
      */
-    public FotoEntity getFoto(Long id, Long fotoid,String tipo) {
+    public FotoEntity getFoto(Long id, Long fotoid, String tipo) {
         if (tipo.equals(ITEM)) {
             return persistence.findInItem(id, fotoid);
-        }
-        else if(tipo.equals(RECLAMO))
-        {
+        } else if (tipo.equals(RECLAMO)) {
             return persistence.findInReclamo(id, fotoid);
-        }          
+        }
         return null;
     }
 
@@ -101,12 +99,10 @@ public class FotoLogic {
         if (tipo.equals(ITEM)) {
             ItemEntity item = itemLogic.getItem(id);
             entity.setItem(item);
-        }
-        else if (tipo.equals(RECLAMO)) {
+        } else if (tipo.equals(RECLAMO)) {
             ReclamoEntity reclamo = reclamoLogic.find(id);
             entity.setReclamo(reclamo);
         }
-        
 
         return persistence.create(entity);
     }
@@ -120,15 +116,14 @@ public class FotoLogic {
      * @return Instancia de FotoEntity con los datos actualizados.
      *
      */
-    public FotoEntity updateFoto(Long id, FotoEntity entity,String tipo) {
+    public FotoEntity updateFoto(Long id, FotoEntity entity, String tipo) {
         LOGGER.info("Inicia proceso de actualizar foto");
         if (tipo.equals(ITEM)) {
             ItemEntity item = itemLogic.getItem(id);
             entity.setItem(item);
-        }
-        else if (tipo.equals(RECLAMO)) {
+        } else if (tipo.equals(RECLAMO)) {
             ReclamoEntity reclamo = reclamoLogic.find(id);
-            entity.setReclamo(reclamo);  
+            entity.setReclamo(reclamo);
         }
         return persistence.update(entity);
     }
@@ -136,14 +131,18 @@ public class FotoLogic {
     /**
      * Elimina una instancia de foto de la base de datos.
      *
-     * @param id Identificador de la instancia a eliminar.
-     * @param tipo RECLAMO o ITEM dependiendo delo que se quiera eliminar
-     * @param idSuper id del item/reclamo el cual es padre de la foto.
+     * @param old FotoEntity a eliminar.
      *
      */
-    public void deleteFoto(Long idSuper, Long id,String tipo) {
+    public void deleteFoto(FotoEntity old) {
         LOGGER.info("Inicia proceso de borrar foto");
-         FotoEntity old = getFoto(idSuper, id,tipo);
+        if (old.getItem() != null) {
+            old.getItem().getAlbum().remove(old);
+            old.setItem(null);
+        } else if (old.getReclamo() != null) {
+            old.getReclamo().getAlbum().remove(old);
+            old.setReclamo(null);
+        }
         persistence.delete(old.getId());
     }
 
