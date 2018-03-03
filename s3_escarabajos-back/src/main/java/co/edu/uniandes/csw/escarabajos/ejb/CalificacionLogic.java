@@ -43,7 +43,7 @@ public class CalificacionLogic
     public CalificacionEntity updateCalificacion(CalificacionEntity cal)throws BusinessLogicException
     {
         LOGGER.info("Inicia el proceso de actualizar una calificaciòn.");
-         if(isInRange(cal.getPuntaje()))
+         if(!isInRange(cal.getPuntaje()))
         {
            throw new BusinessLogicException("El puntaje debe ser un valor entre 0 y 5");
         }
