@@ -87,4 +87,12 @@ public class ReclamoPersistence
         List<ReclamoEntity> results = q.getResultList();
         return results;
     }
+
+    public List<ReclamoEntity> getReclamoPorFactura(Long facturaId)
+    {
+        TypedQuery<ReclamoEntity> q = em.createQuery("select p from ReclamoEntity p where (p.factura.id = :facturaId)", ReclamoEntity.class);
+        q.setParameter("facturaId", facturaId);
+        List<ReclamoEntity> results = q.getResultList();
+        return results;
+    }
 }
