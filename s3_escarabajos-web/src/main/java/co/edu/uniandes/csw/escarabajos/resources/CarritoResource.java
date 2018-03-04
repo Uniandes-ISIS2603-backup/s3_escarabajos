@@ -9,6 +9,8 @@ import co.edu.uniandes.csw.escarabajos.dtos.BicicletaDetailDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.CarritoDetailDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.ClienteDetailDTO;
 import co.edu.uniandes.csw.escarabajos.ejb.CarritoLogic;
+import co.edu.uniandes.csw.escarabajos.ejb.ClienteLogic;
+import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.mappers.BusinessLogicExceptionMapper;
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 
 /**
  * <pre>Clase que implementa el recurso "carrito".
@@ -51,6 +54,9 @@ public class CarritoResource {
     @Inject
     CarritoLogic logic;
     
+    @Inject
+    ClienteLogic logicCliente;
+    
      /**
      * <h1>POST /api/clientes/{idCLiente}/carrito : Agrega el carrito.</h1>
      * no deberia haber esta solicitud http porque el carrito se agrega automaticamente cuando se crea el cliente
@@ -75,7 +81,13 @@ public class CarritoResource {
     @GET
     public CarritoDetailDTO getCarrito(@PathParam("idCliente") Long idCliente) {
         
-        return new CarritoDetailDTO(logic.findCarrito(idCliente));
+        ClienteEntity cliente = logicCliente.getCliente(idCliente);
+        
+        if( cliente == null ){
+            throw new WebApplicationException("El recurso /cliente/" + idCliente + " no existe.", 404);
+        }
+        
+        return new CarritoDetailDTO(logic.findCarrito(cliente.getCarrito().getId()));
     }
     
      /**
