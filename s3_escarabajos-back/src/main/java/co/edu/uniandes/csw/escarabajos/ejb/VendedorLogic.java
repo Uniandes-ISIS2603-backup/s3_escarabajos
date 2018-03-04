@@ -63,9 +63,9 @@ public class VendedorLogic {
         return persistence.update(entity);
     }
     
-    public void deleteVendedor(VendedorEntity entity) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de borrar vendedor con id={0}", entity.getId());    
-        persistence.delete(entity.getId());
-        LOGGER.log(Level.INFO, "Termina proceso de borrar vendedor con id={0}", entity.getId());
+    public void deleteVendedor(Long id) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar vendedor con id={0}", id);    
+        persistence.delete(id);
+        LOGGER.log(Level.INFO, "Termina proceso de borrar vendedor con id={0}", id);
     }
 }

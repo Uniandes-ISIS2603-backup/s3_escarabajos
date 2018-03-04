@@ -7,10 +7,12 @@ package co.edu.uniandes.csw.escarabajos.resources;
 
 import co.edu.uniandes.csw.escarabajos.dtos.VendedorDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.VendedorDetailDTO;
+import co.edu.uniandes.csw.escarabajos.ejb.VendedorLogic;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -41,6 +43,8 @@ import javax.ws.rs.Produces;
 @Consumes("application/json")
 @RequestScoped
 public class VendedorResource {
+     @Inject
+    VendedorLogic logic;
     /**
      * <h1>POST /api/vendedores : Crear un vendedor.</h1>
      * 
@@ -145,7 +149,8 @@ public class VendedorResource {
      */
     @DELETE
     @Path("{id: \\d+}")
-     public void deleteVendedor(@PathParam("id") Long id) {
+     public void deleteVendedor(@PathParam("id") Long id) throws BusinessLogicException {
         // Void
+        logic.deleteVendedor(id);
     }
 }
