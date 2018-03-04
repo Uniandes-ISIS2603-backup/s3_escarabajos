@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.escarabajos.resources;
 
+import co.edu.uniandes.csw.escarabajos.dtos.CarritoDetailDTO;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Path;
@@ -14,6 +15,7 @@ import co.edu.uniandes.csw.escarabajos.dtos.ClienteDetailDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.ClienteDTO;
 import co.edu.uniandes.csw.escarabajos.ejb.CarritoLogic;
 import co.edu.uniandes.csw.escarabajos.ejb.ClienteLogic;
+import co.edu.uniandes.csw.escarabajos.entities.CarritoEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
@@ -79,8 +81,14 @@ public class ClienteResource {
     @Inject
     ClienteLogic logic;
     
+    @Inject
+    CarritoLogic Carritologic;
+    
     @POST
     public ClienteDTO createCliente(ClienteDetailDTO cliente) throws BusinessLogicException {
+        CarritoDetailDTO carrito = new CarritoDetailDTO();
+        Carritologic.createCarrito(carrito.toEntity());
+        cliente.setCarrito(carrito);
         return new ClienteDTO(logic.createCliente(cliente.toEntity()));
     }
     /**
@@ -188,7 +196,12 @@ public class ClienteResource {
     @Path("{id: \\d+}")
      public void deleteCliente(@PathParam("id") Long id) throws BusinessLogicException {
         // Void
-        //logic.deleteCliente();
+        ClienteEntity entity = logic.getCliente(id);
+        if (entity == null) {
+            throw new WebApplicationException("El cliente no existe", 404);
+        }
+        Carritologic.deleteCarrito(entity.getCarrito().getId());
+        logic.deleteCliente(id);
     }
      
     @Path("{idCliente: \\d+}/carrito")
@@ -198,6 +211,16 @@ public class ClienteResource {
             throw new WebApplicationException("El recurso /clientes/" + idCliente + "/carrito no existe.", 404);
         }
         return CarritoResource.class;
+    }
+    
+
+    @Path("{idCliente: \\d+}/calificacion")
+    public Class<CalificacionResource> getClienteCalificacionResource(@PathParam("idCliente") Long idCliente) {
+        ClienteEntity entity = logic.getCliente(idCliente);
+        if (entity == null) {
+            throw new WebApplicationException("El recurso /clientes/" + idCliente + "/calificacion no existe.", 404);
+        }
+        return CalificacionResource.class;
     }
     
     
