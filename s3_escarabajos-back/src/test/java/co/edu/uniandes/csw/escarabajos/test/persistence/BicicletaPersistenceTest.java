@@ -108,9 +108,11 @@ public class BicicletaPersistenceTest {
      */
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
+        
         for (int i = 0; i < 3; i++) {
             BicicletaEntity entity = factory.manufacturePojo(BicicletaEntity.class);
-
+            entity.setUsada(Boolean.FALSE);
+         
             em.persist(entity);
             data.add(entity);
         }
@@ -118,13 +120,12 @@ public class BicicletaPersistenceTest {
 
     /**
      * Prueba para crear un Bicicleta.
-     *
-     *
      */
     @Test
     public void createBicicletaTest() {
         PodamFactory factory = new PodamFactoryImpl();
         BicicletaEntity newEntity = factory.manufacturePojo(BicicletaEntity.class);
+        newEntity.setUsada(Boolean.FALSE);
         BicicletaEntity result = biciPersistence.create(newEntity);
 
         Assert.assertNotNull(result);
@@ -132,12 +133,8 @@ public class BicicletaPersistenceTest {
         BicicletaEntity entity = em.find(BicicletaEntity.class, result.getId());
 
         Assert.assertEquals(newEntity.getCategoria(), entity.getCategoria());
-        if(newEntity.getUsada()== true){
-            Assert.assertTrue(entity.getUsada());
-        }else{
-            Assert.assertFalse(entity.getUsada());
-        }
-        Assert.assertEquals(newEntity.getColor(), entity.getColor());
+        Assert.assertFalse(result.getUsada());
+        
     }
 
     /**
@@ -171,13 +168,8 @@ public class BicicletaPersistenceTest {
         BicicletaEntity newEntity = biciPersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
 
-        Assert.assertEquals(newEntity.getCategoria(), entity.getCategoria());
-        if(newEntity.getUsada()== true){
-            Assert.assertTrue(entity.getUsada());
-        }else{
-            Assert.assertFalse(entity.getUsada());
-        }
-        Assert.assertEquals(newEntity.getColor(), entity.getColor());
+        Assert.assertEquals(newEntity.getCategoria(),entity.getCategoria());
+        Assert.assertFalse(entity.getUsada());
     }
 
     /**
@@ -205,17 +197,14 @@ public class BicicletaPersistenceTest {
         BicicletaEntity newEntity = factory.manufacturePojo(BicicletaEntity.class);
 
         newEntity.setId(entity.getId());
+        newEntity.setUsada(Boolean.FALSE);
 
         biciPersistence.update(newEntity);
 
         BicicletaEntity resp = em.find(BicicletaEntity.class, entity.getId());
 
+       
         Assert.assertEquals(newEntity.getCategoria(), resp.getCategoria());
-        if(newEntity.getUsada()== true){
-            Assert.assertTrue(resp.getUsada());
-        }else{
-            Assert.assertFalse(resp.getUsada());
-        }
-        Assert.assertEquals(newEntity.getColor(), resp.getColor());
+        Assert.assertFalse(resp.getUsada());
     }
 }

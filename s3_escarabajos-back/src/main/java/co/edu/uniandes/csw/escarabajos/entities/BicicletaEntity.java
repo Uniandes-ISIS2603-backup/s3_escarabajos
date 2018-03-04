@@ -15,7 +15,6 @@ import javax.persistence.Entity;
 public class BicicletaEntity extends ItemEntity implements Serializable  {
     
     private String categoria;
-    private String color;
     private Boolean usada;
     
     public String getCategoria() {
@@ -25,14 +24,6 @@ public class BicicletaEntity extends ItemEntity implements Serializable  {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
-    
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
 
     public Boolean getUsada() {
         return usada;
@@ -40,6 +31,5 @@ public class BicicletaEntity extends ItemEntity implements Serializable  {
 
     public void setUsada(Boolean usada) {
         this.usada = usada;
-    }    
-    
+    }  
 }
