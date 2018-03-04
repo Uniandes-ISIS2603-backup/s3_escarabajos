@@ -20,6 +20,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
 @Entity
@@ -39,7 +40,7 @@ public class ReclamoEntity  implements Serializable
     private String razon;
     
     @PodamExclude
-    @ManyToOne( cascade = CascadeType.PERSIST )
+    @OneToOne( cascade = CascadeType.PERSIST )
     private FacturaEntity factura;
 
     @PodamExclude
