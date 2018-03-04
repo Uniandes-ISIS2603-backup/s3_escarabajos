@@ -102,10 +102,7 @@ public class ReclamoEntity  implements Serializable
     public Long getId() {
         return id;
     }
-    public boolean isEnProceso()
-    {
-        return enProceso;
-    }
+
     public void terminar()
     {
         enProceso = false;
@@ -140,5 +137,12 @@ public class ReclamoEntity  implements Serializable
             return this.getId().hashCode();
         }
         return super.hashCode();
+    }
+
+    /**
+     * @return the enProceso
+     */
+    public boolean isEnProceso() {
+        return enProceso;
     }
 }

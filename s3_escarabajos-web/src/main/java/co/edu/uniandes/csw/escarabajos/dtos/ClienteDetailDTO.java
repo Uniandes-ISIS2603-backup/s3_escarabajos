@@ -25,7 +25,7 @@ public class ClienteDetailDTO extends ClienteDTO{
     
     private CarritoDTO carrito;
 
-    private List<FacturaDTO> facturas;
+    private List<FacturaDTO> compras;
     
     private List<MedioPagoDTO> mediosPago ;
     
@@ -58,9 +58,9 @@ public class ClienteDetailDTO extends ClienteDTO{
         }
         
         if (entity != null) {
-            facturas = new ArrayList<>();
-            for (FacturaEntity entityFacturas : entity.getCompras()) {
-                facturas.add(new FacturaDTO(entityFacturas));
+            compras = new ArrayList<>();
+            for (FacturaEntity entityCompras : entity.getCompras()) {
+                compras.add(new FacturaDTO(entityCompras));
             }
 
         }
@@ -113,12 +113,12 @@ public class ClienteDetailDTO extends ClienteDTO{
             entity.setCarrito(this.getCarrito().toEntity());
         }
         
-        if (facturas != null) {
-            List<FacturaEntity> facturasEntity = new ArrayList<>();
-            for (FacturaDTO dtoFactura : facturas) {
-                facturasEntity.add(dtoFactura.toEntity());
+        if (compras != null) {
+            List<FacturaEntity> comprasEntity = new ArrayList<>();
+            for (FacturaDTO dtoFactura : compras) {
+                comprasEntity.add(dtoFactura.toEntity());
             }
-            entity.setCompras(facturasEntity);
+            entity.setCompras(comprasEntity);
         }
         
        /* if (listaDeseos != null) {
@@ -171,17 +171,17 @@ public class ClienteDetailDTO extends ClienteDTO{
     }
 
     /**
-     * @return the facturas
+     * @return the compras
      */
-    public List<FacturaDTO> getFacturas() {
-        return facturas;
+    public List<FacturaDTO> getCompras() {
+        return compras;
     }
 
     /**
-     * @param facturas the facturas to set
+     * @param compras the compras to set
      */
-    public void setFacturas(List<FacturaDTO> facturas) {
-        this.facturas = facturas;
+    public void setCompras(List<FacturaDTO> compras) {
+        this.compras = compras;
     }
 
     /**

@@ -24,11 +24,7 @@ public class VendedorEntity extends ClienteEntity implements Serializable{
     private String telefono;
     
     @PodamExclude
-    @OneToMany(cascade = CascadeType.PERSIST)
-    private List<FacturaEntity> ventas = new ArrayList<FacturaEntity>();
-    
-    @PodamExclude
-    @OneToMany(mappedBy = "vendedor", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "vendedor", cascade = CascadeType.PERSIST)
     private List<BicicletaUsadaEntity> bicicletasUsadas = new ArrayList<BicicletaUsadaEntity>();
 
     public VendedorEntity() {
@@ -62,20 +58,5 @@ public class VendedorEntity extends ClienteEntity implements Serializable{
     public void setBicicletasUsadas(List<BicicletaUsadaEntity> bicicletasUsadas) {
         this.bicicletasUsadas = bicicletasUsadas;
     }
-
-    /**
-     * @return the ventas
-     */
-    public List<FacturaEntity> getVentas() {
-        return ventas;
-    }
-
-    /**
-     * @param ventas the ventas to set
-     */
-    public void setVentas(List<FacturaEntity> ventas) {
-        this.ventas = ventas;
-    }
-
     
 }

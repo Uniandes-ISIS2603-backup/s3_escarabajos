@@ -55,10 +55,7 @@ public class CarritoResource {
      * <h1>POST /api/clientes/{idCLiente}/carrito : Agrega el carrito.</h1>
      * no deberia haber esta solicitud http porque el carrito se agrega automaticamente cuando se crea el cliente
      */
-    @POST
-    public CarritoDetailDTO createCarrito(){
-        return null;
-    }
+
     
      /**
      * <h1>GET /api/clientes/{idCliente}/carrito : Obtener el carrito del cliente.</h1>
@@ -76,9 +73,9 @@ public class CarritoResource {
      * @return JSON {@link CarritoDetailDTO} - el carrito buscado.
      */
     @GET
-    public CarritoDetailDTO getCarrito( Long id ) {
+    public CarritoDetailDTO getCarrito(@PathParam("idCliente") Long idCliente) {
         
-        return new CarritoDetailDTO(logic.findCarrito(id));
+        return new CarritoDetailDTO(logic.findCarrito(idCliente));
     }
     
      /**
@@ -103,9 +100,4 @@ public class CarritoResource {
      * <h1>DELETE /api/clientes/{idCLiente}/carrito : Agrega el carrito.</h1>
      * no deberia haber esta solicitud http porque el carrito se borra automaticamente cuando se borra el cliente
      */
-    @POST
-    public void deleteCarrito(){
-        
-    }
-
 }

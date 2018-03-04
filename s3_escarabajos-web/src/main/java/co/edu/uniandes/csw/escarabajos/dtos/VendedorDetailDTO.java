@@ -34,6 +34,7 @@ public class VendedorDetailDTO extends VendedorDTO{
         }
     }
     
+    @Override
     public VendedorEntity toEntity(){
         VendedorEntity vendedorE = new VendedorEntity();
         

@@ -33,23 +33,23 @@ public class ClienteEntity implements Serializable {
     private String usuario;
     private Integer cedula;
     @PodamExclude
-    @OneToOne(mappedBy = "Cliente", cascade = CascadeType.PERSIST)
+    @OneToOne(mappedBy = "cliente", cascade = CascadeType.PERSIST)
     private CarritoEntity carrito;
 
     @PodamExclude
-    @OneToMany(mappedBy = "Cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<FacturaEntity> compras = new ArrayList<FacturaEntity>();
     
     @PodamExclude
-    @OneToMany(mappedBy = "Cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<MedioPagoEntity> mediosPago = new ArrayList<MedioPagoEntity>();
     
     @PodamExclude
-    @OneToMany(mappedBy = "Cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
     
     @PodamExclude
-    @OneToMany(mappedBy = "Cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<ReclamoEntity> reclamos = new ArrayList<ReclamoEntity>();
    
     public CarritoEntity getCarrito(){

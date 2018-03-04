@@ -51,7 +51,7 @@ public class ReclamoLogic
     
        ReclamoEntity nuevo = reclamoPersistence.create(ent);
        ent.setFactura(f);
-       f.setReclamos(nuevo);
+       f.setReclamo(nuevo);
        LOGGER.info("Finalizando el proceso de crear un reclamo");
        return nuevo;  
      }
@@ -73,7 +73,7 @@ public class ReclamoLogic
        FacturaEntity f = facturaLogic.getFactura(facturaId);
        ent.setFactura(f);
        ReclamoEntity actualizado = reclamoPersistence.update(ent);
-       f.setReclamos(actualizado);
+       f.setReclamo(actualizado);
        LOGGER.info("Finalizando el proceso de actualizar un reclamo");
        return actualizado;  
      }

@@ -35,7 +35,7 @@ public class MedioPagoEntity implements Serializable {
     private String tipo;
     
     @PodamExclude
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private ClienteEntity cliente;
     
     @PodamExclude

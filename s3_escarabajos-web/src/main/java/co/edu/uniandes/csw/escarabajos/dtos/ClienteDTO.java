@@ -48,7 +48,7 @@ public class ClienteDTO {
     private String nombre;
     private String correo;
     private String usuario;
-    private int cedula;
+    private Integer cedula;
     
     
     public ClienteDTO(){

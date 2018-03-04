@@ -33,11 +33,11 @@ public class FacturaEntity implements Serializable {
     private Long id;
     private Double dinero;
     @PodamExclude
-    @OneToOne(mappedBy = "Factura", cascade = CascadeType.ALL)
-    private ReclamoEntity reclamos;
+    @OneToOne(mappedBy = "factura", cascade = CascadeType.ALL)
+    private ReclamoEntity reclamo;
     
     @PodamExclude
-    @OneToOne(mappedBy = "Factura")
+    @OneToOne(mappedBy = "factura",cascade = CascadeType.ALL)
     private MedioPagoEntity medioDePago;
     
     @PodamExclude
@@ -45,17 +45,17 @@ public class FacturaEntity implements Serializable {
     private ClienteEntity cliente;
 
     /**
-     * @return the reclamos
+     * @return the reclamo
      */
-    public ReclamoEntity getReclamos() {
-        return reclamos;
+    public ReclamoEntity getReclamo() {
+        return reclamo;
     }
 
     /**
-     * @param reclamos the reclamos to set
+     * @param reclamo the reclamo to set
      */
-    public void setReclamos(ReclamoEntity reclamos) {
-        this.reclamos = reclamos;
+    public void setReclamo(ReclamoEntity reclamo) {
+        this.reclamo = reclamo;
     }
 
     /**
