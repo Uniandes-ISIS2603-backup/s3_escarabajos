@@ -27,10 +27,10 @@ import javax.ws.rs.WebApplicationException;
 
 /**
  * <pre>Clase que implementa el recurso "calificaciones".
- * URL: /api/calificaciones
+ * URL: /api/clientes/{clientesId}/calificaciones
  * </pre>
  * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta
- * "/api" y este recurso tiene la ruta "calificaciones".</i>
+ * "/api" y este recurso tiene la ruta "clientes/{clientesId}/calificaciones".</i>
  *
  * <h2>Anotaciones </h2>
  * <pre>
