@@ -131,7 +131,7 @@ public class AccesorioLogicTest {
     @Test
     public void deleteAccesorioTest() {
         AccesorioEntity entity = data.get(0);
-        logic.deleteAccesorio(entity);
+        logic.deleteAccesorio(entity.getId());
         AccesorioEntity deleted = em.find(AccesorioEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
