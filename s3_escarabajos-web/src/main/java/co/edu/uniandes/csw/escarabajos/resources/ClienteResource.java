@@ -81,7 +81,7 @@ public class ClienteResource {
     
     @POST
     public ClienteDTO createCliente(ClienteDetailDTO cliente) throws BusinessLogicException {
-        return cliente;
+        return new ClienteDTO(logic.createCliente(cliente.toEntity()));
     }
     /**
      * <h1>GET /api/clientes : Obtener todos las clientes.</h1>
@@ -96,9 +96,23 @@ public class ClienteResource {
      */
     @GET
     public List<ClienteDetailDTO> getClientes() {
-        return new ArrayList<ClienteDetailDTO>();
+        return listEntity2DTO(logic.getClientes());    
     }
     
+    /**
+     * Convierte una lista de ClienteEntity a una lista de ClienteDetailDTO.
+     *
+     * @param entityList Lista de ClienteEntity a convertir.
+     * @return Lista de ClienteDetailDTO convertida.
+     * 
+     */
+    private List<ClienteDetailDTO> listEntity2DTO(List<ClienteEntity> entityList) {
+        List<ClienteDetailDTO> list = new ArrayList<>();
+        for (ClienteEntity entity : entityList) {
+            list.add(new ClienteDetailDTO(entity));
+        }
+        return list;
+    }
      /**
      * <h1>GET /api/clientes/{id} : Obtener cliente por id.</h1>
      * 
@@ -118,7 +132,11 @@ public class ClienteResource {
     @GET
     @Path("{id: \\d+}")
     public ClienteDetailDTO getCliente(@PathParam("id") Long id) {
-        return null;
+        ClienteEntity entity = logic.getCliente(id);
+        if (entity == null) {
+            throw new WebApplicationException("El cliente no existe", 404);
+        }
+        return new ClienteDetailDTO(entity);
     }
     
      /**
@@ -142,7 +160,14 @@ public class ClienteResource {
     @PUT
     @Path("{id: \\d+}")
     public ClienteDetailDTO updateCliente(@PathParam("id") Long id, ClienteDetailDTO cliente) throws BusinessLogicException {
-        return cliente;
+        ClienteEntity entity = cliente.toEntity();
+        entity.setId(id);
+        ClienteEntity oldEntity = logic.getCliente(id);
+        if (oldEntity == null) {
+            throw new WebApplicationException("El cliente no existe", 404);
+        }
+        //entity.setBooks(oldEntity.getBooks());
+        return new ClienteDetailDTO(logic.updateCliente(entity));
     }
     
     /**
@@ -174,4 +199,7 @@ public class ClienteResource {
         }
         return CarritoResource.class;
     }
+    
+    
+    
 }
