@@ -96,7 +96,7 @@ public class ClienteCalificacionResource {
     @POST
     @PathParam("clientesId: \\d+")
     public CalificacionDetailDTO createCalificacion(CalificacionDetailDTO calificacion,
-             @PathParam("clientesId") Long clienteId, Long modeloId, @PathParam("calificacionesId") Long id) throws BusinessLogicException {
+             @PathParam("clientesId") Long clienteId, @PathParam("modelosId") Long modeloId, @PathParam("calificacionesId") Long id) throws BusinessLogicException {
 
         return new CalificacionDetailDTO(cal.crearCalificacion(calificacion.toEntity(), modeloId, clienteId));
     }
@@ -145,7 +145,7 @@ public class ClienteCalificacionResource {
      */
     @GET
     @Path("{clientesId: \\d+}")
-    public CalificacionDetailDTO getCalificacion(@PathParam("clientesId") Long clienteId, Long modeloId, @PathParam("calificacionesId") Long id) throws WebApplicationException, BusinessLogicException {
+    public CalificacionDetailDTO getCalificacion(@PathParam("clientesId") Long clienteId, @PathParam("modelosId") Long modeloId, @PathParam("calificacionesId") Long id) throws WebApplicationException, BusinessLogicException {
         CalificacionDetailDTO cali = new CalificacionDetailDTO(cal.getCalificacionesPorClienteAndModelo(clienteId, modeloId).get(0));
         if (cali == null) {
             throw new WebApplicationException("El recurso /calificaciones/" + id + " no existe.", 404);
@@ -181,7 +181,7 @@ public class ClienteCalificacionResource {
      */
     @PUT
     @Path("{clientesId: \\d+}")
-    public CalificacionDetailDTO updateCalificacion(CalificacionDetailDTO calificacion, @PathParam("calificacionesId") Long id, @PathParam("clientesId") Long clienteId, Long modeloId) throws BusinessLogicException {
+    public CalificacionDetailDTO updateCalificacion(CalificacionDetailDTO calificacion, @PathParam("calificacionesId") Long id, @PathParam("clientesId") Long clienteId,  @PathParam("modelosId") Long modeloId) throws BusinessLogicException {
         CalificacionEntity cali = cal.find(id);
         if (cali == null) {
             throw new WebApplicationException("El recurso /calificaciones/" + id + " no existe.", 404);

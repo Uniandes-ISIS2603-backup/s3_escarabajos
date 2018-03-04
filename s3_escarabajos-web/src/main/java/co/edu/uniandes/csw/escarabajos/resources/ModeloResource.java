@@ -202,4 +202,23 @@ public class ModeloResource {
         }
         return list;
     }
+    /**
+     * Conexión con el servicio de autores para un libro. {@link BookAuthorsResource}
+     * 
+     * Este método conecta la ruta de /modelos con las rutas de /calificaciones que dependen
+     * del modelo, es una redirección al servicio que maneja el segmento de la 
+     * URL que se encarga de las calificaciones.
+     * 
+     * @param modelosId El ID del libro con respecto al cual se accede al servicio.
+     * @return El servicio de calificaciones para ese modelo en paricular.
+     */
+    @Path("{modelosId: \\d+}/calificaciones")
+    public Class<ModeloCalificacionResource> getModeloCalificacionResource(@PathParam("modelosId")Long modelosId)
+    {
+        ModeloEntity modelo = modeloLogic.getModelo(modelosId);
+        if (modelo == null) {
+            throw new WebApplicationException("El recurso /modelos/" + modelosId + "/calificaciones no existe", 404);
+        }
+        return ModeloCalificacionResource.class;
+    }
 }

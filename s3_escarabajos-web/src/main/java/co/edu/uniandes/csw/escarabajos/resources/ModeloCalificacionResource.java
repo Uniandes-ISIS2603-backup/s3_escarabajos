@@ -95,7 +95,7 @@ public class ModeloCalificacionResource {
     @POST
     @PathParam("modelosId: \\d+")
     public CalificacionDetailDTO createCalificacion(CalificacionDetailDTO calificacion
-            , @PathParam("modelosId")Long modeloId, Long clienteId, @PathParam("calificacionesId")Long id) throws BusinessLogicException {
+            , @PathParam("modelosId")Long modeloId, @PathParam("clientesId")Long clienteId, @PathParam("calificacionesId")Long id) throws BusinessLogicException {
 
         return new CalificacionDetailDTO(cal.crearCalificacion(calificacion.toEntity(), modeloId, clienteId));
     }
@@ -141,7 +141,7 @@ public class ModeloCalificacionResource {
      */
     @GET
     @Path("{modelosId: \\d+}")
-    public CalificacionDetailDTO getCalificacion(@PathParam("modelosId") Long modeloId, Long clienteId, @PathParam("calificacionesId") Long id) throws WebApplicationException, BusinessLogicException {
+    public CalificacionDetailDTO getCalificacion(@PathParam("modelosId") Long modeloId, @PathParam("clientesId") Long clienteId, @PathParam("calificacionesId") Long id) throws WebApplicationException, BusinessLogicException {
         CalificacionDetailDTO cali = new CalificacionDetailDTO(cal.getCalificacionesPorClienteAndModelo(clienteId, modeloId).get(0));
         if (cali == null) {
             throw new WebApplicationException("El recurso /calificaciones/" + id + " no existe.", 404);
@@ -169,7 +169,7 @@ public class ModeloCalificacionResource {
      * @param calificacion {@link CalificacionDetailDTO} La calificacion que se
      * desea guardar.
      * @param modeloId El modelo de la calificación que se quiere actualizar.
-     * @param clienteId El cliente de la calificación que se quiere actualizar.
+     * @param clienteId {@link ClienteDetailDTO} El cliente de la calificación que se quiere actualizar.
      * @return JSON {@link CalificacionDetailDTO} - La calificacion guardada.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
      * Error de lógica que se genera al no poder actualizar la calificacion
@@ -177,7 +177,8 @@ public class ModeloCalificacionResource {
      */
     @PUT
     @Path("{modelosId: \\d+}")
-    public CalificacionDetailDTO updateCalificacion(CalificacionDetailDTO calificacion, @PathParam("calificacionesId") Long id,@PathParam("modelosId") Long modeloId, Long clienteId) throws BusinessLogicException {
+    public CalificacionDetailDTO updateCalificacion(CalificacionDetailDTO calificacion, 
+           @PathParam("modelosId") Long modeloId,  @PathParam("calificacionesId") Long id,@PathParam("clientesId")Long clienteId) throws BusinessLogicException {
         CalificacionEntity cali = cal.find(id);
         if (cali == null) 
         {
