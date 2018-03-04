@@ -223,4 +223,11 @@ public class ReclamoLogicTest
         Assert.assertFalse(reclamoLogic.find(data.get(0).getId()).isEnProceso());
                 
     }
+    @Test
+    public void getReclamoByFacturaTest()
+    {
+        Assert.assertEquals(data.get(0), reclamoLogic.getReclamoPorfactura(facturaData.get(0).getId()).get(0));
+        Assert.assertEquals(data.get(1), reclamoLogic.getReclamoPorfactura(facturaData.get(1).getId()).get(0));
+        Assert.assertEquals(data.get(2), reclamoLogic.getReclamoPorfactura(facturaData.get(2).getId()).get(0));
+    }
 }

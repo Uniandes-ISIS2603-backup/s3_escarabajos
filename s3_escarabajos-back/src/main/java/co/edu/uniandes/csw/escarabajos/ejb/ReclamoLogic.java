@@ -13,6 +13,7 @@ import co.edu.uniandes.csw.escarabajos.persistence.ReclamoPersistence;
 import java.util.logging.Logger;
 import javax.inject.Inject;
 import java.util.List;
+import java.util.Objects;
 import javax.ejb.Stateless;
 /**
  *
@@ -127,5 +128,22 @@ public class ReclamoLogic
     public void terminarReclamo(Long id)
     {
         find(id).terminar();
+    }
+
+    public List<ReclamoEntity> getReclamoPorfactura(Long facturaId) 
+    {
+        LOGGER.info("Inicia el proceso de mostrar todos los reclamos de una factura.");
+        List<ReclamoEntity> answ = reclamoPersistence.getReclamoPorFactura(facturaId);
+        LOGGER.info("Termina el proceso de mostrar todos los reclamos de una factura.");
+        return answ;   
+    }
+    public void deleteReclamoByFacturaId(Long facturaId, Long reclamoId) throws BusinessLogicException
+    {
+        ReclamoEntity e1 = find(reclamoId);
+        ReclamoEntity e2 = findByFactura(facturaId).get(0);
+        if(Objects.equals(e1.getId(), e2.getId()))
+            throw new BusinessLogicException("El reclamo no corresponde a la factura");
+        facturaLogic.getFactura(facturaId).setReclamo(null);
+        delete(reclamoId);
     }
 }
