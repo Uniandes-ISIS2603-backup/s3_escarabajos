@@ -12,6 +12,14 @@ import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
 public class CalificacionDetailDTO extends CalificacionDTO
 {
     /**
+     * El cliente que hace la calificacion
+     */
+    private ClienteDTO cliente;
+    /**
+     * El modelo que es calificado
+     */
+    private ModeloDTO modelo;
+    /**
      * Constructor por defecto
      */
     public CalificacionDetailDTO(){};
@@ -22,6 +30,23 @@ public class CalificacionDetailDTO extends CalificacionDTO
     public CalificacionDetailDTO(CalificacionEntity entity) 
     {
         super(entity);
+        if(entity.getCliente() != null)
+        {
+            this.cliente = new ClienteDTO(entity.getCliente());
+        }
+        else
+        {
+            cliente = null;
+        }
+        if(entity.getModelo() != null)
+        {
+            this.modelo = new ModeloDTO(entity.getModelo());
+        }
+        else
+        {
+            modelo = null;
+        }
+        
     }
         /**
      * Transformar un DTO a un Entity
@@ -30,6 +55,15 @@ public class CalificacionDetailDTO extends CalificacionDTO
      */
     public CalificacionEntity toEntiy()
     {
-        return super.toEntity();
+        CalificacionEntity ent = super.toEntity();
+        if(this.modelo != null)
+        {
+            ent.setModelo(this.modelo.toEntity());
+        }
+        if(this.cliente != null)
+        {
+            ent.setCliente(this.cliente.toEntity());
+        }
+        return ent;
     }
 }

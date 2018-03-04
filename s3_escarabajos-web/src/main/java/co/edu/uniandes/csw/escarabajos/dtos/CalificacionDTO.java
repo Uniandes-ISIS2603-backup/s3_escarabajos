@@ -13,13 +13,18 @@ import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
 public class CalificacionDTO 
 {
     /**
+     * Id de la calificacion
+     */
+    private Long id;
+
+    /**
      * Comentario dado por el usuario.
      */
-    String comentario;
+    private String comentario;
     /**
      * Puntaje dado por el usuario.
      */
-    double puntaje;
+    private double puntaje;
     
     /**
      * Constructor por defecto
@@ -32,8 +37,17 @@ public class CalificacionDTO
      */
     public CalificacionDTO(CalificacionEntity cal)
     {
+        id = cal.getId();
         comentario = cal.getComentario();
         puntaje = cal.getPuntaje();
+    }
+    /**
+     * Método para obtener el id.
+     * @return el id. 
+     */
+    public Long getId() 
+    {
+        return id;
     }
     /**
      * Método para obtener el comentario
@@ -43,23 +57,40 @@ public class CalificacionDTO
     {
         return comentario;
     }
+    /**
+     * Metodo para obtener el puntaje
+     * @return el puntaje
+     */
     public double getPuntaje()
     {
         return puntaje;
     }
+    /**
+     * Actualiza el puntaje
+     * @param punt nuevo puntaje
+     */
     public void setPuntaje(double punt)
     {
         puntaje = punt;
     }
+    /**
+     * Actualiza el comentario
+     * @param com el nuevo comentario
+     */
     public void setComentario(String com)
     {
         comentario = com;
     }
+    /**
+     * Convierte un DTO a un entity
+     * @return el nuevo entity
+     */
     public CalificacionEntity toEntity()
     {
         CalificacionEntity e = new CalificacionEntity();
         e.setComentario(comentario);
         e.setPuntaje(puntaje);
+        e.setId(id);
         return e;
     }
 }

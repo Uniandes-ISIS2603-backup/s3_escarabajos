@@ -87,5 +87,4 @@ public class CalificacionPersistence
         List<CalificacionEntity> results = q.getResultList();
         return results;
     }
-   
 }
