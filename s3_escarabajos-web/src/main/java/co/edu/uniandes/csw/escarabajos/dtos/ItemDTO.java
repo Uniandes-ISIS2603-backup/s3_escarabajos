@@ -18,7 +18,7 @@ import java.util.List;
  * <pre>
  *   {
  *      "id": number,
- *      "precio": number,
+ *      "precio": double,
  *      "modeloId": number, 
  *      "color": String,
  *      "album": [{@FotoDTO}]
@@ -51,7 +51,7 @@ import java.util.List;
 public abstract class ItemDTO {
  
     private Long id;
-    private Double precio;
+    private double precio;
     
     private Long modeloId;
     

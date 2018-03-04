@@ -50,7 +50,7 @@ public class AcessorioResource {
     /**
      * <h1>POST /api/accesorios : Crear un accesorio.</h1>
      * 
-     * <pre>Cuerpo de petición: JSON {@link AccesorioDetailDTO}.
+     * <pre>Cuerpo de petición: JSON {@link AccesorioDTO}.
      * 
      * Crea una nuevo accesorio con la informacion que se recibe en el cuerpo 
      * de la petición y se regresa un objeto identico con un id auto-generado 
@@ -64,8 +64,8 @@ public class AcessorioResource {
      * 412 Precodition Failed: Ya existe el accesorio.
      * </code>
      * </pre>
-     * @param accesorio {@link accesorioDetailDTO} - el accesorio que se desea guardar.
-     * @return JSON {@link AccesorioDetailDTO}  - el accesorio guardado con el atributo id autogenerado.
+     * @param accesorio {@link AccesorioDTO} - el accesorio que se desea guardar.
+     * @return JSON {@link AccesorioDTO}  - el accesorio guardado con el atributo id autogenerado.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe el accesorio.
      */
     @POST
@@ -82,7 +82,7 @@ public class AcessorioResource {
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Devuelve todas los accesorios de la aplicacion.</code> 
      * </pre>
-     * @return JSONArray {@link AccesorioDetailDTO} - Los accesorios encontrados en la aplicación. Si no hay ninguno retorna una lista vacía.
+     * @return JSONArray {@link AccesorioDTO} - Los accesorios encontrados en la aplicación. Si no hay ninguno retorna una lista vacía.
      */
     @GET
     public List<AccesorioDTO> getAccesorios() {
@@ -103,7 +103,7 @@ public class AcessorioResource {
      * </code> 
      * </pre>
      * @param id Identificador del accesorio que se esta buscando. Este debe ser una cadena de dígitos.
-     * @return JSON {@link AccesorioDetailDTO} - El accesorio buscado
+     * @return JSON {@link AccesorioDTO} - El accesorio buscado
      */
     @GET
     @Path("{id: \\d+}")
@@ -113,7 +113,7 @@ public class AcessorioResource {
     
     /**
      * <h1>PUT /api/accesorios/{id} : Actualizar el accesorio con el id dado.</h1>
-     * <pre>Cuerpo de petición: JSON {@link AccesorioDetailDTO}.
+     * <pre>Cuerpo de petición: JSON {@link AccesorioDTO}.
      * 
      * Actualiza el accesorio con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
      * 
@@ -125,8 +125,8 @@ public class AcessorioResource {
      * </code> 
      * </pre>
      * @param id Identificador del accesorio que se desea actualizar.Este debe ser una cadena de dígitos.
-     * @param accesorio {@link AccesorioDetailDTO} - El accesorio que se desea guardar.
-     * @return JSON {@link AccesorioDetailDTO} - El accesorio guardado.
+     * @param accesorio {@link AccesorioDTO} - El accesorio que se desea guardar.
+     * @return JSON {@link AccesorioDTO} - El accesorio guardado.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar el accesorio.
      */
     @PUT

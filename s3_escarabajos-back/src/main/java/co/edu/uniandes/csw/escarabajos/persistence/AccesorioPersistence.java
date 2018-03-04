@@ -61,10 +61,10 @@ public class AccesorioPersistence {
         AccesorioEntity entity = em.find(AccesorioEntity.class, id);
         em.remove(entity);
     }
-     public List<AccesorioEntity> findByModelo(Long id){
-        LOGGER.log(Level.INFO, "Consultando las accesorios por modelo ", id);
-        TypedQuery query = em.createQuery("Select e From AccesorioEntity e where e.id = :id", AccesorioEntity.class);
-        query = query.setParameter("id", id);
+     public List<AccesorioEntity> findByModelo(Long modeloId){
+        LOGGER.log(Level.INFO, "Consultando las accesorios por modelo ", modeloId);
+        TypedQuery query = em.createQuery("Select e From AccesorioEntity e where e.modeloId = :modeloId", AccesorioEntity.class);
+        query = query.setParameter("modeloId", modeloId);
         return query.getResultList();
     }
 }

@@ -132,6 +132,7 @@ public class ModeloLogic {
         resp.add(item);
         modeloEntity.setItems(resp);
         item.setModeloId(modeloId);
+        persistence.update(modeloEntity);  
         return item;
     }
 

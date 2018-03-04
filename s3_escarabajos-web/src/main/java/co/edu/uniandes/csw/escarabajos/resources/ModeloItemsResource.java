@@ -108,7 +108,7 @@ public class ModeloItemsResource {
      */
     @GET
     @Path("{itemsId: \\d+}")
-    public ItemDetailDTO getItems(@PathParam("modelosId") Long modelosId, @PathParam("itemsId") Long itemsId) {
+    public ItemDetailDTO getItem(@PathParam("modelosId") Long modelosId, @PathParam("itemsId") Long itemsId) {
         try {
             return new ItemDetailDTO(modeloLogic.getItem(modelosId, itemsId));
         } catch (BusinessLogicException ex) {

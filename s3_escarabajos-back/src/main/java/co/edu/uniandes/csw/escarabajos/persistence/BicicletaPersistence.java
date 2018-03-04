@@ -1,5 +1,6 @@
 package co.edu.uniandes.csw.escarabajos.persistence;
 
+import co.edu.uniandes.csw.escarabajos.entities.AccesorioEntity;
 import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
 import java.util.List;
 import java.util.logging.Level;
@@ -75,10 +76,10 @@ public class BicicletaPersistence {
        em.remove(bici);
     }
     
-    public List<BicicletaEntity> findByModelo(Long idModelo){
-        LOGGER.log(Level.INFO, "Consultando las bicicletas por modelo ", idModelo);
-        TypedQuery query = em.createQuery("Select e From BicicletaEntity e where e.modelo.id = :idModelo", BicicletaEntity.class);
-        query = query.setParameter("idModelo", idModelo);
+    public List<BicicletaEntity> findByModelo(Long modeloId){
+        LOGGER.log(Level.INFO, "Consultando las bicicletas por modelo ", modeloId);
+        TypedQuery query = em.createQuery("Select e From BicicletaEntity e where e.modeloId = :modeloId", BicicletaEntity.class);
+        query = query.setParameter("modeloId", modeloId);
         return query.getResultList();
     }
 }
