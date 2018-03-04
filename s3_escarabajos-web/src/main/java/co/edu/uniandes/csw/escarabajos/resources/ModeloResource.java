@@ -203,7 +203,7 @@ public class ModeloResource {
         return list;
     }
     /**
-     * Conexión con el servicio de autores para un libro. {@link BookAuthorsResource}
+     * Conexión con el servicio de autores para un libro. {@link ModeloCalificacionResource}
      * 
      * Este método conecta la ruta de /modelos con las rutas de /calificaciones que dependen
      * del modelo, es una redirección al servicio que maneja el segmento de la 
