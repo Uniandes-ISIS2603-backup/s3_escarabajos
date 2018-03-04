@@ -215,18 +215,23 @@ public class CarritoLogicTest {
     public void crearFacturaTest() throws BusinessLogicException {
         
         CarritoEntity carrito = data.get(4);
-        
+                
         ItemEntity item1 = dataItems.get(1);
         ItemEntity item2 = dataItems.get(2);
         
+        carrito.setPrecioTotal(0.0);
         logic.addItem(carrito.getCliente().getId(), item1.getId());
         logic.addItem(carrito.getCliente().getId(), item2.getId());
         LOGGER.info(logic.findCarrito(carrito.getId()).getItems().size()+"!!!!!5");
+        LOGGER.info(logic.findCarrito(carrito.getId()).getPrecioTotal()+"!!!!!7");
         FacturaEntity facturaGenerada = logic.crearFactura(carrito.getId());
         LOGGER.info(logic.findCarrito(carrito.getId()).getItems().size()+"!!!!!6");
+        
+        carrito = logic.findCarrito(carrito.getId());
+                       
         double precioTotal = item1.getPrecio()+item2.getPrecio();
         
-//        Assert.assertTrue(facturaGenerada.getDinero()==precioTotal);
+        assert(facturaGenerada.getDinero()==precioTotal);
 
     }
 }

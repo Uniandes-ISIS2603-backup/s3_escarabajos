@@ -106,6 +106,8 @@ public class CarritoLogic {
         
         carrito.setPrecioTotal(carrito.getPrecioTotal() + item.getPrecio());
         
+        persistence.update(carrito);
+        
         return item;
     }
     
@@ -141,17 +143,39 @@ public class CarritoLogic {
         
         FacturaEntity factura = new FacturaEntity();
         
+        actualizarPrecioTotal(id);
+        
+        carrito = persistence.find(id);
+        
         factura.setDinero(carrito.getPrecioTotal());
         
         factura.setCliente(carrito.getCliente());
         
         //factura.setItems(carrito.getItems());
         
+        carrito = persistence.find(id);
+        
         carrito.setItems(new ArrayList<>());
         
         carrito.setPrecioTotal(0.0);
         
+        persistence.update(carrito);
+        
         return factura;
+    }
+    
+    public void actualizarPrecioTotal( Long id ){
+        
+        CarritoEntity carrito = persistence.find(id);
+        
+        carrito.setPrecioTotal(0.0);
+        
+        for(int i=0; i<carrito.getItems().size();i++){
+            
+            carrito.setPrecioTotal(carrito.getPrecioTotal()+ carrito.getItems().get(i).getPrecio());
+        }
+        
+        persistence.update(carrito);
     }
     
     
