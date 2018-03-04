@@ -173,7 +173,7 @@ public class FotoLogicTest {
     }
     
     @Test
-    public void getFotoTest() {
+    public void getFotoTest() throws BusinessLogicException {
         FotoEntity entity = data.get(0);
         FotoEntity resultEntity = logic.getFoto(entity.getReclamo().getId(),entity.getId(),FotoLogic.RECLAMO);
         Assert.assertNotNull(resultEntity);

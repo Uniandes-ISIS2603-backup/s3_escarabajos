@@ -46,6 +46,9 @@ public class FotoLogic {
         List<FotoEntity> respuesta = null;
         if (tipo.equals(ITEM)) {
             ItemEntity item = itemLogic.getItem(id);
+            if (item==null) {
+                throw new BusinessLogicException("El item no existe");
+            }
             if (item.getAlbum() == null) {
                 throw new BusinessLogicException("El item que consulta aún no tiene fotos");
             }
@@ -55,6 +58,9 @@ public class FotoLogic {
             respuesta = item.getAlbum();
         } else if (tipo.equals(RECLAMO)) {
             ReclamoEntity reclamo = reclamoLogic.find(id);
+            if (reclamo==null) {
+                throw new BusinessLogicException("El reclamo no existe");
+            }
             if (reclamo.getAlbum() == null) {
                 throw new BusinessLogicException("El reclamo que consulta aún no tiene fotos");
             }
@@ -74,12 +80,21 @@ public class FotoLogic {
      * @param fotoid Identificador de la foto a consultar
      * @param tipo RECLAMO o ITEM dependiendo delo que se quiera buscar
      * @return Instancia de FotoEntity con los datos de la foto consultada.
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException si no encuentra el item
      *
      */
-    public FotoEntity getFoto(Long id, Long fotoid, String tipo) {
+    public FotoEntity getFoto(Long id, Long fotoid, String tipo) throws BusinessLogicException {
         if (tipo.equals(ITEM)) {
+            ItemEntity item = itemLogic.getItem(id);
+            if (item==null) {
+                throw new BusinessLogicException("El item no existe");
+            }
             return persistence.findInItem(id, fotoid);
         } else if (tipo.equals(RECLAMO)) {
+            ReclamoEntity reclamo = reclamoLogic.find(id);
+            if (reclamo==null) {
+                throw new BusinessLogicException("El reclamo no existe");
+            }
             return persistence.findInReclamo(id, fotoid);
         }
         return null;
@@ -92,15 +107,21 @@ public class FotoLogic {
      * @param id id del Item/Reclamo el cual sera padre de la nueva foto.
      * @param tipo RECLAMO o ITEM dependiendo delo que se quiera crear
      * @return Objeto de FotoEntity con los datos nuevos y su ID.
-     *
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException si no encuentra el item
      */
-    public FotoEntity createFoto(Long id, FotoEntity entity, String tipo) {
+    public FotoEntity createFoto(Long id, FotoEntity entity, String tipo) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de crear foto");
         if (tipo.equals(ITEM)) {
             ItemEntity item = itemLogic.getItem(id);
+            if (item==null) {
+                throw new BusinessLogicException("El item no existe");
+            }
             entity.setItem(item);
         } else if (tipo.equals(RECLAMO)) {
             ReclamoEntity reclamo = reclamoLogic.find(id);
+            if (reclamo==null) {
+                throw new BusinessLogicException("El reclamo no existe");
+            }
             entity.setReclamo(reclamo);
         }
 
@@ -114,15 +135,21 @@ public class FotoLogic {
      * @param id id del item/reclamo el cual sera padre de la foto actualizada.
      * @param tipo RECLAMO o ITEM dependiendo delo que se quiera actualizar
      * @return Instancia de FotoEntity con los datos actualizados.
-     *
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException si no encuentra el item
      */
-    public FotoEntity updateFoto(Long id, FotoEntity entity, String tipo) {
+    public FotoEntity updateFoto(Long id, FotoEntity entity, String tipo) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de actualizar foto");
         if (tipo.equals(ITEM)) {
             ItemEntity item = itemLogic.getItem(id);
+            if (item==null) {
+                throw new BusinessLogicException("El item no existe");
+            }
             entity.setItem(item);
         } else if (tipo.equals(RECLAMO)) {
             ReclamoEntity reclamo = reclamoLogic.find(id);
+            if (reclamo==null) {
+                throw new BusinessLogicException("El reclamo no existe");
+            }
             entity.setReclamo(reclamo);
         }
         return persistence.update(entity);
@@ -134,16 +161,8 @@ public class FotoLogic {
      * @param old FotoEntity a eliminar.
      *
      */
-    public void deleteFoto(FotoEntity old) {
+    public void deleteFoto(FotoEntity old){
         LOGGER.info("Inicia proceso de borrar foto");
-        if (old.getItem() != null) {
-            old.getItem().getAlbum().remove(old);
-            old.setItem(null);
-        } else if (old.getReclamo() != null) {
-            old.getReclamo().getAlbum().remove(old);
-            old.setReclamo(null);
-        }
         persistence.delete(old.getId());
     }
-
 }
