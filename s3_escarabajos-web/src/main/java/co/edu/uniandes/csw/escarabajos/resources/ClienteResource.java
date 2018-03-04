@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.escarabajos.resources;
 
+import co.edu.uniandes.csw.escarabajos.dtos.CarritoDetailDTO;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Path;
@@ -14,6 +15,7 @@ import co.edu.uniandes.csw.escarabajos.dtos.ClienteDetailDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.ClienteDTO;
 import co.edu.uniandes.csw.escarabajos.ejb.CarritoLogic;
 import co.edu.uniandes.csw.escarabajos.ejb.ClienteLogic;
+import co.edu.uniandes.csw.escarabajos.entities.CarritoEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
@@ -79,9 +81,15 @@ public class ClienteResource {
     @Inject
     ClienteLogic logic;
     
+    @Inject
+    CarritoLogic Carritologic;
+    
     @POST
     public ClienteDTO createCliente(ClienteDetailDTO cliente) throws BusinessLogicException {
-        return cliente;
+        CarritoDetailDTO carrito = new CarritoDetailDTO();
+        Carritologic.createCarrito(carrito.toEntity());
+        cliente.setCarrito(carrito);
+        return new ClienteDTO(logic.createCliente(cliente.toEntity()));
     }
     /**
      * <h1>GET /api/clientes : Obtener todos las clientes.</h1>
@@ -96,9 +104,23 @@ public class ClienteResource {
      */
     @GET
     public List<ClienteDetailDTO> getClientes() {
-        return new ArrayList<ClienteDetailDTO>();
+        return listEntity2DTO(logic.getClientes());    
     }
     
+    /**
+     * Convierte una lista de ClienteEntity a una lista de ClienteDetailDTO.
+     *
+     * @param entityList Lista de ClienteEntity a convertir.
+     * @return Lista de ClienteDetailDTO convertida.
+     * 
+     */
+    private List<ClienteDetailDTO> listEntity2DTO(List<ClienteEntity> entityList) {
+        List<ClienteDetailDTO> list = new ArrayList<>();
+        for (ClienteEntity entity : entityList) {
+            list.add(new ClienteDetailDTO(entity));
+        }
+        return list;
+    }
      /**
      * <h1>GET /api/clientes/{id} : Obtener cliente por id.</h1>
      * 
@@ -118,7 +140,11 @@ public class ClienteResource {
     @GET
     @Path("{id: \\d+}")
     public ClienteDetailDTO getCliente(@PathParam("id") Long id) {
-        return null;
+        ClienteEntity entity = logic.getCliente(id);
+        if (entity == null) {
+            throw new WebApplicationException("El cliente no existe", 404);
+        }
+        return new ClienteDetailDTO(entity);
     }
     
      /**
@@ -142,7 +168,14 @@ public class ClienteResource {
     @PUT
     @Path("{id: \\d+}")
     public ClienteDetailDTO updateCliente(@PathParam("id") Long id, ClienteDetailDTO cliente) throws BusinessLogicException {
-        return cliente;
+        ClienteEntity entity = cliente.toEntity();
+        entity.setId(id);
+        ClienteEntity oldEntity = logic.getCliente(id);
+        if (oldEntity == null) {
+            throw new WebApplicationException("El cliente no existe", 404);
+        }
+        //entity.setBooks(oldEntity.getBooks());
+        return new ClienteDetailDTO(logic.updateCliente(entity));
     }
     
     /**
@@ -163,7 +196,12 @@ public class ClienteResource {
     @Path("{id: \\d+}")
      public void deleteCliente(@PathParam("id") Long id) throws BusinessLogicException {
         // Void
-        //logic.deleteCliente();
+        ClienteEntity entity = logic.getCliente(id);
+        if (entity == null) {
+            throw new WebApplicationException("El cliente no existe", 404);
+        }
+        Carritologic.deleteCarrito(entity.getCarrito().getId());
+        logic.deleteCliente(id);
     }
      
     @Path("{idCliente: \\d+}/carrito")
@@ -174,4 +212,17 @@ public class ClienteResource {
         }
         return CarritoResource.class;
     }
+    
+
+    @Path("{idCliente: \\d+}/calificacion")
+    public Class<CalificacionResource> getClienteCalificacionResource(@PathParam("idCliente") Long idCliente) {
+        ClienteEntity entity = logic.getCliente(idCliente);
+        if (entity == null) {
+            throw new WebApplicationException("El recurso /clientes/" + idCliente + "/calificacion no existe.", 404);
+        }
+        return CalificacionResource.class;
+    }
+    
+    
+    
 }
