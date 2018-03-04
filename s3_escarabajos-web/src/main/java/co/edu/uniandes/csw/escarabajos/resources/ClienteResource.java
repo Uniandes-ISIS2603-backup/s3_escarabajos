@@ -188,7 +188,11 @@ public class ClienteResource {
     @Path("{id: \\d+}")
      public void deleteCliente(@PathParam("id") Long id) throws BusinessLogicException {
         // Void
-        //logic.deleteCliente();
+        ClienteEntity entity = logic.getCliente(id);
+        if (entity == null) {
+            throw new WebApplicationException("El cliente no existe", 404);
+        }
+        logic.deleteCliente(id);
     }
      
     @Path("{idCliente: \\d+}/carrito")
