@@ -34,7 +34,7 @@ public class FacturaEntity implements Serializable {
     private Double dinero;
     @PodamExclude
     @OneToOne(mappedBy = "Factura", cascade = CascadeType.ALL)
-    private List<ReclamoEntity> reclamos;
+    private ReclamoEntity reclamos;
     
     @PodamExclude
     @OneToOne(mappedBy = "Factura")
@@ -47,14 +47,14 @@ public class FacturaEntity implements Serializable {
     /**
      * @return the reclamos
      */
-    public List<ReclamoEntity> getReclamos() {
+    public ReclamoEntity getReclamos() {
         return reclamos;
     }
 
     /**
      * @param reclamos the reclamos to set
      */
-    public void setReclamos(List<ReclamoEntity> reclamos) {
+    public void setReclamos(ReclamoEntity reclamos) {
         this.reclamos = reclamos;
     }
 
