@@ -30,12 +30,25 @@ public class BicicletaUsadaPersistence {
         return entity;
     }
 
-    public BicicletaUsadaEntity find(Long id){
-        return em.find(BicicletaUsadaEntity.class,id);
+    public BicicletaUsadaEntity find(Long idVendedor, Long idBici){
+          TypedQuery<BicicletaUsadaEntity> q = em.createQuery("select p from BicicletaUsadaEntity p where (p.vendedor.id = :vendedorid) and (p.id = :biciid)", BicicletaUsadaEntity.class);
+        q.setParameter("vendedorid", idVendedor);
+        q.setParameter("biciid", idBici);
+        List<BicicletaUsadaEntity> results = q.getResultList();
+        BicicletaUsadaEntity bici = null;
+        if (results == null) {
+            bici = null;
+        } else if (results.isEmpty()) {
+            bici = null;
+        } else if (results.size() >= 1) {
+            bici = results.get(0);
+        }
+
+        return bici;
     }
     
     public void delete(Long id){
-        BicicletaUsadaEntity bici = find(id);
+        BicicletaUsadaEntity bici = em.find(BicicletaUsadaEntity.class,id);
        em.remove(bici);
     }
     public BicicletaUsadaEntity findEstado(String estado){
@@ -51,9 +64,10 @@ public class BicicletaUsadaPersistence {
         }
     }
     
-     public List<BicicletaUsadaEntity> findAll() {
-        LOGGER.info("Consultando todas las bicicletas");
-        TypedQuery query = em.createQuery("select u from BicicletaUsadaEntity u", BicicletaUsadaEntity.class);
+     public List<BicicletaUsadaEntity> findAllBicis(Long idVendedor) {
+        LOGGER.info("Consultando todas las bicicletas del vendedor con id");
+        TypedQuery query = em.createQuery("select u from BicicletaUsadaEntity u where (u.vendedor.id  = :idVendedor) ", BicicletaUsadaEntity.class);
+        query.setParameter("idVendedor", idVendedor);
         return query.getResultList();
     }
      

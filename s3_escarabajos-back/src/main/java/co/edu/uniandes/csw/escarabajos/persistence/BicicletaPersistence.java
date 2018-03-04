@@ -75,10 +75,10 @@ public class BicicletaPersistence {
        em.remove(bici);
     }
     
-    public List<BicicletaEntity> findByModelo(Long id){
-        LOGGER.log(Level.INFO, "Consultando las bicicletas por modelo ", id);
-        TypedQuery query = em.createQuery("Select e From BicicletaEntity e where e.id = :id", BicicletaEntity.class);
-        query = query.setParameter("id", id);
+    public List<BicicletaEntity> findByModelo(Long idModelo){
+        LOGGER.log(Level.INFO, "Consultando las bicicletas por modelo ", idModelo);
+        TypedQuery query = em.createQuery("Select e From BicicletaEntity e where e.modelo.id = :idModelo", BicicletaEntity.class);
+        query = query.setParameter("idModelo", idModelo);
         return query.getResultList();
     }
 }

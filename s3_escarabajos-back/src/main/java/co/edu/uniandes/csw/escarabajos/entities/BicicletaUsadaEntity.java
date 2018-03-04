@@ -20,9 +20,7 @@ public class BicicletaUsadaEntity extends BicicletaEntity implements Serializabl
 
     private String facturaOriginal;
     private String estado;
-    @PodamExclude
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private ModeloEntity modelo;
+    
     @PodamExclude
     @ManyToOne(cascade = CascadeType.PERSIST)
     private VendedorEntity vendedor;
@@ -50,14 +48,4 @@ public class BicicletaUsadaEntity extends BicicletaEntity implements Serializabl
     public void setFacturaOriginal(String facturaOriginal) {
         this.facturaOriginal = facturaOriginal;
     }
-
-    public ModeloEntity getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(ModeloEntity modelo) {
-        this.modelo = modelo;
-    }
-
-    
 }
