@@ -10,10 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 /**
@@ -32,7 +34,8 @@ public class ModeloEntity implements Serializable
     private Double calificacionMedia;
     
     @PodamExclude
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "mod_id")
     private List<ItemEntity> items = new ArrayList<>();
   
     @PodamExclude

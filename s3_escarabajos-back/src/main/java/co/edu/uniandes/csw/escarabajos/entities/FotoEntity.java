@@ -26,6 +26,8 @@ public class FotoEntity implements Serializable {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
    private String descripcion;
+   private String url;
+   
    
    @PodamExclude
    @ManyToOne(cascade = CascadeType.PERSIST)
@@ -116,5 +118,19 @@ public class FotoEntity implements Serializable {
             return this.getId().hashCode();
         }
         return super.hashCode();
+    }
+
+    /**
+     * @return the url
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    /**
+     * @param url the url to set
+     */
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

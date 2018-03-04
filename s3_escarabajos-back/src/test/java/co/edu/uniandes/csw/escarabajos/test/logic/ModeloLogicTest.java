@@ -5,6 +5,8 @@
  */
 package co.edu.uniandes.csw.escarabajos.test.logic;
 
+import co.edu.uniandes.csw.escarabajos.ejb.AccesorioLogic;
+import co.edu.uniandes.csw.escarabajos.ejb.ItemLogic;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,15 +16,16 @@ import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.ModeloPersistence;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
-import org.junit.Assert;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,11 +38,16 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class ModeloLogicTest {
-
     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
     private ModeloLogic modeloLogic;
+    
+    @Inject
+    private ItemLogic itemLogic;
+    
+    @Inject
+    private AccesorioLogic accLogic;
 
     @PersistenceContext
     private EntityManager em;
@@ -100,19 +108,19 @@ public class ModeloLogicTest {
      *
      *
      */
-    private void insertData() {
-        for (int i = 0; i < 3; i++) {
-            AccesorioEntity items = factory.manufacturePojo(AccesorioEntity.class);
-            em.persist(items);
-            itemsData.add(items);
-        }
+    private void insertData() throws Exception{
         for (int i = 0; i < 3; i++) {
             ModeloEntity entity = factory.manufacturePojo(ModeloEntity.class);
-            em.persist(entity);
+            modeloLogic.createModelo(entity);
             data.add(entity);
-            if (i == 0) {
-                itemsData.get(i).setModeloId(entity.getId());
-            }
+        }
+        for (int i = 0; i < 3; i++) {
+            AccesorioEntity items = factory.manufacturePojo(AccesorioEntity.class);
+            itemsData.add(items);
+            accLogic.createAccesorio(items);
+        }
+        for (int i = 0; i < 3; i++) {
+            ItemEntity addItem = modeloLogic.addItem(itemsData.get(i),data.get(i).getId());
         }
     }
 
@@ -120,6 +128,7 @@ public class ModeloLogicTest {
      * Prueba para crear un Modelo
      *
      *
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
      */
     @Test
     public void createModeloTest() throws BusinessLogicException {
@@ -128,7 +137,7 @@ public class ModeloLogicTest {
         Assert.assertNotNull(result);
         ModeloEntity entity = em.find(ModeloEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
-
+        
     }
 
     /**
@@ -172,8 +181,9 @@ public class ModeloLogicTest {
     @Test
     public void deleteModeloTest() {
         ModeloEntity entity = data.get(0);
+        Long id = entity.getId();
         modeloLogic.deleteModelo(entity.getId());
-        ModeloEntity deleted = em.find(ModeloEntity.class, entity.getId());
+        ModeloEntity deleted = modeloLogic.getModelo(id);
         Assert.assertNull(deleted);
     }
 
@@ -181,6 +191,7 @@ public class ModeloLogicTest {
      * Prueba para actualizar un Modelo
      *
      *
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
      */
     @Test
     public void updateModeloTest() throws BusinessLogicException {

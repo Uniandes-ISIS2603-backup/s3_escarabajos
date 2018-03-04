@@ -102,13 +102,13 @@ public class ItemLogic {
             throw new BusinessLogicException("El modelo no existe");
         }
         ArrayList<ItemEntity> items = new ArrayList<>();
-        List<AccesorioEntity> result1 = accPers.findByModelo(idModelo);
+        List<AccesorioEntity> result1 = getAccesoriosModelo(idModelo);
         if (result1 != null) {
             for (ItemEntity accesorioEntity : result1) {
                 items.add(accesorioEntity);
             }
         }
-        List<BicicletaEntity> result2 = biciPers.findByModelo(idModelo);
+        List<BicicletaEntity> result2 = getBicicletasModelo(idModelo);
         if (result2 != null) {
             for (ItemEntity bicicletaEntity : result2) {
                 items.add(bicicletaEntity);
@@ -152,5 +152,23 @@ public class ItemLogic {
      */
     public List<FotoEntity> listFotos(Long itemId) {
         return getItem(itemId).getAlbum();
+    }
+
+    /**
+     * Retorna una collecion de bicicletas asociadas a un modelo cada uno con su instancia original
+     * @param modelosId modelo al cual  se le buscaran los bicicletas
+     * @return lista de bicicletas con instancias originales del modelo
+     */
+     public List<BicicletaEntity> getBicicletasModelo(Long modelosId) {
+         return biciPers.findByModelo(modelosId);
+    }
+
+     /**
+     * Retorna una collecion de accesorios asociados a un modelo cada uno con su instancia original
+     * @param modelosId modelo al cual  se le buscaran los accesorios
+     * @return lista de accesorios con instancias originales del modelo
+     */
+    public List<AccesorioEntity> getAccesoriosModelo(Long modelosId) {
+        return accPers.findByModelo(modelosId);
     }
 }

@@ -24,6 +24,9 @@ import javax.inject.Inject;
 @Stateless
 public class ModeloLogic {
 
+    public static final String BICICLETA = "Bicicleta";
+    public static final String ACCESORIO = "Accesorio";
+
     private static final Logger LOGGER = Logger.getLogger(ModeloLogic.class.getName());
 
     @Inject
@@ -94,13 +97,12 @@ public class ModeloLogic {
      */
     public void deleteModelo(Long id) {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar un modelo ");
-        deleteItems(id);
         persistence.delete(id);
     }
 
     /**
      * Agregar un item al modelo
-     *
+     * <pre> el item es del mismo tipo que el modelo.
      * @param item El item a guardar
      * @param modeloId El id de el modelo en el cual se va a guardar el item.
      * @return El item que fue agregado a el modelo.
@@ -110,45 +112,12 @@ public class ModeloLogic {
         if (modeloEntity == null) {
             throw new BusinessLogicException("El modelo no existe!");
         }
-        modeloEntity.getItems().add(item);
+        List<ItemEntity> resp = modeloEntity.getItems();
+        resp.add(item);
+        modeloEntity.setItems(resp);
+        item.setModeloId(modeloId);
         return item;
     }
-
-    /**
-     * Borrar un item de un modelo
-     *
-     * @param itemId El item que se desea borrar de el modelo.
-     * @param modeloId El modelo de el cual se desea eliminar.
-     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException si no encuentra el item
-     */
-    public void removeItem(Long itemId, Long modeloId) throws BusinessLogicException {
-        ModeloEntity modeloEntity = getModelo(modeloId);
-        ItemEntity item = itemLogic.getItem(itemId);
-        if (item == null) {
-            throw new BusinessLogicException("El item no existe!");
-        }
-        modeloEntity.getItems().remove(item);
-        if (item instanceof BicicletaEntity) {
-            //biciLogic.deleteBicicleta((BicicletaEntity)item);
-        } else if (item instanceof AccesorioEntity) {
-            accLogic.deleteAccesorio((AccesorioEntity) item);
-        }
-    }
-     /**
-      * Borra un item conociendo su entity y el de su modelo
-      * @param item item a borrar
-      * @param modelo modelo al cual se le borrara el item
-      * OBS: este metodo hace lo mismo que el anterior pero es mas eficiente (No vuelve a buscar los entities)
-      */
-    private void removeItemPriv(ItemEntity item,ModeloEntity modelo) {
-        modelo.getItems().remove(item);
-        if (item instanceof BicicletaEntity) {
-            //biciLogic.deleteBicicleta((BicicletaEntity)item);
-        } else if (item instanceof AccesorioEntity) {
-            accLogic.deleteAccesorio((AccesorioEntity) item);
-        }
-    }
-    
 
     /**
      * Retorna un item asociado a un modelo
@@ -180,7 +149,8 @@ public class ModeloLogic {
      * @param modeloId Identificador de la instancia de Modelo
      * @return Colección de instancias de ItemEntity asociadas a la instancia de
      * Modelo
-     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException si no existe el modelo
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
+     * si no existe el modelo
      *
      */
     public List<ItemEntity> listItems(Long modeloId) throws BusinessLogicException {
@@ -188,14 +158,82 @@ public class ModeloLogic {
     }
 
     /**
-     * Borra todos los items de un modelo que entra por parametro
+     * Obtiene una colección de instancias de BicicletaEntity asociadas a una
+     * instancia de Modelo
      *
-     * @param modeloId el modelo al cual se le borraran todos los items
+     * @param modelosId Identificador de la instancia de Modelo
+     * @return Colección de instancias de BicicletaEntity asociadas a la
+     * instancia de Modelo
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
+     * si no existe el modelo
+     *
      */
-    public void deleteItems(Long modeloId) {
-        ModeloEntity modeloEntity = getModelo(modeloId);
-        for (ItemEntity item : modeloEntity.getItems()) {
-                removeItemPriv(item, modeloEntity);
+    public List<BicicletaEntity> listBicicletas(Long modelosId) throws BusinessLogicException {
+        ModeloEntity modelo = persistence.find(modelosId);
+        if (modelo == null) {
+            throw new BusinessLogicException("El modelo no existe");
+        }
+        return itemLogic.getBicicletasModelo(modelosId);
+    }
+
+    /**
+     * Obtiene una colección de instancias de AccesorioEntity asociadas a una
+     * instancia de Modelo
+     *
+     * @param modelosId Identificador de la instancia de Modelo
+     * @return Colección de instancias de AccesorioEntity asociadas a la
+     * instancia de Modelo
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
+     * si no existe el modelo
+     *
+     */
+    public List<AccesorioEntity> listAccesorios(Long modelosId) throws BusinessLogicException {
+        ModeloEntity modelo = persistence.find(modelosId);
+        if (modelo == null) {
+            throw new BusinessLogicException("El modelo no existe");
+        }
+        return itemLogic.getAccesoriosModelo(modelosId);
+    }
+
+    /**
+     * Verifica que el entity ingresado por parametro tenga la misma instancia
+     * que el resto de los items de un modelo
+     *
+     * @param modelosId modelo a verificar por id
+     * @param test Item entity a verificar si tiene la misma instancia
+     * @return si el modelo no existe.
+     * @throws BusinessLogicException
+     */
+    public boolean verificarTipoModelo(Long modelosId, ItemEntity test) throws BusinessLogicException {
+        ModeloEntity modelo = persistence.find(modelosId);
+        if (modelo == null) {
+            throw new BusinessLogicException("El modelo no existe");
+        }
+        String tipo = modelo.getTipoModelo();
+        if (tipo.equals(ModeloLogic.BICICLETA) && test instanceof BicicletaEntity) {
+            return true;
+        } else if (tipo.equals(ModeloLogic.ACCESORIO) && test instanceof AccesorioEntity) {
+            return true;
+        } else {
+            return false;
         }
     }
+
+    public void removeItem(Long itemsId, Long modelosId) throws BusinessLogicException {
+        ModeloEntity modelo = persistence.find(modelosId);
+        if (modelo == null) {
+            throw new BusinessLogicException("El modelo no existe");
+        }
+        ItemEntity item = itemLogic.getItem(itemsId);
+        if (item == null) {
+            throw new BusinessLogicException("El item no existe");
+        }
+        String tipo = modelo.getTipoModelo();
+        if (tipo.equals(ModeloLogic.BICICLETA)) {
+          // biciLogic.deleteBicicleta(item.getId());
+        } else if (tipo.equals(ModeloLogic.ACCESORIO) ) {
+            accLogic.deleteAccesorio(item.getId());
+        }
+    }
+
 }
