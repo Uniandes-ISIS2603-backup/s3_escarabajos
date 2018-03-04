@@ -200,6 +200,7 @@ public class ClienteResource {
         if (entity == null) {
             throw new WebApplicationException("El cliente no existe", 404);
         }
+        Carritologic.deleteCarrito(id);
         logic.deleteCliente(id);
     }
      
