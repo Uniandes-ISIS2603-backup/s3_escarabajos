@@ -46,6 +46,9 @@ public class ReclamoEntity  implements Serializable
     @ManyToOne( cascade = CascadeType.PERSIST )
     private ClienteEntity cliente;
    
+    @PodamExclude
+    private boolean enProceso = true;
+    
     public String getMensaje()
     {
         return mensaje;
@@ -98,7 +101,18 @@ public class ReclamoEntity  implements Serializable
     public Long getId() {
         return id;
     }
-
+    public boolean isEnProceso()
+    {
+        return enProceso;
+    }
+    public void terminar()
+    {
+        enProceso = false;
+    }
+    public void renaudar()
+    {
+        enProceso = true;
+    }
     /**
      * @param id the id to set
      */
@@ -119,7 +133,6 @@ public class ReclamoEntity  implements Serializable
         final ReclamoEntity other = (ReclamoEntity) obj;
         return Objects.equals(this.id, other.id);
     }
-
     @Override
     public int hashCode() {
         if (this.getId() != null) {

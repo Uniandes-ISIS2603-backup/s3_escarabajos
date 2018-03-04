@@ -110,6 +110,8 @@ public class ReclamoPersistenceTest
         for (int i = 0; i < 3; i++) 
         {
             ReclamoEntity entity = factory.manufacturePojo(ReclamoEntity.class);
+            entity.renaudar();
+            if( i == 1 ) entity.terminar();
             em.persist(entity);
             data.add(entity);
         }
@@ -169,5 +171,22 @@ public class ReclamoPersistenceTest
 
         Assert.assertEquals(newEntity.getMensaje(), resp.getMensaje());
         Assert.assertEquals(newEntity.getRazon(), resp.getRazon());
+    }
+    @Test
+    public void getReclamosEnProcesoTest()
+    { 
+        List<ReclamoEntity> enProceso = reclamoPersistence.getReclamosEnProceso();
+        
+        Assert.assertEquals(2, enProceso.size());
+        Assert.assertEquals(data.get(0), enProceso.get(0));
+        Assert.assertEquals(data.get(2), enProceso.get(1));
+    }
+     @Test
+    public void getReclamosTerminadosTest()
+    { 
+        List<ReclamoEntity> noEnProceso = reclamoPersistence.getReclamosTerminados();
+        
+        Assert.assertEquals(1, noEnProceso.size());
+        Assert.assertEquals(data.get(1), noEnProceso.get(0));
     }
 }

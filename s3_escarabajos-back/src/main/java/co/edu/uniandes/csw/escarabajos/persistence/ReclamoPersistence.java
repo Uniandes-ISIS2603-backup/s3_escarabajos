@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.escarabajos.persistence;
 
+import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ReclamoEntity;
 import java.util.List;
 import java.util.logging.Level;
@@ -64,5 +65,26 @@ public class ReclamoPersistence
     public void delete(Long id)
     {
       delete(find(id));  
+    }
+    public List<ReclamoEntity> getReclamosByFactura(Long facturaId)
+    {
+        TypedQuery<ReclamoEntity> q = em.createQuery("select p from ReclamoEntity p where (p.factura.id = :facturaId)", ReclamoEntity.class);
+        q.setParameter("facturaId", facturaId);
+        List<ReclamoEntity> results = q.getResultList();
+        return results;
+    }
+    public List<ReclamoEntity> getReclamosEnProceso()
+    {
+        TypedQuery<ReclamoEntity> q = em.createQuery("select p from ReclamoEntity p where (p.enProceso = :proceso)", ReclamoEntity.class);
+        q.setParameter("proceso", true);
+        List<ReclamoEntity> results = q.getResultList();
+        return results;
+    }
+     public List<ReclamoEntity> getReclamosTerminados()
+    {
+        TypedQuery<ReclamoEntity> q = em.createQuery("select p from ReclamoEntity p where (p.enProceso = :proceso)", ReclamoEntity.class);
+        q.setParameter("proceso", false);
+        List<ReclamoEntity> results = q.getResultList();
+        return results;
     }
 }

@@ -45,7 +45,8 @@ public class ReclamoLogicTest
 
     private List<ReclamoEntity> data = new ArrayList<ReclamoEntity>();
 
-
+    private List<FacturaEntity> facturaData = new ArrayList<FacturaEntity>();
+    
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -94,10 +95,16 @@ public class ReclamoLogicTest
      *
      */
     private void insertData() {
+        for (int i = 0; i < 3; i++) {
+            FacturaEntity entity = factory.manufacturePojo(FacturaEntity.class);
 
+            em.persist(entity);
+            facturaData.add(entity);
+        }
         for (int i = 0; i < 3; i++) {
             ReclamoEntity entity = factory.manufacturePojo(ReclamoEntity.class);
-
+            entity.renaudar();
+            entity.setFactura(facturaData.get(i));
             em.persist(entity);
             data.add(entity);
         }
@@ -114,12 +121,14 @@ public class ReclamoLogicTest
         List<FotoEntity> pics = new ArrayList<FotoEntity>();
         pics.add(factory.manufacturePojo(FotoEntity.class));
         newEntity.setAlbum(pics);
-        ReclamoEntity result = reclamoLogic.createReclamo(newEntity);
+        ReclamoEntity result = reclamoLogic.createReclamo(newEntity, facturaData.get(0).getId());
         Assert.assertNotNull(result);
         ReclamoEntity entity = em.find(ReclamoEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
         Assert.assertEquals(newEntity.getMensaje(), entity.getMensaje());
         Assert.assertEquals(newEntity.getRazon(), entity.getRazon());
+        Assert.assertEquals(newEntity.getFactura(), entity.getFactura());
+        Assert.assertTrue(entity.isEnProceso());
     }
 
     /**
@@ -155,7 +164,9 @@ public class ReclamoLogicTest
         Assert.assertEquals(resultEntity.getId(), entity.getId());
         Assert.assertEquals(resultEntity.getMensaje(), entity.getMensaje());
         Assert.assertEquals(resultEntity.getRazon(), entity.getRazon());
-        
+        Assert.assertEquals(resultEntity.getFactura(), entity.getFactura());
+        Assert.assertTrue(resultEntity.isEnProceso());
+
     }
 
     /**
@@ -184,12 +195,32 @@ public class ReclamoLogicTest
         List<FotoEntity> pics = new ArrayList<FotoEntity>();
         pics.add(factory.manufacturePojo(FotoEntity.class));
         pojoEntity.setAlbum(pics);
-        reclamoLogic.updateReclamo(pojoEntity);
+        reclamoLogic.updateReclamo(pojoEntity, facturaData.get(0).getId());
 
         ReclamoEntity resp = em.find(ReclamoEntity.class, entity.getId());
 
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
         Assert.assertEquals(pojoEntity.getMensaje(), resp.getMensaje());
         Assert.assertEquals(pojoEntity.getRazon(), resp.getRazon());
+        Assert.assertEquals(pojoEntity.getFactura(), entity.getFactura());
+        Assert.assertTrue(resp.isEnProceso());
+    }
+    @Test
+    public void getReclamoByFactura()
+    {
+        List<ReclamoEntity> factura0 = reclamoLogic.findByFactura(facturaData.get(0).getId());
+        Assert.assertEquals(factura0.size(), 1);
+        List<ReclamoEntity> factura1 = reclamoLogic.findByFactura(facturaData.get(1).getId());
+        Assert.assertEquals(factura1.size(), 1);
+        List<ReclamoEntity> factura2 = reclamoLogic.findByFactura(facturaData.get(2).getId());
+        Assert.assertEquals(factura2.size(), 1);
+    }
+    @Test
+    public void terminarReclamoTest()
+    {
+        Assert.assertTrue(reclamoLogic.find(data.get(0).getId()).isEnProceso());
+        reclamoLogic.terminarReclamo(data.get(0).getId());
+        Assert.assertFalse(reclamoLogic.find(data.get(0).getId()).isEnProceso());
+                
     }
 }
