@@ -15,27 +15,33 @@ import co.edu.uniandes.csw.escarabajos.entities.BicicletaUsadaEntity;
  * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
  * <pre>
  *   {
+ *       {
  *      "id": number,
- *      "categoria: string,
+ *      "categoria": string,
  *      "marca": string,
- *      "color: string,
+ *      "color": string,
  *      "precio": double,
- *      "usada: boolean,
- *      "facturaOriginal" : string,
- *      "precioVenta" : double
+ *      "usada": boolean,
+ *      "album":[]String,
+ *      "facturaOriginal" : string
+ *      
  *   }
  * </pre> Por ejemplo una bicicletaUsadaEnVenta se representa asi:<br>
  * <pre>
  *   {
  *      "id": 1,
- *      "categoria: BMX,
- *      "marca": We the People,
- *      "color: Negro,
+ *      "categoria: "BMX",
+ *      "marca": "We the People",
+ *      "color: "Negro",
  *      "precio": 2.50,
- *      "usada: true
- *      "facturaOriginal" : "https://cloud10.todocoleccion.online/facturas-antiguas/tc/2010/05/15/19344998.jpg"
+ *      "usada: true,
+ *      "facturaOriginal" : "https://cloud10.todocoleccion.online/facturas-antiguas/tc/2010/05/15/19344998.jpg",
+ *      "album" :[
+ *                 
+ *               ]
+
  *   }
- *
+ * 
  * </pre>
  *
  * @author c.santacruza
@@ -63,8 +69,10 @@ public class BicicletaUsadaDTO extends BicicletaDTO {
      */
     public BicicletaUsadaDTO(BicicletaUsadaEntity bici) {
         super(bici);
-        this.facturaOriginal = bici.getFacturaOriginal();
-        this.estado = bici.getEstado();
+        if (bici != null) {
+            this.facturaOriginal = bici.getFacturaOriginal();
+            this.estado = bici.getEstado();
+        }
     }
 
     public String getEstado() {
@@ -88,6 +96,7 @@ public class BicicletaUsadaDTO extends BicicletaDTO {
      *
      * @return Un Entity con los valores del DTO
      */
+    @Override
     public BicicletaUsadaEntity toEntity() {
         BicicletaUsadaEntity entity = new BicicletaUsadaEntity();
         super.toEntity(entity);

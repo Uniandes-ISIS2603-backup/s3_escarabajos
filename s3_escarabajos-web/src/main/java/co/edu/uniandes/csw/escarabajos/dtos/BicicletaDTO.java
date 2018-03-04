@@ -16,11 +16,13 @@ import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
  * <pre>
  *   {
  *      "id": number,
- *      "categoria: string,
+ *      "categoria": string,
  *      "marca": string,
- *      "color: string,
+ *      "color": string,
  *      "precio": double,
- *      "usada: boolean
+ *      "usada": boolean,
+ *      "album":[]String,
+ *      
  *   }
  * </pre> Por ejemplo una bicicleta se representa asi:<br>
  *
@@ -28,21 +30,23 @@ import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
  *
  *   {
  *      "id": 1,
- *      "categoria": BMX,
- *      "marca": We the People,
- *      "color": Negro,
+ *      "categoria": "Deportiva",
+ *      "marca": "We the People",
+ *      "color": "Negro",
  *      "precio": 3.499,
- *      "usada": false
+ *      "usada": false,
+ *      "album" :[
+ *                 
+ *               ]
  *   }
  *
  * </pre>
  *
  * @author c.santacruza
  */
-public class BicicletaDTO extends ItemDTO{
+public class BicicletaDTO extends ItemDTO {
 
     private String categoria;
-    private String color;
     private Boolean usada;
 
     /**
@@ -60,9 +64,10 @@ public class BicicletaDTO extends ItemDTO{
      */
     public BicicletaDTO(BicicletaEntity bici) {
         super(bici);
-        this.categoria = bici.getCategoria();
-        this.color = bici.getColor();
-        this.usada = bici.getUsada();
+        if (bici != null) {
+            this.categoria = bici.getCategoria();
+            this.usada = bici.getUsada();
+        }
     }
 
     public String getCategoria() {
@@ -71,14 +76,6 @@ public class BicicletaDTO extends ItemDTO{
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public Boolean getUsada() {
@@ -99,7 +96,6 @@ public class BicicletaDTO extends ItemDTO{
         BicicletaEntity entity = new BicicletaEntity();
         super.toEntity(entity);
         entity.setCategoria(this.categoria);
-        entity.setColor(this.color);
         entity.setUsada(this.usada);
 
         return entity;

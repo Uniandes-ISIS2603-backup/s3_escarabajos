@@ -1,10 +1,13 @@
 package co.edu.uniandes.csw.escarabajos.resources;
 
 import co.edu.uniandes.csw.escarabajos.dtos.BicicletaDetailDTO;
+import co.edu.uniandes.csw.escarabajos.ejb.BicicletaLogic;
+import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -13,6 +16,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 
 /**
  * <pre>Clase que implementa el recurso "bicis".
@@ -37,7 +41,19 @@ import javax.ws.rs.Produces;
 
 public class BicicletaResource {
     
-     /**
+    
+    @Inject
+    BicicletaLogic logic;
+     
+     private List<BicicletaDetailDTO> listEntity2DTO(List<BicicletaEntity> entityList) {
+        List<BicicletaDetailDTO> list = new ArrayList<>();
+        for (BicicletaEntity entity : entityList) {
+            list.add(new BicicletaDetailDTO(entity));
+        }
+        return list;
+    }
+    
+    /**
      * <h1>POST /api/bicis : Crear una bicicleta.</h1>
      * 
      * <pre>Cuerpo de petición: JSON {@link BicicletaDetailDTO}.
@@ -60,7 +76,7 @@ public class BicicletaResource {
      */
     @POST
     public BicicletaDetailDTO createBicicleta(BicicletaDetailDTO bicicleta) throws BusinessLogicException {
-        return bicicleta;
+        return new BicicletaDetailDTO(logic.createBicicleta(bicicleta.toEntity()));
     }
 
     /**
@@ -76,7 +92,7 @@ public class BicicletaResource {
      */
     @GET
     public List<BicicletaDetailDTO> getBicicletas() {
-        return new ArrayList<BicicletaDetailDTO>();
+        return listEntity2DTO(logic.getBicicletas());
     }
     
    /**
@@ -94,11 +110,16 @@ public class BicicletaResource {
      * </pre>
      * @param id Identificador de la bicicleta que se esta buscando. Este debe ser una cadena de dígitos.
      * @return JSON {@link BicicletaDetailDTO} - La bicicleta buscada
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
      */
     @GET
     @Path("{id: \\d+}")
-    public BicicletaDetailDTO getBicicleta(@PathParam("id") Long id) {
-        return null;
+    public BicicletaDetailDTO getBicicleta(@PathParam("id") Long id) throws BusinessLogicException,WebApplicationException {
+        BicicletaEntity entity = logic.getBicicleta(id);
+        if(entity == null){
+            throw new WebApplicationException("El recurso /bicis/" + id + " no existe.", 404);
+        }
+        return new BicicletaDetailDTO(entity) ;
     }
     
     /**
@@ -122,7 +143,12 @@ public class BicicletaResource {
     @PUT
     @Path("{id: \\d+}")
     public BicicletaDetailDTO updateBicicleta(@PathParam("id") Long id, BicicletaDetailDTO bici) throws BusinessLogicException {
-        return bici;
+        bici.setId(id);
+        BicicletaEntity entity = logic.getBicicleta(id);
+        if(entity == null){
+            throw new WebApplicationException("El recurso /bicis/" + id + " no existe.", 404);
+        }
+        return new BicicletaDetailDTO(logic.updateBicicleta(id, bici.toEntity()));
     }
     
     /**
@@ -138,11 +164,16 @@ public class BicicletaResource {
      * </code>
      * </pre>
      * @param id Identificador de la bicicleta que se desea borrar. Este debe ser una cadena de dígitos.
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
      */
     @DELETE
     @Path("{id: \\d+}")
-     public void deleteBicicleta(@PathParam("id") Long id) {
-        // Void
+     public void deleteBicicleta(@PathParam("id") Long id) throws BusinessLogicException,WebApplicationException {
+       BicicletaEntity entity = logic.getBicicleta(id);
+       if(entity == null){
+           throw new WebApplicationException("El recurso /bicis/" + id + " no existe.", 404);
+       }
+       logic.deleteBicicleta(id);
     }
     
 }

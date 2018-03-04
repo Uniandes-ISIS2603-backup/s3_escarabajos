@@ -20,7 +20,15 @@ import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
  *      "marca": string,
  *      "color: string,
  *      "precio": double,
- *      "usada: boolean
+ *      "usada: boolean,
+ *      "album" : []String,
+ *      "modelo":{      
+ *                 "id": number,
+ *                 "marca": String,
+ *                 "referencia": String,
+ *                 "calificacionMedia": double,
+ *                 "tipoModelo":String
+ *               }
  *   }
  * </pre> Por ejemplo una bicicleta se representa asi:<br>
  *
@@ -28,12 +36,21 @@ import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
  *
  *   {
  *      "id": 1,
- *      "categoria": BMX,
- *      "marca": We the People,
- *      "color": Negro,
+ *      "categoria": "Deportivo",
+ *      "marca": "We the People",
+ *      "color": "Negro",
  *      "precio": 3.499,
- *      "usada": false
- *   }
+ *      "usada": false,
+ *      "album" : [],
+ *      "modelo" : {
+ *                  "id": 1,
+ *                  "marca": "BMXTREME",
+ *                  "referencia": "BMEXTREME-MTN-2017",
+ *                  "calificacionMedia": 4.50,
+ *                  "tipoModelo": "Bicicleta"
+ *                 }
+ *      }
+ *  
  *
  * </pre>
  *

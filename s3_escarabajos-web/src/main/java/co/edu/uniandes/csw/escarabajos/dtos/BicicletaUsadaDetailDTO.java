@@ -8,9 +8,9 @@ package co.edu.uniandes.csw.escarabajos.dtos;
 import co.edu.uniandes.csw.escarabajos.entities.BicicletaUsadaEntity;
 
 /**
- * BicicletaUsadaEnVentaDetailDTO Objeto de transferencia de datos de
- * BicicletasUsadasEnVenta. Los DetailDTO contienen las represnetaciones de los JSON
- * que se transfieren entre el cliente y el servidor.
+ * BicicletaUsadaDetailDTO Objeto de transferencia de datos de Bicicletas usadas. Los DetailDTO
+ * contienen las representaciones de los JSON que se transfieren entre el
+ * cliente y el servidor.
  *
  * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
  * <pre>
@@ -18,39 +18,54 @@ import co.edu.uniandes.csw.escarabajos.entities.BicicletaUsadaEntity;
  *      "id": number,
  *      "categoria: string,
  *      "marca": string,
- *      "color": string,
+ *      "color: string,
  *      "precio": double,
- *      "usada": boolean,
- *      "facturaOriginal" : string,
- *      "precioVenta" : double,
- *      "vendedor" : {
- *                  "direccion": string,
- *                  "telefono": string
- *                  }
+ *      "usada: boolean,
+ *      "album": []String,
+ *      "modelo":{      
+ *                 "id": number,
+ *                 "marca": String,
+ *                 "referencia": String,
+ *                 "calificacionMedia": double,
+ *                 "tipoModelo":String
+ *               }
+ *      }
  *   }
- * </pre> Por ejemplo una bicicletaUsadaEnVenta se representa asi:<br>
+ * </pre> Por ejemplo una bicicleta se representa asi:<br>
+ *
  * <pre>
+ *
  *   {
  *      "id": 1,
- *      "categoria: BMX,
- *      "marca": We the People,
- *      "color: Negro,
- *      "precio": 2.50,
- *      "usada: true
- *      "facturaOriginal" : "https://cloud10.todocoleccion.online/facturas-antiguas/tc/2010/05/15/19344998.jpg"
- *      "vendedor" : {
- *                  "direccion": "Calle 39 c Sur #82-56",
- *                  "telefono": "4542024"
- *                  }
+ *      "categoria": "BMX",
+ *      "marca": "We the People",
+ *      "color": "Negro",
+ *      "precio": 3.499,
+ *      "usada": true,
+ *      "facturaOriginal" : "https://cloud10.todocoleccion.online/facturas-antiguas/tc/2010/05/15/19344998.jpg",
+ *      "album" :[
+ *                 
+ *               ],
+ *      "modelo" : {
+ *                  "id": 1,
+ *                  "marca": "BMXTREME",
+ *                  "referencia": "BMEXTREME-MTN-2017",
+ *                  "calificacionMedia": 4.50,
+ *                  "tipoModelo": "Bicicleta"  
+ *                 }
  *   }
  *
  * </pre>
  *
  * @author c.santacruza
  */
-public class BicicletaUsadaDetailDTO extends BicicletaUsadaDTO {
+public class BicicletaUsadaDetailDTO extends BicicletaDTO {
 
-    private VendedorDTO vendedor;
+    /*
+    * Relación a un modelo
+     */
+    private ModeloDTO modelo;
+    
     /**
      * Constructor por defecto
      */
@@ -60,12 +75,17 @@ public class BicicletaUsadaDetailDTO extends BicicletaUsadaDTO {
     /**
      * Constructor para transformar un Entity a un DTO
      *
-     * @param entity La entidad de bicicletaUsadaEnVenta a partir de la cual se
-     * construye el objeto
+     * @param entity La entidad de bicicleta a partir de la cual se construye el
+     * objeto
      */
     public BicicletaUsadaDetailDTO(BicicletaUsadaEntity entity) {
         super(entity);
-        entity.setVendedor(this.getVendedor().toEntity());
+       /* if (entity.getModelo()!= null) {
+            this.modelo = new ModeloDTO(entity.getModelo());
+        } else {
+            entity.setModelo(null);
+        }*/ 
+       //ESTO NO HACE FALTA ITEM YA LO HACE
     }
 
     /**
@@ -75,18 +95,24 @@ public class BicicletaUsadaDetailDTO extends BicicletaUsadaDTO {
      */
     @Override
     public BicicletaUsadaEntity toEntity() {
-        BicicletaUsadaEntity biciUsadaE = super.toEntity();
-        biciUsadaE.setVendedor(this.getVendedor().toEntity());
-        return biciUsadaE;
+        BicicletaUsadaEntity biciE = (BicicletaUsadaEntity) super.toEntity();
+       /* if (this.getModelo() != null) {
+            biciE.setModelo(this.getModelo().toEntity());
+        }*/
+        return biciE;
     }
 
-    public VendedorDTO getVendedor() {
-        return vendedor;
+    /**
+     * @return the modelo
+     */
+    public ModeloDTO getModelo() {
+        return modelo;
     }
 
-    public void setVendedor(VendedorDTO vendedor) {
-        this.vendedor = vendedor;
+    /**
+     * @param modelo the modelo to set
+     */
+    public void setModelo(ModeloDTO modelo) {
+        this.modelo = modelo;
     }
-
-    
 }
