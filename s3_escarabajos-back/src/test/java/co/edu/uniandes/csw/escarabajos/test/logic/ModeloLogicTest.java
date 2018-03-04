@@ -117,7 +117,7 @@ public class ModeloLogicTest {
         for (int i = 0; i < 3; i++) {
             AccesorioEntity items = factory.manufacturePojo(AccesorioEntity.class);
             itemsData.add(items);
-            accLogic.createAccesorio(items,Long.MIN_VALUE);
+            accLogic.createAccesorio(items,data.get(i).getId());
         }
         for (int i = 0; i < 3; i++) {
             ItemEntity addItem = modeloLogic.addItem(itemsData.get(i),data.get(i).getId());
@@ -137,6 +137,10 @@ public class ModeloLogicTest {
         Assert.assertNotNull(result);
         ModeloEntity entity = em.find(ModeloEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
+        Assert.assertTrue(newEntity.getCalificacionMedia()== entity.getCalificacionMedia());
+        Assert.assertEquals(newEntity.getMarca(), entity.getMarca());
+        Assert.assertEquals(newEntity.getReferencia(), entity.getReferencia());
+        Assert.assertEquals(newEntity.getTipoModelo(), entity.getTipoModelo());
         
     }
 
@@ -168,9 +172,13 @@ public class ModeloLogicTest {
     @Test
     public void getModeloTest() {
         ModeloEntity entity = data.get(0);
-        ModeloEntity resultEntity = modeloLogic.getModelo(entity.getId());
-        Assert.assertNotNull(resultEntity);
-        Assert.assertEquals(entity.getId(), resultEntity.getId());
+        ModeloEntity newEntity = modeloLogic.getModelo(entity.getId());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(newEntity.getId(), entity.getId());
+        Assert.assertTrue(newEntity.getCalificacionMedia()== entity.getCalificacionMedia());
+        Assert.assertEquals(newEntity.getMarca(), entity.getMarca());
+        Assert.assertEquals(newEntity.getReferencia(), entity.getReferencia());
+        Assert.assertEquals(newEntity.getTipoModelo(), entity.getTipoModelo());
     }
 
     /**
@@ -197,13 +205,14 @@ public class ModeloLogicTest {
     public void updateModeloTest() throws BusinessLogicException {
         ModeloEntity entity = data.get(0);
         ModeloEntity pojoEntity = factory.manufacturePojo(ModeloEntity.class);
-
         pojoEntity.setId(entity.getId());
-
+        pojoEntity.setTipoModelo(entity.getTipoModelo());
         modeloLogic.updateModelo(pojoEntity.getId(), pojoEntity);
-
         ModeloEntity resp = em.find(ModeloEntity.class, entity.getId());
-
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
+        Assert.assertTrue(pojoEntity.getCalificacionMedia()== resp.getCalificacionMedia());
+        Assert.assertEquals(pojoEntity.getMarca(), resp.getMarca());
+        Assert.assertEquals(pojoEntity.getReferencia(), resp.getReferencia());
+        Assert.assertEquals(pojoEntity.getTipoModelo(), resp.getTipoModelo());
     }
 }

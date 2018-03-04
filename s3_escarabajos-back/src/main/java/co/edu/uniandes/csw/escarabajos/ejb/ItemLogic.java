@@ -82,11 +82,13 @@ public class ItemLogic {
         if (entity.getPrecio() < 0) {
             throw new BusinessLogicException("El item no debe tener un precio negativo");
         }
+        if (getItem(entity.getId()) != null) {
+            throw new BusinessLogicException("Ya existe un accesorio el id \"" + entity.getId()+ "\"");
+        }
         ModeloEntity modelo = modeloPers.find(entity.getModeloId());
         if (modelo == null) {
             throw new BusinessLogicException("El item debe tener un modelo");
         }
-
     }
 
     /**

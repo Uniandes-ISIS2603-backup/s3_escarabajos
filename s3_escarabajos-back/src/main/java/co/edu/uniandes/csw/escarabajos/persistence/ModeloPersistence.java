@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.escarabajos.persistence;
 
+import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import java.util.List;
 import java.util.logging.Level;
@@ -90,5 +91,29 @@ public class ModeloPersistence {
         TypedQuery query = em.createQuery("select u from ModeloEntity u", ModeloEntity.class);
         // Note que en el query se hace uso del método getResultList() que obtiene una lista de modelos.
         return query.getResultList();
+    }
+    
+     
+    /**
+     * Busca si hay algun modelo con la referencia que se envía de argumento
+     *
+     * @param referencia: Referencia del modelo que se está buscando
+     * @return null si no existe ningun modelo con el nombre del argumento. Si
+     * existe alguna devuelve la primera.
+     */
+    public ModeloEntity findByReferencia(String referencia) {
+        LOGGER.log(Level.INFO, "Consultando modelo por referencia ", referencia);
+
+        // Se crea un query para buscar clientes con el nombre que recibe el método como argumento. ":name" es un placeholder que debe ser remplazado
+        TypedQuery query = em.createQuery("Select e From ModeloEntity e where e.referencia = :referencia", ModeloEntity.class);
+        // Se remplaza el placeholder ":name" con el valor del argumento 
+        query = query.setParameter("referencia", referencia);
+        // Se invoca el query se obtiene la lista resultado
+        List<ModeloEntity> sameReferencia = query.getResultList();
+        if (sameReferencia.isEmpty()) {
+            return null;
+        } else {
+            return sameReferencia.get(0);
+        }
     }
 }
