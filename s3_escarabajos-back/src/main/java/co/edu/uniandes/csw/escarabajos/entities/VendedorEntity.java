@@ -24,7 +24,7 @@ public class VendedorEntity extends ClienteEntity implements Serializable{
     private String telefono;
     
     @PodamExclude
-    @OneToMany(mappedBy = "vendedor", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "vendedor", cascade = CascadeType.PERSIST,orphanRemoval = true)
     private List<BicicletaUsadaEntity> bicicletasUsadas = new ArrayList<BicicletaUsadaEntity>();
 
     public VendedorEntity() {

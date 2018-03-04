@@ -120,6 +120,7 @@ public class BicicletaUsadaPersistenceTest {
         for (int i = 0; i < 3; i++) {
             BicicletaUsadaEntity entity = factory.manufacturePojo(BicicletaUsadaEntity.class);
             entity.setVendedor(dataVendedor.get(0));
+            entity.setUsada(Boolean.TRUE);
             em.persist(entity);
             data.add(entity);
         }
@@ -131,9 +132,10 @@ public class BicicletaUsadaPersistenceTest {
      *
      */
     @Test
-    public void createBicicletaTest() {
+    public void createBicicletaUsadaTest() {
         PodamFactory factory = new PodamFactoryImpl();
         BicicletaUsadaEntity newEntity = factory.manufacturePojo(BicicletaUsadaEntity.class);
+        newEntity.setUsada(Boolean.TRUE);
         BicicletaUsadaEntity result = biciPersistence.create(newEntity);
 
         Assert.assertNotNull(result);
@@ -141,6 +143,7 @@ public class BicicletaUsadaPersistenceTest {
         BicicletaUsadaEntity entity = em.find(BicicletaUsadaEntity.class, result.getId());
 
         Assert.assertEquals(newEntity.getEstado(), entity.getEstado());
+        Assert.assertTrue(entity.getUsada());
         Assert.assertEquals(newEntity.getFacturaOriginal(), entity.getFacturaOriginal());
     }
 
@@ -154,7 +157,7 @@ public class BicicletaUsadaPersistenceTest {
         VendedorEntity vendedor = dataVendedor.get(0);
         vendedor.setBicicletasUsadas(data);
         List<BicicletaUsadaEntity> list = biciPersistence.findAllBicis(vendedor.getId());
-        Assert.assertEquals(vendedor.getBicicletasUsadas().size(), list.size());
+        Assert.assertEquals(data.size(), list.size());
         for (BicicletaUsadaEntity ent : list) {
             boolean found = false;
             for (BicicletaUsadaEntity entity : data) {
@@ -181,10 +184,11 @@ public class BicicletaUsadaPersistenceTest {
      * Prueba para consultar una Bicicleta.
      */
     @Test
-    public void getBicicletaTest() {
+    public void getBicicletaUsadaTest() {
         BicicletaUsadaEntity entity = data.get(0);
         BicicletaUsadaEntity newEntity = biciPersistence.find(dataVendedor.get(0).getId(), entity.getId());
         Assert.assertNotNull(newEntity);
+        Assert.assertTrue(entity.getUsada());
         Assert.assertEquals(newEntity.getEstado(), entity.getEstado());
         Assert.assertEquals(newEntity.getFacturaOriginal(), entity.getFacturaOriginal());
     }
@@ -195,7 +199,7 @@ public class BicicletaUsadaPersistenceTest {
      *
      */
     @Test
-    public void deleteBicicletaTest() {
+    public void deleteBicicletaUsadaTest() {
         BicicletaUsadaEntity entity = data.get(0);
         biciPersistence.delete(entity.getId());
         BicicletaUsadaEntity deleted = em.find(BicicletaUsadaEntity.class, entity.getId());
@@ -208,18 +212,19 @@ public class BicicletaUsadaPersistenceTest {
      *
      */
     @Test
-    public void updateBicicletaTest() {
+    public void updateBicicletaUsadaTest() {
         BicicletaUsadaEntity entity = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
         BicicletaUsadaEntity newEntity = factory.manufacturePojo(BicicletaUsadaEntity.class);
 
         newEntity.setId(entity.getId());
-
+        newEntity.setUsada(Boolean.TRUE);
         biciPersistence.update(newEntity);
 
         BicicletaUsadaEntity resp = em.find(BicicletaUsadaEntity.class, entity.getId());
 
         Assert.assertEquals(newEntity.getEstado(), resp.getEstado());
+        Assert.assertTrue(entity.getUsada());
         Assert.assertEquals(newEntity.getFacturaOriginal(), resp.getFacturaOriginal());
     }
 }

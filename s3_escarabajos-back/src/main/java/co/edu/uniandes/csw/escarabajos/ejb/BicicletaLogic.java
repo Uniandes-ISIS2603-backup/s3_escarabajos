@@ -6,8 +6,10 @@
 package co.edu.uniandes.csw.escarabajos.ejb;
 
 import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
+import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.BicicletaPersistence;
+import co.edu.uniandes.csw.escarabajos.persistence.ModeloPersistence;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +29,8 @@ public class BicicletaLogic {
     private BicicletaPersistence persistence;
     @Inject
     private ItemLogic logic;
+    @Inject
+    private ModeloPersistence modeloPersistence;
 
     /**
      * Devuelve todos los bicicletas que hay en la base de datos.
@@ -46,12 +50,12 @@ public class BicicletaLogic {
      * @param id El id del bicicleta a buscar
      * @return El bicicleta encontrado, null si no lo encuentra.
      */
-    public BicicletaEntity getBicicleta(Long id) {
+    public BicicletaEntity getBicicleta(Long id) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar bicicleta con id={0}", id);
         BicicletaEntity bici = persistence.find(id);
         if (bici == null) {
             LOGGER.log(Level.SEVERE, "El bicicleta con el id {0} no existe", id);
-            
+            throw new BusinessLogicException("La bicicleta con el id " + id + "no existe");
         }
         LOGGER.log(Level.INFO, "Termina proceso de consultar bicicleta con id={0}", id);
         return bici;
@@ -88,7 +92,13 @@ public class BicicletaLogic {
      */
     public BicicletaEntity updateBicicleta(Long id, BicicletaEntity entity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar bicicleta con id={0}", id);
-        logic.verificarItem(entity);
+        if(entity.getPrecio()<= 0){
+            throw new BusinessLogicException("La bicicleta debe tener un precio mayor a 0");
+        }
+        ModeloEntity modelo = modeloPersistence.find(entity.getModeloId());
+        if (modelo == null) {
+            throw new BusinessLogicException("El item debe tener un modelo");
+        }
         verificarBicicleta(entity);
         BicicletaEntity newEntity = persistence.update(entity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar bicicleta con id={0}", entity.getId());
