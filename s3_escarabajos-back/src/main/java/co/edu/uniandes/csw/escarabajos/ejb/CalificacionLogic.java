@@ -44,7 +44,11 @@ public class CalificacionLogic {
             throw new BusinessLogicException("Por favor ingrese un comentario");
         }
         ModeloEntity model = modeloLogic.getModelo(modeloId);
+        model.getCalificaciones().add(cal);
+        modeloLogic.updateModelo(model.getId(), model);
         ClienteEntity cliente = clienteLogic.getCliente(clienteId);
+        cliente.getCalificaciones().add(cal);
+        clienteLogic.updateCliente(cliente);
         cal.setModelo(model);
         cal.setCliente(cliente);
         model.setCalificacionMedia(getCalificacionMedia(modeloId));
@@ -61,7 +65,11 @@ public class CalificacionLogic {
         }
         LOGGER.info("Termina correctamente el proceso de actualizar una calificacion");
         ModeloEntity model = modeloLogic.getModelo(modeloId);
+        model.getCalificaciones().add(cal);
+        modeloLogic.updateModelo(model.getId(), model);
         ClienteEntity cliente = clienteLogic.getCliente(clienteId);
+        cliente.getCalificaciones().add(cal);
+        clienteLogic.updateCliente(cliente);
         cal.setModelo(model);
         cal.setCliente(cliente);
         model.setCalificacionMedia(getCalificacionMedia(modeloId));

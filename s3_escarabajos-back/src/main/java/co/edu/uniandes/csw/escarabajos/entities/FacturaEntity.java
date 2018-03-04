@@ -33,7 +33,7 @@ public class FacturaEntity implements Serializable {
     private Long id;
     private Double dinero;
     @PodamExclude
-    @OneToMany(mappedBy = "Factura", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "Factura", cascade = CascadeType.ALL)
     private List<ReclamoEntity> reclamos;
     
     @PodamExclude
