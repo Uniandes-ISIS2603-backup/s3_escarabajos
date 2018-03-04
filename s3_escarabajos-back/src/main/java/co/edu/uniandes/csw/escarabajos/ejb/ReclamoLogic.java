@@ -48,8 +48,10 @@ public class ReclamoLogic
            throw new BusinessLogicException("Por favor ingrese el motivo de su reclamo");
        }
        FacturaEntity f = facturaLogic.getFactura(facturaId);
-       ent.setFactura(f);
+    
        ReclamoEntity nuevo = reclamoPersistence.create(ent);
+       ent.setFactura(f);
+       f.setReclamos(nuevo);
        LOGGER.info("Finalizando el proceso de crear un reclamo");
        return nuevo;  
      }
@@ -71,6 +73,7 @@ public class ReclamoLogic
        FacturaEntity f = facturaLogic.getFactura(facturaId);
        ent.setFactura(f);
        ReclamoEntity actualizado = reclamoPersistence.update(ent);
+       f.setReclamos(actualizado);
        LOGGER.info("Finalizando el proceso de actualizar un reclamo");
        return actualizado;  
      }

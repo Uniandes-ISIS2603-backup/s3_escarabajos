@@ -44,15 +44,18 @@ public class CalificacionLogic {
             throw new BusinessLogicException("Por favor ingrese un comentario");
         }
         ModeloEntity model = modeloLogic.getModelo(modeloId);
-        model.getCalificaciones().add(cal);
-        modeloLogic.updateModelo(model.getId(), model);
+       
         ClienteEntity cliente = clienteLogic.getCliente(clienteId);
-        cliente.getCalificaciones().add(cal);
-        clienteLogic.updateCliente(cliente);
+       
         cal.setModelo(model);
         cal.setCliente(cliente);
+        CalificacionEntity nueva = calificacionPersistence.create(cal);
+        model.getCalificaciones().add(nueva);
+        modeloLogic.updateModelo(model.getId(), model);
+        cliente.getCalificaciones().add(cal);
+        clienteLogic.updateCliente(cliente);
         model.setCalificacionMedia(getCalificacionMedia(modeloId));
-        return calificacionPersistence.create(cal);
+        return nueva;
     }
 
     public CalificacionEntity updateCalificacion(CalificacionEntity cal, Long modeloId, Long clienteId) throws BusinessLogicException {
@@ -65,15 +68,18 @@ public class CalificacionLogic {
         }
         LOGGER.info("Termina correctamente el proceso de actualizar una calificacion");
         ModeloEntity model = modeloLogic.getModelo(modeloId);
-        model.getCalificaciones().add(cal);
-        modeloLogic.updateModelo(model.getId(), model);
+       
         ClienteEntity cliente = clienteLogic.getCliente(clienteId);
-        cliente.getCalificaciones().add(cal);
-        clienteLogic.updateCliente(cliente);
+       
         cal.setModelo(model);
         cal.setCliente(cliente);
+        CalificacionEntity nueva = calificacionPersistence.create(cal);
+        model.getCalificaciones().add(nueva);
+        modeloLogic.updateModelo(model.getId(), model);
+        cliente.getCalificaciones().add(cal);
+        clienteLogic.updateCliente(cliente);
         model.setCalificacionMedia(getCalificacionMedia(modeloId));
-        return calificacionPersistence.update(cal);
+        return nueva;
     }
 
     public CalificacionEntity find(Long id) {
