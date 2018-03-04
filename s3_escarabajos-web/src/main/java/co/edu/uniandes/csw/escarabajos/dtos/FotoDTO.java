@@ -38,10 +38,10 @@ public class FotoDTO {
     private String url;
     private String descripcion;
 
-    FotoDTO(){
+    public FotoDTO(){
         
     }
-    FotoDTO(FotoEntity entityFoto) {
+    public  FotoDTO(FotoEntity entityFoto) {
         this.id = entityFoto.getId();
         this.url = entityFoto.getUrl();
         this.descripcion = entityFoto.getDescripcion();

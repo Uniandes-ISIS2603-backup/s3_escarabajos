@@ -150,7 +150,11 @@ public class ItemLogic {
      * item
      *
      */
-    public List<FotoEntity> listFotos(Long itemId) {
+    public List<FotoEntity> listFotos(Long itemId) throws BusinessLogicException {
+        ItemEntity itemEntity = getItem(itemId);
+        if (itemEntity == null) {
+            throw new BusinessLogicException("El item no existe!");
+        }
         return getItem(itemId).getAlbum();
     }
 

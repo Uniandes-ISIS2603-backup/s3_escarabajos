@@ -29,6 +29,9 @@ public class ItemEntity implements Serializable {
     private Long id;
     
     private Double precio;
+    
+    private String color;
+    
     @PodamExclude
     @OneToMany(mappedBy = "item", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<FotoEntity> album = new ArrayList<>();
@@ -114,5 +117,19 @@ public class ItemEntity implements Serializable {
             return this.getId().hashCode();
         }
         return super.hashCode();
+    }
+
+    /**
+     * @return the color
+     */
+    public String getColor() {
+        return color;
+    }
+
+    /**
+     * @param color the color to set
+     */
+    public void setColor(String color) {
+        this.color = color;
     }
 }

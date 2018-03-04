@@ -42,7 +42,6 @@ public class ModeloEntity implements Serializable
     @OneToMany(mappedBy = "modelo", cascade = CascadeType.ALL)
     private List<CalificacionEntity> calificaciones = new ArrayList<>();
    
-    
     public ModeloEntity()
     {
         

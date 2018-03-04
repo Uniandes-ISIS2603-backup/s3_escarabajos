@@ -41,7 +41,8 @@ import java.util.List;
  *          {
  *              "id": 1,
  *              "precio": "221340.91",
- *              "modeloId": 1
+ *              "modeloId": 1,
+ *              "color": rojo,
  *              "album": [
  *                  {
  *                      "id": 1,

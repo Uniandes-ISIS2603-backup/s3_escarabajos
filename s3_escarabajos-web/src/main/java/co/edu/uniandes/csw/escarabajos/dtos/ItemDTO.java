@@ -20,6 +20,7 @@ import java.util.List;
  *      "id": number,
  *      "precio": number,
  *      "modeloId": number, 
+ *      "color": String,
  *      "album": [{@FotoDTO}]
  *   }
  * </pre>
@@ -29,7 +30,8 @@ import java.util.List;
  *   {
  *      "id": 1,
  *      "precio": "221340.91",
- *      "modeloId": 1
+ *      "modeloId": 1,
+ *      "color" Rojo,
  *      "album": [
  *          {
  *              "id": 1,
@@ -53,6 +55,8 @@ public abstract class ItemDTO {
     
     private Long modeloId;
     
+    private String color;
+    
     private List<FotoDTO> album;
     /**
      * Constructor por defecto
@@ -70,6 +74,7 @@ public abstract class ItemDTO {
        this.id = entity.getId();
        this.precio = entity.getPrecio();
        this.modeloId = entity.getModeloId();
+       this.color = entity.getColor();
        if (entity.getAlbum()!= null) {
             album = new ArrayList<>();
             for (FotoEntity entityFoto : entity.getAlbum()) {
@@ -88,6 +93,7 @@ public abstract class ItemDTO {
        entity.setId(this.getId());
        entity.setPrecio(this.getPrecio());
        entity.setModeloId(this.getModeloId());
+       entity.setColor(this.getColor());
         if (getAlbum()!= null) {
             List<FotoEntity> fotoEntity = new ArrayList<>();
             for (FotoDTO dtoFoto : getAlbum()) {
@@ -153,5 +159,19 @@ public abstract class ItemDTO {
      */
     public void setModeloId(long modeloId) {
         this.modeloId = modeloId;
+    }
+
+    /**
+     * @return the color
+     */
+    public String getColor() {
+        return color;
+    }
+
+    /**
+     * @param color the color to set
+     */
+    public void setColor(String color) {
+        this.color = color;
     }
 }
