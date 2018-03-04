@@ -79,6 +79,10 @@ public class ModeloLogic {
         if (modeloEntity != null) {
             throw new BusinessLogicException("El modelo ya existe!");
         }
+        modeloEntity = persistence.findByReferencia(entity.getReferencia());
+        if (modeloEntity != null) {
+            throw new BusinessLogicException("El modelo ya existe!");
+        }
         LOGGER.log(Level.INFO, "Finaliza proceso de crear un modelo ");
         return persistence.create(entity);
     }
@@ -244,7 +248,7 @@ public class ModeloLogic {
         if (tipo.equals(ModeloLogic.BICICLETA)) {
           // biciLogic.deleteBicicleta(item.getId());
         } else if (tipo.equals(ModeloLogic.ACCESORIO) ) {
-            accLogic.deleteAccesorio(item.getId());
+           accLogic.deleteAccesorio(item.getId());
         }
     }
 
