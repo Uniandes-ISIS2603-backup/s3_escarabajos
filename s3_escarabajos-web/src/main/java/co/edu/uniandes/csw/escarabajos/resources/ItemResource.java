@@ -1,7 +1,12 @@
 package co.edu.uniandes.csw.escarabajos.resources;
 
 import co.edu.uniandes.csw.escarabajos.dtos.BicicletaDetailDTO;
+import co.edu.uniandes.csw.escarabajos.dtos.ItemDetailDTO;
+import co.edu.uniandes.csw.escarabajos.dtos.ItemDetailDTO;
 import co.edu.uniandes.csw.escarabajos.ejb.ItemLogic;
+import co.edu.uniandes.csw.escarabajos.ejb.ItemLogic;
+import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
+import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
@@ -38,8 +43,60 @@ import javax.ws.rs.WebApplicationException;
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
-
 public class ItemResource {
     
+    @Inject
+    ItemLogic itemLogic;
     
+      /**
+     * <h1>GET /api/items : Obtener todas los items.</h1>
+     * 
+     * <pre>Busca y devuelve todos los items que existen en la aplicacion.
+     * 
+     * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Devuelve todas los items de la aplicacion.</code> 
+     * </pre>
+     * @return JSONArray {@link ItemDetailDTO} - Los item encontrados en la aplicación. Si no hay ninguno retorna una lista vacía.
+     */
+    @GET
+    public List<ItemDetailDTO> getItems() {
+         return listItemEntity2DetailDTO(itemLogic.getItems());
+    }
+
+    /**
+     * <h1>GET /api/items/{id} : Obtener el item por id.</h1>
+     * 
+     * <pre>Busca el item con el id asociado recibido en la URL y la devuelve.
+     * 
+     * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Devuelve el item correspondiente al id.
+     * </code> 
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 404 Not Found No existe un item con el id dado.
+     * </code> 
+     * </pre>
+     * @param id Identificador del item que se esta buscando. Este debe ser una cadena de dígitos.
+     * @return JSON {@link ItemDetailDTO} - El item buscado
+     * throws WebApplicationException {@link WebApplicationExceptionMapper} - Error de lógica que se genera cuando no se encuentra el item
+     */
+    @GET
+    @Path("{id: \\d+}")
+    public ItemDetailDTO getItem(@PathParam("id") Long id) {
+        ItemEntity entity = itemLogic.getItem(id);
+        if (entity == null) {
+            throw new WebApplicationException("El recurso /items/" + id + " no existe.", 404);
+        }
+        return new ItemDetailDTO(entity);
+    }
+    
+      
+    private List<ItemDetailDTO> listItemEntity2DetailDTO(List<ItemEntity> entityList) {
+        List<ItemDetailDTO> list = new ArrayList<>();
+        for (ItemEntity entity : entityList) {
+            list.add(new ItemDetailDTO(entity));
+        }
+        return list;
+    }
 }

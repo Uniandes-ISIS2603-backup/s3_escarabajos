@@ -17,7 +17,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
- * @author af.varon
+ * @author Andres
  */
 @Entity
 public class FotoEntity implements Serializable {  

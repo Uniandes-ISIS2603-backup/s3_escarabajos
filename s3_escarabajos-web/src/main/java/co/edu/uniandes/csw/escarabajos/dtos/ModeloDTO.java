@@ -14,6 +14,7 @@ import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
  * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
  * <pre>
  *   {
+ *      "id": number,
  *      "marca": String,
  *      "referencia": String,
  *      "calificacionMedia": double,
@@ -25,9 +26,10 @@ import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
  * <pre>
  *
  *   {
+ *      "id": 1,
  *      "marca": "BMXTREME",
  *      "referencia": "BMEXTREME-MTN-2017",
- *      "calificacionMedia": 4.52,
+ *      "calificacionMedia": 4.50,
  *      "tipoModelo": "Accesorio"
  *   }
  *

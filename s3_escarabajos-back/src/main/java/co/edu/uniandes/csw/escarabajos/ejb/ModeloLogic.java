@@ -47,7 +47,9 @@ public class ModeloLogic {
      */
     public List<ModeloEntity> getModelos() {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los modelos");
-        return persistence.findAll();
+         List<ModeloEntity> lista = persistence.findAll();
+        LOGGER.log(Level.INFO, "Finaliza proceso de consultar todos los modelos");
+        return lista;
     }
 
     /**
@@ -58,7 +60,9 @@ public class ModeloLogic {
      */
     public ModeloEntity getModelo(Long id) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar un modelo con id = {0}", id);
-        return persistence.find(id);
+        ModeloEntity respuesta = persistence.find(id);
+        LOGGER.log(Level.INFO, "Finaliza proceso de consultar un modelo con id = {0}", id);
+        return respuesta;
     }
 
     /**
@@ -75,6 +79,7 @@ public class ModeloLogic {
         if (modeloEntity != null) {
             throw new BusinessLogicException("El modelo ya existe!");
         }
+        LOGGER.log(Level.INFO, "Finaliza proceso de crear un modelo ");
         return persistence.create(entity);
     }
 
@@ -85,9 +90,14 @@ public class ModeloLogic {
      * @param entity Instancia de ModeloEntity con los nuevos datos.
      * @return Instancia de ModeloEntity con los datos actualizados.
      */
-    public ModeloEntity updateModelo(Long id, ModeloEntity entity) {
+    public ModeloEntity updateModelo(Long id, ModeloEntity entity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar un modelo ");
-        return persistence.update(entity);
+        ModeloEntity antes = getModelo(id);
+        if (!antes.getTipoModelo().equals(entity.getTipoModelo())) {
+            throw new BusinessLogicException("No se le puede cambiar el tipo a un modelo!");
+        }
+        LOGGER.log(Level.INFO, "Finaliza proceso de actualizar un modelo ");
+        return persistence.update(entity);   
     }
 
     /**
@@ -98,6 +108,7 @@ public class ModeloLogic {
     public void deleteModelo(Long id) {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar un modelo ");
         persistence.delete(id);
+        LOGGER.log(Level.INFO, "Finaliza proceso de borrar un modelo ");
     }
 
     /**
@@ -106,6 +117,7 @@ public class ModeloLogic {
      * @param item El item a guardar
      * @param modeloId El id de el modelo en el cual se va a guardar el item.
      * @return El item que fue agregado a el modelo.
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
      */
     public ItemEntity addItem(ItemEntity item, Long modeloId) throws BusinessLogicException {
         ModeloEntity modeloEntity = getModelo(modeloId);

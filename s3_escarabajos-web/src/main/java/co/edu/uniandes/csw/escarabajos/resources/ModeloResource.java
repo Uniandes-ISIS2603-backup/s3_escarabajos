@@ -11,6 +11,7 @@ import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -44,7 +45,7 @@ import javax.ws.rs.WebApplicationException;
 @Consumes("application/json")
 @RequestScoped
 public class ModeloResource {
-
+  private static final Logger LOGGER = Logger.getLogger(ModeloResource.class.getName());
     
     @Inject
     ModeloLogic modeloLogic;
@@ -150,7 +151,7 @@ public class ModeloResource {
     
     
     /**
-     * <h1>DELETE /api/modelo/{id} : Borrar modelo por id.</h1>
+     * <h1>DELETE /api/modelos/{id} : Borrar modelo por id.</h1>
      * 
      * <pre>Borra el modelo con el id asociado recibido en la URL.
      * 
@@ -166,6 +167,7 @@ public class ModeloResource {
     @DELETE
     @Path("{id: \\d+}")
      public void deleteModelo(@PathParam("id") Long id) {
+      LOGGER.info("DEDETETSETSET");
       ModeloEntity entity = modeloLogic.getModelo(id);
         if (entity == null) {
             throw new WebApplicationException("El recurso /modelos/" + id + " no existe.", 404);
