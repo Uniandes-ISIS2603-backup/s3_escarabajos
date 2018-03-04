@@ -6,10 +6,12 @@
 package co.edu.uniandes.csw.escarabajos.ejb;
 
 import co.edu.uniandes.csw.escarabajos.entities.CarritoEntity;
+import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 import co.edu.uniandes.csw.escarabajos.entities.FacturaEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.CarritoPersistence;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,8 +30,19 @@ public class CarritoLogic {
     @Inject
     private CarritoPersistence persistence;
     
-    public CarritoEntity createCarrito(CarritoEntity entity){
+    @Inject
+    private ItemLogic itemLogic;
+    
+    @Inject
+    private ClienteLogic clienteLogic;
+    
+    public CarritoEntity createCarrito(CarritoEntity entity) throws BusinessLogicException{
         LOGGER.info("Inicia proceso de creación del carrito");
+        CarritoEntity carrito = findCarrito(entity.getId());
+        if (carrito!= null) {
+            throw new BusinessLogicException("El carrito ya existe");
+        }
+        
         persistence.create(entity);
         LOGGER.info("Termina proceso de creación de carrito");
         return entity;
@@ -60,41 +73,67 @@ public class CarritoLogic {
         LOGGER.log(Level.INFO, "Termina proceso de borrar carrito con id={0}", id);
     }
     
-    public void addItem( CarritoEntity carrito, ItemEntity item ) throws BusinessLogicException{
+    public List<ItemEntity> getItems( Long id ) throws BusinessLogicException{
         
-        if (persistence.find(carrito.getId()) == null) {
-            throw new BusinessLogicException("No existe un carrito con el id" + carrito.getId()+ "\"");
+        if (persistence.find(id) == null) {
+            throw new BusinessLogicException("No existe un cliente con el id" + id + "\"");
         }
         
-        carrito.getItems().add(item);
+        CarritoEntity carrito = persistence.find(id);
+        
+        return carrito.getItems();
+    }
+    
+    public ItemEntity addItem( Long clienteId, Long itemId ) throws BusinessLogicException{
+        ClienteEntity cliente = clienteLogic.getCliente(clienteId);    
+        if (cliente == null) {
+            throw new BusinessLogicException("No existe un cliente con el id" + clienteId + "\"");
+        }
+        
+        CarritoEntity carrito = persistence.find(cliente.getCarrito().getId());
+        
+        if (carrito.getItems().contains(itemLogic.getItem(itemId))) {
+            throw new BusinessLogicException("El carrito ya tiene este item");
+        }
+        
+        ItemEntity item = itemLogic.getItem(itemId);
+        
+        List<ItemEntity> rpta = carrito.getItems();
+        
+        rpta.add(item);
+        
+        carrito.setItems(rpta);
         
         carrito.setPrecioTotal(carrito.getPrecioTotal() + item.getPrecio());
         
-        persistence.update(carrito);
-        
+        return item;
     }
     
-    public void removeItem( CarritoEntity carrito, ItemEntity item ) throws BusinessLogicException{
-        
-        if (persistence.find(carrito.getId()) == null) {
-            throw new BusinessLogicException("No existe un carrito con el id" + carrito.getId()+ "\"");
+    public ItemEntity removeItem( Long clienteId, Long itemId ) throws BusinessLogicException{
+      
+        if (clienteLogic.getCliente(clienteId) == null) {
+            throw new BusinessLogicException("No existe un cliente con el id" + clienteId + "\"");
         }
         
-        if (persistence.find(item.getId()) == null) {
-            throw new BusinessLogicException("No existe un item con el id" + item.getId()+ "\"");
-        }
+        CarritoEntity carrito = persistence.find(clienteId);
         
-        carrito.getItems().remove(item);
+        ItemEntity item = itemLogic.getItem(itemId);
+        
+        List<ItemEntity> rpta = carrito.getItems();
+        
+        rpta.remove(item);
+        
+        carrito.setItems(rpta);
         
         carrito.setPrecioTotal(carrito.getPrecioTotal() - item.getPrecio());
         
-        persistence.update(carrito);
+        return item;
     }
     
-    public FacturaEntity crearFactura( CarritoEntity carrito ) throws BusinessLogicException{
-        
-        if (persistence.find(carrito.getId()) == null) {
-            throw new BusinessLogicException("No existe un carrito con el id" + carrito.getId()+ "\"");
+    public FacturaEntity crearFactura( Long id ) throws BusinessLogicException{
+        CarritoEntity carrito = persistence.find(id);
+        if ( carrito== null) {
+            throw new BusinessLogicException("No existe un carrito con el id" + id+ "\"");
         }
         if(carrito.getItems().isEmpty()) {
             throw new BusinessLogicException("NO se puede generar factura porque el carrito aun no contiene items");
@@ -108,11 +147,9 @@ public class CarritoLogic {
         
         //factura.setItems(carrito.getItems());
         
-        carrito.getItems().clear();
+        carrito.setItems(new ArrayList<>());
         
         carrito.setPrecioTotal(0.0);
-        
-        persistence.update(carrito);
         
         return factura;
     }

@@ -49,9 +49,9 @@ public class ClientePersistence {
         LOGGER.log(Level.INFO, "Consultando cliente por nombre ", name);
 
         // Se crea un query para buscar clientes con el nombre que recibe el método como argumento. ":name" es un placeholder que debe ser remplazado
-        TypedQuery query = em.createQuery("Select e From ClienteEntity e where e.name = :name", ClienteEntity.class);
+        TypedQuery query = em.createQuery("Select e From ClienteEntity e where e.nombre = :nombre", ClienteEntity.class);
         // Se remplaza el placeholder ":name" con el valor del argumento 
-        query = query.setParameter("name", name);
+        query = query.setParameter("nombre", name);
         // Se invoca el query se obtiene la lista resultado
         List<ClienteEntity> sameName = query.getResultList();
         if (sameName.isEmpty()) {

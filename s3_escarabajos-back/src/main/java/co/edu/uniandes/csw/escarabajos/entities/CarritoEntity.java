@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.csw.escarabajos.entities;
 
-import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -38,9 +39,10 @@ public class CarritoEntity implements Serializable{
     
     @PodamExclude
     @OneToMany(cascade = CascadeType.PERSIST)
-    private List<ItemEntity> items = new ArrayList<ItemEntity>();
+    @JoinTable(name = "CAR_ITEMS", joinColumns = @JoinColumn(name = "CAR_ID"), inverseJoinColumns = @JoinColumn(name="ITEM_ID"))
+    private List<ItemEntity> items = new ArrayList<>();
     @PodamExclude
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private ClienteEntity cliente;
        
     //----------------------------------------------------

@@ -46,7 +46,6 @@ public class ClienteLogic {
     }
 
     public ClienteEntity getCliente(Long id) {
-        
         return persistence.find(id);
     }
 
@@ -57,9 +56,9 @@ public class ClienteLogic {
         return persistence.update(entity);
     }
     
-    public void deleteCliente(Long id) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de borrar cliente con id={0}", id);    
-        persistence.delete(id);
-        LOGGER.log(Level.INFO, "Termina proceso de borrar cliente con id={0}", id);
+    public void deleteCliente(ClienteEntity entity) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar cliente con id={0}", entity.getId());    
+        persistence.delete(entity.getId());
+        LOGGER.log(Level.INFO, "Termina proceso de borrar cliente con id={0}", entity.getId());
     }
 }
