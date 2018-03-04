@@ -59,21 +59,21 @@ public class ClienteDetailDTO extends ClienteDTO{
         
         if (entity != null) {
             facturas = new ArrayList<>();
-            for (FacturaEntity entityFacturas : entity.getFacturas()) {
+            for (FacturaEntity entityFacturas : entity.getCompras()) {
                 facturas.add(new FacturaDTO(entityFacturas));
             }
 
         }
         if (entity != null) {
             listaDeseos = new ArrayList<>();
-            for (ItemEntity entityItem : entity.getListaDeseos()) {
+           /* for (ItemEntity entityItem : entity.getListaDeseos()) {
                 listaDeseos.add(new ItemDTO(entityItem) {
                     @Override
                     public ItemEntity toEntity() {
                         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                     }
                 });
-            }
+            }*/
 
         }
         if (entity != null) {
@@ -118,16 +118,16 @@ public class ClienteDetailDTO extends ClienteDTO{
             for (FacturaDTO dtoFactura : facturas) {
                 facturasEntity.add(dtoFactura.toEntity());
             }
-            entity.setFacturas(facturasEntity);
+            entity.setCompras(facturasEntity);
         }
         
-        if (listaDeseos != null) {
+       /* if (listaDeseos != null) {
             List<ItemEntity> listaDeseosEntity = new ArrayList<>();
             for (ItemDTO dtoListaDeseos : listaDeseos) {
                 listaDeseosEntity.add(dtoListaDeseos.toEntity());
             }
             entity.setListaDeseos(listaDeseosEntity);
-        }
+        }*/
         
         if (reclamos != null) {
             List<ReclamoEntity> reclamoEntity = new ArrayList<>();

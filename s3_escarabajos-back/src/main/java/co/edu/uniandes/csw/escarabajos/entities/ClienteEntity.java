@@ -51,7 +51,6 @@ public class ClienteEntity implements Serializable {
     @PodamExclude
     @OneToMany(mappedBy = "Cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<ReclamoEntity> reclamos = new ArrayList<ReclamoEntity>();
-    
    
     public CarritoEntity getCarrito(){
         return carrito;

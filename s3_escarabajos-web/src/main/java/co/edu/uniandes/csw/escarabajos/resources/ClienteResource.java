@@ -163,7 +163,7 @@ public class ClienteResource {
     @Path("{id: \\d+}")
      public void deleteCliente(@PathParam("id") Long id) throws BusinessLogicException {
         // Void
-        logic.deleteCliente(id);
+        //logic.deleteCliente();
     }
      
     @Path("{idCliente: \\d+}/carrito")

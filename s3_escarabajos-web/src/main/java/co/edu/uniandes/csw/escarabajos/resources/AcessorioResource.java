@@ -65,12 +65,13 @@ public class AcessorioResource {
      * </code>
      * </pre>
      * @param accesorio {@link accesorioDetailDTO} - el accesorio que se desea guardar.
+     * @param idModelo Identificador del modelo del accesorio que se desea actualizar.Este debe ser una cadena de dígitos.
      * @return JSON {@link AccesorioDetailDTO}  - el accesorio guardado con el atributo id autogenerado.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe el accesorio.
      */
     @POST
-    public AccesorioDTO createAccesorio(AccesorioDTO accesorio) throws BusinessLogicException {
-        return new AccesorioDTO(logic.createAccesorio(accesorio.toEntity()));
+    public AccesorioDTO createAccesorio(AccesorioDTO accesorio, Long idModelo) throws BusinessLogicException {
+        return new AccesorioDTO(logic.createAccesorio(accesorio.toEntity(), idModelo));
     }
 
     /**
@@ -126,13 +127,14 @@ public class AcessorioResource {
      * </pre>
      * @param id Identificador del accesorio que se desea actualizar.Este debe ser una cadena de dígitos.
      * @param accesorio {@link AccesorioDetailDTO} - El accesorio que se desea guardar.
+     * @param idModelo Identificador del modelo del accesorio que se desea actualizar.Este debe ser una cadena de dígitos.
      * @return JSON {@link AccesorioDetailDTO} - El accesorio guardado.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar el accesorio.
      */
     @PUT
     @Path("{id: \\d+}")
-    public AccesorioDTO updateAccesorio(@PathParam("id") Long id, AccesorioDTO accesorio) throws BusinessLogicException {
-        return new AccesorioDTO( logic.updateAccesorio(accesorio.toEntity()) );
+    public AccesorioDTO updateAccesorio(@PathParam("id") Long id, AccesorioDTO accesorio, Long idModelo) throws BusinessLogicException {
+        return new AccesorioDTO( logic.updateAccesorio(accesorio.toEntity(), idModelo) );
     }
     
     /**

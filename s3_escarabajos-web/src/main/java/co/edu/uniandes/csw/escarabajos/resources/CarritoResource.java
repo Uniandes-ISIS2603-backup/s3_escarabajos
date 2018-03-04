@@ -27,7 +27,7 @@ import javax.ws.rs.Produces;
 
 /**
  * <pre>Clase que implementa el recurso "carrito".
- * URL: /api/cliente/{id}/carrito
+ * URL: /api/clientes/{idCliente}/carrito
  * </pre>
  * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta "/api" y
  * este recurso tiene la ruta "carrito".</i>
@@ -52,40 +52,28 @@ public class CarritoResource {
     CarritoLogic logic;
     
      /**
-     * <h1>POST /api/clientes/{id}/carrito : Agrega el carrito.</h1>
-     * 
-     * <pre>Cuerpo de petición: JSON {@link CarritoDetailDTO}.
-     * 
-     * Agrega un carrito
-     * 
-     * Codigos de respuesta:
-     * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Agrego el carrito.
-     * </code>
-     * <code style="color: #c7254e; background-color: #f9f2f4;">
-     * 412 Precodition Failed: El cliente no se encuentra.
-     * </code>
-     * </pre>
-     * @return JSON {@link CarritoDTO}  - El carrito del cliente dado.
-     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica.
+     * <h1>POST /api/clientes/{idCLiente}/carrito : Agrega el carrito.</h1>
+     * no deberia haber esta solicitud http porque el carrito se agrega automaticamente cuando se crea el cliente
      */
-    
     @POST
-    public CarritoDetailDTO agregarCarrito( CarritoDetailDTO carrito ){
-                
-        return new CarritoDetailDTO(logic.createCarrito(carrito.toEntity()));
+    public CarritoDetailDTO createCarrito(){
+        return null;
     }
     
      /**
-     * <h1>GET /api/clientes/{id}/carrito : Obtener el carrito del cliente.</h1>
+     * <h1>GET /api/clientes/{idCliente}/carrito : Obtener el carrito del cliente.</h1>
      * 
      * <pre>Busca y devuelve el carrito del cliente.
      * 
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Devueve el carrito del cliente.</code> 
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 412 Precodition Failed: No existe el cliente.
+     * </code>
      * </pre>
-     * @return JSONArray {@link CarritoDetailDTO} - El carrito del cliente.
+     * @param idCliente Identificador del cliente dueño del carrito que se desa buscar. Este debe ser una cadena de dígitos.
+     * @return JSON {@link CarritoDetailDTO} - el carrito buscado.
      */
     @GET
     public CarritoDetailDTO getCarrito( Long id ) {
@@ -94,7 +82,7 @@ public class CarritoResource {
     }
     
      /**
-     * <h1>PUT /api/clientes/{id}/carrito : Actualizar el carrito del cliente.</h1>
+     * <h1>PUT /api/clientes/{idCLiente}/carrito : Actualizar el carrito del cliente.</h1>
      * <pre>Cuerpo de petición: JSON {@link CarritoDetailDTO}.
      * 
      * Actualiza el carrito del cliente.
@@ -107,26 +95,17 @@ public class CarritoResource {
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar el carrito.
      */
     @PUT
-    public CarritoDetailDTO updateCity(CarritoDetailDTO carrito) throws BusinessLogicException {
+    public CarritoDetailDTO updateCarrito(CarritoDetailDTO carrito) throws BusinessLogicException {
         return new CarritoDetailDTO( logic.updateCarrito(carrito.toEntity()) );
     }
     
-    /**
-     * <h1>DELETE /api/cliente/{id}/carrito/{id2} : Borrar el carrito.</h1>
-     * 
-     * <pre>Borra el carrito.
-     * 
-     * Códigos de respuesta:<br>
-     * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Elimina el carrito.</code>
-     * <code style="color: #c7254e; background-color: #f9f2f4;">
-     * 404 Not Found. No existe el cliente.
-     * </code>
-     * </pre>
+     /**
+     * <h1>DELETE /api/clientes/{idCLiente}/carrito : Agrega el carrito.</h1>
+     * no deberia haber esta solicitud http porque el carrito se borra automaticamente cuando se borra el cliente
      */
-    @DELETE
-    @Path("{id2: \\d+}")
-     public void deleteCarrito(@PathParam("id") Long id) {
-        logic.deleteCarrito(id);
+    @POST
+    public void deleteCarrito(){
+        
     }
+
 }
