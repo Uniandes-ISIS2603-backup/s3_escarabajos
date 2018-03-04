@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.escarabajos.entities;
 
+import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

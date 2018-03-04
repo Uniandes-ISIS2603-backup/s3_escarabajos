@@ -5,6 +5,11 @@
  */
 package co.edu.uniandes.csw.escarabajos.entities;
 
+import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
+import co.edu.uniandes.csw.escarabajos.entities.FacturaEntity;
+import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
+import co.edu.uniandes.csw.escarabajos.entities.MedioPagoEntity;
+import co.edu.uniandes.csw.escarabajos.entities.ReclamoEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +38,7 @@ public class ClienteEntity implements Serializable {
     private String usuario;
     private Integer cedula;
     @PodamExclude
-    @OneToOne(mappedBy = "Cliente")
+    @OneToOne(mappedBy = "Cliente", cascade = CascadeType.PERSIST)
     private CarritoEntity carrito;
 
     @PodamExclude
