@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.escarabajos.dtos;
+
 import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.escarabajos.entities.FotoEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ReclamoEntity;
@@ -14,43 +15,55 @@ import java.util.List;
  *
  * @author n.gaitan
  */
-public class ReclamoDetailDTO extends ReclamoDTO
-{
-    
+public class ReclamoDetailDTO extends ReclamoDTO {
+
+    private FacturaDTO factura;
+
     private List<FotoDTO> album;
+
     /**
      * Constructor vacio
      */
-    public ReclamoDetailDTO(){}
+    public ReclamoDetailDTO() {
+    }
+
     /**
      * Constructor para transformar un Entity a un DTO
      *
-     * @param entity La entidad de modelo a partir de la cual se construye el objeto
+     * @param entity La entidad de modelo a partir de la cual se construye el
+     * objeto
      */
-    public ReclamoDetailDTO(ReclamoEntity entity) 
-    {
+    public ReclamoDetailDTO(ReclamoEntity entity) {
         super(entity);
-         if (entity.getAlbum()!= null) {
+        if (entity.getAlbum() != null) {
             album = new ArrayList<>();
             for (FotoEntity entityFoto : entity.getAlbum()) {
-               album.add(new FotoDTO(entityFoto));
+                album.add(new FotoDTO(entityFoto));
             }
         }
+        if (entity.getFactura() != null) {
+            factura = new FacturaDTO(entity.getFactura());
+        }
+
     }
-        /**
+
+    /**
      * Transformar un DTO a un Entity
      *
-     * @return  La entidad construida a partir del DTO.
+     * @return La entidad construida a partir del DTO.
      */
-    public ReclamoEntity toEntiy()
-    {
+    public ReclamoEntity toEntiy() {
         ReclamoEntity entity = super.toEntity();
-        if (getAlbum()!= null) {
+        if (getAlbum() != null) {
             List<FotoEntity> fotoEntity = new ArrayList<>();
             for (FotoDTO dtoFoto : getAlbum()) {
                 fotoEntity.add(dtoFoto.toEntity());
             }
             entity.setAlbum(fotoEntity);
+        }
+        if(getFactura() != null)
+        {
+            entity.setFactura(factura.toEntity());
         }
         return entity;
     }
@@ -68,4 +81,23 @@ public class ReclamoDetailDTO extends ReclamoDTO
     public void setAlbum(List<FotoDTO> album) {
         this.album = album;
     }
+
+    /**
+     * Retorna la factura a la que hace referencia el reclamo
+     *
+     * @return la factura
+     */
+    public FacturaDTO getFactura() {
+        return factura;
+    }
+
+    /**
+     * Modifica la factura a la que hace referencia el reclamo
+     * @param factura la nueva factura
+     */
+    public void setFactura(FacturaDTO factura) {
+        this.factura = factura;
+    }
+    
+
 }

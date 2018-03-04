@@ -4,13 +4,15 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.escarabajos.dtos;
+
 import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
+
 /**
  *
  * @author n.gaitan
  */
-public class CalificacionDetailDTO extends CalificacionDTO
-{
+public class CalificacionDetailDTO extends CalificacionDTO {
+
     /**
      * El cliente que hace la calificacion
      */
@@ -19,51 +21,83 @@ public class CalificacionDetailDTO extends CalificacionDTO
      * El modelo que es calificado
      */
     private ModeloDTO modelo;
+
     /**
      * Constructor por defecto
      */
-    public CalificacionDetailDTO(){};
+    public CalificacionDetailDTO() {
+    }
+
+    ;
     /**
      * Constructor a partir de una entity
      * @param entity entidad que contiene la informacion
      */
-    public CalificacionDetailDTO(CalificacionEntity entity) 
-    {
+    public CalificacionDetailDTO(CalificacionEntity entity) {
         super(entity);
-        if(entity.getCliente() != null)
-        {
+        if (entity.getCliente() != null) {
             this.cliente = new ClienteDTO(entity.getCliente());
-        }
-        else
-        {
+        } else {
             cliente = null;
         }
-        if(entity.getModelo() != null)
-        {
+        if (entity.getModelo() != null) {
             this.modelo = new ModeloDTO(entity.getModelo());
-        }
-        else
-        {
+        } else {
             modelo = null;
         }
-        
+
     }
-        /**
+
+    /**
      * Transformar un DTO a un Entity
      *
-     * @return  La entidad construida a partir del DTO.
+     * @return La entidad construida a partir del DTO.
      */
-    public CalificacionEntity toEntiy()
-    {
+    public CalificacionEntity toEntiy() {
         CalificacionEntity ent = super.toEntity();
-        if(this.modelo != null)
-        {
+        if (this.modelo != null) {
             ent.setModelo(this.modelo.toEntity());
         }
-        if(this.cliente != null)
-        {
+        if (this.cliente != null) {
             ent.setCliente(this.cliente.toEntity());
         }
         return ent;
     }
+
+    /**
+     * Retorna el cliente de la calificacion
+     *
+     * @return el cliente de la calificacion
+     */
+    public ClienteDTO getCliente() {
+        return cliente;
+    }
+
+    /**
+     * Cambia el cliente de la calificacion
+     *
+     * @param cliente el nuevo cliente
+     */
+    public void setCliente(ClienteDTO cliente) {
+        this.cliente = cliente;
+    }
+
+    /**
+     * Retorna el modelo de la calificacion
+     *
+     * @return el modelo de la calificacion
+     */
+    public ModeloDTO getModelo() {
+        return modelo;
+    }
+
+    /**
+     * Cambia el modelo de la calificacion
+     *
+     * @param modelo el nuevo modelo de la calificacion
+     */
+    public void setModelo(ModeloDTO modelo) {
+        this.modelo = modelo;
+    }
+
 }
