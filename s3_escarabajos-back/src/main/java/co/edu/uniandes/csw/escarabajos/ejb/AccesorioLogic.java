@@ -26,9 +26,12 @@ public class AccesorioLogic {
     @Inject
     private AccesorioPersistence persistence;
     
-    public AccesorioEntity createAccesorio( AccesorioEntity entity, Long idModelo ) throws BusinessLogicException{
+    @Inject ItemLogic itemLogic;
+    
+    public AccesorioEntity createAccesorio( AccesorioEntity entity) throws BusinessLogicException{
         
         LOGGER.info("Inicia proceso de creación de un accesorio");
+        itemLogic.verificarItem(entity);
         // Verifica la regla de negocio que dice que no puede haber dos cities con el mismo nombre
         if (persistence.find(entity.getId()) != null) {
             throw new BusinessLogicException("Ya existe un accesorio el id \"" + entity.getId()+ "\"");

@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.escarabajos.resources;
 
 import co.edu.uniandes.csw.escarabajos.dtos.AccesorioDTO;
 import co.edu.uniandes.csw.escarabajos.ejb.AccesorioLogic;
+import co.edu.uniandes.csw.escarabajos.ejb.ModeloLogic;
 import co.edu.uniandes.csw.escarabajos.entities.AccesorioEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
@@ -46,6 +47,9 @@ public class AcessorioResource {
     
     @Inject
     AccesorioLogic logic;
+    
+    @Inject
+    ModeloLogic modeloLogic;
 
     /**
      * <h1>POST /api/accesorios : Crear un accesorio.</h1>
@@ -70,7 +74,8 @@ public class AcessorioResource {
      */
     @POST
     public AccesorioDTO createAccesorio(AccesorioDTO accesorio) throws BusinessLogicException {
-        return new AccesorioDTO(logic.createAccesorio(accesorio.toEntity(), accesorio.getModeloId()));
+        AccesorioEntity temp = logic.createAccesorio(accesorio.toEntity());
+        return new AccesorioDTO((AccesorioEntity)modeloLogic.addItem(temp,temp.getModeloId()));
     }
 
     /**

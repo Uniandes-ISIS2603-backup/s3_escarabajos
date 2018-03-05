@@ -1,7 +1,8 @@
 package co.edu.uniandes.csw.escarabajos.resources;
 
-import co.edu.uniandes.csw.escarabajos.dtos.BicicletaDetailDTO;
+import co.edu.uniandes.csw.escarabajos.dtos.BicicletaDTO;
 import co.edu.uniandes.csw.escarabajos.ejb.BicicletaLogic;
+import co.edu.uniandes.csw.escarabajos.ejb.ModeloLogic;
 import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
@@ -44,11 +45,14 @@ public class BicicletaResource {
     
     @Inject
     BicicletaLogic logic;
+    
+    @Inject
+    ModeloLogic modeloLogic;
      
-     private List<BicicletaDetailDTO> listEntity2DTO(List<BicicletaEntity> entityList) {
-        List<BicicletaDetailDTO> list = new ArrayList<>();
+     private List<BicicletaDTO> listEntity2DTO(List<BicicletaEntity> entityList) {
+        List<BicicletaDTO> list = new ArrayList<>();
         for (BicicletaEntity entity : entityList) {
-            list.add(new BicicletaDetailDTO(entity));
+            list.add(new BicicletaDTO(entity));
         }
         return list;
     }
@@ -56,7 +60,7 @@ public class BicicletaResource {
     /**
      * <h1>POST /api/bicis : Crear una bicicleta.</h1>
      * 
-     * <pre>Cuerpo de petición: JSON {@link BicicletaDetailDTO}.
+     * <pre>Cuerpo de petición: JSON {@link BicicletaDTO}.
      * 
      * Crea una nueva bicicleta con la informacion que se recibe en el cuerpo 
      * de la petición y se regresa un objeto identico con un id auto-generado 
@@ -70,13 +74,14 @@ public class BicicletaResource {
      * 412 Precodition Failed: Ya existe la bicicleta.
      * </code>
      * </pre>
-     * @param bicicleta {@link BicicletaDetailDTO} - La bicicleta que se desea guardar.
-     * @return JSON {@link BicicletaDetailDTO}  - La bicicleta guardada con el atributo id autogenerado.
+     * @param bicicleta {@link BicicletaDTO} - La bicicleta que se desea guardar.
+     * @return JSON {@link BicicletaDTO}  - La bicicleta guardada con el atributo id autogenerado.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la bicicleta.
      */
     @POST
-    public BicicletaDetailDTO createBicicleta(BicicletaDetailDTO bicicleta) throws BusinessLogicException {
-        return new BicicletaDetailDTO(logic.createBicicleta(bicicleta.toEntity()));
+    public BicicletaDTO createBicicleta(BicicletaDTO bicicleta) throws BusinessLogicException {
+        BicicletaEntity temp = logic.createBicicleta(bicicleta.toEntity());
+        return new BicicletaDTO((BicicletaEntity)modeloLogic.addItem(temp,temp.getModeloId()));
     }
 
     /**
@@ -88,10 +93,10 @@ public class BicicletaResource {
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Devuelve todas las bicicletas de la aplicacion.</code> 
      * </pre>
-     * @return JSONArray {@link BicicletaDetailDTO} - Las bicicletas encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
+     * @return JSONArray {@link BicicletaDTO} - Las bicicletas encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
      */
     @GET
-    public List<BicicletaDetailDTO> getBicicletas() {
+    public List<BicicletaDTO> getBicicletas() {
         return listEntity2DTO(logic.getBicicletas());
     }
     
@@ -109,22 +114,22 @@ public class BicicletaResource {
      * </code> 
      * </pre>
      * @param id Identificador de la bicicleta que se esta buscando. Este debe ser una cadena de dígitos.
-     * @return JSON {@link BicicletaDetailDTO} - La bicicleta buscada
+     * @return JSON {@link BicicletaDTO} - La bicicleta buscada
      * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
      */
     @GET
     @Path("{id: \\d+}")
-    public BicicletaDetailDTO getBicicleta(@PathParam("id") Long id) throws BusinessLogicException,WebApplicationException {
+    public BicicletaDTO getBicicleta(@PathParam("id") Long id) throws BusinessLogicException,WebApplicationException {
         BicicletaEntity entity = logic.getBicicleta(id);
         if(entity == null){
             throw new WebApplicationException("El recurso /bicis/" + id + " no existe.", 404);
         }
-        return new BicicletaDetailDTO(entity) ;
+        return new BicicletaDTO(entity) ;
     }
     
     /**
      * <h1>PUT /api/bicis/{id} : Actualizar bicicleta con el id dado.</h1>
-     * <pre>Cuerpo de petición: JSON {@link BicicletaDetailDTO}.
+     * <pre>Cuerpo de petición: JSON {@link BicicletaDTO}.
      * 
      * Actualiza la bicicleta con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
      * 
@@ -136,19 +141,19 @@ public class BicicletaResource {
      * </code> 
      * </pre>
      * @param id Identificador de la bicicleta que se desea actualizar.Este debe ser una cadena de dígitos.
-     * @param bici {@link BicicletaDetailDTO} La bicicleta que se desea guardar.
-     * @return JSON {@link BicicletaDetailDTO} - La bicicleta guardada.
+     * @param bici {@link BicicletaDTO} La bicicleta que se desea guardar.
+     * @return JSON {@link BicicletaDTO} - La bicicleta guardada.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar la bicicleta porque ya existe una con ese nombre.
      */
     @PUT
     @Path("{id: \\d+}")
-    public BicicletaDetailDTO updateBicicleta(@PathParam("id") Long id, BicicletaDetailDTO bici) throws BusinessLogicException {
+    public BicicletaDTO updateBicicleta(@PathParam("id") Long id, BicicletaDTO bici) throws BusinessLogicException {
         bici.setId(id);
         BicicletaEntity entity = logic.getBicicleta(id);
         if(entity == null){
             throw new WebApplicationException("El recurso /bicis/" + id + " no existe.", 404);
         }
-        return new BicicletaDetailDTO(logic.updateBicicleta(id, bici.toEntity()));
+        return new BicicletaDTO(logic.updateBicicleta(id, bici.toEntity()));
     }
     
     /**

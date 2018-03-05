@@ -128,7 +128,7 @@ public class CarritoLogicTest {
        
             try {
                 logicCliente.createCliente(cliente);
-                logicAccesorio.createAccesorio(item, Long.MIN_VALUE);
+                logicAccesorio.createAccesorio(item);
                 logic.createCarrito(carrito);
             } catch (BusinessLogicException ex) {
             }

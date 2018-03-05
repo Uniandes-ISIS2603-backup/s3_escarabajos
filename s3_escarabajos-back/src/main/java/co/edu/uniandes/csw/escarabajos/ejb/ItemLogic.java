@@ -89,6 +89,11 @@ public class ItemLogic {
         if (modelo == null) {
             throw new BusinessLogicException("El item debe tener un modelo");
         }
+        String tipo = modelo.getTipoModelo();
+        if (!(tipo.equals(ModeloLogic.BICICLETA) && entity instanceof BicicletaEntity||tipo.equals(ModeloLogic.ACCESORIO) && entity instanceof AccesorioEntity)) {
+            throw new BusinessLogicException("El item debe ser del mismo tipo que el modelo");
+        }
+        
     }
 
     /**

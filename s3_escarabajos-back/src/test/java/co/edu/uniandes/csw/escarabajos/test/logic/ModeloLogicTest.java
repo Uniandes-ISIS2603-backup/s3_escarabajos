@@ -117,7 +117,8 @@ public class ModeloLogicTest {
         for (int i = 0; i < 3; i++) {
             AccesorioEntity items = factory.manufacturePojo(AccesorioEntity.class);
             itemsData.add(items);
-            accLogic.createAccesorio(items,data.get(i).getId());
+            items.setModeloId(data.get(i).getId());
+            accLogic.createAccesorio(items);
         }
         for (int i = 0; i < 3; i++) {
             ItemEntity addItem = modeloLogic.addItem(itemsData.get(i),data.get(i).getId());

@@ -1,23 +1,14 @@
 package co.edu.uniandes.csw.escarabajos.resources;
 
-import co.edu.uniandes.csw.escarabajos.dtos.BicicletaDetailDTO;
-import co.edu.uniandes.csw.escarabajos.dtos.ItemDetailDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.ItemDetailDTO;
 import co.edu.uniandes.csw.escarabajos.ejb.ItemLogic;
-import co.edu.uniandes.csw.escarabajos.ejb.ItemLogic;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
-import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
-import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
-import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;

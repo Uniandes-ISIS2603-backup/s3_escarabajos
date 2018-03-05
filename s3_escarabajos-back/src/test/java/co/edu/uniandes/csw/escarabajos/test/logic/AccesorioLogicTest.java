@@ -108,7 +108,7 @@ public class AccesorioLogicTest {
     public void createAccesorioTest() throws BusinessLogicException{
         
         AccesorioEntity newEntity = factory.manufacturePojo(AccesorioEntity.class);
-        AccesorioEntity result = logic.createAccesorio(newEntity, newEntity.getModeloId());
+        AccesorioEntity result = logic.createAccesorio(newEntity);
         Assert.assertNotNull(result);
         AccesorioEntity entity = em.find(AccesorioEntity.class, result.getId());
     }

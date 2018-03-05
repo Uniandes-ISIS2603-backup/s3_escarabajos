@@ -154,4 +154,7 @@ public class ModeloItemsResource {
             throw new WebApplicationException("No existe este item en este modelo", 404);
         }
     }
+    
+    
+    
 }
