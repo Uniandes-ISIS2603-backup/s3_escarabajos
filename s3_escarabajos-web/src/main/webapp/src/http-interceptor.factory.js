@@ -16,8 +16,6 @@
                 },
                 responseError: function (rejection) {
 
-                    var status = rejection.status;
-
                     function showError(message, type) {
 
                         var types = ["info", "danger", "warning", "success"];
