@@ -178,7 +178,7 @@ public class ReclamoPersistenceTest
         List<ReclamoEntity> enProceso = reclamoPersistence.getReclamosEnProceso();
         
         Assert.assertEquals(2, enProceso.size());
-        Assert.assertEquals(data.get(0), enProceso.get(0));
+        Assert.assertEquals(data.get(0).getId(), enProceso.get(0).getId());
         Assert.assertEquals(data.get(2), enProceso.get(1));
     }
      @Test
