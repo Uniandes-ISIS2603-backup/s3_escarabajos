@@ -1,6 +1,5 @@
 package co.edu.uniandes.csw.escarabajos.persistence;
 
-import co.edu.uniandes.csw.escarabajos.entities.AccesorioEntity;
 import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
 import java.util.List;
 import java.util.logging.Level;
