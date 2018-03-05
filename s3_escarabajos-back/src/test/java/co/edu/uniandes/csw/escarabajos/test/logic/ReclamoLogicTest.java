@@ -230,4 +230,10 @@ public class ReclamoLogicTest
         Assert.assertEquals(data.get(1), reclamoLogic.getReclamoPorfactura(facturaData.get(1).getId()).get(0));
         Assert.assertEquals(data.get(2), reclamoLogic.getReclamoPorfactura(facturaData.get(2).getId()).get(0));
     }
+    @Test
+    public void deleteByFacturaTest() throws BusinessLogicException
+    {
+        reclamoLogic.deleteReclamoByFacturaId(facturaData.get(0).getId(), data.get(0).getId());
+        Assert.assertNull(reclamoLogic.find(data.get(0).getId()));
+    }
 }

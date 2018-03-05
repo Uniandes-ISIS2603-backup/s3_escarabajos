@@ -141,8 +141,8 @@ public class ReclamoLogic
     {
         ReclamoEntity e1 = find(reclamoId);
         ReclamoEntity e2 = findByFactura(facturaId).get(0);
-        if(Objects.equals(e1.getId(), e2.getId()))
-            throw new BusinessLogicException("El reclamo no corresponde a la factura");
+        if(!Objects.equals(e1.getId(), e2.getId()))
+            throw new BusinessLogicException("El reclamo no pertenece a la factura.");
         facturaLogic.getFactura(facturaId).setReclamo(null);
         delete(reclamoId);
     }
