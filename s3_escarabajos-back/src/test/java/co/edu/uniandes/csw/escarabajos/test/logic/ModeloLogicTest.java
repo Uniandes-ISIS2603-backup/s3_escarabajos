@@ -16,7 +16,6 @@ import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.ModeloPersistence;
-import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -111,6 +110,7 @@ public class ModeloLogicTest {
     private void insertData() throws Exception{
         for (int i = 0; i < 3; i++) {
             ModeloEntity entity = factory.manufacturePojo(ModeloEntity.class);
+            entity.setTipoModelo(ModeloLogic.ACCESORIO);
             modeloLogic.createModelo(entity);
             data.add(entity);
         }

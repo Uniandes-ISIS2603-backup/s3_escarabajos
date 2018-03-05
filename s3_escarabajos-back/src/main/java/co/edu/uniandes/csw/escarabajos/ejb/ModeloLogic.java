@@ -38,8 +38,8 @@ public class ModeloLogic {
     @Inject
     private AccesorioLogic accLogic;
 
-    //@Inject
-    //private BicicletaLogic biciLogic;
+    @Inject
+    private BicicletaLogic biciLogic;
     /**
      * Obtiene la lista de los registros de Modelo.
      *
@@ -93,6 +93,7 @@ public class ModeloLogic {
      * @param id
      * @param entity Instancia de ModeloEntity con los nuevos datos.
      * @return Instancia de ModeloEntity con los datos actualizados.
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException si se intenta cambiar el tipo 
      */
     public ModeloEntity updateModelo(Long id, ModeloEntity entity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar un modelo ");
@@ -117,7 +118,7 @@ public class ModeloLogic {
 
     /**
      * Agregar un item al modelo
-     * <pre> el item es del mismo tipo que el modelo.
+     * (pre) el item es del mismo tipo que el modelo.(pre)
      * @param item El item a guardar
      * @param modeloId El id de el modelo en el cual se va a guardar el item.
      * @return El item que fue agregado a el modelo.
@@ -228,11 +229,7 @@ public class ModeloLogic {
         String tipo = modelo.getTipoModelo();
         if (tipo.equals(ModeloLogic.BICICLETA) && test instanceof BicicletaEntity) {
             return true;
-        } else if (tipo.equals(ModeloLogic.ACCESORIO) && test instanceof AccesorioEntity) {
-            return true;
-        } else {
-            return false;
-        }
+        } else return tipo.equals(ModeloLogic.ACCESORIO) && test instanceof AccesorioEntity;
     }
 
     public void removeItem(Long itemsId, Long modelosId) throws BusinessLogicException {
