@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.escarabajos.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
@@ -13,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -43,6 +46,11 @@ public class FacturaEntity implements Serializable {
     @PodamExclude
     @ManyToOne
     private ClienteEntity cliente;
+    
+    @PodamExclude
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "FACTURA_ITEMS", joinColumns = @JoinColumn(name = "FACTURA_ID"), inverseJoinColumns = @JoinColumn(name="ITEM_ID"))
+    private List<ItemEntity> items = new ArrayList<>();
 
     /**
      * @return the reclamo
@@ -86,6 +94,14 @@ public class FacturaEntity implements Serializable {
         this.medioDePago = medioDePago;
     }
 
+    public List<ItemEntity> getItems() {
+        return items;
+    }
+
+    public void setItems(List<ItemEntity> items) {
+        this.items = items;
+    }
+    
     /**
      * @return the id
      */
