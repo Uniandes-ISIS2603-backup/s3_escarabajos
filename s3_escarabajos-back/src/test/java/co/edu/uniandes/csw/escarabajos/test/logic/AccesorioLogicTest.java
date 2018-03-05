@@ -6,7 +6,9 @@
 package co.edu.uniandes.csw.escarabajos.test.logic;
 
 import co.edu.uniandes.csw.escarabajos.ejb.AccesorioLogic;
+import co.edu.uniandes.csw.escarabajos.ejb.ModeloLogic;
 import co.edu.uniandes.csw.escarabajos.entities.AccesorioEntity;
+import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.AccesorioPersistence;
 import java.util.ArrayList;
@@ -37,6 +39,10 @@ public class AccesorioLogicTest {
     
     @Inject
     private AccesorioLogic logic;
+    
+    
+    @Inject
+    private ModeloLogic logicModelo;
     
     @PersistenceContext
     private EntityManager em;
@@ -94,14 +100,14 @@ public class AccesorioLogicTest {
      *
      */
     private void insertData() {
+        
         for (int i = 0; i < 3; i++) {
-            
             AccesorioEntity entity = factory.manufacturePojo(AccesorioEntity.class);
-            
+
             em.persist(entity);
-            
             data.add(entity);
         }
+
     }
     
     /**
@@ -111,10 +117,17 @@ public class AccesorioLogicTest {
     @Test
     public void createAccesorioTest() throws BusinessLogicException{
         
+        
+        ModeloEntity modelo = factory.manufacturePojo(ModeloEntity.class);
+        modelo.setTipoModelo(ModeloLogic.ACCESORIO);
+        logicModelo.createModelo(modelo);
         AccesorioEntity newEntity = factory.manufacturePojo(AccesorioEntity.class);
+        newEntity.setModeloId(modelo.getId());
         AccesorioEntity result = logic.createAccesorio(newEntity);
         Assert.assertNotNull(result);
         AccesorioEntity entity = em.find(AccesorioEntity.class, result.getId());
+        
+        Assert.assertEquals(entity, result);
     }
     
     /**

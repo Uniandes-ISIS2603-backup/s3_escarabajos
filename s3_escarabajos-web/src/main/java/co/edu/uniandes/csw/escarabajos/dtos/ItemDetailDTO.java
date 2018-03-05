@@ -81,5 +81,19 @@ public class ItemDetailDTO extends ItemDTO {
         //ATENCION !!! --ESTE METODO NO SE PUEDE LLAMAR, Si quieren el toEntity() de un ITEM toca por las subclases para no perder informacion.
        return null;
     }
+
+    /**
+     * @return the tipo
+     */
+    public String getTipo() {
+        return tipo;
+    }
+
+    /**
+     * @param tipo the tipo to set
+     */
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 }
 

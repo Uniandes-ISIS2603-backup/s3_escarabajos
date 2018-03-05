@@ -153,21 +153,15 @@ public class CarritoLogic {
      * @throws BusinessLogicException 
      */
     public ItemEntity removeItem( Long clienteId, Long itemId ) throws BusinessLogicException{
-      
-        if (clienteLogic.getCliente(clienteId) == null) {
+        ClienteEntity cliente = clienteLogic.getCliente(clienteId);    
+        if (cliente == null) {
             throw new BusinessLogicException("No existe un cliente con el id" + clienteId + "\"");
         }
-        
-        CarritoEntity carrito = persistence.find(clienteId);
-        
+        CarritoEntity carrito = persistence.find(cliente.getCarrito().getId());
         ItemEntity item = itemLogic.getItem(itemId);
-        
         List<ItemEntity> rpta = carrito.getItems();
-        
         rpta.remove(item);
-        
         carrito.setItems(rpta);
-        
         carrito.setPrecioTotal(carrito.getPrecioTotal() - item.getPrecio());
         
         return item;
