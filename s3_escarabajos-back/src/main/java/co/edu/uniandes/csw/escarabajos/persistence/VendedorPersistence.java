@@ -32,6 +32,8 @@ public class VendedorPersistence {
      */
     public VendedorEntity create(VendedorEntity entity) {
         LOGGER.info("Creando un vendedor nuevo");
+        LOGGER.info("entity: "+entity);
+
         em.persist(entity);
         LOGGER.info("Creando una vendedor nuevo");
         return entity;
@@ -63,6 +65,7 @@ public class VendedorPersistence {
     public List<VendedorEntity> findAll() {
         LOGGER.info("Consultando todos los vendedores");
         TypedQuery query = em.createQuery("select u from VendedorEntity u", VendedorEntity.class);
+        LOGGER.info("Query: "+query);
         return query.getResultList();
     }
 

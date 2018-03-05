@@ -45,10 +45,11 @@ public class ClienteDTO {
     // Atributos
     //-----------------------------------------------------------
     
+    private Long id;
     private String nombre;
     private String correo;
     private String usuario;
-    private Integer cedula;
+    private String cedula;
     
     
     public ClienteDTO(){
@@ -61,10 +62,13 @@ public class ClienteDTO {
      * @param cliente: Es la entidad que se va a convertir a DTO
      */
     public ClienteDTO(ClienteEntity cliente) {
-        this.nombre = cliente.getNombre();
-        this.correo = cliente.getCorreo();
-        this.usuario = cliente.getUsuario();
-        this.cedula = cliente.getCedula();
+        if(cliente != null){
+            this.id = cliente.getId();
+            this.nombre = cliente.getNombre();
+            this.correo = cliente.getCorreo();
+            this.usuario = cliente.getUsuario();
+            this.cedula = cliente.getCedula();
+        }
     }
     
     public String getNombre(){
@@ -85,10 +89,10 @@ public class ClienteDTO {
     public void setUsuario(String usuario){
         this.usuario = usuario;
     }
-    public int getCedula(){
+    public String getCedula(){
         return cedula;
     }
-    public void setCedula(int cedula){
+    public void setCedula(String cedula){
         this.cedula = cedula;
     }
     
@@ -99,10 +103,25 @@ public class ClienteDTO {
      */
     public ClienteEntity toEntity() {
         ClienteEntity entity = new ClienteEntity();
-        entity.setNombre(this.nombre);
-        entity.setCorreo(this.correo);
-        entity.setUsuario(this.usuario);
-        entity.setCedula(this.cedula);
+        entity.setId(this.getId());
+        entity.setNombre(this.getNombre());
+        entity.setCorreo(this.getCorreo());
+        entity.setUsuario(this.getUsuario());
+        entity.setCedula(this.getCedula());
         return entity;
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
 }

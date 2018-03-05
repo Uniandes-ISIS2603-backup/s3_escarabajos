@@ -5,8 +5,10 @@
  */
 package co.edu.uniandes.csw.escarabajos.ejb;
 
+import co.edu.uniandes.csw.escarabajos.entities.CarritoEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.escarabajos.persistence.CarritoPersistence;
 import co.edu.uniandes.csw.escarabajos.persistence.ClientePersistence;
 import java.util.List;
 import java.util.logging.Level;
@@ -25,14 +27,14 @@ public class ClienteLogic {
     @Inject
     private ClientePersistence persistence; // Variable para acceder a la persistencia de la aplicación. Es una inyección de dependencias.
 
+    @Inject
+    private CarritoPersistence carritoPersistence;
+    
      public ClienteEntity createCliente(ClienteEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de cliente");
-        // Verifica la regla de negocio que dice que no puede haber dos clientes con el mismo nombre
-        if (persistence.findByName(entity.getNombre()) != null) {
-            throw new BusinessLogicException("Ya existe una cliente con el nombre \"" + entity.getNombre() + "\"");
-        }
-        // Invoca la persistencia para crear el cliente
+        CarritoEntity carrito = new CarritoEntity();
         persistence.create(entity);
+        carritoPersistence.create(carrito);
         LOGGER.info("Termina proceso de creación de cliente");
         return entity;
     }

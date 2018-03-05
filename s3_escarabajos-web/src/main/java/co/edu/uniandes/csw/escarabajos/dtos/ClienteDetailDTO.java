@@ -36,11 +36,12 @@ public class ClienteDetailDTO extends ClienteDTO{
     private List<ReclamoDTO> reclamos ;
     
 
-    private List<ItemDTO> listaDeseos ;
+    /**private List<ItemDTO> listaDeseos ;*/
     /**
      * Constructor por defecto
      */
     public ClienteDetailDTO() {
+        super();
     }
     
     //TODO Todos los que tiene podamexclude
@@ -64,9 +65,10 @@ public class ClienteDetailDTO extends ClienteDTO{
             }
 
         }
+        /**
         if (entity != null) {
             listaDeseos = new ArrayList<>();
-           /* for (ItemEntity entityItem : entity.getListaDeseos()) {
+           /*for (ItemEntity entityItem : entity.getListaDeseos()) {
                 listaDeseos.add(new ItemDTO(entityItem) {
                     @Override
                     public ItemEntity toEntity() {
@@ -75,7 +77,7 @@ public class ClienteDetailDTO extends ClienteDTO{
                 });
             }*/
 
-        }
+        /**}*/
         if (entity != null) {
             reclamos = new ArrayList<>();
             for (ReclamoEntity entityReclamos : entity.getReclamos()) {
@@ -229,14 +231,14 @@ public class ClienteDetailDTO extends ClienteDTO{
     /**
      * @return the listaDeseos
      */
-    public List<ItemDTO> getListaDeseos() {
+    /**public List<ItemDTO> getListaDeseos() {
         return listaDeseos;
-    }
+    }/*
 
     /**
      * @param listaDeseos the listaDeseos to set
      */
-    public void setListaDeseos(List<ItemDTO> listaDeseos) {
+    /**public void setListaDeseos(List<ItemDTO> listaDeseos) {
         this.listaDeseos = listaDeseos;
-    }
+    }*/
 }

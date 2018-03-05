@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.escarabajos.resources;
 import co.edu.uniandes.csw.escarabajos.dtos.VendedorDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.VendedorDetailDTO;
 import co.edu.uniandes.csw.escarabajos.ejb.VendedorLogic;
+import co.edu.uniandes.csw.escarabajos.entities.VendedorEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 
 /**
  * <pre>Clase que implementa el recurso "vendedores".
@@ -68,7 +70,7 @@ public class VendedorResource {
      */
     @POST
     public VendedorDTO createVendedor(VendedorDetailDTO vendedor) throws BusinessLogicException {
-        return vendedor;
+        return new VendedorDTO(logic.createVendedor(vendedor.toEntity()));
     }
     //TODO ALGO CON RESOURCE
     /**
@@ -84,7 +86,15 @@ public class VendedorResource {
      */
     @GET
     public List<VendedorDetailDTO> getVendedores() {
-        return new ArrayList<VendedorDetailDTO>();
+       return listEntity2DTO(logic.getVendedores());
+    }
+    
+     private List<VendedorDetailDTO> listEntity2DTO(List<VendedorEntity> entityList) {
+        List<VendedorDetailDTO> list = new ArrayList<>();
+        for (VendedorEntity entity : entityList) {
+            list.add(new VendedorDetailDTO(entity));
+        }
+        return list;
     }
     
      /**
@@ -106,7 +116,11 @@ public class VendedorResource {
     @GET
     @Path("{id: \\d+}")
     public VendedorDetailDTO getVendedor(@PathParam("id") Long id) {
-        return null;
+        VendedorEntity entity = logic.getVendedor(id);
+        if (entity == null) {
+            throw new WebApplicationException("El cliente no existe", 404);
+        }
+        return new VendedorDetailDTO(entity);
     }
     
      /**

@@ -32,12 +32,6 @@ public class VendedorLogic {
     
      public VendedorEntity createVendedor(VendedorEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de vendedor");
-
-        ClienteEntity cliente = logicCliente.getCliente(entity.getId());
-        if (cliente == null) {
-            throw new BusinessLogicException("No existe un vendedor con el id \"" + entity.getId() + "\"");
-        }
-        
         // Invoca la persistencia para crear el vendedor
         persistence.create(entity);
         LOGGER.info("Termina proceso de creación de vendedor");

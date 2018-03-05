@@ -31,7 +31,7 @@ public class ClienteEntity implements Serializable {
     private String nombre;
     private String correo;
     private String usuario;
-    private Integer cedula;
+    private String cedula;
     @PodamExclude
     @OneToOne(mappedBy = "cliente", cascade = CascadeType.PERSIST)
     private CarritoEntity carrito;
@@ -51,7 +51,7 @@ public class ClienteEntity implements Serializable {
     @PodamExclude
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<ReclamoEntity> reclamos = new ArrayList<ReclamoEntity>();
-   
+ 
     public CarritoEntity getCarrito(){
         return carrito;
     }
@@ -76,10 +76,10 @@ public class ClienteEntity implements Serializable {
     public void setUsuario(String usuario){
         this.usuario = usuario;
     }
-    public int getCedula(){
+    public String getCedula(){
         return cedula;
     }
-    public void setCedula(int cedula){
+    public void setCedula(String cedula){
         this.cedula = cedula;
     } 
 
@@ -175,4 +175,6 @@ public class ClienteEntity implements Serializable {
         }
         return super.hashCode();
     }
+
+    
 }
