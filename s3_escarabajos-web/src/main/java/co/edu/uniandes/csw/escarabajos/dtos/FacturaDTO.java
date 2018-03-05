@@ -16,6 +16,7 @@ import co.edu.uniandes.csw.escarabajos.entities.FacturaEntity;
  */
 public class FacturaDTO{
 
+    private Long id;
     private Double dinero;
 
     public double getDinero() {
@@ -24,6 +25,14 @@ public class FacturaDTO{
 
     public void setDinero(double dinero) {
         this.dinero = dinero;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
     
     /**
