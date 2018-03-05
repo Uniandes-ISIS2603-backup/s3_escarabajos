@@ -104,6 +104,10 @@ public class AccesorioLogicTest {
         }
     }
     
+    /**
+     * prueba el metodo createAccesorio
+     * @throws BusinessLogicException 
+     */
     @Test
     public void createAccesorioTest() throws BusinessLogicException{
         
@@ -113,6 +117,10 @@ public class AccesorioLogicTest {
         AccesorioEntity entity = em.find(AccesorioEntity.class, result.getId());
     }
     
+    /**
+     * prueba el metodo updateAccesorio
+     * @throws BusinessLogicException 
+     */
     @Test
     public void updateAccesorioTest() throws BusinessLogicException {
         
@@ -128,6 +136,9 @@ public class AccesorioLogicTest {
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
     }
 
+    /**
+     * prueba el metodo deleteAccesorio
+     */
     @Test
     public void deleteAccesorioTest() {
         AccesorioEntity entity = data.get(0);
@@ -136,6 +147,9 @@ public class AccesorioLogicTest {
         Assert.assertNull(deleted);
     }
     
+    /**
+     * prueba el metodo getAccesorios
+     */
     @Test
     public void getAccesoriosTest() {
         List<AccesorioEntity> list = logic.getAccesorios();
@@ -151,6 +165,9 @@ public class AccesorioLogicTest {
         }
     }
     
+    /**
+     * prueba el metodo getAccesorio
+     */
     @Test
     public void getAccesorioTest() {
         AccesorioEntity entity = data.get(0);

@@ -28,6 +28,12 @@ public class AccesorioLogic {
     
     @Inject ItemLogic itemLogic;
     
+    /**
+     * crea un accesorio
+     * @param entity
+     * @return el accesorio
+     * @throws BusinessLogicException 
+     */
     public AccesorioEntity createAccesorio( AccesorioEntity entity) throws BusinessLogicException{
         
         LOGGER.info("Inicia proceso de creación de un accesorio");
@@ -42,6 +48,13 @@ public class AccesorioLogic {
         return entity;
     }
     
+    /**
+     * actualiza un accesorio
+     * @param entity
+     * @param idModelo
+     * @return el accesorio
+     * @throws BusinessLogicException 
+     */
     public AccesorioEntity updateAccesorio( AccesorioEntity entity, Long idModelo ) throws BusinessLogicException{
         
         if (persistence.find(entity.getId()) == null) {
@@ -50,6 +63,10 @@ public class AccesorioLogic {
         return persistence.update(entity);
     }
     
+    /**
+     * borra un accesorio
+     * @param id 
+     */
     public void deleteAccesorio( Long id ){
         
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el Accesorio con id={0}", id);    
@@ -57,6 +74,10 @@ public class AccesorioLogic {
         LOGGER.log(Level.INFO, "Termina proceso de borrar el Accesorio con id={0}", id);
     }
     
+    /**
+     * 
+     * @return todos los accesorios
+     */
     public List<AccesorioEntity> getAccesorios() {
         LOGGER.info("Inicia proceso de consultar todos los accesorios");
         List<AccesorioEntity> accesorios = persistence.findAll();
@@ -64,6 +85,11 @@ public class AccesorioLogic {
         return accesorios;
     }
 
+    /**
+     * busca un accesorio
+     * @param id
+     * @return el accesorio
+     */
     public AccesorioEntity getAccesorio(Long id) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar el accesorio con id={0}", id);
         AccesorioEntity accesorio = persistence.find(id);

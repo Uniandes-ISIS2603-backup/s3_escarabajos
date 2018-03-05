@@ -36,6 +36,12 @@ public class CarritoLogic {
     @Inject
     private ClienteLogic clienteLogic;
     
+    /**
+     * Crea un carito 
+     * @param entity
+     * @return el carrito agregado
+     * @throws BusinessLogicException 
+     */
     public CarritoEntity createCarrito(CarritoEntity entity) throws BusinessLogicException{
         LOGGER.info("Inicia proceso de creación del carrito");
         CarritoEntity carrito = findCarrito(entity.getId());
@@ -48,6 +54,11 @@ public class CarritoLogic {
         return entity;
     }
     
+    /**
+     * encuentra un carrito
+     * @param id
+     * @return el carrito encontrado
+     */
     public CarritoEntity findCarrito( Long id ){
         
         LOGGER.log(Level.INFO, "Inicia proceso de consultar el carrito con id={0}", id);
@@ -59,6 +70,12 @@ public class CarritoLogic {
         return carrito;
     }
     
+    /**
+     * actualiza un carrito
+     * @param entity
+     * @return el carrito actualizado
+     * @throws BusinessLogicException 
+     */
     public CarritoEntity updateCarrito( CarritoEntity entity ) throws BusinessLogicException{
         
         if (persistence.find(entity.getId()) == null) {
@@ -67,12 +84,22 @@ public class CarritoLogic {
         return persistence.update(entity);
     }
     
+    /**
+     * borra un carrito
+     * @param id 
+     */
     public void deleteCarrito(Long id) {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar carrito con id={0}", id);
         persistence.deleteCarrito(id);
         LOGGER.log(Level.INFO, "Termina proceso de borrar carrito con id={0}", id);
     }
     
+    /**
+     * devuelve la lista de items del carrito
+     * @param id
+     * @return
+     * @throws BusinessLogicException 
+     */
     public List<ItemEntity> getItems( Long id ) throws BusinessLogicException{
         
         if (persistence.find(id) == null) {
@@ -84,6 +111,13 @@ public class CarritoLogic {
         return carrito.getItems();
     }
     
+    /**
+     * agrega un item a la lista de items
+     * @param clienteId
+     * @param itemId
+     * @return el item agregado
+     * @throws BusinessLogicException 
+     */
     public ItemEntity addItem( Long clienteId, Long itemId ) throws BusinessLogicException{
         ClienteEntity cliente = clienteLogic.getCliente(clienteId);    
         if (cliente == null) {
@@ -111,6 +145,13 @@ public class CarritoLogic {
         return item;
     }
     
+    /**
+     * quita un item de la lista de items del carrito
+     * @param clienteId
+     * @param itemId
+     * @return el item eliminado
+     * @throws BusinessLogicException 
+     */
     public ItemEntity removeItem( Long clienteId, Long itemId ) throws BusinessLogicException{
       
         if (clienteLogic.getCliente(clienteId) == null) {
@@ -132,6 +173,12 @@ public class CarritoLogic {
         return item;
     }
     
+    /**
+     * genera la factura con los items que tiene el carrito y vacia el carrito
+     * @param id
+     * @return la factura generada
+     * @throws BusinessLogicException 
+     */
     public FacturaEntity crearFactura( Long id ) throws BusinessLogicException{
         CarritoEntity carrito = persistence.find(id);
         if ( carrito== null) {
@@ -164,6 +211,10 @@ public class CarritoLogic {
         return factura;
     }
     
+    /**
+     * calcula el procio total del carrito y lo actualiza
+     * @param id 
+     */
     public void actualizarPrecioTotal( Long id ){
         
         CarritoEntity carrito = persistence.find(id);

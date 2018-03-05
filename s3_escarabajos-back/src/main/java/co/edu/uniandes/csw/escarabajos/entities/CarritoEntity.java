@@ -31,16 +31,29 @@ public class CarritoEntity implements Serializable{
     // Atributos
     //----------------------------------------------------
     
+    /**
+     * id autogenerado
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    /**
+     * precio total del carrito
+     */
     private Double precioTotal=0.0;
     
+    /**
+     *  lista de items del carrito
+     */
     @PodamExclude
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "CAR_ITEMS", joinColumns = @JoinColumn(name = "CAR_ID"), inverseJoinColumns = @JoinColumn(name="ITEM_ID"))
     private List<ItemEntity> items = new ArrayList<>();
+    
+    /**
+     * cliente dueño del carrito
+     */
     @PodamExclude
     @OneToOne(cascade = CascadeType.PERSIST)
     private ClienteEntity cliente;
@@ -49,26 +62,47 @@ public class CarritoEntity implements Serializable{
     // Getters y Setters
     //----------------------------------------------------
 
+    /**
+     * @return el precio total del carrito 
+     */
     public Double getPrecioTotal() {
         return precioTotal;
     }
-
+    
+    /**
+     * asigna el precio total
+     * @param precioTotal 
+     */
     public void setPrecioTotal(Double precioTotal) {
         this.precioTotal = precioTotal;
     }
     
+    /**
+     * 
+     * @return la lista de items del carrito
+     */
     public List<ItemEntity> getItems() {
         return items;
     }
 
+    /**
+     * asigna la lista de items del carrito
+     * @param items 
+     */
     public void setItems(List<ItemEntity> items) {
         this.items = items;
     }
-
+    /**
+     * 
+     * @return el cliente dueño del carrito 
+     */
     public ClienteEntity getCliente() {
         return cliente;
     }
-
+    /**
+     * asigna el cliente del carrito
+     * @param cliente 
+     */
     public void setCliente(ClienteEntity cliente) {
         this.cliente = cliente;
     }
