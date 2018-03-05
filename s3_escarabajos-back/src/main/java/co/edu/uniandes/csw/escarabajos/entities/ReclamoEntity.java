@@ -48,7 +48,7 @@ public class ReclamoEntity  implements Serializable
     private ClienteEntity cliente;
    
     @PodamExclude
-    private boolean enProceso = true;
+    private Boolean enProceso = true;
     
     public String getMensaje()
     {

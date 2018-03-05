@@ -212,7 +212,7 @@ public class CalificacionLogicTest
 
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
         Assert.assertEquals(pojoEntity.getComentario(), resp.getComentario());
-        Assert.assertTrue(pojoEntity.getPuntaje() == resp.getPuntaje());
+        Assert.assertEquals(pojoEntity.getPuntaje(), resp.getPuntaje(), 0);
         Assert.assertEquals(pojoEntity.getModelo(), resp.getModelo());
         Assert.assertEquals(pojoEntity.getCliente(), resp.getCliente());
     }

@@ -8,8 +8,42 @@ package co.edu.uniandes.csw.escarabajos.dtos;
 import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
 
 /**
- *
- * @author n.gaitan
+ * Clase que extiende de {@link CalificacionDTO} para manejar la transformacion entre
+ * los objetos JSON y las Entidades de la base de datos. 
+ * 
+  * Al serializarse como JSON esta clase implementa la siguiente calificacion: <br>
+ * <pre>
+ *   {
+ *      "id": number,
+ *      "comentario": String,
+ *      "puntaje": double,
+ *      "cliente": {@link ClienteDTO},
+ *      "modelo": {@link ModeloDTO}
+ *   }
+ * </pre> Por ejemplo una calificacion se representa asi:<br>
+ * <pre>
+ * {
+ *      "id": 1,
+ *      "comentario": "Lindo casco",
+ *      "puntaje": 3.44,
+ *      "cliente": 
+ *      {
+ *          "id": 1,
+            "nombre": "Ariel",
+            "correo": "asnar0@discuz.net",
+            "usuario": "␣",
+            "cedula": "8643803030"
+ *      },
+ *      "modelo": 
+ *      {
+ *          "id": 1,
+ *          "marca": "BMXTREME",
+ *          "referencia": "BMEXTREME-MTN-2017",
+ *          "calificacionMedia": 4.50,
+ *          "tipoModelo": "Accesorio"
+ *      }
+ * }
+ * </pre>
  */
 public class CalificacionDetailDTO extends CalificacionDTO {
 

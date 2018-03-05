@@ -97,7 +97,13 @@ public class ModeloCalificacionResource {
     public CalificacionDetailDTO createCalificacion(CalificacionDetailDTO calificacion
             , @PathParam("modelosId")Long modeloId, @PathParam("clientesId")Long clienteId, @PathParam("calificacionesId")Long id) throws BusinessLogicException {
 
-        return new CalificacionDetailDTO(cal.crearCalificacion(calificacion.toEntity(), modeloId, clienteId));
+        return new CalificacionDetailDTO(
+                cal
+                        .crearCalificacion(
+                        calificacion
+                                .toEntity(),
+                        modeloId,
+                        clienteId));
     }
 
     /**

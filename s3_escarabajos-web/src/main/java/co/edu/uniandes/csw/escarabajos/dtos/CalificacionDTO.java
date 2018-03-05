@@ -7,6 +7,30 @@ package co.edu.uniandes.csw.escarabajos.dtos;
 
 import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
 /**
+ * CalificacionDTO Objeto de transferencia de datos del modelo de la bicicleta. Los DTO
+ * contienen las representaciones de los JSON que se transfieren entre el
+ * cliente y el servidor.
+ *
+ * Al serializarse como JSON esta clase implementa la siguiente calificacion: <br>
+ * <pre>
+ *   {
+ *      "id": number,
+ *      "comentario": String,
+ *      "puntaje": double
+ *      
+ *   }
+ * </pre> Por ejemplo una calificacion se representa asi:<br>
+ *
+ * <pre>
+ *
+ *  {
+ *      "id": 1,
+ *      "comentario": "Lindo casco",
+ *      "puntaje": 5
+ *      
+ *   }
+ *
+ * </pre>
  *
  * @author n.gaitan
  */
@@ -24,7 +48,7 @@ public class CalificacionDTO
     /**
      * Puntaje dado por el usuario.
      */
-    private double puntaje;
+    private Double puntaje;
     
     /**
      * Constructor por defecto

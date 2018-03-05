@@ -73,7 +73,7 @@ public class CalificacionLogic {
        
         cal.setModelo(model);
         cal.setCliente(cliente);
-        CalificacionEntity nueva = calificacionPersistence.create(cal);
+        CalificacionEntity nueva = calificacionPersistence.update(cal);
         model.getCalificaciones().add(nueva);
         modeloLogic.updateModelo(model.getId(), model);
         cliente.getCalificaciones().add(cal);
