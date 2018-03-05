@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.escarabajos.resources;
 
+import co.edu.uniandes.csw.escarabajos.dtos.AccesorioDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.BicicletaDetailDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.CarritoDetailDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.ClienteDetailDTO;
@@ -60,7 +61,27 @@ public class CarritoResource {
      /**
      * <h1>POST /api/clientes/{idCLiente}/carrito : Agrega el carrito.</h1>
      * no deberia haber esta solicitud http porque el carrito se agrega automaticamente cuando se crea el cliente
+     * se creo solo por motivos de prueba ya que clienteResource aun no funciona. En un futuro deberia borrarse.
      */
+//    @POST
+//    public CarritoDetailDTO createCarrito(@PathParam("idCliente") Long idCliente) throws BusinessLogicException {
+//        
+//        ClienteEntity cliente = logicCliente.getCliente(idCliente);
+//        
+//        if( cliente == null ){
+//            throw new WebApplicationException("El recurso /cliente/" + idCliente + " no existe.", 404);
+//        }
+//        
+//        CarritoDetailDTO carrito = new CarritoDetailDTO();
+//        
+//        logic.createCarrito(carrito.toEntity());
+//        
+//        cliente.setCarrito(carrito.toEntity());
+//        
+//        logicCliente.updateCliente(cliente);
+//        
+//        return new CarritoDetailDTO(logic.findCarrito(cliente.getCarrito().getId()));
+//    }
 
     
      /**

@@ -57,7 +57,7 @@ public class CarritoDTO {
     /**
      * modela el precio de todos los itemps a comprar
      */
-    private double precioTotal;
+    private double precioTotal=0.0;
     
     //-----------------------------------------------------------
     // Constructores
