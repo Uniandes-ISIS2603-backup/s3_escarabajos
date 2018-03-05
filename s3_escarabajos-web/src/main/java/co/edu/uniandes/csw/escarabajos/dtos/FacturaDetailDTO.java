@@ -9,9 +9,6 @@ import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 import co.edu.uniandes.csw.escarabajos.entities.FacturaEntity;
 import co.edu.uniandes.csw.escarabajos.entities.MedioPagoEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ReclamoEntity;
-import javax.persistence.CascadeType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 /**
  *
