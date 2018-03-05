@@ -52,52 +52,39 @@ public class ClienteDetailDTO extends ClienteDTO{
      */
     public ClienteDetailDTO(ClienteEntity entity) {
         super(entity);
-        if (entity.getCarrito()!= null) {
-            this.carrito = new CarritoDTO(entity.getCarrito());
-        } else {
-            entity.setCarrito(null);
-        }
-        
         if (entity != null) {
-            compras = new ArrayList<>();
-            for (FacturaEntity entityCompras : entity.getCompras()) {
-                compras.add(new FacturaDTO(entityCompras));
+            if (entity.getCarrito()!= null) {
+                this.carrito = new CarritoDTO(entity.getCarrito());
+            } else {
+                entity.setCarrito(null);
             }
 
-        }
-        /**
-        if (entity != null) {
-            listaDeseos = new ArrayList<>();
-           /*for (ItemEntity entityItem : entity.getListaDeseos()) {
-                listaDeseos.add(new ItemDTO(entityItem) {
-                    @Override
-                    public ItemEntity toEntity() {
-                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                    }
-                });
-            }*/
 
-        /**}*/
-        if (entity != null) {
-            reclamos = new ArrayList<>();
-            for (ReclamoEntity entityReclamos : entity.getReclamos()) {
-                reclamos.add(new ReclamoDTO(entityReclamos));
-            }
+                compras = new ArrayList<>();
+                for (FacturaEntity entityCompras : entity.getCompras()) {
+                    compras.add(new FacturaDTO(entityCompras));
+                }
+           
+                reclamos = new ArrayList<>();
+                for (ReclamoEntity entityReclamos : entity.getReclamos()) {
+                    reclamos.add(new ReclamoDTO(entityReclamos));
+                }
 
-        }
-        if (entity != null) {
-            calificaciones = new ArrayList<>();
-            for (CalificacionEntity entityCalificaciones : entity.getCalificaciones()) {
-                calificaciones.add(new CalificacionDTO(entityCalificaciones));
-            }
+            
+            
+                calificaciones = new ArrayList<>();
+                for (CalificacionEntity entityCalificaciones : entity.getCalificaciones()) {
+                    calificaciones.add(new CalificacionDTO(entityCalificaciones));
+                }
 
-        }
-        if (entity != null) {
-            mediosPago = new ArrayList<>();
-            for (MedioPagoEntity entityMediosPago : entity.getMediosPago()) {
-                mediosPago.add(new MedioPagoDTO(entityMediosPago));
-            }
+            
+            
+                mediosPago = new ArrayList<>();
+                for (MedioPagoEntity entityMediosPago : entity.getMediosPago()) {
+                    mediosPago.add(new MedioPagoDTO(entityMediosPago));
+                }
 
+            
         }
         
     }
