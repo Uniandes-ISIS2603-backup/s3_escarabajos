@@ -143,6 +143,10 @@ public class CarritoLogicTest {
         }
     }
     
+    /**
+     * prueba el metodo createCarrito
+     * @throws BusinessLogicException 
+     */
     @Test
     public void createCarrito() throws BusinessLogicException {
         
@@ -152,6 +156,9 @@ public class CarritoLogicTest {
         CarritoEntity entity = logic.findCarrito(result.getId());
     }
     
+    /**
+     * prueba el metodo findCarrito
+     */
     @Test
     public void findCarritoTest() {
         
@@ -161,6 +168,10 @@ public class CarritoLogicTest {
         Assert.assertEquals(entity.getId(), resultEntity.getId());
     }
     
+    /**
+     * prueba el metodo updateCarrito
+     * @throws BusinessLogicException 
+     */
     @Test
     public void updateCarritoTest() throws BusinessLogicException {
         
@@ -176,6 +187,9 @@ public class CarritoLogicTest {
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
     }
     
+    /**
+     * prueba el metodo deleteCarrito
+     */
     @Test
     public void deleteCarritoTest() {
         CarritoEntity entity = data.get(0);
@@ -184,6 +198,10 @@ public class CarritoLogicTest {
         Assert.assertNull(deleted);
     }
     
+    /**
+     * prueba el metodo addItem
+     * @throws BusinessLogicException 
+     */
     @Test
     public void addItemTest() throws BusinessLogicException {
         
@@ -197,6 +215,10 @@ public class CarritoLogicTest {
    
     }
     
+    /**
+     * prueba el metodo removeItem
+     * @throws BusinessLogicException 
+     */
     @Test
     public void removeItemTest() throws BusinessLogicException{
         
@@ -211,6 +233,10 @@ public class CarritoLogicTest {
         
     }
     
+    /**
+     * prueba el metodo crearFactura
+     * @throws BusinessLogicException 
+     */
     @Test
     public void crearFacturaTest() throws BusinessLogicException {
         

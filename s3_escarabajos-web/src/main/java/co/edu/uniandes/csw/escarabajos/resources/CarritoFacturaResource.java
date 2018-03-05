@@ -10,14 +10,22 @@ import co.edu.uniandes.csw.escarabajos.ejb.CarritoLogic;
 import co.edu.uniandes.csw.escarabajos.ejb.ClienteLogic;
 import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 
 /**
  *
  * @author Mateo
  */
+@Path("clientes/{idCliente: \\d+}/carrito/factura")
+@Produces("application/json")
+@Consumes("application/json")
+@RequestScoped
 public class CarritoFacturaResource {
     
     @Inject

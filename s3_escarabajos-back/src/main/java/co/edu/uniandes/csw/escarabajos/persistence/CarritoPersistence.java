@@ -33,23 +33,40 @@ public class CarritoPersistence {
     // Metodos CRUD
     //--------------------------------------------------------------
 
+    /**
+     * encuentra un carrito
+     * @param clienteId
+     * @return el carrito
+     */
     public CarritoEntity find(Long clienteId) {
         LOGGER.log(Level.INFO, "Consultando carrito del cliente con id={0}", clienteId);
         return em.find(CarritoEntity.class, clienteId);
     }
     
+    /**
+     * crea un carrito
+     * @param entity
+     * @return el carrito
+     */
     public CarritoEntity create(CarritoEntity entity) {
         LOGGER.info("Creando un carrito nuevo");
         em.persist(entity);
         LOGGER.info("Carrito creado");
         return entity;
     }
-    
+    /**
+     * actualiza un carrito
+     * @param entity
+     * @return el carrito
+     */
     public CarritoEntity update(CarritoEntity entity) {
         LOGGER.log(Level.INFO, "Actualizando carrito con id={0}", entity.getId());
         return em.merge(entity);
     }
-    
+    /**
+     * borra el carrito
+     * @param id 
+     */
     public void deleteCarrito(Long id){
         
         LOGGER.log(Level.INFO, "Borrando carrito con id={0}", id);

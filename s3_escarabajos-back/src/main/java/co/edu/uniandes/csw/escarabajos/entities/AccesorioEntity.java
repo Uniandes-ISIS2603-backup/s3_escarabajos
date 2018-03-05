@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 
 /**
  *
- * @author Andres
+ * @author Mateo
  */
 @Entity
 public class AccesorioEntity extends ItemEntity implements Serializable{

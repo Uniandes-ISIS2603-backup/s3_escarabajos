@@ -41,7 +41,10 @@ public class CarritoDetailDTO extends CarritoDTO {
     
     public CarritoDetailDTO() {
     }
-    
+    /**
+     * Crea un CarritoDTO a partir de un Entity
+     * @param entity 
+     */
     public CarritoDetailDTO( CarritoEntity entity ) {
         
         super(entity);
@@ -66,23 +69,42 @@ public class CarritoDetailDTO extends CarritoDTO {
     //-----------------------------------------------------------
     // Getters and Setters
     //-----------------------------------------------------------
-    
+    /**
+     * retorna los items
+     * @return 
+     */
     public List<ItemDTO> getItems() {
         return items;
     }
     
+    /**
+     * asigna los items
+     * @param items 
+     */
     public void setItems(ArrayList<ItemDTO> items) {
         this.items = items;
     }
 
+    /**
+     * retorna el cliente
+     * @return 
+     */
     public ClienteDTO getCliente() {
         return cliente;
     }
 
+    /**
+     * asigna el cliente
+     * @param cliente 
+     */
     public void setCliente(ClienteDTO cliente) {
         this.cliente = cliente;
     }
     
+    /**
+     * Lo convierte en un CarritoENity
+     * @return 
+     */
     @Override
     public CarritoEntity toEntity() {
         

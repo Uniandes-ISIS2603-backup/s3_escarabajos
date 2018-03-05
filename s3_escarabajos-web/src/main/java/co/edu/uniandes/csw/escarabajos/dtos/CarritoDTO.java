@@ -85,10 +85,18 @@ public class CarritoDTO {
     // Getters and Setters
     //-----------------------------------------------------------
     
+    
+    /**
+     * retorna el precio de todos los items
+     * @return 
+     */
     public double getPrecioTotal() {
         return precioTotal;
     }
-
+    /**
+     * asigna el precio total
+     * @param precioTotal 
+     */
     public void setPrecioTotal(double precioTotal) {
         this.precioTotal = precioTotal;
     }
@@ -97,6 +105,10 @@ public class CarritoDTO {
     // Metodos
     //-----------------------------------------------------------
     
+    /**
+     * lo convierte en un CarritoEntity
+     * @return 
+     */
     public CarritoEntity toEntity() {
         
         CarritoEntity entity = new CarritoEntity();

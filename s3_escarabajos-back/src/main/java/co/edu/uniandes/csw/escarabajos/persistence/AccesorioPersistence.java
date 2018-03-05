@@ -34,17 +34,31 @@ public class AccesorioPersistence {
     // Metodos CRUD
     //--------------------------------------------------------------
     
+    /**
+     * encuentra un accesorio
+     * @param id
+     * @return el accesorio
+     */
     public AccesorioEntity find(Long id) {
         LOGGER.log(Level.INFO, "Consultando accesorio con id={0}", id);
         return em.find(AccesorioEntity.class, id);
     }
 
+    /**
+     * 
+     * @return todos los accesorios
+     */
     public List<AccesorioEntity> findAll() {
         LOGGER.info("Consultando todos los accesorios");
         Query q = em.createQuery("select u from AccesorioEntity u");
         return q.getResultList();
     }
 
+    /**
+     * crea un accesorio
+     * @param entity
+     * @return el accesorio
+     */
     public AccesorioEntity create(AccesorioEntity entity) {
         LOGGER.info("Creando un accesorio nuevo");
         em.persist(entity);
@@ -52,15 +66,31 @@ public class AccesorioPersistence {
         return entity;
     }
 
+    /**
+     * actualiza un accesorio
+     * @param entity
+     * @return el accesorio
+     */
     public AccesorioEntity update(AccesorioEntity entity) {
         LOGGER.log(Level.INFO, "Actualizando accesorio con id={0}", entity.getId());
         return em.merge(entity);
     }
+    
+    /**
+     * borra un accesorio
+     * @param id 
+     */
     public void delete(Long id) {
         LOGGER.log(Level.INFO, "Borrando accesorio con id={0}", id);
         AccesorioEntity entity = em.find(AccesorioEntity.class, id);
         em.remove(entity);
     }
+    
+    /**
+     * busca un accesorio por nombre
+     * @param modeloId
+     * @return el accesorio
+     */
      public List<AccesorioEntity> findByModelo(Long modeloId){
         LOGGER.log(Level.INFO, "Consultando las accesorios por modelo ", modeloId);
         TypedQuery query = em.createQuery("Select e From AccesorioEntity e where e.modeloId = :modeloId", AccesorioEntity.class);
