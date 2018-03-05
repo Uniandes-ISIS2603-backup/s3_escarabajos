@@ -75,6 +75,10 @@ public class BicicletaLogic {
         LOGGER.info("Inicia proceso de creación de bicicleta");
         logic.verificarItem(entity);
         verificarBicicleta(entity);
+        
+        if (persistence.find(entity.getId()) != null) {
+            throw new BusinessLogicException("Ya existe una bicicleta con el id \"" + entity.getId()+ "\"");
+        }
         persistence.create(entity);
         LOGGER.info("Termina proceso de creación de bicicleta");
         return entity;
