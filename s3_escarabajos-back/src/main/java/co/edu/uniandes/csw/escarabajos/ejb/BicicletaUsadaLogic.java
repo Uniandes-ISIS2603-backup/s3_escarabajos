@@ -91,6 +91,7 @@ public class BicicletaUsadaLogic {
      */
     public BicicletaUsadaEntity createBicicleta(Long idVendedor,BicicletaUsadaEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de bicicleta usada");
+        entity.setEstado("En proceso");
         logicItem.verificarItem(entity);
         verificarBiciUsada(entity);
         VendedorEntity vendedor = logicVendedor.getVendedor(idVendedor);

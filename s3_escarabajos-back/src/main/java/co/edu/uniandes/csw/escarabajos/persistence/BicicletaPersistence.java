@@ -33,33 +33,10 @@ public class BicicletaPersistence {
         LOGGER.info("Creando una bicicleta nueva");
         return entity;
     }
-
-    /**
-     * Busca si hay alguna bicicleta con el nombre que se envía de argumento
-     *
-     * @param name: Nombre de la bicicleta que se está buscando
-     * @return null si no existe ninguna bicicleta con el nombre del argumento. Si
-     * existe alguna devuelve la primera.
-     */
-    public BicicletaEntity findByName(String name) {
-        LOGGER.log(Level.INFO, "Consultando bicicleta por nombre ", name);
-
-        // Se crea un query para buscar cities con el nombre que recibe el método como argumento. ":name" es un placeholder que debe ser remplazado
-        TypedQuery query = em.createQuery("Select e From BicicletaEntity e where e.name = :name", BicicletaEntity.class);
-        // Se remplaza el placeholder ":name" con el valor del argumento 
-        query = query.setParameter("name", name);
-        // Se invoca el query se obtiene la lista resultado
-        List<BicicletaEntity> sameName = query.getResultList();
-        if (sameName.isEmpty()) {
-            return null;
-        } else {
-            return sameName.get(0);
-        }
-    }
-
+    
     public List<BicicletaEntity> findAll() {
         LOGGER.info("Consultando todas las bicicletas");
-        TypedQuery query = em.createQuery("select u from BicicletaEntity u", BicicletaEntity.class);
+        TypedQuery query = em.createQuery("select u from BicicletaEntity u where u.usada = 0", BicicletaEntity.class);
         return query.getResultList();
     }
 
@@ -78,7 +55,7 @@ public class BicicletaPersistence {
     
     public List<BicicletaEntity> findByModelo(Long modeloId){
         LOGGER.log(Level.INFO, "Consultando las bicicletas por modelo ", modeloId);
-        TypedQuery query = em.createQuery("Select e From BicicletaEntity e where e.modeloId = :modeloId", BicicletaEntity.class);
+        TypedQuery query = em.createQuery("Select e From BicicletaEntity e where e.modeloId = :modeloId and e.usada = 0", BicicletaEntity.class);
         query = query.setParameter("modeloId", modeloId);
         return query.getResultList();
     }

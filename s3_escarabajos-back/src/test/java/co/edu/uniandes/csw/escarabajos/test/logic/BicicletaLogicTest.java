@@ -105,6 +105,7 @@ public class BicicletaLogicTest {
 
         for (int i = 0; i < 3; i++) {
             ModeloEntity entity = factory.manufacturePojo(ModeloEntity.class);
+            entity.setTipoModelo("Bicicleta");
             em.persist(entity);
             dataModelo.add(entity);
         }
