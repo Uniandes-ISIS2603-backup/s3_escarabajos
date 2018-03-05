@@ -86,13 +86,8 @@ public class FotoPersistence {
         q.setParameter("itemid", itemid);
         q.setParameter("fotoid", fotoid);
         List<FotoEntity> results = q.getResultList();
-        LOGGER.info(results.size()+"!!!!!!!!!!!");
         FotoEntity foto = null;
-        if (results == null) {
-            foto = null;
-        } else if (results.isEmpty()) {
-            foto = null;
-        } else if (results.size() >= 1) {
+        if (results.size() >= 1) {
             foto = results.get(0);
         }
 
@@ -114,11 +109,7 @@ public class FotoPersistence {
         q.setParameter("fotoid", fotoid);
         List<FotoEntity> results = q.getResultList();
         FotoEntity foto = null;
-        if (results == null) {
-            foto = null;
-        } else if (results.isEmpty()) {
-            foto = null;
-        } else if (results.size() >= 1) {
+        if (results.size() >= 1) {
             foto = results.get(0);
         }
 

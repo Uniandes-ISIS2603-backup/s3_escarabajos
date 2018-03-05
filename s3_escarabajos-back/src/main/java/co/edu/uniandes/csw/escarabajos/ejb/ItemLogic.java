@@ -47,8 +47,9 @@ public class ItemLogic {
      * @return Lista de entidades de tipo item.
      */
     public List<ItemEntity> getItems() {
-        ArrayList<ItemEntity> items = new ArrayList<ItemEntity>();
+        ArrayList<ItemEntity> items = new ArrayList<>();
         LOGGER.info("Inicia proceso de consultar todos los items");
+        LOGGER.info(biciPers.findAll().size()+"!!!"+accPers.findAll().size());
         for (ItemEntity bicicleta : biciPers.findAll()) {
             items.add(bicicleta);
         }
