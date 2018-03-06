@@ -146,10 +146,11 @@ public class ClienteCalificacionResource {
     @GET
     @Path("{clientesId: \\d+}")
     public CalificacionDetailDTO getCalificacion(@PathParam("clientesId") Long clienteId, @PathParam("modelosId") Long modeloId, @PathParam("calificacionesId") Long id) throws WebApplicationException, BusinessLogicException {
-        CalificacionDetailDTO cali = new CalificacionDetailDTO(cal.getCalificacionesPorClienteAndModelo(clienteId, modeloId).get(0));
-        if (cali == null) {
+        CalificacionEntity calificacion = cal.find(id);
+        if (calificacion == null) {
             throw new WebApplicationException("El recurso /calificaciones/" + id + " no existe.", 404);
         }
+        CalificacionDetailDTO cali = new CalificacionDetailDTO(cal.getCalificacionesPorClienteAndModelo(clienteId, modeloId).get(0));
         return cali;
     }
 

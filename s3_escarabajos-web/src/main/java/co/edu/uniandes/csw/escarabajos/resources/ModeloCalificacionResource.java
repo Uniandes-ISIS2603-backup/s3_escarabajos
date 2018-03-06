@@ -30,7 +30,8 @@ import javax.ws.rs.WebApplicationException;
  * URL: /api/modelos/{modelosId}/calificaciones
  * </pre>
  * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta
- * "/api" y este recurso tiene la ruta "api/modelos/{modelosId}/calificaciones".</i>
+ * "/api" y este recurso tiene la ruta
+ * "api/modelos/{modelosId}/calificaciones".</i>
  *
  * <h2>Anotaciones </h2>
  * <pre>
@@ -41,7 +42,6 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author n.gaitan
  */
-
 @Path("modelos/{modelosId: \\d+}/calificaciones")
 @Produces("application/json")
 @Consumes("application/json")
@@ -53,6 +53,7 @@ public class ModeloCalificacionResource {
 
     /**
      * Convierte una lista de entities a una lista de DTOs
+     *
      * @param l la lista de entidades
      * @return la lista de DTOs
      */
@@ -65,7 +66,8 @@ public class ModeloCalificacionResource {
     }
 
     /**
-     * <h1>POST /api/modelos/{modelosId}/calificaciones/{calificacionesId} : Crear una calificacion.</h1>
+     * <h1>POST /api/modelos/{modelosId}/calificaciones/{calificacionesId} :
+     * Crear una calificacion.</h1>
      *
      * <pre>Cuerpo de petición: JSON {@link CalificacionDetailDTO}.
      *
@@ -94,20 +96,21 @@ public class ModeloCalificacionResource {
      */
     @POST
     @PathParam("modelosId: \\d+")
-    public CalificacionDetailDTO createCalificacion(CalificacionDetailDTO calificacion
-            , @PathParam("modelosId")Long modeloId, @PathParam("clientesId")Long clienteId, @PathParam("calificacionesId")Long id) throws BusinessLogicException {
+    public CalificacionDetailDTO createCalificacion(CalificacionDetailDTO calificacion,
+             @PathParam("modelosId") Long modeloId, @PathParam("clientesId") Long clienteId, @PathParam("calificacionesId") Long id) throws BusinessLogicException {
 
         return new CalificacionDetailDTO(
                 cal
                         .crearCalificacion(
-                        calificacion
-                                .toEntity(),
-                        modeloId,
-                        clienteId));
+                                calificacion
+                                        .toEntity(),
+                                modeloId,
+                                clienteId));
     }
 
     /**
-     * <h1>GET /api/modelos/{modelosId}/calificaciones : Obtener todas las calificaciones del modelo.</h1>
+     * <h1>GET /api/modelos/{modelosId}/calificaciones : Obtener todas las
+     * calificaciones del modelo.</h1>
      *
      * <pre>Busca y devuelve todas las calificaicones que existen en la aplicacion.
      *
@@ -115,18 +118,20 @@ public class ModeloCalificacionResource {
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Devuelve todas las calificaciones de la aplicacion.</code>
      * </pre>
+     *
      * @param modeloId id del modelo que se quiere consultar
      * @return JSONArray {@link CalificacionDetailDTO} - Las calificaciones
      * encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
      */
     @GET
     @PathParam("modelosId: \\d+")
-    public List<CalificacionDetailDTO> getCalificaciones(@PathParam("modelosId")Long modeloId) {
+    public List<CalificacionDetailDTO> getCalificaciones(@PathParam("modelosId") Long modeloId) {
         return list2DTO(cal.getCalificacionesPorModelo(modeloId));
     }
 
     /**
-     * <h1>GET /api/modelos/{modelosId}/calificaciones/{calificacionesId} : Obtener calificacion por id.</h1>
+     * <h1>GET /api/modelos/{modelosId}/calificaciones/{calificacionesId} :
+     * Obtener calificacion por id.</h1>
      *
      * <pre>Busca la calificacion con el id y el modelo asociado recibido en la URL y la devuelve.
      *
@@ -148,16 +153,17 @@ public class ModeloCalificacionResource {
     @GET
     @Path("{modelosId: \\d+}")
     public CalificacionDetailDTO getCalificacion(@PathParam("modelosId") Long modeloId, @PathParam("clientesId") Long clienteId, @PathParam("calificacionesId") Long id) throws WebApplicationException, BusinessLogicException {
-        CalificacionDetailDTO cali = new CalificacionDetailDTO(cal.getCalificacionesPorClienteAndModelo(clienteId, modeloId).get(0));
-        if (cali == null) {
+        CalificacionEntity calificacion = cal.find(id);
+        if (calificacion == null) {
             throw new WebApplicationException("El recurso /calificaciones/" + id + " no existe.", 404);
         }
+        CalificacionDetailDTO cali = new CalificacionDetailDTO(cal.getCalificacionesPorClienteAndModelo(clienteId, modeloId).get(0));
         return cali;
     }
 
     /**
-     * <h1>PUT /api/modelos/{modelosId}/calificaciones/{calificacionesId} : Actualizar la calificacion con el id
-     * dado.</h1>
+     * <h1>PUT /api/modelos/{modelosId}/calificaciones/{calificacionesId} :
+     * Actualizar la calificacion con el id dado.</h1>
      * <pre>Cuerpo de petición: JSON {@link ReclamoDetailDTO}.
      *
      * Actualiza la calificacion con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
@@ -175,7 +181,8 @@ public class ModeloCalificacionResource {
      * @param calificacion {@link CalificacionDetailDTO} La calificacion que se
      * desea guardar.
      * @param modeloId El modelo de la calificación que se quiere actualizar.
-     * @param clienteId {@link ClienteDetailDTO} El cliente de la calificación que se quiere actualizar.
+     * @param clienteId {@link ClienteDetailDTO} El cliente de la calificación
+     * que se quiere actualizar.
      * @return JSON {@link CalificacionDetailDTO} - La calificacion guardada.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
      * Error de lógica que se genera al no poder actualizar la calificacion
@@ -183,18 +190,18 @@ public class ModeloCalificacionResource {
      */
     @PUT
     @Path("{modelosId: \\d+}")
-    public CalificacionDetailDTO updateCalificacion(CalificacionDetailDTO calificacion, 
-           @PathParam("modelosId") Long modeloId,  @PathParam("calificacionesId") Long id,@PathParam("clientesId")Long clienteId) throws BusinessLogicException {
+    public CalificacionDetailDTO updateCalificacion(CalificacionDetailDTO calificacion,
+            @PathParam("modelosId") Long modeloId, @PathParam("calificacionesId") Long id, @PathParam("clientesId") Long clienteId) throws BusinessLogicException {
         CalificacionEntity cali = cal.find(id);
-        if (cali == null) 
-        {
+        if (cali == null) {
             throw new WebApplicationException("El recurso /calificaciones/" + id + " no existe.", 404);
         }
         return new CalificacionDetailDTO(cal.updateCalificacion(calificacion.toEntity(), modeloId, clienteId));
     }
 
     /**
-     * <h1>DELETE /api/modelos/{modelosId}/calificaicones/{calificacionesId} : Borrar calificacion por id.</h1>
+     * <h1>DELETE /api/modelos/{modelosId}/calificaicones/{calificacionesId} :
+     * Borrar calificacion por id.</h1>
      *
      * <pre>Borra la calificacion con el id asociado recibido en la URL.
      *
@@ -213,10 +220,9 @@ public class ModeloCalificacionResource {
      */
     @DELETE
     @Path("{modelosId: \\d+}")
-    public void deleteCalificacion( @PathParam("modelosId")Long modeloId, Long clienteId, @PathParam("calificacionesId") Long id) {
-       CalificacionEntity cali = cal.find(id);
-        if (cali == null) 
-        {
+    public void deleteCalificacion(@PathParam("modelosId") Long modeloId, Long clienteId, @PathParam("calificacionesId") Long id) {
+        CalificacionEntity cali = cal.find(id);
+        if (cali == null) {
             throw new WebApplicationException("El recurso /calificaciones/" + id + " no existe.", 404);
         }
         cal.removeCalificacion(id, clienteId, modeloId);
