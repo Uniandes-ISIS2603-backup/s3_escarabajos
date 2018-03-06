@@ -40,7 +40,7 @@ public class CalificacionLogic {
         if (!isInRange(cal.getPuntaje())) {
             throw new BusinessLogicException("El puntaje debe ser un valor entre 0 y 5");
         }
-        if (cal.getComentario().isEmpty() || cal.getComentario() == null) {
+        if(cal.getComentario() == null || cal.getComentario().isEmpty() ) {
             throw new BusinessLogicException("Por favor ingrese un comentario");
         }
         ModeloEntity model = modeloLogic.getModelo(modeloId);
@@ -63,7 +63,7 @@ public class CalificacionLogic {
         if (!isInRange(cal.getPuntaje())) {
             throw new BusinessLogicException("El puntaje debe ser un valor entre 0 y 5");
         }
-        if (cal.getComentario().isEmpty() || cal.getComentario() == null) {
+        if (cal.getComentario() == null || cal.getComentario().isEmpty() ) {
             throw new BusinessLogicException("Por favor ingrese un comentario");
         }
         LOGGER.info("Termina correctamente el proceso de actualizar una calificacion");
@@ -127,7 +127,7 @@ public class CalificacionLogic {
         LOGGER.info("Inicia el proceso de buscar todas las calificaciones del modelo " + modeloId + " y el cliente " + clienteId);
         List<CalificacionEntity> cals = calificacionPersistence.getCalificacionesPorClienteAndModelo(clienteId, modeloId);
         LOGGER.info("Termina el proceso de buscar todas las calificaciones del modelo " + modeloId);
-        if(cals.isEmpty() || cals == null) throw new BusinessLogicException("No existe una calificación creada por el cliente " + 
+        if(cals == null || cals.isEmpty()) throw new BusinessLogicException("No existe una calificación creada por el cliente " + 
                 clienteId + " para el modelo " + modeloId);
         return cals;
     }
