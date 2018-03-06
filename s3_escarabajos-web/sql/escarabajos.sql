@@ -3,6 +3,8 @@
 delete from ItemEntity;
 delete from ModeloEntity;
 delete from CarritoEntity;
+delete from ClienteEntity;
+delete from VendedorEntity;
 
 --Datos de prueba ModeloEntity con tipo modelo Bicicleta
 
@@ -36,3 +38,4 @@ insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_
 insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id) values (14,'AccesorioEntity', 251.36, 'Goldenrod', 4,4);
 insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id) values (15,'AccesorioEntity', 118.77, 'Pink', 5,5);
 
+--Datos de prueba ClienteEntity
