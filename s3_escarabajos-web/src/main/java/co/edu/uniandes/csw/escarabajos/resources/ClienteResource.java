@@ -81,8 +81,8 @@ public class ClienteResource {
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe el cliente.
      */
     @POST
-    public ClienteDTO createCliente(ClienteDetailDTO cliente) throws BusinessLogicException {
-        return new ClienteDTO(logic.createCliente(cliente.toEntity()));
+    public ClienteDetailDTO createCliente(ClienteDetailDTO cliente) throws BusinessLogicException {
+        return new ClienteDetailDTO(logic.createCliente(cliente.toEntity()));
     }
     /**
      * <h1>GET /api/clientes : Obtener todos las clientes.</h1>
