@@ -14,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -51,6 +53,12 @@ public class ClienteEntity implements Serializable {
     @PodamExclude
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<ReclamoEntity> reclamos = new ArrayList<ReclamoEntity>();
+    
+    
+    @PodamExclude
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = " CLNT_ITEMS", joinColumns = @JoinColumn(name = "CLNT_ID"), inverseJoinColumns = @JoinColumn(name="ITEM_ID"))
+    private List<ItemEntity> deseados = new ArrayList<>();
  
     public CarritoEntity getCarrito(){
         return carrito;
@@ -174,6 +182,20 @@ public class ClienteEntity implements Serializable {
             return this.getId().hashCode();
         }
         return super.hashCode();
+    }
+
+    /**
+     * @return the deseados
+     */
+    public List<ItemEntity> getDeseados() {
+        return deseados;
+    }
+
+    /**
+     * @param deseados the deseados to set
+     */
+    public void setDeseados(List<ItemEntity> deseados) {
+        this.deseados = deseados;
     }
 
     

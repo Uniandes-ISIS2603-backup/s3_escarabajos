@@ -107,7 +107,7 @@ public class VendedorLogicTest {
     }
     
     @Test
-    public void findClienteTest() {
+    public void findVendedorTest() {
         
         VendedorEntity entity = data.get(0);
         VendedorEntity resultEntity = logic.getVendedor(entity.getId());
@@ -116,7 +116,7 @@ public class VendedorLogicTest {
     }
     
     @Test
-    public void updateClienteTest() throws BusinessLogicException {
+    public void updateVendedorTest() throws BusinessLogicException {
         
         VendedorEntity entity = data.get(0);
         VendedorEntity pojoEntity = factory.manufacturePojo(VendedorEntity.class);
@@ -128,5 +128,22 @@ public class VendedorLogicTest {
         VendedorEntity resp = em.find(VendedorEntity.class, entity.getId());
 
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
+    }
+    
+    @Test
+    public void createVendedorTest() throws BusinessLogicException {
+
+        VendedorEntity newEntity = factory.manufacturePojo(VendedorEntity.class);
+        VendedorEntity result = logic.createVendedor(newEntity);
+        Assert.assertNotNull(result);
+        VendedorEntity entity = logic.getVendedor(result.getId());
+    }
+    
+     @Test
+    public void deleteVendedorTest() throws BusinessLogicException {
+        VendedorEntity entity = data.get(0);
+        logic.deleteVendedor(entity.getId());
+        VendedorEntity deleted = em.find(VendedorEntity.class, entity.getId());
+        Assert.assertNull(deleted);
     }
 }

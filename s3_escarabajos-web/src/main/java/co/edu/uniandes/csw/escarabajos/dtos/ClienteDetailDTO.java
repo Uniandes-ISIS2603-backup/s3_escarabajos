@@ -5,8 +5,9 @@
  */
 package co.edu.uniandes.csw.escarabajos.dtos;
 
+import co.edu.uniandes.csw.escarabajos.entities.AccesorioEntity;
+import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
 import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
-import co.edu.uniandes.csw.escarabajos.entities.CarritoEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 import co.edu.uniandes.csw.escarabajos.entities.FacturaEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
@@ -14,8 +15,6 @@ import co.edu.uniandes.csw.escarabajos.entities.MedioPagoEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ReclamoEntity;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
 
 /**
  *
@@ -35,6 +34,7 @@ public class ClienteDetailDTO extends ClienteDTO{
 
     private List<ReclamoDTO> reclamos ;
     
+    private List<ItemDTO> regalos ;
 
     /**private List<ItemDTO> listaDeseos ;*/
     /**
@@ -44,7 +44,6 @@ public class ClienteDetailDTO extends ClienteDTO{
         super();
     }
     
-    //TODO Todos los que tiene podamexclude
     /**
      * Constructor para transformar un Entity a un DTO
      *
@@ -57,6 +56,18 @@ public class ClienteDetailDTO extends ClienteDTO{
                 this.carrito = new CarritoDTO(entity.getCarrito());
             } else {
                 entity.setCarrito(null);
+            }
+            
+            if (entity.getDeseados()!= null) {
+            regalos = new ArrayList<ItemDTO>();
+                for (ItemEntity itemEntity : entity.getDeseados()) {
+                    if (itemEntity instanceof AccesorioEntity) {
+                       regalos.add(new AccesorioDTO((AccesorioEntity)itemEntity)); 
+                    }
+                    else if (itemEntity instanceof BicicletaEntity) {
+                       regalos.add(new BicicletaDTO((BicicletaEntity)itemEntity)); 
+                    }
+                }
             }
 
 
@@ -110,13 +121,13 @@ public class ClienteDetailDTO extends ClienteDTO{
             entity.setCompras(comprasEntity);
         }
         
-       /* if (listaDeseos != null) {
-            List<ItemEntity> listaDeseosEntity = new ArrayList<>();
-            for (ItemDTO dtoListaDeseos : listaDeseos) {
-                listaDeseosEntity.add(dtoListaDeseos.toEntity());
+       if (getRegalos() != null) {
+            List<ItemEntity> itemsEntities = new ArrayList<>();
+            for (ItemDTO itemDto : getRegalos()) {
+                itemsEntities.add(itemDto.toEntity());
             }
-            entity.setListaDeseos(listaDeseosEntity);
-        }*/
+            entity.setDeseados(itemsEntities);
+        }
         
         if (reclamos != null) {
             List<ReclamoEntity> reclamoEntity = new ArrayList<>();
@@ -216,16 +227,17 @@ public class ClienteDetailDTO extends ClienteDTO{
     }
 
     /**
-     * @return the listaDeseos
+     * @return the regalos
      */
-    /**public List<ItemDTO> getListaDeseos() {
-        return listaDeseos;
-    }/*
+    public List<ItemDTO> getRegalos() {
+        return regalos;
+    }
 
     /**
-     * @param listaDeseos the listaDeseos to set
+     * @param regalos the regalos to set
      */
-    /**public void setListaDeseos(List<ItemDTO> listaDeseos) {
-        this.listaDeseos = listaDeseos;
-    }*/
+    public void setRegalos(List<ItemDTO> regalos) {
+        this.regalos = regalos;
+    }
+
 }

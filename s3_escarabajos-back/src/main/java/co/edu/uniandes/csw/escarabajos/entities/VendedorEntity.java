@@ -28,6 +28,7 @@ public class VendedorEntity extends ClienteEntity implements Serializable{
     private List<BicicletaUsadaEntity> bicicletasUsadas = new ArrayList<BicicletaUsadaEntity>();
 
     public VendedorEntity() {
+        
     }
     
     public String getDireccion(){
