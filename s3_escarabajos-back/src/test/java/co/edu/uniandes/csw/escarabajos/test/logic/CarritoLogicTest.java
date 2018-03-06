@@ -19,7 +19,6 @@ import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.CarritoPersistence;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -124,7 +123,7 @@ public class CarritoLogicTest {
             ModeloEntity modelo = factory.manufacturePojo(ModeloEntity.class);
             modelo.setTipoModelo(ModeloLogic.ACCESORIO);
             logicModelo.createModelo(modelo);
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 7; i++) {
 
                 CarritoEntity carrito = factory.manufacturePojo(CarritoEntity.class);
                 AccesorioEntity item = factory.manufacturePojo(AccesorioEntity.class);
@@ -216,24 +215,26 @@ public class CarritoLogicTest {
 
         ItemEntity item = dataItems.get(0);
 
-        logic.addItem(carrito.getCliente().getId(), item.getId());
+        logic.addItem(carrito.getId(), item.getId());
+        
+        carrito = logic.findCarrito(carrito.getId());
+        
+        assert(carrito.getItems().contains(item));
     }
 
     /**
      * prueba el metodo removeItem
      */
     @Test
-    public void removeItemTest() {
-        try {
-            CarritoEntity carrito = data.get(1);
+    public void removeItemTest() throws BusinessLogicException {
+        CarritoEntity carrito = data.get(6);
 
-            ItemEntity item = dataItems.get(1);
+        ItemEntity item = dataItems.get(6);
 
-            logic.addItem(carrito.getCliente().getId(), item.getId());
-            logic.removeItem(carrito.getCliente().getId(), item.getId());
-        } catch (BusinessLogicException e) {
-            Assert.fail();
-        }
+        logic.addItem(carrito.getId(), item.getId());
+        logic.removeItem(carrito.getId(), item.getId());
+
+        assert(carrito.getItems().isEmpty());
     }
 
     /**
@@ -250,8 +251,8 @@ public class CarritoLogicTest {
         ItemEntity item2 = dataItems.get(2);
 
         carrito.setPrecioTotal(0.0);
-        logic.addItem(carrito.getCliente().getId(), item1.getId());
-        logic.addItem(carrito.getCliente().getId(), item2.getId());
+        logic.addItem(carrito.getId(), item1.getId());
+        logic.addItem(carrito.getId(), item2.getId());
         FacturaEntity facturaGenerada = logic.crearFactura(carrito.getId());
         carrito = logic.findCarrito(carrito.getId());
 

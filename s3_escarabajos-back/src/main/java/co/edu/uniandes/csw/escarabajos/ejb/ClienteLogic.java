@@ -35,13 +35,15 @@ public class ClienteLogic {
     
 
      
-     public ClienteEntity createCliente(ClienteEntity entity) throws BusinessLogicException {
+     public ClienteEntity createCliente(ClienteEntity cliente) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de cliente");
         CarritoEntity carrito = new CarritoEntity();
-        persistence.create(entity);
+        carrito.setCliente(cliente);
+        cliente.setCarrito(carrito);
+        persistence.create(cliente);
         carritoPersistence.create(carrito);
         LOGGER.info("Termina proceso de creación de cliente");
-        return entity;
+        return cliente;
     }
 
     public List<ClienteEntity> getClientes() {
