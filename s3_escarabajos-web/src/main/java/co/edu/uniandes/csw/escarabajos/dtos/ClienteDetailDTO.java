@@ -5,8 +5,9 @@
  */
 package co.edu.uniandes.csw.escarabajos.dtos;
 
+import co.edu.uniandes.csw.escarabajos.entities.AccesorioEntity;
+import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
 import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
-import co.edu.uniandes.csw.escarabajos.entities.CarritoEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 import co.edu.uniandes.csw.escarabajos.entities.FacturaEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
@@ -14,11 +15,44 @@ import co.edu.uniandes.csw.escarabajos.entities.MedioPagoEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ReclamoEntity;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
 
 /**
- *
+ * Clase que extiende de {@link ItemDTO} para manejar la transformacion entre
+ * los objetos JSON y las Entidades de la base de datos. Para conocer el
+ * contenido del item vaya a la documentacion de {@link ItemDTO}
+ * 
+ *Al serializarse como JSON esta clase implementa el siguiente cliente: <br>
+ * <pre>
+ * {
+        "cedula": String,
+        "correo": String,
+        "id": Long,
+        "nombre": String,
+        "usuario": String,
+        "calificaciones": [{@CalificacionDTO}],
+        "compras": [{@FacturaDTO}],
+        "mediosPago": [{@MedioPagoDTO}],
+        "reclamos": [{@ReclamoDTO}],
+        "regalos": [{@ReclamoDTO}]
+ * }
+ * </pre>
+ * Por ejemplo un cliente se representa asi:<br>
+ * 
+ * <pre>
+ *   {
+        "type": "clienteDetailDTO",
+        "cedula": "8643803030",
+        "correo": "asnar0@discuz.net",
+        "id": 4,
+        "nombre": "pooper",
+        "usuario": "â\ufffd£",
+        "calificaciones": [],
+        "compras": [],
+        "mediosPago": [],
+        "reclamos": [],
+        "regalos": []
+    }
+ * </pre>
  * @author s.beltran
  */
 public class ClienteDetailDTO extends ClienteDTO{
@@ -35,6 +69,7 @@ public class ClienteDetailDTO extends ClienteDTO{
 
     private List<ReclamoDTO> reclamos ;
     
+    private List<ItemDTO> regalos ;
 
     /**private List<ItemDTO> listaDeseos ;*/
     /**
@@ -44,7 +79,6 @@ public class ClienteDetailDTO extends ClienteDTO{
         super();
     }
     
-    //TODO Todos los que tiene podamexclude
     /**
      * Constructor para transformar un Entity a un DTO
      *
@@ -57,6 +91,18 @@ public class ClienteDetailDTO extends ClienteDTO{
                 this.carrito = new CarritoDTO(entity.getCarrito());
             } else {
                 entity.setCarrito(null);
+            }
+            
+            if (entity.getDeseados()!= null) {
+            regalos = new ArrayList<ItemDTO>();
+                for (ItemEntity itemEntity : entity.getDeseados()) {
+                    if (itemEntity instanceof AccesorioEntity) {
+                       regalos.add(new AccesorioDTO((AccesorioEntity)itemEntity)); 
+                    }
+                    else if (itemEntity instanceof BicicletaEntity) {
+                       regalos.add(new BicicletaDTO((BicicletaEntity)itemEntity)); 
+                    }
+                }
             }
 
 
@@ -110,13 +156,13 @@ public class ClienteDetailDTO extends ClienteDTO{
             entity.setCompras(comprasEntity);
         }
         
-       /* if (listaDeseos != null) {
-            List<ItemEntity> listaDeseosEntity = new ArrayList<>();
-            for (ItemDTO dtoListaDeseos : listaDeseos) {
-                listaDeseosEntity.add(dtoListaDeseos.toEntity());
+       if (getRegalos() != null) {
+            List<ItemEntity> itemsEntities = new ArrayList<>();
+            for (ItemDTO itemDto : getRegalos()) {
+                itemsEntities.add(itemDto.toEntity());
             }
-            entity.setListaDeseos(listaDeseosEntity);
-        }*/
+            entity.setDeseados(itemsEntities);
+        }
         
         if (reclamos != null) {
             List<ReclamoEntity> reclamoEntity = new ArrayList<>();
@@ -216,16 +262,17 @@ public class ClienteDetailDTO extends ClienteDTO{
     }
 
     /**
-     * @return the listaDeseos
+     * @return the regalos
      */
-    /**public List<ItemDTO> getListaDeseos() {
-        return listaDeseos;
-    }/*
+    public List<ItemDTO> getRegalos() {
+        return regalos;
+    }
 
     /**
-     * @param listaDeseos the listaDeseos to set
+     * @param regalos the regalos to set
      */
-    /**public void setListaDeseos(List<ItemDTO> listaDeseos) {
-        this.listaDeseos = listaDeseos;
-    }*/
+    public void setRegalos(List<ItemDTO> regalos) {
+        this.regalos = regalos;
+    }
+
 }

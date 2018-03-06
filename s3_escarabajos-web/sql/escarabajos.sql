@@ -2,6 +2,7 @@
 
 delete from ItemEntity;
 delete from ModeloEntity;
+delete from CarritoEntity;
 
 --Datos de prueba ModeloEntity con tipo modelo Bicicleta
 
@@ -26,4 +27,12 @@ insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod
 insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado) values (300,'BicicletaUsadaEntity', 757.94, 'Green', 1, 'LS', 3, 3, 'https://blogger.com/ultrices/posuere.jsp', 'En proceso');
 insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado) values (400,'BicicletaUsadaEntity', 757.05, 'Green', 1, 'G', 4, 4, 'https://dagondesign.com/aliquam.js', 'En proceso');
 insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado) values (500,'BicicletaUsadaEntity', 929.71, 'Khaki', 1, 'Escort', 5, 5, 'https://netlog.com/in.jpg', 'En proceso');
+
+--Datos de prueba AccesorioEntity
+
+insert into ItemEntity (id, dtype, precio, color, modeloId,mod_id) values (11,'AccesorioEntity', 760.78, 'Puce', 1,1);
+insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id) values (12,'AccesorioEntity', 397.10, 'Blue', 2,2);
+insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id) values (13,'AccesorioEntity', 331.52, 'Green', 3,3);
+insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id) values (14,'AccesorioEntity', 251.36, 'Goldenrod', 4,4);
+insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id) values (15,'AccesorioEntity', 118.77, 'Pink', 5,5);
 

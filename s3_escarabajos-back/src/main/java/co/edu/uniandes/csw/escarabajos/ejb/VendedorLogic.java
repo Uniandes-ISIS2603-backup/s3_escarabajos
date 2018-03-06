@@ -5,10 +5,9 @@
  */
 package co.edu.uniandes.csw.escarabajos.ejb;
 
-import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
+import co.edu.uniandes.csw.escarabajos.entities.BicicletaUsadaEntity;
 import co.edu.uniandes.csw.escarabajos.entities.VendedorEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
-import co.edu.uniandes.csw.escarabajos.persistence.ClientePersistence;
 import co.edu.uniandes.csw.escarabajos.persistence.VendedorPersistence;
 import java.util.List;
 import java.util.logging.Level;
@@ -27,8 +26,7 @@ public class VendedorLogic {
     @Inject
     private VendedorPersistence persistence; // Variable para acceder a la persistencia de la aplicación. Es una inyección de dependencias.
 
-    @Inject
-    private ClienteLogic logicCliente;
+
     
      public VendedorEntity createVendedor(VendedorEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de vendedor");
@@ -62,4 +60,6 @@ public class VendedorLogic {
         persistence.delete(id);
         LOGGER.log(Level.INFO, "Termina proceso de borrar vendedor con id={0}", id);
     }
+    
+
 }

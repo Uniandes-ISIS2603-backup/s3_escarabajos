@@ -145,4 +145,21 @@ public class ClienteLogicTest {
 
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
     }
+    
+    @Test
+    public void createClienteTest() throws BusinessLogicException {
+
+        ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
+        ClienteEntity result = logic.createCliente(newEntity);
+        Assert.assertNotNull(result);
+        ClienteEntity entity = logic.getCliente(result.getId());
+    }
+    
+     @Test
+    public void deleteClienteTest() throws BusinessLogicException {
+        ClienteEntity entity = data.get(0);
+        logic.deleteCliente(entity.getId());
+        ClienteEntity deleted = em.find(ClienteEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
 }

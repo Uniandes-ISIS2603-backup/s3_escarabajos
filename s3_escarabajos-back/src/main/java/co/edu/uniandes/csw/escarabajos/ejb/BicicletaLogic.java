@@ -67,17 +67,16 @@ public class BicicletaLogic {
      * @param entity La entidad de tipo bicicleta del nuevo bicicleta a
      * persistir.
      * @return La entidad luego de persistirla
-     * @throws BusinessLogicException Si el atributo usada es false o
-     * si no esta asociada a una categoria o
-     * si no esta asociada a un modelo
+     * @throws BusinessLogicException Si el atributo usada es false o si no esta
+     * asociada a una categoria o si no esta asociada a un modelo
      */
     public BicicletaEntity createBicicleta(BicicletaEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de bicicleta");
+        entity.setUsada(Boolean.FALSE);
         logic.verificarItem(entity);
         verificarBicicleta(entity);
-        
         if (persistence.find(entity.getId()) != null) {
-            throw new BusinessLogicException("Ya existe una bicicleta con el id \"" + entity.getId()+ "\"");
+            throw new BusinessLogicException("Ya existe una bicicleta con el id \"" + entity.getId() + "\"");
         }
         persistence.create(entity);
         LOGGER.info("Termina proceso de creación de bicicleta");
@@ -90,13 +89,13 @@ public class BicicletaLogic {
      * @param id El ID del bicicleta a actualizar
      * @param entity La entidad del bicicleta con los cambios deseados
      * @return La entidad del bicicleta luego de actualizarla
-     * @throws BusinessLogicException Si el atributo usada es false o
-     * si no esta asociada a una categoria o
-     * si no esta asociada a un modelo
+     * @throws BusinessLogicException Si el atributo usada es false o si no esta
+     * asociada a una categoria o si no esta asociada a un modelo
      */
     public BicicletaEntity updateBicicleta(Long id, BicicletaEntity entity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar bicicleta con id={0}", id);
-        if(entity.getPrecio()<= 0){
+        entity.setUsada(Boolean.FALSE);
+        if (entity.getPrecio() <= 0) {
             throw new BusinessLogicException("La bicicleta debe tener un precio mayor a 0");
         }
         ModeloEntity modelo = modeloPersistence.find(entity.getModeloId());
@@ -119,14 +118,14 @@ public class BicicletaLogic {
         persistence.delete(id);
         LOGGER.log(Level.INFO, "Termina proceso de borrar bicicleta con id={0}", id);
     }
-    
-    public BicicletaEntity verificarBicicleta(BicicletaEntity entity) throws BusinessLogicException{
-         if (entity.getUsada() != false) {
+
+    public BicicletaEntity verificarBicicleta(BicicletaEntity entity) throws BusinessLogicException {
+        if (entity.getUsada() != false) {
             throw new BusinessLogicException("La bicicleta debe ser nueva");
         }
         if (entity.getCategoria() == null || entity.getCategoria().equals(" ")) {
             throw new BusinessLogicException("La bicicleta debe estar asociada a una categoria valida");
         }
         return entity;
-    } 
+    }
 }

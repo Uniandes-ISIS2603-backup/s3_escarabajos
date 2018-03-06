@@ -5,18 +5,11 @@
  */
 package co.edu.uniandes.csw.escarabajos.resources;
 
-import co.edu.uniandes.csw.escarabajos.dtos.CarritoDetailDTO;
-import javax.enterprise.context.RequestScoped;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-
 import co.edu.uniandes.csw.escarabajos.dtos.ClienteDetailDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.ClienteDTO;
 import co.edu.uniandes.csw.escarabajos.ejb.CarritoLogic;
 import co.edu.uniandes.csw.escarabajos.ejb.ClienteLogic;
 import co.edu.uniandes.csw.escarabajos.ejb.VendedorLogic;
-import co.edu.uniandes.csw.escarabajos.entities.CarritoEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
@@ -57,27 +50,6 @@ import javax.ws.rs.WebApplicationException;
  * @version 1.0
  */
 public class ClienteResource {
-    /**
-     * <h1>POST /api/clientes : Crear una cliente.</h1>
-     * 
-     * <pre>Cuerpo de petición: JSON {@link ClienteDetailDTO}.
-     * 
-     * Crea un nuevo cliente con la informacion que se recibe en el cuerpo 
-     * de la petición y se regresa un objeto identico con un id auto-generado 
-     * por la base de datos.
-     * 
-     * Codigos de respuesta:
-     * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Creó el nuevo cliente .
-     * </code>
-     * <code style="color: #c7254e; background-color: #f9f2f4;">
-     * 412 Precodition Failed: Ya existe el cliente.
-     * </code>
-     * </pre>
-     * @param cliente {@link ClienteDetailDTO} - el cliente que se desea guardar.
-     * @return JSON {@link ClienteDetailDTO}  - el cliente guardado con el atributo id autogenerado.
-     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la ciudad.
-     */
     
     @Inject
     ClienteLogic logic;
@@ -110,9 +82,6 @@ public class ClienteResource {
      */
     @POST
     public ClienteDTO createCliente(ClienteDetailDTO cliente) throws BusinessLogicException {
-        //CarritoDetailDTO carrito = new CarritoDetailDTO();
-        //Carritologic.createCarrito(carrito.toEntity());
-        //cliente.setCarrito(carrito);
         return new ClienteDTO(logic.createCliente(cliente.toEntity()));
     }
     /**
@@ -198,7 +167,6 @@ public class ClienteResource {
         if (oldEntity == null) {
             throw new WebApplicationException("El cliente no existe", 404);
         }
-        //entity.setBooks(oldEntity.getBooks());
         return new ClienteDetailDTO(logic.updateCliente(entity));
     }
     

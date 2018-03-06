@@ -5,7 +5,9 @@
  */
 package co.edu.uniandes.csw.escarabajos.persistence;
 
+import co.edu.uniandes.csw.escarabajos.entities.CarritoEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
+import co.edu.uniandes.csw.escarabajos.entities.MedioPagoEntity;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;

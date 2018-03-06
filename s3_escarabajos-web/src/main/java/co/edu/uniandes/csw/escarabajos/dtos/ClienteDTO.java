@@ -15,13 +15,13 @@ import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
  * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
  * <pre>
  *   {
- *      [{
-  "id": 1,
+ {
+  "id": Long,
   "nombre": String,
   "correo": String,
   "usuario": String,
   "cedula": Integer
-}
+ }
  *   }
  * </pre> Por ejemplo un cliente se representa asi:<br>
  *
