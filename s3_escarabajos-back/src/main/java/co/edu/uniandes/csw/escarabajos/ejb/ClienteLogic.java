@@ -5,11 +5,8 @@
  */
 package co.edu.uniandes.csw.escarabajos.ejb;
 
-import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.escarabajos.entities.CarritoEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
-import co.edu.uniandes.csw.escarabajos.entities.FacturaEntity;
-import co.edu.uniandes.csw.escarabajos.entities.MedioPagoEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.CarritoPersistence;
 import co.edu.uniandes.csw.escarabajos.persistence.ClientePersistence;
@@ -67,6 +64,7 @@ public class ClienteLogic {
     
     public void deleteCliente(Long id) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar cliente con id={0}", id);    
+        carritoPersistence.deleteCarrito(getCliente(id).getCarrito().getId());
         persistence.delete(id);
         LOGGER.log(Level.INFO, "Termina proceso de borrar cliente con id={0}", id);
     }

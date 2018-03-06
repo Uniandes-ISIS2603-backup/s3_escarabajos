@@ -35,7 +35,7 @@ public class ClienteEntity implements Serializable {
     private String usuario;
     private String cedula;
     @PodamExclude
-    @OneToOne(mappedBy = "cliente", cascade = CascadeType.PERSIST)
+    @OneToOne(mappedBy = "cliente")
     private CarritoEntity carrito;
 
     @PodamExclude

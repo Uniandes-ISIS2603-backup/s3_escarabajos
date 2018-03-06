@@ -55,7 +55,7 @@ public class CarritoEntity implements Serializable{
      * cliente dueño del carrito
      */
     @PodamExclude
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne
     private ClienteEntity cliente;
        
     //----------------------------------------------------

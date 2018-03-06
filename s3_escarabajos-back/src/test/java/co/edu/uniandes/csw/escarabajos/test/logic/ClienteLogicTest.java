@@ -19,22 +19,6 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.Before;
-import org.junit.runner.RunWith;
-import uk.co.jemos.podam.api.PodamFactory;
-import uk.co.jemos.podam.api.PodamFactoryImpl;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.UserTransaction;
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -100,7 +84,7 @@ public class ClienteLogicTest {
      *
      */
     private void clearData() {
-        
+        em.createQuery("delete from CarritoEntity").executeUpdate();
         em.createQuery("delete from ClienteEntity").executeUpdate();
     }
 
@@ -110,14 +94,12 @@ public class ClienteLogicTest {
      *
      *
      */
-    private void insertData() {
+    private void insertData() throws BusinessLogicException {
 
         for (int i = 0; i < 3; i++) {
             
             ClienteEntity entity = factory.manufacturePojo(ClienteEntity.class);
-            
-            em.persist(entity);
-            
+            logic.createCliente(entity);
             data.add(entity);
         }
     }
@@ -141,7 +123,7 @@ public class ClienteLogicTest {
 
         logic.updateCliente(pojoEntity);
             
-        ClienteEntity resp = em.find(ClienteEntity.class, entity.getId());
+        ClienteEntity resp = logic.getCliente(entity.getId());
 
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
     }
@@ -155,11 +137,11 @@ public class ClienteLogicTest {
         ClienteEntity entity = logic.getCliente(result.getId());
     }
     
-     @Test
+    @Test
     public void deleteClienteTest() throws BusinessLogicException {
-        ClienteEntity entity = data.get(0);
+        ClienteEntity entity = logic.getCliente(data.get(0).getId());
         logic.deleteCliente(entity.getId());
-        ClienteEntity deleted = em.find(ClienteEntity.class, entity.getId());
+        ClienteEntity deleted = logic.getCliente(data.get(0).getId());
         Assert.assertNull(deleted);
     }
 }
