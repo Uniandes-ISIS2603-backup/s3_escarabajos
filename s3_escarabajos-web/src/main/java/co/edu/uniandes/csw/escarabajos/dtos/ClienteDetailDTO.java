@@ -17,7 +17,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Clase que extiende de {@link ItemDTO} para manejar la transformacion entre
+ * los objetos JSON y las Entidades de la base de datos. Para conocer el
+ * contenido del item vaya a la documentacion de {@link ItemDTO}
+ * 
+ *Al serializarse como JSON esta clase implementa el siguiente cliente: <br>
+ * <pre>
+ * {
+        "cedula": String,
+        "correo": String,
+        "id": Long,
+        "nombre": String,
+        "usuario": String,
+        "calificaciones": [{@CalificacionDTO}],
+        "compras": [{@FacturaDTO}],
+        "mediosPago": [{@MedioPagoDTO}],
+        "reclamos": [{@ReclamoDTO}],
+        "regalos": [{@ReclamoDTO}]
+ * }
+ * </pre>
+ * Por ejemplo un cliente se representa asi:<br>
+ * 
+ * <pre>
+ *   {
+        "type": "clienteDetailDTO",
+        "cedula": "8643803030",
+        "correo": "asnar0@discuz.net",
+        "id": 4,
+        "nombre": "pooper",
+        "usuario": "â\ufffd£",
+        "calificaciones": [],
+        "compras": [],
+        "mediosPago": [],
+        "reclamos": [],
+        "regalos": []
+    }
+ * </pre>
  * @author s.beltran
  */
 public class ClienteDetailDTO extends ClienteDTO{
