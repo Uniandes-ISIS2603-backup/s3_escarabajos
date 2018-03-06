@@ -1,6 +1,7 @@
 package co.edu.uniandes.csw.escarabajos.test.logic;
 
 import co.edu.uniandes.csw.escarabajos.ejb.ItemLogic;
+import co.edu.uniandes.csw.escarabajos.ejb.ModeloLogic;
 import co.edu.uniandes.csw.escarabajos.entities.AccesorioEntity;
 import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
@@ -10,6 +11,7 @@ import co.edu.uniandes.csw.escarabajos.persistence.BicicletaPersistence;
 import co.edu.uniandes.csw.escarabajos.persistence.ModeloPersistence;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,17 +32,16 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Andres
  */
 @RunWith(Arquillian.class)
 public class ItemLogicTest {
-    
 
     private PodamFactory factory = new PodamFactoryImpl();
 
+    private static final Logger LOGGER = Logger.getLogger(ItemLogicTest.class.getName());
     @Inject
     private ItemLogic itemLogic;
 
@@ -51,7 +52,7 @@ public class ItemLogicTest {
     private UserTransaction utx;
 
     private List<ItemEntity> data = new ArrayList<ItemEntity>();
-    
+
     private List<ModeloEntity> dataModelos = new ArrayList<ModeloEntity>();
 
     @Deployment
@@ -109,25 +110,32 @@ public class ItemLogicTest {
      *
      */
     private void insertData() {
+        ModeloEntity entity = factory.manufacturePojo(ModeloEntity.class);
+        entity.setTipoModelo(ModeloLogic.ACCESORIO);
+        dataModelos.add(entity);
+        em.persist(entity);
+
+        entity = factory.manufacturePojo(ModeloEntity.class);
+        entity.setTipoModelo(ModeloLogic.BICICLETA);
+        dataModelos.add(entity);
+        em.persist(entity);
+
         for (int i = 0; i < 3; i++) {
-            ModeloEntity entity = factory.manufacturePojo(ModeloEntity.class);
-            dataModelos.add(entity);
-             em.persist(entity);
+            AccesorioEntity entityA = factory.manufacturePojo(AccesorioEntity.class);
+            data.add(entityA);
+            entityA.setModeloId(dataModelos.get(0).getId());
+            em.persist(entityA);
         }
         for (int i = 0; i < 3; i++) {
-            AccesorioEntity entity = factory.manufacturePojo(AccesorioEntity.class);
-            data.add(entity);
-            entity.setModeloId(dataModelos.get(i).getId());
-             em.persist(entity);
-        }
-         for (int i = 0; i < 3; i++) {
-            BicicletaEntity entity = factory.manufacturePojo(BicicletaEntity.class);
-            data.add(entity);
-            entity.setModeloId(dataModelos.get(i).getId());
-             em.persist(entity);
+            BicicletaEntity entityB = factory.manufacturePojo(BicicletaEntity.class);
+            entityB.setUsada(false);
+            data.add(entityB);
+            entityB.setModeloId(dataModelos.get(1).getId());
+            em.persist(entityB);
         }
 
     }
+
     /**
      * Prueba para consultar la lista de Authors
      *

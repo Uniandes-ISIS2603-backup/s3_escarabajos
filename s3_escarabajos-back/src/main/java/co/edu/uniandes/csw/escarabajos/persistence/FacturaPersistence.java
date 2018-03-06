@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.escarabajos.persistence;
 
 import co.edu.uniandes.csw.escarabajos.entities.FacturaEntity;
-import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +20,7 @@ import javax.persistence.TypedQuery;
  * @author jp.carreno
  */
 @Stateless
-public class FacturaPersistence implements Serializable {
+public class FacturaPersistence {
 
     private static final Logger LOGGER = Logger.getLogger(FacturaPersistence.class.getName());
 
