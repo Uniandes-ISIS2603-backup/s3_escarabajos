@@ -40,6 +40,7 @@ public class ModeloLogic {
 
     @Inject
     private BicicletaLogic biciLogic;
+
     /**
      * Obtiene la lista de los registros de Modelo.
      *
@@ -47,7 +48,7 @@ public class ModeloLogic {
      */
     public List<ModeloEntity> getModelos() {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los modelos");
-         List<ModeloEntity> lista = persistence.findAll();
+        List<ModeloEntity> lista = persistence.findAll();
         LOGGER.log(Level.INFO, "Finaliza proceso de consultar todos los modelos");
         return lista;
     }
@@ -93,7 +94,8 @@ public class ModeloLogic {
      * @param id
      * @param entity Instancia de ModeloEntity con los nuevos datos.
      * @return Instancia de ModeloEntity con los datos actualizados.
-     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException si se intenta cambiar el tipo 
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
+     * si se intenta cambiar el tipo
      */
     public ModeloEntity updateModelo(Long id, ModeloEntity entity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar un modelo ");
@@ -102,7 +104,7 @@ public class ModeloLogic {
             throw new BusinessLogicException("No se le puede cambiar el tipo a un modelo!");
         }
         LOGGER.log(Level.INFO, "Finaliza proceso de actualizar un modelo ");
-        return persistence.update(entity);   
+        return persistence.update(entity);
     }
 
     /**
@@ -117,8 +119,9 @@ public class ModeloLogic {
     }
 
     /**
-     * Agregar un item al modelo
-     * (pre) el item es del mismo tipo que el modelo.(pre)
+     * Agregar un item al modelo (pre) el item es del mismo tipo que el
+     * modelo.(pre)
+     *
      * @param item El item a guardar
      * @param modeloId El id de el modelo en el cual se va a guardar el item.
      * @return El item que fue agregado a el modelo.
@@ -132,7 +135,7 @@ public class ModeloLogic {
         List<ItemEntity> resp = modeloEntity.getItems();
         resp.add(item);
         modeloEntity.setItems(resp);
-        persistence.update(modeloEntity);  
+        persistence.update(modeloEntity);
         return item;
     }
 
@@ -212,26 +215,6 @@ public class ModeloLogic {
         return itemLogic.getAccesoriosModelo(modelosId);
     }
 
-    /**
-     * Verifica que el entity ingresado por parametro tenga la misma instancia
-     * que el resto de los items de un modelo
-     *
-     * @param modelosId modelo a verificar por id
-     * @param test Item entity a verificar si tiene la misma instancia
-     * @return si el modelo no existe.
-     * @throws BusinessLogicException
-     */
-    public boolean verificarTipoModelo(Long modelosId, ItemEntity test) throws BusinessLogicException {
-        ModeloEntity modelo = persistence.find(modelosId);
-        if (modelo == null) {
-            throw new BusinessLogicException("El modelo no existe");
-        }
-        String tipo = modelo.getTipoModelo();
-        if (tipo.equals(ModeloLogic.BICICLETA) && test instanceof BicicletaEntity) {
-            return true;
-        } else return tipo.equals(ModeloLogic.ACCESORIO) && test instanceof AccesorioEntity;
-    }
-
     public void removeItem(Long itemsId, Long modelosId) throws BusinessLogicException {
         ModeloEntity modelo = persistence.find(modelosId);
         if (modelo == null) {
@@ -241,12 +224,11 @@ public class ModeloLogic {
         if (item == null) {
             throw new BusinessLogicException("El item no existe");
         }
-        String tipo = modelo.getTipoModelo();
-        if (tipo.equals(ModeloLogic.BICICLETA)) {
-          // biciLogic.deleteBicicleta(item.getId());
-        } else if (tipo.equals(ModeloLogic.ACCESORIO) ) {
-           accLogic.deleteAccesorio(item.getId());
-        }
+        List<ItemEntity> resp = modelo.getItems();
+        resp.remove(item);
+        modelo.setItems(resp);
+        persistence.update(modelo);
+        //itemLogic.removeItem(item);
     }
 
 }

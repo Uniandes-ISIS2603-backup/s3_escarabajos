@@ -16,6 +16,9 @@ import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.ModeloPersistence;
+import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -37,14 +40,15 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class ModeloLogicTest {
+
     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
     private ModeloLogic modeloLogic;
-    
+
     @Inject
     private ItemLogic itemLogic;
-    
+
     @Inject
     private AccesorioLogic accLogic;
 
@@ -107,21 +111,25 @@ public class ModeloLogicTest {
      *
      *
      */
-    private void insertData() throws Exception{
-        for (int i = 0; i < 3; i++) {
-            ModeloEntity entity = factory.manufacturePojo(ModeloEntity.class);
-            entity.setTipoModelo(ModeloLogic.ACCESORIO);
-            modeloLogic.createModelo(entity);
-            data.add(entity);
-        }
-        for (int i = 0; i < 3; i++) {
-            AccesorioEntity items = factory.manufacturePojo(AccesorioEntity.class);
-            itemsData.add(items);
-            items.setModeloId(data.get(i).getId());
-            accLogic.createAccesorio(items);
-        }
-        for (int i = 0; i < 3; i++) {
-            ItemEntity addItem = modeloLogic.addItem(itemsData.get(i),data.get(i).getId());
+    private void insertData() {
+        try {
+            for (int i = 0; i < 3; i++) {
+                ModeloEntity entity = factory.manufacturePojo(ModeloEntity.class);
+                entity.setTipoModelo(ModeloLogic.ACCESORIO);
+                modeloLogic.createModelo(entity);
+                data.add(entity);
+            }
+            for (int i = 0; i < 3; i++) {
+                AccesorioEntity items = factory.manufacturePojo(AccesorioEntity.class);
+                itemsData.add(items);
+                items.setModeloId(data.get(i).getId());
+                accLogic.createAccesorio(items);
+            }
+            for (int i = 0; i < 3; i++) {
+                ItemEntity addItem = modeloLogic.addItem(itemsData.get(i), data.get(i).getId());
+            }
+        } catch (BusinessLogicException e) {
+            Assert.fail();
         }
     }
 
@@ -129,29 +137,31 @@ public class ModeloLogicTest {
      * Prueba para crear un Modelo
      *
      *
-     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
      */
     @Test
-    public void createModeloTest() throws BusinessLogicException {
-        ModeloEntity newEntity = factory.manufacturePojo(ModeloEntity.class);
-        ModeloEntity result = modeloLogic.createModelo(newEntity);
-        Assert.assertNotNull(result);
-        ModeloEntity entity = em.find(ModeloEntity.class, result.getId());
-        Assert.assertEquals(newEntity.getId(), entity.getId());
-        Assert.assertTrue(newEntity.getCalificacionMedia()== entity.getCalificacionMedia());
-        Assert.assertEquals(newEntity.getMarca(), entity.getMarca());
-        Assert.assertEquals(newEntity.getReferencia(), entity.getReferencia());
-        Assert.assertEquals(newEntity.getTipoModelo(), entity.getTipoModelo());
-        
+    public void createModeloTest() {
+        try {
+            ModeloEntity newEntity = factory.manufacturePojo(ModeloEntity.class);
+            ModeloEntity result = modeloLogic.createModelo(newEntity);
+            Assert.assertNotNull(result);
+            ModeloEntity entity = em.find(ModeloEntity.class, result.getId());
+            Assert.assertEquals(newEntity.getId(), entity.getId());
+            Assert.assertTrue(newEntity.getCalificacionMedia() == entity.getCalificacionMedia());
+            Assert.assertEquals(newEntity.getMarca(), entity.getMarca());
+            Assert.assertEquals(newEntity.getReferencia(), entity.getReferencia());
+            Assert.assertEquals(newEntity.getTipoModelo(), entity.getTipoModelo());
+        } catch (BusinessLogicException e) {
+            Assert.fail();
+        }
     }
 
     /**
      * Prueba para consultar la lista de Modelos
      *
-     *
      */
     @Test
     public void getModelosTest() {
+
         List<ModeloEntity> list = modeloLogic.getModelos();
         Assert.assertEquals(data.size(), list.size());
         for (ModeloEntity entity : list) {
@@ -168,7 +178,6 @@ public class ModeloLogicTest {
     /**
      * Prueba para consultar un Modelo
      *
-     *
      */
     @Test
     public void getModeloTest() {
@@ -176,7 +185,7 @@ public class ModeloLogicTest {
         ModeloEntity newEntity = modeloLogic.getModelo(entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(newEntity.getId(), entity.getId());
-        Assert.assertTrue(newEntity.getCalificacionMedia()== entity.getCalificacionMedia());
+        Assert.assertTrue(newEntity.getCalificacionMedia() == entity.getCalificacionMedia());
         Assert.assertEquals(newEntity.getMarca(), entity.getMarca());
         Assert.assertEquals(newEntity.getReferencia(), entity.getReferencia());
         Assert.assertEquals(newEntity.getTipoModelo(), entity.getTipoModelo());
@@ -184,7 +193,6 @@ public class ModeloLogicTest {
 
     /**
      * Prueba para eliminar un Modelo
-     *
      *
      */
     @Test
@@ -197,23 +205,70 @@ public class ModeloLogicTest {
     }
 
     /**
-     * Prueba para actualizar un Modelo
-     *
-     *
-     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
+     * test que prueba el metodo de buscar item en modelo
      */
     @Test
-    public void updateModeloTest() throws BusinessLogicException {
-        ModeloEntity entity = data.get(0);
-        ModeloEntity pojoEntity = factory.manufacturePojo(ModeloEntity.class);
-        pojoEntity.setId(entity.getId());
-        pojoEntity.setTipoModelo(entity.getTipoModelo());
-        modeloLogic.updateModelo(pojoEntity.getId(), pojoEntity);
-        ModeloEntity resp = em.find(ModeloEntity.class, entity.getId());
-        Assert.assertEquals(pojoEntity.getId(), resp.getId());
-        Assert.assertTrue(pojoEntity.getCalificacionMedia()== resp.getCalificacionMedia());
-        Assert.assertEquals(pojoEntity.getMarca(), resp.getMarca());
-        Assert.assertEquals(pojoEntity.getReferencia(), resp.getReferencia());
-        Assert.assertEquals(pojoEntity.getTipoModelo(), resp.getTipoModelo());
+    public void getItemModeloTest() {
+        try {
+            ItemEntity item = modeloLogic.getItem(data.get(0).getId(), itemsData.get(0).getId());
+            Assert.assertNotNull(item);
+            Assert.assertTrue(Objects.equals(itemsData.get(0).getId(), item.getId()));
+        } catch (BusinessLogicException ex) {
+            Assert.fail();
+        }
+    }
+
+    /**
+     * Prueba el metodo que retorna todos los items de un modelo
+     */
+    @Test
+    public void listItemsModeloTest() {
+        List<ItemEntity> items;
+        try {
+            items = modeloLogic.listItems(data.get(0).getId());
+            Assert.assertTrue(Objects.equals(items.get(0).getModeloId(), data.get(0).getId()));
+        } catch (BusinessLogicException ex) {
+            Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    /**
+     * Prueba que se borre un item de un modelo.
+     */
+    @Test
+    public void removeItem() {
+        try {
+            AccesorioEntity item = factory.manufacturePojo(AccesorioEntity.class);
+            itemsData.add(item);
+            item.setModeloId(data.get(0).getId());
+            accLogic.createAccesorio(item);
+            modeloLogic.removeItem(item.getId(), data.get(0).getId());
+        } catch (BusinessLogicException ex) {
+            Assert.fail();
+        }
+    }
+
+    /**
+     * Prueba para actualizar un Modelo
+     *
+     */
+    @Test
+    public void updateModeloTest() {
+        try {
+            ModeloEntity entity = data.get(0);
+            ModeloEntity pojoEntity = factory.manufacturePojo(ModeloEntity.class);
+            pojoEntity.setId(entity.getId());
+            pojoEntity.setTipoModelo(entity.getTipoModelo());
+            modeloLogic.updateModelo(pojoEntity.getId(), pojoEntity);
+            ModeloEntity resp = em.find(ModeloEntity.class, entity.getId());
+            Assert.assertEquals(pojoEntity.getId(), resp.getId());
+            Assert.assertTrue(pojoEntity.getCalificacionMedia() == resp.getCalificacionMedia());
+            Assert.assertEquals(pojoEntity.getMarca(), resp.getMarca());
+            Assert.assertEquals(pojoEntity.getReferencia(), resp.getReferencia());
+            Assert.assertEquals(pojoEntity.getTipoModelo(), resp.getTipoModelo());
+        } catch (BusinessLogicException e) {
+            Assert.fail();
+        }
     }
 }

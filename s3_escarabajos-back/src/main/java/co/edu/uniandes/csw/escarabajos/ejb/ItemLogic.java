@@ -33,7 +33,7 @@ public class ItemLogic {
     @Inject
     private ModeloPersistence modeloPers;
 
-    @Inject 
+    @Inject
     private FotoPersistence fotoPers;
 
     /*
@@ -49,7 +49,7 @@ public class ItemLogic {
     public List<ItemEntity> getItems() {
         ArrayList<ItemEntity> items = new ArrayList<>();
         LOGGER.info("Inicia proceso de consultar todos los items");
-        LOGGER.info(biciPers.findAll().size()+"!!!"+accPers.findAll().size());
+        LOGGER.info(biciPers.findAll().size() + "!!!" + accPers.findAll().size());
         for (ItemEntity bicicleta : biciPers.findAll()) {
             items.add(bicicleta);
         }
@@ -79,29 +79,36 @@ public class ItemLogic {
         return item;
     }
 
+    /**
+     * Metodo que verifica todas las reglas de negocio de un item antes de crearlo.
+     * @param entity item a verificar
+     * @throws BusinessLogicException si no se cumple una de las reglas de negocio.
+     */
     public void verificarItem(ItemEntity entity) throws BusinessLogicException {
         if (entity.getPrecio() < 0) {
             throw new BusinessLogicException("El item no debe tener un precio negativo");
         }
         if (getItem(entity.getId()) != null) {
-            throw new BusinessLogicException("Ya existe un accesorio el id \"" + entity.getId()+ "\"");
+            throw new BusinessLogicException("Ya existe un accesorio el id \"" + entity.getId() + "\"");
         }
         ModeloEntity modelo = modeloPers.find(entity.getModeloId());
         if (modelo == null) {
             throw new BusinessLogicException("El item debe tener un modelo");
         }
         String tipo = modelo.getTipoModelo();
-        if (!(tipo.equals(ModeloLogic.BICICLETA) && entity instanceof BicicletaEntity||tipo.equals(ModeloLogic.ACCESORIO) && entity instanceof AccesorioEntity)) {
+        if (!(tipo.equals(ModeloLogic.BICICLETA) && entity instanceof BicicletaEntity || tipo.equals(ModeloLogic.ACCESORIO) && entity instanceof AccesorioEntity)) {
             throw new BusinessLogicException("El item debe ser del mismo tipo que el modelo");
         }
-        
+
     }
 
     /**
-     * Retorna una collecion de items asociados a un modelo cada uno con su instancia original
-     * @param idModelo modelo al cual  se le buscaran los items
+     * Retorna una collecion de items asociados a un modelo cada uno con su
+     * instancia original
+     *
+     * @param idModelo modelo al cual se le buscaran los items
      * @return lista de items con instancias originales del modelo
-     * @throws BusinessLogicException  si el modelo no existe
+     * @throws BusinessLogicException si el modelo no existe
      */
     public List<ItemEntity> getItemsModelo(Long idModelo) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de consultar todos los items");
@@ -167,20 +174,42 @@ public class ItemLogic {
     }
 
     /**
-     * Retorna una collecion de bicicletas asociadas a un modelo cada uno con su instancia original
-     * @param modelosId modelo al cual  se le buscaran los bicicletas
+     * Retorna una collecion de bicicletas asociadas a un modelo cada uno con su
+     * instancia original
+     *
+     * @param modelosId modelo al cual se le buscaran los bicicletas
      * @return lista de bicicletas con instancias originales del modelo
      */
-     public List<BicicletaEntity> getBicicletasModelo(Long modelosId) {
-         return biciPers.findByModelo(modelosId);
+    public List<BicicletaEntity> getBicicletasModelo(Long modelosId) {
+        return biciPers.findByModelo(modelosId);
     }
 
-     /**
-     * Retorna una collecion de accesorios asociados a un modelo cada uno con su instancia original
-     * @param modelosId modelo al cual  se le buscaran los accesorios
+    /**
+     * Retorna una collecion de accesorios asociados a un modelo cada uno con su
+     * instancia original
+     *
+     * @param modelosId modelo al cual se le buscaran los accesorios
      * @return lista de accesorios con instancias originales del modelo
      */
     public List<AccesorioEntity> getAccesoriosModelo(Long modelosId) {
         return accPers.findByModelo(modelosId);
+    }
+
+    /**
+     * Borra un item y todas sus relaciones.
+     *
+     * @param item
+     */
+    void removeItem(ItemEntity item) {
+        ModeloEntity modelo = modeloPers.find(item.getModeloId());
+        String tipo = modelo.getTipoModelo();
+        for (FotoEntity foto : item.getAlbum()) {
+            //      fotoPers.delete(foto.getId());
+        }
+        if (tipo.equals(ModeloLogic.BICICLETA)) {
+            biciPers.delete(item.getId());
+        } else if (tipo.equals(ModeloLogic.ACCESORIO)) {
+            accPers.delete(item.getId());
+        }
     }
 }
