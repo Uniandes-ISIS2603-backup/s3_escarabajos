@@ -179,7 +179,7 @@ public class ReclamoPersistenceTest
         
         Assert.assertEquals(2, enProceso.size());
         Assert.assertTrue(data.get(0).getId().equals(enProceso.get(0).getId()) || data.get(0).getId().equals(enProceso.get(1).getId()));
-        Assert.assertTrue(data.get(0).getId().equals(enProceso.get(0).getId()) || data.get(2).getId().equals(enProceso.get(1).getId()));
+        Assert.assertTrue(data.get(2).getId().equals(enProceso.get(0).getId()) || data.get(2).getId().equals(enProceso.get(1).getId()));
     }
      @Test
     public void getReclamosTerminadosTest()
