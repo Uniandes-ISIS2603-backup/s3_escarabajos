@@ -1,0 +1,340 @@
+{
+	"id": "1b749a4c-e09e-65e4-d771-753e5a85f4c5",
+	"name": "Pruebas Bicicleta Usada",
+	"allTests": [],
+	"timestamp": 1520386335624,
+	"collection_id": "ed884ad7-d32e-83f1-01e5-35df242543a4",
+	"folder_id": 0,
+	"target_type": "collection",
+	"environment_id": "0",
+	"data": [],
+	"delay": 0,
+	"count": 1,
+	"collection": {
+		"id": "ed884ad7-d32e-83f1-01e5-35df242543a4",
+		"name": "Pruebas Bicicleta Usada",
+		"description": "",
+		"order": [
+			"5ae30f14-e6dd-72a1-70cb-795facfac8af",
+			"ee01321d-cb16-a0e9-b725-17ab09995300",
+			"f275f229-5e08-62ba-7c82-c85ea1d3b377"
+		],
+		"folders": [],
+		"folders_order": [],
+		"requests": [
+			{
+				"id": "5ae30f14-e6dd-72a1-70cb-795facfac8af",
+				"headers": "Content-Type: application/json\n",
+				"headerData": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": "",
+						"enabled": true
+					}
+				],
+				"url": "http://localhost:8080/s3_escarabajos-web/api/vendedores/1/bicis/100",
+				"queryParams": [],
+				"preRequestScript": null,
+				"pathVariables": {},
+				"pathVariableData": [],
+				"method": "GET",
+				"data": "{\r\n\t\"id\": 123,\r\n\t\"categoria\" : \"m\",\r\n       \"marca\": \"We the People\",\r\n       \"color\": \"Negro\",\r\n       \"precio\": 2.50,\r\n       \"modeloId\":1,\r\n       \"facturaOriginal\" : \"https://cloud10.todocoleccion.online/facturas-antiguas/tc/2010/05/15/19344998.jpg\",\r\n       \"album\" :[\r\n                  \r\n                ]\r\n}",
+				"dataMode": "raw",
+				"version": 2,
+				"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
+				"currentHelper": "normal",
+				"helperAttributes": {},
+				"time": 1520356026673,
+				"name": "Get bicicleta usada con id 100",
+				"description": "",
+				"collectionId": "ed884ad7-d32e-83f1-01e5-35df242543a4",
+				"responses": []
+			},
+			{
+				"id": "ee01321d-cb16-a0e9-b725-17ab09995300",
+				"headers": "Content-Type: application/json\n",
+				"headerData": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": "",
+						"enabled": true
+					}
+				],
+				"url": "http://localhost:8080/s3_escarabajos-web/api/vendedores/1/bicis",
+				"queryParams": [],
+				"preRequestScript": null,
+				"pathVariables": {},
+				"pathVariableData": [],
+				"method": "GET",
+				"data": "{\r\n\t\"id\": 123,\r\n\t\"categoria\" : \"m\",\r\n       \"marca\": \"We the People\",\r\n       \"color\": \"Negro\",\r\n       \"precio\": 2.50,\r\n       \"modeloId\":1,\r\n       \"facturaOriginal\" : \"https://cloud10.todocoleccion.online/facturas-antiguas/tc/2010/05/15/19344998.jpg\",\r\n       \"album\" :[\r\n                  \r\n                ]\r\n}",
+				"dataMode": "raw",
+				"version": 2,
+				"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
+				"currentHelper": "normal",
+				"helperAttributes": {},
+				"time": 1520356023781,
+				"name": "Get todas las bicicletas usadas del vendedor 1",
+				"description": "",
+				"collectionId": "ed884ad7-d32e-83f1-01e5-35df242543a4",
+				"responses": []
+			},
+			{
+				"id": "f275f229-5e08-62ba-7c82-c85ea1d3b377",
+				"headers": "Content-Type: application/json\n",
+				"headerData": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": "",
+						"enabled": true
+					}
+				],
+				"url": "http://localhost:8080/s3_escarabajos-web/api/vendedores/1/bicis",
+				"queryParams": [],
+				"preRequestScript": null,
+				"pathVariables": {},
+				"pathVariableData": [],
+				"method": "POST",
+				"data": "{\r\n\t\"id\": 101,\r\n\t\"categoria\" : \"M\",\r\n       \"marca\": \"We the People\",\r\n       \"color\": \"Negro\",\r\n       \"precio\": 3.50,\r\n       \"modeloId\":1,\r\n       \"usada\":true,\r\n       \"facturaOriginal\" : \"https://cloud10.todocoleccion.online/facturas-antiguas/tc/2010/05/15/19344998.jpg\",\r\n       \"album\" :[\r\n                  \r\n                ]\r\n}",
+				"dataMode": "raw",
+				"version": 2,
+				"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
+				"currentHelper": "normal",
+				"helperAttributes": {},
+				"time": 1520356021239,
+				"name": "Post de una bicicleta usada",
+				"description": "",
+				"collectionId": "ed884ad7-d32e-83f1-01e5-35df242543a4",
+				"responses": []
+			}
+		],
+		"timestamp": 1520294472271,
+		"synced": false,
+		"syncedFilename": "",
+		"remote_id": 0,
+		"remoteLink": "",
+		"remoteLinkUpdatedAt": null,
+		"public": false,
+		"owner": "2856583",
+		"subscribed": false,
+		"createdAt": 1520294472271,
+		"updatedAt": 1520355978917,
+		"write": true,
+		"published": false,
+		"favorite": false,
+		"permissions": {},
+		"syncedPermissions": {},
+		"sharedWithTeam": false
+	},
+	"folder": null,
+	"environment": null,
+	"globals": [
+		{
+			"key": "new_id",
+			"type": "text",
+			"value": "6",
+			"enabled": true
+		},
+		{
+			"key": "new_id_e",
+			"type": "text",
+			"value": "1",
+			"enabled": true
+		},
+		{
+			"key": "new_id_b",
+			"type": "text",
+			"value": "1",
+			"enabled": true
+		}
+	],
+	"results": [
+		{
+			"id": "5ae30f14-e6dd-72a1-70cb-795facfac8af",
+			"name": "Get bicicleta usada con id 100",
+			"url": "http://localhost:8080/s3_escarabajos-web/api/vendedores/1/bicis/100",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1651
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			],
+			"time": 1651,
+			"totalRequestTime": 1651,
+			"iterationResults": {}
+		},
+		{
+			"id": "ee01321d-cb16-a0e9-b725-17ab09995300",
+			"name": "Get todas las bicicletas usadas del vendedor 1",
+			"url": "http://localhost:8080/s3_escarabajos-web/api/vendedores/1/bicis",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				141
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			],
+			"time": 141,
+			"totalRequestTime": 141,
+			"iterationResults": {}
+		},
+		{
+			"id": "f275f229-5e08-62ba-7c82-c85ea1d3b377",
+			"name": "Post de una bicicleta usada",
+			"url": "http://localhost:8080/s3_escarabajos-web/api/vendedores/1/bicis",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				508
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			],
+			"time": 508,
+			"totalRequestTime": 508,
+			"iterationResults": {}
+		}
+	],
+	"totalPass": 3,
+	"totalFail": 0,
+	"totalTime": 2300,
+	"lifecycle": "done",
+	"willStop": false,
+	"requests": [
+		{
+			"name": "Get bicicleta usada con id 100",
+			"id": "5ae30f14-e6dd-72a1-70cb-795facfac8af",
+			"url": "http://localhost:8080/s3_escarabajos-web/api/vendedores/1/bicis/100",
+			"time": 1651,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"gridTitles": [
+				"Status code is 200"
+			],
+			"gridData": [
+				[
+					true
+				]
+			],
+			"tests": {
+				"Status code is 200": true
+			}
+		},
+		{
+			"name": "Get todas las bicicletas usadas del vendedor 1",
+			"id": "ee01321d-cb16-a0e9-b725-17ab09995300",
+			"url": "http://localhost:8080/s3_escarabajos-web/api/vendedores/1/bicis",
+			"time": 141,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"gridTitles": [
+				"Status code is 200"
+			],
+			"gridData": [
+				[
+					true
+				]
+			],
+			"tests": {
+				"Status code is 200": true
+			}
+		},
+		{
+			"name": "Post de una bicicleta usada",
+			"id": "f275f229-5e08-62ba-7c82-c85ea1d3b377",
+			"url": "http://localhost:8080/s3_escarabajos-web/api/vendedores/1/bicis",
+			"time": 508,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"gridTitles": [
+				"Status code is 200"
+			],
+			"gridData": [
+				[
+					true
+				]
+			],
+			"tests": {
+				"Status code is 200": true
+			}
+		}
+	],
+	"synced": false
+}

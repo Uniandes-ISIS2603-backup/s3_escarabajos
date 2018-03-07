@@ -40,9 +40,6 @@ public class BicicletaUsadaLogic {
         if (entity.getUsada() != true) {
             throw new BusinessLogicException("La bicicleta usada debe tener el estado de usada en true");
         }
-        if (entity.getCategoria() == null || entity.getCategoria().equals("")) {
-            throw new BusinessLogicException("La bicicleta usada debe estar asociada a una categoria valida");
-        }
         if (!entity.getEstado().equals("En proceso")) {
             throw new BusinessLogicException("La bicicleta usada debe tener estado inicial En proceso");
         }
@@ -90,7 +87,8 @@ public class BicicletaUsadaLogic {
      * asociada a una categoria o si no esta asociada a un modelo
      */
     public BicicletaUsadaEntity createBicicleta(Long idVendedor,BicicletaUsadaEntity entity) throws BusinessLogicException {
-        LOGGER.info("Inicia proceso de creación de bicicleta usada");
+        LOGGER.info("Inicia proceso de creaciÃ³n de bicicleta usada");
+        entity.setUsada(Boolean.TRUE);
         entity.setEstado("En proceso");
         logicItem.verificarItem(entity);
         verificarBiciUsada(entity);
@@ -99,7 +97,7 @@ public class BicicletaUsadaLogic {
         if (persistence.find(idVendedor,entity.getId()) != null) {
             throw new BusinessLogicException("Ya existe una bicicleta usada con el id \"" + entity.getId()+ "\"");
         }
-        LOGGER.info("Termina proceso de creación de bicicleta usada");
+        LOGGER.info("Termina proceso de creaciÃ³n de bicicleta usada");
         return persistence.create(entity);
     }
 
@@ -114,6 +112,7 @@ public class BicicletaUsadaLogic {
      */
     public BicicletaUsadaEntity updateBicicleta(Long idVendedor, BicicletaUsadaEntity entity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar bicicleta usada con id={0}", entity.getId());
+        entity.setUsada(Boolean.TRUE);
         if(entity.getPrecio() < 0 ){
             throw new BusinessLogicException("El precio debe ser mayor a 0");
         }

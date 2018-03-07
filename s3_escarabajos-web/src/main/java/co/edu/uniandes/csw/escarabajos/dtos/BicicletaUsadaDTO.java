@@ -22,7 +22,8 @@ import co.edu.uniandes.csw.escarabajos.entities.BicicletaUsadaEntity;
  *      "color": string,
  *      "precio": double,
  *      "usada": boolean,
- *      "album":[]String,
+ *      "album":[{@FotoDTO}],
+ *      "modeloId":number,
  *      "facturaOriginal" : string
  *      
  *   }
@@ -35,6 +36,7 @@ import co.edu.uniandes.csw.escarabajos.entities.BicicletaUsadaEntity;
  *      "color: "Negro",
  *      "precio": 2.50,
  *      "usada: true,
+ *      "modeloId": 1,
  *      "facturaOriginal" : "https://cloud10.todocoleccion.online/facturas-antiguas/tc/2010/05/15/19344998.jpg",
  *      "album" :[
  *                 

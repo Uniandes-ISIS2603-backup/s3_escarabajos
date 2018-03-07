@@ -22,13 +22,17 @@ insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_
 insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id) values (4,'BicicletaEntity', 251.36, 'Goldenrod', 0, 'A3', 4,4);
 insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id) values (5,'BicicletaEntity', 118.77, 'Pink', 0, 'C70', 5,5);
 
+--Datos de prueba VendedorEntity
+
+insert into VendedorEntity (id, nombre, telefono, direccion) values (1,'Camilo','4542024','Calle 38 C Sur');
+
 --Datos de prueba BicicletUsadaEntity
 
-insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado) values (100,'BicicletaUsadaEntity', 276.71, 'Puce', 1, 'Aerostar', 1, 1, 'http://intel.com/vestibulum/rutrum/rutrum.json', 'En proceso');
-insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado) values (200,'BicicletaUsadaEntity', 395.40, 'Maroon', 1, 'Rabbit', 2, 2, 'http://discovery.com/montes/nascetur/ridiculus/mus/etiam/vel/augue.js', 'En proceso');
-insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado) values (300,'BicicletaUsadaEntity', 757.94, 'Green', 1, 'LS', 3, 3, 'https://blogger.com/ultrices/posuere.jsp', 'En proceso');
-insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado) values (400,'BicicletaUsadaEntity', 757.05, 'Green', 1, 'G', 4, 4, 'https://dagondesign.com/aliquam.js', 'En proceso');
-insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado) values (500,'BicicletaUsadaEntity', 929.71, 'Khaki', 1, 'Escort', 5, 5, 'https://netlog.com/in.jpg', 'En proceso');
+insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado,vendedor_id) values (100,'BicicletaUsadaEntity', 276.71, 'Puce', 1, 'Aerostar', 1, 1, 'http://intel.com/vestibulum/rutrum/rutrum.json', 'En proceso',1);
+insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado,vendedor_id) values (200,'BicicletaUsadaEntity', 395.40, 'Maroon', 1, 'Rabbit', 2, 2, 'http://discovery.com/montes/nascetur/ridiculus/mus/etiam/vel/augue.js', 'En proceso',1);
+insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado,vendedor_id) values (300,'BicicletaUsadaEntity', 757.94, 'Green', 1, 'LS', 3, 3, 'https://blogger.com/ultrices/posuere.jsp', 'En proceso',1);
+insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado,vendedor_id) values (400,'BicicletaUsadaEntity', 757.05, 'Green', 1, 'G', 4, 4, 'https://dagondesign.com/aliquam.js', 'En proceso',1);
+insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado,vendedor_id) values (500,'BicicletaUsadaEntity', 929.71, 'Khaki', 1, 'Escort', 5, 5, 'https://netlog.com/in.jpg', 'En proceso',1);
 
 --Datos de prueba AccesorioEntity
 
@@ -39,3 +43,5 @@ insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_
 insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id) values (15,'AccesorioEntity', 118.77, 'Pink', 5,5);
 
 --Datos de prueba ClienteEntity
+
+
