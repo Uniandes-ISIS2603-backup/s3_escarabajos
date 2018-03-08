@@ -23,6 +23,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
 
 /**
  * <pre>Clase que implementa el recurso "modelos".
@@ -41,11 +42,10 @@ import javax.ws.rs.WebApplicationException;
  * @version 1.0
  */
 @Path("modelos")
-@Produces("application/json")
-@Consumes("application/json")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 @RequestScoped
 public class ModeloResource {
-  private static final Logger LOGGER = Logger.getLogger(ModeloResource.class.getName());
     
     @Inject
     ModeloLogic modeloLogic;
@@ -163,18 +163,19 @@ public class ModeloResource {
      * </code>
      * </pre>
      * @param id Identificador del modelo que se desea borrar. Este debe ser una cadena de dígitos.
-     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException si no se encuentra el modelo
      */
     @DELETE
     @Path("{id: \\d+}")
-     public void deleteModelo(@PathParam("id") Long id) throws BusinessLogicException {
-      LOGGER.info("DEDETETSETSET");
-      ModeloEntity entity = modeloLogic.getModelo(id);
-        if (entity == null) {
-            throw new WebApplicationException("El recurso /modelos/" + id + " no existe.", 404);
-        }
+     public void deleteModelo(@PathParam("id") Long id) {
+      try{
         modeloLogic.deleteModelo(id);
+      }
+      catch(BusinessLogicException e){
+           throw new WebApplicationException("El recurso /modelos/" + id + " no existe.", 404); 
+      }
     }
+     
+     
      
      /**
      * Conexión con el servicio de items para un modelo. {@link ModeloItemsResource}
