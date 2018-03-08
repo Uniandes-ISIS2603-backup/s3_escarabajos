@@ -141,6 +141,7 @@ public class AccesorioLogicTest {
         AccesorioEntity pojoEntity = factory.manufacturePojo(AccesorioEntity.class);
 
         pojoEntity.setId(entity.getId());
+        pojoEntity.setModeloId(entity.getModeloId());
 
         logic.updateAccesorio(pojoEntity, pojoEntity.getModeloId());
 

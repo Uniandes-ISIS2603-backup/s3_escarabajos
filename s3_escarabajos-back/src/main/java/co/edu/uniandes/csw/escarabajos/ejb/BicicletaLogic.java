@@ -94,13 +94,17 @@ public class BicicletaLogic {
      */
     public BicicletaEntity updateBicicleta(Long id, BicicletaEntity entity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar bicicleta con id={0}", id);
+        BicicletaEntity bici = persistence.find(id);
+        if (bici == null) {
+            LOGGER.log(Level.SEVERE, "El bicicleta con el id {0} no existe", id);
+            throw new BusinessLogicException("La bicicleta con el id " + id + "no existe");
+        }
         entity.setUsada(Boolean.FALSE);
         if (entity.getPrecio() <= 0) {
             throw new BusinessLogicException("La bicicleta debe tener un precio mayor a 0");
-        }
-        ModeloEntity modelo = modeloPersistence.find(entity.getModeloId());
-        if (modelo == null) {
-            throw new BusinessLogicException("El item debe tener un modelo");
+        } 
+        if (entity.getModeloId()!= bici.getModeloId()) {
+            throw new BusinessLogicException("No se le puede cambiar el modelo a una bicicleta!");
         }
         verificarBicicleta(entity);
         BicicletaEntity newEntity = persistence.update(entity);
@@ -114,6 +118,7 @@ public class BicicletaLogic {
      * @param id El ID del bicicleta a eliminar
      */
     public void deleteBicicleta(Long id) {
+        //Este metodo no se deberia usar. USEN ModeloLogic.removeItem()!!!!!!!!!!!!!!
         LOGGER.log(Level.INFO, "Inicia proceso de borrar bicicleta con id={0}", id);
         persistence.delete(id);
         LOGGER.log(Level.INFO, "Termina proceso de borrar bicicleta con id={0}", id);
@@ -127,5 +132,9 @@ public class BicicletaLogic {
             throw new BusinessLogicException("La bicicleta debe estar asociada a una categoria valida");
         }
         return entity;
+    }
+    
+    public List<BicicletaEntity> findByModelo(Long id ){
+        return persistence.findByModelo(id);
     }
 }

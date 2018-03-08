@@ -192,7 +192,7 @@ public class BicicletaLogicTest {
 
         pojoEntity.setId(entity.getId());
         pojoEntity.setUsada(Boolean.FALSE);
-        pojoEntity.setModeloId(dataModelo.get(0).getId());
+        pojoEntity.setModeloId(entity.getModeloId());
 
         logic.updateBicicleta(entity.getId(), pojoEntity);
 

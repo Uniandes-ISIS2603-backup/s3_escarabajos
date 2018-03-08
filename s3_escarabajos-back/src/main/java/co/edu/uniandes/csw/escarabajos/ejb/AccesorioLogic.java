@@ -57,8 +57,15 @@ public class AccesorioLogic {
      */
     public AccesorioEntity updateAccesorio( AccesorioEntity entity, Long idModelo ) throws BusinessLogicException{
         
-        if (persistence.find(entity.getId()) == null) {
+        AccesorioEntity acc = persistence.find(entity.getId());
+        if (acc == null) {
             throw new BusinessLogicException("No existe un accesorio con el id" + entity.getId()+ "\"");
+        }
+        if (acc.getPrecio() <= 0) {
+            throw new BusinessLogicException("El accesorio debe tener un precio mayor a 0");
+        } 
+        if (entity.getModeloId()!= acc.getModeloId()) {
+            throw new BusinessLogicException("No se le puede cambiar el modelo a un accesorio!");
         }
         return persistence.update(entity);
     }
@@ -68,7 +75,7 @@ public class AccesorioLogic {
      * @param id 
      */
     public void deleteAccesorio( Long id ){
-        
+        //Este metodo no se deberia usar. USEN ModeloLogic.removeItem()!!!!!!!!!!!!!!
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el Accesorio con id={0}", id);    
         persistence.delete(id);
         LOGGER.log(Level.INFO, "Termina proceso de borrar el Accesorio con id={0}", id);

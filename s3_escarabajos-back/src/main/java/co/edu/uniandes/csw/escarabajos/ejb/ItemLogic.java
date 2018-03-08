@@ -25,9 +25,6 @@ public class ItemLogic {
     private static final Logger LOGGER = Logger.getLogger(ItemLogic.class.getName());
 
     @Inject
-    private AccesorioPersistence accPers;
-
-    @Inject
     private BicicletaPersistence biciPers;
 
     @Inject
@@ -35,6 +32,10 @@ public class ItemLogic {
 
     @Inject
     private FotoPersistence fotoPers;
+
+    @Inject
+    private AccesorioPersistence accPers;
+
 
     /*
       Para crear un Accesorio/Bicicleta:
@@ -49,7 +50,6 @@ public class ItemLogic {
     public List<ItemEntity> getItems() {
         ArrayList<ItemEntity> items = new ArrayList<>();
         LOGGER.info("Inicia proceso de consultar todos los items");
-        LOGGER.info(biciPers.findAll().size() + "!!!" + accPers.findAll().size());
         for (ItemEntity bicicleta : biciPers.findAll()) {
             items.add(bicicleta);
         }
@@ -80,9 +80,12 @@ public class ItemLogic {
     }
 
     /**
-     * Metodo que verifica todas las reglas de negocio de un item antes de crearlo.
+     * Metodo que verifica todas las reglas de negocio de un item antes de
+     * crearlo.
+     *
      * @param entity item a verificar
-     * @throws BusinessLogicException si no se cumple una de las reglas de negocio.
+     * @throws BusinessLogicException si no se cumple una de las reglas de
+     * negocio.
      */
     public void verificarItem(ItemEntity entity) throws BusinessLogicException {
         if (entity.getPrecio() < 0) {
@@ -195,21 +198,4 @@ public class ItemLogic {
         return accPers.findByModelo(modelosId);
     }
 
-    /**
-     * Borra un item y todas sus relaciones.
-     *
-     * @param item
-     */
-    void removeItem(ItemEntity item) {
-        ModeloEntity modelo = modeloPers.find(item.getModeloId());
-        String tipo = modelo.getTipoModelo();
-        for (FotoEntity foto : item.getAlbum()) {
-            //      fotoPers.delete(foto.getId());
-        }
-        if (tipo.equals(ModeloLogic.BICICLETA)) {
-            biciPers.delete(item.getId());
-        } else if (tipo.equals(ModeloLogic.ACCESORIO)) {
-            accPers.delete(item.getId());
-        }
-    }
 }

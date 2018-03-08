@@ -163,10 +163,11 @@ public class ModeloResource {
      * </code>
      * </pre>
      * @param id Identificador del modelo que se desea borrar. Este debe ser una cadena de dígitos.
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException si no se encuentra el modelo
      */
     @DELETE
     @Path("{id: \\d+}")
-     public void deleteModelo(@PathParam("id") Long id) {
+     public void deleteModelo(@PathParam("id") Long id) throws BusinessLogicException {
       LOGGER.info("DEDETETSETSET");
       ModeloEntity entity = modeloLogic.getModelo(id);
         if (entity == null) {

@@ -178,7 +178,7 @@ public class BicicletaResource {
        if(entity == null){
            throw new WebApplicationException("El recurso /bicis/" + id + " no existe.", 404);
        }
-       logic.deleteBicicleta(id);
+       modeloLogic.removeItem(id);
     }
     
 }

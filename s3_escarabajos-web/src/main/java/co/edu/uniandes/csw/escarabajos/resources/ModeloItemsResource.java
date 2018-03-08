@@ -149,7 +149,7 @@ public class ModeloItemsResource {
     @Path("{itemsId: \\d+}")
     public void removeItems(@PathParam("modelosId") Long modelosId, @PathParam("itemsId") Long itemsId) {
         try {
-            modeloLogic.removeItem(itemsId, modelosId);
+            modeloLogic.removeItem(itemsId);
         } catch (BusinessLogicException ex) {
             throw new WebApplicationException("No existe este item en este modelo", 404);
         }

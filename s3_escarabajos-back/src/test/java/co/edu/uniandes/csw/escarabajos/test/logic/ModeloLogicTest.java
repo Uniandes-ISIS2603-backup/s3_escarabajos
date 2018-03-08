@@ -47,9 +47,6 @@ public class ModeloLogicTest {
     private ModeloLogic modeloLogic;
 
     @Inject
-    private ItemLogic itemLogic;
-
-    @Inject
     private AccesorioLogic accLogic;
 
     @PersistenceContext
@@ -58,7 +55,7 @@ public class ModeloLogicTest {
     @Inject
     private UserTransaction utx;
 
-    private List<ModeloEntity> data = new ArrayList<ModeloEntity>();
+    private List<ModeloEntity> data = new ArrayList<>();
 
     private List<ItemEntity> itemsData = new ArrayList();
 
@@ -112,25 +109,29 @@ public class ModeloLogicTest {
      *
      */
     private void insertData() {
-        try {
-            for (int i = 0; i < 3; i++) {
-                ModeloEntity entity = factory.manufacturePojo(ModeloEntity.class);
-                entity.setTipoModelo(ModeloLogic.ACCESORIO);
-                modeloLogic.createModelo(entity);
-                data.add(entity);
-            }
-            for (int i = 0; i < 3; i++) {
-                AccesorioEntity items = factory.manufacturePojo(AccesorioEntity.class);
-                itemsData.add(items);
-                items.setModeloId(data.get(i).getId());
-                accLogic.createAccesorio(items);
-            }
-            for (int i = 0; i < 3; i++) {
-                ItemEntity addItem = modeloLogic.addItem(itemsData.get(i), data.get(i).getId());
-            }
-        } catch (BusinessLogicException e) {
-            Assert.fail();
+        for (int i = 0; i < 3; i++) {
+            AccesorioEntity items = factory.manufacturePojo(AccesorioEntity.class);
+            em.persist(items);
+            itemsData.add(items);
         }
+
+        for (int i = 0; i < 3; i++) {
+            ModeloEntity entity = factory.manufacturePojo(ModeloEntity.class);
+            entity.setTipoModelo(ModeloLogic.ACCESORIO);
+            ArrayList<ItemEntity> items = new ArrayList<>();
+            items.add(itemsData.get(i));
+            entity.setItems(items);
+            em.persist(entity);
+            data.add(entity);
+            
+        }
+        for (ModeloEntity modelo : modeloLogic.getModelos()) {
+            for (ItemEntity item : modelo.getItems()) {
+                item.setModeloId(modelo.getId());
+                em.merge(item);
+            }
+        }
+
     }
 
     /**
@@ -196,11 +197,10 @@ public class ModeloLogicTest {
      *
      */
     @Test
-    public void deleteModeloTest() {
+    public void deleteModeloTest() throws BusinessLogicException {
         ModeloEntity entity = data.get(0);
-        Long id = entity.getId();
         modeloLogic.deleteModelo(entity.getId());
-        ModeloEntity deleted = modeloLogic.getModelo(id);
+        ModeloEntity deleted = modeloLogic.getModelo(entity.getId());
         Assert.assertNull(deleted);
     }
 
@@ -239,13 +239,9 @@ public class ModeloLogicTest {
     @Test
     public void removeItem() {
         try {
-            AccesorioEntity item = factory.manufacturePojo(AccesorioEntity.class);
-            itemsData.add(item);
-            item.setModeloId(data.get(0).getId());
-            accLogic.createAccesorio(item);
-            modeloLogic.removeItem(item.getId(), data.get(0).getId());
+            modeloLogic.removeItem(itemsData.get(2).getId());
         } catch (BusinessLogicException ex) {
-            Assert.fail();
+          Assert.fail();
         }
     }
 

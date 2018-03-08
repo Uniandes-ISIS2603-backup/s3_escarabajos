@@ -153,11 +153,12 @@ public class AcessorioResource {
      * </code>
      * </pre>
      * @param id Identificador del accesorio que se desea borrar. Este debe ser una cadena de dígitos.
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException si el accesorio no existe!
      */
     @DELETE
     @Path("{id: \\d+}")
-     public void deleteAccesorio(@PathParam("id") Long id) {
-        logic.deleteAccesorio(id);
+     public void deleteAccesorio(@PathParam("id") Long id) throws BusinessLogicException {
+       modeloLogic.removeItem(id);
     }
      
     private List<AccesorioDTO> listBookEntity2DetailDTO(List<AccesorioEntity> entityList) {
