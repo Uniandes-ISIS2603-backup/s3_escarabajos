@@ -27,7 +27,7 @@ import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
  *
  * <pre>
  *
- *   [{
+ *   {
   "id": 1,
   "nombre": "Ariel",
   "correo": "asnar0@discuz.net",

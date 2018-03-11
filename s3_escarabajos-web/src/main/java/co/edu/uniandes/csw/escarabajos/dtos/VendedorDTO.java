@@ -8,6 +8,31 @@ package co.edu.uniandes.csw.escarabajos.dtos;
 import co.edu.uniandes.csw.escarabajos.entities.VendedorEntity;
 
 /**
+ * VendedorDTO Objeto de transferencia de datos del . Los DTO
+ * contienen las representaciones de los JSON que se transfieren entre el
+ * cliente y el servidor.
+ *
+ * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ * <pre>
+ *   {
+	"nombre":String,
+	"direccion":String,
+	"telefono":String
+	
+    }
+ * </pre> Por ejemplo un modelo se representa asi:<br>
+ *
+ * <pre>
+ *
+ *   {
+	"nombre":"pibe",
+	"direccion":"Cra 57 b 121",
+	"telefono":"5885845"
+        "id": 2
+	
+    }
+ *
+ * </pre>
  *
  * @author s.beltran
  */
