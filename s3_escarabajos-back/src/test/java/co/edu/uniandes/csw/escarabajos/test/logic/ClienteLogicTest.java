@@ -139,9 +139,9 @@ public class ClienteLogicTest {
     
     @Test
     public void deleteClienteTest() throws BusinessLogicException {
-        ClienteEntity entity = logic.getCliente(data.get(0).getId());
+        ClienteEntity entity = data.get(0);
         logic.deleteCliente(entity.getId());
-        ClienteEntity deleted = logic.getCliente(data.get(0).getId());
+        ClienteEntity deleted = em.find(ClienteEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
 }

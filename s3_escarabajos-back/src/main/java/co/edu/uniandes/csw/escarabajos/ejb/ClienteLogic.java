@@ -34,13 +34,13 @@ public class ClienteLogic {
      
      public ClienteEntity createCliente(ClienteEntity cliente) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de cliente");
-        CarritoEntity carrito = new CarritoEntity();
-        carrito.setCliente(cliente);
-        cliente.setCarrito(carrito);
-        persistence.create(cliente);
-        carritoPersistence.create(carrito);
+        //CarritoEntity carrito = new CarritoEntity();
+        //carrito.setCliente(cliente);
+        //cliente.setCarrito(carrito);
+        
+        //carritoPersistence.create(carrito);
         LOGGER.info("Termina proceso de creación de cliente");
-        return cliente;
+        return persistence.create(cliente);
     }
 
     public List<ClienteEntity> getClientes() {
@@ -52,6 +52,8 @@ public class ClienteLogic {
     }
 
     public ClienteEntity getCliente(Long id) {
+        LOGGER.info("Inicia proceso de consultar clientes");
+
         return persistence.find(id);
     }
 
@@ -64,7 +66,7 @@ public class ClienteLogic {
     
     public void deleteCliente(Long id) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar cliente con id={0}", id);    
-        carritoPersistence.deleteCarrito(getCliente(id).getCarrito().getId());
+        //carritoPersistence.deleteCarrito(getCliente(id).getCarrito().getId());
         persistence.delete(id);
         LOGGER.log(Level.INFO, "Termina proceso de borrar cliente con id={0}", id);
     }

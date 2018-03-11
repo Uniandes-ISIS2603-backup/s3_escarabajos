@@ -70,6 +70,7 @@ public class ClientePersistence {
     }
 
     public ClienteEntity find(Long id) {
+        LOGGER.log(Level.INFO, "Consultando cliente con id={0}", id);
         return em.find(ClienteEntity.class, id);
     }
 

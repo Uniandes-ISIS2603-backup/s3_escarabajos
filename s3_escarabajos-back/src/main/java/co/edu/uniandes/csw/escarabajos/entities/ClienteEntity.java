@@ -57,7 +57,8 @@ public class ClienteEntity implements Serializable {
     
     @PodamExclude
     @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = " CLNT_ITEMS", joinColumns = @JoinColumn(name = "CLNT_ID"), inverseJoinColumns = @JoinColumn(name="ITEM_ID"))
+    /*@JoinTable(name = " CLNT_ITEMS", joinColumns = @JoinColumn(name = "CLNT_ID"), inverseJoinColumns = @JoinColumn(name="ITEM_ID"))
+    */
     private List<ItemEntity> deseados = new ArrayList<>();
  
     public CarritoEntity getCarrito(){
