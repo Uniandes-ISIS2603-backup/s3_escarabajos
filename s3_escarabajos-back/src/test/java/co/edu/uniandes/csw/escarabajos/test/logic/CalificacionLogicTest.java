@@ -232,7 +232,7 @@ public class CalificacionLogicTest
         CalificacionEntity e = factory.manufacturePojo(CalificacionEntity.class);
         calificacionLogic.crearCalificacion(e, modelosData.get(0).getId(), clientesdata.get(0).getId());
         modelo0 = calificacionLogic.getCalificacionesPorModelo(modelosData.get(0).getId());
-        Assert.assertEquals(2, modelo0.size());
+        Assert.assertEquals(1, modelo0.size());
     }
     @Test
     public void darCalificacionesPorClienteTest() throws BusinessLogicException
@@ -247,7 +247,7 @@ public class CalificacionLogicTest
         CalificacionEntity e = factory.manufacturePojo(CalificacionEntity.class);
         calificacionLogic.crearCalificacion(e, modelosData.get(0).getId(), clientesdata.get(0).getId());
         cliente0 = calificacionLogic.getCalificacionesPorCliente(clientesdata.get(0).getId());
-        Assert.assertEquals(2, cliente0.size());
+        Assert.assertEquals(1, cliente0.size());
     }
     @Test
     public void getCalificacionesPorClienteAndModeloTest() throws BusinessLogicException
@@ -262,7 +262,7 @@ public class CalificacionLogicTest
         CalificacionEntity e = factory.manufacturePojo(CalificacionEntity.class);
         calificacionLogic.crearCalificacion(e, modelosData.get(0).getId(), clientesdata.get(0).getId());
         mc0 = calificacionLogic.getCalificacionesPorClienteAndModelo(clientesdata.get(0).getId(), modelosData.get(0).getId());
-        Assert.assertEquals(2, mc0.size());
+        Assert.assertEquals(1, mc0.size());
     }
     /**
      * Prueba para verificar la calificacion media de un modelo.
@@ -278,6 +278,6 @@ public class CalificacionLogicTest
         e.setPuntaje(3);
         calificacionLogic.crearCalificacion(e, modelosData.get(0).getId(), clientesdata.get(0).getId());
         Assert.assertEquals(-1, calificacionLogic.getCalificacionMedia(Long.MIN_VALUE), 0.01);
-        Assert.assertEquals(2, calificacionLogic.getCalificacionMedia(modelosData.get(0).getId()), 0.01);
+        Assert.assertEquals(1, calificacionLogic.getCalificacionMedia(modelosData.get(0).getId()), 0.01);
     }
 }
