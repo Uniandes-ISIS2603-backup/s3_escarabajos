@@ -28,7 +28,7 @@ public class BicicletaUsadaPersistence {
     /**
      * Crea una nueva bicicleta usada.
      *
-     * @param entity
+     * @param entity datos de la nueva bicicleta
      * @return bicicleta usada
      */
     public BicicletaUsadaEntity create(BicicletaUsadaEntity entity) {
@@ -39,8 +39,8 @@ public class BicicletaUsadaPersistence {
     /**
      * Encuentra una bicicleta usada asociada a un vendedor.
      *
-     * @param idVendedor
-     * @param idBici
+     * @param idVendedor vendedor especifico
+     * @param idBici bicicleta especifica
      * @return bicicleta usada
      */
     public BicicletaUsadaEntity find(Long idVendedor, Long idBici) {
@@ -63,7 +63,7 @@ public class BicicletaUsadaPersistence {
     /**
      * Borra una bicicleta usada asociacda a un vendedor.
      *
-     * @param id
+     * @param id de la bicicleta a eliminar.
      */
     public void delete(Long id) {
         BicicletaUsadaEntity bici = em.find(BicicletaUsadaEntity.class, id);
@@ -73,7 +73,7 @@ public class BicicletaUsadaPersistence {
     /**
      * Encuentra todas las bicicletas usadas con el mismo estado.
      *
-     * @param estado
+     * @param estado para poder filtrar
      * @return bicicleta usada con estado "estado".
      */
     public BicicletaUsadaEntity findEstado(String estado) {
@@ -92,7 +92,7 @@ public class BicicletaUsadaPersistence {
     /**
      * Devuelve todas las bicicletas de un vendedor.
      *
-     * @param idVendedor
+     * @param idVendedor vendedor especifico
      * @return lista bicicletas
      */
     public List<BicicletaUsadaEntity> findAllBicis(Long idVendedor) {
@@ -105,7 +105,7 @@ public class BicicletaUsadaPersistence {
     /**
      * Modifica los datos de una bicicleta usada.
      *
-     * @param bici
+     * @param bici datos nuevos de la bicicleta.
      * @return bicicleta usada con nuevos datos.
      */
     public BicicletaUsadaEntity update(BicicletaUsadaEntity bici) {

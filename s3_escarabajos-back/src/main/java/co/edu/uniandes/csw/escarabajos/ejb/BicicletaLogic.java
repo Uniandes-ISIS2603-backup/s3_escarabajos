@@ -53,10 +53,10 @@ public class BicicletaLogic {
     }
 
     /**
-     * Devuelve una bicicleta especifica.
-     *
-     * @param id El id del bicicleta a buscar
-     * @return bicicleta
+     * Devuelve una bicicleta especifica
+     * @param id de la bicicleta
+     * @return Datos de la biciccleta especifica
+     * @throws BusinessLogicException Por reglas de negocio
      */
     public BicicletaEntity getBicicleta(Long id) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar bicicleta con id={0}", id);
@@ -123,7 +123,7 @@ public class BicicletaLogic {
     /**
      * Eliminar un bicicleta especifica
      *
-     * @param id 
+     * @param id de la bicicleta a borrar
      */
     public void deleteBicicleta(Long id) {
         //Este metodo no se deberia usar. USEN ModeloLogic.removeItem()!!!!!!!!!!!!!!
@@ -134,9 +134,9 @@ public class BicicletaLogic {
 
     /**
      * Metodo que verifica las reglas de negocio.
-     * @param entity
-     * @return
-     * @throws BusinessLogicException 
+     * @param entity Datos de la bicicleta a veficar
+     * @return bicicleta cumpliendo las reglas de negocio.
+     * @throws BusinessLogicException  por reglas de negocio
      */
     public BicicletaEntity verificarBicicleta(BicicletaEntity entity) throws BusinessLogicException {
         if (entity.getUsada() != false) {
@@ -149,7 +149,7 @@ public class BicicletaLogic {
     }
     /**
      * Encuentra todas las bicicletas con un modelo especifico
-     * @param id
+     * @param id del modelo para filtrar
      * @return lista de bicicletas.
      */
     public List<BicicletaEntity> findByModelo(Long id ){

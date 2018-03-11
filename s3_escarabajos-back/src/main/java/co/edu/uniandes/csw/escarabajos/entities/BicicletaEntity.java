@@ -30,7 +30,7 @@ public class BicicletaEntity extends ItemEntity implements Serializable  {
     }
     /**
      * Modifica la categoria
-     * @param categoria 
+     * @param categoria nueva categoria
      */
     public void setCategoria(String categoria) {
         this.categoria = categoria;
@@ -44,7 +44,7 @@ public class BicicletaEntity extends ItemEntity implements Serializable  {
     }
     /**
      * Modifica usada
-     * @param usada 
+     * @param usada  nuevo usada
      */
     public void setUsada(Boolean usada) {
         this.usada = usada;

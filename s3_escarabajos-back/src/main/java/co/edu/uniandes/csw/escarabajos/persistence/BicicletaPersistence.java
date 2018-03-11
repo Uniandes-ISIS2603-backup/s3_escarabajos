@@ -47,7 +47,7 @@ public class BicicletaPersistence {
     /**
      * Encuentra una bicicleta especifica
      *
-     * @param id
+     * @param id de la bicicleta 
      * @return bicicleta
      */
     public BicicletaEntity find(Long id) {
@@ -57,7 +57,7 @@ public class BicicletaPersistence {
     /**
      * Modifica los datos de una bicicleta existente.
      *
-     * @param entity
+     * @param entity datos nuevos de la bicicleta
      * @return bicicleta con nuevos datos.
      */
     public BicicletaEntity update(BicicletaEntity entity) {
@@ -67,7 +67,7 @@ public class BicicletaPersistence {
     /**
      * Elimina una bicicleta
      *
-     * @param id
+     * @param id bicicleta a eliminar
      */
     public void delete(Long id) {
         BicicletaEntity bici = find(id);
@@ -77,7 +77,7 @@ public class BicicletaPersistence {
     /**
      * Devuelve todas las bicicletas de la tienda con el mismo modelo.
      *
-     * @param modeloId
+     * @param modeloId modelo por el cual se filtrara
      * @return lista de bicicletas
      */
     public List<BicicletaEntity> findByModelo(Long modeloId) {

@@ -50,9 +50,9 @@ public class BicicletaUsadaLogic {
     /**
      * Metodo que verifica las reglas de negocio.
      *
-     * @param entity
-     * @return
-     * @throws BusinessLogicException
+     * @param entity datos de la bicicleta a verficar 
+     * @return bicicleta cumpliendo las reglas de negocio.
+     * @throws BusinessLogicException Por reglas de negocio
      */
     public BicicletaUsadaEntity verificarBiciUsada(BicicletaUsadaEntity entity) throws BusinessLogicException {
         if (entity.getUsada() != true) {
@@ -67,7 +67,7 @@ public class BicicletaUsadaLogic {
     /**
      * Devuelve todas las bicicletas de un vendedor.
      *
-     * @param idVendedor
+     * @param idVendedor vendedor especifico
      * @return lista de bicicletas usadas.
      * @throws BusinessLogicException Por reglas de negocio.
      */
@@ -84,8 +84,8 @@ public class BicicletaUsadaLogic {
     /**
      * Devuelve una bicicleta especifica de un vendedor especifico.
      *
-     * @param idVendedor
-     * @param idBici
+     * @param idVendedor vendedor especifico
+     * @param idBici bicicleta especifica
      * @return bicicleta usada
      * @throws BusinessLogicException por reglas de negocio
      */
@@ -103,8 +103,8 @@ public class BicicletaUsadaLogic {
     /**
      * Crea una bicicleta nueva asociada a un vendedor.
      *
-     * @param idVendedor
-     * @param entity
+     * @param idVendedor vendedor especifico
+     * @param entity datos de bicicleta a crear.
      * @return bicicleta nueva
      * @throws BusinessLogicException Por reglasd de negocio
      */
@@ -126,10 +126,10 @@ public class BicicletaUsadaLogic {
     /**
      * Modifica una bicleta asociada a un vendedor
      *
-     * @param idVendedor
-     * @param entity
+     * @param idVendedor vendedor especifico
+     * @param entity nuevos ddatos de la bicicleta
      * @return Bicicleta modificada
-     * @throws BusinessLogicException
+     * @throws BusinessLogicException Por reglas de negocio
      */
     public BicicletaUsadaEntity updateBicicleta(Long idVendedor, BicicletaUsadaEntity entity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar bicicleta usada con id={0}", entity.getId());
@@ -151,8 +151,8 @@ public class BicicletaUsadaLogic {
     /**
      * Elimina una bicicleta asociada a un vendedor
      *
-     * @param idVendedor
-     * @param idBici
+     * @param idVendedor vendedor especifico
+     * @param idBici bicicleta especifica
      * @throws BusinessLogicException Por reglas de negocio
      */
     public void deleteBicicleta(Long idVendedor, Long idBici) throws BusinessLogicException {

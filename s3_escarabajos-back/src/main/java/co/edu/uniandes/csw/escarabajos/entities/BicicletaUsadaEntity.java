@@ -43,7 +43,7 @@ public class BicicletaUsadaEntity extends BicicletaEntity implements Serializabl
     }
     /**
      * Modifica el vendedor.
-     * @param vendedor 
+     * @param vendedor nuevo vendedor
      */
     public void setVendedor(VendedorEntity vendedor) {
         this.vendedor = vendedor;
@@ -58,7 +58,7 @@ public class BicicletaUsadaEntity extends BicicletaEntity implements Serializabl
     }
     /**
      * Modific el estado
-     * @param estado 
+     * @param estado nuevo estado
      */
     public void setEstado(String estado) {
         this.estado = estado;
@@ -72,7 +72,7 @@ public class BicicletaUsadaEntity extends BicicletaEntity implements Serializabl
     }
     /**
      * Modifica la factura original.
-     * @param facturaOriginal 
+     * @param facturaOriginal  nueva factura originial
      */
     public void setFacturaOriginal(String facturaOriginal) {
         this.facturaOriginal = facturaOriginal;
