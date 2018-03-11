@@ -1,0 +1,315 @@
+{
+	"info": {
+		"name": "Escarabajos-ngaitan",
+		"_postman_id": "5adf5c37-00f1-48c6-946e-5aa566427a5e",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Reclamos",
+			"description": "",
+			"item": [
+				{
+					"name": "CreateReclamo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\" : 1,\n\t\"mensaje\": \"Modus Ponens es muy aleta\",\n\t\"razon\": \"Intento de Post\",\n\t\"enProceso\" : true,\n\t\"factura\" : {},\n\t\"cliente\" : {}\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/s3_escarabajos-web/api/reclamos/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"s3_escarabajos-web",
+								"api",
+								"reclamos",
+								""
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetReclamo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/s3_escarabajos-web/api/reclamos/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"s3_escarabajos-web",
+								"api",
+								"reclamos",
+								"1"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "getAllReclamos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/s3_escarabajos-web/api/reclamos/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"s3_escarabajos-web",
+								"api",
+								"reclamos",
+								""
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "upDateReclamo",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\" : 1,\n\t\"mensaje\": \"Decir Hola es muy aleta\",\n\t\"razon\": \"Intento de Put\",\n\t\"enProceso\" : false,\n\t\"factura\" : {},\n\t\"cliente\" : {}\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/s3_escarabajos-web/api/reclamos/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"s3_escarabajos-web",
+								"api",
+								"reclamos",
+								""
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "getDespuesDelUpdate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/s3_escarabajos-web/api/reclamos/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"s3_escarabajos-web",
+								"api",
+								"reclamos",
+								""
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteReclamo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/s3_escarabajos-web/api/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"s3_escarabajos-web",
+								"api",
+								"2"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "getDespuesDeBorrar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/s3_escarabajos-web/api/reclamos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"s3_escarabajos-web",
+								"api",
+								"reclamos"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Calificacion",
+			"description": "",
+			"item": [
+				{
+					"name": "CreateCalificacion",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\" : 1, \n\t\"comentario\" : \"Muy Fea\",\n\t\"puntaje\" : 1,\n\t\"cliente\" : {},\n\t\"modelo\" : {}\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/s3_escarabajos-web/api/calificaciones",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"s3_escarabajos-web",
+								"api",
+								"calificaciones"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "FindAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/s3_escarabajos-web/api/calificaciones/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"s3_escarabajos-web",
+								"api",
+								"calificaciones",
+								""
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateCalificacion",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\" : 1, \n\t\"comentario\" : \"No es tan fea\",\n\t\"puntaje\" : 1.5,\n\t\"cliente\" : {},\n\t\"modelo\" : {}\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/s3_escarabajos-web/api/calificaciones/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"s3_escarabajos-web",
+								"api",
+								"calificaciones",
+								""
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteCalificacion",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/s3_escarabajos-web/api/calificaciones/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"s3_escarabajos-web",
+								"api",
+								"calificaciones",
+								"3"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
