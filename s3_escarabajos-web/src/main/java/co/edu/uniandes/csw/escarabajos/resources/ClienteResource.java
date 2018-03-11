@@ -198,12 +198,12 @@ public class ClienteResource {
     }
      
     @Path("{idCliente: \\d+}/carrito")
-    public Class<CarritoResource> getClienteCarrito(@PathParam("idCliente") Long idCliente) {
+    public Class<ClienteCarritoResource> getClienteCarrito(@PathParam("idCliente") Long idCliente) {
         ClienteEntity entity = logic.getCliente(idCliente);
         if (entity == null) {
             throw new WebApplicationException("El recurso /clientes/" + idCliente + "/carrito no existe.", 404);
         }
-        return CarritoResource.class;
+        return ClienteCarritoResource.class;
     }
     
 

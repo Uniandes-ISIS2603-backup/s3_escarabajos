@@ -39,7 +39,7 @@ public class CarritoPersistence {
      * @return el carrito
      */
     public CarritoEntity find(Long clienteId) {
-        LOGGER.log(Level.INFO, "Consultando carrito del cliente con id={0}", clienteId);
+        LOGGER.log(Level.INFO, "Consultando carrito con id={0}", clienteId);
         return em.find(CarritoEntity.class, clienteId);
     }
     

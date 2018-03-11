@@ -17,28 +17,17 @@ import co.edu.uniandes.csw.escarabajos.entities.CarritoEntity;
  * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
  * <pre>
  *   {
- *      "items": [
- *      {"id": number,
- *      "categoria: string,
- *      "marca": string,
- *      "color: string,
- *      "precio": double,
- *      "usada: boolean}
- *      ]
+ *      "id": number,
+ *      "preciTotal": double
+ *      
  *   }
- * </pre> Por ejemplo una bicicleta se representa asi:<br>
+ * </pre> Por ejemplo un modelo se representa asi:<br>
  *
  * <pre>
  *
  *   {
- *      "items": [
- *      {"id": 1,
- *      "categoria: BMX,
- *      "marca": We the People,
- *      "color: Negro,
- *      "precio": 3.499,
- *      "usada: false}
- *      ]
+ *      "id": 3,
+ *      "precioTotal": 0.0
  *   }
  *
  * </pre>
@@ -52,12 +41,14 @@ public class CarritoDTO {
     // Atributos
     //-----------------------------------------------------------
     
-    
-    
+    /**
+     * modela el id unico
+     */
+    private Long id;
     /**
      * modela el precio de todos los itemps a comprar
      */
-    private double precioTotal=0.0;
+    private Double precioTotal=0.0;
     
     //-----------------------------------------------------------
     // Constructores
@@ -77,6 +68,7 @@ public class CarritoDTO {
      * @param bici: Es la entidad que se va a convertir a DTO
      */
     public CarritoDTO(CarritoEntity carrito) {
+        this.id = carrito.getId();
         this.precioTotal = carrito.getPrecioTotal();
     }
     
@@ -90,15 +82,23 @@ public class CarritoDTO {
      * retorna el precio de todos los items
      * @return 
      */
-    public double getPrecioTotal() {
+    public Double getPrecioTotal() {
         return precioTotal;
     }
     /**
      * asigna el precio total
      * @param precioTotal 
      */
-    public void setPrecioTotal(double precioTotal) {
+    public void setPrecioTotal(Double precioTotal) {
         this.precioTotal = precioTotal;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     //-----------------------------------------------------------
@@ -112,9 +112,8 @@ public class CarritoDTO {
     public CarritoEntity toEntity() {
         
         CarritoEntity entity = new CarritoEntity();
+        entity.setId(this.id);
         entity.setPrecioTotal(this.precioTotal);
         return entity;
     }
-    
-    
 }
