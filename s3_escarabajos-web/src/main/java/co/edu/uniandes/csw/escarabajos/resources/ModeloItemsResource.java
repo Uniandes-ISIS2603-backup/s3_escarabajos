@@ -1,6 +1,7 @@
 package co.edu.uniandes.csw.escarabajos.resources;
 
 import co.edu.uniandes.csw.escarabajos.dtos.ItemDetailDTO;
+import co.edu.uniandes.csw.escarabajos.ejb.FotoLogic;
 import co.edu.uniandes.csw.escarabajos.ejb.ModeloLogic;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
@@ -14,6 +15,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 import javax.ws.rs.WebApplicationException;
 
 /**
@@ -37,7 +39,8 @@ import javax.ws.rs.WebApplicationException;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ModeloItemsResource {
-
+private static final Logger LOGGER = Logger.getLogger(ModeloItemsResource.class.getName());
+    
     @Inject
     private ModeloLogic modeloLogic;
 
@@ -79,6 +82,7 @@ public class ModeloItemsResource {
         try {
             return itemsListEntity2DTO(modeloLogic.listItems(modelosId));
         } catch (BusinessLogicException ex) {
+            LOGGER.info(ex.getMessage());
             throw new WebApplicationException("No deberia passar? Verificando que el otro resource mire si existe.", 404);
         }
     }
@@ -112,6 +116,7 @@ public class ModeloItemsResource {
         try {
             return new ItemDetailDTO(modeloLogic.getItem(modelosId, itemsId));
         } catch (BusinessLogicException ex) {
+             LOGGER.info(ex.getMessage());
             throw new WebApplicationException("No existe este item en este modelo", 404);
         }
     }
@@ -151,6 +156,7 @@ public class ModeloItemsResource {
         try {
             modeloLogic.removeItem(itemsId);
         } catch (BusinessLogicException ex) {
+             LOGGER.info(ex.getMessage());
             throw new WebApplicationException("No existe este item en este modelo", 404);
         }
     }

@@ -15,6 +15,8 @@ import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.FotoPersistence;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -121,25 +123,42 @@ public class FotoLogicTest {
         }
     }
     
+    /**
+     * prueba si el create funciona
+     */
     @Test
-    public void createFotoTest() throws BusinessLogicException{
+    public void createFotoTest() {
         
-        FotoEntity newEntity = factory.manufacturePojo(FotoEntity.class);
-        FotoEntity result = logic.createFoto(reclamodata.get(0).getId(),newEntity,FotoLogic.RECLAMO);
-        Assert.assertNotNull(result);
+        try {
+            FotoEntity newEntity = factory.manufacturePojo(FotoEntity.class);
+            FotoEntity result = logic.createFoto(reclamodata.get(0).getId(),newEntity,FotoLogic.RECLAMO);
+            Assert.assertNotNull(result);
+        } catch (BusinessLogicException ex) {
+            Assert.fail();
+        }
     }
-    
+    /**
+     * prueba si el update funciona
+     */
     @Test
-    public void updateFotoTest() throws BusinessLogicException {
+    public void updateFotoTest() {
         
-        FotoEntity entity = data.get(0);
-        FotoEntity pojoEntity = factory.manufacturePojo(FotoEntity.class);
-        pojoEntity.setId(entity.getId());
-        logic.updateFoto(pojoEntity);
-        FotoEntity resp = em.find(FotoEntity.class, entity.getId());
-        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+        try {
+            FotoEntity entity = data.get(0);
+            FotoEntity pojoEntity = factory.manufacturePojo(FotoEntity.class);
+            pojoEntity.setId(entity.getId());
+            logic.updateFoto(pojoEntity);
+            FotoEntity resp = em.find(FotoEntity.class, entity.getId());
+            Assert.assertEquals(pojoEntity.getId(), resp.getId());
+        } catch (BusinessLogicException ex) {
+             Assert.fail();
+        }
     }
 
+    
+    /**
+     * prueba si el delete funciona
+     */
     @Test
     public void deleteFotoTest() {
         FotoEntity entity = data.get(0);
@@ -148,6 +167,9 @@ public class FotoLogicTest {
         Assert.assertNull(deleted);
     }
     
+    /**
+     * prueba si el getFotos funciona
+     */
     @Test
     public void getFotosTest() {
         List<FotoEntity> list = new ArrayList<>();
@@ -168,11 +190,18 @@ public class FotoLogicTest {
         }
     }
     
+    /**
+     * prueba si el getFotos funciona
+     */
     @Test
-    public void getFotoTest() throws BusinessLogicException {
-        FotoEntity entity = data.get(0);
-        FotoEntity resultEntity = logic.getFoto(entity.getReclamo().getId(),entity.getId(),FotoLogic.RECLAMO);
-        Assert.assertNotNull(resultEntity);
-        Assert.assertEquals(entity.getId(), resultEntity.getId());
+    public void getFotoTest() {
+        try {
+            FotoEntity entity = data.get(0);
+            FotoEntity resultEntity = logic.getFoto(entity.getReclamo().getId(),entity.getId(),FotoLogic.RECLAMO);
+            Assert.assertNotNull(resultEntity);
+            Assert.assertEquals(entity.getId(), resultEntity.getId());
+        } catch (BusinessLogicException ex) {
+            Assert.fail();
+        }
     }
 }

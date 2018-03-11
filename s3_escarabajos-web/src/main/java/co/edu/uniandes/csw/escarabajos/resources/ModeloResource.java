@@ -46,7 +46,7 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @RequestScoped
 public class ModeloResource {
-    
+    private static final Logger LOGGER = Logger.getLogger(ModeloResource.class.getName());
     @Inject
     ModeloLogic modeloLogic;
     
@@ -170,7 +170,8 @@ public class ModeloResource {
       try{
         modeloLogic.deleteModelo(id);
       }
-      catch(BusinessLogicException e){
+      catch(BusinessLogicException ex){
+           LOGGER.info(ex.getMessage());
            throw new WebApplicationException("El recurso /modelos/" + id + " no existe.", 404); 
       }
     }

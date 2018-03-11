@@ -87,6 +87,7 @@ public class ModeloDetailDTO extends ModeloDTO
      */
     public ModeloDetailDTO()
     {
+        //empty
     }
         /**
      * Constructor para transformar un Entity a un DTO

@@ -15,6 +15,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.WebApplicationException;
@@ -40,12 +41,12 @@ import javax.ws.rs.WebApplicationException;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ReclamoFotosResource {
-
+    private static final Logger LOGGER = Logger.getLogger(ReclamoFotosResource.class.getName());
     @Inject
     private FotoLogic fotoLogic;
     
-    @Inject
-    private ReclamoLogic reclamoLogic;
+//    @Inject
+//    private ReclamoLogic reclamoLogic;
 
     /**
      * Convierte un lista de FotoEntity a un lista de FotoDTO.
@@ -82,7 +83,7 @@ public class ReclamoFotosResource {
      */
     @GET
     public List<FotoDTO> listFotos(@PathParam("reclamosId") Long reclamosId) {
-            return null;//return fotosListEntity2DTO(reclamoLogic.listFotos(reclamosId));
+        return null;
     }
 
     /**
@@ -114,6 +115,7 @@ public class ReclamoFotosResource {
         try {
             return new FotoDTO(fotoLogic.getFoto(reclamosId, fotosId,FotoLogic.RECLAMO));
         } catch (BusinessLogicException ex) {
+             LOGGER.info(ex.getMessage());
             throw new WebApplicationException("No existe este foto en este reclamo", 404);
         }
     }
@@ -161,7 +163,7 @@ public class ReclamoFotosResource {
      * 412 Precodition Failed: No se pudo actualizar la foto
      * </code>
      * </pre>
-     * @param id de la foto a actualizar
+     * @param id El ID de la foto que se va a actualizar
      * @param foto {@link FotoDTO} - La foto que se desea guardar.
      * @return JSON {@link FotoDTO}  - La foto actualizada.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando no existe la foto.
@@ -176,7 +178,7 @@ public class ReclamoFotosResource {
     
     
     /**
-     * <h1>DELETE /api/reclamos/{reclamosId}/fotos/{fotosId} : Elimina un foto
+     * <h1>DELETE /api/reclamos/{idReclamo}/fotos/{fotosId} : Elimina un foto
      * dentro del reclamo.</h1>
      *
      * <pre> Elimina la referencia del foto asociado al ID dentro del reclamo
@@ -187,11 +189,11 @@ public class ReclamoFotosResource {
      * 200 OK Se eliminó la referencia del foto.
      * </code>
      * </pre>
-      *
+     *
      * @param id Identificador de la foto que se desea borrar. Este debe ser
      * un cadena de dígitos.
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra el item.
+     * Error de lógica que se genera cuando no se encuentra el reclamo.
      */
     @DELETE
     @Path("{id: \\d+}")

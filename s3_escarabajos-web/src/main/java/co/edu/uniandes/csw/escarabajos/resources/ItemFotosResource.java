@@ -15,6 +15,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.WebApplicationException;
@@ -40,7 +41,7 @@ import javax.ws.rs.WebApplicationException;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ItemFotosResource {
-
+    private static final Logger LOGGER = Logger.getLogger(ItemFotosResource.class.getName());
     @Inject
     private FotoLogic fotoLogic;
     
@@ -85,6 +86,7 @@ public class ItemFotosResource {
         try {
             return fotosListEntity2DTO(itemLogic.listFotos(itemsId));
         } catch (BusinessLogicException ex) {
+             LOGGER.info(ex.getMessage());
             throw new WebApplicationException("No deberia passar? Verificando que el otro resource mire si existe.", 404);
         }
     }
@@ -118,6 +120,7 @@ public class ItemFotosResource {
         try {
             return new FotoDTO(fotoLogic.getFoto(itemsId, fotosId,FotoLogic.ITEM));
         } catch (BusinessLogicException ex) {
+             LOGGER.info(ex.getMessage());
             throw new WebApplicationException("No existe este foto en este item", 404);
         }
     }

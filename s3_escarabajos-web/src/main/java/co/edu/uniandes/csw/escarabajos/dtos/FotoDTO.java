@@ -39,7 +39,7 @@ public class FotoDTO {
     private String descripcion;
 
     public FotoDTO(){
-        
+        //empty
     }
     public  FotoDTO(FotoEntity entityFoto) {
         this.id = entityFoto.getId();

@@ -63,6 +63,7 @@ public class AccesorioDTO extends ItemDTO {
      * Constructor por defecto
      */
     public AccesorioDTO() {
+        //empty
     }
     
      /**

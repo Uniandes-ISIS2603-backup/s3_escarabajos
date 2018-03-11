@@ -65,7 +65,7 @@ public class ModeloDTO
      */
     public ModeloDTO() 
     {
-
+        //empty
     }
     /**
      * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
