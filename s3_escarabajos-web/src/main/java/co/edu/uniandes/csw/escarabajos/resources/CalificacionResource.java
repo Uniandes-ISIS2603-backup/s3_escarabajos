@@ -18,6 +18,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import co.edu.uniandes.csw.escarabajos.dtos.CalificacionDetailDTO;
+import co.edu.uniandes.csw.escarabajos.ejb.CalificacionLogic;
+import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
+import javax.inject.Inject;
+import javax.ws.rs.WebApplicationException;
 /**
  * <pre>Clase que implementa el recurso "calificaciones".
  * URL: /api/calificaciones
@@ -40,6 +44,16 @@ import co.edu.uniandes.csw.escarabajos.dtos.CalificacionDetailDTO;
 @RequestScoped
 public class CalificacionResource 
 {
+    @Inject 
+    CalificacionLogic calificacionLogic;
+    
+    private List<CalificacionDetailDTO> listModeloEntity2DetailDTO(List<CalificacionEntity> entityList) {
+        List<CalificacionDetailDTO> list = new ArrayList<>();
+        for (CalificacionEntity entity : entityList) {
+            list.add(new CalificacionDetailDTO(entity));
+        }
+        return list;
+    }
      /**
      * <h1>POST /api/calificaciones : Crear una calificacion.</h1>
      * 
@@ -63,7 +77,7 @@ public class CalificacionResource
      */
     @POST
     public CalificacionDetailDTO createCalificacion(CalificacionDetailDTO calificacion) throws BusinessLogicException {
-        return calificacion;
+        return new CalificacionDetailDTO(calificacionLogic.crearCalificacion(calificacion.toEntity(), Long.MIN_VALUE, Long.MIN_VALUE));
     }
 
     /**
@@ -79,7 +93,7 @@ public class CalificacionResource
      */
     @GET
     public List<CalificacionDetailDTO> getCalificaciones() {
-        return new ArrayList<CalificacionDetailDTO>();
+        return listModeloEntity2DetailDTO(calificacionLogic.findAll());
     }
     
    /**
@@ -101,7 +115,11 @@ public class CalificacionResource
     @GET
     @Path("{id: \\d+}")
     public CalificacionDetailDTO getCalificacion(@PathParam("id") Long id) {
-        return null;
+        CalificacionEntity entity = calificacionLogic.find(id);
+        if (entity == null) {
+            throw new WebApplicationException("El recurso /reclamos/" + id + " no existe.", 404);
+        }    
+        return new CalificacionDetailDTO(entity);
     }
     
     /**
@@ -117,15 +135,13 @@ public class CalificacionResource
      * 404 Not Found. No existe una calificacion con el id dado.
      * </code> 
      * </pre>
-     * @param id Identificador de la calificacion que se desea actualizar.Este debe ser una cadena de dígitos.
      * @param calificacion {@link CalificacionDetailDTO} La calificacion que se desea guardar.
      * @return JSON {@link CalificacionDetailDTO} - La calificacion guardada.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar la calificacion porque ya existe una con ese id.
      */
     @PUT
-    @Path("{id: \\d+}")
-    public CalificacionDetailDTO updateCalificacion(@PathParam("id") Long id, CalificacionDetailDTO calificacion) throws BusinessLogicException {
-        return calificacion;
+    public CalificacionDetailDTO updateCalificacion( CalificacionDetailDTO calificacion) throws BusinessLogicException {
+        return new CalificacionDetailDTO(calificacionLogic.updateCalificacion(calificacion.toEntity(), Long.MIN_VALUE, Long.MIN_VALUE));
     }
     
     /**
@@ -144,7 +160,11 @@ public class CalificacionResource
      */
     @DELETE
     @Path("{id: \\d+}")
-     public void deleteCalificacion(@PathParam("id") Long id) {
-        // Void
+     public void deleteCalificacion(@PathParam("id") Long id) throws BusinessLogicException {
+       try {
+             calificacionLogic.delete(id);
+        } catch(Exception e)  {
+              throw new BusinessLogicException("La calificacion no existe");
+        }
     }
 }

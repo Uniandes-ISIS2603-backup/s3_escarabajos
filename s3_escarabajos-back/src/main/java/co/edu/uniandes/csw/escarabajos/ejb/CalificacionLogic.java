@@ -43,18 +43,18 @@ public class CalificacionLogic {
         if(cal.getComentario() == null || cal.getComentario().isEmpty() ) {
             throw new BusinessLogicException("Por favor ingrese un comentario");
         }
-        ModeloEntity model = modeloLogic.getModelo(modeloId);
+       // ModeloEntity model = modeloLogic.getModelo(modeloId);
        
-        ClienteEntity cliente = clienteLogic.getCliente(clienteId);
+        //ClienteEntity cliente = clienteLogic.getCliente(clienteId);
        
-        cal.setModelo(model);
-        cal.setCliente(cliente);
+        //cal.setModelo(model);
+        //cal.setCliente(cliente);
         CalificacionEntity nueva = calificacionPersistence.create(cal);
-        model.getCalificaciones().add(nueva);
-        modeloLogic.updateModelo(model.getId(), model);
-        cliente.getCalificaciones().add(cal);
-        clienteLogic.updateCliente(cliente);
-        model.setCalificacionMedia(getCalificacionMedia(modeloId));
+       // model.getCalificaciones().add(nueva);
+       // modeloLogic.updateModelo(model.getId(), model);
+        //cliente.getCalificaciones().add(cal);
+        //clienteLogic.updateCliente(cliente);
+      //  model.setCalificacionMedia(getCalificacionMedia(modeloId));
         return nueva;
     }
 
@@ -71,14 +71,14 @@ public class CalificacionLogic {
        
         ClienteEntity cliente = clienteLogic.getCliente(clienteId);
        
-        cal.setModelo(model);
-        cal.setCliente(cliente);
+       // cal.setModelo(model);
+       // cal.setCliente(cliente);
         CalificacionEntity nueva = calificacionPersistence.update(cal);
-        model.getCalificaciones().add(nueva);
-        modeloLogic.updateModelo(model.getId(), model);
-        cliente.getCalificaciones().add(cal);
-        clienteLogic.updateCliente(cliente);
-        model.setCalificacionMedia(getCalificacionMedia(modeloId));
+       // model.getCalificaciones().add(nueva);
+       // modeloLogic.updateModelo(model.getId(), model);
+      //  cliente.getCalificaciones().add(cal);
+      //  clienteLogic.updateCliente(cliente);
+       // model.setCalificacionMedia(getCalificacionMedia(modeloId));
         return nueva;
     }
 
