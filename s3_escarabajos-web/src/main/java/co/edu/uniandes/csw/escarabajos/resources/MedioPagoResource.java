@@ -6,11 +6,14 @@
 package co.edu.uniandes.csw.escarabajos.resources;
 
 import co.edu.uniandes.csw.escarabajos.dtos.MedioPagoDetailDTO;
+import co.edu.uniandes.csw.escarabajos.ejb.MedioPagoLogic;
+import co.edu.uniandes.csw.escarabajos.entities.MedioPagoEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.mappers.BusinessLogicExceptionMapper;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 
 import javax.ws.rs.DELETE;
@@ -20,6 +23,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 
 /**
  * <pre>Clase que implementa el recurso "MedioPago".
@@ -48,8 +52,19 @@ import javax.ws.rs.Produces;
  */
 public class MedioPagoResource {
     
+    @Inject
+    MedioPagoLogic logic;
+    
+    private List<MedioPagoDetailDTO> listEntity2DTO(List<MedioPagoEntity> entityList) {
+        List<MedioPagoDetailDTO> list = new ArrayList<>();
+        for (MedioPagoEntity entity : entityList) {
+            list.add(new MedioPagoDetailDTO(entity));
+        }
+        return list;
+    }
+    
      /**
-     * <h1>POST /api/clientes/{id}/mediospago : Crear una ciudad.</h1>
+     * <h1>POST /api/mediospago : Crear un medio de pago.</h1>
      * 
      * <pre>Cuerpo de petición: JSON {@link MedioPagoDetailDTO}.
      * 
@@ -71,11 +86,12 @@ public class MedioPagoResource {
      */
     @POST
     public MedioPagoDetailDTO createMedioPago(MedioPagoDetailDTO medioP) throws BusinessLogicException {
-        return medioP;
+        MedioPagoEntity temp = logic.createMedioPago(medioP.toEntity());
+        return new MedioPagoDetailDTO(temp);
     }
 
     /**
-     * <h1>GET /api/clientes/{id}/mediospago : Obtener todos los medios de pago.</h1>
+     * <h1>GET /api/mediospago : Obtener todos los medios de pago.</h1>
      * 
      * <pre>Busca y devuelve todos los medios de pago que existen en la aplicacion.
      * 
@@ -87,11 +103,11 @@ public class MedioPagoResource {
      */
     @GET
     public List<MedioPagoDetailDTO> getMediosPago() {
-        return new ArrayList<MedioPagoDetailDTO>();
+        return listEntity2DTO(logic.getMedioPagos());
     }
 
     /**
-     * <h1>GET /api/clientes/{id}/mediospago/{id} : Obtener medio de pago por id.</h1>
+     * <h1>GET /api/mediospago/{id} : Obtener medio de pago por id.</h1>
      * 
      * <pre>Busca el medio de pago con el id asociado recibido en la URL y la devuelve.
      * 
@@ -109,11 +125,15 @@ public class MedioPagoResource {
     @GET
     @Path("{id: \\d+}")
     public MedioPagoDetailDTO getMedioPago(@PathParam("id") Long id) {
-        return null;
+        MedioPagoEntity entity = logic.getMedioPago(id);
+        if(entity == null){
+            throw new WebApplicationException("El recurso /mediospago/" + id + " no existe.", 404);
+        }
+        return new MedioPagoDetailDTO(entity);
     }
     
     /**
-     * <h1>PUT /api/clientes/{id}/mediospago/{id} : Actualizar medio de pago con el id dado.</h1>
+     * <h1>PUT /api/mediospago/{id} : Actualizar medio de pago con el id dado.</h1>
      * <pre>Cuerpo de petición: JSON {@link MedioPagoDetailDTO}.
      * 
      * Actualiza el medio de pago con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
@@ -133,11 +153,16 @@ public class MedioPagoResource {
     @PUT
     @Path("{id: \\d+}")
     public MedioPagoDetailDTO updateMedioPago(@PathParam("id") Long id, MedioPagoDetailDTO medioP) throws BusinessLogicException {
-        return medioP;
+        medioP.setId(id);
+        MedioPagoEntity entity = logic.getMedioPago(id);
+        if(entity == null){
+            throw new WebApplicationException("El recurso /mediospago/" + id + " no existe.", 404);
+        }
+        return new MedioPagoDetailDTO(logic.updateMedioPago(entity));
     }
     
     /**
-     * <h1>DELETE /api/clientes/{id}/mediospago/{id} : Borrar medio de pago por id.</h1>
+     * <h1>DELETE /api/mediospago/{id} : Borrar medio de pago por id.</h1>
      * 
      * <pre>Borra el medio de pago con el id asociado recibido en la URL.
      * 
@@ -153,7 +178,11 @@ public class MedioPagoResource {
     @DELETE
     @Path("{id: \\d+}")
      public void deleteMedioPago(@PathParam("id") Long id) {
-        // Void
+        MedioPagoEntity entity = logic.getMedioPago(id);
+       if(entity == null){
+           throw new WebApplicationException("El recurso /mediospago/" + id + " no existe.", 404);
+       }
+       logic.deleteMedioPago(entity);
     }
     
 }

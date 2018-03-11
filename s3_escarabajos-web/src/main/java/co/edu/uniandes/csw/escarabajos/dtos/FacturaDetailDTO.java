@@ -26,12 +26,13 @@ public class FacturaDetailDTO extends FacturaDTO {
      * Constructor por defecto
      */
     public FacturaDetailDTO() {
+        //vacio
     }
 
     /**
      * Constructor para transformar un Entity a un DTO
      *
-     * @param entity La entidad de bicicleta a partir de la cual se construye el objeto
+     * @param entity La entidad de factura a partir de la cual se construye el objeto
      */
     public FacturaDetailDTO(FacturaEntity entity) {
         super(entity);
@@ -47,11 +48,11 @@ public class FacturaDetailDTO extends FacturaDTO {
      */
     @Override
     public FacturaEntity toEntity() {
-        FacturaEntity biciE = super.toEntity();
-        biciE.setCliente(this.cliente);
-        biciE.setMedioDePago(this.getMedioDePago());
-        biciE.setReclamo(this.reclamo);
-        return biciE;
+        FacturaEntity facturaE = super.toEntity();
+        facturaE.setCliente(this.cliente);
+        facturaE.setMedioDePago(this.getMedioDePago());
+        facturaE.setReclamo(this.reclamo);
+        return facturaE;
     }
 
     /**

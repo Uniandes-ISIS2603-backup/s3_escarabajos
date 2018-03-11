@@ -63,7 +63,7 @@ public class MedioPagoDTO {
     //-----------------------------------------------------------
     // Atributos
     //-----------------------------------------------------------
-    
+    private long id;
     /**
      * modela el precio total de la transaccion
      */
@@ -121,8 +121,15 @@ public class MedioPagoDTO {
 
     //Falta hacerlo TODO
     MedioPagoEntity toEntity() {
-        return null;
+        MedioPagoEntity entity = new MedioPagoEntity();
+        return entity;
     }
-    
-    
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

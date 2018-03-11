@@ -43,6 +43,14 @@ public class FacturaResource {
     @Inject
     FacturaLogic logic;
     
+    private List<FacturaDetailDTO> listEntity2DTO(List<FacturaEntity> entityList) {
+        List<FacturaDetailDTO> list = new ArrayList<>();
+        for (FacturaEntity entity : entityList) {
+            list.add(new FacturaDetailDTO(entity));
+        }
+        return list;
+    }
+    
      /**
      * <h1>POST /api/facturas : Crear una factura.</h1>
      * 
@@ -66,7 +74,8 @@ public class FacturaResource {
      */
     @POST
     public FacturaDetailDTO createFactura(FacturaDetailDTO factura) throws BusinessLogicException {
-        return factura;
+        FacturaEntity temp = logic.createFactura(factura.toEntity());
+        return new FacturaDetailDTO(temp);
     }
 
     /**
@@ -82,7 +91,7 @@ public class FacturaResource {
      */
     @GET
     public List<FacturaDetailDTO> getFacturas() {
-        return new ArrayList<FacturaDetailDTO>();
+        return listEntity2DTO(logic.getFacturas());
     }
     
    /**
@@ -108,7 +117,7 @@ public class FacturaResource {
         if(entity == null){
             throw new WebApplicationException("El recurso /facturas/" + id + " no existe.", 404);
         }
-        return new FacturaDetailDTO(entity) ;
+        return new FacturaDetailDTO(entity);
     }
     
     /**
@@ -125,17 +134,17 @@ public class FacturaResource {
      * </code> 
      * </pre>
      * @param id Identificador de la factura que se desea actualizar.Este debe ser una cadena de dígitos.
-     * @param city {@link FacturaDetailDTO} La factura que se desea guardar.
+     * @param factura {@link FacturaDetailDTO} La factura que se desea guardar.
      * @return JSON {@link FacturaDetailDTO} - La factura guardada.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar la factura porque ya existe una con ese nombre.
      */
     @PUT
     @Path("{id: \\d+}")
-    public FacturaDetailDTO updateFactura(@PathParam("id") Long id, FacturaDetailDTO city) throws BusinessLogicException {
-        city.setId(id);
+    public FacturaDetailDTO updateFactura(@PathParam("id") Long id, FacturaDetailDTO factura) throws BusinessLogicException {
+        factura.setId(id);
         FacturaEntity entity = logic.getFactura(id);
         if(entity == null){
-            throw new WebApplicationException("El recurso /bicis/" + id + " no existe.", 404);
+            throw new WebApplicationException("El recurso /facturas/" + id + " no existe.", 404);
         }
         return new FacturaDetailDTO(logic.updateFactura(entity));
     }
