@@ -161,22 +161,16 @@ public class ReclamoFotosResource {
      * 412 Precodition Failed: No se pudo actualizar la foto
      * </code>
      * </pre>
-     * @param reclamoId El ID del reclamo del cual se guarda la foto
-     * @param id El ID de la foto que se va a actualizar
+     * @param id de la foto a actualizar
      * @param foto {@link FotoDTO} - La foto que se desea guardar.
      * @return JSON {@link FotoDTO}  - La foto actualizada.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando no existe la foto.
      */
     @PUT
     @Path("{id: \\d+}")
-    public FotoDTO updateFoto(@PathParam("reclamoId") Long reclamoId, @PathParam("id") Long id, FotoDTO foto) throws BusinessLogicException {
+    public FotoDTO updateFoto( @PathParam("id") Long id, FotoDTO foto) throws BusinessLogicException {
         foto.setId(id);
-        FotoEntity entity = fotoLogic.getFoto(reclamoId, id,FotoLogic.RECLAMO);
-        if (entity == null) {
-            throw new WebApplicationException("El recurso /reclamos/" + reclamoId+ "/fotos/" + id + " no existe.", 404);
-        }
-        return new FotoDTO(fotoLogic.updateFoto(reclamoId, foto.toEntity(),FotoLogic.RECLAMO));
-
+        return new FotoDTO(fotoLogic.updateFoto(foto.toEntity()));
     }
     
     
@@ -193,18 +187,15 @@ public class ReclamoFotosResource {
      * 200 OK Se eliminó la referencia del foto.
      * </code>
      * </pre>
-     *
-     * @param reclamosId Identificador del reclamo que se esta buscando. Este debe
-     * ser un cadena de dígitos.
-     * @param fotosId Identificador del foto que se desea guardar. Este debe ser
+      *
+     * @param id Identificador de la foto que se desea borrar. Este debe ser
      * un cadena de dígitos.
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra el reclamo.
+     * Error de lógica que se genera cuando no se encuentra el item.
      */
     @DELETE
-    @Path("{fotosId: \\d+}")
-    public void removeFotos(@PathParam("reclamosId") Long reclamosId, @PathParam("fotosId") Long fotosId) throws BusinessLogicException {
-       FotoEntity foto = fotoLogic.getFoto(reclamosId, fotosId, FotoLogic.RECLAMO);
-        fotoLogic.deleteFoto(foto);
+    @Path("{id: \\d+}")
+    public void removeFoto( @PathParam("id") Long id){
+        fotoLogic.deleteFoto(id);
     }
 }

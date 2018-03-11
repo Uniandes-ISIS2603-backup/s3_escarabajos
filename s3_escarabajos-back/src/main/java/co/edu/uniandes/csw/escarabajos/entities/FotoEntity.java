@@ -30,11 +30,11 @@ public class FotoEntity implements Serializable {
    
    
    @PodamExclude
-   @ManyToOne(cascade = CascadeType.PERSIST)
+   @ManyToOne(cascade = CascadeType.ALL)
    private ItemEntity item;
    
    @PodamExclude
-   @ManyToOne(cascade = CascadeType.PERSIST)
+   @ManyToOne(cascade = CascadeType.ALL)
    private ReclamoEntity reclamo;
    
    

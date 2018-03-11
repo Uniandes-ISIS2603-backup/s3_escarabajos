@@ -1,0 +1,412 @@
+{
+	"info": {
+		"name": "ItemCollectio",
+		"_postman_id": "505f59cc-04f3-427d-90c1-409bee8afa89",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CreateModelo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0d1007eb-4e9f-4a52-b264-31e667a9b391",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_m\",data.id);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"id\": 0,\r\n   \"marca\": \"BMXTREME\",\r\n   \"referencia\": \"BMEXTREME-MTN-2017\",\r\n   \"calificacionMedia\": 0,\r\n   \"tipoModelo\": \"Accesorio\",\r\n   \"items\": [  \r\n   ],\r\n   \"calificaciones\": [\r\n   ]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/modelos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"modelos"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "CreateModeloBicicleta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "52fda860-94c8-4bcd-a233-5210fc4170d3",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_mb\",data.id);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"id\": 0,\r\n   \"marca\": \"BIANCHI\",\r\n   \"referencia\": \"ROAD-1999\",\r\n   \"calificacionMedia\": 0,\r\n   \"tipoModelo\": \"Bicicleta\",\r\n   \"items\": [  \r\n   ],\r\n   \"calificaciones\": [\r\n   ]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/modelos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"modelos"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "CreateAccesorio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7af13317-1ac8-44ce-a545-2486def7c123",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_a\",data.id);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"id\": 0,\r\n\t\"precio\": 20000,\r\n\t\"modeloId\": {{new_id_m}},\r\n\t\"color\": \"Verde\",\r\n\t\"album\": [],\r\n\t\"tipoAcessorio\": \"Casco\",\r\n\t\"descripcion\": \"Casco super resistente con espuma antishock\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/accesorios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"accesorios"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "CreateAccesorio2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d77e0e71-60b2-4bb6-ab11-e0a7a07bdd4d",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_a2\",data.id);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"id\": 0,\r\n\t\"precio\": 20000,\r\n\t\"modeloId\": {{new_id_m}},\r\n\t\"color\": \"Verde\",\r\n\t\"album\": [],\r\n\t\"tipoAcessorio\": \"Casco\",\r\n\t\"descripcion\": \"Casco super resistente con espuma antishock\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/accesorios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"accesorios"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "CreateBicicleta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1019bd0e-f3c7-4b42-8d04-de9e7dd03db3",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_b\",data.id);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"id\": 0,\r\n\t\"precio\": 20000,\r\n\t\"modeloId\": {{new_id_mb}},\r\n\t\"color\": \"Verde\",\r\n\t\"album\": [],\r\n\t\"usada\": false,\r\n    \"categoria\": \"Deportiva\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/bicis",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"bicis"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetItems",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0b3a62d9-8bc6-4945-b6a7-c35b89730911",
+						"type": "text/javascript",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"tests[\"items count\"] = data.length >= 0;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 1,\r\n  \"url\": \"http://dummyimage.com/151x104.png/dddddd/000000\",\r\n  \"descripcion\": \"Casco Rojo\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/items",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"items"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetModeloItems",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "393fb780-e87f-4b94-a338-0f05e7ef7982",
+						"type": "text/javascript",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"tests[\"itemsModelo count\"] = data.length >= 0;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"id\": 0,\r\n\t\"precio\": 20000,\r\n\t\"modeloId\": 1,\r\n\t\"color\": \"Azul\",\r\n\t\"album\": [],\r\n\t\"tipoAcessorio\": \"Casco\",\r\n\t\"descripcion\": \"Casco super resistente con espuma antishock\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/modelos/{{new_id_m}}/items",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"modelos",
+						"{{new_id_m}}",
+						"items"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetModeloItem",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"id\": 0,\r\n\t\"precio\": 20000,\r\n\t\"modeloId\": 1,\r\n\t\"color\": \"Azul\",\r\n\t\"album\": [],\r\n\t\"tipoAcessorio\": \"Casco\",\r\n\t\"descripcion\": \"Casco super resistente con espuma antishock\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/modelos/{{new_id_m}}/items/{{new _id_a}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"modelos",
+						"{{new_id_m}}",
+						"items",
+						"{{new _id_a}}"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetItem",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dfb9ab12-b2cd-4be3-8285-9c060c8fa816",
+						"type": "text/javascript",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 1,\r\n  \"url\": \"http://dummyimage.com/151x104.png/dddddd/000000\",\r\n  \"descripcion\": \"Casco Rojo\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/items/{{new_id_a}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"items",
+						"{{new_id_a}}"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

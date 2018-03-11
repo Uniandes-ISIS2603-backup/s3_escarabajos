@@ -65,7 +65,6 @@ public class VendedorPersistence {
     public List<VendedorEntity> findAll() {
         LOGGER.info("Consultando todos los vendedores");
         TypedQuery query = em.createQuery("select u from VendedorEntity u", VendedorEntity.class);
-        LOGGER.info("Query: "+query);
         return query.getResultList();
     }
 

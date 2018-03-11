@@ -165,7 +165,6 @@ public class ItemFotosResource {
      * 412 Precodition Failed: No se pudo actualizar la foto
      * </code>
      * </pre>
-     * @param itemId El ID del item del cual se guarda la foto
      * @param id El ID de la foto que se va a actualizar
      * @param foto {@link FotoDTO} - La foto que se desea guardar.
      * @return JSON {@link FotoDTO}  - La foto actualizada.
@@ -173,20 +172,15 @@ public class ItemFotosResource {
      */
     @PUT
     @Path("{id: \\d+}")
-    public FotoDTO updateFoto(@PathParam("itemId") Long itemId, @PathParam("id") Long id, FotoDTO foto) throws BusinessLogicException {
+    public FotoDTO updateFoto( @PathParam("id") Long id, FotoDTO foto) throws BusinessLogicException {
         foto.setId(id);
-        FotoEntity entity = fotoLogic.getFoto(itemId, id,FotoLogic.ITEM);
-        if (entity == null) {
-            throw new WebApplicationException("El recurso /items/" + itemId+ "/fotos/" + id + " no existe.", 404);
-        }
-        return new FotoDTO(fotoLogic.updateFoto(itemId, foto.toEntity(),FotoLogic.ITEM));
-
+        return new FotoDTO(fotoLogic.updateFoto(foto.toEntity()));
     }
     
     
     
     /**
-     * <h1>DELETE /api/items/{itemsId}/fotos/{fotosId} : Elimina un foto
+     * <h1>DELETE /api/items/{idItem}/fotos/{fotosId} : Elimina un foto
      * dentro del item.</h1>
      *
      * <pre> Elimina la referencia del foto asociado al ID dentro del item
@@ -198,17 +192,14 @@ public class ItemFotosResource {
      * </code>
      * </pre>
      *
-     * @param itemsId Identificador del item que se esta buscando. Este debe
-     * ser un cadena de dígitos.
-     * @param fotosId Identificador del foto que se desea guardar. Este debe ser
+     * @param id Identificador de la foto que se desea borrar. Este debe ser
      * un cadena de dígitos.
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el item.
      */
     @DELETE
-    @Path("{fotosId: \\d+}")
-    public void removeFotos(@PathParam("itemsId") Long itemsId, @PathParam("fotosId") Long fotosId) throws BusinessLogicException {
-       FotoEntity foto = fotoLogic.getFoto(itemsId, fotosId, FotoLogic.ITEM);
-        fotoLogic.deleteFoto(foto);
+    @Path("{id: \\d+}")
+    public void removeFoto( @PathParam("id") Long id){
+        fotoLogic.deleteFoto(id);
     }
 }

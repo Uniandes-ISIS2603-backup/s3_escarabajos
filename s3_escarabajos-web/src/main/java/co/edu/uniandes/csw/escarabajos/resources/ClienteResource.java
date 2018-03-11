@@ -192,8 +192,6 @@ public class ClienteResource {
         if (entity == null) {
             throw new WebApplicationException("El cliente no existe", 404);
         }
-        vendedorlogic.deleteVendedor(id);
-        Carritologic.deleteCarrito(entity.getCarrito().getId());
         logic.deleteCliente(id);
     }
      

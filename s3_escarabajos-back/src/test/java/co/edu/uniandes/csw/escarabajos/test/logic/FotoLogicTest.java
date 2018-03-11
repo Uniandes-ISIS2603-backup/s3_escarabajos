@@ -134,20 +134,16 @@ public class FotoLogicTest {
         
         FotoEntity entity = data.get(0);
         FotoEntity pojoEntity = factory.manufacturePojo(FotoEntity.class);
-
         pojoEntity.setId(entity.getId());
-
-        logic.updateFoto(entity.getReclamo().getId(),pojoEntity,FotoLogic.RECLAMO);
-
+        logic.updateFoto(pojoEntity);
         FotoEntity resp = em.find(FotoEntity.class, entity.getId());
-
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
     }
 
     @Test
     public void deleteFotoTest() {
         FotoEntity entity = data.get(0);
-        logic.deleteFoto(entity);
+        logic.deleteFoto(entity.getId());
         FotoEntity deleted = em.find(FotoEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
