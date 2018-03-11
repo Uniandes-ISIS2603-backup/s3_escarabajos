@@ -76,14 +76,14 @@ public class ModeloLogic {
      */
     public ModeloEntity createModelo(ModeloEntity entity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de crear un modelo ");
-        ModeloEntity modeloEntity = getModelo(entity.getId());
-        if (modeloEntity != null) {
-            throw new BusinessLogicException("El modelo ya existe!");
-        }
-        modeloEntity = persistence.findByReferencia(entity.getReferencia());
-        if (modeloEntity != null) {
-            throw new BusinessLogicException("El modelo ya existe!");
-        }
+//        ModeloEntity modeloEntity = getModelo(entity.getId());
+//        if (modeloEntity != null) {
+//            throw new BusinessLogicException("El modelo ya existe!");
+//        }
+//        modeloEntity = persistence.findByReferencia(entity.getReferencia());
+//        if (modeloEntity != null) {
+//            throw new BusinessLogicException("El modelo ya existe!");
+//        }
         LOGGER.log(Level.INFO, "Finaliza proceso de crear un modelo ");
         return persistence.create(entity);
     }
