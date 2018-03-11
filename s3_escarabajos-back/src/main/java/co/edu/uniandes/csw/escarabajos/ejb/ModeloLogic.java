@@ -19,7 +19,7 @@ import javax.inject.Inject;
 
 /**
  *
- * @modelo Andres
+ * @author Andres
  */
 @Stateless
 public class ModeloLogic {
@@ -71,8 +71,7 @@ public class ModeloLogic {
      *
      * @param entity Objeto de ModeloEntity con los datos nuevos
      * @return Objeto de ModeloEntity con los datos nuevos y su ID.
-     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
-     * si ya existe el modelo
+     * @throws BusinessLogicException si ya existe el modelo
      */
     public ModeloEntity createModelo(ModeloEntity entity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de crear un modelo ");
@@ -91,11 +90,10 @@ public class ModeloLogic {
     /**
      * Actualiza la información de una instancia de Modelo.
      *
-     * @param id
+     * @param id del modelo
      * @param entity Instancia de ModeloEntity con los nuevos datos.
      * @return Instancia de ModeloEntity con los datos actualizados.
-     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
-     * si se intenta cambiar el tipo
+     * @throws BusinessLogicException si se intenta cambiar el tipo
      */
     public ModeloEntity updateModelo(Long id, ModeloEntity entity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar un modelo ");
@@ -109,8 +107,8 @@ public class ModeloLogic {
 
     /**
      * Elimina una instancia de Modelo de la base de datos.
-     *
-     * @param id Identificador de la instancia a eliminar.
+     * @param id del modelo
+     * @throws BusinessLogicException Por reglas de negocio 
      */
     public void deleteModelo(Long id) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar un modelo ");
@@ -136,7 +134,7 @@ public class ModeloLogic {
      * @param item El item a guardar
      * @param modeloId El id de el modelo en el cual se va a guardar el item.
      * @return El item que fue agregado a el modelo.
-     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
+     * @throws BusinessLogicException por reglas de negocio
      */
     public ItemEntity addItem(ItemEntity item, Long modeloId) throws BusinessLogicException {
         ModeloEntity modeloEntity = getModelo(modeloId);
@@ -180,8 +178,7 @@ public class ModeloLogic {
      * @param modeloId Identificador de la instancia de Modelo
      * @return Colección de instancias de ItemEntity asociadas a la instancia de
      * Modelo
-     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
-     * si no existe el modelo
+     * @throws BusinessLogicException si no existe el modelo
      *
      */
     public List<ItemEntity> listItems(Long modeloId) throws BusinessLogicException {
@@ -190,6 +187,7 @@ public class ModeloLogic {
 
     /**
      * Borra un item y su relacion con un modelo
+     *
      * @param itemsId item a borrar
      * @throws BusinessLogicException si el item o el modelo no existen.
      */

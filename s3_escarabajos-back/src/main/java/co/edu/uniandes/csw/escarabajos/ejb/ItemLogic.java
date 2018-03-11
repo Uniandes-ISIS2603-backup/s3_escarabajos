@@ -166,7 +166,7 @@ public class ItemLogic {
      * @param itemId Identificador de la instancia de item
      * @return Colección de instancias de FotoEntity asociadas a la instancia de
      * item
-     *
+     *@throws BusinessLogicException Por reglasd de negocio
      */
     public List<FotoEntity> listFotos(Long itemId) throws BusinessLogicException {
         ItemEntity itemEntity = getItem(itemId);
