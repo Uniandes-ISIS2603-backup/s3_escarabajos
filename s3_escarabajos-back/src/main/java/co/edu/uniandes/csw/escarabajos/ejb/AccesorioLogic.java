@@ -30,9 +30,9 @@ public class AccesorioLogic {
     
     /**
      * crea un accesorio
-     * @param entity
+     * @param entity el entity que se desea crear
      * @return el accesorio
-     * @throws BusinessLogicException 
+     * @throws BusinessLogicException  si ya existe el accesorio
      */
     public AccesorioEntity createAccesorio( AccesorioEntity entity) throws BusinessLogicException{
         
@@ -50,10 +50,10 @@ public class AccesorioLogic {
     
     /**
      * actualiza un accesorio
-     * @param entity
-     * @param idModelo
+     * @param entity el entity que se desea actualizar
+     * @param idModelo id del modelo que se desea actualizar
      * @return el accesorio
-     * @throws BusinessLogicException 
+     * @throws BusinessLogicException si no se logra actualizar
      */
     public AccesorioEntity updateAccesorio( AccesorioEntity entity, Long idModelo ) throws BusinessLogicException{
         
@@ -72,7 +72,7 @@ public class AccesorioLogic {
     
     /**
      * borra un accesorio
-     * @param id 
+     * @param id  el id del accesorio a borrar
      */
     public void deleteAccesorio( Long id ){
         //Este metodo no se deberia usar. USEN ModeloLogic.removeItem()!!!!!!!!!!!!!!
@@ -94,7 +94,7 @@ public class AccesorioLogic {
 
     /**
      * busca un accesorio
-     * @param id
+     * @param id el id del accesorio de consulta
      * @return el accesorio
      */
     public AccesorioEntity getAccesorio(Long id) {

@@ -35,7 +35,7 @@ public class CarritoPersistence {
 
     /**
      * encuentra un carrito
-     * @param clienteId
+     * @param clienteId el id del cliente
      * @return el carrito
      */
     public CarritoEntity find(Long clienteId) {
@@ -45,7 +45,7 @@ public class CarritoPersistence {
     
     /**
      * crea un carrito
-     * @param entity
+     * @param entity el carrito a crear
      * @return el carrito
      */
     public CarritoEntity create(CarritoEntity entity) {
@@ -56,7 +56,7 @@ public class CarritoPersistence {
     }
     /**
      * actualiza un carrito
-     * @param entity
+     * @param entity el carrito a actualizar
      * @return el carrito
      */
     public CarritoEntity update(CarritoEntity entity) {
@@ -65,7 +65,7 @@ public class CarritoPersistence {
     }
     /**
      * borra el carrito
-     * @param id 
+     * @param id  el id del carrito a borrar
      */
     public void deleteCarrito(Long id){
         

@@ -36,7 +36,7 @@ public class AccesorioPersistence {
     
     /**
      * encuentra un accesorio
-     * @param id
+     * @param id el id del accesorio buscado
      * @return el accesorio
      */
     public AccesorioEntity find(Long id) {
@@ -56,7 +56,7 @@ public class AccesorioPersistence {
 
     /**
      * crea un accesorio
-     * @param entity
+     * @param entity el accesorio que se desea agregar
      * @return el accesorio
      */
     public AccesorioEntity create(AccesorioEntity entity) {
@@ -68,7 +68,7 @@ public class AccesorioPersistence {
 
     /**
      * actualiza un accesorio
-     * @param entity
+     * @param entity el accesorio actualizado
      * @return el accesorio
      */
     public AccesorioEntity update(AccesorioEntity entity) {
@@ -78,7 +78,7 @@ public class AccesorioPersistence {
     
     /**
      * borra un accesorio
-     * @param id 
+     * @param id  el id del accesorio que se desea borrar
      */
     public void delete(Long id) {
         LOGGER.log(Level.INFO, "Borrando accesorio con id={0}", id);
@@ -88,7 +88,7 @@ public class AccesorioPersistence {
     
     /**
      * busca un accesorio por nombre
-     * @param modeloId
+     * @param modeloId el id del modelo 
      * @return el accesorio
      */
      public List<AccesorioEntity> findByModelo(Long modeloId){

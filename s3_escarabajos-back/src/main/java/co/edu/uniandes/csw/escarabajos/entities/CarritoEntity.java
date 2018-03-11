@@ -71,7 +71,7 @@ public class CarritoEntity implements Serializable{
     
     /**
      * asigna el precio total
-     * @param precioTotal 
+     * @param precioTotal el nuevo precioTotal
      */
     public void setPrecioTotal(Double precioTotal) {
         this.precioTotal = precioTotal;
@@ -87,7 +87,7 @@ public class CarritoEntity implements Serializable{
 
     /**
      * asigna la lista de items del carrito
-     * @param items 
+     * @param items la nueva lista de items
      */
     public void setItems(List<ItemEntity> items) {
         this.items = items;
@@ -101,7 +101,7 @@ public class CarritoEntity implements Serializable{
     }
     /**
      * asigna el cliente del carrito
-     * @param cliente 
+     * @param cliente  el nuevo cliente
      */
     public void setCliente(ClienteEntity cliente) {
         this.cliente = cliente;

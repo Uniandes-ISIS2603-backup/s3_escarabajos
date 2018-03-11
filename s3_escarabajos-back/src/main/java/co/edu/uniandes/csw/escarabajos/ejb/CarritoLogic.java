@@ -38,9 +38,9 @@ public class CarritoLogic {
     
     /**
      * Crea un carito 
-     * @param entity
+     * @param entity el carrito que se quiere crear
      * @return el carrito agregado
-     * @throws BusinessLogicException 
+     * @throws BusinessLogicException  si ya existe el carrito
      */
     public CarritoEntity createCarrito(CarritoEntity entity) throws BusinessLogicException{
         LOGGER.info("Inicia proceso de creación del carrito");
@@ -56,7 +56,7 @@ public class CarritoLogic {
     
     /**
      * encuentra un carrito
-     * @param id
+     * @param id el id del carrito a buscar
      * @return el carrito encontrado
      */
     public CarritoEntity findCarrito( Long id ){
@@ -72,9 +72,9 @@ public class CarritoLogic {
     
     /**
      * actualiza un carrito
-     * @param entity
+     * @param entity el carrito con la informacion actualizada
      * @return el carrito actualizado
-     * @throws BusinessLogicException 
+     * @throws BusinessLogicException si no se puede actualizar
      */
     public CarritoEntity updateCarrito( CarritoEntity entity ) throws BusinessLogicException{
         
@@ -86,7 +86,7 @@ public class CarritoLogic {
     
     /**
      * borra un carrito
-     * @param id 
+     * @param id el id del carrito que se desea borrar
      */
     public void deleteCarrito(Long id) {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar carrito con id={0}", id);
@@ -96,9 +96,9 @@ public class CarritoLogic {
     
     /**
      * devuelve la lista de items del carrito
-     * @param id
-     * @return
-     * @throws BusinessLogicException 
+     * @param id el id del carrito al que se le quieren consultar los items
+     * @return la lista de items
+     * @throws BusinessLogicException si no se puede colsultar
      */
     public List<ItemEntity> getItems( Long id ) throws BusinessLogicException{
         
@@ -113,10 +113,10 @@ public class CarritoLogic {
     
     /**
      * agrega un item a la lista de items
-     * @param clienteId
-     * @param itemId
+     * @param idCarrito el id del carito al que se le quiere agregar items
+     * @param itemId el id del item que se desea agregar 
      * @return el item agregado
-     * @throws BusinessLogicException 
+     * @throws BusinessLogicException si no se encuentra el carrito o el item
      */
     public ItemEntity addItem( Long idCarrito, Long itemId ) throws BusinessLogicException{
                   
@@ -147,10 +147,10 @@ public class CarritoLogic {
     
     /**
      * quita un item de la lista de items del carrito
-     * @param clienteId
-     * @param itemId
+     * @param idCarrito el id del carrito que se le quiere quitar un item
+     * @param itemId el id del item que se desea quitar
      * @return el item eliminado
-     * @throws BusinessLogicException 
+     * @throws BusinessLogicException  si no se encuentra el carrito o el item
      */
     public ItemEntity removeItem( Long idCarrito, Long itemId ) throws BusinessLogicException{
         CarritoEntity carrito = persistence.find(idCarrito);
@@ -170,9 +170,9 @@ public class CarritoLogic {
     
     /**
      * genera la factura con los items que tiene el carrito y vacia el carrito
-     * @param id
+     * @param id el id del carrito
      * @return la factura generada
-     * @throws BusinessLogicException 
+     * @throws BusinessLogicException si el carrito no tiene items 
      */
     public FacturaEntity crearFactura( Long id ) throws BusinessLogicException{
         CarritoEntity carrito = persistence.find(id);
@@ -208,7 +208,7 @@ public class CarritoLogic {
     
     /**
      * calcula el procio total del carrito y lo actualiza
-     * @param id 
+     * @param id del carrito que se desea actualizar el precio
      */
     public void actualizarPrecioTotal( Long id ){
         
