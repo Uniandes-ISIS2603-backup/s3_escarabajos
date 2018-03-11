@@ -12,8 +12,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author n.gaitan
+ * Clase que extiende de {@link CalificacionDTO} para manejar la transformacion entre
+ * los objetos JSON y las Entidades de la base de datos. 
+ * 
+  * Al serializarse como JSON esta clase implementa el siguiente reclamo: <br>
+ * <pre>
+ *   {
+ *      "id": number,
+ *      "mensaje": String,
+ *      "razon": double,
+ *      "factura": {@link FacturaDTO},
+ *      "album": [{@link FotoDTO}]
+ *   }
+ * </pre> Por ejemplo un reclamo se representa asi:<br>
+ * <pre>
+ * {
+ *      "id": 1,
+ *      "mensaje": "Color incorrecto",
+ *      "razon": "Cambio de bicicleta",
+ *      "factura": {},
+ *      "album": []
+ * }
+ * </pre>
  */
 public class ReclamoDetailDTO extends ReclamoDTO {
 
