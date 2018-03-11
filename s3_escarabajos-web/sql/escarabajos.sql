@@ -5,6 +5,7 @@ delete from ModeloEntity;
 delete from CarritoEntity;
 delete from ClienteEntity;
 delete from VendedorEntity;
+delete from FacturaEntity;
 
 --Datos de prueba ModeloEntity con tipo modelo Bicicleta
 

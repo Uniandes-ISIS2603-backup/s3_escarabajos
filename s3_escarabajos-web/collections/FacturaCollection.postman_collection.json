@@ -1,0 +1,193 @@
+{
+	"id": "4ab3d69e-f6cb-4b3d-3f59-c951e2f395a1",
+	"name": "FacturaCollection",
+	"description": "",
+	"order": [
+		"d68a98dd-1a94-cbbe-0a85-7decfed64f79",
+		"0a35aadf-d56f-98d0-9227-02f77ba7e2e6",
+		"73cf2d04-5380-5804-9cf6-77e7067b746e",
+		"5281d534-2df0-9d56-4361-5a5b1995e6f8"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1520737588637,
+	"owner": 0,
+	"public": false,
+	"events": [],
+	"variables": [],
+	"auth": null,
+	"requests": [
+		{
+			"id": "0a35aadf-d56f-98d0-9227-02f77ba7e2e6",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/s3_escarabajos-web/api/facturas",
+			"queryParams": [],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d11d8d97-58f0-497d-b4e3-3c4175e9f8ce",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"auth": null,
+			"time": 1520741490225,
+			"name": "Obtener todas las facturas",
+			"description": "",
+			"collectionId": "4ab3d69e-f6cb-4b3d-3f59-c951e2f395a1",
+			"responses": [],
+			"preRequestScript": null,
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
+			"currentHelper": null,
+			"helperAttributes": null,
+			"rawModeData": "{\n\t\"dinero\":\"10000\"\n}"
+		},
+		{
+			"id": "5281d534-2df0-9d56-4361-5a5b1995e6f8",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/s3_escarabajos-web/api/facturas/1",
+			"queryParams": [],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4dec37d7-b438-45a8-b9ea-8b9a23399765",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 204\"] = responseCode.code === 204;"
+						]
+					}
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"auth": null,
+			"time": 1520741591216,
+			"name": "Eliminar factura",
+			"description": "",
+			"collectionId": "4ab3d69e-f6cb-4b3d-3f59-c951e2f395a1",
+			"responses": [],
+			"preRequestScript": null,
+			"tests": "tests[\"Status code is 204\"] = responseCode.code === 204;",
+			"currentHelper": null,
+			"helperAttributes": null,
+			"rawModeData": ""
+		},
+		{
+			"id": "73cf2d04-5380-5804-9cf6-77e7067b746e",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/s3_escarabajos-web/api/facturas/1",
+			"queryParams": [],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5e7688ed-3322-4b3d-8d44-0915c325bb35",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"auth": null,
+			"time": 1520741493974,
+			"name": "Obtener la factura con id 1",
+			"description": "",
+			"collectionId": "4ab3d69e-f6cb-4b3d-3f59-c951e2f395a1",
+			"responses": [],
+			"preRequestScript": null,
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
+			"currentHelper": null,
+			"helperAttributes": null,
+			"rawModeData": "{\n\t\"dinero\":\"10000\"\n}"
+		},
+		{
+			"id": "d68a98dd-1a94-cbbe-0a85-7decfed64f79",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/s3_escarabajos-web/api/facturas",
+			"queryParams": [],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e495cc59-9e20-429a-968e-34c790564ffd",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"auth": null,
+			"time": 1520741505657,
+			"name": "Crear factura",
+			"description": "",
+			"collectionId": "4ab3d69e-f6cb-4b3d-3f59-c951e2f395a1",
+			"responses": [],
+			"preRequestScript": null,
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
+			"currentHelper": null,
+			"helperAttributes": null,
+			"rawModeData": "{\n\t\"dinero\":\"15000\"\n}"
+		}
+	]
+}

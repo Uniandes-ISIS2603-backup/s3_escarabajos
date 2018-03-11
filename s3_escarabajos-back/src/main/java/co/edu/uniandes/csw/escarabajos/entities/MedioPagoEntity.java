@@ -28,9 +28,7 @@ public class MedioPagoEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private Double dineroT;
-    
-    private Integer numeroTarjeta;
+   // private Integer numeroTarjeta;
     
     private String tipo;
     
@@ -41,34 +39,6 @@ public class MedioPagoEntity implements Serializable {
     @PodamExclude
     @OneToOne
     private FacturaEntity factura;
-
-    /**
-     * @return the dineroT
-     */
-    public double getDineroT() {
-        return dineroT;
-    }
-
-    /**
-     * @param dineroT the dineroT to set
-     */
-    public void setDineroT(double dineroT) {
-        this.dineroT = dineroT;
-    }
-
-    /**
-     * @return the numeroTarjeta
-     */
-    public int getNumeroTarjeta() {
-        return numeroTarjeta;
-    }
-
-    /**
-     * @param numeroTarjeta the numeroTarjeta to set
-     */
-    public void setNumeroTarjeta(int numeroTarjeta) {
-        this.numeroTarjeta = numeroTarjeta;
-    }
 
     /**
      * @return the tipo

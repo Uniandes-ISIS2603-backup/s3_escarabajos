@@ -41,7 +41,7 @@ import javax.ws.rs.WebApplicationException;
  * @author Mateo  
  * @version 1.0
  */
-@Path("clientes/{id: \\d+}/mediospago")
+@Path("mediospago")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped

@@ -28,14 +28,14 @@ public class MedioPagoLogic {
      public MedioPagoEntity createMedioPago(MedioPagoEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de medio de pago");
         // Verifica la regla de negocio que dice que no puede haber dos medios de pago con el mismo nombre
-        List<MedioPagoEntity> todos = persistence.findAll();
+    /*    List<MedioPagoEntity> todos = persistence.findAll();
         for(int i = 0; i < todos.size();i++)
         {
             if(todos.get(i).getNumeroTarjeta() == entity.getNumeroTarjeta())
             {
                 throw new BusinessLogicException("Ya existe un medio de pago con el numero de tarjeta \"" + entity.getNumeroTarjeta() + "\"");
             }
-        }
+        }*/
         // Invoca la persistencia para crear el cliente
         persistence.create(entity);
         LOGGER.info("Termina proceso de creación de medio de pago");

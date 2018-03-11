@@ -65,13 +65,9 @@ public class MedioPagoDTO {
     //-----------------------------------------------------------
     private long id;
     /**
-     * modela el precio total de la transaccion
-     */
-    private double dineroTransaccion;
-    /**
      *  modela el numero de tarjeta de credito del cliente que realizo la transaccion
      */
-    private int numeroTarjeta;
+   // private int numeroTarjeta;
     
     /**
      *  modela el tipo de medio de pago que uso el cliente
@@ -91,25 +87,12 @@ public class MedioPagoDTO {
     // Getters and Setters
     //-----------------------------------------------------------
 
-    MedioPagoDTO(MedioPagoEntity entityMediosPago) {
-    }
-    
-    
-    public double getDineroTransaccion() {
-        return dineroTransaccion;
+    MedioPagoDTO(MedioPagoEntity entity) {
+        this.id = entity.getId();
+       // this.numeroTarjeta = entity.getNumeroTarjeta();
+        this.tipo = entity.getTipo();
     }
 
-    public void setDineroTransaccion(double dineroTransaccion) {
-        this.dineroTransaccion = dineroTransaccion;
-    }
-
-    public int getNumeroTarjeta() {
-        return numeroTarjeta;
-    }
-
-    public void setNumeroTarjeta(int numeroTarjeta) {
-        this.numeroTarjeta = numeroTarjeta;
-    }
 
     public String getTipo() {
         return tipo;

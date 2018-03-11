@@ -50,6 +50,7 @@ public class FacturaDTO{
      */
     public FacturaDTO(FacturaEntity factura) {
         this.dinero = factura.getDinero();
+        this.id = factura.getId();
     }
     
     /**
