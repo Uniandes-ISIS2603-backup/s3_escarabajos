@@ -36,7 +36,7 @@ import javax.ws.rs.Produces;
  * Produces/Consumes: indica que los servicios definidos en este recurso reciben y devuelven objetos en formato JSON
  * RequestScoped: Inicia una transacción desde el llamado de cada método (servicio). 
  * </pre>
- * @author Andres  
+ * @author Mateo
  * @version 1.0
  */
 @Path("accesorios")

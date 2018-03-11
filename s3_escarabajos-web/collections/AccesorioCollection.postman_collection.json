@@ -1,0 +1,266 @@
+{
+	"info": {
+		"name": "AccesorioCollection",
+		"_postman_id": "bea17755-42d4-3d6e-2f9a-5ffd00a70c8a",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "pide la lista de accesorios",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "69e9a648-8629-4f40-a4e7-7ef2eccc2595",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"type\": \"clienteConCarrito\",\r\n        \"cedula\": 2,\r\n        \"correo\": \"String\",\r\n        \"nombre\": \"String\",\r\n        \"usuario\": \"String\",\r\n        \"calificaciones\": [],\r\n        \"compras\": [],\r\n        \"listaDeseos\": [],\r\n        \"mediosPago\": [],\r\n        \"reclamos\": [],   \r\n        \"carrito\": {   \t   \t\r\n        \t\"precioTotal\" : 10, \t\r\n        \t\"items\": [ \t\t\r\n        \t{ \t\t\r\n        \t\t\"id\": 1, \t\t\r\n        \t\t\"categoria\": \"string\",     \t\r\n        \t\t\"marca\": \"string\", \t\r\n        \t\t\"color\": \"string\",     \t\r\n        \t\t\"precio\": 10,     \t\r\n        \t\t\"usada\": false \t\t\r\n        \t\t\r\n        \t}     \r\n        \t]   \r\n        }\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:18075/s3_escarabajos-web/api/accesorios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "18075",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"accesorios"
+					],
+					"query": [
+						{
+							"key": "fields",
+							"value": "devices",
+							"equals": true,
+							"disabled": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "agrega un modelo para el accesorio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f4121188-15f3-4a67-bd76-14b79816c49f",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_modelo\",data.id);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n       \"id\": 1,\r\n       \"marca\": \"BMXTREME\",\r\n       \"referencia\": \"BMEXTREME-MTN-2017\",\r\n       \"calificacionMedia\": 4.50,\r\n       \"tipoModelo\": \"Accesorio\"\r\n }"
+				},
+				"url": {
+					"raw": "http://localhost:18075/s3_escarabajos-web/api/modelos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "18075",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"modelos"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "agrega un accesorio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dba226a4-2487-4fa2-bceb-4dfd5b8c0641",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id\",data.id);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n       \"id\": {{new_id_modelo}},\r\n       \"precio\": 1,\r\n       \"modeloId\": {{new_id_modelo}}, \r\n       \"color\": \"String\",\r\n       \"album\": [],\r\n       \"tipoAcessorio\": \"\",\r\n       \"descripcion\": \"String\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:18075/s3_escarabajos-web/api/accesorios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "18075",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"accesorios"
+					],
+					"query": [
+						{
+							"key": "fields",
+							"value": "devices",
+							"equals": true,
+							"disabled": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "actualiza el accesorio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6eca4f3b-6e03-48a0-8552-76ee9e45ded8",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n       \"id\": 1,\r\n       \"precio\": 1,\r\n       \"modeloId\": 1, \r\n       \"color\": \"Prueba actualizacion\",\r\n       \"album\": [],\r\n       \"tipoAcessorio\": \"String\",\r\n       \"descripcion\": \"String\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:18075/s3_escarabajos-web/api/accesorios/{{new_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "18075",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"accesorios",
+						"{{new_id}}"
+					],
+					"query": [
+						{
+							"key": "fields",
+							"value": "devices",
+							"equals": true,
+							"disabled": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "pide el accesorio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "02bf1a15-c204-457c-bdd3-84f72cd20f1d",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n       \"id\": 1,\r\n       \"precio\": 1,\r\n       \"modeloId\": 1, \r\n       \"color\": \"Prueba actualizacion\",\r\n       \"album\": [],\r\n       \"tipoAcessorio\": \"String\",\r\n       \"descripcion\": \"String\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:18075/s3_escarabajos-web/api/accesorios/{{new_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "18075",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"accesorios",
+						"{{new_id}}"
+					],
+					"query": [
+						{
+							"key": "fields",
+							"value": "devices",
+							"equals": true,
+							"disabled": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

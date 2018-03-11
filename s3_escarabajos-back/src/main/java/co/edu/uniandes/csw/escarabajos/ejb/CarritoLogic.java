@@ -44,14 +44,14 @@ public class CarritoLogic {
      */
     public CarritoEntity createCarrito(CarritoEntity entity) throws BusinessLogicException{
         LOGGER.info("Inicia proceso de creación del carrito");
-        CarritoEntity carrito = findCarrito(entity.getId());
+        CarritoEntity carrito = persistence.find(entity.getId());
         if (carrito!= null) {
             throw new BusinessLogicException("El carrito ya existe");
         }
         
-        persistence.create(entity);
+        CarritoEntity rpta = persistence.create(entity);
         LOGGER.info("Termina proceso de creación de carrito");
-        return entity;
+        return rpta;
     }
     
     /**
