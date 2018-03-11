@@ -1,0 +1,461 @@
+{
+	"info": {
+		"name": "ModeloCollection",
+		"_postman_id": "8d524b36-3290-4fb6-956d-42cda986b30f",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CreateModelo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0d1007eb-4e9f-4a52-b264-31e667a9b391",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_m\",data.id);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"id\": 0,\r\n   \"marca\": \"BMXTREME\",\r\n   \"referencia\": \"BMEXTREME-MTN-2017\",\r\n   \"calificacionMedia\": 0,\r\n   \"tipoModelo\": \"Accesorio\",\r\n   \"items\": [  \r\n   ],\r\n   \"calificaciones\": [\r\n   ]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/modelos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"modelos"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "CreateModelo1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "813eb9fb-b6ca-473f-9c39-762669d871e4",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_m2\",data.id);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"id\": 0,\r\n   \"marca\": \"GIANT\",\r\n   \"referencia\": \"SPORT-2017\",\r\n   \"calificacionMedia\": 0,\r\n   \"tipoModelo\": \"Bicicleta\",\r\n   \"items\": [  \r\n   ],\r\n   \"calificaciones\": [\r\n   ]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/modelos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"modelos"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "CreateModeloBicicleta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0bb01679-168a-43fc-8d92-32a8c45e34ff",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_m3\",data.id);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"id\": 0,\r\n   \"marca\": \"BIANCHI\",\r\n   \"referencia\": \"ROAD-1999\",\r\n   \"calificacionMedia\": 0,\r\n   \"tipoModelo\": \"Bicicleta\",\r\n   \"items\": [  \r\n   ],\r\n   \"calificaciones\": [\r\n   ]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/modelos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"modelos"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetModelos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7cfdce7e-d7f5-4c3e-89eb-4d373f19bf98",
+						"type": "text/javascript",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"tests[\"modelos count\"] = data.length >= 0;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"id\": 0,\r\n   \"marca\": \"BIANCHI\",\r\n   \"referencia\": \"ROAD-1999\",\r\n   \"calificacionMedia\": 0,\r\n   \"tipoModelo\": \"Bicicleta\",\r\n   \"items\": [  \r\n   ],\r\n   \"calificaciones\": [\r\n   ]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/modelos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"modelos"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "PutModelo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "40488d34-86f2-4158-b9e9-bc2e8210eff6",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"id\": 0,\r\n   \"marca\": \"BIANCHI123\",\r\n   \"referencia\": \"ROAD-1999\",\r\n   \"calificacionMedia\": 0,\r\n   \"tipoModelo\": \"Bicicleta\",\r\n   \"items\": [  \r\n   ],\r\n   \"calificaciones\": [\r\n   ]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/modelos/{{new_id_m3}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"modelos",
+						"{{new_id_m3}}"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "CreateAccesorio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7af13317-1ac8-44ce-a545-2486def7c123",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_a\",data.id);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"id\": 0,\r\n\t\"precio\": 20000,\r\n\t\"modeloId\": {{new_id_m}},\r\n\t\"color\": \"Verde\",\r\n\t\"album\": [],\r\n\t\"tipoAcessorio\": \"Casco\",\r\n\t\"descripcion\": \"Casco super resistente con espuma antishock\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/accesorios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"accesorios"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetItems",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bffc0cf7-0b69-423a-8ef4-6be2ee500f00",
+						"type": "text/javascript",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"tests[\"modelos count\"] = data.length >= 0;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 1,\r\n  \"url\": \"http://dummyimage.com/151x104.png/dddddd/000000\",\r\n  \"descripcion\": \"Casco Rojo\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/items",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"items"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteModeloConItems",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "05b3ea2d-933d-4eab-82fc-7bf505683fd8",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 204\"] = responseCode.code === 204;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/modelos/{{new_id_m}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"modelos",
+						"{{new_id_m}}"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteModelo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "701879cf-8401-46b5-8eb7-6ea981c9bf4a",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 204\"] = responseCode.code === 204;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/modelos/{{new_id_m2}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"modelos",
+						"{{new_id_m2}}"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetItems",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "44863d63-a8fb-43c3-968b-f5a7e8be76ab",
+						"type": "text/javascript",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"tests[\"modelos count\"] = data.length === 0;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 1,\r\n  \"url\": \"http://dummyimage.com/151x104.png/dddddd/000000\",\r\n  \"descripcion\": \"Casco Rojo\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/items",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"items"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

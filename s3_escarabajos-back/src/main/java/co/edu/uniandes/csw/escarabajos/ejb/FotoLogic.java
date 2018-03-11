@@ -125,6 +125,7 @@ public class FotoLogic {
             entity.setReclamo(reclamo);
         }
 
+        
         return persistence.create(entity);
     }
 
@@ -132,37 +133,25 @@ public class FotoLogic {
      * Actualiza la información de una instancia de la Foto.
      *
      * @param entity Instancia de FotoEntity con los nuevos datos.
-     * @param id id del item/reclamo el cual sera padre de la foto actualizada.
-     * @param tipo RECLAMO o ITEM dependiendo delo que se quiera actualizar
      * @return Instancia de FotoEntity con los datos actualizados.
      * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException si no encuentra el item
      */
-    public FotoEntity updateFoto(Long id, FotoEntity entity, String tipo) throws BusinessLogicException {
+    public FotoEntity updateFoto( FotoEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de actualizar foto");
-        if (tipo.equals(ITEM)) {
-            ItemEntity item = itemLogic.getItem(id);
-            if (item==null) {
-                throw new BusinessLogicException("El item no existe");
-            }
-            entity.setItem(item);
-        } else if (tipo.equals(RECLAMO)) {
-            ReclamoEntity reclamo = reclamoLogic.find(id);
-            if (reclamo==null) {
-                throw new BusinessLogicException("El reclamo no existe");
-            }
-            entity.setReclamo(reclamo);
-        }
-        return persistence.update(entity);
+        FotoEntity antigua = persistence.find(entity.getId());
+        antigua.setDescripcion(entity.getDescripcion());
+        antigua.setUrl(entity.getUrl());
+        return persistence.update(antigua);
     }
 
     /**
      * Elimina una instancia de foto de la base de datos.
      *
-     * @param old FotoEntity a eliminar.
+     * @param id Foto a eliminar.
      *
      */
-    public void deleteFoto(FotoEntity old){
+    public void deleteFoto(Long id){
         LOGGER.info("Inicia proceso de borrar foto");
-        persistence.delete(old.getId());
+        persistence.delete(id);
     }
 }
