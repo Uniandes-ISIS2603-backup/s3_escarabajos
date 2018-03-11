@@ -19,19 +19,32 @@ import javax.persistence.TypedQuery;
  */
 @Stateless
 public class BicicletaUsadaPersistence {
-    
+
     public static final Logger LOGGER = Logger.getLogger(BicicletaUsadaPersistence.class.getName());
-    
+
     @PersistenceContext(unitName = "EscarabajosPU")
     protected EntityManager em;
-    
-    public BicicletaUsadaEntity create(BicicletaUsadaEntity entity){
+
+    /**
+     * Crea una nueva bicicleta usada.
+     *
+     * @param entity
+     * @return bicicleta usada
+     */
+    public BicicletaUsadaEntity create(BicicletaUsadaEntity entity) {
         em.persist(entity);
         return entity;
     }
 
-    public BicicletaUsadaEntity find(Long idVendedor, Long idBici){
-          TypedQuery<BicicletaUsadaEntity> q = em.createQuery("select p from BicicletaUsadaEntity p where (p.vendedor.id = :vendedorid) and (p.id = :biciid) and p.usada = 1", BicicletaUsadaEntity.class);
+    /**
+     * Encuentra una bicicleta usada asociada a un vendedor.
+     *
+     * @param idVendedor
+     * @param idBici
+     * @return bicicleta usada
+     */
+    public BicicletaUsadaEntity find(Long idVendedor, Long idBici) {
+        TypedQuery<BicicletaUsadaEntity> q = em.createQuery("select p from BicicletaUsadaEntity p where (p.vendedor.id = :vendedorid) and (p.id = :biciid) and p.usada = 1", BicicletaUsadaEntity.class);
         q.setParameter("vendedorid", idVendedor);
         q.setParameter("biciid", idBici);
         List<BicicletaUsadaEntity> results = q.getResultList();
@@ -46,13 +59,25 @@ public class BicicletaUsadaPersistence {
 
         return bici;
     }
-    
-    public void delete(Long id){
-        BicicletaUsadaEntity bici = em.find(BicicletaUsadaEntity.class,id);
-       em.remove(bici);
+
+    /**
+     * Borra una bicicleta usada asociacda a un vendedor.
+     *
+     * @param id
+     */
+    public void delete(Long id) {
+        BicicletaUsadaEntity bici = em.find(BicicletaUsadaEntity.class, id);
+        em.remove(bici);
     }
-    public BicicletaUsadaEntity findEstado(String estado){
-         TypedQuery query = em.createQuery("Select e From BicicletaUsadaEntity e where e.estado = :estado and e.usada = 1", BicicletaUsadaEntity.class);
+
+    /**
+     * Encuentra todas las bicicletas usadas con el mismo estado.
+     *
+     * @param estado
+     * @return bicicleta usada con estado "estado".
+     */
+    public BicicletaUsadaEntity findEstado(String estado) {
+        TypedQuery query = em.createQuery("Select e From BicicletaUsadaEntity e where e.estado = :estado and e.usada = 1", BicicletaUsadaEntity.class);
         // Se remplaza el placeholder ":name" con el valor del argumento 
         query = query.setParameter("estado", estado);
         // Se invoca el query se obtiene la lista resultado
@@ -63,15 +88,27 @@ public class BicicletaUsadaPersistence {
             return sameEstado.get(0);
         }
     }
-    
-     public List<BicicletaUsadaEntity> findAllBicis(Long idVendedor) {
+
+    /**
+     * Devuelve todas las bicicletas de un vendedor.
+     *
+     * @param idVendedor
+     * @return lista bicicletas
+     */
+    public List<BicicletaUsadaEntity> findAllBicis(Long idVendedor) {
         LOGGER.info("Consultando todas las bicicletas del vendedor con id");
         TypedQuery query = em.createQuery("select u from BicicletaUsadaEntity u where (u.vendedor.id  = :idVendedor) and u.usada = 1 ", BicicletaUsadaEntity.class);
         query.setParameter("idVendedor", idVendedor);
         return query.getResultList();
     }
-     
-     public BicicletaUsadaEntity update(BicicletaUsadaEntity bici){
-        return  em.merge(bici);
-     }
+
+    /**
+     * Modifica los datos de una bicicleta usada.
+     *
+     * @param bici
+     * @return bicicleta usada con nuevos datos.
+     */
+    public BicicletaUsadaEntity update(BicicletaUsadaEntity bici) {
+        return em.merge(bici);
+    }
 }

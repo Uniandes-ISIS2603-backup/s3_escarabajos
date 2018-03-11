@@ -26,17 +26,35 @@ public class BicicletaUsadaLogic {
 
     private static final Logger LOGGER = Logger.getLogger(BicicletaLogic.class.getName());
 
+    /**
+     * Injecta la persistencia de bicicleta usada.
+     */
     @Inject
     private BicicletaUsadaPersistence persistence;
+    /**
+     * Injecta la logica de item.
+     */
     @Inject
     private ItemLogic logicItem;
+    /**
+     * Injecta la logica de vendedor.
+     */
     @Inject
     private VendedorLogic logicVendedor;
+    /**
+     * Injecta la persistencia de modelo.
+     */
     @Inject
     private ModeloPersistence modeloPersistence;
 
-    
-    public BicicletaUsadaEntity verificarBiciUsada(BicicletaUsadaEntity entity) throws BusinessLogicException{
+    /**
+     * Metodo que verifica las reglas de negocio.
+     *
+     * @param entity
+     * @return
+     * @throws BusinessLogicException
+     */
+    public BicicletaUsadaEntity verificarBiciUsada(BicicletaUsadaEntity entity) throws BusinessLogicException {
         if (entity.getUsada() != true) {
             throw new BusinessLogicException("La bicicleta usada debe tener el estado de usada en true");
         }
@@ -45,15 +63,18 @@ public class BicicletaUsadaLogic {
         }
         return entity;
     }
+
     /**
-     * Devuelve todos los bicicleta usadas usadas que hay en la base de datos.
+     * Devuelve todas las bicicletas de un vendedor.
      *
-     * @return Lista de entidades de tipo bicicleta usada.
+     * @param idVendedor
+     * @return lista de bicicletas usadas.
+     * @throws BusinessLogicException Por reglas de negocio.
      */
     public List<BicicletaUsadaEntity> getBicicletasDelVendedor(Long idVendedor) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de consultar todos los bicicleta usadas usadas");
         VendedorEntity vendedor = logicVendedor.getVendedor(idVendedor);
-        if(vendedor.getBicicletasUsadas() == null || vendedor.getBicicletasUsadas().isEmpty()){
+        if (vendedor.getBicicletasUsadas() == null || vendedor.getBicicletasUsadas().isEmpty()) {
             throw new BusinessLogicException("El vendedor aun no tiene ninguna bicicleta usada");
         }
         LOGGER.info("Termina proceso de consultar todos los bicicleta usadas usadas");
@@ -61,32 +82,33 @@ public class BicicletaUsadaLogic {
     }
 
     /**
-     * Busca un bicicleta usada por ID
+     * Devuelve una bicicleta especifica de un vendedor especifico.
      *
-     * @param id El id del bicicleta usada a buscar
-     * @return El bicicleta usada encontrado, null si no lo encuentra.
+     * @param idVendedor
+     * @param idBici
+     * @return bicicleta usada
+     * @throws BusinessLogicException por reglas de negocio
      */
-    public BicicletaUsadaEntity getBicicleta(Long idVendedor,Long idBici) throws BusinessLogicException {
+    public BicicletaUsadaEntity getBicicleta(Long idVendedor, Long idBici) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar bicicleta usada con id={0}", idBici);
-        BicicletaUsadaEntity bici = persistence.find(idVendedor,idBici);
+        BicicletaUsadaEntity bici = persistence.find(idVendedor, idBici);
         if (bici == null) {
             LOGGER.log(Level.SEVERE, "El bicicleta usada con el id {0} no existe", idBici);
-            throw new BusinessLogicException("No existe una bicicleta usada con el id "+ idBici);
+            throw new BusinessLogicException("No existe una bicicleta usada con el id " + idBici);
         }
         LOGGER.log(Level.INFO, "Termina proceso de consultar bicicleta usada con id={0}", idBici);
         return bici;
     }
 
     /**
-     * Guardar una nueva bicicleta usada
+     * Crea una bicicleta nueva asociada a un vendedor.
      *
-     * @param entity La entidad de tipo bicicleta usada del nuevo bicicleta
-     * usada a persistir.
-     * @return La entidad luego de persistirla
-     * @throws BusinessLogicException Si el atributo usada es false o si no esta
-     * asociada a una categoria o si no esta asociada a un modelo
+     * @param idVendedor
+     * @param entity
+     * @return bicicleta nueva
+     * @throws BusinessLogicException Por reglasd de negocio
      */
-    public BicicletaUsadaEntity createBicicleta(Long idVendedor,BicicletaUsadaEntity entity) throws BusinessLogicException {
+    public BicicletaUsadaEntity createBicicleta(Long idVendedor, BicicletaUsadaEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creaciÃ³n de bicicleta usada");
         entity.setUsada(Boolean.TRUE);
         entity.setEstado("En proceso");
@@ -94,26 +116,25 @@ public class BicicletaUsadaLogic {
         verificarBiciUsada(entity);
         VendedorEntity vendedor = logicVendedor.getVendedor(idVendedor);
         entity.setVendedor(vendedor);
-        if (persistence.find(idVendedor,entity.getId()) != null) {
-            throw new BusinessLogicException("Ya existe una bicicleta usada con el id \"" + entity.getId()+ "\"");
+        if (persistence.find(idVendedor, entity.getId()) != null) {
+            throw new BusinessLogicException("Ya existe una bicicleta usada con el id \"" + entity.getId() + "\"");
         }
         LOGGER.info("Termina proceso de creaciÃ³n de bicicleta usada");
         return persistence.create(entity);
     }
 
     /**
-     * Actualizar un bicicleta usada por ID
+     * Modifica una bicleta asociada a un vendedor
      *
-     * @param id El ID del bicicleta usada a actualizar
-     * @param entity La entidad del bicicleta usada con los cambios deseados
-     * @return La entidad del bicicleta usada luego de actualizarla
-     * @throws BusinessLogicException Si el atributo usada es false o si no esta
-     * asociada a una categoria o si no esta asociada a un modelo
+     * @param idVendedor
+     * @param entity
+     * @return Bicicleta modificada
+     * @throws BusinessLogicException
      */
     public BicicletaUsadaEntity updateBicicleta(Long idVendedor, BicicletaUsadaEntity entity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar bicicleta usada con id={0}", entity.getId());
         entity.setUsada(Boolean.TRUE);
-        if(entity.getPrecio() < 0 ){
+        if (entity.getPrecio() < 0) {
             throw new BusinessLogicException("El precio debe ser mayor a 0");
         }
         ModeloEntity modelo = modeloPersistence.find(entity.getModeloId());
@@ -128,16 +149,17 @@ public class BicicletaUsadaLogic {
     }
 
     /**
-     * Eliminar un bicicleta usada por ID
+     * Elimina una bicicleta asociada a un vendedor
      *
-     * @param id El ID de la bicicleta usada a eliminar
+     * @param idVendedor
+     * @param idBici
+     * @throws BusinessLogicException Por reglas de negocio
      */
-    public void deleteBicicleta(Long idVendedor,Long idBici) throws BusinessLogicException {
+    public void deleteBicicleta(Long idVendedor, Long idBici) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar bicicleta usada con id={0}", idBici);
         BicicletaUsadaEntity aBorrar = getBicicleta(idVendedor, idBici);
         persistence.delete(aBorrar.getId());
         LOGGER.log(Level.INFO, "Termina proceso de borrar bicicleta usada con id={0}", idBici);
     }
-    
-    
+
 }

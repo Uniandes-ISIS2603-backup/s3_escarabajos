@@ -62,7 +62,7 @@ public class BicicletaDTO extends ItemDTO {
      * Constructor por defecto
      */
     public BicicletaDTO() {
-
+        
     }
 
     /**
@@ -78,7 +78,7 @@ public class BicicletaDTO extends ItemDTO {
             this.usada = bici.getUsada();
         }
     }
-
+    
     public String getCategoria() {
         return categoria;
     }

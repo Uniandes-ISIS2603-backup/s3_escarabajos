@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.escarabajos.ejb;
 
 import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
-import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.BicicletaPersistence;
 import co.edu.uniandes.csw.escarabajos.persistence.ModeloPersistence;
@@ -25,10 +24,19 @@ public class BicicletaLogic {
 
     private static final Logger LOGGER = Logger.getLogger(BicicletaLogic.class.getName());
 
+    /**
+     * Injecta la persistencia de bicicleta.
+     */
     @Inject
     private BicicletaPersistence persistence;
+    /**
+     * Injecta la logica de item.
+     */
     @Inject
     private ItemLogic logic;
+    /**
+     * Injecta la persistencia de modelo.
+     */
     @Inject
     private ModeloPersistence modeloPersistence;
 
@@ -45,10 +53,10 @@ public class BicicletaLogic {
     }
 
     /**
-     * Busca un bicicleta por ID
+     * Devuelve una bicicleta especifica.
      *
      * @param id El id del bicicleta a buscar
-     * @return El bicicleta encontrado, null si no lo encuentra.
+     * @return bicicleta
      */
     public BicicletaEntity getBicicleta(Long id) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar bicicleta con id={0}", id);
@@ -84,7 +92,7 @@ public class BicicletaLogic {
     }
 
     /**
-     * Actualizar un bicicleta por ID
+     * Actualizar un bicicleta especifica
      *
      * @param id El ID del bicicleta a actualizar
      * @param entity La entidad del bicicleta con los cambios deseados
@@ -113,9 +121,9 @@ public class BicicletaLogic {
     }
 
     /**
-     * Eliminar un bicicleta por ID
+     * Eliminar un bicicleta especifica
      *
-     * @param id El ID del bicicleta a eliminar
+     * @param id 
      */
     public void deleteBicicleta(Long id) {
         //Este metodo no se deberia usar. USEN ModeloLogic.removeItem()!!!!!!!!!!!!!!
@@ -124,6 +132,12 @@ public class BicicletaLogic {
         LOGGER.log(Level.INFO, "Termina proceso de borrar bicicleta con id={0}", id);
     }
 
+    /**
+     * Metodo que verifica las reglas de negocio.
+     * @param entity
+     * @return
+     * @throws BusinessLogicException 
+     */
     public BicicletaEntity verificarBicicleta(BicicletaEntity entity) throws BusinessLogicException {
         if (entity.getUsada() != false) {
             throw new BusinessLogicException("La bicicleta debe ser nueva");
@@ -133,7 +147,11 @@ public class BicicletaLogic {
         }
         return entity;
     }
-    
+    /**
+     * Encuentra todas las bicicletas con un modelo especifico
+     * @param id
+     * @return lista de bicicletas.
+     */
     public List<BicicletaEntity> findByModelo(Long id ){
         return persistence.findByModelo(id);
     }
