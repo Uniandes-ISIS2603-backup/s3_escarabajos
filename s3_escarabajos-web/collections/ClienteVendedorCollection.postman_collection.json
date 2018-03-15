@@ -10,7 +10,9 @@
 		"daa54efa-f678-e0d8-312c-1785fdad10e1",
 		"c8ebbffa-9d61-d221-7239-605cf5e3a1c3",
 		"ed6c21d2-b7c0-53a7-9c04-caa9a071a539",
-		"f399acba-5673-e114-495f-82025faa4fab"
+		"f399acba-5673-e114-495f-82025faa4fab",
+		"c5042555-bdbf-0de8-25b0-dc0389c4f3ba",
+		"6eee815e-faa3-1495-7757-d27431909093"
 	],
 	"folders": [],
 	"folders_order": [],
@@ -171,6 +173,68 @@
 			"currentHelper": null,
 			"helperAttributes": null,
 			"rawModeData": "{\n\t\"nombre\":\"pibe\",\n\t\"direccion\":\"1585\",\n\t\"telefono\":\"58858\"\n\t\n}"
+		},
+		{
+			"id": "6eee815e-faa3-1495-7757-d27431909093",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/s3_escarabajos-web/api/clientes/117",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"events": [],
+			"auth": null,
+			"method": "PUT",
+			"collectionId": "013957fb-8697-0e67-1d9e-b55764c5503d",
+			"data": [],
+			"dataMode": "raw",
+			"name": "put cliente",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1521137485526,
+			"version": 2,
+			"responses": [],
+			"currentHelper": null,
+			"helperAttributes": null,
+			"rawModeData": "{\n\t\"cedula\": \"696969\",\n    \"correo\": \"asnar0@discuz.net\",\n    \"nombre\": \"pibeValderrama\"\n}"
+		},
+		{
+			"id": "c5042555-bdbf-0de8-25b0-dc0389c4f3ba",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/s3_escarabajos-web/api/vendedores/2",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"events": [],
+			"auth": null,
+			"method": "PUT",
+			"collectionId": "013957fb-8697-0e67-1d9e-b55764c5503d",
+			"data": [],
+			"dataMode": "raw",
+			"name": "put vendedor",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1521137266695,
+			"version": 2,
+			"responses": [],
+			"currentHelper": null,
+			"helperAttributes": null,
+			"rawModeData": "{\r\n\t\"nombre\":\"pibeValderrama\",\r\n\t\"direccion\":\"Cra 57 b 121\",\r\n\t\"telefono\":\"5885845\"\r\n}"
 		},
 		{
 			"id": "c8ebbffa-9d61-d221-7239-605cf5e3a1c3",

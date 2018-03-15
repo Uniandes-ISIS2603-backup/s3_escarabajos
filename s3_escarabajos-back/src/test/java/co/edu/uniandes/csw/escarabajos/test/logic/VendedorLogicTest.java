@@ -139,6 +139,21 @@ public class VendedorLogicTest {
         VendedorEntity entity = logic.getVendedor(result.getId());
     }
     
+    @Test
+    public void getVendedoresTest() throws BusinessLogicException {
+        List<VendedorEntity> list = logic.getVendedores();
+        Assert.assertEquals(data.size(), list.size());
+        for (VendedorEntity entity : list) {
+            boolean found = false;
+            for (VendedorEntity storedEntity : data) {
+                if (entity.getId().equals(storedEntity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+    
      @Test
     public void deleteVendedorTest() throws BusinessLogicException {
         VendedorEntity entity = data.get(0);

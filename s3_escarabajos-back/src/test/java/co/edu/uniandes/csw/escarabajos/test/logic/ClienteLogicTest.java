@@ -138,6 +138,21 @@ public class ClienteLogicTest {
     }
     
     @Test
+    public void getClientesTest() throws BusinessLogicException {
+        List<ClienteEntity> list = logic.getClientes();
+        Assert.assertEquals(data.size(), list.size());
+        for (ClienteEntity entity : list) {
+            boolean found = false;
+            for (ClienteEntity storedEntity : data) {
+                if (entity.getId().equals(storedEntity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+    
+    @Test
     public void deleteClienteTest() throws BusinessLogicException {
         ClienteEntity entity = data.get(0);
         logic.deleteCliente(entity.getId());
