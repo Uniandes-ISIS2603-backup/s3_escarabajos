@@ -25,13 +25,14 @@ public class FacturaLogic {
     @Inject
     private FacturaPersistence persistence; // Variable para acceder a la persistencia de la aplicación. Es una inyección de dependencias.
 
+    //TODO: Factura no tiene ninguna regla de negocio.
      public FacturaEntity createFactura(FacturaEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de factura");
         persistence.create(entity);
         LOGGER.info("Termina proceso de creación de factura");
         return entity;
     }
-
+//TODO: Cambiar lo de editorials
     public List<FacturaEntity> getFacturas() {
         LOGGER.info("Inicia proceso de consultar todas las facturas");
         // Note que, por medio de la inyección de dependencias se llama al método "findAll()" que se encuentra en la persistencia.
@@ -50,7 +51,7 @@ public class FacturaLogic {
         }
         return persistence.update(entity);
     }
-    
+    //TODO: que pasa si no existe la Factura? 
     public void deleteFactura(FacturaEntity entity){
         LOGGER.log(Level.INFO, "Inicia proceso de borrar la factura con id={0}", entity.getId());    
         persistence.delete(entity.getId());

@@ -20,24 +20,28 @@ import javax.inject.Inject;
  */
 @Stateless
 public class AccesorioLogic {
-    
+
     private final static Logger LOGGER = Logger.getLogger(AccesorioLogic.class.getName());
-    
+
     @Inject
     private AccesorioPersistence persistence;
-    
-    @Inject ItemLogic itemLogic;
-    
+
+    @Inject
+    // TODO: falta private
+    ItemLogic itemLogic;
+
     /**
      * crea un accesorio
+     *
      * @param entity el entity que se desea crear
      * @return el accesorio
-     * @throws BusinessLogicException  si ya existe el accesorio
+     * @throws BusinessLogicException si ya existe el accesorio
      */
-    public AccesorioEntity createAccesorio( AccesorioEntity entity) throws BusinessLogicException{
-        
+    public AccesorioEntity createAccesorio(AccesorioEntity entity) throws BusinessLogicException {
+
         LOGGER.info("Inicia proceso de creación de un accesorio");
         itemLogic.verificarItem(entity);
+        //TODO: QUitar las líneas que no sirven
         // Verifica la regla de negocio que dice que no puede haber dos accesorios con el mismo nombre
 //        if (persistence.find(entity.getId()) != null) {
 //            throw new BusinessLogicException("Ya existe un accesorio el id \"" + entity.getId()+ "\"");
@@ -47,42 +51,44 @@ public class AccesorioLogic {
         LOGGER.info("Termina proceso de creación del accesorio");
         return entity;
     }
-    
+
     /**
      * actualiza un accesorio
+     *
      * @param entity el entity que se desea actualizar
      * @param idModelo id del modelo que se desea actualizar
      * @return el accesorio
      * @throws BusinessLogicException si no se logra actualizar
      */
-    public AccesorioEntity updateAccesorio( AccesorioEntity entity, Long idModelo ) throws BusinessLogicException{
-        
+    public AccesorioEntity updateAccesorio(AccesorioEntity entity, Long idModelo) throws BusinessLogicException {
+
         AccesorioEntity acc = persistence.find(entity.getId());
         if (acc == null) {
-            throw new BusinessLogicException("No existe un accesorio con el id" + entity.getId()+ "\"");
+            throw new BusinessLogicException("No existe un accesorio con el id" + entity.getId() + "\"");
         }
         if (acc.getPrecio() <= 0) {
             throw new BusinessLogicException("El accesorio debe tener un precio mayor a 0");
-        } 
-        if (entity.getModeloId()!= acc.getModeloId()) {
+        }
+        if (entity.getModeloId() != acc.getModeloId()) {
             throw new BusinessLogicException("No se le puede cambiar el modelo a un accesorio!");
         }
         return persistence.update(entity);
     }
-    
+
     /**
      * borra un accesorio
-     * @param id  el id del accesorio a borrar
+     *
+     * @param id el id del accesorio a borrar
      */
-    public void deleteAccesorio( Long id ){
+    public void deleteAccesorio(Long id) {
         //Este metodo no se deberia usar. USEN ModeloLogic.removeItem()!!!!!!!!!!!!!!
-        LOGGER.log(Level.INFO, "Inicia proceso de borrar el Accesorio con id={0}", id);    
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar el Accesorio con id={0}", id);
         persistence.delete(id);
         LOGGER.log(Level.INFO, "Termina proceso de borrar el Accesorio con id={0}", id);
     }
-    
+
     /**
-     * 
+     *
      * @return todos los accesorios
      */
     public List<AccesorioEntity> getAccesorios() {
@@ -94,6 +100,7 @@ public class AccesorioLogic {
 
     /**
      * busca un accesorio
+     *
      * @param id el id del accesorio de consulta
      * @return el accesorio
      */

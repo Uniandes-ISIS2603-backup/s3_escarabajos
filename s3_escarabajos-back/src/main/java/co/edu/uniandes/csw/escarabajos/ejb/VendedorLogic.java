@@ -31,6 +31,7 @@ public class VendedorLogic {
      public VendedorEntity createVendedor(VendedorEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de vendedor");
         // Invoca la persistencia para crear el vendedor
+        //TODO: No hay reglas de negocio
         persistence.create(entity);
         LOGGER.info("Termina proceso de creación de vendedor");
         return entity;

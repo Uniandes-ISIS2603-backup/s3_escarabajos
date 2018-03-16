@@ -32,7 +32,7 @@ public class CarritoLogic {
     
     @Inject
     private ItemLogic itemLogic;
-    
+    //TODO: Está variable no se está usando
     @Inject
     private ClienteLogic clienteLogic;
     
@@ -44,6 +44,7 @@ public class CarritoLogic {
      */
     public CarritoEntity createCarrito(CarritoEntity entity) throws BusinessLogicException{
         LOGGER.info("Inicia proceso de creación del carrito");
+        // TODO: Esta verificación no está bien porque no se ha creado el carrito entonces no tiene aun un id. 
         CarritoEntity carrito = persistence.find(entity.getId());
         if (carrito!= null) {
             throw new BusinessLogicException("El carrito ya existe");

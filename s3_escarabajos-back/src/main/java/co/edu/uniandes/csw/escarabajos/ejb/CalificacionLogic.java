@@ -43,6 +43,8 @@ public class CalificacionLogic {
         if(cal.getComentario() == null || cal.getComentario().isEmpty() ) {
             throw new BusinessLogicException("Por favor ingrese un comentario");
         }
+        
+        // TODO: QUitar las líneas que no sirven
        // ModeloEntity model = modeloLogic.getModelo(modeloId);
        
         //ClienteEntity cliente = clienteLogic.getCliente(clienteId);

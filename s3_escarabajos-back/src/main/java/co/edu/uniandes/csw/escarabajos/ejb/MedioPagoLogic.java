@@ -27,6 +27,8 @@ public class MedioPagoLogic {
 
      public MedioPagoEntity createMedioPago(MedioPagoEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de medio de pago");
+        //TODO: No hay la regla de negocio
+        
         // Verifica la regla de negocio que dice que no puede haber dos medios de pago con el mismo nombre
     /*    List<MedioPagoEntity> todos = persistence.findAll();
         for(int i = 0; i < todos.size();i++)

@@ -75,6 +75,7 @@ public class ModeloLogic {
      */
     public ModeloEntity createModelo(ModeloEntity entity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de crear un modelo ");
+        //TODO: NO hay reglas de negocio
 //        ModeloEntity modeloEntity = getModelo(entity.getId());
 //        if (modeloEntity != null) {
 //            throw new BusinessLogicException("El modelo ya existe!");

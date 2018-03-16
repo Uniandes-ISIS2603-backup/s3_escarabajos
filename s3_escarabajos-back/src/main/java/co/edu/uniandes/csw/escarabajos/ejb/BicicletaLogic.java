@@ -37,6 +37,7 @@ public class BicicletaLogic {
     /**
      * Injecta la persistencia de modelo.
      */
+    //TODO: esta variable nunca se usa
     @Inject
     private ModeloPersistence modeloPersistence;
 
@@ -83,6 +84,7 @@ public class BicicletaLogic {
         entity.setUsada(Boolean.FALSE);
         logic.verificarItem(entity);
         verificarBicicleta(entity);
+        // TODO: Esta condición está mal porque aun no existe el id de la bicicleta entity que se está tratando de crear. eso lo crea la base de datos. 
         if (persistence.find(entity.getId()) != null) {
             throw new BusinessLogicException("Ya existe una bicicleta con el id \"" + entity.getId() + "\"");
         }
