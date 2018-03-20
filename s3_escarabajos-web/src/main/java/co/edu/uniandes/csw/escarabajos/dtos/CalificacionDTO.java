@@ -60,7 +60,7 @@ public class CalificacionDTO
      * @param cal entidad de la se saca la información
      */
     public CalificacionDTO(CalificacionEntity cal)
-    {
+    {//TODO: cal podría ser null
         id = cal.getId();
         comentario = cal.getComentario();
         puntaje = cal.getPuntaje();

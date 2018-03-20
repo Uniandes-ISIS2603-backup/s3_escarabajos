@@ -46,6 +46,7 @@ public class VendedorDTO {
         
     }
     public VendedorDTO(VendedorEntity vendedor){
+        //TODO: vendedor podría ser null
         this.id = vendedor.getId();
         this.nombre = vendedor.getNombre();
         this.direccion = vendedor.getDireccion();

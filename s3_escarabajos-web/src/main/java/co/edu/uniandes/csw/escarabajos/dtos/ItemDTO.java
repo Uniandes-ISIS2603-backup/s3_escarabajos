@@ -71,6 +71,7 @@ public abstract class ItemDTO {
      * @param entity: Es la entidad que se va a convertir a DTO
      */
     public ItemDTO(ItemEntity entity) {
+       //TODO: entity podría ser null 
        this.id = entity.getId();
        this.precio = entity.getPrecio();
        this.modeloId = entity.getModeloId();
@@ -89,6 +90,7 @@ public abstract class ItemDTO {
      * @param entity Es la entidad que se le van a asignarlos valores del DTO
      * @return Un Entity con los valores del DTO
      */
+   
     public ItemEntity toEntity(ItemEntity entity) {
        entity.setId(this.getId());
        entity.setPrecio(this.getPrecio());

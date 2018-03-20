@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.escarabajos.dtos;
-
+//TODO: Borrar lo que no se use
 import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.escarabajos.entities.FotoEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ReclamoEntity;
@@ -55,6 +55,7 @@ public class ReclamoDetailDTO extends ReclamoDTO {
      */
     public ReclamoDetailDTO(ReclamoEntity entity) {
         super(entity);
+        //TODO: entity podría ser null
         if (entity.getAlbum() != null) {
             album = new ArrayList<>();
             for (FotoEntity entityFoto : entity.getAlbum()) {
@@ -72,6 +73,7 @@ public class ReclamoDetailDTO extends ReclamoDTO {
      *
      * @return La entidad construida a partir del DTO.
      */
+    //TODO: falta @Override
     public ReclamoEntity toEntiy() {
         ReclamoEntity entity = super.toEntity();
         if (getAlbum() != null) {

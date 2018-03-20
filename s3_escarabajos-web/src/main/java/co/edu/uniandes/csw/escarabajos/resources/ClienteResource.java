@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.escarabajos.resources;
 
 import co.edu.uniandes.csw.escarabajos.dtos.ClienteDetailDTO;
+//TODO: Borrar lo que no se use
 import co.edu.uniandes.csw.escarabajos.dtos.ClienteDTO;
 import co.edu.uniandes.csw.escarabajos.ejb.CarritoLogic;
 import co.edu.uniandes.csw.escarabajos.ejb.ClienteLogic;

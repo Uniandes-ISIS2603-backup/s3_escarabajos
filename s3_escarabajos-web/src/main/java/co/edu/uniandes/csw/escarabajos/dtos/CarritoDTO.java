@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.escarabajos.dtos;
-
+//TODO: borrar lo que no se necesite
 import co.edu.uniandes.csw.escarabajos.entities.AccesorioEntity;
 import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
 import co.edu.uniandes.csw.escarabajos.entities.CarritoEntity;
@@ -60,7 +60,7 @@ public class CarritoDTO {
     public CarritoDTO() {
         
     }
-    
+    //TODO: actualizar la documentación
         /**
      * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
      * la entidad que viene de argumento.
@@ -68,6 +68,7 @@ public class CarritoDTO {
      * @param bici: Es la entidad que se va a convertir a DTO
      */
     public CarritoDTO(CarritoEntity carrito) {
+        //TODO: carrito podría ser null
         this.id = carrito.getId();
         this.precioTotal = carrito.getPrecioTotal();
     }

@@ -37,6 +37,7 @@ public class FacturaDetailDTO extends FacturaDTO {
     //TODO: qué pasa si entity es null
     public FacturaDetailDTO(FacturaEntity entity) {
        super(entity);
+       //TODO: entity podría ser null
        this.cliente = entity.getCliente();
        this.medioDePago = entity.getMedioDePago();
        this.reclamo = entity.getReclamo();

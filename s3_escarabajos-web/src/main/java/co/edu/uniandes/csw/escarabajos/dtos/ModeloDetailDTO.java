@@ -96,6 +96,7 @@ public class ModeloDetailDTO extends ModeloDTO
      */
     public ModeloDetailDTO(ModeloEntity entity) {
         super(entity);
+        //TODO: entity podría ser null
         if (entity.getItems()!= null) {
             items = new ArrayList<>();
             for (ItemEntity entityItem: entity.getItems()) {

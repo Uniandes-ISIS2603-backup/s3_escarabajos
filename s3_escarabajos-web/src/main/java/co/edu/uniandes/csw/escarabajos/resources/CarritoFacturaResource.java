@@ -52,7 +52,7 @@ public class CarritoFacturaResource {
      */
     @GET
     public FacturaDetailDTO getFacturCarrito(@PathParam("idCliente") Long idCliente) throws BusinessLogicException {
-               
+               //TODO: Revisar este código. Es un GET pero hace un create?
         ClienteEntity cliente = logicCliente.getCliente(idCliente);
         
         FacturaDetailDTO factura= new FacturaDetailDTO(logicCarrito.crearFactura(cliente.getCarrito().getId()));

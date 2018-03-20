@@ -54,6 +54,7 @@ public class VendedorDetailDTO extends VendedorDTO{
     
     public VendedorDetailDTO (VendedorEntity entity){
         super(entity);
+        //TODO: entity podría ser null
         if (entity.getBicicletasUsadas()!= null) {
            bicicletasUsadas = new ArrayList<>();
             for (BicicletaUsadaEntity entityBicicletaUsada: entity.getBicicletasUsadas()) {

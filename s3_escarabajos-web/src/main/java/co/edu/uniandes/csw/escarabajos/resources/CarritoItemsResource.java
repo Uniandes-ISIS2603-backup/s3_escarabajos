@@ -37,7 +37,7 @@ import javax.ws.rs.WebApplicationException;
  * RequestScoped: Inicia una transacción desde el llamado de cada método (servicio). 
  * @author Mateo
  */
-
+//TODO: falta formato de idcliente
 @Path("clientes/{idCliente}/carrito/items")
 @Produces("application/json")
 @Consumes("application/json")
@@ -72,7 +72,9 @@ public class CarritoItemsResource {
     @POST
     @Path("{idItem: \\d+}")
     public ItemDetailDTO addItemCarrito(@PathParam("idCliente") Long idCliente, @PathParam("idItem") Long idItem ){
-        
+        //TODO si no existe el recurso cliente con idCliente debe disparar WebApplicationException
+        //TODO si no existe el recurso item con idItem debe disparar WebApplicationException
+        //TODO: Este try catch está mal
         try {
             return new ItemDetailDTO( carritoLogic.addItem(idCliente, idItem) );
         } catch (BusinessLogicException ex) {
@@ -102,7 +104,9 @@ public class CarritoItemsResource {
     @DELETE
     @Path("{idItem: \\d+}")
     public ItemDetailDTO deleteItemCarrito(@PathParam("idCliente") Long idCliente, @PathParam("idItem") Long idItem ){
-        
+        //TODO si no existe el recurso cliente con idCliente debe disparar WebApplicationException
+        //TODO si no existe el recurso item con idItem debe disparar WebApplicationException
+        //TODO: Este try catch está mal
         try {
             return new ItemDetailDTO( carritoLogic.removeItem(idCliente, idItem) );
         } catch (BusinessLogicException ex) {
@@ -124,7 +128,9 @@ public class CarritoItemsResource {
      */
     @GET
     public List<ItemDetailDTO> getItemsCarrito( @PathParam("idCliente") Long idCliente ) {
-        
+        //TODO si no existe el recurso cliente con idCliente debe disparar WebApplicationException
+        //TODO si no existe el recurso item con idItem debe disparar WebApplicationException
+        //TODO: Este try catch está mal
         try {
             return listEntity2DTO(carritoLogic.getItems(idCliente));
         } catch (BusinessLogicException ex) {

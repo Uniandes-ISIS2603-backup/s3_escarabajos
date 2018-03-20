@@ -35,6 +35,7 @@ public class MedioPagoDetailDTO extends MedioPagoDTO {
      */
     public MedioPagoDetailDTO(MedioPagoEntity entity) {
         super(entity);
+        //TODO: entity podría ser null
        this.cliente = entity.getCliente();
     }
     

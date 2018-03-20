@@ -49,6 +49,7 @@ public class FacturaDTO{
      * @param factura: Es la entidad que se va a convertir a DTO
      */
     public FacturaDTO(FacturaEntity factura) {
+        //TODO: factura podría ser null
         this.dinero = factura.getDinero();
         this.id = factura.getId();
     }

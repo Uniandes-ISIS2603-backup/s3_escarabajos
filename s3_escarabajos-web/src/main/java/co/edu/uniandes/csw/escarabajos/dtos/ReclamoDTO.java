@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.escarabajos.dtos;
 
 import co.edu.uniandes.csw.escarabajos.entities.ReclamoEntity;
+//TODO: Borrar lo que no se use
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -71,6 +72,7 @@ public class ReclamoDTO {
      * @param recl: Es la entidad que se va a convertir a DTO
      */
     public ReclamoDTO(ReclamoEntity recl) {
+        //TODO: recl podría ser null
         this.id = recl.getId();
         this.mensaje = recl.getMensaje();
         this.razon = recl.getRazon();

@@ -20,6 +20,7 @@ import javax.ws.rs.Produces;
 import co.edu.uniandes.csw.escarabajos.dtos.*;
 import co.edu.uniandes.csw.escarabajos.ejb.*;
 import co.edu.uniandes.csw.escarabajos.entities.*;
+//TODO: Borrar lo que no se use
 import com.sun.javafx.scene.control.skin.VirtualFlow;
 
 import javax.inject.Inject;
@@ -30,7 +31,8 @@ import javax.ws.rs.WebApplicationException;
  * URL: /api/clientes/{clientesId}/calificaciones
  * </pre>
  * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta
- * "/api" y este recurso tiene la ruta "clientes/{clientesId}/calificaciones".</i>
+ * "/api" y este recurso tiene la ruta
+ * "clientes/{clientesId}/calificaciones".</i>
  *
  * <h2>Anotaciones </h2>
  * <pre>
@@ -96,8 +98,10 @@ public class ClienteCalificacionResource {
     @POST
     @PathParam("clientesId: \\d+")
     public CalificacionDetailDTO createCalificacion(CalificacionDetailDTO calificacion,
-             @PathParam("clientesId") Long clienteId, @PathParam("modelosId") Long modeloId, @PathParam("calificacionesId") Long id) throws BusinessLogicException {
-
+            @PathParam("clientesId") Long clienteId, @PathParam("modelosId") Long modeloId, @PathParam("calificacionesId") Long id) throws BusinessLogicException {
+        //TODO si no existe el recurso cliente  debe disparar WebApplicationException
+        //TODO si no existe el recurso modelo con  debe disparar WebApplicationException
+       //TODO si no existe el recurso calificación con  debe disparar WebApplicationException
         return new CalificacionDetailDTO(cal.crearCalificacion(calificacion.toEntity(), modeloId, clienteId));
     }
 
@@ -119,6 +123,7 @@ public class ClienteCalificacionResource {
     @GET
     @PathParam("clientesId: \\d+")
     public List<CalificacionDetailDTO> getCalificaciones(@PathParam("clientesId") Long clienteId) {
+        //TODO si no existe el recurso cliente  debe disparar WebApplicationException
         return list2DTO(cal.getCalificacionesPorCliente(clienteId));
     }
 
@@ -182,7 +187,7 @@ public class ClienteCalificacionResource {
      */
     @PUT
     @Path("{clientesId: \\d+}")
-    public CalificacionDetailDTO updateCalificacion(CalificacionDetailDTO calificacion, @PathParam("calificacionesId") Long id, @PathParam("clientesId") Long clienteId,  @PathParam("modelosId") Long modeloId) throws BusinessLogicException {
+    public CalificacionDetailDTO updateCalificacion(CalificacionDetailDTO calificacion, @PathParam("calificacionesId") Long id, @PathParam("clientesId") Long clienteId, @PathParam("modelosId") Long modeloId) throws BusinessLogicException {
         CalificacionEntity cali = cal.find(id);
         if (cali == null) {
             throw new WebApplicationException("El recurso /calificaciones/" + id + " no existe.", 404);

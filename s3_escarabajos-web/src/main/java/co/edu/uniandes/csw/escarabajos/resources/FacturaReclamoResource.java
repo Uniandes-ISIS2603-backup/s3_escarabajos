@@ -114,7 +114,7 @@ public class FacturaReclamoResource {
     @GET
     @PathParam("facturasId: \\d+")
     public ReclamoDetailDTO getreclamos(@PathParam("facturasId")Long facturaId) 
-    {
+    {//TODO si no existe el recurso factura debe disparar WebApplicationException
         return list2DTO(reclamo.getReclamoPorfactura(facturaId)).get(0);
     }
 
@@ -147,6 +147,7 @@ public class FacturaReclamoResource {
     @Path("{facturasId: \\d+}")
     public ReclamoDetailDTO updatereclamo(ReclamoDetailDTO reclamo, 
            @PathParam("facturasId") Long facturaId,  @PathParam("reclamosId") Long id) throws BusinessLogicException {
+        //TODO si no existe el recurso factura debe disparar WebApplicationException
         ReclamoEntity recl = this.reclamo.find(id);
         if (recl == null) 
         {
@@ -175,6 +176,7 @@ public class FacturaReclamoResource {
     @DELETE
     @Path("{facturasId: \\d+}")
     public void deletereclamo( @PathParam("facturasId")Long facturaId, @PathParam("reclamosId") Long id) throws BusinessLogicException {
+       //TODO si no existe el recurso factura debe disparar WebApplicationException
        ReclamoEntity cali = reclamo.find(id);
         if (cali == null) 
         {

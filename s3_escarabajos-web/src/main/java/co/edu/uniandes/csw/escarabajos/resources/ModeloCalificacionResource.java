@@ -97,7 +97,7 @@ public class ModeloCalificacionResource {
     @POST
     @PathParam("modelosId: \\d+")
     public CalificacionDetailDTO createCalificacion(CalificacionDetailDTO calificacion,
-             @PathParam("modelosId") Long modeloId, @PathParam("clientesId") Long clienteId, @PathParam("calificacionesId") Long id) throws BusinessLogicException {
+            @PathParam("modelosId") Long modeloId, @PathParam("clientesId") Long clienteId, @PathParam("calificacionesId") Long id) throws BusinessLogicException {
 
         return new CalificacionDetailDTO(
                 cal

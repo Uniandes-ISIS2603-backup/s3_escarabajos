@@ -52,7 +52,7 @@ import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
  * @author Andres
  */
 public class ItemDetailDTO extends ItemDTO {
-
+//TODO. Si esto es solo un dato báscio deberia ir en ItemDTO y esta clase no debería existir
     private String tipo;
     
     /**

@@ -117,6 +117,7 @@ public class ItemFotosResource {
     @GET
     @Path("{fotosId: \\d+}")
     public FotoDTO getFotos(@PathParam("itemsId") Long itemsId, @PathParam("fotosId") Long fotosId) {
+        //TODO si no existe el recurso item debe disparar WebApplicationException
         try {
             return new FotoDTO(fotoLogic.getFoto(itemsId, fotosId,FotoLogic.ITEM));
         } catch (BusinessLogicException ex) {
@@ -149,6 +150,8 @@ public class ItemFotosResource {
      */
     @POST
     public FotoDTO createFoto(@PathParam("itemsId") Long idItem, FotoDTO foto) throws BusinessLogicException {
+          //TODO si no existe el recurso item debe disparar WebApplicationException
+      
         return new FotoDTO(fotoLogic.createFoto(idItem, foto.toEntity(),FotoLogic.ITEM));
     }
 
@@ -176,6 +179,7 @@ public class ItemFotosResource {
     @PUT
     @Path("{id: \\d+}")
     public FotoDTO updateFoto( @PathParam("id") Long id, FotoDTO foto) throws BusinessLogicException {
+        
         foto.setId(id);
         return new FotoDTO(fotoLogic.updateFoto(foto.toEntity()));
     }

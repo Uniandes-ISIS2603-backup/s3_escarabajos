@@ -54,6 +54,8 @@ public class ModeloDTO
     /**
      * Atributo que modela la calificacionMedia del modelo
      */
+    
+     //TODO: no puede ser double debe ser Double. arreglar también set/get
     private double calificacionMedia;
     /**
      * Atributo que modela la el tipo de modelo
@@ -74,7 +76,7 @@ public class ModeloDTO
      * @param modelo: Es la entidad que se va a convertir a DTO
      */
     public ModeloDTO(ModeloEntity modelo) 
-    {
+    {//TODO: modelo podría ser null
         this.id = modelo.getId();
         this.marca = modelo.getMarca();
         this.referencia = modelo.getReferencia();

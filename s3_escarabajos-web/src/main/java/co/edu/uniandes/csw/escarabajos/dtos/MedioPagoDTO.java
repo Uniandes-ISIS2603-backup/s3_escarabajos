@@ -63,6 +63,8 @@ public class MedioPagoDTO {
     //-----------------------------------------------------------
     // Atributos
     //-----------------------------------------------------------
+    
+    //TODO: no puede ser long debe ser Long. arreglar también set/get
     private long id;
     /**
      *  modela el numero de tarjeta de credito del cliente que realizo la transaccion
@@ -88,6 +90,7 @@ public class MedioPagoDTO {
     //-----------------------------------------------------------
 
     MedioPagoDTO(MedioPagoEntity entity) {
+        //TODO: entity podría ser null
         this.id = entity.getId();
        // this.numeroTarjeta = entity.getNumeroTarjeta();
         this.tipo = entity.getTipo();

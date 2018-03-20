@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.escarabajos.dtos;
 
 import co.edu.uniandes.csw.escarabajos.entities.AccesorioEntity;
 import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
+//TODO: Borrar lo que no se use
 import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.escarabajos.entities.CarritoEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
@@ -66,7 +67,7 @@ public class CarritoDetailDTO extends CarritoDTO {
     /**
      * modela los items que el cliente va a comprar
      */
-    private List<ItemDTO> items = new ArrayList<ItemDTO>();
+    private List<ItemDTO> items = new ArrayList<>();
     
     /**
      * modela el cliente dueño del carrito;
@@ -86,6 +87,7 @@ public class CarritoDetailDTO extends CarritoDTO {
     /**
      * Crea un carrito de la nada y le asigna un cliente que llega por parametro
      */
+    //TODO: Revisar este método. cuándo se usaría?
     public CarritoDetailDTO( ClienteDTO cliente ){
         
         super();
@@ -100,6 +102,7 @@ public class CarritoDetailDTO extends CarritoDTO {
     public CarritoDetailDTO( CarritoEntity entity ) {
         
         super(entity);
+       //TODO: entity podría ser null
         if (entity.getCliente()!= null) {
             this.cliente = new ClienteDTO(entity.getCliente());
         } else {

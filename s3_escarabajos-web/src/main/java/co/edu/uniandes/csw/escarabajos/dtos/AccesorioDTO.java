@@ -74,6 +74,7 @@ public class AccesorioDTO extends ItemDTO {
      */
     public AccesorioDTO(AccesorioEntity entity) {
        super(entity);
+       //TODO: entity podría ser null
        this.tipoAccesorio = entity.getTipoAcessorio();
        this.descripcion = entity.getDescripcion();
        

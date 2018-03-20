@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.escarabajos.resources;
-
+//TODO: Borrar lo que no se use
 import co.edu.uniandes.csw.escarabajos.dtos.AccesorioDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.CarritoDetailDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.ClienteDTO;

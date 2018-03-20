@@ -69,6 +69,7 @@ public class CalificacionDetailDTO extends CalificacionDTO {
      */
     public CalificacionDetailDTO(CalificacionEntity entity) {
         super(entity);
+        //TODO: entity podría ser null
         if (entity.getCliente() != null) {
             this.cliente = new ClienteDTO(entity.getCliente());
         } else {
@@ -87,6 +88,7 @@ public class CalificacionDetailDTO extends CalificacionDTO {
      *
      * @return La entidad construida a partir del DTO.
      */
+    //TODO: debe tener @Override
     public CalificacionEntity toEntiy() {
         CalificacionEntity ent = super.toEntity();
         if (this.modelo != null) {
