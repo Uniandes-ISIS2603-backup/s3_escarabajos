@@ -123,6 +123,7 @@ public class BicicletaLogicTest {
      * Prueba para crear un Bicicleta
      *
      *
+     * @throws BusinessLogicException Por reglas de negocio
      */
     @Test
     public void createBicicletaTest() throws BusinessLogicException {
@@ -141,6 +142,7 @@ public class BicicletaLogicTest {
 
     /**
      * Prueba para consultar la lista de Bicicletas de un vendedor
+     * @throws BusinessLogicException Por reglas de negocio
      */
     @Test
     public void getBicicletasTest() throws BusinessLogicException {
@@ -160,6 +162,7 @@ public class BicicletaLogicTest {
     /**
      * Prueba para consultar un Bicicleta especifica de un vendedor
      * especifico
+     * @throws BusinessLogicException Por reglas de negocio
      */
     @Test
     public void getBicicletaTest() throws BusinessLogicException {
@@ -173,6 +176,7 @@ public class BicicletaLogicTest {
 
     /**
      * Prueba para eliminar un Bicicleta
+     * @throws BusinessLogicException Por reglas de negocio
      */
     @Test
     public void deleteBicicletaTest() throws BusinessLogicException {
@@ -184,6 +188,7 @@ public class BicicletaLogicTest {
 
     /**
      * Prueba para actualizar un Bicicleta
+     * @throws BusinessLogicException Por reglas de negocio
      */
     @Test
     public void updateBicicletaTest() throws BusinessLogicException {

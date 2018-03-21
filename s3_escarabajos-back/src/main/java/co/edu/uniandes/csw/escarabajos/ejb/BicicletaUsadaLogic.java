@@ -116,9 +116,6 @@ public class BicicletaUsadaLogic {
         verificarBiciUsada(entity);
         VendedorEntity vendedor = logicVendedor.getVendedor(idVendedor);
         entity.setVendedor(vendedor);
-        if (persistence.find(idVendedor, entity.getId()) != null) {
-            throw new BusinessLogicException("Ya existe una bicicleta usada con el id \"" + entity.getId() + "\"");
-        }
         LOGGER.info("Termina proceso de creaciÃ³n de bicicleta usada");
         return persistence.create(entity);
     }

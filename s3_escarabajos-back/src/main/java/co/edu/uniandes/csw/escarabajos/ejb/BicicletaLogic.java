@@ -8,7 +8,6 @@ package co.edu.uniandes.csw.escarabajos.ejb;
 import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.BicicletaPersistence;
-import co.edu.uniandes.csw.escarabajos.persistence.ModeloPersistence;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,9 +36,7 @@ public class BicicletaLogic {
     /**
      * Injecta la persistencia de modelo.
      */
-    //TODO: esta variable nunca se usa
-    @Inject
-    private ModeloPersistence modeloPersistence;
+    //TODO: DONE
 
     /**
      * Devuelve todos los bicicletas que hay en la base de datos.
@@ -84,10 +81,7 @@ public class BicicletaLogic {
         entity.setUsada(Boolean.FALSE);
         logic.verificarItem(entity);
         verificarBicicleta(entity);
-        // TODO: Esta condición está mal porque aun no existe el id de la bicicleta entity que se está tratando de crear. eso lo crea la base de datos. 
-        if (persistence.find(entity.getId()) != null) {
-            throw new BusinessLogicException("Ya existe una bicicleta con el id \"" + entity.getId() + "\"");
-        }
+        // TODO: DONE 
         persistence.create(entity);
         LOGGER.info("Termina proceso de creación de bicicleta");
         return entity;
