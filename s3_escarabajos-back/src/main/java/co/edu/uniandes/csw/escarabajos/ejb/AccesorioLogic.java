@@ -27,8 +27,8 @@ public class AccesorioLogic {
     private AccesorioPersistence persistence;
 
     @Inject
-    // TODO: falta private
-    ItemLogic itemLogic;
+    // DONE: falta private
+    private ItemLogic itemLogic;
 
     /**
      * crea un accesorio
@@ -41,11 +41,11 @@ public class AccesorioLogic {
 
         LOGGER.info("Inicia proceso de creación de un accesorio");
         itemLogic.verificarItem(entity);
-        //TODO: QUitar las líneas que no sirven
+        //DONE: QUitar las líneas que no sirven
         // Verifica la regla de negocio que dice que no puede haber dos accesorios con el mismo nombre
-//        if (persistence.find(entity.getId()) != null) {
-//            throw new BusinessLogicException("Ya existe un accesorio el id \"" + entity.getId()+ "\"");
-//        }
+        if (persistence.find(entity.getId()) != null) {
+            throw new BusinessLogicException("Ya existe un accesorio el id \"" + entity.getId()+ "\"");
+        }
         // Invoca la persistencia para crear la city
         persistence.create(entity);
         LOGGER.info("Termina proceso de creación del accesorio");

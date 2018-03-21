@@ -4,9 +4,7 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.escarabajos.dtos;
-//TODO: borrar lo que no se necesite
-import co.edu.uniandes.csw.escarabajos.entities.AccesorioEntity;
-import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
+//DONE: borrar lo que no se necesite
 import co.edu.uniandes.csw.escarabajos.entities.CarritoEntity;
 
 /**

@@ -32,9 +32,7 @@ public class CarritoLogic {
     
     @Inject
     private ItemLogic itemLogic;
-    //TODO: Está variable no se está usando
-    @Inject
-    private ClienteLogic clienteLogic;
+    //DONE: Está variable no se está usando
     
     /**
      * Crea un carito 

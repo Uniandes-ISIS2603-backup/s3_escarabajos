@@ -7,8 +7,7 @@ package co.edu.uniandes.csw.escarabajos.dtos;
 
 import co.edu.uniandes.csw.escarabajos.entities.AccesorioEntity;
 import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
-//TODO: Borrar lo que no se use
-import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
+//DONE: Borrar lo que no se use
 import co.edu.uniandes.csw.escarabajos.entities.CarritoEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import java.util.ArrayList;

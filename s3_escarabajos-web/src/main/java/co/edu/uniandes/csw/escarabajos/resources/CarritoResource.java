@@ -43,7 +43,8 @@ import javax.ws.rs.Produces;
 @RequestScoped
 public class CarritoResource {
     
-    //TODO: No entiendo para qué sirve esta clase. Cuántos carritos hay?
+    //DONE: No entiendo para qué sirve esta clase. Cuántos carritos hay?
+    //esta clase era solo para el ciclo 1 par mostrar que carrito funcionaba bien sin depender del cliente, la que se va a usar es la otro
     @Inject
     CarritoLogic logic;
 
