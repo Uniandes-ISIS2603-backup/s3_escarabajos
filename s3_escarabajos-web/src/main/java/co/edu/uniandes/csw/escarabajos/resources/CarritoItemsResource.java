@@ -5,9 +5,12 @@
  */
 package co.edu.uniandes.csw.escarabajos.resources;
 
+import co.edu.uniandes.csw.escarabajos.dtos.ClienteDetailDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.ItemDetailDTO;
 import co.edu.uniandes.csw.escarabajos.ejb.CarritoLogic;
+import co.edu.uniandes.csw.escarabajos.ejb.ClienteLogic;
 import co.edu.uniandes.csw.escarabajos.ejb.ItemLogic;
+import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
@@ -37,8 +40,8 @@ import javax.ws.rs.WebApplicationException;
  * RequestScoped: Inicia una transacción desde el llamado de cada método (servicio). 
  * @author Mateo
  */
-//TODO: falta formato de idcliente
-@Path("clientes/{idCliente}/carrito/items")
+//DONE: falta formato de idcliente
+@Path("clientes/{idCliente: \\d+}/carrito/items")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
@@ -49,6 +52,9 @@ public class CarritoItemsResource {
     
     @Inject
     CarritoLogic carritoLogic;
+    
+    @Inject
+    ClienteLogic clienteLogic;
     
      /**
      * <h1>POST /api/clientes/{idCLiente}/carrito/items/{idItem} : Agrega un item al carrito.</h1>
@@ -72,13 +78,30 @@ public class CarritoItemsResource {
     @POST
     @Path("{idItem: \\d+}")
     public ItemDetailDTO addItemCarrito(@PathParam("idCliente") Long idCliente, @PathParam("idItem") Long idItem ){
-        //TODO si no existe el recurso cliente con idCliente debe disparar WebApplicationException
-        //TODO si no existe el recurso item con idItem debe disparar WebApplicationException
-        //TODO: Este try catch está mal
+        //DONE si no existe el recurso cliente con idCliente debe disparar WebApplicationException
+        //DONE si no existe el recurso item con idItem debe disparar WebApplicationException
+        //DONE: Este try catch está mal
         try {
-            return new ItemDetailDTO( carritoLogic.addItem(idCliente, idItem) );
-        } catch (BusinessLogicException ex) {
-            throw new WebApplicationException("El recurso /items/" + idItem + " no existe.", 404);
+            
+            ClienteEntity clienteEntity = clienteLogic.getCliente(idCliente);
+            
+            if(clienteEntity==null){
+                throw new WebApplicationException("El recurso /cliente/" + idCliente + " no existe.", 404);
+            }
+            
+            ItemEntity itemEntity = itemLogic.getItem(idItem);
+            
+            if(itemEntity==null){
+                throw new WebApplicationException("El recurso /items/" + idItem + " no existe.", 404);
+            }
+            
+            ClienteDetailDTO cliente = new ClienteDetailDTO(clienteEntity);
+            
+            return new ItemDetailDTO( carritoLogic.addItem(cliente.getCarrito().getId(), idItem) );
+        }
+        catch (BusinessLogicException ex) {
+            
+            throw new WebApplicationException(ex.getMessage(), 500);
         }
     }
     
@@ -104,13 +127,28 @@ public class CarritoItemsResource {
     @DELETE
     @Path("{idItem: \\d+}")
     public ItemDetailDTO deleteItemCarrito(@PathParam("idCliente") Long idCliente, @PathParam("idItem") Long idItem ){
-        //TODO si no existe el recurso cliente con idCliente debe disparar WebApplicationException
-        //TODO si no existe el recurso item con idItem debe disparar WebApplicationException
-        //TODO: Este try catch está mal
+        //DONE si no existe el recurso cliente con idCliente debe disparar WebApplicationException
+        //DONE si no existe el recurso item con idItem debe disparar WebApplicationException
+        //DONE: Este try catch está mal
         try {
+            
+            ClienteEntity clienteEntity = clienteLogic.getCliente(idCliente);
+            
+            if(clienteEntity==null){
+                throw new WebApplicationException("El recurso /cliente/" + idCliente + " no existe.", 404);
+            }
+            
+            ItemEntity itemEntity = itemLogic.getItem(idItem);
+            
+            if(itemEntity==null){
+                throw new WebApplicationException("El recurso /items/" + idItem + " no existe.", 404);
+            }
+            
+            ClienteDetailDTO cliente = new ClienteDetailDTO(clienteEntity);
+            
             return new ItemDetailDTO( carritoLogic.removeItem(idCliente, idItem) );
         } catch (BusinessLogicException ex) {
-            throw new WebApplicationException("El recurso /items/" + idItem + " no existe.", 404);
+            throw new WebApplicationException(ex.getMessage(),500);
         }
     }
     
@@ -128,13 +166,20 @@ public class CarritoItemsResource {
      */
     @GET
     public List<ItemDetailDTO> getItemsCarrito( @PathParam("idCliente") Long idCliente ) {
-        //TODO si no existe el recurso cliente con idCliente debe disparar WebApplicationException
-        //TODO si no existe el recurso item con idItem debe disparar WebApplicationException
-        //TODO: Este try catch está mal
+        //DONE si no existe el recurso cliente con idCliente debe disparar WebApplicationException
+        //DONE si no existe el recurso item con idItem debe disparar WebApplicationException
+        //Este todo no tiene sentido porque si no hay items se debe devolver una lista vacia
+        //DONE: Este try catch está mal
         try {
-            return listEntity2DTO(carritoLogic.getItems(idCliente));
+            
+            ClienteEntity clienteEntity = clienteLogic.getCliente(idCliente);
+            
+            ClienteDetailDTO cliente = new ClienteDetailDTO(clienteEntity);
+            
+            return listEntity2DTO(carritoLogic.getItems(cliente.getCarrito().getId()));
+            
         } catch (BusinessLogicException ex) {
-            throw new WebApplicationException("El recurso /cliente/" + idCliente + " no existe.", 404);
+            throw new WebApplicationException(ex.getMessage(), 500);
         }
     }
     

@@ -52,7 +52,8 @@ public class CarritoFacturaResource {
      */
     @GET
     public FacturaDetailDTO getFacturCarrito(@PathParam("idCliente") Long idCliente) throws BusinessLogicException {
-               //TODO: Revisar este código. Es un GET pero hace un create?
+        //DONE: Revisar este código. Es un GET pero hace un create?
+        //asi es como queremos que sea para que cuando le den generar get factura se genere y se devuelve la factura que se genero
         ClienteEntity cliente = logicCliente.getCliente(idCliente);
         
         FacturaDetailDTO factura= new FacturaDetailDTO(logicCarrito.crearFactura(cliente.getCarrito().getId()));

@@ -42,11 +42,7 @@ public class CarritoLogic {
      */
     public CarritoEntity createCarrito(CarritoEntity entity) throws BusinessLogicException{
         LOGGER.info("Inicia proceso de creación del carrito");
-        // TODO: Esta verificación no está bien porque no se ha creado el carrito entonces no tiene aun un id. 
-        CarritoEntity carrito = persistence.find(entity.getId());
-        if (carrito!= null) {
-            throw new BusinessLogicException("El carrito ya existe");
-        }
+        // DONE: Esta verificación no está bien porque no se ha creado el carrito entonces no tiene aun un id. 
         
         CarritoEntity rpta = persistence.create(entity);
         LOGGER.info("Termina proceso de creación de carrito");
@@ -99,13 +95,13 @@ public class CarritoLogic {
      * @return la lista de items
      * @throws BusinessLogicException si no se puede colsultar
      */
-    public List<ItemEntity> getItems( Long id ) throws BusinessLogicException{
+    public List<ItemEntity> getItems( Long idCarrito ) throws BusinessLogicException{
         
-        if (persistence.find(id) == null) {
-            throw new BusinessLogicException("No existe un cliente con el id" + id + "\"");
+        if (persistence.find(idCarrito) == null) {
+            throw new BusinessLogicException("No existe un carrito con el id" + idCarrito + "\"");
         }
         
-        CarritoEntity carrito = persistence.find(id);
+        CarritoEntity carrito = persistence.find(idCarrito);
         
         return carrito.getItems();
     }
@@ -122,7 +118,7 @@ public class CarritoLogic {
         CarritoEntity carrito = persistence.find(idCarrito);
         
         if (carrito == null) {
-            throw new BusinessLogicException("No existe un cliente con el id" + idCarrito + "\"");
+            throw new BusinessLogicException("No existe un carrito con el id " + idCarrito + "\"");
         }
         
         if (carrito.getItems().contains(itemLogic.getItem(itemId))) {
@@ -130,6 +126,11 @@ public class CarritoLogic {
         }
         
         ItemEntity item = itemLogic.getItem(itemId);
+        
+        if( item == null ) {
+            
+            throw new BusinessLogicException("No existe un item con el id " + itemId );
+        }
         
         List<ItemEntity> rpta = carrito.getItems();
         
