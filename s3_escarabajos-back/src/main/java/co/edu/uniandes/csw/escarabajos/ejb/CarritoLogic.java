@@ -224,5 +224,18 @@ public class CarritoLogic {
         persistence.update(carrito);
     }
     
-    
+    /**
+     * retorna el carrito perteneciente al cliente que entra por parametro
+     * @param id del cliente dueño del carrito
+     */
+    public CarritoEntity getCarritoByClienteId( Long clienteId ){
+        
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar el carrito del cliente con id={0}", clienteId);
+        CarritoEntity carrito = persistence.findCarritoByClienteId(clienteId);
+        if (carrito == null) {
+            LOGGER.log(Level.SEVERE, "El cliente con id {0} aun no tiene un carrito ", clienteId);
+        }
+        LOGGER.log(Level.INFO, "Termina proceso de consultar carrito del cliente con id={0}", clienteId);
+        return carrito;
+    }
 }

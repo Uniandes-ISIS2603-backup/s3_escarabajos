@@ -68,7 +68,7 @@ public class ClienteCarritoResource {
      * se creo solo por motivos de prueba ya que clienteResource aun no funciona. En un futuro deberia borrarse.
      */
     @POST
-    public CarritoDetailDTO createCarrito(@PathParam("idCliente") Long idCliente) throws BusinessLogicException {
+    public CarritoDetailDTO createCarritoDeCliente(@PathParam("idCliente") Long idCliente) throws BusinessLogicException {
         
         ClienteEntity clienteEntity = logicCliente.getCliente(idCliente);
         
@@ -76,17 +76,21 @@ public class ClienteCarritoResource {
             throw new WebApplicationException("El recurso /clientes/" + idCliente + " no existe.", 404);
         }
         
+        //PILAS esta verificacion no funciona bien cuando el cliente ya tiene carrito daña la aplicacion
+        //toca buscar otra manera de verificar si el cliente ya tiene carrito
+        //depronto si funciona y lo que falla es el getCliente la segunda vez
+        if( clienteEntity.getCarrito() != null ){
+            
+            throw new WebApplicationException("El recurso /clientes/" + idCliente + " ya tiene un carrito.", 400);
+        }
+        
         CarritoDetailDTO carrito = new CarritoDetailDTO(new ClienteDTO(clienteEntity));
         
         CarritoEntity carritoEntity = logic.createCarrito(carrito.toEntity());
         
-        clienteEntity.setCarrito(carritoEntity);
-       
-        logicCliente.updateCliente(clienteEntity);
+        CarritoDetailDTO carritoCreado = new CarritoDetailDTO(carritoEntity);
         
-        logic.updateCarrito(carritoEntity);
-        
-        return new CarritoDetailDTO(logic.findCarrito(carritoEntity.getId()));
+        return carritoCreado;
     }
 
     
@@ -114,7 +118,7 @@ public class ClienteCarritoResource {
             throw new WebApplicationException("El recurso /cliente/" + idCliente + " no existe.", 404);
         }
         
-        CarritoEntity carrito = cliente.getCarrito();
+        CarritoEntity carrito = logic.getCarritoByClienteId(idCliente);
         
         if( carrito == null ){
             

@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -72,5 +73,17 @@ public class CarritoPersistence {
         LOGGER.log(Level.INFO, "Borrando carrito con id={0}", id);
         CarritoEntity entity = em.find(CarritoEntity.class, id);
         em.remove(entity);
+    }
+    
+    /**
+     * retorna el carrito perteneciente al cliente que entra por parametro
+     * @param id del cliente dueño del carrito
+     */
+    public CarritoEntity findCarritoByClienteId( Long clienteId ){
+        
+        LOGGER.log(Level.INFO, "Consultando el carrito del cliente con id= ", clienteId);
+        TypedQuery<CarritoEntity> q = em.createQuery("select u from CarritoEntity u where u.cliente_id = :id", CarritoEntity.class);
+        q = q.setParameter("id", clienteId);
+        return q.getSingleResult();
     }
 }
