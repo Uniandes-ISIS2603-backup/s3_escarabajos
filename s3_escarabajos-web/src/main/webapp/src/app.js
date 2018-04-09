@@ -4,7 +4,7 @@
         'ui.router',
        
         // Internal modules dependencies       
-        'citiesModule',
+        'moduloBicis'
         
 
     ]);
