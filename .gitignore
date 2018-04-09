@@ -26,3 +26,4 @@ hs_err_pid*
 /s3_escarabajos-back/target/
 /s3_escarabajos-web/target/
 /s3_escarabajos-back/nbproject/
+/s3_escarabajos-web/bower_components/
