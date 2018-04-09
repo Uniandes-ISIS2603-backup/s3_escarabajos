@@ -20,8 +20,7 @@ import javax.ws.rs.Produces;
 import co.edu.uniandes.csw.escarabajos.dtos.*;
 import co.edu.uniandes.csw.escarabajos.ejb.*;
 import co.edu.uniandes.csw.escarabajos.entities.*;
-//TODO: Borrar lo que no se use
-import com.sun.javafx.scene.control.skin.VirtualFlow;
+//TODO: DONE Borrar lo que no se use
 
 import javax.inject.Inject;
 import javax.ws.rs.WebApplicationException;
@@ -51,6 +50,8 @@ public class ClienteCalificacionResource {
 
     @Inject
     CalificacionLogic cal;
+    ClienteLogic cli;
+    ModeloLogic mod;
 
     /**
      * Convierte una lista de entities a una lista de DTOs
@@ -98,10 +99,19 @@ public class ClienteCalificacionResource {
     @POST
     @PathParam("clientesId: \\d+")
     public CalificacionDetailDTO createCalificacion(CalificacionDetailDTO calificacion,
-            @PathParam("clientesId") Long clienteId, @PathParam("modelosId") Long modeloId, @PathParam("calificacionesId") Long id) throws BusinessLogicException {
-        //TODO si no existe el recurso cliente  debe disparar WebApplicationException
-        //TODO si no existe el recurso modelo con  debe disparar WebApplicationException
-       //TODO si no existe el recurso calificación con  debe disparar WebApplicationException
+            @PathParam("clientesId") Long clienteId, Long modeloId, @PathParam("calificacionesId") Long id) throws BusinessLogicException {
+        //TODO DONE si no existe el recurso cliente  debe disparar WebApplicationException
+        if (cli.getCliente(clienteId) == null) {
+            throw new WebApplicationException("El cliente no existe");
+        }
+        //TODO DONE si no existe el recurso modelo con  debe disparar WebApplicationException
+        if (mod.getModelo(modeloId) == null) {
+            throw new WebApplicationException("El modelo no existe");
+        }
+        if (cal.find(id) != null) {
+            throw new WebApplicationException("La calificacion ya existe");
+        }
+        //TODO DONE si existe el recurso calificación con  debe disparar WebApplicationException
         return new CalificacionDetailDTO(cal.crearCalificacion(calificacion.toEntity(), modeloId, clienteId));
     }
 
@@ -122,8 +132,11 @@ public class ClienteCalificacionResource {
      */
     @GET
     @PathParam("clientesId: \\d+")
-    public List<CalificacionDetailDTO> getCalificaciones(@PathParam("clientesId") Long clienteId) {
-        //TODO si no existe el recurso cliente  debe disparar WebApplicationException
+    public List<CalificacionDetailDTO> getCalificaciones(@PathParam("clientesId") Long clienteId)throws WebApplicationException {
+        //TODO DONE si no existe el recurso cliente  debe disparar WebApplicationException
+        if (cli.getCliente(clienteId) == null) {
+            throw new WebApplicationException("El cliente no existe");
+        }
         return list2DTO(cal.getCalificacionesPorCliente(clienteId));
     }
 

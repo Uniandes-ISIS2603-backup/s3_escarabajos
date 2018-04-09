@@ -4,18 +4,18 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.escarabajos.dtos;
-//TODO: Borrar lo que no se use
-import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
+//TODO: DONE Borrar lo que no se use
+
 import co.edu.uniandes.csw.escarabajos.entities.FotoEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ReclamoEntity;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Clase que extiende de {@link CalificacionDTO} para manejar la transformacion entre
- * los objetos JSON y las Entidades de la base de datos. 
- * 
-  * Al serializarse como JSON esta clase implementa el siguiente reclamo: <br>
+ * Clase que extiende de {@link CalificacionDTO} para manejar la transformacion
+ * entre los objetos JSON y las Entidades de la base de datos.
+ *
+ * Al serializarse como JSON esta clase implementa el siguiente reclamo: <br>
  * <pre>
  *   {
  *      "id": number,
@@ -55,15 +55,17 @@ public class ReclamoDetailDTO extends ReclamoDTO {
      */
     public ReclamoDetailDTO(ReclamoEntity entity) {
         super(entity);
-        //TODO: entity podría ser null
-        if (entity.getAlbum() != null) {
-            album = new ArrayList<>();
-            for (FotoEntity entityFoto : entity.getAlbum()) {
-                album.add(new FotoDTO(entityFoto));
+        //TODO: DONE entity podría ser null
+        if (entity != null) {
+            if (entity.getAlbum() != null) {
+                album = new ArrayList<>();
+                for (FotoEntity entityFoto : entity.getAlbum()) {
+                    album.add(new FotoDTO(entityFoto));
+                }
             }
-        }
-        if (entity.getFactura() != null) {
-            factura = new FacturaDTO(entity.getFactura());
+            if (entity.getFactura() != null) {
+                factura = new FacturaDTO(entity.getFactura());
+            }
         }
 
     }
@@ -73,7 +75,7 @@ public class ReclamoDetailDTO extends ReclamoDTO {
      *
      * @return La entidad construida a partir del DTO.
      */
-    //TODO: falta @Override
+    //TODO: DONE falta @Override, el Override solo se pone si la clase es implementada, mas no heredadas
     public ReclamoEntity toEntiy() {
         ReclamoEntity entity = super.toEntity();
         if (getAlbum() != null) {
@@ -83,8 +85,7 @@ public class ReclamoDetailDTO extends ReclamoDTO {
             }
             entity.setAlbum(fotoEntity);
         }
-        if(getFactura() != null)
-        {
+        if (getFactura() != null) {
             entity.setFactura(factura.toEntity());
         }
         return entity;
@@ -115,11 +116,11 @@ public class ReclamoDetailDTO extends ReclamoDTO {
 
     /**
      * Modifica la factura a la que hace referencia el reclamo
+     *
      * @param factura la nueva factura
      */
     public void setFactura(FacturaDTO factura) {
         this.factura = factura;
     }
-    
 
 }

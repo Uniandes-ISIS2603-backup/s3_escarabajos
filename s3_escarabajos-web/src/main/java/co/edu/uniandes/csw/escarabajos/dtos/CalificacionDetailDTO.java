@@ -8,10 +8,11 @@ package co.edu.uniandes.csw.escarabajos.dtos;
 import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
 
 /**
- * Clase que extiende de {@link CalificacionDTO} para manejar la transformacion entre
- * los objetos JSON y las Entidades de la base de datos. 
- * 
-  * Al serializarse como JSON esta clase implementa la siguiente calificacion: <br>
+ * Clase que extiende de {@link CalificacionDTO} para manejar la transformacion
+ * entre los objetos JSON y las Entidades de la base de datos.
+ *
+ * Al serializarse como JSON esta clase implementa la siguiente calificacion:
+ * <br>
  * <pre>
  *   {
  *      "id": number,
@@ -26,15 +27,15 @@ import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
  *      "id": 1,
  *      "comentario": "Lindo casco",
  *      "puntaje": 3.44,
- *      "cliente": 
+ *      "cliente":
  *      {
  *          "id": 1,
-            "nombre": "Ariel",
-            "correo": "asnar0@discuz.net",
-            "usuario": "␣",
-            "cedula": "8643803030"
+ * "nombre": "Ariel",
+ * "correo": "asnar0@discuz.net",
+ * "usuario": "␣",
+ * "cedula": "8643803030"
  *      },
- *      "modelo": 
+ *      "modelo":
  *      {
  *          "id": 1,
  *          "marca": "BMXTREME",
@@ -68,17 +69,19 @@ public class CalificacionDetailDTO extends CalificacionDTO {
      * @param entity entidad que contiene la informacion
      */
     public CalificacionDetailDTO(CalificacionEntity entity) {
+        //TODO DONE entity podria ser null
         super(entity);
-        //TODO: entity podría ser null
-        if (entity.getCliente() != null) {
-            this.cliente = new ClienteDTO(entity.getCliente());
-        } else {
-            cliente = null;
-        }
-        if (entity.getModelo() != null) {
-            this.modelo = new ModeloDTO(entity.getModelo());
-        } else {
-            modelo = null;
+        if (entity != null) {
+            if (entity.getCliente() != null) {
+                this.cliente = new ClienteDTO(entity.getCliente());
+            } else {
+                cliente = null;
+            }
+            if (entity.getModelo() != null) {
+                this.modelo = new ModeloDTO(entity.getModelo());
+            } else {
+                modelo = null;
+            }
         }
 
     }
@@ -88,7 +91,7 @@ public class CalificacionDetailDTO extends CalificacionDTO {
      *
      * @return La entidad construida a partir del DTO.
      */
-    //TODO: debe tener @Override
+    //TODO: DONE debe tener @Override, el Override solo se pone si la clase es implementada, mas no heredadas
     public CalificacionEntity toEntiy() {
         CalificacionEntity ent = super.toEntity();
         if (this.modelo != null) {

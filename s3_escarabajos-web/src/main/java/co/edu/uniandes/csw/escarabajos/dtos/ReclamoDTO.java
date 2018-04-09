@@ -6,12 +6,11 @@
 package co.edu.uniandes.csw.escarabajos.dtos;
 
 import co.edu.uniandes.csw.escarabajos.entities.ReclamoEntity;
-//TODO: Borrar lo que no se use
-import java.util.ArrayList;
-import java.util.List;
+//TODO: DONE Borrar lo que no se use
+
 /**
- * ReclamoDTO Objeto de transferencia de datos del modelo de la bicicleta. Los DTO
- * contienen las representaciones de los JSON que se transfieren entre el
+ * ReclamoDTO Objeto de transferencia de datos del modelo de la bicicleta. Los
+ * DTO contienen las representaciones de los JSON que se transfieren entre el
  * cliente y el servidor.
  *
  * Al serializarse como JSON esta clase implementa el siguiente reclamo: <br>
@@ -21,7 +20,7 @@ import java.util.List;
  *      "mensaje": String,
  *      "razon": String,
  *      "enProceso" : Boolean
- *      
+ *
  *   }
  * </pre> Por ejemplo un reclamo se representa asi:<br>
  *
@@ -32,7 +31,7 @@ import java.util.List;
  *      "mensaje": "Rueda pinchada",
  *      "razon": "Garantía",
  *      "enProceso": false
- *      
+ *
  *   }
  *
  * </pre>
@@ -72,11 +71,14 @@ public class ReclamoDTO {
      * @param recl: Es la entidad que se va a convertir a DTO
      */
     public ReclamoDTO(ReclamoEntity recl) {
-        //TODO: recl podría ser null
-        this.id = recl.getId();
-        this.mensaje = recl.getMensaje();
-        this.razon = recl.getRazon();
-        this.enProceso = recl.isEnProceso();
+        //TODO: DONE recl podría ser null
+        if (recl != null) {
+            this.id = recl.getId();
+            this.mensaje = recl.getMensaje();
+            this.razon = recl.getRazon();
+            this.enProceso = recl.isEnProceso();
+        }
+
     }
 
     /**
@@ -99,6 +101,7 @@ public class ReclamoDTO {
 
     /**
      * Retorna la razon del reclam
+     *
      * @return la razon del reclamo
      */
     public String getRazon() {
@@ -134,6 +137,7 @@ public class ReclamoDTO {
 
     /**
      * Cambia el estado de enProceso
+     *
      * @param enProceso el cambio que se quiere hacer
      */
     public void setEnProceso(boolean enProceso) {

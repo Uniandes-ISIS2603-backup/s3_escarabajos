@@ -204,6 +204,9 @@ public class ReclamoLogicTest
         Assert.assertEquals(pojoEntity.getRazon(), resp.getRazon());
         Assert.assertTrue(resp.isEnProceso());
     }
+    /**
+     * Prueba para obtener un reclamo por su factura
+     */
     @Test
     public void getReclamoByFactura()
     {
@@ -215,6 +218,9 @@ public class ReclamoLogicTest
         Assert.assertEquals(factura2.size(), 1);
     }
     @Test
+     /**
+     * Prueba para terminar un reclamo
+     */
     public void terminarReclamoTest()
     {
         Assert.assertTrue(reclamoLogic.find(data.get(0).getId()).isEnProceso());
