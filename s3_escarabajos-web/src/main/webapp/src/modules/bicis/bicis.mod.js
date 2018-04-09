@@ -7,7 +7,7 @@
 
             var basePath = 'src/modules/bicis/';
 
-            $urlRouterProvider.otherwise("/bicisList");
+            $urlRouterProvider.otherwise("/bicis/list");
 
             $stateProvider.state('bicis', {
                 url: '/bicis',
@@ -43,14 +43,6 @@
                         templateUrl: basePath + 'bici.detail.html',
                         controller: 'biciDetailCtrl',
                         controllerAs: 'ctrl'
-                    }
-                }
-            }).state('biciList', {
-                url: '/list',
-                parent: 'books',
-                views: {
-                    'listView': {
-                        templateUrl: basePath + 'bicis.list.'
                     }
                 }
             });
