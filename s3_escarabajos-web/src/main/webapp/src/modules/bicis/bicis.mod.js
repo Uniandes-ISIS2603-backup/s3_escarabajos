@@ -13,7 +13,7 @@
                 url: '/bicis',
                 abstract: true,
                 views: {
-                    'mainView': {
+                    'detailView': {
                         templateUrl: basePath + 'bicis.html',
                         controller: 'biciCtrl',
                         controllerAs: 'ctrl'

@@ -1,0 +1,31 @@
+{   
+    "id": 1,
+    "precioTotal": 700000,
+    "items": [{
+        "type": "itemDetailDTO",
+        "album": ["https://www.decathlon.es/media/839/8396173/big_0c025576-1027-4e5d-8690-0acd54ce9d1b.jpg"],
+        "color": "Roja",
+        "id": 3,
+        "modeloId": 2,
+        "precio": 500000,
+        "tipo": "Bicicleta"
+    },
+    {
+        "type": "itemDetailDTO",
+        "album": ["https://i2.linio.com/p/d9b59db305267e4d216285faa2d7dce9-product.jpg"],
+        "color": "Verde",
+        "id": 1,
+        "modeloId": 1,
+        "precio": 100000,
+        "tipo": "Accesorio"
+    },
+    {
+        "type": "itemDetailDTO",
+        "album": ["https://i2.linio.com/p/d9b59db305267e4d216285faa2d7dce9-product.jpg"],
+        "color": "Verde",
+        "id": 2,
+        "modeloId": 1,
+        "precio": 100000,
+        "tipo": "Accesorio"
+    }]
+}

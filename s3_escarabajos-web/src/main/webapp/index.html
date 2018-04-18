@@ -10,56 +10,75 @@
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
         <script src="bower_components/angular/angular.js"></script>
         <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+        
+        <script src="src/app.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="style.css">
+        <script src="src/http-interceptor.factory.js" type="text/javascript"></script>
+        <link rel="shortcut icon" href="src/resources/images/bici.ico" type="image/x-icon">
      
         <!-- Bicicletas -->
          <script src="src/modules/bicis/bicis.mod.js" type="text/javascript"></script>
         <script src="src/modules/bicis/bicis.ctrl.js" type="text/javascript"></script>
          <script src="src/modules/bicis/bicis.detail.ctrl.js" type="text/javascript"></script>
+         
+         <!-- Carrito -->
+        <script src="src/modules/carrito/carrito.mod.js"></script>
+        <script src="src/modules/carrito/carrito.ctrl.js"></script>
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
-        <script src="src/app.js" type="text/javascript"></script> 
-        <script src="src/http-interceptor.factory.js" type="text/javascript"></script>
-        <link rel="shortcut icon" href="src/resources/images/bici.ico" type="image/x-icon">
+
+      
+
+
 
     </head>
 
-    <body class="span4">
-        <div class="container-fluid">
-            <div class="row mainHeader">
-                <div class="col-md-1"> 
-                    <img src="src/resources/images/bici.ico" alt="logo" class="img-responsive logo"/>
-                </div>
-                <div class="col-md-6">
-                    <h2 class="mainTitle">ESCARABAJOS</h2>
-                </div>
-                <div class="col-md-5">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
-                    </ul>
-                </div>
+    <body>
+       <div class="container-fluid grisClarito fixed-top">     
+      <div class="row">
+        <div class="col-3 border">
 
-            </div> 
-            <div class="row">
-                <div class="col-md-12">
-                    <ul class="nav nav-tabs">
-                        <!-- Enlace al estado de listar bicicletas -->
-                        <li role="navigation"><a ui-sref="bicisList">Bicicletas</a></li>
-                    </ul>
+            <img src=https://i.pinimg.com/originals/a0/c1/d7/a0c1d7a98acbd3a0f8ac5bed850b0362.png class="img-responsive center-block" alt="Cinque Terre" style="width:100px;height:100px;">
+
+        </div>
+        <div class="col-6">
+          <h1 class="text-center">Escarabajos</h1>
+          <form class="navbar-form" role="search">
+            <div class="input-group add-on">
+              <input class="form-control" placeholder="Search" name="srch-term" id="srch-term" type="text">
+                <div class="input-group-btn">
+                  <button type="button" class="btn btn-success">
+                    <span class="glyphicon glyphicon-search"></span>
+                  </button>
                 </div>
             </div>
-            <div class="span4" ui-view="mainView"></div> 
+          </form>
         </div>
-        <br>
-        <br>
-        <div class="navbar navbar-default navbar-fixed-bottom">
-            <div class="container">
-                <p class="navbar-text pull-rigth">© <3 Con amor
-                    <a ui-sref="bicisList">Bicicletas</a>
-                    <img src="src/resources/images/Logo_Uniandes.png" alt="logo" width="8%"/>
-                </p>
-                
+        <div class="col-3">
+          <div class="row top top-buffer">
+            <div class="col-4">
+              <a ui-sref="carrito" class="btn btn-success text-white"><span class="glyphicon glyphicon-shopping-cart" ></span></a>
             </div>
+            <div class="col-4">
+              <div class="dropdown">
+                <button type="button" class="btn btn-success  dropdown-toggle" data-toggle="dropdown">
+                  Mi Perfil
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a class="dropdown-item" href="#">Link 1</a>
+                  <a class="dropdown-item" href="#">Link 2</a>
+                  <a class="dropdown-item" href="#">Link 3</a>
+                </div>
+              </div>         
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
+    
+    <div>
+        <div class = "top-buffer2" ui-view="mainView"></div>
+    </div> 
     </body>
 </html>
