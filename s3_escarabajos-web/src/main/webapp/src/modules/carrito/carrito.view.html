@@ -1,0 +1,68 @@
+<div class = "container-fluid">
+  
+<table class = "table">
+  <tr ng-repeat="item in carrito.items">
+    <td>
+      <div class="container-fluid">
+        <div class="row">
+         <div class="col-2" ng-repeat='foto in item.album |limitTo:1'>
+            <img src= "{{foto}}" class="img-responsive center-block" alt="Cinque Terre" style="width:100px;height:100px;">
+         </div>
+          <div class="col-4">
+            <p>
+              Modelo: {{item.modeloId}}<br>
+              Tipo Modelo: {{item.tipo}}<br>
+              Referencia: <br>
+              Color: {{item.color}}
+            </p>
+          </div>
+          <div class="col-2">
+            <p>Precio:</p>
+            <h4>${{item.precio}}</h4>
+          </div>
+          <div class="col-2">
+            <p>Cantidad:</p>
+            
+            <div class="form-group">
+              <div class="selectContainer">
+                <select class="form-control" name="qty">
+                  <option value="">1</option>
+                  <option value="s">2</option>
+                  <option value="m">3</option>
+                  <option value="l">4</option>
+                  <option value="xl">5</option>
+                </select>
+              </div>
+            </div>
+            
+          </div>
+          <div class="col-2t">
+            <p>Eliminar</p>
+            <a ui-sref="carrito" class="btn btn-danger"><span class="glyphicon glyphicon-trash" style="color:white"></span></a>
+
+          </div>
+        </div>
+      </div> 
+    </td>
+  </tr>
+</table>
+<div class="container-fluid bg-secondary fixed-bottom">     
+  <div class="container-fluid">
+  <div class="row">
+    <div class="col-6">
+      <a ui-sref="carrito" class="btn btn-success text-white top-buffer10 ">Volver</a>
+    </div>
+    <div class="col-2 top-buffer10 text-white">
+      <p>Total: ${{carrito.precioTotal}}</p>
+    </div>
+    <div class="col-2">
+      <a ui-sref="carrito" class="btn btn-success text-white top-buffer10 ">Vaciar</a>
+    </div>
+    <div class="col-2">
+      <a ui-sref="carrito" class="btn btn-success text-white top-buffer10 ">Comprar</a>
+    </div>
+  </div>
+</div>
+</div>
+  
+</div>
