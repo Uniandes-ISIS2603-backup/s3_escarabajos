@@ -1,13 +1,21 @@
-.top-buffer { margin-top: 80px;}
-
-.top-buffer2 { margin-top: 130px;}
-
-.top-buffer10 { margin-top: 10px;}
-
-.grisClarito {
-	background-color: whiteSmoke;
+vertical-menu {
+    width: 50px;
+    position: fixed;
 }
 
-.grisClarito2 {
-	background-color: LightGray;
+.vertical-menu a {
+    background-color: #424949;
+    color: white;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+}
+
+.vertical-menu a:hover {
+    background-color: #1B2631;
+}
+
+.vertical-menu a.active {
+    background-color: black;
+    color: white;
 }

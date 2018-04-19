@@ -1,0 +1,24 @@
+[{
+    "id": "1",
+    "razon": "Rueda pinchada",
+    "modelo": "SSK-2018-BMXTREME",
+    "estado": "Finalizado"
+},
+{
+    "id": "2",
+    "razon": "Manubrio Torcido",
+    "modelo": "WEK-2016-4KIDS",
+    "estado": "En Proceso"
+},
+{
+    "id": "3",
+    "razon": "Casco Roto",
+    "modelo": "HSET-212-2018",
+    "estado": "En Proceso"
+},
+{
+    "id": "4",
+    "razon": "Rodilleras Peqeenias",
+    "modelo": "BIKEWEAR-2017-112",
+    "estado": "Finalizado"
+}]

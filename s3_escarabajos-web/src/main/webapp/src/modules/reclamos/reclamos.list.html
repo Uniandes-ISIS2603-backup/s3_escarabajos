@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div>
+    <nav class = "row">
+        <div class="vertical-menu">
+            <a href="#">Mi Perfil</a>
+            <a href="#">Lista de deseos</a>
+            <a href="#">Mis Compras</a>
+            <a class="active" ui-sref="reclamosList">Mis Reclamos</a>
+            <a href="#">Editar Información</a>
+            <a href="#">Eliminar Cuenta</a>
+            <a href="#">Cerrar Sesión</a>
+        </div>
+        <div class="list-group" style = "margin-right: 100px">
+            <a href="#" class="list-group-item"  ng-repeat = "reclamo in reclamosRecords">First item</a>
+        </div>
+    </nav>
+</div>
+
