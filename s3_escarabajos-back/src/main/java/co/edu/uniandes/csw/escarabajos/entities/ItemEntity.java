@@ -40,6 +40,11 @@ public class ItemEntity implements Serializable {
     
     private Long modeloId;
     
+    /**
+     * Atributo que representa la categoria a la que pertenece esta bicicleta.
+     */
+    private String categoria;
+    
     
     /**
      * @return the id
@@ -133,5 +138,19 @@ public class ItemEntity implements Serializable {
      */
     public void setColor(String color) {
         this.color = color;
+    }
+    
+    /**
+     * @return the categoria
+     */
+    public String getCategoria() {
+        return categoria;
+    }
+
+    /**
+     * @param categoria the categoria to set
+     */
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 }

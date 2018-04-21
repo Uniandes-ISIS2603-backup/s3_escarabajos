@@ -14,27 +14,10 @@ import javax.persistence.Entity;
 @Entity
 public class BicicletaEntity extends ItemEntity implements Serializable  {
     /**
-     * Atributo que representa la categoria a la que pertenece esta bicicleta.
-     */
-    private String categoria;
-    /**
      * Atributo que permite diferenciar si la bicicleta es usada o no.
      */
     private Boolean usada;
-    /**
-     * Devuelve la categoria
-     * @return categoria
-     */
-    public String getCategoria() {
-        return categoria;
-    }
-    /**
-     * Modifica la categoria
-     * @param categoria nueva categoria
-     */
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
+    
     /**
      * Devuelve usada
      * @return usada

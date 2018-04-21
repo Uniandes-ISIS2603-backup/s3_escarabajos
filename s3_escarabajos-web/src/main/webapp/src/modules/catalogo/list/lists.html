@@ -1,0 +1,12 @@
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
+<div class="container-fluid">
+<!--list, bicicletas/accesorios sin propagandas-->
+    <div class="row">
+        <div ui-view="noAdvView"></div>
+    </div>
+    <!--listAdv, bicicletas/accesorios con propagandas-->
+    <div class="row">
+        <div ui-view="AdvView"></div>
+    </div>
+</div>
+

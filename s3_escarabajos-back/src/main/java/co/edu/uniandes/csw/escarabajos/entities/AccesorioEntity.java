@@ -15,30 +15,11 @@ import javax.persistence.Entity;
 @Entity
 public class AccesorioEntity extends ItemEntity implements Serializable{
     
-    /**
-     * Variable que representa el tipo de accesorio (Casco, Silla,...).
-     */
-    private String tipoAcessorio;
     
     /**
      * Descripcion del accesorio.
      */
     private String descripcion;
-     
-
-    /**
-     * @return the tipoAcessorio
-     */
-    public String getTipoAcessorio() {
-        return tipoAcessorio;
-    }
-
-    /**
-     * @param tipoAcessorio the tipoAcessorio to set
-     */
-    public void setTipoAcessorio(String tipoAcessorio) {
-        this.tipoAcessorio = tipoAcessorio;
-    }
 
     /**
      * @return the descripcion

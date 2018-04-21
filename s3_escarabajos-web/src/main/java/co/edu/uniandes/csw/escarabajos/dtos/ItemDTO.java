@@ -21,6 +21,7 @@ import java.util.List;
  *      "precio": double,
  *      "modeloId": number, 
  *      "color": String,
+ *      "categoria": String,
  *      "album": [{@FotoDTO}]
  *   }
  * </pre>
@@ -32,6 +33,7 @@ import java.util.List;
  *      "precio": "221340.91",
  *      "modeloId": 1,
  *      "color" Rojo,
+ *      "categoria" deportiva,
  *      "album": [
  *          {
  *              "id": 1,
@@ -57,6 +59,8 @@ public abstract class ItemDTO {
     
     private String color;
     
+    private String categoria;
+    
     private List<FotoDTO> album;
     /**
      * Constructor por defecto
@@ -76,6 +80,7 @@ public abstract class ItemDTO {
        this.precio = entity.getPrecio();
        this.modeloId = entity.getModeloId();
        this.color = entity.getColor();
+       this.categoria = entity.getCategoria();
        if (entity.getAlbum()!= null) {
             album = new ArrayList<>();
             for (FotoEntity entityFoto : entity.getAlbum()) {
@@ -96,6 +101,7 @@ public abstract class ItemDTO {
        entity.setPrecio(this.getPrecio());
        entity.setModeloId(this.getModeloId());
        entity.setColor(this.getColor());
+       entity.setCategoria(this.getCategoria());
         if (getAlbum()!= null) {
             List<FotoEntity> fotoEntity = new ArrayList<>();
             for (FotoDTO dtoFoto : getAlbum()) {
@@ -176,4 +182,18 @@ public abstract class ItemDTO {
     public void setColor(String color) {
         this.color = color;
     }
+
+    /**
+     * @return the categoria
+     */
+    public String getCategoria() {
+        return categoria;
+    }
+
+    /**
+     * @param categoria the categoria to set
+     */
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }    
 }

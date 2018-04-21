@@ -19,9 +19,9 @@ import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
  *      "precio": double,
  *      "modeloId": number, 
  *      "color": String,
+ *      "categoria": String,
  *      "album": [{@FotoDTO}],
- *      "usada": boolean,
- *      "categoria": String
+ *      "usada": boolean
  *      
  *   }
  * </pre> Por ejemplo una bicicleta se representa asi:<br>
@@ -33,6 +33,7 @@ import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
  *      "precio": 30000,
  *      "modeloId": 1, 
  *      "color": Rojo,
+ *      "categoria": "Deportiva",
  *      "album": [
  *          {
  *              "id": 1,
@@ -45,8 +46,7 @@ import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
  *              "descripcion": "Cayford"
  *           }
  *      ],
- *      "usada": false,
- *      "categoria": "Deportiva"
+ *      "usada": false
  *   }
  *
  * </pre>
@@ -54,8 +54,6 @@ import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
  * @author c.santacruza
  */
 public class BicicletaDTO extends ItemDTO {
-
-    private String categoria;
     private Boolean usada;
 
     /**
@@ -74,19 +72,10 @@ public class BicicletaDTO extends ItemDTO {
     public BicicletaDTO(BicicletaEntity bici) {
         super(bici);
         if (bici != null) {
-            this.categoria = bici.getCategoria();
             this.usada = bici.getUsada();
         }
     }
     
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-
     public Boolean getUsada() {
         return usada;
     }
@@ -104,7 +93,6 @@ public class BicicletaDTO extends ItemDTO {
     public BicicletaEntity toEntity() {
         BicicletaEntity entity = new BicicletaEntity();
         super.toEntity(entity);
-        entity.setCategoria(this.categoria);
         entity.setUsada(this.usada);
 
         return entity;

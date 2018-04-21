@@ -21,7 +21,8 @@ import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
  *      "id": number,
  *      "precio": number,
  *      "modeloId": number, 
- *      "color": rojo,
+ *      "color": color,
+ *      "categoria": String,
  *      "album": [{@FotoDTO}],
  *      "tipo": String
  *   }
@@ -34,6 +35,7 @@ import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
  *      "precio": "221340.91",
  *      "modeloId": 1,
  *      "color": rojo,
+ *      "categoria": "casco",
  *      "album": [
  *          {
  *              "id": 1,

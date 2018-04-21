@@ -20,8 +20,8 @@ import co.edu.uniandes.csw.escarabajos.entities.*;
  *      "precio": double,
  *      "modeloId": number, 
  *      "color": String,
+ *      "categoria": String,
  *      "album": [{@FotoDTO}],
- *      "tipoAcessorio": String,
  *      "descripcion": String
  *   }
  * </pre>
@@ -34,6 +34,7 @@ import co.edu.uniandes.csw.escarabajos.entities.*;
  *      "precio": 30000,
  *      "modeloId": 1, 
  *      "color": Rojo,
+ *      "categoria": "Casco",
  *      "album": [
  *          {
  *              "id": 1,
@@ -46,7 +47,6 @@ import co.edu.uniandes.csw.escarabajos.entities.*;
  *              "descripcion": "Cayford"
  *           }
  *      ],
- *      "tipoAcessorio": "Casco",
  *      "descripcion": "Casco super resistente color verde"
  *   }
  *
@@ -77,7 +77,6 @@ public class AccesorioDTO extends ItemDTO {
        //DONE: entity podría ser null
        
        if(entity != null){
-        this.tipoAccesorio = entity.getTipoAcessorio();
         this.descripcion = entity.getDescripcion();
        }
     }
@@ -105,7 +104,6 @@ public class AccesorioDTO extends ItemDTO {
     public AccesorioEntity toEntity() {
         AccesorioEntity entity = new AccesorioEntity();
         super.toEntity(entity);         //Recoge la informacion que esta en la super clase y la agrega al entity
-        entity.setTipoAcessorio(this.tipoAccesorio);
         entity.setDescripcion(this.descripcion);
         return entity;
     }
