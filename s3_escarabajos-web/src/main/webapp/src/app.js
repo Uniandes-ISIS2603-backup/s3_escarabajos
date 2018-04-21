@@ -6,9 +6,9 @@
         
         // Internal modules dependencies       
         //'moduloBicis',
-        //"CarritoMod",
-        //'reclamosModule'
-          'catalogoModule'
+          'CarritoMod',
+          'reclamosModule'
+          //'catalogoModule'
         
 
     ]);
