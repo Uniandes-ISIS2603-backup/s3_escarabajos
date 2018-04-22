@@ -99,11 +99,11 @@ public class CarritoItemsResource {
             
             List<ItemDetailDTO> items =getItemsCarrito(idCarrito);
             
-            if (items.contains(new ItemDetailDTO(itemEntity))) {
+            if (items.contains(new ItemDetailDTO(itemEntity,itemLogic.getReferenciaItem(itemEntity)))) {
                 throw new WebApplicationException("El item ya esta en su carrito", 404);
             }
-
-            return new ItemDetailDTO( carritoLogic.addItem(idCarrito, idItem ));
+            itemEntity = itemLogic.getItem(idItem);
+            return new ItemDetailDTO( carritoLogic.addItem(idCarrito, idItem ),itemLogic.getReferenciaItem(itemEntity));
         }
         catch (BusinessLogicException ex) {
             
@@ -150,7 +150,7 @@ public class CarritoItemsResource {
                 throw new WebApplicationException("El recurso /items/" + idItem + " no existe.", 404);
             }
             
-            return new ItemDetailDTO( carritoLogic.removeItem(idCarrito, idItem) );
+            return new ItemDetailDTO( carritoLogic.removeItem(idCarrito, idItem),itemLogic.getReferenciaItem(itemEntity) );
         } catch (BusinessLogicException ex) {
             throw new WebApplicationException(ex.getMessage(),500);
         }
@@ -206,7 +206,7 @@ public class CarritoItemsResource {
     private List<ItemDetailDTO> listEntity2DTO(List<ItemEntity> entityList) {
         List<ItemDetailDTO> list = new ArrayList<>();
         for (ItemEntity entity : entityList) {
-            list.add(new ItemDetailDTO(entity));
+            list.add(new ItemDetailDTO(entity,itemLogic.getReferenciaItem(entity)));
         }
         return list;
     }   

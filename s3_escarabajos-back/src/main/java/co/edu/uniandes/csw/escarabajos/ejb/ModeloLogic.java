@@ -54,6 +54,16 @@ public class ModeloLogic {
     }
 
     /**
+     * Retorna la referencia de un item que entre por paramentro
+     *
+     * @param entity al que se le buscara la referencia del modelo.
+     * @return referencia del modelo al que le pertenece el item.
+     */
+    public String getReferenciaItem(ItemEntity entity) {
+        return itemLogic.getReferenciaItem(entity);
+    }
+
+    /**
      * Obtiene los datos de una instancia de Modelo a partir de su ID.
      *
      * @param id Identificador de la instancia a consultar
@@ -75,15 +85,14 @@ public class ModeloLogic {
      */
     public ModeloEntity createModelo(ModeloEntity entity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de crear un modelo ");
-        //TODO: NO hay reglas de negocio
-//        ModeloEntity modeloEntity = getModelo(entity.getId());
-//        if (modeloEntity != null) {
-//            throw new BusinessLogicException("El modelo ya existe!");
-//        }
-//        modeloEntity = persistence.findByReferencia(entity.getReferencia());
-//        if (modeloEntity != null) {
-//            throw new BusinessLogicException("El modelo ya existe!");
-//        }
+        ModeloEntity modeloEntity = getModelo(entity.getId());
+        if (modeloEntity != null) {
+            throw new BusinessLogicException("El modelo ya existe!");
+        }
+        modeloEntity = persistence.findByReferencia(entity.getReferencia());
+        if (modeloEntity != null) {
+            throw new BusinessLogicException("El modelo ya existe!");
+        }
         LOGGER.log(Level.INFO, "Finaliza proceso de crear un modelo ");
         return persistence.create(entity);
     }
@@ -108,8 +117,9 @@ public class ModeloLogic {
 
     /**
      * Elimina una instancia de Modelo de la base de datos.
+     *
      * @param id del modelo
-     * @throws BusinessLogicException Por reglas de negocio 
+     * @throws BusinessLogicException Por reglas de negocio
      */
     public void deleteModelo(Long id) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar un modelo ");
@@ -210,5 +220,71 @@ public class ModeloLogic {
         } else if (item instanceof AccesorioEntity) {
             accLogic.deleteAccesorio(item.getId());
         }
+    }
+
+    /**
+     * Obtiene una colección de todas las marcas de accesorios en el sistema
+     *
+     * @return Colección de nombres de todas las marcas de accesorios en el
+     * sistema
+     *
+     */
+    public List<String> getMarcasAccesorios() {
+        return persistence.findMarcas(ACCESORIO);
+    }
+
+    /**
+     * Obtiene una colección de todas las categorias de accesorios en el sistema
+     *
+     * @return Colección de nombres de todas las categorias de accesorios en el
+     * sistema
+     *
+     */
+    public List<String> getCategoriasAccesorios() {
+        return null;// return persistence.findCategoriasAccesorios();
+    }
+
+    /**
+     * Obtiene una colección de todos los colores de accesorios en el sistema
+     *
+     * @return Colección de nombres de todas los colores de accesorios en el
+     * sistema
+     *
+     */
+    public List<String> getColoresAccesorios() {
+        return null;//return persistence.findColoresAccesorios();
+    }
+
+    /**
+     * Obtiene una colección de todas las marcas de bicicletas en el sistema
+     *
+     * @return Colección de nombres de todas las marcas de bicicletas en el
+     * sistema
+     *
+     */
+    public List<String> getMarcasBicicletas() {
+        return persistence.findMarcas(BICICLETA);
+    }
+
+    /**
+     * Obtiene una colección de todas las categorias de bicicletas en el sistema
+     *
+     * @return Colección de nombres de todas las categorias de bicicletas en el
+     * sistema
+     *
+     */
+    public List<String> getCategoriasBicicletas() {
+        return null;// return persistence.findCategoriasBicicletas();
+    }
+
+    /**
+     * Obtiene una colección de todos los colores de bicicletas en el sistema
+     *
+     * @return Colección de nombres de todas los colores de bicicletas en el
+     * sistema
+     *
+     */
+    public List<String> getColoresBicicletas() {
+        return null;// return persistence.findColoresBicicletas();
     }
 }

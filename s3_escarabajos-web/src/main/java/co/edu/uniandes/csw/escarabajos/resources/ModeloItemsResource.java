@@ -39,8 +39,9 @@ import javax.ws.rs.WebApplicationException;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ModeloItemsResource {
-private static final Logger LOGGER = Logger.getLogger(ModeloItemsResource.class.getName());
-    
+
+    private static final Logger LOGGER = Logger.getLogger(ModeloItemsResource.class.getName());
+
     @Inject
     private ModeloLogic modeloLogic;
 
@@ -54,7 +55,7 @@ private static final Logger LOGGER = Logger.getLogger(ModeloItemsResource.class.
     private List<ItemDetailDTO> itemsListEntity2DTO(List<ItemEntity> entityList) {
         List<ItemDetailDTO> list = new ArrayList<>();
         for (ItemEntity entity : entityList) {
-            list.add(new ItemDetailDTO(entity));
+            list.add(new ItemDetailDTO(entity, modeloLogic.getReferenciaItem(entity)));
         }
         return list;
     }
@@ -114,9 +115,10 @@ private static final Logger LOGGER = Logger.getLogger(ModeloItemsResource.class.
     @Path("{itemsId: \\d+}")
     public ItemDetailDTO getItem(@PathParam("modelosId") Long modelosId, @PathParam("itemsId") Long itemsId) {
         try {
-            return new ItemDetailDTO(modeloLogic.getItem(modelosId, itemsId));
+            ItemEntity entity = modeloLogic.getItem(modelosId, itemsId);
+            return new ItemDetailDTO(entity, modeloLogic.getReferenciaItem(entity));
         } catch (BusinessLogicException ex) {
-             LOGGER.info(ex.getMessage());
+            LOGGER.info(ex.getMessage());
             throw new WebApplicationException("No existe este item en este modelo", 404);
         }
     }
@@ -156,11 +158,9 @@ private static final Logger LOGGER = Logger.getLogger(ModeloItemsResource.class.
         try {
             modeloLogic.removeItem(itemsId);
         } catch (BusinessLogicException ex) {
-             LOGGER.info(ex.getMessage());
+            LOGGER.info(ex.getMessage());
             throw new WebApplicationException("No existe este item en este modelo", 404);
         }
     }
-    
-    
-    
+
 }

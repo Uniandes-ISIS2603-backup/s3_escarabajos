@@ -106,6 +106,17 @@ public class ItemLogic {
     }
 
     /**
+     * Retorna la referencia de un item que entre por paramentro
+     *
+     * @param entity al que se le buscara la referencia del modelo.
+     * @return referencia del modelo al que le pertenece el item.
+     */
+    public String getReferenciaItem(ItemEntity entity) {
+        ModeloEntity modelo = modeloPers.find(entity.getModeloId());
+        return modelo.getReferencia();
+    }
+
+    /**
      * Retorna una collecion de items asociados a un modelo cada uno con su
      * instancia original
      *
@@ -166,7 +177,7 @@ public class ItemLogic {
      * @param itemId Identificador de la instancia de item
      * @return Colección de instancias de FotoEntity asociadas a la instancia de
      * item
-     *@throws BusinessLogicException Por reglasd de negocio
+     * @throws BusinessLogicException Por reglasd de negocio
      */
     public List<FotoEntity> listFotos(Long itemId) throws BusinessLogicException {
         ItemEntity itemEntity = getItem(itemId);

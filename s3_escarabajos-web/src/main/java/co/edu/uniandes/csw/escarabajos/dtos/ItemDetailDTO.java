@@ -4,31 +4,32 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.escarabajos.dtos;
+
 import co.edu.uniandes.csw.escarabajos.ejb.ModeloLogic;
 import co.edu.uniandes.csw.escarabajos.entities.AccesorioEntity;
 import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 
-//ESTA CLASE NO DEBERIA EXSISTIR YA QUE ITEM NO TIENE RELACIONES CON NADA.
 /**
  * Clase que extiende de {@link ItemDTO} para manejar la transformacion entre
  * los objetos JSON y las Entidades de la base de datos. Para conocer el
  * contenido del item vaya a la documentacion de {@link ItemDTO}
- * 
- *Al serializarse como JSON esta clase implementa el siguiente item: <br>
+ *
+ * Al serializarse como JSON esta clase implementa el siguiente item: <br>
  * <pre>
  *   {
  *      "id": number,
  *      "precio": number,
- *      "modeloId": number, 
+ *      "modeloId": number,
  *      "color": color,
  *      "categoria": String,
  *      "album": [{@FotoDTO}],
- *      "tipo": String
+ *      "tipo": String,
+ *      "referencia": String,
+ *      "disponible": Boolean
  *   }
- * </pre>
- * Por ejemplo un item se representa asi:<br>
- * 
+ * </pre> Por ejemplo un item se representa asi:<br>
+ *
  * <pre>
  *   {
  *      "id": 1,
@@ -48,15 +49,23 @@ import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
  *              "descripcion": "Cayford"
  *          }
  *      ],
- *      "tipo": "Accesorio"
+ *      "tipo": "Accesorio",
+ *      "referencia": "1234-abcd",
+ *      "disponible": true
+ * 
  *   }
  * </pre>
+ *
  * @author Andres
  */
 public class ItemDetailDTO extends ItemDTO {
-//TODO. Si esto es solo un dato báscio deberia ir en ItemDTO y esta clase no debería existir
+
     private String tipo;
+
+    private String referencia;
     
+    private Boolean disponible;
+
     /**
      * Constructor por defecto
      */
@@ -66,22 +75,24 @@ public class ItemDetailDTO extends ItemDTO {
     /**
      * Constructor para transformar un Entity a un DTO
      *
-     * @param entity La entidad del item a partir de la cual se construye el objeto
+     * @param entity La entidad del item a partir de la cual se construye el
+     * objeto
      */
-    public ItemDetailDTO(ItemEntity entity) {
+    public ItemDetailDTO(ItemEntity entity, String referencia) {
         super(entity);
         if (entity instanceof AccesorioEntity) {
             this.tipo = ModeloLogic.ACCESORIO;
-        }
-        else if(entity instanceof BicicletaEntity){
+        } else if (entity instanceof BicicletaEntity) {
             this.tipo = ModeloLogic.BICICLETA;
         }
+        this.referencia = referencia;
+        this.disponible = entity.getDisponible();
     }
 
     @Override
-    public ItemEntity toEntity()  {
+    public ItemEntity toEntity() {
         //ATENCION !!! --ESTE METODO NO SE PUEDE LLAMAR, Si quieren el toEntity() de un ITEM toca por las subclases para no perder informacion.
-       return null;
+        return null;
     }
 
     /**
@@ -97,5 +108,32 @@ public class ItemDetailDTO extends ItemDTO {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-}
 
+    /**
+     * @return the referencia
+     */
+    public String getReferencia() {
+        return referencia;
+    }
+
+    /**
+     * @param referencia the referencia to set
+     */
+    public void setReferencia(String referencia) {
+        this.referencia = referencia;
+    }
+
+    /**
+     * @return the disponible
+     */
+    public Boolean getDisponible() {
+        return disponible;
+    }
+
+    /**
+     * @param disponible the disponible to set
+     */
+    public void setDisponible(Boolean disponible) {
+        this.disponible = disponible;
+    }
+}

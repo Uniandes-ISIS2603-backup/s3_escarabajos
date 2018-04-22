@@ -21,31 +21,36 @@ import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
- * @author Andres 
+ * @author Andres
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class ItemEntity implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     private Double precio;
-    
+
     private String color;
-    
+
     @PodamExclude
     @OneToMany(mappedBy = "item", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<FotoEntity> album = new ArrayList<>();
-    
+
     private Long modeloId;
-    
+
     /**
-     * Atributo que representa la categoria a la que pertenece esta bicicleta.
+     * Atributo que representa la categoria a la que pertenece el item.
      */
     private String categoria;
-    
-    
+
+    /**
+     * Atributo que representa si el item esta disponible para compra
+     */
+    private Boolean disponible;
+
     /**
      * @return the id
      */
@@ -71,7 +76,7 @@ public class ItemEntity implements Serializable {
      * @param precio the precio to set
      */
     public void setPrecio(double precio) {
-        this.precio = precio;
+        this.setPrecio((Double) precio);
     }
 
     /**
@@ -99,11 +104,10 @@ public class ItemEntity implements Serializable {
      * @param modeloId the modeloId to set
      */
     public void setModeloId(long modeloId) {
-        this.modeloId = modeloId;
+        this.setModeloId((Long) modeloId);
     }
- 
-    
-     @Override
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -139,7 +143,7 @@ public class ItemEntity implements Serializable {
     public void setColor(String color) {
         this.color = color;
     }
-    
+
     /**
      * @return the categoria
      */
@@ -152,5 +156,33 @@ public class ItemEntity implements Serializable {
      */
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    /**
+     * @param precio the precio to set
+     */
+    public void setPrecio(Double precio) {
+        this.precio = precio;
+    }
+
+    /**
+     * @param modeloId the modeloId to set
+     */
+    public void setModeloId(Long modeloId) {
+        this.modeloId = modeloId;
+    }
+
+    /**
+     * @return the disponible
+     */
+    public Boolean getDisponible() {
+        return disponible;
+    }
+
+    /**
+     * @param disponible the disponible to set
+     */
+    public void setDisponible(Boolean disponible) {
+        this.disponible = disponible;
     }
 }
