@@ -2,7 +2,7 @@
     var mod = ng.module("ListadeseosMod");
     mod.controller('listadeseosCtrl', ['$scope', '$http',
         function ($scope, $http) {
-            $http.get('data/items.listaDeseos.json').then(function (response) {
+            $http.get('data/listadeseos.json').then(function (response) {
                 $scope.listaDeseos = response.data;
                 
                 var lista2 = [];
