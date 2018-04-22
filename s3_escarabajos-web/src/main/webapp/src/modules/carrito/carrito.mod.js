@@ -10,6 +10,17 @@
             controller: "carritoCtrl"
           }
         }
+      }).state('deleteItemCarrito', {
+          
+        param: {
+            itemId: null
+        },
+        views: {
+          mainView: {
+            templateUrl: "src/modules/carrito/carrito.view.html",
+            controller: "deleteItemCarritoCtrl"
+          }
+        }
       })
   }]);
 

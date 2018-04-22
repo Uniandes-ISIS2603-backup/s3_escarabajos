@@ -2,12 +2,12 @@
     var mod = ng.module("CarritoMod");
     mod.controller('carritoCtrl', ['$scope', '$http',
         function ($scope, $http) {
-            $http.get('data/items.carrito.json').then(function (response) {
+            $http.get('api/carrito/'+1+'/items').then(function (response) {
                 $scope.carrito = response.data;
                 
                 var lista2 = [];
                 
-                var lista = $scope.carrito.items;
+                var lista = $scope.carrito;
                 
                 for (i=0;i<lista.length; i++) {
                     
@@ -32,7 +32,7 @@
                 }
                
                 
-                $scope.carrito.items = lista2;
+                $scope.carrito = lista2;
                 
 
             });
