@@ -22,6 +22,20 @@
             controller: "deleteCarritoCtrl"
           }
         }
+        
+      }).state('addItemCarrito', {
+        
+        params: {
+            itemId: null
+        },
+        
+        views: {
+          mainView: {
+            templateUrl: "src/modules/carrito/carrito.view.html",
+            controller: "addCarritoCtrl"
+          }
+        }
+        
       }).state('vaciarCarrito', {
                 
         views: {

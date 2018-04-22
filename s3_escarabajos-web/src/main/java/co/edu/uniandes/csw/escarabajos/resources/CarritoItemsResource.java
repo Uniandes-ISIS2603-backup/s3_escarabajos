@@ -97,6 +97,12 @@ public class CarritoItemsResource {
                 throw new WebApplicationException("El recurso /items/" + idItem + " no existe.", 404);
             }
             
+            List<ItemDetailDTO> items =getItemsCarrito(idCarrito);
+            
+            if (items.contains(new ItemDetailDTO(itemEntity))) {
+                throw new WebApplicationException("El item ya esta en su carrito", 404);
+            }
+
             return new ItemDetailDTO( carritoLogic.addItem(idCarrito, idItem ));
         }
         catch (BusinessLogicException ex) {

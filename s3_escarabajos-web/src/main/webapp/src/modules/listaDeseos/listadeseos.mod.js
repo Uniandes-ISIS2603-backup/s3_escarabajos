@@ -27,7 +27,7 @@
         views: {
           mainView: {
             templateUrl: "src/modules/listaDeseos/listadeseos.view.html",
-            controller: "vaciaListadeseosCtrl"
+            controller: "vaciarListadeseosCtrl"
           }
         }
       })

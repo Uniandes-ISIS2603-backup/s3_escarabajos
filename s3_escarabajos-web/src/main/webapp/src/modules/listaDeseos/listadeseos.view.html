@@ -28,6 +28,13 @@
                             <label>{{item.cantidad}}</label>
 
                         </div>
+                        
+                        <div class="col-md-2">
+                            <p>Agregar al Carrito</p>
+                            <a  ui-sref ="addItemCarrito({itemId: item.id})" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart" style="color:white"></span></a>
+
+                        </div>
+                        
                         <div class="col-md-2">
                             <p>Eliminar</p>
                             <a  ui-sref ="deleteItemListadeseos({itemId: item.id})" class="btn btn-danger"><span class="glyphicon glyphicon-trash" style="color:white"></span></a>
@@ -59,7 +66,7 @@
                     <p style="margin-top: 5px">Total: ${{total}}</p>
                 </div>
                 <div class="col-md-2">
-                    <a ui-sref="vaciarListaDeseos" class="btn btn-success text-white " style="margin-top: 10px">Vaciar</a>
+                    <a ui-sref="vaciarListadeseos" class="btn btn-success text-white " style="margin-top: 10px">Vaciar</a>
                 </div>
                 <div class="col-md-2">
                     <a ui-sref="comprar" class="btn btn-success text-white" style="margin-top: 10px">Comprar</a>
