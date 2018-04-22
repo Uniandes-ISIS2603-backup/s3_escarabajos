@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "main": "src/main/webapp/index.html",
   "dependencies": {
-    "angular": "^1.6.9",
+   "angular": "^1.5.8",
     "bootstrap": "^3.3.7",
-    "angular-ui-router": "~1.0.10",
+    "angular-ui-router": "~0.2.14",
     "angular-bootstrap": "^0.13.4",
+    "jquery" : "^3.3.1",
     "popper.js":"^1.14.3",
-    "tooltip.js":"https://unpkg.com/tooltip.js",
-    "jquery" : "^3.3.1"
+    "tooltip.js":"https://unpkg.com/tooltip.js" 
   },
   "devDependencies": {}
 }
