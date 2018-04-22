@@ -2,14 +2,18 @@
     var mod = ng.module("ListadeseosMod");
     mod.controller('listadeseosCtrl', ['$scope', '$http',
         function ($scope, $http) {
-            $http.get('data/listadeseos.json').then(function (response) {
-                $scope.listaDeseos = response.data;
+            $http.get('api/carrito/2/items').then(function (response) {
+                $scope.listadeseos = response.data;
                 
                 var lista2 = [];
                 
-                var lista = $scope.listaDeseos.items;
+                var lista = $scope.listadeseos;
+                
+                var total = 0;
                 
                 for (i=0;i<lista.length; i++) {
+                    
+                    total = total + lista[i].precio;
                     
                     var repetido = false;
                     
@@ -31,8 +35,9 @@
                     }
                 }
                
+               $scope.total = total;
                 
-                $scope.listaDeseos.items = lista2;
+                $scope.listadeseos = lista2;
                 
 
             });

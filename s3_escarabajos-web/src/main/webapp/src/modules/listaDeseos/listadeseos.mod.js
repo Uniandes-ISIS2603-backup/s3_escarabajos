@@ -10,6 +10,26 @@
             controller: "listadeseosCtrl"
           }
         }
+      }).state('deleteItemListadeseos', {
+        
+        params: {
+            itemId: null
+        },
+        
+        views: {
+          mainView: {
+            templateUrl: "src/modules/listaDeseos/listadeseos.view.html",
+            controller: "deleteListaDeseosCtrl"
+          }
+        }
+      }).state('vaciarListadeseos', {
+                
+        views: {
+          mainView: {
+            templateUrl: "src/modules/listaDeseos/listadeseos.view.html",
+            controller: "vaciaListadeseosCtrl"
+          }
+        }
       })
   }]);
 

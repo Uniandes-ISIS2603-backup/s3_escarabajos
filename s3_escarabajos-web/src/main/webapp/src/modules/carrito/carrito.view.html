@@ -30,7 +30,7 @@
                         </div>
                         <div class="col-md-2">
                             <p>Eliminar</p>
-                            <button  ui-sref ="deleteItemCarrito({itemId: item.id})" class="btn btn-danger"><span class="glyphicon glyphicon-trash" style="color:white"></span></button>
+                            <a  ui-sref ="deleteItemCarrito({itemId: item.id})" class="btn btn-danger"><span class="glyphicon glyphicon-trash" style="color:white"></span></a>
 
                         </div>
                     </div>
@@ -56,10 +56,10 @@
                     <a ui-sref="catalogo" class="btn btn-success text-white" style="margin-top: 10px">Volver</a>
                 </div>
                 <div class="col-md-2 top-buffer10 text-white" style="margin-top: 10px">
-                    <p style="margin-top: 5px">Total: ${{carrito.precioTotal}}</p>
+                    <p style="margin-top: 5px">Total: ${{total}}</p>
                 </div>
                 <div class="col-md-2">
-                    <a ui-sref="carrito" class="btn btn-success text-white " style="margin-top: 10px">Vaciar</a>
+                    <a ui-sref="vaciarCarrito" class="btn btn-success text-white " style="margin-top: 10px">Vaciar</a>
                 </div>
                 <div class="col-md-2">
                     <a ui-sref="comprar" class="btn btn-success text-white" style="margin-top: 10px">Comprar</a>

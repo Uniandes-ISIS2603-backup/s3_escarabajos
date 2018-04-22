@@ -150,6 +150,20 @@ public class CarritoItemsResource {
         }
     }
     
+    @DELETE
+    public void vaciarCarrito(@PathParam("idCarrito") Long idCarrito){
+        //DONE si no existe el recurso cliente con idCliente debe disparar WebApplicationException
+        //DONE si no existe el recurso item con idItem debe disparar WebApplicationException
+        //DONE: Este try catch está mal
+
+        List<ItemDetailDTO> items = getItemsCarrito(idCarrito);
+
+        for (int i = 0; i < items.size(); i++) {
+
+            deleteItemCarrito(idCarrito, items.get(i).getId());
+        }
+    }
+    
      /**
      * <h1>GET /api/clientes/{idCliente}/carrito/items : Obtener los items del carrito del cliente.</h1>
      * 
