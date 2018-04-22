@@ -3,7 +3,7 @@
 <div class = "container-fluid" id = "div1">
 
     <table class = "table">
-        <tr ng-repeat="item in carrito.items">
+        <tr ng-repeat="item in listadeseos.items">
             <td>
                 <div class="container-fluid">
                     <div class="row">
@@ -28,10 +28,13 @@
                             <label>{{item.cantidad}}</label>
 
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             <p>Eliminar</p>
                             <a onclick="delete(0)" class="btn btn-danger"><span class="glyphicon glyphicon-trash" style="color:white"></span></a>
-
+                        </div>
+                        <div class="col-md-1">
+                            <p>Agregar al Carrito</p>
+                            <a onclick="delete(0)" class="btn btn-danger"><span class="glyphicon glyphicon-shopping-cart" style="color:white"></span></a>
                         </div>
                     </div>
                 </div> 
@@ -52,7 +55,7 @@
         </style>    
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <a ui-sref="catalogo" class="btn btn-success text-white" style="margin-top: 10px">Volver</a>
                 </div>
                 <div class="col-md-2 top-buffer10 text-white" style="margin-top: 10px">
@@ -60,9 +63,6 @@
                 </div>
                 <div class="col-md-2">
                     <a ui-sref="carrito" class="btn btn-success text-white " style="margin-top: 10px">Vaciar</a>
-                </div>
-                <div class="col-md-2">
-                    <a ui-sref="comprar" class="btn btn-success text-white" style="margin-top: 10px">Comprar</a>
                 </div>
             </div>
         </div>
