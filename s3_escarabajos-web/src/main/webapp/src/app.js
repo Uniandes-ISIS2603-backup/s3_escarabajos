@@ -4,6 +4,7 @@
         'ui.router',
         // Internal modules dependencies       
           'moduloBicis',
+          'moduloBicisUsadas',
           'CarritoMod',
           'reclamosModule',
           'ListadeseosMod'

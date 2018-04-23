@@ -1,0 +1,40 @@
+<alert class="alert alert-danger" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
+
+<script src="src/modules/bicisUsadas/imageDetalle.js"></script>
+<link rel="stylesheet" href="src/modules/bicisUsadas/detalle.css" />
+
+<div class="container col-sm-6">
+    <div class="mySlides" ng-repeat='a in biciUsadaActual.fotos'>
+        <div class="numbertext">1 / 6</div>
+        <img ng-src="{{a[a]}}" style="width:100%">
+    </div>
+    <a class="prev" onclick="plusSlides(-1)">❮</a>
+    <a class="next" onclick="plusSlides(1)">❯</a>
+
+    <div class="caption-container">
+        <p id="caption"></p>
+    </div>
+
+    <div class="row">
+        <div class="column" ng-repeat='b in biciUsadaActual.fotos'>
+            <img class="demo cursor" ng-src="{{b[b]}}" 
+                 style="width:100%" onclick="currentSlide(1)" alt="{{b.modeloId}}">
+        </div>
+    </div>
+</div>
+<div class="col-sm-5" style="position:relative;">
+    <label>Modelo</label> 
+    {{biciUsadaActual.modeloId}}<br>
+    <label>Categoria</label>
+    {{biciUsadaActual.categoria}}<br>
+    <label>Color</label>
+    {{biciUsadaActual.color}}<br>
+    <label>Precio</label>
+    {{biciUsadaActual.precio}}<br>
+    <label>Usada</label>
+    {{biciUsadaActual.usada}}<br>
+     <label>Estado</label>
+    {{biciUsadaActual.estado}}<br>
+     <label>Factura Original</label>
+    {{biciUsadaActual.facturaOriginal}}<br>
+</div>
