@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="src/modules/bicis/crear/create.css"/>
+<div class="container-fluid">
+    <form name="bicicleta"  style="max-width:500px;margin:auto">
+        <h2>
+            <i class="fa fa-bicycle icon"></i>
+            Crear Bicicleta
+        </h2>
+        <label for="bicicletaModelo">Modelo</label>
+        <div class="input-container">
+            <input id="bicicletaModelo" class="input-field" type="text" required ng-model="data.modeloId" placeholder="Id del modelo" >
+        </div>
+        <label for="bicicletaPrecio">Precio</label>
+        <div class="input-container">
+            <input id="bicicletaPrecio" class="input-field" type="text" required ng-model="data.precio" placeholder="Precio">
+        </div>
+        <label for="bicicletaCategoria">Categoria</label>
+        <div class="input-container">
+            <input id="bicicletaCategoria" class="input-field" type="text" required ng-model="data.categoria" placeholder="Categoria" >
+        </div>
+        <div class="row">
+            <label for="bicicletaColor">Color</label>
+            <input id="bicicletaColor" type="color" required ng-model="data.color" value="#000000">
+        </div>
+        <br>
+            <button type="submit" ng-click="createBici()" class="btn-c">Crear</button>
+            <br>
+            <button  class="btn-c" ui-sref="bicisList">Cancelar</button>
+    </form>
+</div>

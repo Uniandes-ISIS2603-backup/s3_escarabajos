@@ -7,7 +7,8 @@
         <!-- Dependencias Externas -->
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="style.css" />
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
         <script src="bower_components/angular/angular.js"></script>
 
         <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -26,9 +27,14 @@
         <script src="src/modules/carrito/carritoitem.delete.ctrl.js" type="text/javascript"></script>
         <script src="src/modules/carrito/carrito.delete.ctrl.js" type="text/javascript"></script>
         <script src="src/modules/carrito/carritoitem.add.ctrl.js" type="text/javascript"></script>
-
-
-
+        
+        <!--Bicis-->
+        <script src="src/modules/bicis/bicis.mod.js" type="text/javascript"></script>
+        <script src="src/modules/bicis/bicis.ctrl.js" type="text/javascript"></script>
+        <script src="src/modules/bicis/bicis.detail.ctrl.js" type="text/javascript"></script>
+        <script src="src/modules/bicis/crear/bicis.create.ctrl.js" type="text/javascript"></script>
+        <script src="src/modules/bicis/crear/bicis.create.html" type="text/javascript"></script>
+        
         <!-- ListaDeseos-->
         <script src="src/modules/listaDeseos/listadeseos.mod.js" type="text/javascript"></script>
         <script src="src/modules/listaDeseos/listadeseos.ctrl.js" type="text/javascript"></script>
@@ -46,7 +52,7 @@
                 <div class="container-fluid">
                     <ul class="nav navbar-nav" Style="margin-left: 70px;">
                         <li class="active"><a href="#">Catalogo</a></li>
-                        <li><a href="#">Bicicletas</a></li>
+                        <li><a ui-sref="bicisList">Bicicletas</a></li>
                         <li><a href="#">Accesorios</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right" Style="margin-right: 70px;">
@@ -79,10 +85,10 @@
                 </div>
             </nav>
         </div>
-
-        <div class="container-fluid" ui-view = "mainView">
-
+        <div class="row">
+            <div ui-view = "mainView"> </div>
+            <div ui-view = "ofertasView"></div>
         </div>
-
+        
     </body>
 </html>

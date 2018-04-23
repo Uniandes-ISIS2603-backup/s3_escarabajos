@@ -13,7 +13,7 @@
                 url: '/bicis',
                 abstract: true,
                 views: {
-                    'detailView': {
+                    'mainView': {
                         templateUrl: basePath + 'bicis.html',
                         controller: 'biciCtrl',
                         controllerAs: 'ctrl'
@@ -34,15 +34,19 @@
                     biciId: null
                 },
                 views: {
-                    'listView':{
-                      templateUrl: basePath + 'bici.list.html',
-                      controller : 'biciDetailCtrl',
-                      controllerAs: 'ctrl'
-                    },
                     'detailView': {
-                        templateUrl: basePath + 'bici.detail.html',
+                        templateUrl: basePath + 'bicis.detail.html',
                         controller: 'biciDetailCtrl',
                         controllerAs: 'ctrl'
+                    }
+                }
+            }).state('biciCreate', {
+                url: '/create',
+                parent: 'bicis',
+                views: {
+                    'listView': {
+                        templateUrl: basePath + '/crear/bicis.create.html',
+                        controller: 'biciCreateCtrl'
                     }
                 }
             });

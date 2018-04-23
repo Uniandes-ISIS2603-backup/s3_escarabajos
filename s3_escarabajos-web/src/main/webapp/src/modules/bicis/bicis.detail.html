@@ -1,65 +1,37 @@
 <alert class="alert alert-danger" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
-<div class="container-fluid"> 
+
+<script src="src/modules/bicis/imageDetalle.js"></script>
+<link rel="stylesheet" href="src/modules/bicis/detalle.css" />
+
+<div class="container col-sm-6">
+    <div class="mySlides" ng-repeat='a in biciActual.fotos'>
+        <div class="numbertext">1 / 6</div>
+        <img src="https://cdn.shopify.com/s/files/1/1290/2773/products/Huayruro_1024x1024.jpg?v=1493124165.jpg" style="width:100%">
+    </div>
+    <a class="prev" onclick="plusSlides(-1)">❮</a>
+    <a class="next" onclick="plusSlides(1)">❯</a>
+
+    <div class="caption-container">
+        <p id="caption"></p>
+    </div>
+
     <div class="row">
-        <div class="col-sm-8">
-            <div class="row">
-                <div class="class-sm-4">
-                    <h3>Entre</h3>
-                    hola que tal
-                    <div ng-repeat="bici in biciActual.album">
-                        <div class="thumbnail">
-                            <img class="img-responsive" ng-src='{{bici.album[0]}}' alt="bicicleta {{bici.id}}"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-s-4">
-                    <dl>     
-                        <dt class="bold"> Categoria :</dt>
-                        <dd>{{biciActual.categoria}}</dd>
-                        <hr>
-                        <dt class="bold">Modelo :</dt>
-                        <dd>{{biciActual.modelo}}</dd>
-                        <hr>
-                        <dt class="bold">Tipo Modelo :</dt>
-                        <dd>{{biciActual.tipoModelo}}</dd>
-                        <hr>
-                        <dt class="bold">Marca : </dt>
-                        <dd>{{biciActual.marca}}</dd>
-                        <hr>
-                        <dt class="bold">Referencia : </dt>
-                        <dd>{{biciActual.referencia}}</dd>
-                        <hr>
-                        <dt class="bold">Color : </dt>
-                        <dd>{{biciActual.color}}</dd>
-                        <hr>
-                        <dt class="bold">Precio : </dt>
-                        <dd>{{biciActual.precio}}</dd>
-                        <hr>
-                        <dt class="bold">Calificación : </dt>
-                        <dd>{{biciActual.calificacionPromedio}}</dd>
-                    </dl>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="panel panel-default">
-                <div class="panel panel-heading">
-                    Categoria
-                </div>
-                <div class="panel panel-body">
-                    <input type="checkbox" name="cate1"> Infantiles<br>
-                    <input type="checkbox" name="cate2"> Ocio<br>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel panel-heading">
-                    Modelo
-                </div>
-                <div class="panel panel-body">
-                    <input type="checkbox" name="cate1"> Deportivos<br>
-                    <input type="checkbox" name="cate2"> Carretera<br>
-                </div>
-            </div>
+        <div class="column" ng-repeat='b in biciActual.fotos'>
+            <img class="demo cursor" src="https://cdn.shopify.com/s/files/1/1290/2773/products/Huayruro_1024x1024.jpg?v=1493124165.jpg" 
+                 style="width:100%" onclick="currentSlide(1)" alt="{{b.modeloId}}">
         </div>
     </div>
+</div>
+<div class="col-sm-5" style="position:relative;">
+    <label>Modelo</label> 
+    {{biciActual.modeloId}}<br>
+    <label>Categoria</label>
+    {{biciActual.categoria}}<br>
+    <label>Color</label>
+    {{biciActual.color}}<br>
+    <label></label>
+    <label>Precio</label>
+    {{biciActual.precio}}<br>
+    <label>Usada</label>
+    {{biciActual.usada}}<br>
 </div>
