@@ -178,8 +178,8 @@ public class AcessorioResource {
     @DELETE
     @Path("{id: \\d+}")
     public void deleteAccesorio(@PathParam("id") Long id) throws BusinessLogicException {
-        //TODO si no existe el recurso debe disparar WebApplicationException
-        modeloLogic.removeItem(id);
+        
+        logic.deleteAccesorio(id);
     }
 
     private List<AccesorioDTO> listBookEntity2DetailDTO(List<AccesorioEntity> entityList) {

@@ -1,0 +1,35 @@
+<alert class="alert alert-danger" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
+
+<script src="src/modules/accesorio/imageDetalle.js"></script>
+<link rel="stylesheet" href="src/modules/accesorios/detalle.css" />
+
+<div class="container col-sm-6">
+    <div class="mySlides" ng-repeat='a in accesorioActual.fotos'>
+        <div class="numbertext">1 / 6</div>
+        <img src="https://cdn.shopify.com/s/files/1/1290/2773/products/Huayruro_1024x1024.jpg?v=1493124165.jpg" style="width:100%">
+    </div>
+    <a class="prev" onclick="plusSlides(-1)">❮</a>
+    <a class="next" onclick="plusSlides(1)">❯</a>
+
+    <div class="caption-container">
+        <p id="caption"></p>
+    </div>
+
+    <div class="row">
+        <div class="column" ng-repeat='b in AccesorioActual.fotos'>
+            <img class="demo cursor" src="https://cdn.shopify.com/s/files/1/1290/2773/products/Huayruro_1024x1024.jpg?v=1493124165.jpg" 
+                 style="width:100%" onclick="currentSlide(1)" alt="{{b.modeloId}}">
+        </div>
+    </div>
+</div>
+<div class="col-sm-5 well" style="position:relative;">
+    <label>Modelo</label> 
+    {{accesorioActual.modeloId}}<br>
+    <label>Categoria</label>
+    {{accesorioActual.categoria}}<br>
+    <label>Color</label>
+    {{accesorioActual.color}}<br>
+    <label></label>
+    <label>Precio</label>
+    {{accesorioActual.precio}}<br>
+</div>

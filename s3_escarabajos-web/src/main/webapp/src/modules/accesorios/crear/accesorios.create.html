@@ -1,0 +1,34 @@
+<link rel="stylesheet" href="src/modules/accesorios/crear/create.css"/>
+<div class="container-fluid">
+    <form name="accesorio"  style="max-width:500px;margin:auto">
+        <h2>
+            <i class="fa fa-bicycle icon"></i>
+            Crear Accesorio
+        </h2>
+        <label for="accesorioModelo">Modelo</label>
+        <div class="input-container">
+            <input id="accesorioModelo" class="input-field" type="text" required ng-model="data.modeloId" placeholder="Id del modelo" >
+        </div>
+        <label for="accesorioPrecio">Precio</label>
+        <div class="input-container">
+            <input id="accesorioPrecio" class="input-field" type="text" required ng-model="data.precio" placeholder="Precio">
+        </div>
+        <label for="accesorioTipoAccesorio">Tipo Accesorio</label>
+        <div class="input-container">
+            <input id="accesorioTipoAccesorio" class="input-field" type="text" required ng-model="data.tipoAccesorio" placeholder="Categoria" >
+        </div>
+        <div class="row">
+            <label for="accesorioDescripcion">Descripcion</label>
+            <input id="accesorioDescripcion"  class = "input-field" type="textxclass" required ng-model="data.descripcion" value="#000000">
+        </div>
+        <br>
+        <div class="row">
+            <label for="accesorioColor">Color</label>
+            <input id="accesorioColor" type="color" required ng-model="data.color" value="#000000">
+        </div>
+        
+            <button type="submit" ng-click="createAccesorio()" class="btn-c">Crear</button>
+            <br>
+            <button  class="btn-c" ui-sref="accesoriosList">Cancelar</button>
+    </form>
+</div>

@@ -1,0 +1,37 @@
+<alert class="alert alert-danger" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}}</alert>
+<div class="container-fluid">    
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><label>Accesorio</label></div>
+            <div class="panel-body">
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                        <a class="btn btn-info" ui-sref="accesorioCreate"><span class="glyphicon glyphicon-plus-sign"></span>Nuevo Accesorio</a>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Modelo</th>    
+                                <th>Categoria</th>  
+                                <th>Actions</th>  
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="accesorio in listaAccesorio">
+                                <td id="{{$index}}-modelo"><a ui-sref="accesorioDetail({accesorioId: accesorio.id})">{{accesorio.modeloId}}</a></td>
+                                <td id="{{$index}}-categoria">{{accesorio.categoria}}</td>
+                                <td id="{{$index}}-actions">
+                                    <a class="btn btn-default btn-sm" ui-sref="accesorioUpdate({accesorioId: accesorio.id})"><span class="glyphicon glyphicon-edit"></span></a>
+                                    <a class="btn btn-danger btn-sm" ui-sref="accesorioDelete({itemId: accesorio.id})"><span class="glyphicon glyphicon-trash"></span></a>
+                                    <a  ui-sref ="addItemCarrito({itemId: accesorio.id})" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart" style="color:white"></span></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
