@@ -7,7 +7,8 @@
           'moduloBicisUsadas',
           'CarritoMod',
           'reclamosModule',
-          'ListadeseosMod'
+          'ListadeseosMod',
+          'AccesoriosMod'
           //'catalogoModule'
         
 
