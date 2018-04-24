@@ -17,9 +17,10 @@ and open the template in the editor.
             <a href="#">Eliminar Cuenta</a>
             <a href="#">Cerrar Sesión</a>
         </div>
-        <div class="list-group col-sm-7">
+        <div class="list-group col-sm-7" ui-view = "reclamoPanel">
+            <legend>Mis Reclamos</legend>
             <div align="right">
-                <a ui-sref="reclamoAdd" class="btn btn-primary">
+                <a ui-sref="reclamosCreate" class="btn btn-primary">
                     <span class="glyphicon glyphicon-plus-sign" style = "width:10px"></span> Añadir reclamo
                 </a>
             </div>

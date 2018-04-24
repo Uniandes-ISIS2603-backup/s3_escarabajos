@@ -7,7 +7,7 @@
             // En basePath se encuentran los templates y controladores de módulo
             var basePath = 'src/modules/reclamos/';
             // Mostrar la lista de editoriales será el estado por defecto del módulo
-            $urlRouterProvider.otherwise("/reclamosList");
+            $urlRouterProvider.otherwise("/reclamos");
             // Definición del estado 'editorialsList' donde se listan los editoriales
             $stateProvider.state('reclamosList', {
                 // Url que aparecerá en el browser
@@ -17,6 +17,15 @@
                         templateUrl: basePath + 'reclamos.list.html',
                         controller: 'reclamosCtrl',
                         controllerAs: 'ctrl'
+                    }
+                }
+            });
+            $stateProvider.state('reclamosCreate', {
+                // Url que aparecerá en el browser
+                url: '/reclamos/create',
+                views: {
+                    'mainView': {
+                        templateUrl: basePath + 'reclamos.create.html',
                     }
                 }
             });

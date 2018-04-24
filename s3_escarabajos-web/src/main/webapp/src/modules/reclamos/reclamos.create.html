@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<div class = "container-fluid">
+    <div class = "row">
+        <div class = "col-sm-1"></div>
+        <div class="vertical-menu col-sm-3" style = "margin-top:45px">
+            <a ui-sref="clientesProfile">Mi Perfil</a>
+            <a href="#">Lista de deseos</a>
+            <a href="#">Mis Compras</a>
+            <a class="active" ui-sref="reclamosList">Mis Reclamos</a>
+            <a href="#">Editar Información</a>
+            <a href="#">Eliminar Cuenta</a>
+            <a href="#">Cerrar Sesión</a>
+        </div>
+        <div class="list-group col-sm-7">
+            <div class="container" style = "width:700px">
+                <legend>Crear reclamo</legend>
+                <form class="form-horizontal" action="/action_page.php">
+                    <div class="form-group">
+                        <label for="usr">Razón:</label>
+                        <input type="text" class="form-control" id="usr">
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">Descripción:</label>
+                        <textarea class="form-control" rows="5" id="comment"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="sel2">Seleccione la factura</label>
+                        <select class="form-control" id="sel2">
+                            <option>Factura 1</option>
+                            <option>Factura 2</option>
+                            <option>Factura 3</option>
+                            <option>Factura n</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sel1">Seleccione el item</label>
+                        <select class="form-control" id="sel1">
+                            <option>Item 1</option>
+                            <option>Item 2</option>
+                            <option>Item 3</option>
+                            <option>Item i</option>
+                        </select>
+                    </div>
+                </form>
+                <div align="right">
+                <a ui-sref="conectarAlMundo" class="btn btn-success">
+                     Aceptar
+                </a>
+                <a ui-sref="reclamosList" class="btn btn-danger">
+                    Cancelar
+                </a>
+            </div>
+            </div>
+        </div>
+        <div class = "col-sm-1"></div>
+    </div>
+</div>
+
