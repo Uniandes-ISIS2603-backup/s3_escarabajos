@@ -1,0 +1,67 @@
+ <alert class="alert alert-danger" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
+ <form class="form-horizontal">
+    <!-- Form Name -->
+    <legend>SignUp</legend>
+
+    <div class="container">
+      <div class="row profile">
+        
+        <div class="col-md-9">
+          <div class="profile-content">
+            <fieldset>
+
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Username</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" placeholder="UserName" class="form-control input-md">
+
+                </div>
+              </div>
+
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Nombre</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" placeholder="nombre" class="form-control input-md" required="">
+
+                </div>
+              </div>
+
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Cedula</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" placeholder="cedula" class="form-control input-md">
+
+                </div>
+              </div>
+
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Email</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" placeholder="tu email" class="form-control input-md">
+
+                </div>
+              </div>
+
+              <!-- Button (Double) -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="btnsave"></label>
+                <div class="col-md-8">
+                  <button id="btnsave" name="btnsave" class="btn btn-success" ng-click="ctrl.getRecord(id)">Ingresar</button>
+                </div>
+              </div>
+
+            </fieldset>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </form>
+ 
+
+
