@@ -27,33 +27,6 @@
                         templateUrl: basePath + 'facturas.list.html'
                     }
                 }
-            }).state('facturaDetail', {
-                url: '/{facturaId:int}/detail',
-                parent: 'facturas',
-                param: {
-                    biciId: null
-                },
-                views: {
-                    'listView': {
-                        templateUrl: basePath + 'facturas.list.html',
-                        controller: 'facturaDetailCtrl',
-                        controllerAs: 'ctrl'
-                    },
-                    'detailView': {
-                        templateUrl: basePath + 'facturas.detail.html',
-                        controller: 'facturaDetailCtrl',
-                        controllerAs: 'ctrl'
-                    }
-                }
-            }).state('facturaCreate', {
-                url: '/create',
-                parent: 'facturas',
-                views: {
-                    'listView': {
-                        templateUrl: basePath + '/new/facturas.new.html',
-                        controller: 'facturaNewCtrl'
-                    }
-                }
             });
         }]);
 })(window.angular)

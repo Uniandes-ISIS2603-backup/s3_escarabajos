@@ -11,9 +11,10 @@
           'AccesoriosMod',
           'clientesModule',
           'vendedoresModule',
-          'catalogoModule',
-          'moduloFacturas'
+          'catalogoModule'
         
+
+
 
     ]);
     // Resuelve problemas de las promesas

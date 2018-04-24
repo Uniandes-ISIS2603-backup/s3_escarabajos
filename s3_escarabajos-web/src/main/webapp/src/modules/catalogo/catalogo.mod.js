@@ -45,7 +45,7 @@
     mod.constant("catalogoContext", "api/catalogo");
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             var basePath = 'src/modules/catalogo/';
-//            $urlRouterProvider.otherwise("/catalogo/");
+//          $urlRouterProvider.otherwise("/catalogo");
             $stateProvider.state('catalogoParent', {
                 url: '/catalogo',
                 abstract: true,

@@ -3,6 +3,7 @@ var mod = ng.module("clientesModule", []);
     mod.constant("clientesContext", "api/clientes");
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             var basePath = 'src/modules/clientes/';
+            
             $urlRouterProvider.otherwise("/clientesList");
 
             $stateProvider.state('clientesList', {

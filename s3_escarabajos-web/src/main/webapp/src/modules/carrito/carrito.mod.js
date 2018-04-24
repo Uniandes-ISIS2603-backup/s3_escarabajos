@@ -2,7 +2,7 @@
   var mod = angular.module('CarritoMod', ['ui.router']);
 
   mod.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-    
+       
     $stateProvider.state('carrito', {
         views: {
           mainView: {
