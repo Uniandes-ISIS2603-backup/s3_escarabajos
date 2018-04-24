@@ -17,11 +17,19 @@ and open the template in the editor.
             <a href="#">Cerrar Sesión</a>
         </div>
         <div class="list-group col-sm-7">
-            <a ui-sref="reclamoDetail" class="list-group-item"  style = "size:50'x"ng-repeat = "reclamo in reclamosRecords">
-                <h1>{{reclamo.razon}}</h1>
-                <p>{{reclamo.modelo}}</p>
-                <p>{{reclamo.estado}}</p>
-            </a>
+            <div class="list-group-item" ng-repeat = "reclamo in reclamosRecords">
+                <h1>Razón: {{reclamo.razon}}</h1>
+                <p>Modelo: {{reclamo.modelo}}</p>
+                <p>Estado: {{reclamo.estado}}</p>
+                <div>
+                    <a ui-sref="reclamoDetail" class="btn btn-success">
+                        <span class="glyphicon glyphicon-search" style = "width:10px"></span> Ver
+                    </a>
+                    <a ui-sref="reclamoDelete" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-trash" style = "width:10px"></span> Eliminar
+                    </a>
+                </div>
+            </div>
         </div>
         <div class = "col-sm-1"></div>
     </div>
