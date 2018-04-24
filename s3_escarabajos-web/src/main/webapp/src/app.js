@@ -10,6 +10,7 @@
           'ListadeseosMod',
           'AccesoriosMod',
           'clientesModule',
+          'moduloFacturas',
           'vendedoresModule',
           'catalogoModule'
         

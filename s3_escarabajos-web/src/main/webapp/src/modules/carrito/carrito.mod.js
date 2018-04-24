@@ -3,6 +3,8 @@
 
   mod.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
        
+       $urlRouterProvider.otherwise("/carrito");
+       
     $stateProvider.state('carrito', {
         views: {
           mainView: {

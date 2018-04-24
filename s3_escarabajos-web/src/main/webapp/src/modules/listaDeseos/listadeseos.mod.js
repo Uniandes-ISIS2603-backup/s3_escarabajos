@@ -2,7 +2,7 @@
   var mod = angular.module('ListadeseosMod', ['ui.router']);
 
   mod.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-    
+    $urlRouterProvider.otherwise("/listadeseos");
     $stateProvider.state('listadeseos', {
         views: {
           mainView: {
