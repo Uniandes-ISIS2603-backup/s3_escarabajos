@@ -4,10 +4,12 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+
 <div class = "container-fluid">
     <div class = "row">
-        <div class="vertical-menu col-sm-3">
-            <a href="#">Mi Perfil</a>
+        <div class = "col-sm-1"></div>
+        <div class="vertical-menu col-sm-3" style = "margin-top:45px">
+            <a ui-sref="clientesProfile">Mi Perfil</a>
             <a href="#">Lista de deseos</a>
             <a href="#">Mis Compras</a>
             <a class="active" ui-sref="reclamosList">Mis Reclamos</a>
@@ -16,11 +18,16 @@ and open the template in the editor.
             <a href="#">Cerrar Sesión</a>
         </div>
         <div class="list-group col-sm-7">
-            <div class="list-group-item" ng-repeat = "reclamo in reclamosRecords">
+            <div align="right">
+                <a ui-sref="reclamoAdd" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-plus-sign" style = "width:10px"></span> Añadir reclamo
+                </a>
+            </div>
+            <div class="list-group-item" ng-repeat = "reclamo in reclamosRecords" style = "margin-top:10px">
                 <h1>Razón: {{reclamo.razon}}</h1>
                 <p>Modelo: {{reclamo.modelo}}</p>
                 <p>Estado: {{reclamo.estado}}</p>
-                <div>
+                <div align="right">
                     <a ui-sref="reclamoDetail" class="btn btn-success">
                         <span class="glyphicon glyphicon-search" style = "width:10px"></span> Ver
                     </a>
@@ -30,6 +37,7 @@ and open the template in the editor.
                 </div>
             </div>
         </div>
+        <div class = "col-sm-1"></div>
     </div>
 </div>
 
