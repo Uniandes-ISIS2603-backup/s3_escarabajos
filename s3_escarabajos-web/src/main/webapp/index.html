@@ -31,6 +31,13 @@
         <script src="src/modules/carrito/carrito.delete.ctrl.js" type="text/javascript"></script>
         <script src="src/modules/carrito/carritoitem.add.ctrl.js" type="text/javascript"></script>
 
+        <!--Facturas-->
+        <script src="src/modules/facturas/facturas.mod.js" type="text/javascript"></script>
+        <script src="src/modules/facturas/facturas.ctrl.js" type="text/javascript"></script>
+        <script src="src/modules/facturas/facturas.detail.ctrl.js" type="text/javascript"></script>
+        <script src="src/modules/facturas/new/facturas.new.ctrl.js" type="text/javascript"></script>
+        <script src="src/modules/facturas/new/facturas.new.html" type="text/javascript"></script>
+
         <!--Bicis-->
         <script src="src/modules/bicis/bicis.mod.js" type="text/javascript"></script>
         <script src="src/modules/bicis/bicis.ctrl.js" type="text/javascript"></script>
@@ -111,7 +118,7 @@
                             <ul class="dropdown-menu">
                                 <li><a ui-sref="clientesProfile">Mi perfil</a></li>
                                 <li><a ui-sref = "listadeseos">Lista de deseos</a></li>
-                                <li><a href="#">Mis compras</a></li>
+                                <li><a ui-sref = "facturasList">Mis compras</a></li>
                                 <li><a ui-sref="bicisUsadaList">Mis ventas</a></li>
                                 <li><a ui-sref="reclamosList">Mis reclamos</a></li>
                                 <li><a href="#">Cerrar Sesión</a></li>

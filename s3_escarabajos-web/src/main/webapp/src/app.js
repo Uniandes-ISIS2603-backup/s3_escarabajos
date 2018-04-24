@@ -11,7 +11,8 @@
           'AccesoriosMod',
           'clientesModule',
           'vendedoresModule',
-          'catalogoModule'
+          'catalogoModule',
+          'moduloFacturas'
         
 
     ]);
