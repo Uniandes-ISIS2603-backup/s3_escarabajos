@@ -16,8 +16,31 @@
              * Esta función utiliza el protocolo HTTP para crear la bicicleta usada.
              * @param {Object} biciUsada Objeto con la nueva de la bicicleta usada.
              */
+            
+              
+              
             $scope.createBiciUsada = function () {
-                $http.post(biciUsadaContext + '/' + $state.params.vendedorId + '/bicis' , $scope.data).then(function (response) {
+                 var input = {};
+                
+                input.id = 7777;
+                
+                input.precio = parseInt($scope.data.precio);
+                
+                input.modeloId = parseInt($scope.data.modeloId);
+                
+                input.color = $scope.data.color;
+                
+                input.categoria = $scope.data.categoria;
+                
+                input.album  = [];
+                
+                input.usada = true;
+                
+                input.facturaOriginal  = $scope.data.facturaOriginal;
+                
+                  //Debia ser: biciUsadaContext + '/' + $state.params.vendedorId + '/bicis' pero aun no esta funcionando vendedor completamente.
+                //por ende lo hago con un vendedor especifico.
+                $http.post(biciUsadaContext + '/1/bicis' , input).then(function (response) {
                     $state.go('bicisUsadaList', {biciUsadaId: response.data.id}, {reload: true});
                 });
             };

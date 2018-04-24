@@ -17,7 +17,25 @@
              * @param {Object} bici Objeto con la nueva de la bicicleta.
              */
             $scope.createBici = function () {
-                $http.post(biciContext, $scope.data).then(function (response) {
+                console.log($scope.data)
+                var input = {};
+                
+                input.id = 9999;
+                
+                input.precio = parseInt($scope.data.precio);
+                
+                input.modeloId = parseInt($scope.data.modeloId);
+                
+                input.color = $scope.data.color;
+                
+                input.categoria = $scope.data.categoria;
+                
+                input.album  = [];
+                
+                input.usada = false;
+                
+                console.log(input)
+                $http.post(biciContext, input).then(function (response) {
                     $state.go('bicisList', {biciId: response.data.id}, {reload: true});
                 });
             };

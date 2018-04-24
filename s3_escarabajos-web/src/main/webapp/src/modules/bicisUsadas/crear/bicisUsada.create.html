@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="src/modules/bicis/crear/create.css"/>
 <div class="container-fluid">
     <form name="bicicleta"  style="max-width:500px;margin:auto">
-        <h2>
+        <h2 style="text-align-last: center">
             <i class="fa fa-bicycle icon"></i>
             Agregar Bicicleta
         </h2>
@@ -26,8 +26,13 @@
             <input id="bicicletaUsadaColor" type="color" required ng-model="data.color" value="#000000">
         </div>
         <br>
-            <button type="submit" ng-click="createBiciUsada()" class="btn-c">Agregar</button>
-            <br>
-            <button  class="btn-c" ui-sref="bicisUsadaList">Cancelar</button>
+        <div class="row col-sm-12">
+            <div class="col-sm-5">
+                <button type="submit" ng-click="createBiciUsada()" class="btn-c">Crear</button>
+            </div>
+            <div class="col-sm-5">
+                <button class="btn-c" ui-sref="bicisUsadasList">Cancelar</button>
+            </div>
+        </div>
     </form>
 </div>
