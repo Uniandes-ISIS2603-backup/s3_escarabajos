@@ -84,9 +84,9 @@
     <body>
 
         <div class="container-fluid" style="background-color:black;color:#fff;height:150px;">
-            <img src = "data/Imagenes/Banner.jpg" style = "width:100%">
+            <img src = "data/Imagenes/Banner.jpg" style = "height:100%">
         </div>
-        <div style="background-color:black">
+        <div style="background-color:black"  style = "height:100%;width:100%">
             <nav class="navbar navbar-inverse" style="background-color:black" data-spy="affix" data-offset-top="147">
                 <div class="container-fluid">
                     <ul class="nav navbar-nav" Style="margin-left: 70px;">
@@ -128,12 +128,8 @@
             </nav>
         </div>
         <div class="row">
-
             <div ui-view = "mainView"> </div>
             <div ui-view = "ofertasView"></div>
-            <div class = "col-sm-1"></div>
-
         </div>
-
     </body>
 </html>
