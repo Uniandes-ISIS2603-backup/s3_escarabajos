@@ -12,7 +12,7 @@
             <tr ng-repeat="record in records">
 
                 <td id="{{$index}}-name">{{record.nombre}}</td>
-                <td id="{{$index}}-id">{{record.id}}</td>
+                <td id="{{$index}}-id"><a ui-sref="clientesDetail({clienteId:record.id})">{{record.id}}</td>
                 <td>
                     <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="ctrl.deleteRecord(record.id)"><span class="glyphicon glyphicon-minus"></span> Remove</button>
 

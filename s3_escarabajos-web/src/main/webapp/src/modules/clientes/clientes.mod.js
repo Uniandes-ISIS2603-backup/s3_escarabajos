@@ -41,6 +41,15 @@ var mod = ng.module("clientesModule", []);
                         templateUrl: basePath + 'clientes.signIn.html'
                     }
                 }
+            }).state('clientesDetail', {
+                url: '/clientesDetail',
+                views: {
+                    'mainView': {
+                        controller: 'clientesCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'clientes.detail.html'
+                    }
+                }
             });
         }]);
 

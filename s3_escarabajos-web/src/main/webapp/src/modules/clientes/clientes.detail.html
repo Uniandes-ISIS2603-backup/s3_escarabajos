@@ -1,0 +1,80 @@
+<alert class="alert alert-danger" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
+<form class="form-horizontal">
+    <!-- Form Name -->
+    <legend>Perfil de usuario</legend>
+
+    <div class="container">
+      <div class="row profile">
+        <div class="col-md-3">
+          <div class="profile-sidebar">
+            <!-- SIDEBAR USERPIC -->
+            <div class="profile-userpic">
+              <img src="https://thumb1.shutterstock.com/display_pic_with_logo/2213711/664577617/stock-vector-bug-line-icon-outline-vector-sign-linear-style-pictogram-isolated-on-white-symbol-logo-664577617.jpg" class="img-responsive" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="profile-content">
+            <fieldset>
+
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Username</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" placeholder="UserName" class="form-control input-md">
+                  {{record.id}}
+                </div>
+              </div>
+
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Nombre</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" placeholder="nombre" class="form-control input-md" required="">
+
+                </div>
+              </div>
+
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Cedula</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" placeholder="cedula" class="form-control input-md">
+
+                </div>
+              </div>
+
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Email</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" placeholder="tu email" class="form-control input-md">
+
+                </div>
+              </div>
+
+              <!-- Button (Double) -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="btnsave">Guardar Cambios</label>
+                <div class="col-md-8">
+                  <button id="btnsave" name="btnsave" class="btn btn-success">Si</button>
+                  <button id="btncancel" name="btncancel" class="btn btn-danger">No</button>
+                </div>
+              </div>
+
+            </fieldset>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </form>
+
+<div class="col-sm-2" style="position:relative;">
+    <label>id</label> 
+    {{clienteActual.id}}<br>
+    <label>nombre</label>
+    {{clienteActual.nombre}}<br>
+
+</div>
