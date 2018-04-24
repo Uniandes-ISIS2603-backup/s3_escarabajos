@@ -241,7 +241,7 @@ public class ModeloLogic {
      *
      */
     public List<String> getCategoriasAccesorios() {
-        return null;// return persistence.findCategoriasAccesorios();
+        return persistence.findCategorias(ACCESORIO);
     }
 
     /**
@@ -252,7 +252,7 @@ public class ModeloLogic {
      *
      */
     public List<String> getColoresAccesorios() {
-        return null;//return persistence.findColoresAccesorios();
+        return persistence.findColores(ACCESORIO);
     }
 
     /**

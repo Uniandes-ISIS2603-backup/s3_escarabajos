@@ -10,8 +10,8 @@
           'ListadeseosMod',
           'AccesoriosMod',
           'clientesModule',
-          'vendedoresModule'
-          //'catalogoModule'
+          'vendedoresModule',
+          'catalogoModule'
         
 
     ]);

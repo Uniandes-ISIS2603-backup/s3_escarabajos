@@ -1,6 +1,6 @@
 /**
  * @ngdoc overview
- * @name books.module:bookModule
+ * @name catalogo.module:catalogoModule
  * @description
  * Definición del módulo de Angular del catalogo. El módulo encapsula todos los 
  * controladores y los templates HTML que estén relacionados con los modelos
@@ -45,99 +45,88 @@
     mod.constant("catalogoContext", "api/catalogo");
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             var basePath = 'src/modules/catalogo/';
-            $urlRouterProvider.otherwise("/catalogo/");
+//            $urlRouterProvider.otherwise("/catalogo/");
             $stateProvider.state('catalogoParent', {
                 url: '/catalogo',
                 abstract: true,
+                params: {
+                   paginaParam: 1,
+                   filasParam: 3,
+                   filtrosParam: {"categorias":[],"marcas":[],"precios":{"min":0,"max":-1},"calificacion":0.0,"colores":[]} ///Cambiar esto para que sea el filtro de mayor calificacion desc.
+                },
                 views: {
                     'mainView': {
-                        template: '<ui-view/>'
+                        templateUrl: basePath + 'catalogoParent.html'
                     }
                 }
             }).state('catalogo', {
-                 url: '/',
-                parent: 'catalogo',
-                param: {
-                    catalogoPg: 1,
-                    catalogoQty: 1
-                },
+                url: '/',
+                parent: 'catalogoParent',
                 views: {
                     'catalogoView': {
-                        templateUrl: basePath + '/catalogo/catalogo.html',
+                        templateUrl: basePath + 'catalogo/catalogo.html',
                         controller: 'catalogoCtrl',
                         controllerAs: 'ctrl'
                     }
                 }
-            }).state('bicicletasParent', {
-                url: '/bicicletas',
-                parent: 'catalogo',
+            }).state('listParent', {
+                parent: 'catalogoParent',
                 abstract: true,
                 views: {
                     'listParentView': {
-                        templateUrl: basePath + '/list/lists.html'
+                        templateUrl: basePath + 'list/lists.html'
+                    }
+                }
+            }).state('bicicletasParent', {
+                url: '/bicicletas',
+                parent: 'listParent',
+                abstract: true,
+                views: {
+                    'bicicletasParentView': {
+                        templateUrl: basePath + 'list/bicicletas/bicicletas.html'
                     }
                 }
             }).state('bicicletasNoAdv', {
                 parent: 'bicicletasParent',
-                param: {
-                    bicicletasNoAdvPg: 1,
-                    bicicletasNoAdvRws:3,
-                    bicicletasNoAdvFilters: ""
-                },
                 views: {
-                    'noAdvView': {
-                        templateUrl: basePath + '/list/noAdv.html',
+                    'bicicletasNoAdvView': {
+                        templateUrl: basePath + 'list/bicicletas/catalogo.bicicletas.noAdv.html',
                         controller: 'catalogoBicicletasNoAdvCtrl',
                         controllerAs: 'ctrl'
                     }
                 }
             }).state('bicicletasAdv', {
                 parent: 'bicicletasParent',
-                param: {
-                    bicicletasAdvPg: 1,
-                    bicicletasAdvRws:3,
-                    bicicletasAdvFilters: ""
-                },
                 views: {
-                    'advView': {
-                        templateUrl: basePath + '/list/adv.html',
+                    'bicicletasAdvView': {
+                        templateUrl: basePath + 'list/bicicletas/catalogo.bicicletas.adv.html',
                         controller: 'catalogoBicicletasAdvCtrl',
                         controllerAs: 'ctrl'
                     }
                 }
             }).state('accesoriosParent', {
                 url: '/accesorios',
-                parent: 'catalogo',
+                parent: 'listParent',
                 abstract: true,
                 views: {
-                    'listParentView': {
-                        templateUrl: basePath + '/list/lists.html'
+                    'accesoriosParentView': {
+                        templateUrl: basePath + 'list/accesorios/accesorios.html'
                     }
                 }
             }).state('accesoriosNoAdv', {
                 parent: 'accesoriosParent',
-                param: {
-                    accesoriosNoAdvPg: 1,
-                    accesoriosNoAdvRws:3,
-                    accesoriosNoAdvFilters: ""
-                },
                 views: {
-                    'noAdvView': {
-                        templateUrl: basePath + '/list/noAdv.html',
+                    'accesoriosNoAdvView': {
+                        templateUrl: basePath + 'list/accesorios/catalogo.accesorios.noadv.html',
                         controller: 'catalogoAccesoriosNoAdvCtrl',
                         controllerAs: 'ctrl'
                     }
                 }
             }).state('accesoriosAdv', {
                 parent: 'accesoriosParent',
-                param: {
-                    accesoriosAdvPg: 1,
-                    accesoriosAdvRws:3,
-                    accesoriosAdvFilters: ""
-                },
                 views: {
-                    'advView': {
-                        templateUrl: basePath + '/list/adv.html',
+                    'accesoriosAdvView': {
+                        templateUrl: basePath + 'list/accesorios/catalogo.accesorios.adv.html',
                         controller: 'catalogoAccesoriosAdvCtrl',
                         controllerAs: 'ctrl'
                     }

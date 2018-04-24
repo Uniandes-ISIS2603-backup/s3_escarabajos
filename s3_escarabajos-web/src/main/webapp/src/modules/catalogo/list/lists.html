@@ -1,12 +1,132 @@
-<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
-<div class="container-fluid">
-<!--list, bicicletas/accesorios sin propagandas-->
-    <div class="row">
-        <div ui-view="noAdvView"></div>
-    </div>
-    <!--listAdv, bicicletas/accesorios con propagandas-->
-    <div class="row">
-        <div ui-view="AdvView"></div>
-    </div>
-</div>
+<div>
+    <style media="screen" type="text/css">
+        .rating {
+            display: inline-block;
+            position: relative;
+            height: 45px;
+            line-height: 50px;
+            font-size: 40px;
+        }
+        .rating label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            cursor: pointer;
+        }
 
+        .rating label:last-child {
+            position: static;
+        }
+
+        .rating label:nth-child(1) {
+            z-index: 5;
+        }
+
+        .rating label:nth-child(2) {
+            z-index: 4;
+        }
+
+        .rating label:nth-child(3) {
+            z-index: 3;
+        }
+
+        .rating label:nth-child(4) {
+            z-index: 2;
+        }
+
+        .rating label:nth-child(5) {
+            z-index: 1;
+        }
+
+        .rating label input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+        }
+
+        .rating label .icon {
+            float: left;
+            color: transparent;
+        }
+
+        .rating label:last-child .icon {
+            color: #000;
+        }
+
+        .rating:not(:hover) label input:checked ~ .icon,
+        .rating:hover label:hover input ~ .icon {
+            color: #09f;
+        }
+
+        .rating label input:focus:not(:checked) ~ .icon:last-child {
+            color: #000;
+            text-shadow: 0 0 5px #09f;
+        }
+
+        .vertical .carousel-inner {
+            height: 100%;
+        }
+
+        .carousel.vertical .item {
+            -webkit-transition: 0.6s ease-in-out top;
+            -moz-transition: 0.6s ease-in-out top;
+            -ms-transition: 0.6s ease-in-out top;
+            -o-transition: 0.6s ease-in-out top;
+            transition: 0.6s ease-in-out top;
+        }
+
+        .carousel.vertical .active {
+            top: 20px;
+        }
+
+        .carousel.vertical .next {
+            top: -400px;
+          
+        }
+
+        .carousel.vertical .prev {
+            top: 400px;
+        }
+
+        .carousel.vertical .next.left,
+        .carousel.vertical .prev.right {
+            top: 0;
+            
+        }
+
+        .carousel.vertical .active.left {
+            top: -400px;
+               
+
+        }
+
+        .carousel.vertical .active.right {
+            top: 400px;
+        }
+
+        .carousel.vertical .item {
+            left: 0;
+               color: #000;
+        }
+
+        .carousel.vertical .carousel-control {
+            width: 100%;
+            bottom: inherit;
+            top: inherit;
+         
+            transform: rotate(90deg);
+            
+        }
+
+        .carousel.vertical .carousel-control.left {
+            top: 8px;
+        }
+        .carousel.vertical .carousel-control.right {
+            top: 965px;
+        }
+    </style>
+    <div ui-view="bicicletasParentView"></div>
+    <div ui-view="accesoriosParentView"></div>
+</div>

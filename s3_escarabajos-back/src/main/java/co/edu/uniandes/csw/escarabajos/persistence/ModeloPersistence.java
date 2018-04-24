@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.escarabajos.persistence;
 
 import co.edu.uniandes.csw.escarabajos.ejb.ModeloLogic;
-import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import java.util.ArrayList;
 import java.util.List;
@@ -142,13 +141,54 @@ public class ModeloPersistence {
      */
     public List<String> findCategorias(String nombre) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar marcas");
-        if (nombre.equals(ModeloLogic.ACCESORIO)) {
-            TypedQuery query = em.createQuery("Select distinct(e.marca) From ModeloEntity e where e.tipoModelo =  :name", String.class);
-
+        TypedQuery query;
+        switch (nombre) {
+            case ModeloLogic.ACCESORIO:
+                query = em.createQuery("Select distinct(e.categoria) From AccesorioEntity e", String.class);
+                break;
+            case ModeloLogic.BICICLETA:
+                query = em.createQuery("Select distinct(e.categoria) From BicicletaEntity e", String.class);
+                break;
+            default:
+                query = em.createQuery("Select distinct(e.categoria) From BicicletaUsadaEntity e", String.class);
+                break;
         }
-        TypedQuery query = em.createQuery("Select distinct(e.marca) From ModeloEntity e where e.tipoModelo =  :name", String.class);
-        query.setParameter("name", nombre);
         List<String> lista = query.getResultList();
+
+        if (lista == null) {
+            lista = new ArrayList<String>();
+        
+        }
+        LOGGER.log(Level.INFO, lista.toString());
+        return lista;
+    }
+
+    /**
+     * Devuelve todas los colores de la base da datos
+     *
+     * @param nombre del tipo de modelo a buscar
+     * @return una lista con todas los colores de un tipo de item que encuentre
+     * en la base de datos;
+     */
+    public List<String> findColores(String nombre) {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar marcas");
+        TypedQuery query;
+        switch (nombre) {
+            case ModeloLogic.ACCESORIO:
+                query = em.createQuery("Select distinct(e.color) From AccesorioEntity e", String.class);
+                break;
+            case ModeloLogic.BICICLETA:
+                query = em.createQuery("Select distinct(e.color) From BicicletaEntity e", String.class);
+                break;
+            default:
+                query = em.createQuery("Select distinct(e.color) From BicicletaUsadaEntity e", String.class);
+                break;
+        }
+        List<String> lista = query.getResultList();
+        if (lista == null) {
+            lista = new ArrayList<String>();
+        
+        }
         return lista;
     }
 
