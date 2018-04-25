@@ -69,11 +69,12 @@
 
         <!--Catalogo-->
         <script src="src/modules/catalogo/catalogo.mod.js" type="text/javascript"></script>
-        <script src="src/modules/catalogo/catalogo/catalogo.ctrl.js" type="text/javascript"></script>
-        <script src="src/modules/catalogo/list/bicicletas/catalogo.bicicletas.noadv.ctrl.js" type="text/javascript"></script>
-        <script src="src/modules/catalogo/list/bicicletas/catalogo.bicicletas.adv.ctrl.js" type="text/javascript"></script>
-        <script src="src/modules/catalogo/list/accesorios/catalogo.accesorios.noadv.ctrl.js" type="text/javascript"></script>
-        <script src="src/modules/catalogo/list/accesorios/catalogo.accesorios.adv.ctrl.js" type="text/javascript"></script>    
+        <script src="src/modules/catalogo/adv.ctrl.js" type="text/javascript"></script>
+        <script src="src/modules/catalogo/filtros.ctrl.js" type="text/javascript"></script>
+        <script src="src/modules/catalogo/noadv.ctrl.js" type="text/javascript"></script>
+        <script src="src/modules/catalogo/propagandas.ctrl.js" type="text/javascript"></script>
+         <script src="src/modules/catalogo/catalogo.ctrl.js" type="text/javascript"></script>
+
 
         <!--Facturas-->
         <script src="src/modules/facturas/facturas.mod.js" type="text/javascript"></script>
@@ -90,7 +91,7 @@
             <nav class="navbar navbar-inverse" style="background-color:black" data-spy="affix" data-offset-top="147">
                 <div class="container-fluid">
                     <ul class="nav navbar-nav" Style="margin-left: 70px;">
-                        <li class="active"><a ui-sref="accesoriosAdv">Catalogo</a></li>
+                        <li class="active"><a ui-sref="adv({adv:true})">Catalogo</a></li>
                         <li><a ui-sref="bicisList">Bicicletas</a></li>
                         <li><a ui-sref="accesoriosList">Accesorios</a></li>
                         <li><a ui-sref="clientesList">Clientes</a></li>
@@ -119,7 +120,7 @@
                                 <li><a ui-sref = "facturasList">Mis compras</a></li>
                                 <li><a ui-sref="bicisUsadaList">Mis ventas</a></li>
                                 <li><a ui-sref="reclamosList">Mis reclamos</a></li>
-                                <li><a ui-sref="">Cerrar Sesión</a></li>
+                                <!--                                <li><a ui-sref="">Cerrar Sesión</a></li>-->
                             </ul>
                         </li>
                         <li><a ui-sref="carrito"><span class="glyphicon glyphicon-shopping-cart"></span> Carrito</a></li>
@@ -129,8 +130,8 @@
         </div>
 
         <div class="container-fluid">
-              <div class="span4" ui-view="mainView"></div>  
-                <!--<div ui-view = "ofertasView"></div>-->
+            <div class="span4" ui-view="mainView"></div>  
+            <!--<div ui-view = "ofertasView"></div>-->
         </div>
 
     </body>

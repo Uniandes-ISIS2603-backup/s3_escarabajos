@@ -16,27 +16,7 @@
  * |------------------|----------------------------|-------------------------|
  * | catalogoParent   | /catalogo                  | mainView:               |
  * |                  |                            | '<ui-view/>'            |
- * |                  |                            |                         |
- * | catalogo         | /catalogo/                 |catalogoView:            |
- * |                  |                            | /catalogo/catalogo.html |
- * |                  |                            |                         |
- * | bicicletasParent | /catalogo/bicicletas       | listParentView:         |
- * |                  |                            | /list/lists.html        |
- * |                  |                            |                         |
- * | bicicletasNoAdv  | /catalogo/bicicletas       | noAdvView:              |
- * |                  |                            | /list/noAdv.html        |
- * |                  |                            |                         |
- * | bicicletasAdv    | /catalogo/bicicletas       | advView:                |
- * |                  |                            | /list/adv.html          |
- * |                  |                            |                         |
- * | accesoriosParent | /catalogo/accesorios       | listParentView:         |
- * |                  |                            | /list/lists.html        |
- * |                  |                            |                         |
- * | accesoriosNoAdv  | /catalogo/accesorios       | noAdvView               |
- * |                  |                            | /list/noAdv.html        |
- * |                  |                            |                         |
- * | accesoriosAdv    | /catalogo/accesorios       | advView:                |
- * |                  |                            | /list/adv.html          |
+ * |                  |                            |                         |     |
  * |------------------|----------------------------|-------------------------|
  *```
  */
@@ -45,89 +25,61 @@
     mod.constant("catalogoContext", "api/catalogo");
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             var basePath = 'src/modules/catalogo/';
-       $urlRouterProvider.otherwise("/catalogo");
-            $stateProvider.state('catalogoParent', {
+            $stateProvider.state('catalogo', {
                 url: '/catalogo',
                 abstract: true,
                 params: {
-                   paginaParam: 1,
-                   filasParam: 3,
-                   filtrosParam: {"categorias":[],"marcas":[],"precios":{"min":0,"max":-1},"calificacion":0.0,"colores":[]} ///Cambiar esto para que sea el filtro de mayor calificacion desc.
+                    data: null,
+                    tipo: 'accesorios',
+                    adv: true
                 },
                 views: {
                     'mainView': {
-                        templateUrl: basePath + 'catalogoParent.html'
-                    }
-                }
-            }).state('catalogo', {
-                url: '/',
-                parent: 'catalogoParent',
-                views: {
-                    'catalogoView': {
-                        templateUrl: basePath + 'catalogo/catalogo.html',
+                        templateUrl: basePath + 'catalogo.html',
                         controller: 'catalogoCtrl',
                         controllerAs: 'ctrl'
                     }
                 }
-            }).state('listParent', {
-                parent: 'catalogoParent',
+            }).state('advParent', {
+                parent: 'catalogo',
                 abstract: true,
                 views: {
-                    'listParentView': {
-                        templateUrl: basePath + 'list/lists.html'
-                    }
-                }
-            }).state('bicicletasParent', {
-                url: '/bicicletas',
-                parent: 'listParent',
-                abstract: true,
-                views: {
-                    'bicicletasParentView': {
-                        templateUrl: basePath + 'list/bicicletas/bicicletas.html'
-                    }
-                }
-            }).state('bicicletasNoAdv', {
-                parent: 'bicicletasParent',
-                views: {
-                    'bicicletasNoAdvView': {
-                        templateUrl: basePath + 'list/bicicletas/catalogo.bicicletas.noAdv.html',
-                        controller: 'catalogoBicicletasNoAdvCtrl',
+                    'advView': {
+                        templateUrl: basePath + 'propagandas.html',
+                        controller: 'propagandasCtrl',
                         controllerAs: 'ctrl'
                     }
                 }
-            }).state('bicicletasAdv', {
-                parent: 'bicicletasParent',
+            }).state('adv', {
+                parent: 'catalogo',
                 views: {
-                    'bicicletasAdvView': {
-                        templateUrl: basePath + 'list/bicicletas/catalogo.bicicletas.adv.html',
-                        controller: 'catalogoBicicletasAdvCtrl',
+                   'filtrosView': {
+                        templateUrl: basePath + 'filtros.html',
+                        controller: 'filtrosCtrl',
+                        controllerAs: 'ctrl'
+                    },
+                    'catalogoView': {
+                        templateUrl: basePath + 'modelos.html',
+                        controller: 'advCtrl',
+                        controllerAs: 'ctrl'
+                    },
+                    'advView': {
+                        templateUrl: basePath + 'propagandas.html',
+                        controller: 'propagandasCtrl',
                         controllerAs: 'ctrl'
                     }
                 }
-            }).state('accesoriosParent', {
-                url: '/accesorios',
-                parent: 'listParent',
-                abstract: true,
+            }).state('noAdv', {
+                parent: 'catalogo',
                 views: {
-                    'accesoriosParentView': {
-                        templateUrl: basePath + 'list/accesorios/accesorios.html'
-                    }
-                }
-            }).state('accesoriosNoAdv', {
-                parent: 'accesoriosParent',
-                views: {
-                    'accesoriosNoAdvView': {
-                        templateUrl: basePath + 'list/accesorios/catalogo.accesorios.noadv.html',
-                        controller: 'catalogoAccesoriosNoAdvCtrl',
+                    'filtrosView': {
+                        templateUrl: basePath + 'filtros.html',
+                        controller: 'filtrosCtrl',
                         controllerAs: 'ctrl'
-                    }
-                }
-            }).state('accesoriosAdv', {
-                parent: 'accesoriosParent',
-                views: {
-                    'accesoriosAdvView': {
-                        templateUrl: basePath + 'list/accesorios/catalogo.accesorios.adv.html',
-                        controller: 'catalogoAccesoriosAdvCtrl',
+                    },
+                    'catalogoView': {
+                        templateUrl: basePath + 'modelos.html',
+                        controller: 'noAdvCtrl',
                         controllerAs: 'ctrl'
                     }
                 }
