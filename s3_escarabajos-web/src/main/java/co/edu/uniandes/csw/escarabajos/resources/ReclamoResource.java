@@ -55,7 +55,7 @@ public class ReclamoResource {
     }
 
     @GET
-    @Path("{id: \\d+}")
+    @Path("/{id: \\d+}")
     public ReclamoDetailDTO getReclamo(@PathParam("id") Long id) {
         ReclamoEntity entity = reclamoLogic.find(id);
         if (entity == null) {

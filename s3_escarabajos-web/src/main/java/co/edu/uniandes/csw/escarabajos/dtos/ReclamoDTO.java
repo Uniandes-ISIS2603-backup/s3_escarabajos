@@ -125,7 +125,14 @@ public class ReclamoDTO {
     public Long getId() {
         return id;
     }
-
+    /**
+     * Actualiza el id del reclamo
+     * @param id el nuveo id del relcamo
+     */
+    public void setId(Long id)
+    {
+        this.id = id;
+    }
     /**
      * Método que define si un reclamo está en proceso.
      *

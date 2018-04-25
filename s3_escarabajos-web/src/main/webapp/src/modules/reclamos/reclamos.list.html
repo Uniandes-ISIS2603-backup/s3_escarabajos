@@ -26,14 +26,14 @@ and open the template in the editor.
             </div>
             <div class="list-group-item" ng-repeat = "reclamo in reclamosRecords" style = "margin-top:10px">
                 <h1>Razón: {{reclamo.razon}}</h1>
-                <p>Modelo: {{reclamo.modelo}}</p>
-                <p>Estado: {{reclamo.estado}}</p>
+                <p>Modelo: Pendiente del join</p>
+                <p id = "enp{{reclamo.id}}">Preguntarle a Rubby</p>
                 <div align="right">
                     <a ui-sref="reclamoDetail" class="btn btn-success">
                         <span class="glyphicon glyphicon-search" style = "width:10px"></span> Ver
                     </a>
                     <a ui-sref="reclamoDelete" class="btn btn-danger">
-                        <span class="glyphicon glyphicon-trash" style = "width:10px"></span> Eliminar
+                        <span class="glyphicon glyphicon-trash" style = "width:10px"></span> Finalizar
                     </a>
                 </div>
             </div>
@@ -41,4 +41,9 @@ and open the template in the editor.
         <div class = "col-sm-1"></div>
     </div>
 </div>
-
+<script>
+    function isEnProceso(reclamo)
+    {
+        document.getElementById("enp"+reclamo.id).innerHTML = "En proceso: Test";
+    }
+</script>

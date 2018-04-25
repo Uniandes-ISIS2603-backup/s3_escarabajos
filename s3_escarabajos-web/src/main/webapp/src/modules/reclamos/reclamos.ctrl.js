@@ -3,8 +3,9 @@
     mod.constant("reclamosContext", "api/reclamos");
     mod.controller('reclamosCtrl', ['$scope', '$http', 'reclamosContext',
         function ($scope, $http, reclamosContext) {
-            $http.get('data/reclamos.json').then(function (response) {
+            $http.get(reclamosContext).then(function (response) {
                 $scope.reclamosRecords = response.data;
+                console.log(reclamosContext);
             });
         }
     ]);
