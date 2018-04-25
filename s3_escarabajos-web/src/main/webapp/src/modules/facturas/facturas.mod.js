@@ -7,7 +7,7 @@
 
             var basePath = 'src/modules/facturas/';
 
-            $urlRouterProvider.otherwise("/facturas/list");
+           // $urlRouterProvider.otherwise("/facturas/list");
 
             $stateProvider.state('facturas', {
                 url: '/facturas',

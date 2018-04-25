@@ -1,0 +1,46 @@
+<div class="row" ng-repeat="chunk in modelos">
+    <div class="col-xs-{{cols}}" ng-repeat="modelo in chunk">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-8 col-xs-offset-2 ">
+                        <img class="img-responsive" src="{{modelo.url}}" alt="{{modelo.referencia}}">
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row" style="height: 20px">
+                    <p style=" font-size:100% ; text-align: center">{{modelo.referencia}}</p>
+                </div>
+                <div class="row" style="height: 40px">
+                    <p style=" font-size:200% ; text-align: center">${{modelo.precio}}</p>
+                </div>
+                <div class="row" >
+                    <div class="col-xs-12 text-center" >
+                        <!--1-->
+                        <i class="fa fa-star-o" aria-hidden="true" style="font-size: 180%" ng-if=" modelo.calificacionMedia < 0.25" ></i>
+                        <i class="fa fa-star-half-o" aria-hidden="true" style="font-size: 180%"ng-if=" modelo.calificacionMedia >= 0.25 && modelo.calificacionMedia < 0.75" ></i>
+                        <i class="fa fa-star" aria-hidden="true" style="font-size: 180%" ng-if="modelo.calificacionMedia >= 0.75"></i>
+                        <!--2-->
+                        <i class="fa fa-star-o" aria-hidden="true" style="font-size: 180%" ng-if=" modelo.calificacionMedia < 1.25" ></i>
+                        <i class="fa fa-star-half-o" aria-hidden="true" style="font-size: 180%"ng-if=" modelo.calificacionMedia >= 1.25 && modelo.calificacionMedia < 1.75" ></i>
+                        <i class="fa fa-star" aria-hidden="true" style="font-size: 180%" ng-if="modelo.calificacionMedia >= 1.75"></i>
+                        <!--3-->
+                        <i class="fa fa-star-o" aria-hidden="true" style="font-size: 180%" ng-if=" modelo.calificacionMedia < 2.25" ></i>
+                        <i class="fa fa-star-half-o" aria-hidden="true" style="font-size: 180%"ng-if=" modelo.calificacionMedia >= 2.25 && modelo.calificacionMedia < 2.75" ></i>
+                        <i class="fa fa-star" aria-hidden="true" style="font-size: 180%" ng-if="modelo.calificacionMedia >= 2.75"></i>
+                        <!--4-->
+                        <i class="fa fa-star-o" aria-hidden="true" style="font-size: 180%" ng-if=" modelo.calificacionMedia < 3.25" ></i>
+                        <i class="fa fa-star-half-o" aria-hidden="true" style="font-size: 180%"ng-if=" modelo.calificacionMedia >= 3.25 && modelo.calificacionMedia < 0.75" ></i>
+                        <i class="fa fa-star" aria-hidden="true" style="font-size: 180%" ng-if="modelo.calificacionMedia >= 3.75"></i>
+                        <!--5-->
+                        <i class="fa fa-star-o" aria-hidden="true" style="font-size: 180%" ng-if=" modelo.calificacionMedia < 4.25" ></i>
+                        <i class="fa fa-star-half-o" aria-hidden="true" style="font-size: 180%"ng-if=" modelo.calificacionMedia >= 4.25 && modelo.calificacionMedia < 4.75" ></i>
+                        <i class="fa fa-star" aria-hidden="true" style="font-size: 180%" ng-if="modelo.calificacionMedia >= 4.75"></i>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
