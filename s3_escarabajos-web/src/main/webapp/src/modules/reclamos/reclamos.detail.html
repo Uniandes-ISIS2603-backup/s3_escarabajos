@@ -18,22 +18,26 @@ and open the template in the editor.
             <a href="#">Cerrar Sesión</a>
         </div>
         <div class="list-group col-sm-7" ui-view = "reclamoPanel">
-            <legend>Mis Reclamos</legend>
+            <legend>Información del reclamo</legend>
             <div align="right">
                 <a ui-sref="reclamosCreate" class="btn btn-primary">
                     <span class="glyphicon glyphicon-plus-sign" style = "width:10px"></span> Añadir reclamo
                 </a>
             </div>
-            <div class="list-group-item" ng-repeat = "reclamo in reclamosRecords" style = "margin-top:10px">
-                <h1>Razón: {{reclamo.razon}}</h1>
-                <p>Modelo: Pendiente del join</p>
-                <p id = "enp{{reclamo.id}}">Preguntarle a Rubby</p>
+            <div class="list-group-item" style = "margin-top:10px">
+                <h1>Razón: {{reclamoActual.razon}}</h1>
+                <p>Item: Pendiente del join</p>
+                <p id = "enp{{reclamoActual.id}}">Preguntarle a Rubby</p>
+                <p>Mensaje: {{reclamoActual.mensaje}}</p>
                 <div align="right">
-                    <a ui-sref="reclamosDetail({reclamoId: reclamo.id})" class="btn btn-success">
-                        <span class="glyphicon glyphicon-search" style = "width:10px"></span> Ver
+                    <a ui-sref="reclamosPut" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-pencil" style = "width:10px"></span> Editar
                     </a>
                     <a ui-sref="reclamosDelete" class="btn btn-danger">
                         <span class="glyphicon glyphicon-trash" style = "width:10px"></span> Finalizar
+                    </a>
+                    <a ui-sref="reclamosList" class="btn btn-success">
+                        Volver
                     </a>
                 </div>
             </div>
