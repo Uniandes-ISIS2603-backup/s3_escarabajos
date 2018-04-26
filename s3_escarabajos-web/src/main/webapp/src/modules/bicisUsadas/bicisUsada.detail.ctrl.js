@@ -12,7 +12,9 @@
             //pero como no esta completa la parte de vendedor lo puse para un vendedor especifico para mostrar 
             //que si sirve la union del back con el front
                 $http.get(biciUsadaContext + '/1/bicis/' + $state.params.biciUsadaId).then(function (response) {
+                    console.log(response.data.facturaOriginal);
                     $scope.biciUsadaActual = response.data;
+                    
                 });
             }
         }]);

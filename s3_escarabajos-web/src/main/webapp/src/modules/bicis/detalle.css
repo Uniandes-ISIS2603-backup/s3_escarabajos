@@ -6,7 +6,7 @@ body {
     text-align: left;
 }
 .well {
-    max-height:390px;
+    max-height:550px;
     border-color: transparent;
     background-color: transparent;
     box-shadow: inset 0px 0px 7px rgba(0,0,0,0.5);
