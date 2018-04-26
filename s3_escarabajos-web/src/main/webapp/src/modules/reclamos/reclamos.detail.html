@@ -26,18 +26,23 @@ and open the template in the editor.
             </div>
             <div class="list-group-item" style = "margin-top:10px">
                 <h1>Razón: {{reclamoActual.razon}}</h1>
-                <p>Item: Pendiente del join</p>
-                <p id = "enp{{reclamoActual.id}}">Preguntarle a Rubby</p>
-                <p>Mensaje: {{reclamoActual.mensaje}}</p>
-                <div align="right">
+                <p><label>Item:</label> Pendiente del join</p>
+                <div class ="container-fluid">
+                    <label>Mensajes:</label>
+                    <p><label>Usuario 1:</label> {{reclamoActual.mensaje}}</p>
                     <a ui-sref="reclamosPut" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-pencil" style = "width:10px"></span> Editar
+                        <span class="glyphicon glyphicon-pencil" style = "width:10px"></span> Nuevo Mensaje
+                    </a>
+                </div>
+                <br>
+                <p id = "enp{{reclamoActual.id}}">Preguntarle a Rubby</p>
+
+                <div align="right">
+                    <a ui-sref="reclamosList" class="btn btn-success">
+                        Volver
                     </a>
                     <a ui-sref="reclamosDelete" class="btn btn-danger">
                         <span class="glyphicon glyphicon-trash" style = "width:10px"></span> Finalizar
-                    </a>
-                    <a ui-sref="reclamosList" class="btn btn-success">
-                        Volver
                     </a>
                 </div>
             </div>

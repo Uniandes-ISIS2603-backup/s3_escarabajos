@@ -37,6 +37,7 @@ public class ReclamoLogic {
 
     public ReclamoEntity createReclamo(ReclamoEntity ent, Long facturaId) throws BusinessLogicException {
         LOGGER.info("Iniciando el proceso de crear un reclamo.");
+        LOGGER.info(ent+"");
         if (ent.getMensaje().isEmpty()) {
             throw new BusinessLogicException("Por favor ingrese los detalles del reclamo.");
         }

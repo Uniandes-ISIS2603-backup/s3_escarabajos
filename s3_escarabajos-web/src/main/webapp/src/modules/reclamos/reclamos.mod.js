@@ -17,7 +17,7 @@
                         templateUrl: basePath + 'reclamos.list.html',
                         controller: 'reclamosCtrl',
                         controllerAs: 'ctrl'
-                    }
+                    },
                 }
             });
             $stateProvider.state('reclamosCreate', {
@@ -26,12 +26,16 @@
                 views: {
                     'mainView': {
                         templateUrl: basePath + 'reclamos.create.html',
+                        controller: 'reclamoCreateCtrl'
                     }
+                },
+                 data: {
+                  
                 }
             });
             $stateProvider.state('reclamosDetail', {
                 // Url que aparecerá en el browser
-                url: 'reclamos/{reclamoId:int}',
+                url: '/reclamos/{reclamoId:int}',
                 param: {
                     reclamoId: null
                 },

@@ -26,8 +26,9 @@ and open the template in the editor.
             </div>
             <div class="list-group-item" ng-repeat = "reclamo in reclamosRecords" style = "margin-top:10px">
                 <h1>Razón: {{reclamo.razon}}</h1>
-                <p>Modelo: Pendiente del join</p>
-                <p id = "enp{{reclamo.id}}">Preguntarle a Rubby</p>
+                <p><label>Item:</label> Pendiente del join</p>
+                <p ng-if = "!reclamo.enProceso"><label>Estado:</label> Finalizado</p>
+                <p ng-if = "reclamo.enProceso"><label>Estado:</label> En Proceso</p>
                 <div align="right">
                     <a ui-sref="reclamosDetail({reclamoId: reclamo.id})" class="btn btn-success">
                         <span class="glyphicon glyphicon-search" style = "width:10px"></span> Ver

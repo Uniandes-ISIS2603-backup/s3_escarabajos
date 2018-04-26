@@ -38,10 +38,10 @@ insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod
 --Datos de prueba ClienteEntity
 
 --Datos de prueba ReclamoEntity
-insert into ReclamoEntity values (1,0, 'La bicicleta no ha llegado. La pedí hace 2 semanas y no he recibido información alguna sobre su estado, estoy pendiente a respuesta.', 'El pedido no ha llegado', null, null);
+insert into ReclamoEntity values (1,1, 'La bicicleta no ha llegado. La pedí hace 2 semanas y no he recibido información alguna sobre su estado, estoy pendiente a respuesta.', 'El pedido no ha llegado', null, null);
 insert into ReclamoEntity values (2,0, 'Las rodilleras me llegaron en una talla menor a la pedida', 'Rodilleras pequeñas', null, null);
-insert into ReclamoEntity values (3,0, 'Quiero exigir la garantía por una bicicleta que se rompió', 'Garantía', null, null);
-insert into ReclamoEntity values (4,0, 'Los frenos no funcionan correctamente, se demoran mucho en comenzar a funcionar', 'Frenos dañados', null, null);
+insert into ReclamoEntity values (3,1, 'Quiero exigir la garantía por una bicicleta que se rompió', 'Garantía', null, null);
+insert into ReclamoEntity values (4,1, 'Los frenos no funcionan correctamente, se demoran mucho en comenzar a funcionar', 'Frenos dañados', null, null);
 insert into ReclamoEntity values (5,0, 'El casco llegó sin seguro.', 'El casco llegó sin seguro.', null, null);
 
 

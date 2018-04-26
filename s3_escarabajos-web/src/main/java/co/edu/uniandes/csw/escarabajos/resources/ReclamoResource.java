@@ -46,7 +46,8 @@ public class ReclamoResource {
 
     @POST
     public ReclamoDetailDTO createReclamo(ReclamoDetailDTO reclamo) throws BusinessLogicException {
-        return new ReclamoDetailDTO(reclamoLogic.createReclamo(reclamo.toEntity(), new Long(1)));
+        reclamo.setEnProceso(true);
+        return new ReclamoDetailDTO(reclamoLogic.createReclamo(reclamo.toEntity(), null));
     }
 
     @GET

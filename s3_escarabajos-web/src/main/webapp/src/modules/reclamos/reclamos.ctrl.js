@@ -11,8 +11,6 @@
     ]);
     mod.controller("reclamosDetailCtrl", ['$scope', 'reclamosContext', '$http', '$state',
         function ($scope, reclamosContext, $http, $state) {
-            console.log(1);
-
             if ($state.params.reclamoId !== undefined && $state.params.reclamoId !== null) {
 
                 $http.get(reclamosContext + "/" + $state.params.reclamoId).then(function (response) {
@@ -20,5 +18,17 @@
                 });
             }
         }]);
+    mod.controller('reclamoCreateCtrl', ['$scope', '$http', 'reclamosContext', '$state', '$rootScope',
+        function ($scope, $http, reclamosContext, $state, $rootScope) {
+            $rootScope.edit = false;
+
+            $scope.data = {};
+            $scope.createReclamo = function () {
+                $http.post(reclamosContext, $scope.data).then(function (response) {
+                    $state.go('reclamosList', {reclamoId: response.data.id},{reload: true});
+                });
+            };
+        }
+    ]);
 }
 )(window.angular);
