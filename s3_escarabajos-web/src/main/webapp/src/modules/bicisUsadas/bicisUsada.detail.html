@@ -12,7 +12,7 @@
     <div class="col-sm-2"></div>
     <div class="col-sm-8">
         <div class="well" style="overflow:auto;">
-            <div class="container col-sm-8" >
+            <div class="container col-sm-8 col-xs-6" >
                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
                     <ol class="carousel-indicators">
@@ -47,7 +47,7 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-            <div class="col-sm-1"></div>
+            <div class="col-sm-2"></div>
             <div  class="texto col-sm-3">
                 <h4>Modelo:         {{biciUsadaActual.modeloId}}</h4>
                 <h4>Categoria:      {{biciUsadaActual.categoria}}</h4>
@@ -58,7 +58,7 @@
                 </h4>
                 <h4>Usada:          {{biciUsadaActual.usada}}</h4>
                 <h4>Estado:         {{biciUsadaActual.estado}}</h4>
-                <h4>Factura Original:       {{biciUsadaActual.facturaOriginal}}</h4>
+                <h4>Factura Original:     <a href="{{biciUsadaActual.facturaOriginal}}">Aquí</a></h4>
                 <br>
                 <br>
                 <div style="position: relative;" class="row">
@@ -85,9 +85,8 @@
         </div>
     </div>
 </div>
-</div>
 <div class="row">
-    <div class="col-sm-2"></div>
+    <div class="col-sm-1"></div>
     <div class="col-sm-8">
         <hr class="antes">
         <div class="form-group">
