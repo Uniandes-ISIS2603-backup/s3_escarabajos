@@ -26,5 +26,8 @@ hs_err_pid*
 /s3_escarabajos-back/target/
 /s3_escarabajos-web/target/
 /s3_escarabajos-back/nbproject/
+/s3_escarabajos-web/src/main/webapp/bower_components/angular-bootstrap
+/s3_escarabajos-web/src/main/webapp/bower_components/angular
+/s3_escarabajos-web/src/main/webapp/bower_components/jquery
 /s3_escarabajos-web/bower_components/
 /s3_escarabajos-web/src/main/webapp/bower_components/
