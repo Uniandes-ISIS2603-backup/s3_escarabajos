@@ -1,7 +1,7 @@
 (function (ng) {
     var mod = ng.module("moduloBicisUsadas");
     
-    mod.constant("biciUsadaContext","api/vendedores");
+    mod.constant("biciUsadaContext","api/clientes");
     
     mod.controller('biciUsadaCreateCtrl',['$scope','$http','biciUsadaContext','$state',
         function($scope,$http,biciUsadaContext,$state){

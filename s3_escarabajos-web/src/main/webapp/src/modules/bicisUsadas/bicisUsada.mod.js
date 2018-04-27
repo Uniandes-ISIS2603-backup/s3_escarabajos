@@ -2,17 +2,17 @@
     //Tendria como dependecia el modulo del vendedor pero como no esta completo lo omitire
     var mod = ng.module("moduloBicisUsadas", ['ui.router']);
 
-    mod.constant("biciUsadaContext", "api/vendedores");
+    mod.constant("biciUsadaContext", "api/clientes");
 
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
             var basePath = 'src/modules/bicisUsadas/';
 
-            $urlRouterProvider.otherwise("/vendedores/1/bicis/list");
+            $urlRouterProvider.otherwise("/clientes/1/bicis/list");
             //Tendria que tener de parent:'vendedorDetail' pero como no esta completa la parte de vendedor 
             //pondre la url de un vendedor especifico
             $stateProvider.state('bicisUsada', {
-                url: '/vendedores/1/bicis',
+                url: '/clientes/1/bicis',
                 abstract: true,
                 views: {
                     //Deberia ser en un childrenView pero como no esta completa la parte de vendedor se mostrara

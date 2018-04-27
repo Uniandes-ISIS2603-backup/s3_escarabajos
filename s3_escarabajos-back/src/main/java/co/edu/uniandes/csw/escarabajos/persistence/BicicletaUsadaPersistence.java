@@ -44,8 +44,8 @@ public class BicicletaUsadaPersistence {
      * @return bicicleta usada
      */
     public BicicletaUsadaEntity find(Long idVendedor, Long idBici) {
-        TypedQuery<BicicletaUsadaEntity> q = em.createQuery("select p from BicicletaUsadaEntity p where (p.vendedor.id = :vendedorid) and (p.id = :biciid) and p.usada = 1", BicicletaUsadaEntity.class);
-        q.setParameter("vendedorid", idVendedor);
+        TypedQuery<BicicletaUsadaEntity> q = em.createQuery("select p from BicicletaUsadaEntity p where (p.cliente.id = :clienteid) and (p.id = :biciid) and p.usada = 1", BicicletaUsadaEntity.class);
+        q.setParameter("clienteid", idVendedor);
         q.setParameter("biciid", idBici);
         List<BicicletaUsadaEntity> results = q.getResultList();
         BicicletaUsadaEntity bici = null;
@@ -97,8 +97,8 @@ public class BicicletaUsadaPersistence {
      */
     public List<BicicletaUsadaEntity> findAllBicis(Long idVendedor) {
         LOGGER.info("Consultando todas las bicicletas del vendedor con id");
-        TypedQuery query = em.createQuery("select u from BicicletaUsadaEntity u where (u.vendedor.id  = :idVendedor) and u.usada = 1 ", BicicletaUsadaEntity.class);
-        query.setParameter("idVendedor", idVendedor);
+        TypedQuery query = em.createQuery("select u from BicicletaUsadaEntity u where (u.cliente.id  = :idCliente) and u.usada = 1 ", BicicletaUsadaEntity.class);
+        query.setParameter("idCliente", idVendedor);
         return query.getResultList();
     }
 

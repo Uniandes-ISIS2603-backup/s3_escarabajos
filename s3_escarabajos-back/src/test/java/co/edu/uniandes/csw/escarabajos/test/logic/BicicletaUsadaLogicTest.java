@@ -7,8 +7,8 @@ package co.edu.uniandes.csw.escarabajos.test.logic;
 
 import co.edu.uniandes.csw.escarabajos.ejb.BicicletaUsadaLogic;
 import co.edu.uniandes.csw.escarabajos.entities.BicicletaUsadaEntity;
+import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
-import co.edu.uniandes.csw.escarabajos.entities.VendedorEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.BicicletaUsadaPersistence;
 import java.util.ArrayList;
@@ -51,7 +51,7 @@ public class BicicletaUsadaLogicTest {
   
     private List<BicicletaUsadaEntity> data = new ArrayList<BicicletaUsadaEntity>();
 
-    private List<VendedorEntity> dataVendedor = new ArrayList<VendedorEntity>();
+    private List<ClienteEntity> dataVendedor = new ArrayList<ClienteEntity>();
 
     private List<ModeloEntity> dataModelo = new ArrayList<ModeloEntity>();
     @Deployment
@@ -60,6 +60,7 @@ public class BicicletaUsadaLogicTest {
                 .addPackage(BicicletaUsadaEntity.class.getPackage())
                 .addPackage(BicicletaUsadaLogic.class.getPackage())
                 .addPackage(BicicletaUsadaPersistence.class.getPackage())
+                .addPackage(ClienteEntity.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -93,7 +94,7 @@ public class BicicletaUsadaLogicTest {
      */
     private void clearData() {
         em.createQuery("delete from BicicletaUsadaEntity").executeUpdate();
-        em.createQuery("delete from VendedorEntity").executeUpdate();
+        em.createQuery("delete from ClienteEntity").executeUpdate();
         em.createQuery("delete from ModeloEntity").executeUpdate();
     }
 
@@ -113,7 +114,7 @@ public class BicicletaUsadaLogicTest {
         }
         
         for (int i = 0; i < 3; i++) {
-            VendedorEntity entity = factory.manufacturePojo(VendedorEntity.class);
+            ClienteEntity entity = factory.manufacturePojo(ClienteEntity.class);
             em.persist(entity);
             dataVendedor.add(entity);
         }
@@ -122,7 +123,7 @@ public class BicicletaUsadaLogicTest {
             BicicletaUsadaEntity entity = factory.manufacturePojo(BicicletaUsadaEntity.class);
             entity.setModeloId(dataModelo.get(0).getId());
             entity.setEstado("En proceso");
-            entity.setVendedor(dataVendedor.get(1));
+            entity.setCliente(dataVendedor.get(1));
             
             em.persist(entity);
             data.add(entity);
@@ -139,7 +140,7 @@ public class BicicletaUsadaLogicTest {
         BicicletaUsadaEntity newEntity = factory.manufacturePojo(BicicletaUsadaEntity.class);
         newEntity.setModeloId(dataModelo.get(0).getId());
         newEntity.setEstado("En proceso");
-        BicicletaUsadaEntity result = logic.createBicicleta(data.get(0).getVendedor().getId(),newEntity);
+        BicicletaUsadaEntity result = logic.createBicicleta(data.get(0).getCliente().getId(),newEntity);
         Assert.assertNotNull(result);
         BicicletaUsadaEntity entity = em.find(BicicletaUsadaEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());

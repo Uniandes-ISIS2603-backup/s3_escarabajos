@@ -10,7 +10,6 @@ import co.edu.uniandes.csw.escarabajos.dtos.ClienteDetailDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.ClienteDTO;
 import co.edu.uniandes.csw.escarabajos.ejb.CarritoLogic;
 import co.edu.uniandes.csw.escarabajos.ejb.ClienteLogic;
-import co.edu.uniandes.csw.escarabajos.ejb.VendedorLogic;
 import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
@@ -58,8 +57,6 @@ public class ClienteResource {
     @Inject
     CarritoLogic Carritologic;
     
-    @Inject
-    VendedorLogic vendedorlogic;
     /**
      * <h1>POST /api/clientes : Crear un cliente.</h1>
      * 

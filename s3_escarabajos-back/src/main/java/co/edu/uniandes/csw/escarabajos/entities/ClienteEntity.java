@@ -14,8 +14,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -34,6 +32,9 @@ public class ClienteEntity implements Serializable {
     private String correo;
     private String usuario;
     private String cedula;
+    private String direccion;
+    private String telefono;
+    
     @PodamExclude
     @OneToOne(mappedBy = "cliente")
     private CarritoEntity carrito;
@@ -60,6 +61,10 @@ public class ClienteEntity implements Serializable {
     /*@JoinTable(name = " CLNT_ITEMS", joinColumns = @JoinColumn(name = "CLNT_ID"), inverseJoinColumns = @JoinColumn(name="ITEM_ID"))
     */
     private List<ItemEntity> deseados = new ArrayList<>();
+    
+     @PodamExclude
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST,orphanRemoval = true)
+    private List<BicicletaUsadaEntity> bicicletasUsadas = new ArrayList<BicicletaUsadaEntity>();
  
     public CarritoEntity getCarrito(){
         return carrito;
@@ -91,6 +96,19 @@ public class ClienteEntity implements Serializable {
     public void setCedula(String cedula){
         this.cedula = cedula;
     } 
+    
+    public String getDireccion(){
+        return direccion;
+    }
+    public void setDireccion(String direccion){
+        this.direccion = direccion;
+    }
+    public String getTelefono(){
+        return telefono;
+    }
+    public void setTelefono(String telefono){
+        this.telefono = telefono;
+    }
 
     /**
      * @return the compras
@@ -146,6 +164,20 @@ public class ClienteEntity implements Serializable {
      */
     public void setReclamos(List<ReclamoEntity> reclamos) {
         this.reclamos = reclamos;
+    }
+    
+    /**
+     * @return the bicicletasUsadas
+     */
+    public List<BicicletaUsadaEntity> getBicicletasUsadas() {
+        return bicicletasUsadas;
+    }
+
+    /**
+     * @param bicicletasUsadas the bicicletasUsadas to set
+     */
+    public void setBicicletasUsadas(List<BicicletaUsadaEntity> bicicletasUsadas) {
+        this.bicicletasUsadas = bicicletasUsadas;
     }
 
     /**

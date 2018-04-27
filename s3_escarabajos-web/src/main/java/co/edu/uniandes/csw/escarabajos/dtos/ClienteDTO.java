@@ -50,8 +50,8 @@ public class ClienteDTO {
     private String correo;
     private String usuario;
     private String cedula;
-    
-    
+    private String direccion;
+    private String telefono;
     public ClienteDTO(){
     }
     
@@ -68,6 +68,8 @@ public class ClienteDTO {
             this.correo = cliente.getCorreo();
             this.usuario = cliente.getUsuario();
             this.cedula = cliente.getCedula();
+            this.direccion = cliente.getDireccion();
+            this.telefono = cliente.getTelefono();
         }
     }
     
@@ -95,6 +97,21 @@ public class ClienteDTO {
     public void setCedula(String cedula){
         this.cedula = cedula;
     }
+        public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
     
     /**
      * Convertir DTO a Entity
@@ -108,6 +125,8 @@ public class ClienteDTO {
         entity.setCorreo(this.getCorreo());
         entity.setUsuario(this.getUsuario());
         entity.setCedula(this.getCedula());
+        entity.setDireccion(this.getDireccion());
+        entity.setTelefono(this.getTelefono());
         return entity;
     }
 

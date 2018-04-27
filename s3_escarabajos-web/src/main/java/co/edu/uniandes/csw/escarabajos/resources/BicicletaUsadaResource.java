@@ -24,7 +24,7 @@ import javax.ws.rs.WebApplicationException;
 
 /**
  * <pre>Clase que implementa el recurso "bicisUsadas".
- * URL: /api/vendedores/{idVendedor}/bicis
+ * URL: /api/clientes/{idCliente}/bicis
  * </pre>
  * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta "/api" y
  * este recurso tiene la ruta "bicisUsadas".</i>
@@ -38,7 +38,7 @@ import javax.ws.rs.WebApplicationException;
   * @author c.santacruza
  */
 
-@Path("vendedores/{idVendedor: \\d+}/bicis")
+@Path("clientes/{idCliente: \\d+}/bicis")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
@@ -58,7 +58,7 @@ public class BicicletaUsadaResource {
     }
     
     /**
-     * <h1>POST /api/vendedores/{idVendedor}/bicis : Crear una bicicleta usada.</h1>
+     * <h1>POST /api/clientes/{idCliente}/bicis : Crear una bicicleta usada.</h1>
      * 
      * <pre>Cuerpo de petición: JSON {@link BicicletaUsadaDTO}.
      * 
@@ -80,13 +80,13 @@ public class BicicletaUsadaResource {
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la bicicleta usada.
      */
     @POST
-    public BicicletaUsadaDTO createBicicletaUsada(@PathParam("idVendedor") Long idVendedor,BicicletaUsadaDTO bici) throws BusinessLogicException {
+    public BicicletaUsadaDTO createBicicletaUsada(@PathParam("idCliente") Long idVendedor,BicicletaUsadaDTO bici) throws BusinessLogicException {
         BicicletaUsadaEntity temp = logic.createBicicleta(idVendedor,bici.toEntity());
         return new BicicletaUsadaDTO((BicicletaUsadaEntity)modeloLogic.addItem(temp,temp.getModeloId()));
     }
 
     /**
-     * <h1>GET /api/vendedores/{idVendedor}/bicis : Obtener todas las bicicletas usadas.</h1>
+     * <h1>GET /api/clientes/{idCliente}/bicis : Obtener todas las bicicletas usadas.</h1>
      * 
      * <pre>Busca y devuelve todas las bicicletas usadas que existen en la aplicacion.
      * 
@@ -99,12 +99,12 @@ public class BicicletaUsadaResource {
      * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
      */
     @GET
-    public List<BicicletaUsadaDTO> getBicicletaUsadasDelVendedor(@PathParam("idVendedor")Long idVendedor) throws BusinessLogicException {
+    public List<BicicletaUsadaDTO> getBicicletaUsadasDelVendedor(@PathParam("idCliente")Long idVendedor) throws BusinessLogicException {
         return listEntity2DTO(logic.getBicicletasDelVendedor(idVendedor));
     }
     
    /**
-     * <h1>GET /api/vendedores/{idVendedor}/bicis/{id} : Obtener bicicleta usada por id.</h1>
+     * <h1>GET /api/clientes/{idCliente}/bicis/{id} : Obtener bicicleta usada por id.</h1>
      * 
      * <pre>Busca la bicicleta usada con el id asociado recibido en la URL y la devuelve.
      * 
@@ -123,16 +123,16 @@ public class BicicletaUsadaResource {
      */
     @GET
     @Path("{id: \\d+}")
-    public BicicletaUsadaDTO getBicicletaUsada(@PathParam("idVendedor")Long idVendedor,@PathParam("id") Long id) throws BusinessLogicException,WebApplicationException {
+    public BicicletaUsadaDTO getBicicletaUsada(@PathParam("idCliente")Long idVendedor,@PathParam("id") Long id) throws BusinessLogicException,WebApplicationException {
         BicicletaUsadaEntity entity = logic.getBicicleta(idVendedor, id);
         if(entity == null){
-            throw new WebApplicationException("El recurso /vendedor/" + idVendedor + "/bicis/" + id + " no existe.", 404);
+            throw new WebApplicationException("El recurso /cliente/" + idVendedor + "/bicis/" + id + " no existe.", 404);
         }
         return new BicicletaUsadaDTO(entity);
     }
     
     /**
-     * <h1>PUT /api/vendedores/{idVendedor}/bicis/{id} : Actualizar bicicleta usada con el id dado.</h1>
+     * <h1>PUT /api/clientes/{idCliente}/bicis/{id} : Actualizar bicicleta usada con el id dado.</h1>
      * <pre>Cuerpo de petición: JSON {@link BicicletaUsadaDTO}.
      * 
      * Actualiza la bicicleta usada con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
@@ -152,17 +152,17 @@ public class BicicletaUsadaResource {
      */
     @PUT
     @Path("{id: \\d+}")
-    public BicicletaUsadaDTO updateBicicletaUsada(@PathParam("idVendedor")Long idVendedor,@PathParam("id") Long id, BicicletaUsadaDTO bici) throws BusinessLogicException {
+    public BicicletaUsadaDTO updateBicicletaUsada(@PathParam("idCliente")Long idVendedor,@PathParam("id") Long id, BicicletaUsadaDTO bici) throws BusinessLogicException {
         bici.setId(id);
         BicicletaUsadaEntity entity = logic.getBicicleta(idVendedor, id);
         if(entity == null){
-            throw new WebApplicationException("El recurso /vendedor/" + idVendedor + "/bicis/" + id + " no existe.", 404);
+            throw new WebApplicationException("El recurso /cliente/" + idVendedor + "/bicis/" + id + " no existe.", 404);
         }
         return new BicicletaUsadaDTO(logic.updateBicicleta(idVendedor, bici.toEntity()));
     }
     
     /**
-     * <h1>DELETE /api/vendedores/{idVendedor}/bicis/{id} : Borrar bicicleta usada por id.</h1>
+     * <h1>DELETE /api/clientes/{idCliente}/bicis/{id} : Borrar bicicleta usada por id.</h1>
      * 
      * <pre>Borra la bicicleta usada con el id asociado recibido en la URL.
      * 
@@ -179,10 +179,10 @@ public class BicicletaUsadaResource {
      */
     @DELETE
     @Path("{id: \\d+}")
-     public void deleteBicicletaUsada(@PathParam("idVendedor")Long idVendedor,@PathParam("id") Long id) throws BusinessLogicException {
+     public void deleteBicicletaUsada(@PathParam("idCliente")Long idVendedor,@PathParam("id") Long id) throws BusinessLogicException {
         BicicletaUsadaEntity entity = logic.getBicicleta(idVendedor,id);
         if(entity == null){
-            throw new WebApplicationException("El recurso /vendedor/" + idVendedor + "/bicis/" + id + " no existe.", 404);
+            throw new WebApplicationException("El recurso /cliente/" + idVendedor + "/bicis/" + id + " no existe.", 404);
         }
         logic.deleteBicicleta(idVendedor, id);
     }

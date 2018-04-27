@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.escarabajos.dtos;
 
 import co.edu.uniandes.csw.escarabajos.entities.AccesorioEntity;
 import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
+import co.edu.uniandes.csw.escarabajos.entities.BicicletaUsadaEntity;
 import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 import co.edu.uniandes.csw.escarabajos.entities.FacturaEntity;
@@ -70,6 +71,8 @@ public class ClienteDetailDTO extends ClienteDTO{
     private List<ReclamoDTO> reclamos ;
     
     private List<ItemDTO> regalos ;
+    
+    private List<BicicletaUsadaDTO> bicicletasUsadas;
 
     /**private List<ItemDTO> listaDeseos ;*/
     /**
@@ -104,7 +107,7 @@ public class ClienteDetailDTO extends ClienteDTO{
                     }
                 }
             }
-
+                
 
                 compras = new ArrayList<>();
                 for (FacturaEntity entityCompras : entity.getCompras()) {
@@ -128,6 +131,11 @@ public class ClienteDetailDTO extends ClienteDTO{
                 mediosPago = new ArrayList<>();
                 for (MedioPagoEntity entityMediosPago : entity.getMediosPago()) {
                     mediosPago.add(new MedioPagoDTO(entityMediosPago));
+                }
+                
+                bicicletasUsadas = new ArrayList<>();
+                for (BicicletaUsadaEntity entityBicicletaUsada: entity.getBicicletasUsadas()) {
+                    bicicletasUsadas.add(new BicicletaUsadaDTO(entityBicicletaUsada));
                 }
 
             
@@ -186,6 +194,14 @@ public class ClienteDetailDTO extends ClienteDTO{
                 mediosPagoEntity.add(dtoMediosPago.toEntity());
             }
             entity.setMediosPago(mediosPagoEntity);
+        }
+        
+        if (getBicicletasUsadas() != null) {
+            List<BicicletaUsadaEntity> bicicletasUsadasEntity = new ArrayList<>();
+            for (BicicletaUsadaDTO dtoBicicletaUsada : getBicicletasUsadas()) {
+               bicicletasUsadasEntity.add(dtoBicicletaUsada.toEntity());
+            }
+            entity.setBicicletasUsadas(bicicletasUsadasEntity);
         }
 
         return entity;
@@ -273,6 +289,20 @@ public class ClienteDetailDTO extends ClienteDTO{
      */
     public void setRegalos(List<ItemDTO> regalos) {
         this.regalos = regalos;
+    }
+    
+    /**
+     * @return the bicicletasUsadas
+     */
+    public List<BicicletaUsadaDTO> getBicicletasUsadas() {
+        return bicicletasUsadas;
+    }
+
+    /**
+     * @param bicicletasUsadas the bicicletasUsadas to set
+     */
+    public void setBicicletasUsadas(List<BicicletaUsadaDTO> bicicletasUsadas) {
+        this.bicicletasUsadas = bicicletasUsadas;
     }
 
 }

@@ -9,7 +9,6 @@ import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.CarritoPersistence;
 import co.edu.uniandes.csw.escarabajos.persistence.ClientePersistence;
-import co.edu.uniandes.csw.escarabajos.persistence.VendedorPersistence;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,8 +26,6 @@ public class ClienteLogic {
     @Inject
     private ClientePersistence persistence; // Variable para acceder a la persistencia de la aplicación. Es una inyección de dependencias.
 
-    @Inject
-    private VendedorPersistence persistenceVendedor; 
     
     @Inject
     private CarritoPersistence carritoPersistence;
@@ -63,9 +60,6 @@ public class ClienteLogic {
     
     public void deleteCliente(Long id) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar cliente con id={0}", id);    
-        if(persistenceVendedor.find(id)!=null){
-            persistenceVendedor.delete(id);
-        }
         persistence.delete(id);
         LOGGER.log(Level.INFO, "Termina proceso de borrar cliente con id={0}", id);
     }

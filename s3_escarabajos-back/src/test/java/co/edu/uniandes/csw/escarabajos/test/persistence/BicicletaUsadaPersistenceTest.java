@@ -1,7 +1,7 @@
 package co.edu.uniandes.csw.escarabajos.test.persistence;
 
 import co.edu.uniandes.csw.escarabajos.entities.BicicletaUsadaEntity;
-import co.edu.uniandes.csw.escarabajos.entities.VendedorEntity;
+import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 import co.edu.uniandes.csw.escarabajos.persistence.BicicletaUsadaPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -94,14 +94,14 @@ public class BicicletaUsadaPersistenceTest {
      */
     private void clearData() {
         em.createQuery("delete from BicicletaUsadaEntity").executeUpdate();
-        em.createQuery("delete from VendedorEntity").executeUpdate();
+        em.createQuery("delete from ClienteEntity").executeUpdate();
     }
 
     /**
      *
      */
     private List<BicicletaUsadaEntity> data = new ArrayList<BicicletaUsadaEntity>();
-    private List<VendedorEntity> dataVendedor = new ArrayList<VendedorEntity>();
+    private List<ClienteEntity> dataVendedor = new ArrayList<ClienteEntity>();
 
     /**
      * Inserta los datos iniciales para el correcto funcionamiento de las
@@ -112,14 +112,14 @@ public class BicicletaUsadaPersistenceTest {
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
-            VendedorEntity entity = factory.manufacturePojo(VendedorEntity.class);
+            ClienteEntity entity = factory.manufacturePojo(ClienteEntity.class);
 
             em.persist(entity);
             dataVendedor.add(entity);
         }
         for (int i = 0; i < 3; i++) {
             BicicletaUsadaEntity entity = factory.manufacturePojo(BicicletaUsadaEntity.class);
-            entity.setVendedor(dataVendedor.get(0));
+            entity.setCliente(dataVendedor.get(0));
             entity.setUsada(Boolean.TRUE);
             em.persist(entity);
             data.add(entity);
@@ -154,7 +154,7 @@ public class BicicletaUsadaPersistenceTest {
      */
     @Test
     public void getBicicletasDelVendedorTest() {
-        VendedorEntity vendedor = dataVendedor.get(0);
+        ClienteEntity vendedor = dataVendedor.get(0);
         vendedor.setBicicletasUsadas(data);
         List<BicicletaUsadaEntity> list = biciPersistence.findAllBicis(vendedor.getId());
         Assert.assertEquals(data.size(), list.size());

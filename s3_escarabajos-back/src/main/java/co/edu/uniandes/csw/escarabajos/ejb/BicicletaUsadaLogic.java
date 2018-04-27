@@ -6,8 +6,8 @@
 package co.edu.uniandes.csw.escarabajos.ejb;
 
 import co.edu.uniandes.csw.escarabajos.entities.BicicletaUsadaEntity;
+import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
-import co.edu.uniandes.csw.escarabajos.entities.VendedorEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.BicicletaUsadaPersistence;
 import co.edu.uniandes.csw.escarabajos.persistence.ModeloPersistence;
@@ -40,7 +40,7 @@ public class BicicletaUsadaLogic {
      * Injecta la logica de vendedor.
      */
     @Inject
-    private VendedorLogic logicVendedor;
+    private ClienteLogic logicVendedor;
     /**
      * Injecta la persistencia de modelo.
      */
@@ -73,7 +73,7 @@ public class BicicletaUsadaLogic {
      */
     public List<BicicletaUsadaEntity> getBicicletasDelVendedor(Long idVendedor) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de consultar todos los bicicleta usadas usadas");
-        VendedorEntity vendedor = logicVendedor.getVendedor(idVendedor);
+        ClienteEntity vendedor = logicVendedor.getCliente(idVendedor);
         if (vendedor.getBicicletasUsadas() == null || vendedor.getBicicletasUsadas().isEmpty()) {
             throw new BusinessLogicException("El vendedor aun no tiene ninguna bicicleta usada");
         }
@@ -114,8 +114,8 @@ public class BicicletaUsadaLogic {
         entity.setEstado("En proceso");
         logicItem.verificarItem(entity);
         verificarBiciUsada(entity);
-        VendedorEntity vendedor = logicVendedor.getVendedor(idVendedor);
-        entity.setVendedor(vendedor);
+        ClienteEntity vendedor = logicVendedor.getCliente(idVendedor);
+        entity.setCliente(vendedor);
         LOGGER.info("Termina proceso de creaciÃ³n de bicicleta usada");
         return persistence.create(entity);
     }
@@ -139,8 +139,8 @@ public class BicicletaUsadaLogic {
             throw new BusinessLogicException("La bicicleta usada debe tener un modelo");
         }
         verificarBiciUsada(entity);
-        VendedorEntity vendedor = logicVendedor.getVendedor(idVendedor);
-        entity.setVendedor(vendedor);
+        ClienteEntity vendedor = logicVendedor.getCliente(idVendedor);
+        entity.setCliente(vendedor);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar bicicleta usada con id={0}", entity.getId());
         return persistence.update(entity);
     }

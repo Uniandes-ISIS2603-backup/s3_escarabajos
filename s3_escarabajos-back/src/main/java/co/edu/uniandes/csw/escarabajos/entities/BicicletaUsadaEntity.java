@@ -32,21 +32,21 @@ public class BicicletaUsadaEntity extends BicicletaEntity implements Serializabl
      */
     @PodamExclude
     @ManyToOne(cascade = CascadeType.PERSIST)
-    private VendedorEntity vendedor;
+    private ClienteEntity cliente;
     
     /**
      * Devuelve el vendedor.
      * @return vendedor
      */
-    public VendedorEntity getVendedor() {
-        return vendedor;
+    public ClienteEntity getCliente() {
+        return cliente;
     }
     /**
      * Modifica el vendedor.
-     * @param vendedor nuevo vendedor
+     * @param cliente nuevo vendedor
      */
-    public void setVendedor(VendedorEntity vendedor) {
-        this.vendedor = vendedor;
+    public void setCliente(ClienteEntity cliente) {
+        this.cliente = cliente;
     }
     
     /**
