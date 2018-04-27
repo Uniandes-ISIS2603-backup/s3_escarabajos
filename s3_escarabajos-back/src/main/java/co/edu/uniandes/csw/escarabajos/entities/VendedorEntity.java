@@ -10,9 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -21,25 +18,15 @@ import uk.co.jemos.podam.common.PodamExclude;
  * @author s.beltran
  */
 @Entity
-public class VendedorEntity implements Serializable{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class VendedorEntity extends ClienteEntity implements Serializable{
+
     private String direccion;
     private String telefono;
-    private String nombre;
     
     @PodamExclude
     @OneToMany(mappedBy = "vendedor", cascade = CascadeType.PERSIST,orphanRemoval = true)
     private List<BicicletaUsadaEntity> bicicletasUsadas = new ArrayList<BicicletaUsadaEntity>();
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
     public String getDireccion(){
         return direccion;
     }
@@ -51,14 +38,6 @@ public class VendedorEntity implements Serializable{
     }
     public void setTelefono(String telefono){
         this.telefono = telefono;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     
