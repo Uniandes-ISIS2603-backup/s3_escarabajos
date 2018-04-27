@@ -4,8 +4,8 @@
     
     mod.constant("clientesContext","api/clientes");
     
-    mod.controller('clientesCtrl',['$scope','$http','clientesContext',
-        function($scope,$http,clientesContext){
+    mod.controller('clientesCtrl',['$scope','$http','clientesContext', '$state',
+        function($scope,$http,clientesContext, $state){
             
             $scope.listaClientes ={};
             

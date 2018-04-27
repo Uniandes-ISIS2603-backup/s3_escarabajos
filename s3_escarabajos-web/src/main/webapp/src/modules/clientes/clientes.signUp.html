@@ -14,8 +14,7 @@
               <div class="form-group">
                 <label class="col-md-4 control-label" for="textinput">Username</label>
                 <div class="col-md-4">
-                  <input id="textinput" name="textinput" type="text" placeholder="UserName" class="form-control input-md">
-
+                  <input id="usuario" name="textinput" type="text" required ng-model="data.usuario" placeholder="UserName" class="form-control input-md">
                 </div>
               </div>
 
@@ -23,8 +22,7 @@
               <div class="form-group">
                 <label class="col-md-4 control-label" for="textinput">Nombre</label>
                 <div class="col-md-4">
-                  <input id="textinput" name="textinput" type="text" placeholder="nombre" class="form-control input-md" required="">
-
+                  <input id="nombre" name="textinput" type="text" required ng-model="data.nombre" placeholder="nombre" class="form-control input-md" required="">
                 </div>
               </div>
 
@@ -32,7 +30,7 @@
               <div class="form-group">
                 <label class="col-md-4 control-label" for="textinput">Cedula</label>
                 <div class="col-md-4">
-                  <input id="textinput" name="textinput" type="text" placeholder="cedula" class="form-control input-md">
+                  <input id="cedula" name="textinput" type="text" required ng-model="data.cedula" placeholder="cedula" class="form-control input-md">
 
                 </div>
               </div>
@@ -41,7 +39,7 @@
               <div class="form-group">
                 <label class="col-md-4 control-label" for="textinput">Email</label>
                 <div class="col-md-4">
-                  <input id="textinput" name="textinput" type="text" placeholder="tu email" class="form-control input-md">
+                  <input id="correo" name="textinput" type="text" required ng-model="data.correo" placeholder="tu email" class="form-control input-md">
 
                 </div>
               </div>
@@ -50,7 +48,7 @@
               <div class="form-group">
                 <label class="col-md-4 control-label" for="btnsave"></label>
                 <div class="col-md-8">
-                  <button id="btnsave" name="btnsave" class="btn btn-success" ng-click="ctrl.getRecord(id)">Ingresar</button>
+                  <button id="btnsave" name="btnsave" class="btn btn-success" ng-click="createCliente()">Ingresar</button>
                 </div>
               </div>
 

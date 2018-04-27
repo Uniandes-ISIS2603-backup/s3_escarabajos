@@ -3,12 +3,12 @@
 
     mod.constant("clientesContext", "api/clientes");
 
-    mod.controller("clienteDetailCtrl", ['$scope', 'clientesContext', '$http', '$state',
-        function ($scope, clientesContext, $http, $state) {
+    mod.controller("clientesDetailCtrl", ['$scope','$http','clientesContext', '$state',
+        function ($scope, $http, clientesContext, $state) {  
             
-            if ($state.params.clienteId !== undefined && $state.params.clienteId !== null) {
+            if (($state.params.clienteId !== undefined)&& ($state.params.clienteId !== null)) {
                 
-                $http.get(clientesContext + '/119').then(function (response) {
+                $http.get(clientesContext + '/' + $state.params.clienteId).then(function (response) {
                     $scope.clienteActual = response.data;
                 });
             }

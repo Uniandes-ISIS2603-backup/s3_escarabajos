@@ -21,8 +21,7 @@
               <div class="form-group">
                 <label class="col-md-4 control-label" for="textinput">Username</label>
                 <div class="col-md-4">
-                  <input id="textinput" name="textinput" type="text" placeholder="UserName" class="form-control input-md">
-                  {{record.id}}
+                  {{clienteActual.usuario}}
                 </div>
               </div>
 
@@ -30,7 +29,7 @@
               <div class="form-group">
                 <label class="col-md-4 control-label" for="textinput">Nombre</label>
                 <div class="col-md-4">
-                  <input id="textinput" name="textinput" type="text" placeholder="nombre" class="form-control input-md" required="">
+                  {{clienteActual.nombre}}
 
                 </div>
               </div>
@@ -39,7 +38,7 @@
               <div class="form-group">
                 <label class="col-md-4 control-label" for="textinput">Cedula</label>
                 <div class="col-md-4">
-                  <input id="textinput" name="textinput" type="text" placeholder="cedula" class="form-control input-md">
+                  {{clienteActual.cedula}}
 
                 </div>
               </div>
@@ -48,8 +47,7 @@
               <div class="form-group">
                 <label class="col-md-4 control-label" for="textinput">Email</label>
                 <div class="col-md-4">
-                  <input id="textinput" name="textinput" type="text" placeholder="tu email" class="form-control input-md">
-
+                    {{clienteActual.correo}}
                 </div>
               </div>
 
@@ -70,11 +68,3 @@
 
 
   </form>
-
-<div class="col-sm-2" style="position:relative;">
-    <label>id</label> 
-    {{clienteActual.id}}<br>
-    <label>nombre</label>
-    {{clienteActual.nombre}}<br>
-
-</div>

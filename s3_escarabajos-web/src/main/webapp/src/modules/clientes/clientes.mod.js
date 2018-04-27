@@ -19,7 +19,7 @@ var mod = ng.module("clientesModule", []);
                 url: '/clientesSignUp',
                 views: {
                     'mainView': {
-                        controller: 'clientesCtrl',
+                        controller: 'clientesCreateCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'clientes.signUp.html'
                     }
@@ -43,10 +43,13 @@ var mod = ng.module("clientesModule", []);
                     }
                 }
             }).state('clientesDetail', {
-                url: '/clientesDetail',
+                url: '/{clienteId:int}/clientesDetail',
+                param: {
+                    clienteId: null
+                },
                 views: {
                     'mainView': {
-                        controller: 'clientesCtrl',
+                        controller: 'clientesDetailCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'clientes.detail.html'
                     }
