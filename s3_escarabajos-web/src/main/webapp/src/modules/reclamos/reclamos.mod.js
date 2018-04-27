@@ -30,7 +30,7 @@
                         controllerAs: 'ctrl'
                     }
                 },
-                 data: {
+                data: {
                   
                 }
             });
@@ -46,6 +46,8 @@
                         controller: 'reclamosDetailCtrl',
                         controllerAs: 'ctrl'
                     }
+                },
+                data: {
                 }
             });
         }

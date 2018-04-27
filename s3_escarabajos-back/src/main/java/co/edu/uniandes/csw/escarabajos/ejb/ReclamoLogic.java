@@ -125,7 +125,11 @@ public class ReclamoLogic {
         reclamoPersistence.update(temp);
     }
 
-    public void renaudarReclamo(Long id){
+    /**
+     *
+     * @param id
+     */
+    public void renaudarReclamo(Long id) {
         ReclamoEntity temp = find(id);
         temp.renaudar();
         reclamoPersistence.update(temp);
@@ -148,10 +152,10 @@ public class ReclamoLogic {
         delete(reclamoId);
     }
 
-    public ReclamoEntity updateMensajeReclamo(ReclamoEntity ent, Long facturaId) throws BusinessLogicException {
+    public ReclamoEntity updateMensajeReclamo(ReclamoEntity ent, Long reclId) throws BusinessLogicException {
         LOGGER.info("Iniciando el proceso de actualizar un reclamo.");
         if (ent.getMensaje() == null || ent.getMensaje().isEmpty()) {
-            throw new BusinessLogicException("Por favor ingrese los detalles del reclamo.");
+            throw new BusinessLogicException("Por favor ingrese el mensaje.");
         }
         // if (emptyList(ent.getAlbum())) {
         //   throw new BusinessLogicException("Debe ingresar al menos 1 foto con evidencia.");
@@ -159,7 +163,9 @@ public class ReclamoLogic {
 
         //FacturaEntity f = facturaLogic.getFactura(facturaId);
         //  ent.setFactura(f);
-        ReclamoEntity actualizado = reclamoPersistence.find(ent.getId());
+        ReclamoEntity actualizado = reclamoPersistence.find(reclId);
+        LOGGER.info("E" + actualizado.getId());
+
         actualizado.setMensaje(actualizado.getMensaje() + "@@@@@@@" + ent.getMensaje());
         actualizado = reclamoPersistence.update(actualizado);
         //f.setReclamo(actualizado);

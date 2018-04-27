@@ -12,6 +12,7 @@
     mod.controller("reclamosDetailCtrl", ['$scope', 'reclamosContext', '$http', '$state',
         function ($scope, reclamosContext, $http, $state) {
             if ($state.params.reclamoId !== undefined && $state.params.reclamoId !== null) {
+                $scope.data = {};
 
                 $http.get(reclamosContext + "/" + $state.params.reclamoId).then(function (response) {
                     $scope.reclamoActual = response.data;
@@ -20,9 +21,15 @@
                     $http.put(reclamosContext + "/finalizar/" + $state.params.reclamoId).then(
                             $state.go('^.reclamosDetail', {reclamoId: $state.params.reclamoId}, {reload: true}));
                 };
-                 $scope.renaudar = function () {
+                $scope.renaudar = function () {
                     $http.put(reclamosContext + "/renaudar/" + $state.params.reclamoId).then(
                             $state.go('^.reclamosDetail', {reclamoId: $state.params.reclamoId}, {reload: true}));
+                };
+                $scope.updateMensaje = function () {
+
+                    $http.put(reclamosContext + "/" + $state.params.reclamoId, $scope.data).then(function (response) {
+                        $state.go('^.reclamosDetail', {reclamoId: $state.params.reclamoId}, {reload: true});
+                    });
                 };
             }
         }]);

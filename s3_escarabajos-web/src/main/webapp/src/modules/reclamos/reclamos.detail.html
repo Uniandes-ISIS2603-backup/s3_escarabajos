@@ -30,14 +30,14 @@ and open the template in the editor.
                 <div class ="container-fluid">
                     <label>Mensajes:</label>
                     <p><label>Usuario:</label> {{reclamoActual.mensaje}}</p>
-                    <a ui-sref="reclamosPut" class="btn btn-primary" data-toggle="collapse" data-target = "#mensaje" ng-if = "reclamoActual.enProceso">
+                    <a class="btn btn-primary" data-toggle="collapse" data-target = "#mensaje" ng-if = "reclamoActual.enProceso">
                         <span class="glyphicon glyphicon-pencil" style = "width:10px"></span> Nuevo Mensaje
                     </a>
                     <div id="mensaje" class="collapse" ng-if = "reclamoActual.enProceso">
                         <br>
                         <textarea class="form-control" rows="5" id="comment" ng-model = "data.mensaje"></textarea>
                         <br>
-                        <a ui-sref="reclamoUpdate" class="btn btn-success">
+                        <a class="btn btn-success" ng-click = "updateMensaje()">
                             Enviar
                         </a>
                     </div>

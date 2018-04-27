@@ -47,6 +47,7 @@ public class ReclamoResource {
     @POST
     public ReclamoDetailDTO createReclamo(ReclamoDetailDTO reclamo) throws BusinessLogicException {
         reclamo.setEnProceso(true);
+        reclamo.setMensaje("@@@@@@@"+reclamo.getMensaje());
         return new ReclamoDetailDTO(reclamoLogic.createReclamo(reclamo.toEntity(), null));
     }
 
@@ -66,22 +67,23 @@ public class ReclamoResource {
     }
 
     @PUT
-    public ReclamoDetailDTO updateReclamo(ReclamoDetailDTO reclamo) throws BusinessLogicException {
-        return new ReclamoDetailDTO(reclamoLogic.updateReclamo(reclamo.toEntity(), null));
+    @Path("/{idRe: \\d+}")
+    public ReclamoDetailDTO updateReclamo(ReclamoDetailDTO reclamo,@PathParam("idRe") Long id) throws BusinessLogicException {
+        reclamo.setId(id);
+        return new ReclamoDetailDTO(reclamoLogic.updateMensajeReclamo(reclamo.toEntity(), id));
     }
 
     @PUT
     @Path("/finalizar/{id: \\d+}")
-    public ReclamoDetailDTO terminar(@PathParam("id")Long id) throws BusinessLogicException {
+    public ReclamoDetailDTO terminar(@PathParam("id") Long id) throws BusinessLogicException {
         reclamoLogic.terminarReclamo(id);
         return new ReclamoDetailDTO(reclamoLogic.find(id));
     }
-
     @PUT
-    @Path("/renaudar/{id: \\d+}")
-    public ReclamoDetailDTO renaudar(@PathParam("id") Long id) throws BusinessLogicException {
-        reclamoLogic.renaudarReclamo(id);
-        return new ReclamoDetailDTO(reclamoLogic.find(id));
+    @Path("/renaudar/{idR: \\d+}")
+    public ReclamoDetailDTO renaudar(@PathParam("idR") Long idR) throws BusinessLogicException {
+        reclamoLogic.renaudarReclamo(idR);
+        return new ReclamoDetailDTO(reclamoLogic.find(idR));
     }
 
     @DELETE
