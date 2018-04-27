@@ -37,41 +37,36 @@ public class ReclamoLogic {
 
     public ReclamoEntity createReclamo(ReclamoEntity ent, Long facturaId) throws BusinessLogicException {
         LOGGER.info("Iniciando el proceso de crear un reclamo.");
-        LOGGER.info(ent+"");
-        if (ent.getMensaje().isEmpty()) {
+        if (ent.getMensaje() == null || ent.getMensaje().isEmpty()) {
             throw new BusinessLogicException("Por favor ingrese los detalles del reclamo.");
         }
         // if(emptyList(ent.getAlbum()))
         //{
         //  throw new BusinessLogicException("Debe ingresar al menos 1 foto con evidencia.");
         //}
-        if (ent.getRazon().isEmpty()) {
+        if (ent.getRazon() == null || ent.getRazon().isEmpty()) {
             throw new BusinessLogicException("Por favor ingrese el motivo de su reclamo");
         }
-       // FacturaEntity f = facturaLogic.getFactura(facturaId);
+        // FacturaEntity f = facturaLogic.getFactura(facturaId);
 
-       ReclamoEntity nuevo = reclamoPersistence.create(ent);
-       // ent.setFactura(f);
-       // f.setReclamo(nuevo);
+        ReclamoEntity nuevo = reclamoPersistence.create(ent);
+        // ent.setFactura(f);
+        // f.setReclamo(nuevo);
         LOGGER.info("Finalizando el proceso de crear un reclamo");
         return nuevo;
     }
 
     public ReclamoEntity updateReclamo(ReclamoEntity ent, Long facturaId) throws BusinessLogicException {
         LOGGER.info("Iniciando el proceso de actualizar un reclamo.");
-        if (ent.getMensaje().isEmpty()) {
+        if (ent == null || ent.getMensaje().isEmpty()) {
             throw new BusinessLogicException("Por favor ingrese los detalles del reclamo.");
         }
         // if (emptyList(ent.getAlbum())) {
         //   throw new BusinessLogicException("Debe ingresar al menos 1 foto con evidencia.");
-        //}
-        if (ent.getRazon().isEmpty()) {
-            throw new BusinessLogicException("Por favor ingrese el motivo de su reclamo");
-        }
-
         //FacturaEntity f = facturaLogic.getFactura(facturaId);
-      //  ent.setFactura(f);
-        ReclamoEntity actualizado = reclamoPersistence.update(ent);
+        //  ent.setFactura(f);
+        ReclamoEntity actualizado = reclamoPersistence.find(ent.getId());
+        actualizado = reclamoPersistence.update(actualizado);
         //f.setReclamo(actualizado);
         LOGGER.info("Finalizando el proceso de actualizar un reclamo");
         return actualizado;
@@ -125,7 +120,15 @@ public class ReclamoLogic {
     }
 
     public void terminarReclamo(Long id) {
-        find(id).terminar();
+        ReclamoEntity temp = find(id);
+        temp.terminar();
+        reclamoPersistence.update(temp);
+    }
+
+    public void renaudarReclamo(Long id){
+        ReclamoEntity temp = find(id);
+        temp.renaudar();
+        reclamoPersistence.update(temp);
     }
 
     public List<ReclamoEntity> getReclamoPorfactura(Long facturaId) {
@@ -143,5 +146,24 @@ public class ReclamoLogic {
         }
         facturaLogic.getFactura(facturaId).setReclamo(null);
         delete(reclamoId);
+    }
+
+    public ReclamoEntity updateMensajeReclamo(ReclamoEntity ent, Long facturaId) throws BusinessLogicException {
+        LOGGER.info("Iniciando el proceso de actualizar un reclamo.");
+        if (ent.getMensaje() == null || ent.getMensaje().isEmpty()) {
+            throw new BusinessLogicException("Por favor ingrese los detalles del reclamo.");
+        }
+        // if (emptyList(ent.getAlbum())) {
+        //   throw new BusinessLogicException("Debe ingresar al menos 1 foto con evidencia.");
+        //}
+
+        //FacturaEntity f = facturaLogic.getFactura(facturaId);
+        //  ent.setFactura(f);
+        ReclamoEntity actualizado = reclamoPersistence.find(ent.getId());
+        actualizado.setMensaje(actualizado.getMensaje() + "@@@@@@@" + ent.getMensaje());
+        actualizado = reclamoPersistence.update(actualizado);
+        //f.setReclamo(actualizado);
+        LOGGER.info("Finalizando el proceso de actualizar un reclamo");
+        return actualizado;
     }
 }

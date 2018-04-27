@@ -29,20 +29,32 @@ and open the template in the editor.
                 <p><label>Item:</label> Pendiente del join</p>
                 <div class ="container-fluid">
                     <label>Mensajes:</label>
-                    <p><label>Usuario 1:</label> {{reclamoActual.mensaje}}</p>
-                    <a ui-sref="reclamosPut" class="btn btn-primary">
+                    <p><label>Usuario:</label> {{reclamoActual.mensaje}}</p>
+                    <a ui-sref="reclamosPut" class="btn btn-primary" data-toggle="collapse" data-target = "#mensaje" ng-if = "reclamoActual.enProceso">
                         <span class="glyphicon glyphicon-pencil" style = "width:10px"></span> Nuevo Mensaje
                     </a>
+                    <div id="mensaje" class="collapse" ng-if = "reclamoActual.enProceso">
+                        <br>
+                        <textarea class="form-control" rows="5" id="comment" ng-model = "data.mensaje"></textarea>
+                        <br>
+                        <a ui-sref="reclamoUpdate" class="btn btn-success">
+                            Enviar
+                        </a>
+                    </div>
                 </div>
                 <br>
-                <p id = "enp{{reclamoActual.id}}">Preguntarle a Rubby</p>
+                <p ng-if = "!reclamoActual.enProceso"><label>Estado:</label> Finalizado</p>
+                <p ng-if = "reclamoActual.enProceso"><label>Estado:</label> En Proceso</p>
 
-                <div align="right">
+                <div align="right" >
                     <a ui-sref="reclamosList" class="btn btn-success">
                         Volver
                     </a>
-                    <a ui-sref="reclamosDelete" class="btn btn-danger">
-                        <span class="glyphicon glyphicon-trash" style = "width:10px"></span> Finalizar
+                    <a class="btn btn-info"  ng-if = "reclamoActual.enProceso" ng-click ="terminar()" >
+                        <span class="glyphicon glyphicon-check" style = "width:10px"></span> Finalizar
+                    </a>
+                    <a class="btn btn-info"  ng-if = "!reclamoActual.enProceso" ng-click = "renaudar()">
+                        <span class="glyphicon glyphicon-share" style = "width:10px"></span> Renaudar
                     </a>
                 </div>
             </div>

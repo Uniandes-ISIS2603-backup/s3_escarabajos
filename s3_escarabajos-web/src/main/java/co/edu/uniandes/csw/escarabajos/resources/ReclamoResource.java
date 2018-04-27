@@ -67,17 +67,30 @@ public class ReclamoResource {
 
     @PUT
     public ReclamoDetailDTO updateReclamo(ReclamoDetailDTO reclamo) throws BusinessLogicException {
-        return new ReclamoDetailDTO(reclamoLogic.updateReclamo(reclamo.toEntity(), new Long(1)));
+        return new ReclamoDetailDTO(reclamoLogic.updateReclamo(reclamo.toEntity(), null));
+    }
+
+    @PUT
+    @Path("/finalizar/{id: \\d+}")
+    public ReclamoDetailDTO terminar(@PathParam("id")Long id) throws BusinessLogicException {
+        reclamoLogic.terminarReclamo(id);
+        return new ReclamoDetailDTO(reclamoLogic.find(id));
+    }
+
+    @PUT
+    @Path("/renaudar/{id: \\d+}")
+    public ReclamoDetailDTO renaudar(@PathParam("id") Long id) throws BusinessLogicException {
+        reclamoLogic.renaudarReclamo(id);
+        return new ReclamoDetailDTO(reclamoLogic.find(id));
     }
 
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteReclamo(@PathParam("id") Long id) throws BusinessLogicException
-    {
+    public void deleteReclamo(@PathParam("id") Long id) throws BusinessLogicException {
         try {
-             reclamoLogic.delete(id);
-        } catch(Exception e)  {
-              throw new BusinessLogicException("El reclamo no existe");
+            reclamoLogic.delete(id);
+        } catch (Exception e) {
+            throw new BusinessLogicException("El reclamo no existe");
         }
     }
 }

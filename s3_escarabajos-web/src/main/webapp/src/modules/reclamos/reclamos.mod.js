@@ -26,7 +26,8 @@
                 views: {
                     'mainView': {
                         templateUrl: basePath + 'reclamos.create.html',
-                        controller: 'reclamoCreateCtrl'
+                        controller: 'reclamoCreateCtrl',
+                        controllerAs: 'ctrl'
                     }
                 },
                  data: {
