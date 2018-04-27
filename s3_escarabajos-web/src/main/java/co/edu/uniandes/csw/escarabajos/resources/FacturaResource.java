@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.escarabajos.resources;
 
 
+import co.edu.uniandes.csw.escarabajos.dtos.FacturaDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.FacturaDetailDTO;
 import co.edu.uniandes.csw.escarabajos.ejb.FacturaLogic;
 import co.edu.uniandes.csw.escarabajos.entities.FacturaEntity;
@@ -85,8 +86,8 @@ public class FacturaResource {
      * @return JSONArray {@link FacturaDetailDTO} - Las facturas encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
      */
     @GET
-    public List<FacturaDetailDTO> getFacturas() {
-        return listEntity2DTO(logic.getFacturas());
+    public List<FacturaDetailDTO> getFacturas(@PathParam("idCliente")Long idCliente) throws BusinessLogicException {
+        return listEntity2DTO(logic.getFacturas(idCliente));
     }
     
    /**
@@ -107,10 +108,10 @@ public class FacturaResource {
      */
     @GET
     @Path("{id: \\d+}")
-    public FacturaDetailDTO getFactura(@PathParam("id") Long id) {
-        FacturaEntity entity = logic.getFactura(id);
+    public FacturaDetailDTO getFactura(@PathParam("idCliente")Long idCliente,@PathParam("id") Long id) throws BusinessLogicException {
+        FacturaEntity entity = logic.getFacturaCLiente(idCliente, id);
         if(entity == null){
-            throw new WebApplicationException("El recurso /facturas/" + id + " no existe.", 404);
+            throw new WebApplicationException("El recurso /clientes/" + idCliente + "/facturas/" + id + "no existe.", 404);
         }
         return new FacturaDetailDTO(entity);
     }
@@ -135,13 +136,13 @@ public class FacturaResource {
      */
     @PUT
     @Path("{id: \\d+}")
-    public FacturaDetailDTO updateFactura(@PathParam("id") Long id, FacturaDetailDTO factura) throws BusinessLogicException {
+    public FacturaDetailDTO updateFactura(@PathParam("idCliente")Long idCliente, @PathParam("id") Long id, FacturaDetailDTO factura) throws BusinessLogicException {
         factura.setId(id);
-        FacturaEntity entity = logic.getFactura(id);
+       FacturaEntity entity = logic.getFacturaCLiente(idCliente, id);
         if(entity == null){
-            throw new WebApplicationException("El recurso /facturas/" + id + " no existe.", 404);
+            throw new WebApplicationException("El recurso /clientes/" + idCliente + "/facturas/" + id + " no existe.", 404);
         }
-        return new FacturaDetailDTO(logic.updateFactura(entity));
+        return new FacturaDetailDTO(logic.updateFactura(idCliente, factura.toEntity()));
     }
     
     /**
@@ -160,10 +161,10 @@ public class FacturaResource {
      */
     @DELETE
     @Path("{id: \\d+}")
-     public void deleteFactura(@PathParam("id") Long id) {
-       FacturaEntity entity = logic.getFactura(id);
+     public void deleteFactura(@PathParam("idVendedor")Long idCliente, @PathParam("id") Long id) throws BusinessLogicException {
+       FacturaEntity entity = logic.getFacturaCLiente(idCliente,id);
        if(entity == null){
-           throw new WebApplicationException("El recurso /facturas/" + id + " no existe.", 404);
+           throw new WebApplicationException("El recurso /clientes/" + idCliente + "/facturas/" + id + " no existe.", 404);
        }
        logic.deleteFactura(entity);
     }

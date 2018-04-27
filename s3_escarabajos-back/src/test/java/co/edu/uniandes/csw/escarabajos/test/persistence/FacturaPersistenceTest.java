@@ -5,7 +5,7 @@
  */
 package co.edu.uniandes.csw.escarabajos.test.persistence;
 
-import co.edu.uniandes.csw.escarabajos.entities.FacturaEntity;
+import co.edu.uniandes.csw.escarabajos.entities.*;
 import co.edu.uniandes.csw.escarabajos.persistence.FacturaPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -104,6 +104,7 @@ public class FacturaPersistenceTest {
      *
      */
     private List<FacturaEntity> data = new ArrayList<FacturaEntity>();
+    private List<ClienteEntity> dataCliente = new ArrayList<ClienteEntity>();
 
     /**
      * Inserta los datos iniciales para el correcto funcionamiento de las
@@ -146,7 +147,9 @@ public class FacturaPersistenceTest {
      */
     @Test
     public void getFacturasTest() {
-        List<FacturaEntity> list = facturaPersistence.findAll();
+        ClienteEntity cliente = dataCliente.get(0);
+        cliente.setCompras(data);
+        List<FacturaEntity> list = facturaPersistence.findAll(cliente.getId());
         Assert.assertEquals(data.size(), list.size());
         for (FacturaEntity ent : list) {
             boolean found = false;

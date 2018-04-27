@@ -28,8 +28,31 @@ public class FacturaPersistence {
     protected EntityManager em;
 
     public FacturaEntity find(Long id) {
-        LOGGER.log(Level.INFO, "Consultando factura con id={0}", id);
         return em.find(FacturaEntity.class, id);
+    }
+    
+    /**
+     * Encuentra una factura asociada a un cliente.
+     *
+     * @param idCliente vendedor especifico
+     * @param idFactura bicicleta especifica
+     * @return bicicleta usada
+     */
+    public FacturaEntity findFacturaCliente(Long idCliente, Long idFactura) {
+        TypedQuery<FacturaEntity> q = em.createQuery("select p from FacturaEntity p where (p.cliente.id = :clienteid) and (p.id = :facturaid)", FacturaEntity.class);
+        q.setParameter("clienteid", idCliente);
+        q.setParameter("facturaid", idFactura);
+        List<FacturaEntity> results = q.getResultList();
+        FacturaEntity factura = null;
+        if (results == null) {
+            factura = null;
+        } else if (results.isEmpty()) {
+            factura = null;
+        } else if (results.size() >= 1) {
+            factura = results.get(0);
+        }
+
+        return factura;
     }
 
     public FacturaEntity findByName(String name) {
@@ -40,10 +63,11 @@ public class FacturaPersistence {
         return q.getSingleResult();
     }
 
-    public List<FacturaEntity> findAll() {
-        LOGGER.info("Consultando todas las facturas");
-        Query q = em.createQuery("select u from FacturaEntity u");
-        return q.getResultList();
+    public List<FacturaEntity> findAll(Long idCliente) {
+        LOGGER.info("Consultando todas las facturas del cliente con id");
+        TypedQuery query = em.createQuery("select u from FacturaEntity u where (u.cliente.id  = :idCliente)", FacturaEntity.class);
+        query.setParameter("idCliente", idCliente);
+        return query.getResultList();
     }
 
     public FacturaEntity create(FacturaEntity entity) {

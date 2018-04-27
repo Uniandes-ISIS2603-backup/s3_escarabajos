@@ -6,7 +6,7 @@
 package co.edu.uniandes.csw.escarabajos.test.logic;
 
 import co.edu.uniandes.csw.escarabajos.ejb.FacturaLogic;
-import co.edu.uniandes.csw.escarabajos.entities.FacturaEntity;
+import co.edu.uniandes.csw.escarabajos.entities.*;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.FacturaPersistence;
 import java.util.ArrayList;
@@ -44,6 +44,7 @@ public class FacturaLogicTest {
     private UserTransaction utx;
 
     private List<FacturaEntity> data = new ArrayList<FacturaEntity>();
+    private List<ClienteEntity> dataCliente = new ArrayList<ClienteEntity>();
     
     @Deployment
     public static JavaArchive createDeployment() {
@@ -120,7 +121,7 @@ public class FacturaLogicTest {
 
         pojoEntity.setId(entity.getId());
 
-        logic.updateFactura(pojoEntity);
+        logic.updateFactura(dataCliente.get(1).getId(),pojoEntity);
 
         FacturaEntity resp = em.find(FacturaEntity.class, entity.getId());
 
@@ -136,8 +137,8 @@ public class FacturaLogicTest {
     }
     
     @Test
-    public void getFacturasTest() {
-        List<FacturaEntity> list = logic.getFacturas();
+    public void getFacturasTest() throws BusinessLogicException {
+        List<FacturaEntity> list = logic.getFacturas(dataCliente.get(1).getId());
         Assert.assertEquals(data.size(), list.size());
         for (FacturaEntity entity : list) {
             boolean found = false;
@@ -151,9 +152,9 @@ public class FacturaLogicTest {
     }
     
     @Test
-    public void getFacturaTest() {
+    public void getFacturaTest() throws BusinessLogicException {
         FacturaEntity entity = data.get(0);
-        FacturaEntity resultEntity = logic.getFactura(entity.getId());
+        FacturaEntity resultEntity = logic.getFactura(dataCliente.get(1).getId(),entity.getId());
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
     }
