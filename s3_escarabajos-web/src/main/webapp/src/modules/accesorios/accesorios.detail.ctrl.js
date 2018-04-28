@@ -10,6 +10,8 @@
                 
                 $http.get(accesorioContext + '/' + $state.params.accesorioId).then(function (response) {
                     $scope.accesorioActual = response.data;
+                    
+                    console.log(response.data);
                 });
             }
         }]);
