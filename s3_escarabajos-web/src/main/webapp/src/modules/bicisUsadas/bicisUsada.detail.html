@@ -3,14 +3,14 @@
 <script src="src/modules/bicisUsadas/imageDetalle.js"></script>
 <link rel="stylesheet" href="src/modules/bicisUsadas/detalle.css" />
 <br>
-<div style="position: absolute;left: 100px; ">
+<div style="position: absolute;left: 20px; ">
     <button type="button" ui-sref="bicisUsadaList" class="btn btn-default">
         <a ui-sref="bicisUsadaList" class="glyphicon glyphicon-chevron-left"></a>
     </button>
 </div>
 <div class="row">
-    <div class="col-sm-2"></div>
-    <div class="col-sm-8">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-11">
         <div class="well" style="overflow:auto;">
             <div class="container col-sm-8 col-xs-6" >
                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -61,26 +61,6 @@
                 <h4>Factura Original:     <a href="{{biciUsadaActual.facturaOriginal}}">Aquí</a></h4>
                 <br>
                 <br>
-                <div style="position: relative;" class="row">
-                    <div class="col-sm-4">
-                        <a  ui-sref ="addItemCarrito({itemId: biciUsadaActual.id})" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart" style="color:white"></span></a>
-                    </div>
-                    <div class="col-xs-6">
-                        <h6 style="font-size: 10px">Agregar Carrito</h6>
-                    </div>
-                </div>
-                <br>
-                <div style="position:relative;" class="row">
-
-                    <div class="col-sm-4">
-                        <button type="button" ui-sref="bicisUsadaList" class="btn btn-default">
-                            <a ui-sref="bicisUsadaList" class="glyphicon glyphicon-gift"></a>
-                        </button>
-                    </div>
-
-                    <h6 style="font-size: 10px">Agregar Lista Deseos</h6>
-
-                </div> 
             </div>
         </div>
     </div>
