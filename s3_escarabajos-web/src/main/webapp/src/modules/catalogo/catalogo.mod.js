@@ -29,8 +29,9 @@
                 url: '/catalogo',
                 abstract: true,
                 params: {
-                    data: null,
-                    tipo: 'accesorios',
+                    filtros:{marcas:[],categorias:[],colores:[],precioMin:null,precioMax:null,calificacionMin:0.0},
+                    pagina:1,
+                    tipo:null,
                     adv: true
                 },
                 views: {
@@ -40,20 +41,10 @@
                         controllerAs: 'ctrl'
                     }
                 }
-            }).state('advParent', {
-                parent: 'catalogo',
-                abstract: true,
-                views: {
-                    'advView': {
-                        templateUrl: basePath + 'propagandas.html',
-                        controller: 'propagandasCtrl',
-                        controllerAs: 'ctrl'
-                    }
-                }
             }).state('adv', {
                 parent: 'catalogo',
                 views: {
-                   'filtrosView': {
+                    'filtrosView': {
                         templateUrl: basePath + 'filtros.html',
                         controller: 'filtrosCtrl',
                         controllerAs: 'ctrl'
@@ -62,8 +53,7 @@
                         templateUrl: basePath + 'modelos.html',
                         controller: 'advCtrl',
                         controllerAs: 'ctrl'
-                    },
-                    'advView': {
+                    }, 'advView': {
                         templateUrl: basePath + 'propagandas.html',
                         controller: 'propagandasCtrl',
                         controllerAs: 'ctrl'

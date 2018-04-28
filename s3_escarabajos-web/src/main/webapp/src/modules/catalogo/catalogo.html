@@ -1,21 +1,21 @@
 <div>
-    <div class="row">
+    <div class="row" >
         <div class="col-md-2">
             <div ui-view="filtrosView"></div>
         </div>
         <div class="col-xs-10">
-             
             <div class="row" ng-if="adv === true">
                 <div class="col-xs-9" >
-                <div ui-view="catalogoView"></div>
+                    <div ui-view="catalogoView"></div>
                 </div>
                 <div class="col-xs-3" >
                     <div ui-view="advView"></div>
                 </div>
             </div>
-            <div class="row" ng-if="adv === false">
-                <div class="col-xs-12" ></div>
-                <div ui-view="catalogoView"></div>
+            <div class="row" ng-if="adv === false" >
+                <div class="col-xs-12" >
+                    <div ui-view="catalogoView"></div>
+                </div>
             </div>
         </div>
     </div>
