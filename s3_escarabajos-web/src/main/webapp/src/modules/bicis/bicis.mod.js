@@ -40,9 +40,7 @@
                         controllerAs: 'ctrl'
                     },
                     'gaitanView': {
-                        templateUrl: 'src/modules/calificaciones/calificaciones.list.html',
-                        controller: 'calificacionCtrl',
-                        controllerAs: 'ctrl'
+                        templateUrl: 'src/modules/calificaciones/calificaciones.list.html'
                     }
                 }
             }).state('biciCreate', {
