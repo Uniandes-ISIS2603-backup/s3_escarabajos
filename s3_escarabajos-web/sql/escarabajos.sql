@@ -1,5 +1,6 @@
 --Borrar los datos de las tablas
-
+delete from car_Items;
+delete from clienteEntity_itementity;
 delete from ItemEntity;
 delete from ModeloEntity;
 delete from CarritoEntity;
@@ -14,6 +15,11 @@ insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) 
 insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (4, 'Hombre', 'KPW', 10, 'Bicicleta');
 insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (5, 'Elantra', 'CNY', 17, 'Bicicleta');
 
+
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (6, '6 Series', 'SILAA BMX', 11, 'Accesorio');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (7, 'Hombre', 'CASCO BMX', 10, 'Accesorio');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (8, 'Elantra', 'RODILLERAS BMX', 17, 'Accesorio');
+
 --Datos de prueba BicicletaEntity
 
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id) values (1,'BicicletaEntity', 760.78, 'Puce', 0, 'MKT', 1,1);
@@ -21,6 +27,13 @@ insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_
 insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id) values (3,'BicicletaEntity', 331.52, 'Green', 0, 'Jetta', 3,3);
 insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id) values (4,'BicicletaEntity', 251.36, 'Goldenrod', 0, 'A3', 4,4);
 insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id) values (5,'BicicletaEntity', 118.77, 'Pink', 0, 'C70', 5,5);
+insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id) values (6,'BicicletaEntity', 760.78, 'Puce', 0, 'MKT', 1,1);
+
+
+insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id) values (7,'AccesorioEntity', 760.78, 'Puce', 0, 'C60', 6,6);
+insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id) values (8,'AccesorioEntity', 760.78, 'Green', 0, 'MYK', 7,7);
+insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id) values (9,'AccesorioEntity', 760.78, 'pink', 0, 'QWE', 8,8);
+
 
 --Datos de prueba VendedorEntity
 insert into ClienteEntity (id, cedula, correo, nombre, usuario) values (1, '9898989', 'coc@hotmale.com', 'Camilo','pedro69');
@@ -43,5 +56,24 @@ insert into ReclamoEntity values (2,0, 'Las rodilleras me llegaron en una talla 
 insert into ReclamoEntity values (3,1, 'Quiero exigir la garantía por una bicicleta que se rompió', 'Garantía', null, null);
 insert into ReclamoEntity values (4,1, 'Los frenos no funcionan correctamente, se demoran mucho en comenzar a funcionar', 'Frenos dañados', null, null);
 insert into ReclamoEntity values (5,0, 'El casco llegó sin seguro.', 'El casco llegó sin seguro.', null, null);
+
+
+--Datos carrito
+insert into carritoentity values(1,0.0, null);
+
+insert into car_items values(1,1);
+insert into car_items values(1,2);
+insert into car_items values(1,3);
+insert into car_items values(1,6);
+
+--datos lista de deseos
+insert into carritoentity values(2,0.0, null);
+
+insert into car_items values(2,1);
+insert into car_items values(2,2);
+insert into car_items values(2,3);
+insert into car_items values(2,6);
+
+
 
 

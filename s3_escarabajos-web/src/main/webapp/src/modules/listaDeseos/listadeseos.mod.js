@@ -30,6 +30,19 @@
             controller: "vaciarListadeseosCtrl"
           }
         }
+      }).state('addItemListaDeseos', {
+        
+        params: {
+            itemId: null
+        },
+        
+        views: {
+          mainView: {
+            templateUrl: "src/modules/listaDeseos/listadeseos.view.html",
+            controller: "addListaDeseosCtrl"
+          }
+        }
+        
       })
   }]);
 

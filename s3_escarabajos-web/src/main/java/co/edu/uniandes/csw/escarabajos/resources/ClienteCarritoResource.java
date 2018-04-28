@@ -30,6 +30,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
 
 /**
  * <pre>Clase que implementa el recurso "carrito".
@@ -49,8 +50,8 @@ import javax.ws.rs.WebApplicationException;
  */
 
 @Path("clientes/{idCliente: \\d+}/carrito")
-@Produces("application/json")
-@Consumes("application/json")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 @RequestScoped
 public class ClienteCarritoResource {
     
@@ -70,11 +71,17 @@ public class ClienteCarritoResource {
     @POST
     public CarritoDetailDTO createCarritoDeCliente(@PathParam("idCliente") Long idCliente) throws BusinessLogicException {
         
+        LOGGER.info("AAAAAAAAAAAAAA" + idCliente);
+        
         ClienteEntity clienteEntity = logicCliente.getCliente(idCliente);
+        
+         LOGGER.info("BBBBBBBBBBB" + idCliente);
         
         if( clienteEntity == null ){
             throw new WebApplicationException("El recurso /clientes/" + idCliente + " no existe.", 404);
         }
+        
+         LOGGER.info("CCCCCCCCCCCCCCCCCCC" + idCliente);
         
         //PILAS esta verificacion no funciona bien cuando el cliente ya tiene carrito daña la aplicacion
         //toca buscar otra manera de verificar si el cliente ya tiene carrito
@@ -84,11 +91,20 @@ public class ClienteCarritoResource {
             throw new WebApplicationException("El recurso /clientes/" + idCliente + " ya tiene un carrito.", 400);
         }
         
+         LOGGER.info("DDDDDDDDDD" + idCliente);
+        
         CarritoDetailDTO carrito = new CarritoDetailDTO(new ClienteDTO(clienteEntity));
+        
+        
+         LOGGER.info("EEEEEEEEEEEEEE" + idCliente);
         
         CarritoEntity carritoEntity = logic.createCarrito(carrito.toEntity());
         
+         LOGGER.info("FFFFFFFFFFFFFFFFF" + idCliente);
+        
         CarritoDetailDTO carritoCreado = new CarritoDetailDTO(carritoEntity);
+        
+         LOGGER.info("GGGGGGGGGGGGGGGGG" + idCliente);
         
         return carritoCreado;
     }
@@ -112,11 +128,11 @@ public class ClienteCarritoResource {
     @GET
     public CarritoDetailDTO getCarrito(@PathParam("idCliente") Long idCliente) {
         
-        ClienteEntity cliente = logicCliente.getCliente(idCliente);
-        
-        if( cliente == null ){
-            throw new WebApplicationException("El recurso /cliente/" + idCliente + " no existe.", 404);
-        }
+//        ClienteEntity cliente = logicCliente.getCliente(idCliente);
+//        
+//        if( cliente == null ){
+//            throw new WebApplicationException("El recurso /cliente/" + idCliente + " no existe.", 404);
+//        }
         
         CarritoEntity carrito = logic.getCarritoByClienteId(idCliente);
         

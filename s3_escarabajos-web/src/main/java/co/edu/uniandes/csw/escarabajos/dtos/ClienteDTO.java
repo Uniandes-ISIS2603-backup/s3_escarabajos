@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.escarabajos.dtos;
 
 import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
+import java.util.logging.Logger;
 
 /**
  * CarritoDTO Objeto de transferencia de datos del . Los DTO
@@ -52,6 +53,9 @@ public class ClienteDTO {
     private String cedula;
     private String direccion;
     private String telefono;
+    
+    private static final Logger LOGGER = Logger.getLogger(ClienteDetailDTO.class.getName());
+    
     public ClienteDTO(){
     }
     
@@ -62,6 +66,9 @@ public class ClienteDTO {
      * @param cliente: Es la entidad que se va a convertir a DTO
      */
     public ClienteDTO(ClienteEntity cliente) {
+        
+        LOGGER.info("ENTRO AL CLIENTE DTO");
+        
         if(cliente != null){
             this.id = cliente.getId();
             this.nombre = cliente.getNombre();

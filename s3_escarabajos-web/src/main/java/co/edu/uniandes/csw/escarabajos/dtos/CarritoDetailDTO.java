@@ -81,6 +81,7 @@ public class CarritoDetailDTO extends CarritoDTO {
      * Constructo por defecto
      */
     public CarritoDetailDTO() {
+        super();
     }
     
     /**

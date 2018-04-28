@@ -16,7 +16,7 @@ import co.edu.uniandes.csw.escarabajos.entities.CarritoEntity;
  * <pre>
  *   {
  *      "id": number,
- *      "preciTotal": double
+ *      "precioTotal": double
  *      
  *   }
  * </pre> Por ejemplo un modelo se representa asi:<br>

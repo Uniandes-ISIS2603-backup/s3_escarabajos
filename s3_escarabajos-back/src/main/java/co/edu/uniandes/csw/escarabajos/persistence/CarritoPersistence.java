@@ -82,7 +82,7 @@ public class CarritoPersistence {
     public CarritoEntity findCarritoByClienteId( Long clienteId ){
         
         LOGGER.log(Level.INFO, "Consultando el carrito del cliente con id= ", clienteId);
-        TypedQuery<CarritoEntity> q = em.createQuery("select u from CarritoEntity u where u.cliente_id = :id", CarritoEntity.class);
+        TypedQuery<CarritoEntity> q = em.createQuery("select u from CarritoEntity u where u.cliente = :id", CarritoEntity.class);
         q = q.setParameter("id", clienteId);
         return q.getSingleResult();
     }

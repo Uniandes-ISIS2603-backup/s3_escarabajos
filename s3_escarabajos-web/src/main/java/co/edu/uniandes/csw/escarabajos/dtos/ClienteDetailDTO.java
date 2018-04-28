@@ -14,8 +14,10 @@ import co.edu.uniandes.csw.escarabajos.entities.FacturaEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import co.edu.uniandes.csw.escarabajos.entities.MedioPagoEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ReclamoEntity;
+import co.edu.uniandes.csw.escarabajos.resources.ClienteCarritoResource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Clase que extiende de {@link ItemDTO} para manejar la transformacion entre
@@ -58,6 +60,11 @@ import java.util.List;
  */
 public class ClienteDetailDTO extends ClienteDTO{
     
+    
+    
+    private static final Logger LOGGER = Logger.getLogger(ClienteDetailDTO.class.getName());
+    
+    
     private CarritoDTO carrito;
 
     private List<FacturaDTO> compras;
@@ -88,7 +95,11 @@ public class ClienteDetailDTO extends ClienteDTO{
      * @param entity
      */
     public ClienteDetailDTO(ClienteEntity entity) {
+        
         super(entity);
+        
+        LOGGER.info("ENTRO AL DETAIL DTO CLIENTE");
+                
         if (entity != null) {
             if (entity.getCarrito()!= null) {
                 this.carrito = new CarritoDTO(entity.getCarrito());
