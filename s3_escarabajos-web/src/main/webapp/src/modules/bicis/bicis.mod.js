@@ -30,6 +30,7 @@
             }).state('biciDetail', {
                 url: '/{biciId:int}/detail',
                 parent: 'bicis',
+                data: {},
                 param: {
                     biciId: null
                 },
