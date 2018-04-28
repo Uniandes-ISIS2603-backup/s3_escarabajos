@@ -29,7 +29,7 @@ and open the template in the editor.
                 <p><label>Item:</label> Pendiente del join</p>
                 <div class ="container-fluid">
                     <label>Mensajes:</label>
-                    <p><label>Usuario:</label> {{reclamoActual.mensaje}}</p>
+                    <p ng-repeat = "msj in reclamoActual.mensaje.split('@@@@@@@')" ng-if = "msj != ''"><label>Usuario:</label> {{msj}}</p>
                     <a class="btn btn-primary" data-toggle="collapse" data-target = "#mensaje" ng-if = "reclamoActual.enProceso">
                         <span class="glyphicon glyphicon-pencil" style = "width:10px"></span> Nuevo Mensaje
                     </a>
