@@ -62,7 +62,7 @@ public class ClienteEntity implements Serializable {
     */
     private List<ItemEntity> deseados = new ArrayList<>();
     
-     @PodamExclude
+    @PodamExclude
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST,orphanRemoval = true)
     private List<BicicletaUsadaEntity> bicicletasUsadas = new ArrayList<BicicletaUsadaEntity>();
  

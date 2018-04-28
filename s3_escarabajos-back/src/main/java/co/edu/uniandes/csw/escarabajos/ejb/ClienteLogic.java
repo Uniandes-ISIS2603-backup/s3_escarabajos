@@ -64,5 +64,12 @@ public class ClienteLogic {
         LOGGER.log(Level.INFO, "Termina proceso de borrar cliente con id={0}", id);
     }
     
+    public List<ClienteEntity> getVendedores() {
+        LOGGER.info("Inicia proceso de consultar todos los clientes vendedores");
+        // Note que, por medio de la inyección de dependencias se llama al método "findAll()" que se encuentra en la persistencia.
+        List<ClienteEntity> editorials = persistence.findAllVendedores();
+        LOGGER.info("Termina proceso de consultar todos los clientes vendedores");
+        return editorials;
+    }
    
 }

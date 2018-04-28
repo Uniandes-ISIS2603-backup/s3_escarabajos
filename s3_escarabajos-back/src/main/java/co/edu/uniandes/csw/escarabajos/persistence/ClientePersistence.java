@@ -83,4 +83,10 @@ public class ClientePersistence {
         ClienteEntity entity = em.find(ClienteEntity.class, id);
         em.remove(entity);
     }
+    
+    public List<ClienteEntity> findAllVendedores() {
+        LOGGER.info("Consultando todos los clientes vendedores");
+        TypedQuery query = em.createQuery("select u from ClienteEntity u where u.direccion IS NOT NULL", ClienteEntity.class);
+        return query.getResultList();
+    }
 }
