@@ -66,6 +66,18 @@
                         controller: 'biciDeleteCtrl'
                     }
                 }
-            });
+            }).state('biciUpdate', {
+                url: '/update/{biciId:int}',
+                parent: 'bicis',
+                params: {
+                    biciId: null
+                },
+                views: {
+                    'listView': {
+                        templateUrl: basePath + '/editar/bicis.edit.html',
+                        controller: 'biciEditCtrl'
+                    }
+                }
+            })
         }]);
 })(window.angular)
