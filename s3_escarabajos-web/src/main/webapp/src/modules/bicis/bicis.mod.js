@@ -38,6 +38,9 @@
                         templateUrl: basePath + 'bicis.detail.html',
                         controller: 'biciDetailCtrl',
                         controllerAs: 'ctrl'
+                    },
+                    'gaitanView': {
+                        templateUrl: 'src/modules/calificaciones/calificaciones.list.html',
                     }
                 }
             }).state('biciCreate', {
