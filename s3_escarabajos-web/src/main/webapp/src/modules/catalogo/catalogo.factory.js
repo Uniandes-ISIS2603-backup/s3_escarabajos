@@ -22,8 +22,14 @@
                 return $http.get(catalogoContext + '/colores/' + tipo);
             };
 
-            dataFactory.getModelos = function (tipo,filtros) {
-                return $http.get(catalogoContext + '/modelos/'+tipo,filtros);
+            dataFactory.getModelos = function (tipo, filtros) {
+                
+               var temp = angular.toJson(filtros);
+               temp.precioMin = parseFloat(filtros.precioMin);
+               temp.precioMax = parseFloat(filtros.precioMax);
+               temp.calificacionMin = parseFloat(filtros.calificacionMin);
+               console.log(temp);
+                return $http.post(catalogoContext + '/modelos/' + tipo,temp);
             };
 
             return dataFactory;

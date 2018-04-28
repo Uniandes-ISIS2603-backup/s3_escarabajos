@@ -77,6 +77,7 @@ public class ItemDetailDTO extends ItemDTO {
      *
      * @param entity La entidad del item a partir de la cual se construye el
      * objeto
+     * @param referencia la referencia del modelo al que le pertenece el item.
      */
     public ItemDetailDTO(ItemEntity entity, String referencia) {
         super(entity);

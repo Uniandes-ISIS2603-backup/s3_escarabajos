@@ -287,4 +287,21 @@ public class ModeloLogic {
     public List<String> getColoresBicicletas() {
         return null;// return persistence.findColoresBicicletas();
     }
+
+    public List<ModeloEntity> getModelosBicicletasFiltrados() {
+        return null;
+    }
+
+    public List<ModeloEntity> getModelosAccesoriosFiltrados() {
+        return null;
+    }
+
+    public List<ModeloEntity> getModelosBicicletasFiltrados(List<String> marcas, List<String> categorias, List<String> colores, Double precioMin, Double precioMax, Double calificacionMin) {
+        List<ModeloEntity> modelos = getModelos();
+        return modelos;
+    }
+
+    public List<ModeloEntity> getModelosAccesoriosFiltrados(List<String> marcas, List<String> categorias, List<String> colores, Double precioMin, Double precioMax, Double calificacionMin) {
+        return getModelos();
+    }
 }

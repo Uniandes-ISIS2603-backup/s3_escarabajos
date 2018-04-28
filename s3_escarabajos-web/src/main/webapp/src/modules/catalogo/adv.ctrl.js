@@ -5,7 +5,7 @@
             $scope.filtros = $state.params.filtros;
             $scope.pagina = $state.params.pagina;
             $scope.tipo = $state.params.tipo;
-            
+
             catalogoFactory.getModelos($scope.tipo, $scope.filtros).then(function (response) {
                 $scope.mods = response.data;
                 $scope.modelos = [];

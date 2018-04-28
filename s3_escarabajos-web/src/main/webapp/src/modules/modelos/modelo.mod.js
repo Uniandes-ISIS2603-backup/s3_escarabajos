@@ -1,10 +1,10 @@
 
 (function (ng) {
-    var mod = ng.module("catalogoModule", ['ui.router']);
-    mod.constant("catalogoContext", "api/catalogo");
+    var mod = ng.module("modeloModule", ['ui.router']);
+    mod.constant("modeloContext", "api/modelos");
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-            var basePath = 'src/modules/catalogo/';
-            $stateProvider.state('catalogo', {
+            var basePath = 'src/modules/modelos/';
+            $stateProvider.state('modelo', {
                 url: '/catalogo',
                 abstract: true,
                 params: {
