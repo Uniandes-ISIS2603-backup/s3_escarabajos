@@ -97,7 +97,7 @@ public class ModeloCalificacionResource {
     @POST
     @PathParam("modelosId: \\d+")
     public CalificacionDetailDTO createCalificacion(CalificacionDetailDTO calificacion,
-            @PathParam("modelosId") Long modeloId, @PathParam("clientesId") Long clienteId, @PathParam("calificacionesId") Long id) throws BusinessLogicException {
+            @PathParam("modelosId") Long modeloId) throws BusinessLogicException {
 
         return new CalificacionDetailDTO(
                 cal
@@ -105,7 +105,7 @@ public class ModeloCalificacionResource {
                                 calificacion
                                         .toEntity(),
                                 modeloId,
-                                clienteId));
+                                null));
     }
 
     /**
@@ -124,7 +124,6 @@ public class ModeloCalificacionResource {
      * encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
      */
     @GET
-    @PathParam("modelosId: \\d+")
     public List<CalificacionDetailDTO> getCalificaciones(@PathParam("modelosId") Long modeloId) {
         return list2DTO(cal.getCalificacionesPorModelo(modeloId));
     }
@@ -159,44 +158,6 @@ public class ModeloCalificacionResource {
         }
         CalificacionDetailDTO cali = new CalificacionDetailDTO(cal.getCalificacionesPorClienteAndModelo(clienteId, modeloId).get(0));
         return cali;
-    }
-
-    /**
-     * <h1>PUT /api/modelos/{modelosId}/calificaciones/{calificacionesId} :
-     * Actualizar la calificacion con el id dado.</h1>
-     * <pre>Cuerpo de petición: JSON {@link ReclamoDetailDTO}.
-     *
-     * Actualiza la calificacion con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
-     *
-     * Codigos de respuesta:
-     * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Actualiza la calificacion con el id dado con la información enviada como parámetro. Retorna un objeto identico.</code>
-     * <code style="color: #c7254e; background-color: #f9f2f4;">
-     * 404 Not Found. No existe una calificacion con el id dado.
-     * </code>
-     * </pre>
-     *
-     * @param id Identificador de la calificacion que se desea actualizar.Este
-     * debe ser una cadena de dígitos.
-     * @param calificacion {@link CalificacionDetailDTO} La calificacion que se
-     * desea guardar.
-     * @param modeloId El modelo de la calificación que se quiere actualizar.
-     * @param clienteId {@link ClienteDetailDTO} El cliente de la calificación
-     * que se quiere actualizar.
-     * @return JSON {@link CalificacionDetailDTO} - La calificacion guardada.
-     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
-     * Error de lógica que se genera al no poder actualizar la calificacion
-     * porque ya existe una con ese id.
-     */
-    @PUT
-    @Path("{modelosId: \\d+}")
-    public CalificacionDetailDTO updateCalificacion(CalificacionDetailDTO calificacion,
-            @PathParam("modelosId") Long modeloId, @PathParam("calificacionesId") Long id, @PathParam("clientesId") Long clienteId) throws BusinessLogicException {
-        CalificacionEntity cali = cal.find(id);
-        if (cali == null) {
-            throw new WebApplicationException("El recurso /calificaciones/" + id + " no existe.", 404);
-        }
-        return new CalificacionDetailDTO(cal.updateCalificacion(calificacion.toEntity(), modeloId, clienteId));
     }
 
     /**

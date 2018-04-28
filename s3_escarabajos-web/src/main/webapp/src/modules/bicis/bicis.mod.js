@@ -38,6 +38,11 @@
                         templateUrl: basePath + 'bicis.detail.html',
                         controller: 'biciDetailCtrl',
                         controllerAs: 'ctrl'
+                    },
+                    'gaitanView': {
+                        templateUrl: 'src/modules/calificaciones/calificaciones.list.html',
+                        controller: 'calificacionCtrl',
+                        controllerAs: 'ctrl'
                     }
                 }
             }).state('biciCreate', {
@@ -51,10 +56,10 @@
                 }
             }).state('biciDelete', {
                 parent: 'bicis',
-                params:{
+                params: {
                     biciId: null
                 },
-                 views: {
+                views: {
                     'listView': {
                         templateUrl: basePath + 'bicis.list.html',
                         controller: 'biciDeleteCtrl'

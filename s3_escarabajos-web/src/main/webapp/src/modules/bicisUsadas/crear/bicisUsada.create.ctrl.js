@@ -13,7 +13,7 @@
              * @name createBiciUsada
              * @methodOf bicisUsada.controller:biciUsadaCreateCtrl
              * @description
-             * Esta funciÃ³n utiliza el protocolo HTTP para crear la bicicleta usada.
+             * Esta función utiliza el protocolo HTTP para crear la bicicleta usada.
              * @param {Object} biciUsada Objeto con la nueva de la bicicleta usada.
              */
             
@@ -36,8 +36,9 @@
                 
                 input.usada = true;
                 
-                input.facturaOriginal  = $scope.data.facturaOriginal;
+                input.estado = "En proceso"
                 
+                input.facturaOriginal  = $scope.data.facturaOriginal;
                   //Debia ser: biciUsadaContext + '/' + $state.params.vendedorId + '/bicis' pero aun no esta funcionando vendedor completamente.
                 //por ende lo hago con un vendedor especifico.
                 $http.post(biciUsadaContext + '/1/bicis' , input).then(function (response) {
