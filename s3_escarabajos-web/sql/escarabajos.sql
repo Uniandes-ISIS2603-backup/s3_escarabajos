@@ -38,7 +38,7 @@ insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod
 --Datos de prueba VendedorEntity(con telefono y direccion no null)
 insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (1, '9898989', 'coc@hotmale.com', 'Camilo','pedro69','468651684','Frankfurtcalle8-9');
 insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (2, '1111111', 'hol@gmail.com', 'Felipe','saga','1232123','calle8-9');
-
+insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (3, '1111111', 'hol@gmail.com', 'pedro','saga',null,null);
 
 --Datos de prueba BicicletUsadaEntity
 

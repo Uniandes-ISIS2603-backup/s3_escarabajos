@@ -4,17 +4,15 @@
     <table class="table table-striped col-md-4">
         <thead>
             <tr>
+                <th>Nombre</th>
                 <th>Id</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="record in records">
 
+                <td id="{{$index}}-name">{{record.nombre}}</td>
                 <td id="{{$index}}-id">{{record.id}}</td>
-                <td>
-                   | <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="ctrl.deleteRecord(record.id)"><span class="glyphicon glyphicon-minus"></span> Remove</button>
-                </td>
             </tr>
         </tbody>
     </table>

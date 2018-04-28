@@ -244,6 +244,21 @@ public class ClienteResource {
         return CalificacionResource.class;
     }
     
-    
+    /**
+     * <h1>GET /api/clientes/vendedores : Obtener todos las clientes vendedores.</h1>
+     * 
+     * <pre>Busca y devuelve todas los clientes vendedores que existen en la aplicacion.
+     * 
+     * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Devuelve todas los clientes de la aplicacion.</code> 
+     * </pre>
+     * @return JSONArray {@link ClienteDetailDTO} - Los clientes encontrados en la aplicación. Si no hay ninguna retorna una lista vacía.
+     */
+    @GET
+    @Path("/vendedores")
+    public List<ClienteDetailDTO> getVendedores() {
+        return listEntity2DTO(logic.getVendedores());    
+    }
     
 }

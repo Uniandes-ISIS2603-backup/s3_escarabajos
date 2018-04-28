@@ -50,8 +50,6 @@
 
             catalogoFactory.getColores($state.params.tipo).then(function (response) {
                 $scope.col = response.data;
-                console.log("!!!!");
-                console.log($scope.col);
                 for (var j = 0; j < $scope.col.length; j++) {
                     $scope.col[j].activado = false;
                     for (var i = 0; i < $scope.filtros.colores.length; i++) {

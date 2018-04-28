@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.escarabajos.dtos;
 
 import co.edu.uniandes.csw.escarabajos.entities.AccesorioEntity;
 import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
+import co.edu.uniandes.csw.escarabajos.entities.BicicletaUsadaEntity;
 import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
@@ -24,10 +25,12 @@ import java.util.List;
  *      "marca": String,
  *      "referencia": String,
  *      "calificacionMedia": double,
- *      "tipoModelo":String
+ *      "tipoModelo":String,
+ *      "url": String,
+ *      "precio"double,
  *      "items": [{@ItemDTO}],
  *      "calficaciones": [{
- * @CalificacionDTO}] }
+ * @CalificacionDTO}]}
  * </pre> Por ejemplo un modelo se representa asi:<br>
  *
  * <pre>
@@ -64,7 +67,9 @@ import java.util.List;
  *              "comentario": "Muy buen Casco",
  *              "puntaje": 4
  *          }
- *      ]
+ *      ],
+ *      "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAKvSURBVDjLpZJdSFNhGMcnIX4GhglGKHlRemHhYBoSiEkgZhgaIjqwNaqBGuxiF5FFhDOHzRmZlGBdhI5SopQInZOJtXkTKGYyN+fm5s7mOW7HtjHHhv17zynLqDDowMN7znOe/+/5egUABP9jewY4VlePOp3OG3a7/YnVaq32er37/hlgXlq65fF6wbIsb263G2azmZqdnU3fE/Bhbq7d7fEgGo0iEokgGAwiHA7D7/eDAFjjzEziXwEGo/Gu3eXixaFQiM/OMAzW19d5kNVmw3uTSfFHgMFgUFpIACfmgrmMnJj0zrfAGbOxAcP0tO83gHVgoI3S6xElgkAgAJ/Px4s9pJW1tTU4HA7YCJzzj01O4heAp7W1LTg0hNjUFLY6O7FpMICmaVAUBRdph2wBy8vLPJBsBi9HR5d+AKz19TK2vx8xQt1SqRBsacFnqRT04CDICrGysgKyQqwSITeHsfFxPNNqs3iAMTs7wdbUhBhxhpVKBMj7pkQCf10dmKoquNRqWCwWvJh4CsXji7iqOY8G5elwxfUTN3nAWE7OMbtcjujwMAIyGTYbG+GrrQVTWQlvWRmo4mJou67hzvAlvFnoxRylQ/dEE+q6j+Nk8yG14Hlm5pFFki3S1wdWLIavpgZ0RQW8paWgiopAE4C0/QxGPt7HyOIDbnBQ66+gWy/jAFuCntTUuNd5efOMXP4lpFCALi+Hp6QEbpEINAGwhYU41yrE24V+7H5G53s5wLcN9KSlHTSJRE5GLI6GGhpAE0CAVOAXCvEpPx+nmg9H7+mk6NBJeHHHuORnBTtr1KSkHBjIyHi1WFDAuoXCbVtu7va7rKyYNj39LAlUXlDnoUt3mc/Mndw3P4PdF+l2fHycJjFR9Cg5WfEwKalak5Cwf+cfCVYRC3Blfz9VnP8rovbZoQ8oWiIAAAAASUVORK5CYII=",
+ *      "precio": 0.0
  *   }
  *
  * </pre>
@@ -83,6 +88,10 @@ public class ModeloDetailDTO extends ModeloDTO {
      */
     private List<CalificacionDTO> calificaciones;
 
+    private String url;
+
+    private Double precio;
+
     /**
      * Constructor por defecto
      */
@@ -99,6 +108,8 @@ public class ModeloDetailDTO extends ModeloDTO {
     public ModeloDetailDTO(ModeloEntity entity) {
         super(entity);
         //TODO: entity podría ser null
+        precio = Double.MAX_VALUE;
+        url = "https://17a6ky3xia123toqte227ibf-wpengine.netdna-ssl.com/wp-content/uploads/2016/12/bike-home-template-optimized.jpg";
         if (entity.getItems() != null) {
             items = new ArrayList<>();
             for (ItemEntity entityItem : entity.getItems()) {
@@ -106,6 +117,14 @@ public class ModeloDetailDTO extends ModeloDTO {
                     items.add(new AccesorioDTO((AccesorioEntity) entityItem));
                 } else if (entityItem instanceof BicicletaEntity) {
                     items.add(new BicicletaDTO((BicicletaEntity) entityItem));
+                }
+                if (entityItem.getPrecio() < precio && !(entityItem instanceof BicicletaUsadaEntity)) {
+                    precio = entityItem.getPrecio();
+                    try {
+                        url = entityItem.getAlbum().get(0).getUrl();
+                    } catch (Exception e) {
+
+                    }
                 }
             }
         }
@@ -169,6 +188,34 @@ public class ModeloDetailDTO extends ModeloDTO {
      */
     public void setItems(List<ItemDTO> items) {
         this.items = items;
+    }
+
+    /**
+     * @return the url
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    /**
+     * @param url the url to set
+     */
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    /**
+     * @return the precio
+     */
+    public Double getPrecio() {
+        return precio;
+    }
+
+    /**
+     * @param precio the precio to set
+     */
+    public void setPrecio(Double precio) {
+        this.precio = precio;
     }
 
 }

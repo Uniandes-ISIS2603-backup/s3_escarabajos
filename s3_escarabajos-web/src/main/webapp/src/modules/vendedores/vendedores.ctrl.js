@@ -1,18 +1,22 @@
 (function (ng) {
 
     var mod = ng.module("vendedoresModule");
+    
+    mod.constant("vendedoresContext","api/clientes/vendedores");
 
-    mod.controller("vendedoresCtrl", ['$scope', '$state', '$stateParams', '$http', 'vendedoresContext', function ($scope, $state, $stateParams, $http, context) {
+    mod.controller("vendedoresCtrl", ['$scope', '$http', 'vendedoresContext', 
+        function ($scope, $http, vendedoresContext) {
     
-    
-     $http.get('http://localhost:8080/s3_escarabajos-web/api/vendedores').then(function (response) {
-                    $scope.records = response.data;
-     });         
+            
+            $scope.listaVendedores ={};
+            
+            $http.get(vendedoresContext).then(function(response){
+                $scope.records = response.data;
+            });
      
-     this.deleteRecord = function (id) {
-                $http.delete('http://localhost:8080/s3_escarabajos-web/api/vendedores/'+ id);
-                $state.reload('vendedoresList');
-     };
+            this.getRecord = function (id) {
+                $http.get('http://localhost:8080/s3_escarabajos-web/api/clientes/'+ id);
+            };
 
         }]);
 })(window.angular);
