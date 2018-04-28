@@ -27,8 +27,7 @@
                var temp = angular.toJson(filtros);
                temp.precioMin = parseFloat(filtros.precioMin);
                temp.precioMax = parseFloat(filtros.precioMax);
-               temp.calificacionMin = parseFloat(filtros.calificacionMin);
-               console.log(temp);
+               temp.calificacionMin = parseFloat(filtros.calificacionMin)
                 return $http.post(catalogoContext + '/modelos/' + tipo,temp);
             };
 
