@@ -1,5 +1,5 @@
  <alert class="alert alert-danger" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
- <form class="form-horizontal">
+ <form class="form-horizontal" name="signUp">
     <!-- Form Name -->
     <legend>SignUp</legend>
 
@@ -14,7 +14,7 @@
               <div class="form-group">
                 <label class="col-md-4 control-label" for="textinput">Username</label>
                 <div class="col-md-4">
-                  <input id="usuario" name="textinput" type="text" required ng-model="data.usuario" placeholder="UserName" class="form-control input-md">
+                  <input id="usuario" name="username" type="text" required ng-model="data.usuario" placeholder="UserName" class="form-control input-md" autofocus>
                 </div>
               </div>
 
@@ -22,7 +22,7 @@
               <div class="form-group">
                 <label class="col-md-4 control-label" for="textinput">Nombre</label>
                 <div class="col-md-4">
-                  <input id="nombre" name="textinput" type="text" required ng-model="data.nombre" placeholder="nombre" class="form-control input-md" required="">
+                  <input id="nombre" name="nombre" type="text" required ng-model="data.nombre" placeholder="nombre" class="form-control input-md" required="">
                 </div>
               </div>
 
@@ -30,36 +30,47 @@
               <div class="form-group">
                 <label class="col-md-4 control-label" for="textinput">Cedula</label>
                 <div class="col-md-4">
-                  <input id="cedula" name="textinput" type="text" required ng-model="data.cedula" placeholder="cedula" class="form-control input-md">
+                  <input id="cedula" name="cedula" type="text" required ng-model="data.cedula" placeholder="cedula" class="form-control input-md">
 
                 </div>
               </div>
 
               <!-- Text input-->
               <div class="form-group">
-                <label class="col-md-4 control-label" for="textinput">Email</label>
+                <label class="col-md-4 control-label" for="email">Email</label>
                 <div class="col-md-4">
-                  <input id="correo" name="textinput" type="text" required ng-model="data.correo" placeholder="tu email" class="form-control input-md">
-
+                  <input name="email" id="correo" type="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required ng-model="data.correo" placeholder="tu email" class="form-control input-md" >
                 </div>
               </div>
 
               <!-- Button (Double) -->
               <div class="form-group">
                 <label class="col-md-4 control-label" for="btnsave"></label>
-                <div class="col-md-8">
-                  <button id="btnsave" name="btnsave" class="btn btn-success" ng-click="createCliente()">Ingresar</button>
+                <div class="col-md-8" >
+                    <button id="btnsave" name="btnsave" class="btn btn-success" ng-click="createCliente()">Ingresar</button>
                 </div>
               </div>
 
+              <div class="alert-warning">
+                  <span ng-show="signUp.username.$error.required">
+                      Usuario es requerido
+                  </span>
+                  <span ng-show="signUp.nombre.$error.required">
+                      <br>nombre es requerido
+                  </span>
+                  <span ng-show="signUp.cedula.$error.required">
+                      <br>cedula es requerida
+                  </span>
+                  <span ng-show="signUp.email.$error.required">
+                      <br>Email es requerido
+                  </span>
+                  <span ng-show="signUp.email.$error.email">
+                      <br>direccion email errada
+                  </span>
+              </div>
             </fieldset>
           </div>
         </div>
       </div>
     </div>
-
-
   </form>
- 
-
-
