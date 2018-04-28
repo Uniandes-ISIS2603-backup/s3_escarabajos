@@ -1,70 +1,80 @@
 <alert class="alert alert-danger" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
-<form class="form-horizontal">
-    <!-- Form Name -->
-    <legend>Perfil de usuario</legend>
+<div class="row col-sm-12">
+    <form class="form-horizontal col-sm-12">
+        <!-- Form Name -->
+        <legend>Perfil de usuario</legend>
 
-    <div class="container">
-      <div class="row profile">
-        <div class="col-md-3">
-          <div class="profile-sidebar">
-            <!-- SIDEBAR USERPIC -->
-            <div class="profile-userpic">
-              <img src="https://thumb1.shutterstock.com/display_pic_with_logo/2213711/664577617/stock-vector-bug-line-icon-outline-vector-sign-linear-style-pictogram-isolated-on-white-symbol-logo-664577617.jpg" class="img-responsive" alt="">
+        <div class="container">
+            <div class="row profile">
+                <div class="col-md-3">
+                    <div class="profile-sidebar">
+                        <!-- SIDEBAR USERPIC -->
+                        <div class="profile-userpic">
+                            <img src="https://thumb1.shutterstock.com/display_pic_with_logo/2213711/664577617/stock-vector-bug-line-icon-outline-vector-sign-linear-style-pictogram-isolated-on-white-symbol-logo-664577617.jpg" class="img-responsive" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="profile-content">
+                        <fieldset>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="textinput">Username</label>
+                                <div class="col-md-4">
+                                    {{clienteActual.usuario}}
+                                </div>
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="textinput">Nombre</label>
+                                <div class="col-md-4">
+                                    {{clienteActual.nombre}}
+
+                                </div>
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="textinput">Cedula</label>
+                                <div class="col-md-4">
+                                    {{clienteActual.cedula}}
+
+                                </div>
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="textinput">Email</label>
+                                <div class="col-md-4">
+                                    {{clienteActual.correo}}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-1"></div>
+                                <div class="col-sm-12">
+                                    <a ui-sref ="bicisUsadaList({clienteId: clienteActual.id})" class="btn btn-primary">Ver  <i class="fa fa-bicycle icon"></i></a>
+                                    <div class="row">
+                                        <hr>
+                                        <div ui-view="childrenView"></div>
+                                        <hr>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Button (Double) -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="btnsave">Guardar Cambios</label>
+                                <div class="col-md-8">
+                                    <button id="btnsave" name="btnsave" class="btn btn-success">Si</button>
+                                    <button id="btncancel" name="btncancel" class="btn btn-danger">No</button>
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-        <div class="col-md-9">
-          <div class="profile-content">
-            <fieldset>
-
-              <!-- Text input-->
-              <div class="form-group">
-                <label class="col-md-4 control-label" for="textinput">Username</label>
-                <div class="col-md-4">
-                  {{clienteActual.usuario}}
-                </div>
-              </div>
-
-              <!-- Text input-->
-              <div class="form-group">
-                <label class="col-md-4 control-label" for="textinput">Nombre</label>
-                <div class="col-md-4">
-                  {{clienteActual.nombre}}
-
-                </div>
-              </div>
-
-              <!-- Text input-->
-              <div class="form-group">
-                <label class="col-md-4 control-label" for="textinput">Cedula</label>
-                <div class="col-md-4">
-                  {{clienteActual.cedula}}
-
-                </div>
-              </div>
-
-              <!-- Text input-->
-              <div class="form-group">
-                <label class="col-md-4 control-label" for="textinput">Email</label>
-                <div class="col-md-4">
-                    {{clienteActual.correo}}
-                </div>
-              </div>
-
-              <!-- Button (Double) -->
-              <div class="form-group">
-                <label class="col-md-4 control-label" for="btnsave">Guardar Cambios</label>
-                <div class="col-md-8">
-                  <button id="btnsave" name="btnsave" class="btn btn-success">Si</button>
-                  <button id="btncancel" name="btncancel" class="btn btn-danger">No</button>
-                </div>
-              </div>
-
-            </fieldset>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-  </form>
+    </form>
+</div>
