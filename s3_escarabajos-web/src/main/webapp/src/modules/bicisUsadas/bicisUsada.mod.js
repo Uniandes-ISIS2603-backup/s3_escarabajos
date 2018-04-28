@@ -66,6 +66,18 @@
                         controller: 'biciUsadaDeleteCtrl'
                     }
                 }
+            }).state('biciUsadaUpdate', {
+                url: '/update/{biciUsadaId:int}',
+                parent: 'bicisUsada',
+                params: {
+                    biciUsadaId: null
+                },
+                views: {
+                    'listView': {
+                        templateUrl: basePath + '/editar/bicisUsada.edit.html',
+                        controller: 'biciUsadaEditCtrl'
+                    }
+                }
             });
         }]);
 })(window.angular)

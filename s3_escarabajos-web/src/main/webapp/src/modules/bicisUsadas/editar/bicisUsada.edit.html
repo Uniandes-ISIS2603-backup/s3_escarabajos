@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="src/modules/bicis/crear/create.css"/>
+<div class="container-fluid">
+    <form name="bicicleta"  style="max-width:500px;margin:auto">
+        <h2 style="text-align-last: center">
+            <i class="fa fa-cog icon"></i>
+            Editar Bicicleta
+        </h2>
+        <label for="bicicletaUsadaModelo">Modelo</label>
+        <div class="input-container">
+            <input id="bicicletaUsadaModelo" class="input-field" type="text" required ng-model="biciUsadaActual.modeloId" placeholder="{{biciUsadaActual.modeloId}}" disabled>
+        </div>
+        <label for="bicicletaUsadaPrecio">Precio</label>
+        <div class="input-container">
+            <input id="bicicletaUsadaPrecio" class="input-field" type="text" required ng-model="biciUsadaActual.precio" placeholder="{{biciUsadaActual.precio}}" >
+        </div>
+        <label for="bicicletaUsadaCategoria">Categoria</label>
+        <div class="input-container">
+            <input id="bicicletaUsadaCategoria" class="input-field" type="text" required ng-model="biciUsadaActual.categoria" placeholder="{{biciUsadaActual.categoria}}">
+        </div>
+        <label for="bicicletaUsadaFacturaOriginal">Factura Original</label>
+        <div class="input-container">
+            <input id="bicicletaUsadaFacturaOriginal" class="input-field" type="text" required ng-model="biciUsadaActual.facturaOriginal" placeholder="{{biciUsadaActual.facturaOriginal}}">
+        </div>
+        <label for="bicicletaUsadaEstado">Estado</label>
+        <div class="input-container">
+            <input id="bicicletaUsadaEstado" class="input-field" type="text" required ng-model="biciUsadaActual.estado" placeholder="{{biciUsadaActual.estado}}">
+        </div>
+        <div class="row">
+            <label for="bicicletaUsadaColor">Color</label>
+            <input id="bicicletaUsadaColor" type="color" required ng-model="biciUsadaActual.color" ng-init="biciUsadaActual.color='{{biciUsadaActual.color}}'">
+        </div>
+        
+        <br>
+            <div class="row col-sm-12">
+            <div class="col-sm-5">
+                <button type="submit" ng-click="updateBiciUsada()" class="btn-c">Guardar</button>
+            </div>
+            <div class="col-sm-5">
+                <button class="btn-c" ui-sref="bicisUsadaList">Cancelar</button>
+            </div>
+        </div>
+    </form>
+</div>

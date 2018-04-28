@@ -15,6 +15,7 @@
                             <tr>
                                 <th>Modelo</th>    
                                 <th>Categoria</th>  
+                                <th>Estado</th>
                                 <th>Actions</th>  
                             </tr>
                         </thead>
@@ -22,6 +23,7 @@
                             <tr ng-repeat="bici in listaBicisUsadas">
                                 <td id="{{$index}}-modelo"><a ui-sref="biciUsadaDetail({biciUsadaId:bici.id})">{{bici.modeloId}}</a></td>
                                 <td id="{{$index}}-categoria">{{bici.categoria}}</td>
+                                <td id="{{$index}}-estado">{{bici.estado}}</td>
                                 <td id="{{$index}}-actions">
                                     <a class="btn btn-default btn-sm" ui-sref="biciUsadaUpdate({biciUsadaId: bici.id})"><span class="glyphicon glyphicon-edit"></span></a>
                                     <a class="btn btn-danger btn-sm" ui-sref="biciUsadaDelete({biciUsadaId: bici.id})"><span class="glyphicon glyphicon-trash"></span></a>
