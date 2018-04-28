@@ -1,12 +1,14 @@
 --Borrar los datos de las tablas
 delete from car_Items;
 delete from clienteEntity_itementity;
+delete from CalificacionEntity;
 delete from ItemEntity;
 delete from ModeloEntity;
 delete from CarritoEntity;
 delete from ClienteEntity;
 delete from FacturaEntity;
 delete from ReclamoEntity;
+
 --Datos de prueba ModeloEntity con tipo modelo Bicicleta
 
 insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (1, 'Cayman', 'EUR', 18, 'Bicicleta');
@@ -73,6 +75,15 @@ insert into car_items values(2,2);
 insert into car_items values(2,3);
 insert into car_items values(2,6);
 
-
+insert into CalificacionEntity (id, comentario, puntaje, cliente_id, modelo_id) values(1,'Muy buenos frenos', 5, 1, 1);
+insert into CalificacionEntity (id, comentario, puntaje, cliente_id, modelo_id) values(2,'Lindos colores', 4, 2, 1);
+insert into CalificacionEntity (id, comentario, puntaje, cliente_id, modelo_id) values(3,'Asiento muy comodo', 3, 3, 2);
+insert into CalificacionEntity (id, comentario, puntaje, cliente_id, modelo_id)values(4,'Demasiado pesada', 2, 1, 2);
+insert into CalificacionEntity (id, comentario, puntaje, cliente_id, modelo_id) values(5,'Muy fea en diseño y no sirve para lo que dice', 1, 2, 3);
+insert into CalificacionEntity (id, comentario, puntaje, cliente_id, modelo_id) values(6,'Excelente tracción', 5, 3, 3);
+insert into CalificacionEntity (id, comentario, puntaje, cliente_id, modelo_id) values(7,'Ideal para BMX', 4, 1, 4);
+insert into CalificacionEntity (id, comentario, puntaje, cliente_id, modelo_id) values(8,'Me gustan sus colores', 3, 2, 4);
+insert into CalificacionEntity (id, comentario, puntaje, cliente_id, modelo_id) values(9,'Diseño muy feo', 2, 3, 5);
+insert into CalificacionEntity (id, comentario, puntaje, cliente_id, modelo_id) values(10,'Muy infantil', 1, null, 5);
 
 

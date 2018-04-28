@@ -95,7 +95,6 @@ public class ModeloCalificacionResource {
      * Error de lógica que se genera cuando ya existe un reclamo.
      */
     @POST
-    @PathParam("modelosId: \\d+")
     public CalificacionDetailDTO createCalificacion(CalificacionDetailDTO calificacion,
             @PathParam("modelosId") Long modeloId) throws BusinessLogicException {
 
@@ -126,66 +125,5 @@ public class ModeloCalificacionResource {
     @GET
     public List<CalificacionDetailDTO> getCalificaciones(@PathParam("modelosId") Long modeloId) {
         return list2DTO(cal.getCalificacionesPorModelo(modeloId));
-    }
-
-    /**
-     * <h1>GET /api/modelos/{modelosId}/calificaciones/{calificacionesId} :
-     * Obtener calificacion por id.</h1>
-     *
-     * <pre>Busca la calificacion con el id y el modelo asociado recibido en la URL y la devuelve.
-     *
-     * Codigos de respuesta:
-     * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Devuelve la calificacion correspondiente al id.
-     * </code>
-     * <code style="color: #c7254e; background-color: #f9f2f4;">
-     * 404 Not Found No existe una calificacion con el id dado.
-     * </code>
-     * </pre>
-     *
-     * @param modeloId el id del modelo que al que hace parte la calificacion
-     * @param clienteId el id del cliente al que hace parte la calificacion
-     * @param id Identificador de la calificacion que se esta buscando. Este
-     * debe ser una cadena de dígitos.
-     * @return JSON {@link CalificacionDetailDTO} - El reclamo buscada
-     */
-    @GET
-    @Path("{modelosId: \\d+}")
-    public CalificacionDetailDTO getCalificacion(@PathParam("modelosId") Long modeloId, @PathParam("clientesId") Long clienteId, @PathParam("calificacionesId") Long id) throws WebApplicationException, BusinessLogicException {
-        CalificacionEntity calificacion = cal.find(id);
-        if (calificacion == null) {
-            throw new WebApplicationException("El recurso /calificaciones/" + id + " no existe.", 404);
-        }
-        CalificacionDetailDTO cali = new CalificacionDetailDTO(cal.getCalificacionesPorClienteAndModelo(clienteId, modeloId).get(0));
-        return cali;
-    }
-
-    /**
-     * <h1>DELETE /api/modelos/{modelosId}/calificaicones/{calificacionesId} :
-     * Borrar calificacion por id.</h1>
-     *
-     * <pre>Borra la calificacion con el id asociado recibido en la URL.
-     *
-     * Códigos de respuesta:<br>
-     * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Elimina la calificacion correspondiente al id dado.</code>
-     * <code style="color: #c7254e; background-color: #f9f2f4;">
-     * 404 Not Found. No existe una calificacion con el id dado.
-     * </code>
-     * </pre>
-     *
-     * @param modeloId el modelo al que se le quiere eliminar la calificación
-     * @param clienteId el cliente que quiere eliminar la calificacioón
-     * @param id Identificador de la calificacion que se desea borrar. Este debe
-     * ser una cadena de dígitos.
-     */
-    @DELETE
-    @Path("{modelosId: \\d+}")
-    public void deleteCalificacion(@PathParam("modelosId") Long modeloId, Long clienteId, @PathParam("calificacionesId") Long id) {
-        CalificacionEntity cali = cal.find(id);
-        if (cali == null) {
-            throw new WebApplicationException("El recurso /calificaciones/" + id + " no existe.", 404);
-        }
-        cal.removeCalificacion(id, clienteId, modeloId);
     }
 }

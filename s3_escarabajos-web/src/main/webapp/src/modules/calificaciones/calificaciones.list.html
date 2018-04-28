@@ -5,7 +5,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <div class="col-sm-2"></div>
-<div class="col-sm-8">
+<div class="col-sm-8" >
     <legend>Calificaciones</legend>
     <div align = "right">
         <a class="btn btn-primary" data-toggle="collapse" data-target = "#mensaje" >
@@ -15,7 +15,7 @@ and open the template in the editor.
     <div id="mensaje" class="collapse" align = "right">
         <br>
         <label for="sel1">Seleccione el item</label>
-        <select class="form-control" id="sel1" style = "width:50px">
+        <select class="form-control" id="sel1" style = "width:50px" ng-model = "data.puntaje">
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -31,22 +31,15 @@ and open the template in the editor.
     </div>
     <br>
     <div class="panel-group" id="accordion">
-        <div class="panel panel-default">
+        <div class="panel panel-default" ng-repeat = "cal in calificaciones">
             <div class="panel-heading">
+                <label>Usuario Pendiente de conexión</label>
                 <div align  = "Right">
-                    <font size = "4px">5</font>
+                    <font size = "4px">{{cal.puntaje}}</font>
                     <span class = "glyphicon glyphicon-star"></span>
-                    <a class = "btn btn-success" data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-                        <span class = "glyphicon glyphicon-plus"></span>
-                    </a>
                 </div>
             </div>
-            <div id="collapse1" class="panel-collapse collapse">
-                <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                    commodo consequat.</div>
-            </div>
+            <div class="panel-body">{{cal.comentario}}</div>
         </div>
     </div>
 </div>

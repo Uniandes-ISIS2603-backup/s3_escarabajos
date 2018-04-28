@@ -36,7 +36,7 @@ public class CalificacionEntity  implements Serializable
     private ModeloEntity modelo;
     
     @PodamExclude
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private ClienteEntity cliente;
     
     public String getComentario()

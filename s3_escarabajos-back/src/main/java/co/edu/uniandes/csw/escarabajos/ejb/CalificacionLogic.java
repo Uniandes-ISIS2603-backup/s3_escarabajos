@@ -46,15 +46,15 @@ public class CalificacionLogic {
 
         // TODO: DONE QUitar las líneas que no sirven
         ModeloEntity model = modeloLogic.getModelo(modeloId);
-        ClienteEntity cliente = clienteLogic.getCliente(clienteId);
+//        ClienteEntity cliente = clienteLogic.getCliente(clienteId);
         cal.setModelo(model);
-        cal.setCliente(cliente);
+//        cal.setCliente(cliente);
         CalificacionEntity nueva = calificacionPersistence.create(cal);
         model.getCalificaciones().add(nueva);
-        modeloLogic.updateModelo(model.getId(), model);
-        cliente.getCalificaciones().add(cal);
-        clienteLogic.updateCliente(cliente);
         model.setCalificacionMedia(getCalificacionMedia(modeloId));
+        modeloLogic.updateModelo(model.getId(), model);
+//        cliente.getCalificaciones().add(cal);
+//        clienteLogic.updateCliente(cliente);
         return nueva;
     }
 

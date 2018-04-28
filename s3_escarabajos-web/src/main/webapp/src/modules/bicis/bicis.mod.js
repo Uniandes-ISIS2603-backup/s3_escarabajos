@@ -39,8 +39,10 @@
                         controller: 'biciDetailCtrl',
                         controllerAs: 'ctrl'
                     },
-                    'gaitanView': {
-                        templateUrl: 'src/modules/calificaciones/calificaciones.list.html'
+                    'calificacionView': {
+                        templateUrl: 'src/modules/calificaciones/calificaciones.list.html',
+                        controller: 'calificacionesListCtrl',
+                        controllerAs: 'ctrl'
                     }
                 }
             }).state('biciCreate', {
