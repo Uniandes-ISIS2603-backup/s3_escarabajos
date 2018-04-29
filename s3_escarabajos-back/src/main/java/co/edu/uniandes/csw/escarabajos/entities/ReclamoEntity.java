@@ -14,12 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -31,10 +32,6 @@ public class ReclamoEntity  implements Serializable
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @PodamExclude
-    @OneToMany(mappedBy = "reclamo", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<FotoEntity> album = new ArrayList<FotoEntity>();
     
     private String mensaje;
     private String razon;
@@ -49,6 +46,11 @@ public class ReclamoEntity  implements Serializable
    
     @PodamExclude
     private Boolean enProceso = true;
+    
+    @PodamExclude
+    @ElementCollection
+    @CollectionTable(name = "RECLAMO_ALBUM")
+    private List<String> album = new ArrayList<>();
     
     public String getMensaje()
     {
@@ -80,20 +82,6 @@ public class ReclamoEntity  implements Serializable
 
     public void setCliente(ClienteEntity cliente) {
         this.cliente = cliente;
-    }
-
-    /**
-     * @return the album
-     */
-    public List<FotoEntity> getAlbum() {
-        return album;
-    }
-
-    /**
-     * @param album the album to set
-     */
-    public void setAlbum(List<FotoEntity> album) {
-        this.album = album;
     }
 
     /**
@@ -144,5 +132,19 @@ public class ReclamoEntity  implements Serializable
      */
     public boolean isEnProceso() {
         return enProceso;
+    }
+
+    /**
+     * @return the album
+     */
+    public List<String> getAlbum() {
+        return album;
+    }
+
+    /**
+     * @param album the album to set
+     */
+    public void setAlbum(List<String> album) {
+        this.album = album;
     }
 }

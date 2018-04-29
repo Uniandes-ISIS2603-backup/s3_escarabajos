@@ -22,14 +22,14 @@
                 return $http.get(catalogoContext + '/colores/' + tipo);
             };
 
-            dataFactory.getModelos = function (tipo, filtros) {
-                
-               var temp = angular.toJson(filtros);
-               temp.precioMin = parseFloat(filtros.precioMin);
-               temp.precioMax = parseFloat(filtros.precioMax);
-               temp.calificacionMin = parseFloat(filtros.calificacionMin)
-                return $http.post(catalogoContext + '/modelos/' + tipo,temp);
+            dataFactory.getModelos = function (tipo, filtros, pagina, numeroModelos) {
+                var temp = angular.toJson(filtros);
+                temp.precioMin = parseFloat(filtros.precioMin);
+                temp.precioMax = parseFloat(filtros.precioMax);
+                temp.calificacionMin = parseFloat(filtros.calificacionMin)
+                return $http.post(catalogoContext + '/modelos/' + tipo + '/' + pagina + '/' + numeroModelos, temp);
             };
+            
 
             return dataFactory;
         }]);

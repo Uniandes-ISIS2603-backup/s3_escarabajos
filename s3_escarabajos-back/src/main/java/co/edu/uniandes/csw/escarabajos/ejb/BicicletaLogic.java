@@ -83,6 +83,7 @@ public class BicicletaLogic {
         verificarBicicleta(entity);
         // TODO: DONE 
         persistence.create(entity);
+        entity.setDisponible(Boolean.TRUE);
         LOGGER.info("Termina proceso de creación de bicicleta");
         return entity;
     }

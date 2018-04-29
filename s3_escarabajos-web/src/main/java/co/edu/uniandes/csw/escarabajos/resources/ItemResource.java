@@ -94,25 +94,4 @@ public class ItemResource {
         }
         return list;
     }
-
-    /**
-     * Conexión con el servicio de fotos para un item. {@link ItemFotosResource}
-     *
-     * Este método conecta la ruta de /items con las rutas de /fotos que
-     * dependen del item, es una redirección al servicio que maneja el segmento
-     * de la URL que se encarga de las fotos.
-     *
-     * @param id El ID del id con respecto al cual se accede al servicio.
-     * @return El servicio de fotos para ese item en paricular.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra el item.
-     */
-    @Path("{id: \\d+}/fotos")
-    public Class<ItemFotosResource> getItemFotosResource(@PathParam("id") Long id) {
-        ItemEntity entity = itemLogic.getItem(id);
-        if (entity == null) {
-            throw new WebApplicationException("El recurso /modelos/" + id + "/items no existe", 404);
-        }
-        return ItemFotosResource.class;
-    }
 }

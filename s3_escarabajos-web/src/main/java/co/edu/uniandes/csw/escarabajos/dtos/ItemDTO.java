@@ -4,29 +4,27 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.escarabajos.dtos;
-import co.edu.uniandes.csw.escarabajos.entities.FotoEntity;
+
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * ItemDTO Objeto de transferencia de datos de Accesorios. Los DTO contienen las
  * represnetaciones de los JSON que se transfieren entre el cliente y el
  * servidor.
- * 
+ *
  * Al serializarse como JSON esta clase implementa el siguiente item: <br>
  * <pre>
  *   {
  *      "id": number,
  *      "precio": double,
- *      "modeloId": number, 
+ *      "modeloId": number,
  *      "color": String,
  *      "categoria": String,
- *      "album": [{@FotoDTO}]
+ *      "album": [{@String}]
  *   }
- * </pre>
- * Por ejemplo un item se representa asi:<br>
- * 
+ * </pre> Por ejemplo un item se representa asi:<br>
+ *
  * <pre>
  *   {
  *      "id": 1,
@@ -48,70 +46,63 @@ import java.util.List;
  *      ]
  *   }
  * </pre>
+ *
  * @author Andres
  */
 public abstract class ItemDTO {
- 
+
     private Long id;
     private double precio;
-    
+
     private Long modeloId;
-    
+
     private String color;
-    
+
     private String categoria;
-    
-    private List<FotoDTO> album;
+
+    private List<String> album;
+
     /**
      * Constructor por defecto
      */
     public ItemDTO() {
     }
-    
-     /**
+
+    /**
      * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
      * la entidad que viene de argumento.
      *
      * @param entity: Es la entidad que se va a convertir a DTO
      */
     public ItemDTO(ItemEntity entity) {
-       //TODO: entity podría ser null 
-       this.id = entity.getId();
-       this.precio = entity.getPrecio();
-       this.modeloId = entity.getModeloId();
-       this.color = entity.getColor();
-       this.categoria = entity.getCategoria();
-       if (entity.getAlbum()!= null) {
-            album = new ArrayList<>();
-            for (FotoEntity entityFoto : entity.getAlbum()) {
-               album.add(new FotoDTO(entityFoto));
-            }
+        if (entity != null) {
+            this.id = entity.getId();
+            this.precio = entity.getPrecio();
+            this.modeloId = entity.getModeloId();
+            this.color = entity.getColor();
+            this.categoria = entity.getCategoria();
+            this.album = entity.getAlbum();
         }
     }
+
     public abstract ItemEntity toEntity();
-      /**
+
+    /**
      * Convertir DTO a Entity
      *
      * @param entity Es la entidad que se le van a asignarlos valores del DTO
      * @return Un Entity con los valores del DTO
      */
-   
     public ItemEntity toEntity(ItemEntity entity) {
-       entity.setId(this.getId());
-       entity.setPrecio(this.getPrecio());
-       entity.setModeloId(this.getModeloId());
-       entity.setColor(this.getColor());
-       entity.setCategoria(this.getCategoria());
-        if (getAlbum()!= null) {
-            List<FotoEntity> fotoEntity = new ArrayList<>();
-            for (FotoDTO dtoFoto : getAlbum()) {
-                fotoEntity.add(dtoFoto.toEntity());
-            }
-            entity.setAlbum(fotoEntity);
-        }
+        entity.setId(this.getId());
+        entity.setPrecio(this.getPrecio());
+        entity.setModeloId(this.getModeloId());
+        entity.setColor(this.getColor());
+        entity.setCategoria(this.getCategoria());
+        entity.setAlbum(this.getAlbum());
         return entity;
     }
-    
+
     /**
      * @return the id
      */
@@ -140,18 +131,17 @@ public abstract class ItemDTO {
         this.precio = precio;
     }
 
-
     /**
      * @return the album
      */
-    public List<FotoDTO> getAlbum() {
+    public List<String> getAlbum() {
         return album;
     }
 
     /**
      * @param album the album to set
      */
-    public void setAlbum(List<FotoDTO> album) {
+    public void setAlbum(List<String> album) {
         this.album = album;
     }
 
@@ -195,5 +185,5 @@ public abstract class ItemDTO {
      */
     public void setCategoria(String categoria) {
         this.categoria = categoria;
-    }    
+    }
 }

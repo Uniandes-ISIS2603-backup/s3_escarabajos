@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.escarabajos.resources;
 
+import co.edu.uniandes.csw.escarabajos.ejb.ReclamoLogic;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;

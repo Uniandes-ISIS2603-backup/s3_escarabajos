@@ -4,10 +4,9 @@
         function ($scope, $state, catalogoFactory) {
             $scope.pagina = $state.params.pagina;
             $scope.filtros = $state.params.filtros;
-            var test = [{"nombre": "AAAA"}, {"nombre": "BBBB"}, {"nombre": "CCCC"}, {"nombre": "DDDD"}, {"nombre": "EEEE"}, {"nombre": "FFFF"}, {"nombre": "GGGG"}, {"nombre": "HHHH"}, {"nombre": "IIII"}, {"nombre": "JJJJ"}];
-
-           //catalogoFactory.getMarcas($state.params.tipo).then(function (response) {
-                $scope.marc = [{"nombre": "AAAA"}, {"nombre": "BBBB"}, {"nombre": "CCCC"}, {"nombre": "DDDD"}, {"nombre": "EEEE"}, {"nombre": "FFFF"}, {"nombre": "GGGG"}, {"nombre": "HHHH"}, {"nombre": "IIII"}, {"nombre": "JJJJ"}];//response.data;
+            
+            catalogoFactory.getMarcas($state.params.tipo).then(function (response) {
+                $scope.marc = response.data;
                 for (var j = 0; j < $scope.marc.length; j++) {
                     $scope.marc[j].activado = false;
                     for (var i = 0; i < $scope.filtros.marcas.length; i++) {
@@ -25,7 +24,7 @@
                         $scope.marcasCol.push($scope.marc[i]);
                     }
                 }
-           // });
+            });
 
             catalogoFactory.getCategorias($state.params.tipo).then(function (response) {
                 $scope.cat = response.data;

@@ -31,9 +31,6 @@ public class ItemLogic {
     private ModeloPersistence modeloPers;
 
     @Inject
-    private FotoPersistence fotoPers;
-
-    @Inject
     private AccesorioPersistence accPers;
 
 
@@ -146,45 +143,25 @@ public class ItemLogic {
         return items;
     }
 
-    /**
-     * Retorna una foto asociado a un item
-     *
-     * @param itemId El id del item a buscar.
-     * @param fotoId El id de la foto a buscar
-     * @return El foto encontrada dentro del item.
-     * @throws BusinessLogicException Si la foto no se encuentra en el item o si
-     * el item no existe
-     */
-    public FotoEntity getFoto(Long itemId, Long fotoId) throws BusinessLogicException {
-        ItemEntity itemEntity = getItem(itemId);
-        if (itemEntity == null) {
+    public ItemEntity comprarItem(Long id) throws BusinessLogicException {
+        int tipo = 1;
+        ItemEntity item = biciPers.find(id);
+        if (item == null) {
+            tipo = 2;
+            item = accPers.find(id);
+        }
+        if (item == null) {
+            LOGGER.log(Level.SEVERE, "El item con el id {0} no existe", id);
             throw new BusinessLogicException("El item no existe!");
-        }
-        List<FotoEntity> fotos = itemEntity.getAlbum();
-        FotoEntity foto = fotoPers.findInItem(itemId, fotoId);
-        int index = fotos.indexOf(foto);
-        if (index >= 0) {
-            return fotos.get(index);
-        }
-        throw new BusinessLogicException("La foto no está asociada a el item");
 
-    }
+        } else {
 
-    /**
-     * Obtiene una colección de instancias de FotoEntity asociadas a una
-     * instancia de item
-     *
-     * @param itemId Identificador de la instancia de item
-     * @return Colección de instancias de FotoEntity asociadas a la instancia de
-     * item
-     * @throws BusinessLogicException Por reglasd de negocio
-     */
-    public List<FotoEntity> listFotos(Long itemId) throws BusinessLogicException {
-        ItemEntity itemEntity = getItem(itemId);
-        if (itemEntity == null) {
-            throw new BusinessLogicException("El item no existe!");
+            if (!item.getDisponible()) {
+                throw new BusinessLogicException("El item no esta disponible!");
+            }
+            item.setDisponible(Boolean.TRUE);
+            return item;
         }
-        return getItem(itemId).getAlbum();
     }
 
     /**

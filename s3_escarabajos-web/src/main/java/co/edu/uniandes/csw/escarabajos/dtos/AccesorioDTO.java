@@ -55,7 +55,6 @@ import co.edu.uniandes.csw.escarabajos.entities.*;
  */
 public class AccesorioDTO extends ItemDTO {
  
-    private String tipoAccesorio;
     private String descripcion;
     
     
@@ -79,13 +78,6 @@ public class AccesorioDTO extends ItemDTO {
        if(entity != null){
         this.descripcion = entity.getDescripcion();
        }
-    }
-
-    /**
-     * @return the tipoAccesorio
-     */
-    public String getTipoAccesorio() {
-        return tipoAccesorio;
     }
 
     /**

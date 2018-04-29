@@ -46,6 +46,7 @@ public class AccesorioLogic {
         if (persistence.find(entity.getId()) != null) {
             throw new BusinessLogicException("Ya existe un accesorio el id \"" + entity.getId()+ "\"");
         }
+        entity.setDisponible(Boolean.TRUE);
         // Invoca la persistencia para crear la city
         persistence.create(entity);
         LOGGER.info("Termina proceso de creación del accesorio");

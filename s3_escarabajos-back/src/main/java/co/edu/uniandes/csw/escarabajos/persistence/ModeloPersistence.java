@@ -156,8 +156,8 @@ public class ModeloPersistence {
         List<String> lista = query.getResultList();
 
         if (lista == null) {
-            lista = new ArrayList<String>();
-        
+            lista = new ArrayList<>();
+
         }
         LOGGER.log(Level.INFO, lista.toString());
         return lista;
@@ -186,10 +186,237 @@ public class ModeloPersistence {
         }
         List<String> lista = query.getResultList();
         if (lista == null) {
-            lista = new ArrayList<String>();
-        
+            lista = new ArrayList<>();
+
         }
         return lista;
     }
 
+    /**
+     * Metodo que se encarga de filtrar todos los modelos de accesorios por los
+     * parametros dados.
+     *
+     * @param marcas marcas que debe tener, si esta vacia no verificar las
+     * marcas.
+     * @param categorias categorias a verificar, si esta vacia no verificar las
+     * categorias.
+     * @param colores colores a verficar, si esta vacia no verificar los
+     * colores.
+     * @param precioMin precio min que debe tener.
+     * @param precioMax precio max que deben tener los modelos. si es -1 no hay
+     * limite.
+     * @param calificacionMin calificacion minima que deben tener los modelos.
+     * @param page pagina a mostrar.
+     * @param maxRecords numero me modelos a mostrar por pagina
+     * @return lista de modelos filtrados.
+     */
+    public List<ModeloEntity> filtrarAccesorios(List<String> marcas, List<String> categorias, List<String> colores, Double precioMin, Double precioMax, Double calificacionMin, Integer page, Integer maxRecords) {
+        LOGGER.log(Level.INFO, "Inicia proceso de filtrar Acesorios");
+        String sql = "Select e From ModeloEntity e where e.calificacionMedia >= :calificacionMin ";
+        if (!marcas.isEmpty()) {
+            sql += " AND e.marca IN :marcas ";
+        }
+        if (!categorias.isEmpty() && !colores.isEmpty()) {
+            sql += "AND e.id IN (SELECT a.modeloId FROM AccesorioEntity a WHERE a.categoria IN :categorias AND a.color in :colores) ";
+        } else if (!categorias.isEmpty()) {
+            sql += "AND e.id IN (SELECT a.modeloId FROM AccesorioEntity a WHERE a.categoria IN :categorias) ";
+        } else if (!colores.isEmpty()) {
+            sql += "AND e.id IN (SELECT a.modeloId FROM AccesorioEntity a WHERE a.color IN :colores) ";
+        }
+        sql += "AND e.id IN (SELECT a.modeloId FROM AccesorioEntity a WHERE a.precio between :precioMin AND :precioMax AND a.disponible = TRUE) ";
+        TypedQuery query = em.createQuery(sql, ModeloEntity.class);
+        query.setParameter("calificacionMin", calificacionMin);
+        query.setParameter("precioMin", precioMin);
+        if (precioMax == -1) {
+            query.setParameter("precioMax", Double.MAX_VALUE);
+        } else {
+            query.setParameter("precioMax", precioMax);
+        }
+        if (page != null && maxRecords != null) {
+            query.setFirstResult((page
+                    - 1) * maxRecords);
+            query.setMaxResults(maxRecords);
+        }
+        if (!marcas.isEmpty()) {
+            query.setParameter("marcas", marcas);
+        }
+        if (!categorias.isEmpty()) {
+            query.setParameter("categorias", categorias);
+        }
+        if (!colores.isEmpty()) {
+            query.setParameter("colores", colores);
+        }
+        List<ModeloEntity> lista = query.getResultList();
+        if (lista == null) {
+            lista = new ArrayList<>();
+        }
+        LOGGER.log(Level.INFO, lista.toString());
+        return lista;
+    }
+
+    /**
+     * Metodo que se encarga de filtrar todos los modelos de bicicletas por los
+     * parametros dados.
+     *
+     * @param marcas marcas que debe tener, si esta vacia no verificar las
+     * marcas.
+     * @param categorias categorias a verificar, si esta vacia no verificar las
+     * categorias.
+     * @param colores colores a verficar, si esta vacia no verificar los
+     * colores.
+     * @param precioMin precio min que debe tener.
+     * @param precioMax precio max que deben tener los modelos. si es -1 no hay
+     * limite.
+     * @param calificacionMin calificacion minima que deben tener los modelos.
+     * @param page pagina a mostrar.
+     * @param maxRecords numero me modelos a mostrar por pagina
+     * @return lista de modelos filtrados.
+     */
+    public List<ModeloEntity> filtrarBicicletas(List<String> marcas, List<String> categorias, List<String> colores, Double precioMin, Double precioMax, Double calificacionMin, Integer page, Integer maxRecords) {
+        LOGGER.log(Level.INFO, "Inicia proceso de filtrar bicicletas");
+        String sql = "Select e From ModeloEntity e where e.calificacionMedia >= :calificacionMin ";
+        if (!marcas.isEmpty()) {
+            sql += " AND e.marca IN :marcas ";
+        }
+        if (!categorias.isEmpty() && !colores.isEmpty()) {
+            sql += "AND e.id IN (SELECT a.modeloId FROM BicicletaEntity a WHERE a.categoria IN :categorias AND a.color in :colores) ";
+        } else if (!categorias.isEmpty()) {
+            sql += "AND e.id IN (SELECT a.modeloId FROM BicicletaEntity a WHERE a.categoria IN :categorias) ";
+        } else if (!colores.isEmpty()) {
+            sql += "AND e.id IN (SELECT a.modeloId FROM BicicletaEntity a WHERE a.color IN :colores) ";
+        }
+        sql += "AND e.id IN (SELECT a.modeloId FROM BicicletaEntity a WHERE a.precio between :precioMin AND :precioMax AND a.disponible = TRUE) ";
+        TypedQuery query = em.createQuery(sql, ModeloEntity.class);
+        query.setParameter("calificacionMin", calificacionMin);
+        query.setParameter("precioMin", precioMin);
+        if (precioMax == -1) {
+            query.setParameter("precioMax", Double.MAX_VALUE);
+        } else {
+            query.setParameter("precioMax", precioMax);
+        }
+        if (page != null && maxRecords != null) {
+            query.setFirstResult((page
+                    - 1) * maxRecords);
+            query.setMaxResults(maxRecords);
+        }
+        if (!marcas.isEmpty()) {
+            query.setParameter("marcas", marcas);
+        }
+        if (!categorias.isEmpty()) {
+            query.setParameter("categorias", categorias);
+        }
+        if (!colores.isEmpty()) {
+            query.setParameter("colores", colores);
+        }
+        List<ModeloEntity> lista = query.getResultList();
+        if (lista == null) {
+            lista = new ArrayList<>();
+        }
+        LOGGER.log(Level.INFO, lista.toString());
+        return lista;
+    }
+
+    /**
+     * Metodo que se encarga de filtrar todos los modelos de accesorios por los
+     * parametros dados.
+     *
+     * @param marcas marcas que debe tener, si esta vacia no verificar las
+     * marcas.
+     * @param categorias categorias a verificar, si esta vacia no verificar las
+     * categorias.
+     * @param colores colores a verficar, si esta vacia no verificar los
+     * colores.
+     * @param precioMin precio min que debe tener.
+     * @param precioMax precio max que deben tener los modelos. si es -1 no hay
+     * limite.
+     * @param calificacionMin calificacion minima que deben tener los modelos.
+     * @return lista de modelos filtrados.
+     */
+    public Integer contarAccesoriosFiltrados(List<String> marcas, List<String> categorias, List<String> colores, Double precioMin, Double precioMax, Double calificacionMin) {
+        LOGGER.log(Level.INFO, "Inicia proceso de contar accesorios filtrados");
+        String sql = "Select count(e) From ModeloEntity e where e.calificacionMedia >= :calificacionMin ";
+        if (!marcas.isEmpty()) {
+            sql += " AND e.marca IN :marcas ";
+        }
+        if (!categorias.isEmpty() && !colores.isEmpty()) {
+            sql += "AND e.id IN (SELECT a.modeloId FROM AccesorioEntity a WHERE a.categoria IN :categorias AND a.color in :colores) ";
+        } else if (!categorias.isEmpty()) {
+            sql += "AND e.id IN (SELECT a.modeloId FROM AccesorioEntity a WHERE a.categoria IN :categorias) ";
+        } else if (!colores.isEmpty()) {
+            sql += "AND e.id IN (SELECT a.modeloId FROM AccesorioEntity a WHERE a.color IN :colores) ";
+        }
+        sql += "AND e.id IN (SELECT a.modeloId FROM AccesorioEntity a WHERE a.precio between :precioMin AND :precioMax AND a.disponible = TRUE) ";
+        TypedQuery query = em.createQuery(sql, String.class);
+        query.setParameter("calificacionMin", calificacionMin);
+        query.setParameter("precioMin", precioMin);
+        if (precioMax == -1) {
+            query.setParameter("precioMax", Double.MAX_VALUE);
+        } else {
+            query.setParameter("precioMax", precioMax);
+        }
+        if (!marcas.isEmpty()) {
+            query.setParameter("marcas", marcas);
+        }
+        if (!categorias.isEmpty()) {
+            query.setParameter("categorias", categorias);
+        }
+        if (!colores.isEmpty()) {
+            query.setParameter("colores", colores);
+        }
+        Integer resp = Integer.parseInt(query.getSingleResult().toString());
+        LOGGER.log(Level.INFO, resp.toString());
+        return resp;
+    }
+
+    /**
+     * Metodo que se encarga de filtrar todos los modelos de bicicletas por los
+     * parametros dados.
+     *
+     * @param marcas marcas que debe tener, si esta vacia no verificar las
+     * marcas.
+     * @param categorias categorias a verificar, si esta vacia no verificar las
+     * categorias.
+     * @param colores colores a verficar, si esta vacia no verificar los
+     * colores.
+     * @param precioMin precio min que debe tener.
+     * @param precioMax precio max que deben tener los modelos. si es -1 no hay
+     * limite.
+     * @param calificacionMin calificacion minima que deben tener los modelos.
+     * @return lista de modelos filtrados.
+     */
+    public Integer contarBicicletasFiltradas(List<String> marcas, List<String> categorias, List<String> colores, Double precioMin, Double precioMax, Double calificacionMin) {
+        LOGGER.log(Level.INFO, "Inicia proceso de contar bicicletas filtradas");
+        String sql = "Select count(e) From ModeloEntity e where e.calificacionMedia >= :calificacionMin ";
+        if (!marcas.isEmpty()) {
+            sql += " AND e.marca IN :marcas ";
+        }
+        if (!categorias.isEmpty() && !colores.isEmpty()) {
+            sql += "AND e.id IN (SELECT a.modeloId FROM BicicletaEntity a WHERE a.categoria IN :categorias AND a.color in :colores) ";
+        } else if (!categorias.isEmpty()) {
+            sql += "AND e.id IN (SELECT a.modeloId FROM BicicletaEntity a WHERE a.categoria IN :categorias) ";
+        } else if (!colores.isEmpty()) {
+            sql += "AND e.id IN (SELECT a.modeloId FROM BicicletaEntity a WHERE a.color IN :colores) ";
+        }
+        sql += "AND e.id IN (SELECT a.modeloId FROM BicicletaEntity a WHERE a.precio between :precioMin AND :precioMax AND a.disponible = TRUE) ";
+        TypedQuery query = em.createQuery(sql, String.class);
+        query.setParameter("calificacionMin", calificacionMin);
+        query.setParameter("precioMin", precioMin);
+        if (precioMax == -1) {
+            query.setParameter("precioMax", Double.MAX_VALUE);
+        } else {
+            query.setParameter("precioMax", precioMax);
+        }
+        if (!marcas.isEmpty()) {
+            query.setParameter("marcas", marcas);
+        }
+        if (!categorias.isEmpty()) {
+            query.setParameter("categorias", categorias);
+        }
+        if (!colores.isEmpty()) {
+            query.setParameter("colores", colores);
+        }
+        Integer resp = Integer.parseInt(query.getSingleResult().toString());
+        LOGGER.log(Level.INFO, resp.toString());
+        return resp;
+    }
 }

@@ -4,11 +4,12 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.escarabajos.dtos;
+
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 
 /**
- * ModeloDTO Objeto de transferencia de datos del modelo de la bicicleta. Los DTO
- * contienen las representaciones de los JSON que se transfieren entre el
+ * ModeloDTO Objeto de transferencia de datos del modelo de la bicicleta. Los
+ * DTO contienen las representaciones de los JSON que se transfieren entre el
  * cliente y el servidor.
  *
  * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
@@ -19,7 +20,7 @@ import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
  *      "referencia": String,
  *      "calificacionMedia": double,
  *      "tipoModelo":String
- *      
+ *
  *   }
  * </pre> Por ejemplo un modelo se representa asi:<br>
  *
@@ -37,9 +38,9 @@ import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
  *
  * @author Andres
  */
-public class ModeloDTO
-{
-     /**
+public class ModeloDTO {
+
+    /**
      * Atributo que modela el id unico del modelo
      */
     private Long id;
@@ -51,64 +52,63 @@ public class ModeloDTO
      * Atributo que modela la referencia del modelo
      */
     private String referencia;
+
     /**
      * Atributo que modela la calificacionMedia del modelo
      */
-    
-     //TODO: no puede ser double debe ser Double. arreglar también set/get
-    private double calificacionMedia;
+    private Double calificacionMedia;
     /**
      * Atributo que modela la el tipo de modelo
      */
     private String tipoModelo;
-     
+
     /**
      * Constructor por defecto
      */
-    public ModeloDTO() 
-    {
+    public ModeloDTO() {
         //empty
     }
+
     /**
      * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
      * la entidad que viene de argumento.
      *
      * @param modelo: Es la entidad que se va a convertir a DTO
      */
-    public ModeloDTO(ModeloEntity modelo) 
-    {//TODO: modelo podría ser null
-        this.id = modelo.getId();
-        this.marca = modelo.getMarca();
-        this.referencia = modelo.getReferencia();
-        this.calificacionMedia = modelo.getCalificacionMedia();
-        this.tipoModelo = modelo.getTipoModelo();
+    public ModeloDTO(ModeloEntity modelo) {
+        if (modelo != null) {
+            this.id = modelo.getId();
+            this.marca = modelo.getMarca();
+            this.referencia = modelo.getReferencia();
+            this.calificacionMedia = modelo.getCalificacionMedia();
+            this.tipoModelo = modelo.getTipoModelo();
+        }
     }
-   //-----------------------------------------------------------
-   // Métodos
-   //-----------------------------------------------------------
-    
-     public String getReferencia()
-    {
+    //-----------------------------------------------------------
+    // Métodos
+    //-----------------------------------------------------------
+
+    public String getReferencia() {
         return referencia;
     }
-    public String getMarca()
-    {
+
+    public String getMarca() {
         return marca;
     }
-    public double getCalificacionMedia()
-    {
+
+    public Double getCalificacionMedia() {
         return calificacionMedia;
     }
-    public void setReferencia(String referencia)
-    {
+
+    public void setReferencia(String referencia) {
         this.referencia = referencia;
     }
-    public void setMarca(String marca)
-    {
+
+    public void setMarca(String marca) {
         this.marca = marca;
     }
-    public void setCalificacionMedia(double cal)
-    {
+
+    public void setCalificacionMedia(Double cal) {
         this.calificacionMedia = cal;
     }
 
@@ -139,8 +139,8 @@ public class ModeloDTO
     public void setTipoModelo(String tipoModelo) {
         this.tipoModelo = tipoModelo;
     }
-    
-     /**
+
+    /**
      * Convertir DTO a Entity
      *
      * @return Un Entity con los valores del DTO

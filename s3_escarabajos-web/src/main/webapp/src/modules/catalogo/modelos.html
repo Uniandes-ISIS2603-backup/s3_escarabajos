@@ -44,6 +44,36 @@
         </div>
     </div>
 </div>
- <button type="button" class="btn" ui-sref="adv({pagina:pagina + 1 })" >Basic</button>    
-    <h1 >{{pagina}} BBB</h1>
-    <h1> 
+<div class="row">
+    <style>
+        .pagination {
+            display: inline-block;
+        }
+
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 10px 20px;
+            text-decoration: none;
+        }
+
+        .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .pagination a:hover:not(.active):not(.disabled) {
+            background-color: #ddd;
+            border-radius: 5px;
+        }
+    </style>
+    <div class="col-xs-12 text-center" >
+
+        <div class="pagination">
+            <a ng-class="{disabled:pagina === 1}" ng-click="prev()">&laquo;</a>
+            <a ng-class="{active:temp === pagina}" ui-sref="adv({filtros:filtros,pagina:temp,tipo:tipo})" ng-repeat="temp in paginas" >{{temp}}</a>
+            <a ng-class="{disabled:pagina === pags}" ng-click="next()">&raquo;</a>
+        </div>
+    </div>
+</div> 

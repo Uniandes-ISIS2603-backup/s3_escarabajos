@@ -198,6 +198,11 @@ public class ModeloResource {
         return ModeloItemsResource.class;
     }
     
+    /**
+     * Metodo que se encarga de pasar una lista de modeloEntity a modeloDetailDTO
+     * @param entityList lista de entities a transferir
+     * @return lista de detailDTOS
+     */
     private List<ModeloDetailDTO> listModeloEntity2DetailDTO(List<ModeloEntity> entityList) {
         List<ModeloDetailDTO> list = new ArrayList<>();
         for (ModeloEntity entity : entityList) {

@@ -26,6 +26,7 @@ public class ModeloLogic {
 
     public static final String BICICLETA = "Bicicleta";
     public static final String ACCESORIO = "Accesorio";
+    public static final String BICICLETAUSADA = "BicicletaUsada";
 
     private static final Logger LOGGER = Logger.getLogger(ModeloLogic.class.getName());
 
@@ -274,7 +275,7 @@ public class ModeloLogic {
      *
      */
     public List<String> getCategoriasBicicletas() {
-        return null;// return persistence.findCategoriasBicicletas();
+        return persistence.findCategorias(BICICLETA);
     }
 
     /**
@@ -285,23 +286,98 @@ public class ModeloLogic {
      *
      */
     public List<String> getColoresBicicletas() {
-        return null;// return persistence.findColoresBicicletas();
+        return persistence.findColores(BICICLETA);
     }
 
-    public List<ModeloEntity> getModelosBicicletasFiltrados() {
-        return null;
+    /**
+     * Metodo que se encarga de llamar el metodo de la persistencia que filtra
+     * los modelos.
+     *
+     * @param marcas marcas a filtrar.
+     * @param categorias categorias a filtrar
+     * @param colores colores a filtrar
+     * @param precioMin precioMin de los modelos a filtrar
+     * @param precioMax precioMax de los modelos a filtrar
+     * @param calificacionMin calificacion minima de los modelos a filtrar
+     * @param pagina pagina a buscar
+     * @param numModelos numero de modelos a filtrar.
+     * @return lista de modeloEntity filtrados.
+     * @throws BusinessLogicException si los filtros no estan en el formato
+     * adecuado!
+     */
+    public List<ModeloEntity> getModelosBicicletasFiltrados(List<String> marcas, List<String> categorias, List<String> colores, Double precioMin, Double precioMax, Double calificacionMin, Integer pagina, Integer numModelos) throws BusinessLogicException {
+        if (marcas != null && categorias != null && colores != null && precioMin >= 0 && precioMax >= -1 && calificacionMin >= 0) {
+            return persistence.filtrarBicicletas(marcas, categorias, colores, precioMin, precioMax, calificacionMin, pagina, numModelos);
+        } else {
+            throw new BusinessLogicException("Los Filtros no estan en el formato adecuado!");
+        }
     }
 
-    public List<ModeloEntity> getModelosAccesoriosFiltrados() {
-        return null;
+    /**
+     * Metodo que se encarga de llamar el metodo de la persistencia que filtra
+     * los modelos.
+     *
+     * @param marcas marcas a filtrar.
+     * @param categorias categorias a filtrar
+     * @param colores colores a filtrar
+     * @param precioMin precioMin de los modelos a filtrar
+     * @param precioMax precioMax de los modelos a filtrar
+     * @param calificacionMin calificacion minima de los modelos a filtrar
+     * @param pagina pagina a buscar
+     * @param numModelos numero de modelos a filtrar.
+     * @return lista de modeloEntity filtrados.
+     * @throws BusinessLogicException si los filtros no estan en el formato
+     * adecuado!
+     */
+    public List<ModeloEntity> getModelosAccesoriosFiltrados(List<String> marcas, List<String> categorias, List<String> colores, Double precioMin, Double precioMax, Double calificacionMin, Integer pagina, Integer numModelos) throws BusinessLogicException {
+        if (marcas != null && categorias != null && colores != null && precioMin >= 0 && precioMax >= 0 && calificacionMin >= 0) {
+            return persistence.filtrarAccesorios(marcas, categorias, colores, precioMin, precioMax, calificacionMin, pagina, numModelos);
+        } else {
+            throw new BusinessLogicException("Los Filtros no estan en el formato adecuado!");
+        }
     }
 
-    public List<ModeloEntity> getModelosBicicletasFiltrados(List<String> marcas, List<String> categorias, List<String> colores, Double precioMin, Double precioMax, Double calificacionMin) {
-        List<ModeloEntity> modelos = getModelos();
-        return modelos;
+    /**
+     * Metodo que se encarga de llamar el metodo que cuenta el numero de modelos
+     * de tipo bicicleta con los filtros datos. los modelos.
+     *
+     * @param marcas marcas a filtrar.
+     * @param categorias categorias a filtrar
+     * @param colores colores a filtrar
+     * @param precioMin precioMin de los modelos a filtrar
+     * @param precioMax precioMax de los modelos a filtrar
+     * @param calificacionMin calificacion minima de los modelos a filtrar
+     * @return lista de modeloEntity filtrados.
+     * @throws BusinessLogicException si los filtros no estan en el formato
+     * adecuado!
+     */
+    public Integer getNumeroBicicletasConFiltros(List<String> marcas, List<String> categorias, List<String> colores, Double precioMin, Double precioMax, Double calificacionMin) throws BusinessLogicException {
+        if (marcas != null && categorias != null && colores != null && precioMin >= 0 && precioMax >= -1 && calificacionMin >= 0) {
+            return persistence.contarBicicletasFiltradas(marcas, categorias, colores, precioMin, precioMax, calificacionMin);
+        } else {
+            throw new BusinessLogicException("Los Filtros no estan en el formato adecuado!");
+        }
     }
 
-    public List<ModeloEntity> getModelosAccesoriosFiltrados(List<String> marcas, List<String> categorias, List<String> colores, Double precioMin, Double precioMax, Double calificacionMin) {
-        return getModelos();
+    /**
+     * Metodo que se encarga de llamar el metodo que cuenta el numero de modelos
+     * de tipo accesorios con los filtros datos. los modelos.
+     *
+     * @param marcas marcas a filtrar.
+     * @param categorias categorias a filtrar
+     * @param colores colores a filtrar
+     * @param precioMin precioMin de los modelos a filtrar
+     * @param precioMax precioMax de los modelos a filtrar
+     * @param calificacionMin calificacion minima de los modelos a filtrar
+     * @return numero de modelos de accesorios que cumplen con los filtros.
+     * @throws BusinessLogicException si los filtros no estan en el formato
+     * adecuado!
+     */
+    public Integer getNumeroAccesoriosConFiltros(List<String> marcas, List<String> categorias, List<String> colores, Double precioMin, Double precioMax, Double calificacionMin) throws BusinessLogicException {
+        if (marcas != null && categorias != null && colores != null && precioMin >= 0 && precioMax >= -1 && calificacionMin >= 0) {
+            return persistence.contarAccesoriosFiltrados(marcas, categorias, colores, precioMin, precioMax, calificacionMin);
+        } else {
+            throw new BusinessLogicException("Los Filtros no estan en el formato adecuado!");
+        }
     }
 }

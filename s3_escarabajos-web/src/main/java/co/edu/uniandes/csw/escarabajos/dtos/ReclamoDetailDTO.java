@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.escarabajos.dtos;
 //TODO: DONE Borrar lo que no se use
 
-import co.edu.uniandes.csw.escarabajos.entities.FotoEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ReclamoEntity;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +21,7 @@ import java.util.List;
  *      "mensaje": String,
  *      "razon": double,
  *      "factura": {@link FacturaDTO},
- *      "album": [{@link FotoDTO}]
+ *      "album": [{@String}]
  *   }
  * </pre> Por ejemplo un reclamo se representa asi:<br>
  * <pre>
@@ -39,7 +38,7 @@ public class ReclamoDetailDTO extends ReclamoDTO {
 
     private FacturaDTO factura;
 
-    private List<FotoDTO> album;
+    private List<String> album;
 
     /**
      * Constructor vacio
@@ -57,12 +56,9 @@ public class ReclamoDetailDTO extends ReclamoDTO {
         super(entity);
         //TODO: DONE entity podría ser null
         if (entity != null) {
-            if (entity.getAlbum() != null) {
-                album = new ArrayList<>();
-                for (FotoEntity entityFoto : entity.getAlbum()) {
-                    album.add(new FotoDTO(entityFoto));
-                }
-            }
+//            if (entity.getAlbum() != null) {
+//                album = entity.getAlbum();
+//            }
             if (entity.getFactura() != null) {
                 factura = new FacturaDTO(entity.getFactura());
             }
@@ -79,11 +75,7 @@ public class ReclamoDetailDTO extends ReclamoDTO {
     public ReclamoEntity toEntiy() {
         ReclamoEntity entity = super.toEntity();
         if (getAlbum() != null) {
-            List<FotoEntity> fotoEntity = new ArrayList<>();
-            for (FotoDTO dtoFoto : getAlbum()) {
-                fotoEntity.add(dtoFoto.toEntity());
-            }
-            entity.setAlbum(fotoEntity);
+//            entity.setAlbum(album);
         }
         if (getFactura() != null) {
             entity.setFactura(factura.toEntity());
@@ -94,14 +86,14 @@ public class ReclamoDetailDTO extends ReclamoDTO {
     /**
      * @return the album
      */
-    public List<FotoDTO> getAlbum() {
+    public List<String> getAlbum() {
         return album;
     }
 
     /**
      * @param album the album to set
      */
-    public void setAlbum(List<FotoDTO> album) {
+    public void setAlbum(List<String> album) {
         this.album = album;
     }
 

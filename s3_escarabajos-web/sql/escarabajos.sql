@@ -1,14 +1,14 @@
 --Borrar los datos de las tablas
 delete from car_Items;
 delete from clienteEntity_itementity;
-delete from CalificacionEntity;
+delete from item_album;
+delete from reclamo_album;
 delete from ItemEntity;
 delete from ModeloEntity;
 delete from CarritoEntity;
 delete from ClienteEntity;
 delete from FacturaEntity;
 delete from ReclamoEntity;
-
 --Datos de prueba ModeloEntity con tipo modelo Bicicleta
 
 insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (1, 'Cayman', 'EUR', 18, 'Bicicleta');
@@ -24,17 +24,17 @@ insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) 
 
 --Datos de prueba BicicletaEntity
 
-insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id) values (1,'BicicletaEntity', 760.78, 'Puce', 0, 'MKT', 1,1);
-insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id) values (2,'BicicletaEntity', 397.10, 'Blue', 0, 'Suburban 2500', 2,2);
-insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id) values (3,'BicicletaEntity', 331.52, 'Green', 0, 'Jetta', 3,3);
-insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id) values (4,'BicicletaEntity', 251.36, 'Goldenrod', 0, 'A3', 4,4);
-insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id) values (5,'BicicletaEntity', 118.77, 'Pink', 0, 'C70', 5,5);
-insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id) values (6,'BicicletaEntity', 760.78, 'Puce', 0, 'MKT', 1,1);
+insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible) values (1,'BicicletaEntity', 760.78, 'Puce', 0, 'MKT', 1,1,1);
+insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id,disponible) values (2,'BicicletaEntity', 397.10, 'Blue', 0, 'Suburban 2500', 2,2,1);
+insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id,disponible) values (3,'BicicletaEntity', 331.52, 'Green', 0, 'Jetta', 3,3,1);
+insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id,disponible) values (4,'BicicletaEntity', 251.36, 'Goldenrod', 0, 'A3', 4,4,1);
+insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id,disponible) values (5,'BicicletaEntity', 118.77, 'Pink', 0, 'C70', 5,5,1);
+insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible) values (6,'BicicletaEntity', 760.78, 'Puce', 0, 'MKT', 1,1,1);
 
 
-insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id) values (7,'AccesorioEntity', 760.78, 'Puce', 0, 'C60', 6,6);
-insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id) values (8,'AccesorioEntity', 760.78, 'Green', 0, 'MYK', 7,7);
-insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id) values (9,'AccesorioEntity', 760.78, 'pink', 0, 'QWE', 8,8);
+insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible) values (7,'AccesorioEntity', 760.78, 'Puce', 0, 'C60', 6,6,1);
+insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible) values (8,'AccesorioEntity', 760.78, 'Green', 0, 'MYK', 7,7,1);
+insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible) values (9,'AccesorioEntity', 760.78, 'pink', 0, 'QWE', 8,8,1);
 
 
 --Datos de prueba VendedorEntity(con telefono y direccion no null)
@@ -44,11 +44,11 @@ insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccio
 
 --Datos de prueba BicicletUsadaEntity
 
-insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado,cliente_id) values (100,'BicicletaUsadaEntity', 276.71, 'Puce', 1, 'Aerostar', 1, 1, 'http://intel.com/vestibulum/rutrum/rutrum.json', 'En proceso',1);
-insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado,cliente_id) values (200,'BicicletaUsadaEntity', 395.40, 'Maroon', 1, 'Rabbit', 2, 2, 'http://discovery.com/montes/nascetur/ridiculus/mus/etiam/vel/augue.js', 'En proceso',1);
-insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado,cliente_id) values (300,'BicicletaUsadaEntity', 757.94, 'Green', 1, 'LS', 3, 3, 'https://blogger.com/ultrices/posuere.jsp', 'En proceso',1);
-insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado,cliente_id) values (400,'BicicletaUsadaEntity', 757.05, 'Green', 1, 'G', 4, 4, 'https://dagondesign.com/aliquam.js', 'En proceso',2);
-insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado,cliente_id) values (500,'BicicletaUsadaEntity', 929.71, 'Khaki', 1, 'Escort', 5, 5, 'https://netlog.com/in.jpg', 'En proceso',2);
+insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado,cliente_id,disponible) values (100,'BicicletaUsadaEntity', 276.71, 'Puce', 1, 'Aerostar', 1, 1, 'http://intel.com/vestibulum/rutrum/rutrum.json', 'En proceso',1,1);
+insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado,cliente_id,disponible) values (200,'BicicletaUsadaEntity', 395.40, 'Maroon', 1, 'Rabbit', 2, 2, 'http://discovery.com/montes/nascetur/ridiculus/mus/etiam/vel/augue.js', 'En proceso',1,1);
+insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado,cliente_id,disponible) values (300,'BicicletaUsadaEntity', 757.94, 'Green', 1, 'LS', 3, 3, 'https://blogger.com/ultrices/posuere.jsp', 'En proceso',1,1);
+insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado,cliente_id,disponible) values (400,'BicicletaUsadaEntity', 757.05, 'Green', 1, 'G', 4, 4, 'https://dagondesign.com/aliquam.js', 'En proceso',2,1);
+insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado,cliente_id,disponible) values (500,'BicicletaUsadaEntity', 929.71, 'Khaki', 1, 'Escort', 5, 5, 'https://netlog.com/in.jpg', 'En proceso',2,1);
 
 --Datos de prueba ClienteEntity
 --Datos de prueba ReclamoEntity
@@ -75,15 +75,6 @@ insert into car_items values(2,2);
 insert into car_items values(2,3);
 insert into car_items values(2,6);
 
-insert into CalificacionEntity (id, comentario, puntaje, cliente_id, modelo_id) values(1,'Muy buenos frenos', 5, 1, 1);
-insert into CalificacionEntity (id, comentario, puntaje, cliente_id, modelo_id) values(2,'Lindos colores', 4, 2, 1);
-insert into CalificacionEntity (id, comentario, puntaje, cliente_id, modelo_id) values(3,'Asiento muy comodo', 3, 3, 2);
-insert into CalificacionEntity (id, comentario, puntaje, cliente_id, modelo_id)values(4,'Demasiado pesada', 2, 1, 2);
-insert into CalificacionEntity (id, comentario, puntaje, cliente_id, modelo_id) values(5,'Muy fea en diseño y no sirve para lo que dice', 1, 2, 3);
-insert into CalificacionEntity (id, comentario, puntaje, cliente_id, modelo_id) values(6,'Excelente tracción', 5, 3, 3);
-insert into CalificacionEntity (id, comentario, puntaje, cliente_id, modelo_id) values(7,'Ideal para BMX', 4, 1, 4);
-insert into CalificacionEntity (id, comentario, puntaje, cliente_id, modelo_id) values(8,'Me gustan sus colores', 3, 2, 4);
-insert into CalificacionEntity (id, comentario, puntaje, cliente_id, modelo_id) values(9,'Diseño muy feo', 2, 3, 5);
-insert into CalificacionEntity (id, comentario, puntaje, cliente_id, modelo_id) values(10,'Muy infantil', 1, null, 5);
+
 
 

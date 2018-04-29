@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,8 +35,9 @@ public class ItemEntity implements Serializable {
     private String color;
 
     @PodamExclude
-    @OneToMany(mappedBy = "item", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<FotoEntity> album = new ArrayList<>();
+    @ElementCollection
+    @CollectionTable(name = "ITEM_ALBUM")
+    private List<String> album = new ArrayList<>();
 
     private Long modeloId;
 
@@ -74,20 +77,6 @@ public class ItemEntity implements Serializable {
      */
     public void setPrecio(double precio) {
         this.setPrecio((Double) precio);
-    }
-
-    /**
-     * @return the album
-     */
-    public List<FotoEntity> getAlbum() {
-        return album;
-    }
-
-    /**
-     * @param album the album to set
-     */
-    public void setAlbum(List<FotoEntity> album) {
-        this.album = album;
     }
 
     /**
@@ -181,5 +170,19 @@ public class ItemEntity implements Serializable {
      */
     public void setDisponible(Boolean disponible) {
         this.disponible = disponible;
+    }
+
+    /**
+     * @return the album
+     */
+    public List<String> getAlbum() {
+        return album;
+    }
+
+    /**
+     * @param album the album to set
+     */
+    public void setAlbum(List<String> album) {
+        this.album = album;
     }
 }

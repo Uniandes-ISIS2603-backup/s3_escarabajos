@@ -4,9 +4,6 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.escarabajos.ejb;
-
-import co.edu.uniandes.csw.escarabajos.entities.FacturaEntity;
-import co.edu.uniandes.csw.escarabajos.entities.FotoEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ReclamoEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.ReclamoPersistence;
@@ -31,9 +28,6 @@ public class ReclamoLogic {
     @Inject
     private FacturaLogic facturaLogic;
 
-    private boolean emptyList(List<FotoEntity> lista) {
-        return lista.isEmpty();
-    }
 
     public ReclamoEntity createReclamo(ReclamoEntity ent, Long facturaId) throws BusinessLogicException {
         LOGGER.info("Iniciando el proceso de crear un reclamo.");

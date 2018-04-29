@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.escarabajos.dtos;
 import co.edu.uniandes.csw.escarabajos.ejb.ModeloLogic;
 import co.edu.uniandes.csw.escarabajos.entities.AccesorioEntity;
 import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
+import co.edu.uniandes.csw.escarabajos.entities.BicicletaUsadaEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 
 /**
@@ -23,7 +24,7 @@ import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
  *      "modeloId": number,
  *      "color": color,
  *      "categoria": String,
- *      "album": [{@FotoDTO}],
+ *      "album": [{@String}],
  *      "tipo": String,
  *      "referencia": String,
  *      "disponible": Boolean
@@ -52,7 +53,7 @@ import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
  *      "tipo": "Accesorio",
  *      "referencia": "1234-abcd",
  *      "disponible": true
- * 
+ *
  *   }
  * </pre>
  *
@@ -63,7 +64,7 @@ public class ItemDetailDTO extends ItemDTO {
     private String tipo;
 
     private String referencia;
-    
+
     private Boolean disponible;
 
     /**
@@ -81,13 +82,19 @@ public class ItemDetailDTO extends ItemDTO {
      */
     public ItemDetailDTO(ItemEntity entity, String referencia) {
         super(entity);
-        if (entity instanceof AccesorioEntity) {
-            this.tipo = ModeloLogic.ACCESORIO;
-        } else if (entity instanceof BicicletaEntity) {
-            this.tipo = ModeloLogic.BICICLETA;
+        if (entity != null) {
+            if (entity instanceof AccesorioEntity) {
+                this.tipo = ModeloLogic.ACCESORIO;
+            } else if (entity instanceof BicicletaEntity) {
+                if (entity instanceof BicicletaUsadaEntity) {
+                    this.tipo = ModeloLogic.BICICLETAUSADA;
+                } else {
+                    this.tipo = ModeloLogic.BICICLETA;
+                }
+            }
+            this.referencia = referencia;
+            this.disponible = entity.getDisponible();
         }
-        this.referencia = referencia;
-        this.disponible = entity.getDisponible();
     }
 
     @Override

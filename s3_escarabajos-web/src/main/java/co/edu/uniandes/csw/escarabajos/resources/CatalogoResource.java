@@ -8,8 +8,10 @@ package co.edu.uniandes.csw.escarabajos.resources;
 import co.edu.uniandes.csw.escarabajos.dtos.FiltrosDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.InfoDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.ModeloDetailDTO;
+import co.edu.uniandes.csw.escarabajos.dtos.PaginacionDTO;
 import co.edu.uniandes.csw.escarabajos.ejb.ModeloLogic;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
+import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -18,6 +20,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -205,29 +208,57 @@ public class CatalogoResource {
         return listString2Info(modeloLogic.getColoresBicicletas());
     }
 
-    
     /**
+     * Metodo que se encarga de llamar al metodo de la logica que filtra los
+     * modelos de bicicletas
      *
-     * @param filtros
-     * @return
+     * @param filtros filtros a revisar
+     * @param pagina pagina a buscar
+     * @param maxRecords numero de records a retornar.
+     * @return objeto de paginacion con lista de modelos y numero total de
+     * items.
+     * @throws BusinessLogicException si los filtros no estan en el formato
+     * adecuado
      */
     @POST
-    @Path("modelos/bicicletas")
-    public List<ModeloDetailDTO> getModelosBicicletasByFiltros(FiltrosDTO filtros) {
-        return listModeloEntity2DetailDTO(modeloLogic.getModelosBicicletasFiltrados(filtros.getMarcas(),filtros.getCategorias(),filtros.getColores(),filtros.getPrecioMin(),filtros.getPrecioMax(),filtros.getCalificacionMin()));
+    @Path("modelos/bicicletas/{pagina: \\d+}/{records: \\d+}")
+    public PaginacionDTO getModelosBicicletasByFiltros(FiltrosDTO filtros, @PathParam("pagina") Integer pagina,
+            @PathParam("records") Integer maxRecords) throws BusinessLogicException {
+        return new PaginacionDTO(listModeloEntity2DetailDTO(modeloLogic.getModelosBicicletasFiltrados(filtros.getMarcas(),
+                filtros.getCategorias(), filtros.getColores(), filtros.getPrecioMin(), filtros.getPrecioMax(), filtros.getCalificacionMin(),
+                pagina, maxRecords)), modeloLogic.getNumeroBicicletasConFiltros(filtros.getMarcas(),
+                        filtros.getCategorias(), filtros.getColores(), filtros.getPrecioMin(), filtros.getPrecioMax(), filtros.getCalificacionMin()));
     }
-    
 
     /**
+     * Metodo que se encarga de llamar al metodo de la logica que filtra los
+     * modelos de accesorios
      *
-     * @param filtros
-     * @return
+     * @param filtros filtros a revisar
+     * @param pagina pagina a buscar
+     * @param maxRecords numero de records a retornar.
+     * @return objeto de paginacion con lista de modelos y numero total de
+     * items.
+     * @throws BusinessLogicException si los filtros no estan en el formato
+     * adecuado
      */
     @POST
-    @Path("modelos/accesorios")
-    public List<ModeloDetailDTO> getModelosAccesoriosByFiltros(FiltrosDTO filtros) {
-        return listModeloEntity2DetailDTO(modeloLogic.getModelosAccesoriosFiltrados(filtros.getMarcas(),filtros.getCategorias(),filtros.getColores(),filtros.getPrecioMin(),filtros.getPrecioMax(),filtros.getCalificacionMin()));
+    @Path("modelos/accesorios/{pagina: \\d+}/{records: \\d+}")
+    public PaginacionDTO getModelosAccesoriosByFiltros(FiltrosDTO filtros, @PathParam("pagina") Integer pagina,
+            @PathParam("records") Integer maxRecords) throws BusinessLogicException {
+        return new PaginacionDTO(listModeloEntity2DetailDTO(modeloLogic.getModelosAccesoriosFiltrados(filtros.getMarcas(),
+                filtros.getCategorias(), filtros.getColores(), filtros.getPrecioMin(), filtros.getPrecioMax(), filtros.getCalificacionMin(),
+                pagina, maxRecords)), modeloLogic.getNumeroAccesoriosConFiltros(filtros.getMarcas(),
+                        filtros.getCategorias(), filtros.getColores(), filtros.getPrecioMin(), filtros.getPrecioMax(), filtros.getCalificacionMin()));
     }
+
+    /**
+     * Metodo que se encarga de pasar una lista de modeloEntity a
+     * modeloDetailDTO
+     *
+     * @param entityList lista de entities a transferir
+     * @return lista de detailDTOS
+     */
     private List<ModeloDetailDTO> listModeloEntity2DetailDTO(List<ModeloEntity> entityList) {
         List<ModeloDetailDTO> list = new ArrayList<>();
         for (ModeloEntity entity : entityList) {
