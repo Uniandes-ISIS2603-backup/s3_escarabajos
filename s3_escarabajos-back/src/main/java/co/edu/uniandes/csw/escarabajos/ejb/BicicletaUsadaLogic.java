@@ -58,9 +58,6 @@ public class BicicletaUsadaLogic {
         if (entity.getUsada() != true) {
             throw new BusinessLogicException("La bicicleta usada debe tener el estado de usada en true");
         }
-        if (!entity.getEstado().equals("En proceso")) {
-            throw new BusinessLogicException("La bicicleta usada debe tener estado inicial En proceso");
-        }
         return entity;
     }
 

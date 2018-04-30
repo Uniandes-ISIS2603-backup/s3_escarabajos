@@ -17,21 +17,26 @@
         <div class="input-container">
             <input id="bicicletaUsadaCategoria" class="input-field" type="text" required ng-model="biciUsadaActual.categoria" placeholder="{{biciUsadaActual.categoria}}">
         </div>
-        <label for="bicicletaUsadaFacturaOriginal">Factura Original</label>
+        <label for="bicicletaUsadaFacturaOriginal">Factura</label>
         <div class="input-container">
-            <input id="bicicletaUsadaFacturaOriginal" class="input-field" type="text" required ng-model="biciUsadaActual.facturaOriginal" placeholder="{{biciUsadaActual.facturaOriginal}}">
+            <input id="bicicletaUsadaFacturaOriginal" class="input-field" type="url" required ng-model="biciUsadaActual.facturaOriginal" placeholder="{{biciUsadaActual.facturaOriginal}}">
         </div>
         <label for="bicicletaUsadaEstado">Estado</label>
         <div class="input-container">
-            <input id="bicicletaUsadaEstado" class="input-field" type="text" required ng-model="biciUsadaActual.estado" placeholder="{{biciUsadaActual.estado}}">
+            <select class="form-control" id="bicicletaUsadaEstado" ng-model="biciUsadaActual.estado" required>
+                <option selected="true" disabled="disabled">{{biciUsadaActual.estado}}</option>
+                <option value="En proceso">En proceso</option>
+                <option value="Aceptada">Aceptada</option>
+                <option value="Rechazada">Rechazada</option>
+            </select>
         </div>
         <div class="row">
             <label for="bicicletaUsadaColor">Color</label>
-            <input id="bicicletaUsadaColor" type="color" required ng-model="biciUsadaActual.color" ng-init="biciUsadaActual.color='{{biciUsadaActual.color}}'">
+            <input id="bicicletaUsadaColor" type="color" required ng-model="biciUsadaActual.color" ng-init="biciUsadaActual.color ='{{biciUsadaActual.color}}'">
         </div>
-        
+
         <br>
-            <div class="row col-sm-12">
+        <div class="row col-sm-12">
             <div class="col-sm-5">
                 <button type="submit" ng-click="updateBiciUsada()" class="btn-c">Guardar</button>
             </div>

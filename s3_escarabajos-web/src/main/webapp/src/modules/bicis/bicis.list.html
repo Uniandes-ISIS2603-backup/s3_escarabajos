@@ -26,6 +26,9 @@
                                     <a class="btn btn-default btn-sm" ui-sref="biciUpdate({biciId: bici.id})"><span class="glyphicon glyphicon-edit"></span></a>
                                     <a class="btn btn-danger btn-sm" ui-sref="biciDelete({biciId: bici.id})"><span class="glyphicon glyphicon-trash"></span></a>
                                     <a  ui-sref ="addItemCarrito({itemId: bici.id})" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart" style="color:white"></span></a>
+                                    <button type="button" ui-sref="addItemListaDeseos({itemId: bici.id})" class="btn btn-default text-primary">
+                                        <a ui-sref="addItemListaDeseos({itemId: bici.id})"  class="glyphicon glyphicon-heart"></a>
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>
