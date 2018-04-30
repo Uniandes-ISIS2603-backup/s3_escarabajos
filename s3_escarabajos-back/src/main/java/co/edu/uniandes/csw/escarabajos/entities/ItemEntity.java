@@ -9,14 +9,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.Lob;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -37,6 +36,7 @@ public class ItemEntity implements Serializable {
     @PodamExclude
     @ElementCollection
     @CollectionTable(name = "ITEM_ALBUM")
+    @Lob
     private List<String> album = new ArrayList<>();
 
     private Long modeloId;

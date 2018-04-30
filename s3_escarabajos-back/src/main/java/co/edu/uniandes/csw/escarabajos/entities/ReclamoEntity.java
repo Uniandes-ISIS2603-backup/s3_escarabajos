@@ -20,6 +20,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -50,6 +51,7 @@ public class ReclamoEntity  implements Serializable
     @PodamExclude
     @ElementCollection
     @CollectionTable(name = "RECLAMO_ALBUM")
+    @Lob
     private List<String> album = new ArrayList<>();
     
     public String getMensaje()
