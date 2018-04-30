@@ -37,8 +37,10 @@
                         templateUrl: basePath + 'accesorios.detail.html',
                         controller: 'accesorioDetailCtrl'
                     },
-                    'listView': {
-                        templateUrl: basePath + 'accesorios.list.html'
+                    'calificacionView': {
+                        templateUrl: 'src/modules/calificaciones/calificaciones.list.html',
+                        controller: 'calificacionesListCtrl2',
+                        controllerAs: 'ctrl'
                     }
                 }
             }).state('accesorioCreate', {
@@ -59,6 +61,18 @@
                     'listView': {
                         templateUrl: basePath + 'accesorios.list.html',
                         controller: 'accesorioDeleteCtrl'
+                    }
+                }
+            }).state('accesorioUpdate', {
+                url: '/update/{accesorioId:int}',
+                parent: 'accesorios',
+                params: {
+                    accesorioId: null
+                },
+                views: {
+                    'listView': {
+                        templateUrl: basePath + '/editar/accesorios.edit.html',
+                        controller: 'accesorioEditCtrl'
                     }
                 }
             });
