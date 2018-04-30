@@ -25,10 +25,15 @@ insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) 
 --Datos de prueba BicicletaEntity
 
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible) values (1,'BicicletaEntity', 760.78, 'Puce', 0, 'MKT', 1,1,1);
+insert into Item_album (itemEntity_ID, album) values (1, 'data/Imagenes/BicicletaTest1.jpg');
 insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id,disponible) values (2,'BicicletaEntity', 397.10, 'Blue', 0, 'Suburban 2500', 2,2,1);
+insert into Item_album (itemEntity_ID, album) values (2, 'data/Imagenes/BicicletaTest2.jpg');
 insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id,disponible) values (3,'BicicletaEntity', 331.52, 'Green', 0, 'Jetta', 3,3,1);
+insert into Item_album (itemEntity_ID, album) values (3, 'data/Imagenes/BicicletaTest3.jpg');
 insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id,disponible) values (4,'BicicletaEntity', 251.36, 'Goldenrod', 0, 'A3', 4,4,1);
+insert into Item_album (itemEntity_ID, album) values (4, 'data/Imagenes/BicicletaTest1.jpg');
 insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id,disponible) values (5,'BicicletaEntity', 118.77, 'Pink', 0, 'C70', 5,5,1);
+insert into Item_album (itemEntity_ID, album) values (5, 'data/Imagenes/BicicletaTest2.jpg');
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible) values (6,'BicicletaEntity', 760.78, 'Puce', 0, 'MKT', 1,1,1);
 
 

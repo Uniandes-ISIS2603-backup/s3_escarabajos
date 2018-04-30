@@ -19,7 +19,7 @@
                     
                     for (j=0;j<lista2.length; j++) {
                         
-                        if(lista[i].color===lista[j].color  && lista[i].modelo===lista[j].modelo && lista[i].precio===lista[j].precio){
+                        if(lista[i].color===lista[j].color  && lista[i].modelo===lista[j].modelo && lista[i].precio===lista[j].precio && lista[i].tipo===lista[j].tipo && lista[i].referencia===lista[j].referencia){
                             
                             lista2[j].cantidad = lista2[j].cantidad + 1;
                             
@@ -38,7 +38,6 @@
                $scope.total = total;
                 
                 $scope.carrito = lista2;
-                
 
             });
             
