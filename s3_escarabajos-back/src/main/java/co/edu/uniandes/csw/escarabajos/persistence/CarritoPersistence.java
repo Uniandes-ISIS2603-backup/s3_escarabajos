@@ -81,9 +81,12 @@ public class CarritoPersistence {
      */
     public CarritoEntity findCarritoByClienteId( Long clienteId ){
         
-        LOGGER.log(Level.INFO, "Consultando el carrito del cliente con id= ", clienteId);
-        TypedQuery<CarritoEntity> q = em.createQuery("select u from CarritoEntity u where u.cliente = :id", CarritoEntity.class);
+        LOGGER.log(Level.INFO, "Consultando el carrito del cliente con id= {0}", clienteId);
+        TypedQuery<CarritoEntity> q = em.createQuery("select u from CarritoEntity u where u.cliente.id = :id", CarritoEntity.class);
+        LOGGER.info("ya hizo el createQuery");
         q = q.setParameter("id", clienteId);
+        LOGGER.info("ya agrego el parametro");
+        LOGGER.info(q.getParameters().toString());
         return q.getSingleResult();
     }
 }
