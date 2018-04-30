@@ -4,7 +4,6 @@
         function ($scope, $state, catalogoFactory) {
             $scope.pagina = $state.params.pagina;
             $scope.filtros = $state.params.filtros;
-            
             catalogoFactory.getMarcas($state.params.tipo).then(function (response) {
                 $scope.marc = response.data;
                 for (var j = 0; j < $scope.marc.length; j++) {
@@ -67,6 +66,90 @@
                     }
                 }
             });
+
+
+            $(':radio').change(function () {
+                $scope.filtros.calificacionMin = this.value;
+                $state.go('adv', {
+                    filtros: $scope.filtros,
+                    pagina: $scope.pagina,
+                    tipo: $scope.tipo
+                }, {
+                    reload: true
+                });
+            });
+
+            $scope.cambiarMarca = function (marca) {
+                var enc = false;
+                var temp = [];
+                for (var i = 0; i < $scope.filtros.marcas.length && !enc; i++) {
+
+                    if ($scope.filtros.marcas[i] === marca) {
+                        enc = true;
+                    } else {
+                        temp.push($scope.filtros.marcas[i]);
+                    }
+                }
+                if (!enc) {
+                    temp.push(marca);
+                }
+                $scope.filtros.marcas = temp;
+                $state.go('adv', {
+                    filtros: $scope.filtros,
+                    pagina: $scope.pagina,
+                    tipo: $scope.tipo
+                }, {
+                    reload: true
+                });
+            };
+
+            $scope.cambiarCategoria = function (categoria) {
+                var enc = false;
+                var temp = [];
+                for (var i = 0; i < $scope.filtros.categorias.length && !enc; i++) {
+
+                    if ($scope.filtros.categorias[i] === categoria) {
+                        enc = true;
+                    } else {
+                        temp.push($scope.filtros.categorias[i]);
+                    }
+                }
+                if (!enc) {
+                    temp.push(categoria);
+                }
+                $scope.filtros.categorias = temp;
+                $state.go('adv', {
+                    filtros: $scope.filtros,
+                    pagina: $scope.pagina,
+                    tipo: $scope.tipo
+                }, {
+                    reload: true
+                });
+            };
+
+            $scope.cambiarColor = function (color) {
+                var enc = false;
+                var temp = [];
+                for (var i = 0; i < $scope.filtros.colores.length && !enc; i++) {
+
+                    if ($scope.filtros.colores[i] === color) {
+                        enc = true;
+                    } else {
+                        temp.push($scope.filtros.colores[i]);
+                    }
+                }
+                if (!enc) {
+                    temp.push(color);
+                }
+                $scope.filtros.colores = temp;
+                $state.go('adv', {
+                    filtros: $scope.filtros,
+                    pagina: $scope.pagina,
+                    tipo: $scope.tipo
+                }, {
+                    reload: true
+                });
+            };
         }
     ]);
 }
