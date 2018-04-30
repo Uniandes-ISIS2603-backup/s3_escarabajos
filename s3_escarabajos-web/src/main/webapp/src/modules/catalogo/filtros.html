@@ -77,15 +77,10 @@
             <div class="col-xs-2" >
             </div>
             <div class="col-xs-10" >
-                <label class="container" style="color: #FFF; font-size: 16px;" ng-if="marca.activado">{{marca.nombre}}    
-                    <input type="checkbox" checked >
+                <label class="container" style="color: #FFF; font-size: 16px;">{{marca.nombre}}    
+                    <input type="checkbox" ng-checked='marca.activado' ng-change="cambiarMarca(marca.nombre)" ng-model="marca.activado">
                     <span class="checkmark"></span>
                 </label>
-                <label class="container" style="color: #FFF; font-size: 16px;" ng-if="!marca.activado">{{marca.nombre}}   
-                    <input type="checkbox" >
-                    <span class="checkmark"></span>
-                </label>
-
             </div>
         </div>
         <div ng-if="marcasCol.length > 0">
@@ -94,12 +89,8 @@
                     <div class="col-xs-2" >
                     </div>
                     <div class="col-xs-10" >
-                        <label class="container" style="color: #FFF; font-size: 16px;" ng-if="marca.activado">{{marca.nombre}}    
-                            <input type="checkbox" checked >
-                            <span class="checkmark"></span>
-                        </label>
-                        <label class="container" style="color: #FFF; font-size: 16px;" ng-if="!marca.activado">{{marca.nombre}}   
-                            <input type="checkbox" >
+                        <label class="container" style="color: #FFF; font-size: 16px;">{{marca.nombre}}    
+                            <input type="checkbox" ng-checked='marca.activado' ng-change="cambiarMarca(marca.nombre)" ng-model="marca.activado">
                             <span class="checkmark"></span>
                         </label>
                     </div>
@@ -132,15 +123,10 @@
             <div class="col-xs-2" >
             </div>
             <div class="col-xs-10" >
-                <label class="container" style="color: #FFF; font-size: 16px;" ng-if="categoria.activado">{{categoria.nombre}}    
-                    <input type="checkbox" checked >
+                <label class="container" style="color: #FFF; font-size: 16px;">{{categoria.nombre}}    
+                    <input type="checkbox" ng-checked='categoria.activado' ng-change="cambiarCategoria(categoria.nombre)" ng-model="categoria.activado">
                     <span class="checkmark"></span>
                 </label>
-                <label class="container" style="color: #FFF; font-size: 16px;" ng-if="!categoria.activado">{{categoria.nombre}}   
-                    <input type="checkbox" >
-                    <span class="checkmark"></span>
-                </label>
-
             </div>
         </div>
         <div ng-if="categoriasCol.length > 0">
@@ -149,15 +135,10 @@
                     <div class="col-xs-2" >
                     </div>
                     <div class="col-xs-10" >
-                        <label class="container" style="color: #FFF; font-size: 16px;" ng-if="categoria.activado">{{categoria.nombre}}    
-                            <input type="checkbox" checked >
+                        <label class="container" style="color: #FFF; font-size: 16px;">{{categoria.nombre}}    
+                            <input type="checkbox" ng-checked='categoria.activado' ng-change="cambiarCategoria(categoria.nombre)" ng-model="categoria.activado">
                             <span class="checkmark"></span>
                         </label>
-                        <label class="container" style="color: #FFF; font-size: 16px;" ng-if="!categoria.activado">{{categoria.nombre}}   
-                            <input type="checkbox" >
-                            <span class="checkmark"></span>
-                        </label>
-
                     </div>
                 </div>
             </div>
@@ -178,29 +159,29 @@
             <div class="col-xs-12 text-center" >
                 <form class="rating">
                     <label>
-                        <input type="radio" name="stars" value="1" />
+                        <input type="radio" name="stars" value="1" ng-checked="filtros.calificacionMin === '1'" />
                         <span class="icon">★</span>
                     </label>
                     <label>
-                        <input type="radio" name="stars" value="2" />
+                        <input type="radio" name="stars" value="2" ng-checked="filtros.calificacionMin === '2'"/>
                         <span class="icon">★</span>
                         <span class="icon">★</span>
                     </label>
                     <label>
-                        <input type="radio" name="stars" value="3" />
+                        <input type="radio" name="stars" value="3"  ng-checked="filtros.calificacionMin === '3'"/>
                         <span class="icon">★</span>
                         <span class="icon">★</span>
                         <span class="icon">★</span>   
                     </label>
                     <label>
-                        <input type="radio" name="stars" value="4" />
+                        <input type="radio" name="stars" value="4" ng-checked="filtros.calificacionMin === '4'"/>
                         <span class="icon">★</span>
                         <span class="icon">★</span>
                         <span class="icon">★</span>
                         <span class="icon">★</span>
                     </label>
                     <label>
-                        <input type="radio" name="stars" value="5" />
+                        <input type="radio" name="stars" value="5" ng-checked="filtros.calificacionMin === '5'"/>
                         <span class="icon">★</span>
                         <span class="icon">★</span>
                         <span class="icon">★</span>
@@ -222,15 +203,10 @@
             <div class="col-xs-2" >
             </div>
             <div class="col-xs-10" >
-                <label class="container" style="color: #FFF; font-size: 16px;" ng-if="color.activado">{{color.nombre}}    
-                    <input type="checkbox" checked >
+                <label class="container" style="color: #FFF; font-size: 16px;">{{color.nombre}}    
+                    <input type="checkbox" ng-checked='color.activado' ng-change="cambiarColor(color.nombre)" ng-model="color.activado">
                     <span class="checkmark"></span>
                 </label>
-                <label class="container" style="color: #FFF; font-size: 16px;" ng-if="!color.activado">{{color.nombre}}   
-                    <input type="checkbox" >
-                    <span class="checkmark"></span>
-                </label>
-
             </div>
         </div>
         <div ng-if="coloresCol.length > 0">
@@ -239,15 +215,10 @@
                     <div class="col-xs-2" >
                     </div>
                     <div class="col-xs-10" >
-                        <label class="container" style="color: #FFF; font-size: 16px;" ng-if="color.activado">{{color.nombre}}    
-                            <input type="checkbox" checked >
+                        <label class="container" style="color: #FFF; font-size: 16px;">{{color.nombre}}    
+                            <input type="checkbox" ng-checked='color.activado' ng-change="cambiarColor(color.nombre)" ng-model="color.activado">
                             <span class="checkmark"></span>
                         </label>
-                        <label class="container" style="color: #FFF; font-size: 16px;" ng-if="!color.activado">{{color.nombre}}   
-                            <input type="checkbox" >
-                            <span class="checkmark"></span>
-                        </label>
-
                     </div>
                 </div>
             </div>
