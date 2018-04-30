@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,7 +37,7 @@ public class ClienteEntity implements Serializable {
     private String telefono;
     
     @PodamExclude
-    @OneToOne(mappedBy = "cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     private CarritoEntity carrito;
 
     @PodamExclude

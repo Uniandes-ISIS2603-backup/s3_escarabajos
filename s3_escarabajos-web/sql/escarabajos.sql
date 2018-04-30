@@ -65,7 +65,7 @@ insert into ReclamoEntity values (5,0, 'El casco llegó sin seguro.', 'El casco 
 
 
 --Datos carrito
-insert into carritoentity values(1,0.0, null);
+insert into carritoentity values(1,0.0, 1);
 
 insert into car_items values(1,1);
 insert into car_items values(1,2);
