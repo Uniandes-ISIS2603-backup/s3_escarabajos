@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="src/modules/bicis/detalle.css" />
 <div class="col-sm-4">
     <div class="col-sm-2"></div>
-    <div class="container-fluid col-sm-8">
+    <div class="container-fluid">
         <form name="bicicleta"  style="max-width:500px;margin:auto">
             <h2 style="text-align-last: center">
                 <i class="fa fa-bicycle icon"></i>
@@ -25,8 +25,8 @@
             <div class="input-container">
                 <input id="bicicletaAlbum" class="input-field" type="url" required ng-model="data.album" placeholder="url" >
             </div>
-            <div class="row">
-                <label for="bicicletaColor">Color</label>
+            <div class="row" style="position: inherit;">
+                <label  for="bicicletaColor">Color</label>
                 <input id="bicicletaColor" type="color" required ng-model="data.color" value="#000000" ng-init="data.color = '#000000'">
             </div>
             <br>
@@ -39,14 +39,14 @@
                 </div>
             </div>
         </form>
-        <br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     </div>
-    <div class="col-sm-2"></div>
 </div>
 <div class="col-xs-1"></div>
 <div class="col-sm-8">
     <br>
     <div class="row">
+        <div><br><br><br><br></div>
         <div class="col-sm-12">
             <div class="well" style="overflow:auto;">
                 <div class="container col-sm-8" >
