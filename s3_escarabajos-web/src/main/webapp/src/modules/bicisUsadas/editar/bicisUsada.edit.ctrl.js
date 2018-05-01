@@ -27,7 +27,7 @@
 
                         input.categoria = $scope.biciUsadaActual.categoria;
 
-                        input.album =$scope.biciUsadaActual.categoria;
+                        input.album =$scope.biciUsadaActual.album;
 
                         input.usada = true;
 
