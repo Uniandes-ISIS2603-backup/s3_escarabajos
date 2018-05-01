@@ -1,40 +1,123 @@
 <link rel="stylesheet" href="src/modules/bicis/crear/create.css"/>
-<div class="container-fluid">
-    <form name="bicicleta"  style="max-width:500px;margin:auto">
-        <h2 style="text-align-last: center">
-            <i class="fa fa-bicycle icon"></i>
-            Crear Bicicleta
-        </h2>
-        <label for="bicicletaModelo">Modelo</label>
-        <div class="input-container">
-            <input id="bicicletaModelo" class="input-field" type="text" required ng-model="data.modeloId" placeholder="Id del modelo" >
-        </div>
-        <label for="bicicletaPrecio">Precio</label>
-        <div class="input-container">
-            <input id="bicicletaPrecio" class="input-field" type="text" required ng-model="data.precio" placeholder="Precio">
-        </div>
-        <label for="bicicletaCategoria">Categoria</label>
-        <div class="input-container">
-            <input id="bicicletaCategoria" class="input-field" type="text" required ng-model="data.categoria" placeholder="Categoria" >
-        </div>
-        <label for="bicicletaAlbum">Fotos</label>
-        <div class="input-container">
-            <input id="bicicletaAlbum" class="input-field" type="url" required ng-model="data.album" placeholder="url" >
-        </div>
-        <div class="row">
-            <label for="bicicletaColor">Color</label>
-            <input id="bicicletaColor" type="color" required ng-model="data.color" value="#000000" ng-init="data.color='#000000'">
-        </div>
-        <br>
+<script src="src/modules/bicis/imageDetalle.js"></script>
+<link rel="stylesheet" href="src/modules/bicis/detalle.css" />
+<div class="col-sm-4">
+    <div class="col-sm-2"></div>
+    <div class="container-fluid col-sm-8">
+        <form name="bicicleta"  style="max-width:500px;margin:auto">
+            <h2 style="text-align-last: center">
+                <i class="fa fa-bicycle icon"></i>
+                Crear Bicicleta
+            </h2>
+            <label for="bicicletaModelo">Modelo</label>
+            <div class="input-container">
+                <input id="bicicletaModelo" class="input-field" type="text" required ng-model="data.modeloId" placeholder="Id del modelo" >
+            </div>
+            <label for="bicicletaPrecio">Precio</label>
+            <div class="input-container">
+                <input id="bicicletaPrecio" class="input-field" type="text" required ng-model="data.precio" placeholder="Precio">
+            </div>
+            <label for="bicicletaCategoria">Categoria</label>
+            <div class="input-container">
+                <input id="bicicletaCategoria" class="input-field" type="text" required ng-model="data.categoria" placeholder="Categoria" >
+            </div>
+            <label for="bicicletaAlbum">Fotos</label>
+            <div class="input-container">
+                <input id="bicicletaAlbum" class="input-field" type="url" required ng-model="data.album" placeholder="url" >
+            </div>
+            <div class="row">
+                <label for="bicicletaColor">Color</label>
+                <input id="bicicletaColor" type="color" required ng-model="data.color" value="#000000" ng-init="data.color = '#000000'">
+            </div>
+            <br>
             <div class="row col-sm-12">
-            <div class="col-sm-5">
-                <button type="submit" ng-click="createBici()" class="btn-c">Crear</button>
+                <div class="col-xs-6">
+                    <button type="submit" ng-click="createBici()" class="btn-c">Crear</button>
+                </div>
+                <div class="col-xs-6">
+                    <button class="btn-c" ui-sref="bicisList">Cancelar</button>
+                </div>
             </div>
-            <div class="col-sm-5">
-                <button class="btn-c" ui-sref="bicisList">Cancelar</button>
+        </form>
+        <br><br><br><br><br><br><br><br><br><br>
+    </div>
+    <div class="col-sm-2"></div>
+</div>
+<div class="col-xs-1"></div>
+<div class="col-sm-8">
+    <br>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="well" style="overflow:auto;">
+                <div class="container col-sm-8" >
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                            <li data-target="#myCarousel" data-slide-to="2"></li>
+                        </ol>
+
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner">
+
+                            <div class="item active">
+                                <img class="img-responsive" src="http://www.fyrdraca.co.uk/wp-content/uploads/2017/04/bicycle-city-street-wallpaper-53cb2e1d5128e.jpg" alt="Los Angeles" style="width:100%;">
+                            </div>
+
+                            <div class="item">
+                                <img class="img-responsive"  ng-src="{{data.album}}"  style="width:80%;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                <div class="col-xs-1"></div>
+                <div  class="texto col-sm-3">
+                    <h4>Modelo:         {{data.modeloId}}</h4>
+                    <h4>Categoria:      {{data.categoria}}</h4>
+                    <h4 style="color:DodgerBlue;">{{data.precio|currency}}</h4>
+                    <h4>
+                        Color:
+                        <div class="well" style="background-color:{{data.color}}; width:7%; height:7%; align-content:flex-end;"></div>
+                    </h4>
+                    <h4>Usada:          {{input.usada}}</h4>
+
+                    <br>
+                    <div style="position: relative;" class="row">
+                        <div class="col-sm-4">
+                            <a  href ="#" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart" style="color:white"></span></a>
+                        </div>
+                        <div class="col-xs-6">
+                            <h6 style="font-size: 10px">Agregar Carrito</h6>
+                        </div>
+                    </div>
+                    <br>
+                    <div style="position:relative;" class="row">
+
+                        <div class="col-sm-4">
+                            <button type="button" href="#" class="btn btn-default text-primary">
+                            <a href="#"  class="glyphicon glyphicon-heart"></a>
+                        </button>
+                        </div>
+                        <div class="col-xs-6">
+                            <h6 style="font-size: 10px;">Agregar Lista Deseos</h6>
+                        </div>
+                    </div> 
+                </div>
             </div>
         </div>
-    </form>
-    <br><br><br><br><br><br><br><br><br><br><br>
-</div>
+    </div>
 
+    <br>
+    <br>
+</div>

@@ -16,8 +16,9 @@
              * Esta función utiliza el protocolo HTTP para crear la bicicleta.
              * @param {Object} bici Objeto con la nueva de la bicicleta.
              */
+            
             $scope.createBici = function () {
-                console.log($scope.data)
+                console.log($scope.data + " este es data")
                 var input = {};
                 
                 input.id = 9999;
