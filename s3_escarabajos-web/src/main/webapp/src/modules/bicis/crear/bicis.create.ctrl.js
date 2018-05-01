@@ -30,9 +30,11 @@
                 
                 input.categoria = $scope.data.categoria;
                 
-                input.album  = [];
+                input.album  = $scope.data.album;
                 
                 input.usada = false;
+                
+                input.disponible  = true;
                 
                 console.log(input)
                 $http.post(biciContext, input).then(function (response) {

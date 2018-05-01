@@ -32,11 +32,13 @@
 
                 input.categoria = $scope.data.categoria;
 
-                input.album = [];
+                input.album = $scope.data.album;
 
                 input.usada = true;
 
                 input.estado = "En proceso"
+                
+                input.disponible = true;
 
                 input.facturaOriginal = $scope.data.facturaOriginal;
                 //Debia ser: biciUsadaContext + '/' + $state.params.vendedorId + '/bicis' pero aun no esta funcionando vendedor completamente.

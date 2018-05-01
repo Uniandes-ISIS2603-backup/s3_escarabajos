@@ -8,7 +8,7 @@
 
             var basePath = 'src/modules/bicisUsadas/';
 
-            $urlRouterProvider.otherwise("/bicis/list'");
+            $urlRouterProvider.otherwise("/bicis/list");
             //Tendria que tener de parent:'vendedorDetail' pero como no esta completa la parte de vendedor 
             //pondre la url de un vendedor especifico
             

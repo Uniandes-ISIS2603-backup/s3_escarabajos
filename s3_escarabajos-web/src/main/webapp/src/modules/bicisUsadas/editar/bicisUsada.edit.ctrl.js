@@ -27,11 +27,13 @@
 
                         input.categoria = $scope.biciUsadaActual.categoria;
 
-                        input.album = [];
+                        input.album =$scope.biciUsadaActual.categoria;
 
                         input.usada = true;
 
                         input.estado = $scope.biciUsadaActual.estado;
+                        
+                        input.disponible = true;
 
                         input.facturaOriginal = $scope.biciUsadaActual.facturaOriginal;
 

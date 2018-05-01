@@ -28,11 +28,8 @@
                             <img class="img-responsive" src="http://www.fyrdraca.co.uk/wp-content/uploads/2017/04/bicycle-city-street-wallpaper-53cb2e1d5128e.jpg" alt="Los Angeles" style="width:100%;">
                         </div>
 
-                        <div class="item">
-                            <img class="img-responsive"  src="http://s1.1zoom.me/big0/177/Toys_Bicycle_446901.jpg" alt="Chicago" style="width:100%;">
-                        </div>
-                        <div class="item">
-                            <img class="img-responsive"  src="http://www.fondosni.com/images/2013-04-28/Rueda%20de%20bicicleta-365091.jpg" alt="New York" style="width:100%;">
+                        <div ng-repeat="(foto,i) in biciActual.album track by $id(foto)" class="item">
+                            <img class="img-responsive"  ng-src="{{i}}"  style="width:80%;">
                         </div>
                     </div>
                 </div>

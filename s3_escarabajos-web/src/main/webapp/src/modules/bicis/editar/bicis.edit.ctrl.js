@@ -26,9 +26,11 @@
 
                         input.categoria = $scope.biciActual.categoria;
 
-                        input.album = [];
+                        input.album = $scope.biciActual.album;
                         
                         input.usada = false;
+                        
+                        input.disponible = true;
                         
                         $http.put(biciContext + '/' + $state.params.biciId, input).then(function (response) {
                             $state.go('bicisList', {biciId: response.data.id}, {reload: true});
