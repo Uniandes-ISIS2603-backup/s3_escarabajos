@@ -14,6 +14,15 @@ var mod = ng.module("vendedoresModule", []);
                         templateUrl: basePath + 'vendedores.list.html'
                     }
                 }
+            }).state('vendedoresCreate', {
+                url: '/vendedoresCreate',
+                views: {
+                    'mainView': {
+                        controller: 'vendedoresCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'vendedores.create.html'
+                    }
+                }
             });
         }]);
 

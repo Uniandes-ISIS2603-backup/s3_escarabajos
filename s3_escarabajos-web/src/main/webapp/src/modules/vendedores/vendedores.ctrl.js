@@ -17,6 +17,19 @@
             this.getRecord = function (id) {
                 $http.get('http://localhost:8080/s3_escarabajos-web/api/clientes/'+ id);
             };
+            
+            $scope.createVendedor = function () {
+
+                        var input = {};
+
+                        input.telefono = $scope.clienteActual.usuario;
+                        
+                        input.direccion = $scope.clienteActual.nombre;
+                        
+                        $http.put("api/clientes" + '/' + $state.params.clienteId, input).then(function (response) {
+                            $state.go('clientesList', {clienteId: response.data.id}, {reload: true});
+                        });
+                    };
 
         }]);
 })(window.angular);

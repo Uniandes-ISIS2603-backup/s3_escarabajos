@@ -21,6 +21,7 @@
             this.getRecord = function (id) {
                 $http.get('http://localhost:8080/s3_escarabajos-web/api/clientes/'+ id);
             };
+
     }]);
 
 })(window.angular);
