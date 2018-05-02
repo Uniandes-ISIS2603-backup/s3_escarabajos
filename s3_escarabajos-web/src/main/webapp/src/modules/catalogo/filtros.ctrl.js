@@ -150,6 +150,54 @@
                     reload: true
                 });
             };
+
+            catalogoFactory.getPrecioMax($state.params.tipo).then(function (response) {
+                $scope.max = parseFloat(response.data.nombre);
+                $scope.min = 0;
+                $scope.valMin = 0;
+                if ($scope.filtros.precioMin > 0) {
+                    $scope.valMin = Math.round($scope.filtros.precioMin / 1000);
+                }
+                $scope.valMax = Math.round($scope.max / 1000);
+                if ($scope.filtros.precioMax < $scope.max) {
+                    $scope.valMax = Math.round($scope.filtros.precioMax / 1000);
+                }
+                $scope.max = Math.round($scope.max / 1000);
+                var handle1 = $("#custom-handle1");
+                var handle2 = $("#custom-handle2");
+                $("#slider-range").slider({
+                    create: function () {
+                        handle1.text($scope.valMin + "K");
+                        handle2.text($scope.valMax + "K");
+                    },
+                    range: true,
+                    min: $scope.min,
+                    max: $scope.max,
+                    values: [$scope.valMin, $scope.valMax],
+                    step: 10,
+                    slide: function (event, ui) {
+                        handle1.text("$" + ui.values[0] + "K");
+                        handle2.text("$" + ui.values[1] + "K");
+                    },
+                    change: function (event, ui) {
+                        $scope.filtros.precioMin = ui.values[0] * 1000;
+                        $scope.filtros.precioMax = ui.values[1] * 1000;
+                        $state.go('adv', {
+                            filtros: $scope.filtros,
+                            pagina: $scope.pagina,
+                            tipo: $scope.tipo
+                        }, {
+                            reload: true
+                        });
+                    }
+                });
+            });
+
+
+
+
+
+
         }
     ]);
 }

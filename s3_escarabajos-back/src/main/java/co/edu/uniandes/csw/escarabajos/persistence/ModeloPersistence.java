@@ -419,4 +419,32 @@ public class ModeloPersistence {
         LOGGER.log(Level.INFO, resp.toString());
         return resp;
     }
+
+    /**
+     * Metodo que se encarga de consultar el precio de la bicicleta mas cara de
+     * la aplicacion.
+     *
+     * @return precio de la bicicleta mas cara;
+     */
+    public Double getPrecioBicicletas() {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar el precio de las bicicletas.");
+        TypedQuery query;
+        query = em.createQuery("Select max(e.precio) From BicicletaEntity e ", String.class);
+        Double resp = Double.parseDouble(query.getSingleResult().toString());
+        return resp;
+    }
+
+    /**
+     * Metodo que se encarga de consultar el precio del accesorio mas caro de la
+     * aplicacion.
+     *
+     * @return precio del accesorio mas caro.
+     */
+    public Double getPrecioAccesorios() {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar el precio de los accesorios");
+        TypedQuery query;
+        query = em.createQuery("Select max(e.precio) From AccesorioEntity e ", String.class);
+        Double resp = Double.parseDouble(query.getSingleResult().toString());
+        return resp;
+    }
 }

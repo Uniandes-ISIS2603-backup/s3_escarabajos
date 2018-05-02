@@ -64,6 +64,25 @@
         -ms-transform: rotate(45deg);
         transform: rotate(45deg);
     }
+
+    #custom-handle1 {
+        width: 4em;
+        height: 1.6em;
+        top: 50%;
+        margin-top: -.8em;
+        text-align: center;
+        font-size: 100%;
+        line-height: 1.6em;
+    }
+    #custom-handle2 {
+        width: 4em;
+        height: 1.6em;
+        top: 50%;
+        margin-top: -.8em;
+        text-align: center;
+        font-size: 100%;
+        line-height: 1.6em;
+    }
 </style>
 
 
@@ -110,7 +129,13 @@
             <p class="text" style="color: #FFF; font-size: 18px; text-align: center;">Precio</p>
         </div>
         <div class="row">
-            <!--Precio chooser.-->
+            <div class="col-xs-10 text-center" >
+                <div id="slider-range">
+                    <div id="custom-handle1" class="ui-slider-handle"></div>
+                    <div id="custom-handle2" class="ui-slider-handle"></div>
+                </div>
+            </div>
+            <div class="col-xs-2" ></div>
         </div>      
     </div>
 </div>

@@ -380,4 +380,22 @@ public class ModeloLogic {
             throw new BusinessLogicException("Los Filtros no estan en el formato adecuado!");
         }
     }
+
+    /**
+     * Metodo que se encarga de pedirle el precio al persistence.
+     *
+     * @return precio de la bicicleta mas cara de la aplicacion.
+     */
+    public Double getPrecioBicicletas() {
+        return persistence.getPrecioBicicletas();
+    }
+
+    /**
+     * Metodo que se encarga de pedirle el precio al persistence.
+     *
+     * @return precio del accesorios mas cara de la aplicacion.
+     */
+    public Double getPrecioAccesorios() {
+        return persistence.getPrecioAccesorios();
+    }
 }

@@ -209,6 +209,56 @@ public class CatalogoResource {
     }
 
     /**
+     * <h1>GET /api/catalogo/precio/bicicletas : Obtener el precio de la
+     * bicicleta mas cara de la aplicacion</h1>
+     *
+     * <pre>busca el precio de la bicicleta mas cara
+     *
+     * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Devuelve el precio.
+     * </code>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 404 Not Found No existen bicicletas..
+     * </code>
+     * </pre>
+     *
+     * @return InfoDTO con el precio buscado WebApplicationException
+     * {@link WebApplicationExceptionMapper} - Error de lógica que se genera
+     * cuando no falla la busqueda
+     */
+    @GET
+    @Path("precio/bicicletas")
+    public InfoDTO getPrecioBicicletas() {
+        return new InfoDTO(modeloLogic.getPrecioBicicletas().toString());
+    }
+
+    /**
+     * <h1>GET /api/catalogo/precio/accesorios : Obtener el precio del accesorio
+     * mas caro de la aplicacion</h1>
+     *
+     * <pre>busca el precio del accesorio mas caro.
+     *
+     * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Devuelve el precio.
+     * </code>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 404 Not Found No existen bicicletas..
+     * </code>
+     * </pre>
+     *
+     * @return InfoDTO con el precio buscado WebApplicationException
+     * {@link WebApplicationExceptionMapper} - Error de lógica que se genera
+     * cuando no falla la busqueda
+     */
+    @GET
+    @Path("precio/accesorios")
+    public InfoDTO getPrecioAccesorios() {
+        return new InfoDTO(modeloLogic.getPrecioAccesorios().toString());
+    }
+
+    /**
      * Metodo que se encarga de llamar al metodo de la logica que filtra los
      * modelos de bicicletas
      *

@@ -21,6 +21,9 @@
             dataFactory.getColores = function (tipo) {
                 return $http.get(catalogoContext + '/colores/' + tipo);
             };
+            dataFactory.getPrecioMax = function (tipo) {
+                return $http.get(catalogoContext + '/precio/' + tipo);
+            };
 
             dataFactory.getModelos = function (tipo, filtros, pagina, numeroModelos) {
                 var temp = angular.toJson(filtros);
