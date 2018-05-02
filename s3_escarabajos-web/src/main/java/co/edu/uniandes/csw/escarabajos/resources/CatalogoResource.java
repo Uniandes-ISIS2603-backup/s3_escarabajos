@@ -9,7 +9,7 @@ import co.edu.uniandes.csw.escarabajos.dtos.FiltrosDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.InfoDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.ModeloDetailDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.PaginacionDTO;
-import co.edu.uniandes.csw.escarabajos.ejb.ModeloLogic;
+import co.edu.uniandes.csw.escarabajos.ejb.CatalogoLogic;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
@@ -48,7 +48,7 @@ import javax.ws.rs.core.MediaType;
 public class CatalogoResource {
 
     @Inject
-    ModeloLogic modeloLogic;
+    CatalogoLogic catalogoLogic;
 
     /**
      * <h1>GET /api/catalogo/marcas/accesorios : Obtener todas las marcas de la
@@ -72,7 +72,7 @@ public class CatalogoResource {
     @GET
     @Path("marcas/accesorios")
     public List<InfoDTO> getMarcasAccesorios() {
-        return listString2Info(modeloLogic.getMarcasAccesorios());
+        return listString2Info(catalogoLogic.getMarcasAccesorios());
     }
 
     /**
@@ -97,7 +97,7 @@ public class CatalogoResource {
     @GET
     @Path("categorias/accesorios")
     public List<InfoDTO> getCategoriasAccesorios() {
-        return listString2Info(modeloLogic.getCategoriasAccesorios());
+        return listString2Info(catalogoLogic.getCategoriasAccesorios());
     }
 
     /**
@@ -122,9 +122,14 @@ public class CatalogoResource {
     @GET
     @Path("colores/accesorios")
     public List<InfoDTO> getColoresAccesorios() {
-        return listString2Info(modeloLogic.getColoresAccesorios());
+        return listString2Info(catalogoLogic.getColoresAccesorios());
     }
 
+    /**
+     * Metodo que se encarga de convertir una lista de strings a InfoDTO
+     * @param entityList lista de strings.
+     * @return lista de InfoDTO
+     */
     private List<InfoDTO> listString2Info(List<String> entityList) {
         ArrayList<InfoDTO> list = new ArrayList<>();
         for (String entity : entityList) {
@@ -155,7 +160,7 @@ public class CatalogoResource {
     @GET
     @Path("marcas/bicicletas")
     public List<InfoDTO> getMarcasBicicletas() {
-        return listString2Info(modeloLogic.getMarcasBicicletas());
+        return listString2Info(catalogoLogic.getMarcasBicicletas());
     }
 
     /**
@@ -180,7 +185,7 @@ public class CatalogoResource {
     @GET
     @Path("categorias/bicicletas")
     public List<InfoDTO> getCategoriasBicicletas() {
-        return listString2Info(modeloLogic.getCategoriasBicicletas());
+        return listString2Info(catalogoLogic.getCategoriasBicicletas());
     }
 
     /**
@@ -205,7 +210,7 @@ public class CatalogoResource {
     @GET
     @Path("colores/bicicletas")
     public List<InfoDTO> getColoresBicicletas() {
-        return listString2Info(modeloLogic.getColoresBicicletas());
+        return listString2Info(catalogoLogic.getColoresBicicletas());
     }
 
     /**
@@ -230,7 +235,7 @@ public class CatalogoResource {
     @GET
     @Path("precio/bicicletas")
     public InfoDTO getPrecioBicicletas() {
-        return new InfoDTO(modeloLogic.getPrecioBicicletas().toString());
+        return new InfoDTO(catalogoLogic.getPrecioBicicletas().toString());
     }
 
     /**
@@ -255,7 +260,7 @@ public class CatalogoResource {
     @GET
     @Path("precio/accesorios")
     public InfoDTO getPrecioAccesorios() {
-        return new InfoDTO(modeloLogic.getPrecioAccesorios().toString());
+        return new InfoDTO(catalogoLogic.getPrecioAccesorios().toString());
     }
 
     /**
@@ -274,9 +279,9 @@ public class CatalogoResource {
     @Path("modelos/bicicletas/{pagina: \\d+}/{records: \\d+}")
     public PaginacionDTO getModelosBicicletasByFiltros(FiltrosDTO filtros, @PathParam("pagina") Integer pagina,
             @PathParam("records") Integer maxRecords) throws BusinessLogicException {
-        return new PaginacionDTO(listModeloEntity2DetailDTO(modeloLogic.getModelosBicicletasFiltrados(filtros.getMarcas(),
+        return new PaginacionDTO(listModeloEntity2DetailDTO(catalogoLogic.getModelosBicicletasFiltrados(filtros.getMarcas(),
                 filtros.getCategorias(), filtros.getColores(), filtros.getPrecioMin(), filtros.getPrecioMax(), filtros.getCalificacionMin(),
-                pagina, maxRecords)), modeloLogic.getNumeroBicicletasConFiltros(filtros.getMarcas(),
+                pagina, maxRecords)), catalogoLogic.getNumeroBicicletasConFiltros(filtros.getMarcas(),
                         filtros.getCategorias(), filtros.getColores(), filtros.getPrecioMin(), filtros.getPrecioMax(), filtros.getCalificacionMin()));
     }
 
@@ -296,9 +301,9 @@ public class CatalogoResource {
     @Path("modelos/accesorios/{pagina: \\d+}/{records: \\d+}")
     public PaginacionDTO getModelosAccesoriosByFiltros(FiltrosDTO filtros, @PathParam("pagina") Integer pagina,
             @PathParam("records") Integer maxRecords) throws BusinessLogicException {
-        return new PaginacionDTO(listModeloEntity2DetailDTO(modeloLogic.getModelosAccesoriosFiltrados(filtros.getMarcas(),
+        return new PaginacionDTO(listModeloEntity2DetailDTO(catalogoLogic.getModelosAccesoriosFiltrados(filtros.getMarcas(),
                 filtros.getCategorias(), filtros.getColores(), filtros.getPrecioMin(), filtros.getPrecioMax(), filtros.getCalificacionMin(),
-                pagina, maxRecords)), modeloLogic.getNumeroAccesoriosConFiltros(filtros.getMarcas(),
+                pagina, maxRecords)), catalogoLogic.getNumeroAccesoriosConFiltros(filtros.getMarcas(),
                         filtros.getCategorias(), filtros.getColores(), filtros.getPrecioMin(), filtros.getPrecioMax(), filtros.getCalificacionMin()));
     }
 
