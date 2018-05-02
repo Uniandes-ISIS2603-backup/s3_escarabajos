@@ -192,12 +192,9 @@ public class ReclamoLogicTest
         ReclamoEntity entity = data.get(0);
         ReclamoEntity pojoEntity = factory.manufacturePojo(ReclamoEntity.class);
         pojoEntity.setId(entity.getId());
-       List<String> pics = new ArrayList<>();
-        pics.add(factory.manufacturePojo(String.class));
-        //newEntity.setAlbum(pics);
-        reclamoLogic.updateReclamo(pojoEntity, facturaData.get(0).getId());
+        reclamoLogic.updateMensajeReclamo(pojoEntity, pojoEntity.getId());
 
-        ReclamoEntity resp = em.find(ReclamoEntity.class, entity.getId());
+        ReclamoEntity resp = em.find(ReclamoEntity.class, pojoEntity.getId());
 
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
         Assert.assertEquals(pojoEntity.getMensaje(), resp.getMensaje());

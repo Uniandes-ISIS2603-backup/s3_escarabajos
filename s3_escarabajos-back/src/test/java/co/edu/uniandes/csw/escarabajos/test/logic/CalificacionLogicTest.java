@@ -247,7 +247,7 @@ public class CalificacionLogicTest
         CalificacionEntity e = factory.manufacturePojo(CalificacionEntity.class);
         calificacionLogic.crearCalificacion(e, modelosData.get(0).getId(), clientesdata.get(0).getId());
         cliente0 = calificacionLogic.getCalificacionesPorCliente(clientesdata.get(0).getId());
-        Assert.assertEquals(2, cliente0.size());
+        Assert.assertEquals(1, cliente0.size());
     }
     @Test
     public void getCalificacionesPorClienteAndModeloTest() throws BusinessLogicException
@@ -262,7 +262,7 @@ public class CalificacionLogicTest
         CalificacionEntity e = factory.manufacturePojo(CalificacionEntity.class);
         calificacionLogic.crearCalificacion(e, modelosData.get(0).getId(), clientesdata.get(0).getId());
         mc0 = calificacionLogic.getCalificacionesPorClienteAndModelo(clientesdata.get(0).getId(), modelosData.get(0).getId());
-        Assert.assertEquals(2, mc0.size());
+        Assert.assertEquals(1, mc0.size());
     }
     /**
      * Prueba para verificar la calificacion media de un modelo.

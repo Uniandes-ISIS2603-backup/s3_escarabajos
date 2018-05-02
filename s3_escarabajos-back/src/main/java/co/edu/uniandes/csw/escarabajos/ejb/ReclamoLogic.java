@@ -158,8 +158,6 @@ public class ReclamoLogic {
         //FacturaEntity f = facturaLogic.getFactura(facturaId);
         //  ent.setFactura(f);
         ReclamoEntity actualizado = reclamoPersistence.find(reclId);
-        LOGGER.info("E" + actualizado.getId());
-
         actualizado.setMensaje(actualizado.getMensaje() + "@@@@@@@" + ent.getMensaje());
         actualizado = reclamoPersistence.update(actualizado);
         //f.setReclamo(actualizado);
