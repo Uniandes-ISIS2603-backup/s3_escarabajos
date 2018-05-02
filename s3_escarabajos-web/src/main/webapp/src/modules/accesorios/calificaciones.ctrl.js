@@ -6,7 +6,6 @@
     mod.controller("calificacionesListCtrl2", ['$scope', 'calificacionContext', '$http', '$state',
         function ($scope, calificacionContext, $http, $state) {
             $scope.data = {};
-            console.log($state.params.accesorioId );
             if ($state.params.accesorioId !== undefined && $state.params.accesorioId !== null) {
                 
                 
