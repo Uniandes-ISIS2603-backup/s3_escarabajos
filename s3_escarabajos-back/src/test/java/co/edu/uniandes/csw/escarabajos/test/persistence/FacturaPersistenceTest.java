@@ -34,8 +34,8 @@ public class FacturaPersistenceTest {
     /**
      *
      * @return Devuelve el jar que Arquillian va a desplegar en el Glassfish
-     * embebido. El jar contiene las clases de Factura, el descriptor de la
-     * base de datos y el archivo benas.xml para resolver la inyección de
+     * embebido. El jar contiene las clases de Factura, el descriptor de la base
+     * de datos y el archivo benas.xml para resolver la inyección de
      * dependencias.
      */
     @Deployment
@@ -116,9 +116,12 @@ public class FacturaPersistenceTest {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
             FacturaEntity entity = factory.manufacturePojo(FacturaEntity.class);
-
+            ClienteEntity c = factory.manufacturePojo(ClienteEntity.class);
+            em.persist(c);
+            entity.setCliente(c);
             em.persist(entity);
             data.add(entity);
+            dataCliente.add(c);
         }
     }
 
@@ -134,10 +137,10 @@ public class FacturaPersistenceTest {
         FacturaEntity result = facturaPersistence.create(newEntity);
 
         Assert.assertNotNull(result);
-        
+
         FacturaEntity entity = em.find(FacturaEntity.class, result.getId());
         Assert.assertEquals(newEntity.getCliente(), entity.getCliente());
-        Assert.assertTrue(newEntity.getDinero().equals( entity.getDinero()));
+        Assert.assertTrue(newEntity.getDinero().equals(entity.getDinero()));
     }
 
     /**
@@ -146,20 +149,14 @@ public class FacturaPersistenceTest {
      *
      */
     @Test
-    public void getFacturasTest() {
-        ClienteEntity cliente = dataCliente.get(0);
-        cliente.setCompras(data);
-        List<FacturaEntity> list = facturaPersistence.findAll(cliente.getId());
-        Assert.assertEquals(data.size(), list.size());
-        for (FacturaEntity ent : list) {
-            boolean found = false;
-            for (FacturaEntity entity : data) {
-                if (ent.getId().equals(entity.getId())) {
-                    found = true;
-                }
-            }
-            Assert.assertTrue(found);
-        }
+    public void getFacturas() {
+        ClienteEntity cliente1 = dataCliente.get(0);
+        List<FacturaEntity> list1 = facturaPersistence.findAll(cliente1.getId());
+        Assert.assertEquals(1, list1.size());
+
+        ClienteEntity cliente2 = dataCliente.get(1);
+        List<FacturaEntity> list2 = facturaPersistence.findAll(cliente2.getId());
+        Assert.assertEquals(1, list2.size());
     }
 
     /**
@@ -198,10 +195,12 @@ public class FacturaPersistenceTest {
         FacturaEntity entity = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
         FacturaEntity newEntity = factory.manufacturePojo(FacturaEntity.class);
-
         newEntity.setId(entity.getId());
-
         facturaPersistence.update(newEntity);
-        Assert.assertEquals(newEntity.getCliente(), entity.getCliente());
-    }  
+
+        FacturaEntity find = facturaPersistence.find(newEntity.getId());
+
+        Assert.assertEquals(newEntity.getId(), find.getId());
+        Assert.assertEquals(newEntity.getDinero(), find.getDinero());
+    }
 }
