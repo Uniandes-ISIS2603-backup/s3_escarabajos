@@ -340,7 +340,13 @@ public class CatalogoPersistence {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar el precio de las bicicletas.");
         TypedQuery query;
         query = em.createQuery("Select max(e.precio) From BicicletaEntity e ", String.class);
-        Double resp = Double.parseDouble(query.getSingleResult().toString());
+        Double resp = 0.0;
+        try {
+            String temp = query.getSingleResult().toString();
+            resp = Double.parseDouble(temp);
+        } catch (NullPointerException e) {
+            //empty
+        }
         return resp;
     }
 
@@ -354,7 +360,13 @@ public class CatalogoPersistence {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar el precio de los accesorios");
         TypedQuery query;
         query = em.createQuery("Select max(e.precio) From AccesorioEntity e ", String.class);
-        Double resp = Double.parseDouble(query.getSingleResult().toString());
+        Double resp = 0.0;
+        try {
+            String temp = query.getSingleResult().toString();
+            resp = Double.parseDouble(temp);
+        } catch (NullPointerException e) {
+            //empty
+        }
         return resp;
     }
 

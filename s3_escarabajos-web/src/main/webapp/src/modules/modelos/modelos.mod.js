@@ -1,7 +1,7 @@
 
 (function (ng) {
-    var mod = ng.module("modeloModule", ['ui.router']);
-    mod.constant("modeloContext", "api/modelos");
+    var mod = ng.module("modelosModule", ['ui.router']);
+    mod.constant("modelosContext", "api/modelos");
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             var basePath = 'src/modules/modelos/';
             $stateProvider.state('modelos', {
@@ -26,7 +26,7 @@
                     },
                     'clasificacionesView': {
                         templateUrl: 'src/modules/calificaciones/calificaciones.list.html',
-                        controller: 'calificacionCtrl',
+                        controller: 'calificacionesListCtrl',
                         controllerAs: 'ctrl'
                     }
                 }

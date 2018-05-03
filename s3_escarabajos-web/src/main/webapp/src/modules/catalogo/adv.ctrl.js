@@ -21,6 +21,14 @@
                 }
             });
 
+            $scope.ir = function (id) {
+                $state.go('modeloDetail', {
+                    modeloId: id
+                }, {
+                    reload: true
+                });
+            };
+
             $scope.prev = function () {
                 if ($scope.pagina !== 1) {
                     $state.go('adv', {
