@@ -98,6 +98,7 @@ public class FacturaPersistenceTest {
      */
     private void clearData() {
         em.createQuery("delete from FacturaEntity").executeUpdate();
+        em.createQuery("delete from ClienteEntity").executeUpdate();
     }
 
     /**
@@ -115,8 +116,14 @@ public class FacturaPersistenceTest {
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
-            FacturaEntity entity = factory.manufacturePojo(FacturaEntity.class);
+            ClienteEntity entity = factory.manufacturePojo(ClienteEntity.class);
 
+            em.persist(entity);
+            dataCliente.add(entity);
+        }
+        for (int i = 0; i < 3; i++) {
+            FacturaEntity entity = factory.manufacturePojo(FacturaEntity.class);
+            entity.setCliente(dataCliente.get(0));
             em.persist(entity);
             data.add(entity);
         }
@@ -200,8 +207,10 @@ public class FacturaPersistenceTest {
         FacturaEntity newEntity = factory.manufacturePojo(FacturaEntity.class);
 
         newEntity.setId(entity.getId());
-
         facturaPersistence.update(newEntity);
-        Assert.assertEquals(newEntity.getCliente(), entity.getCliente());
+
+        FacturaEntity resp = em.find(FacturaEntity.class, entity.getId());
+
+        Assert.assertEquals(newEntity.getDinero(), resp.getDinero());
     }  
 }

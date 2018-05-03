@@ -85,6 +85,7 @@ public class FacturaLogicTest {
      */
     private void clearData() {
         em.createQuery("delete from FacturaEntity").executeUpdate();
+        em.createQuery("delete from ClienteEntity").executeUpdate();
     }
 
     /**
@@ -95,11 +96,16 @@ public class FacturaLogicTest {
      */
     private void insertData() {
         for (int i = 0; i < 3; i++) {
-            
+            ClienteEntity entity = factory.manufacturePojo(ClienteEntity.class);
+            em.persist(entity);
+            dataCliente.add(entity);
+        }
+        
+        for (int i = 0; i < 3; i++) {
             FacturaEntity entity = factory.manufacturePojo(FacturaEntity.class);
+            entity.setCliente(dataCliente.get(1));
             
             em.persist(entity);
-            
             data.add(entity);
         }
     }
