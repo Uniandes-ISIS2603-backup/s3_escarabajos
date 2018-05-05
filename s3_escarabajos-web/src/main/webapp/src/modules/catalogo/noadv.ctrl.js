@@ -1,16 +1,60 @@
 (function (ng) {
     var mod = ng.module("catalogoModule");
-    mod.constant("catalogoContext", "api/catalogo");
-    mod.controller('noAdvCtrl', ['$scope', '$http', 'catalogoContext',
-        function ($scope, $http, catalogoContext) {
-            //Aqui se definen los chunks y eso
-//            var temp = [{"marca": "123", "referencia": "abc-123", "calificacionMedia": 4.0, "url": "https://www.decathlon.es/media/836/8360662/big_35a2777897594375a1eb8324a42d1410.jpg", "precio": 8000}, {"marca": "123", "referencia": "abc-123", "calificacionMedia": 4.5, "url": "https://www.decathlon.es/media/836/8360662/big_35a2777897594375a1eb8324a42d1410.jpg", "precio": 8000}, {"marca": "123", "referencia": "abc-123", "calificacionMedia": 4.5, "url": "https://www.decathlon.es/media/836/8360662/big_35a2777897594375a1eb8324a42d1410.jpg", "precio": 8000}, {"marca": "123", "referencia": "abc-123", "calificacionMedia": 4.5, "url": "https://www.decathlon.es/media/836/8360662/big_35a2777897594375a1eb8324a42d1410.jpg", "precio": 8000}, {"marca": "123", "referencia": "abc-123", "calificacionMedia": 4.5, "url": "https://www.decathlon.es/media/836/8360662/big_35a2777897594375a1eb8324a42d1410.jpg", "precio": 8000}, {"marca": "123", "referencia": "abc-123", "calificacionMedia": 4.5, "url": "https://www.decathlon.es/media/836/8360662/big_35a2777897594375a1eb8324a42d1410.jpg", "precio": 8000}, {"marca": "123", "referencia": "abc-123", "calificacionMedia": 4.5, "url": "https://www.decathlon.es/media/836/8360662/big_35a2777897594375a1eb8324a42d1410.jpg", "precio": 8000}, {"marca": "123", "referencia": "abc-123", "calificacionMedia": 4.5, "url": "https://www.decathlon.es/media/836/8360662/big_35a2777897594375a1eb8324a42d1410.jpg", "precio": 8000}, {"marca": "123", "referencia": "abc-123", "calificacionMedia": 4.5, "url": "https://www.decathlon.es/media/836/8360662/big_35a2777897594375a1eb8324a42d1410.jpg", "precio": 8000}, {"marca": "123", "referencia": "abc-123", "calificacionMedia": 4.5, "url": "https://www.decathlon.es/media/836/8360662/big_35a2777897594375a1eb8324a42d1410.jpg", "precio": 8000}, {"marca": "123", "referencia": "abc-123", "calificacionMedia": 4.5, "url": "https://www.decathlon.es/media/836/8360662/big_35a2777897594375a1eb8324a42d1410.jpg", "precio": 8000}, {"marca": "123", "referencia": "abc-123", "calificacionMedia": 4.5, "url": "https://www.decathlon.es/media/836/8360662/big_35a2777897594375a1eb8324a42d1410.jpg", "precio": 8000}];
-//            $scope.modelos = [];
-//            for (var i = 0; i < temp.length; i += 4) {
-//                $scope.modelos.push(temp.slice(i, i + 4));
-//            }
-//            $scope.cols = 3;
+    mod.controller('noAdvCtrl', ['$scope', '$state', 'catalogoFactory',
+        function ($scope, $state, catalogoFactory) {
+            $scope.filtros = $state.params.filtros;
+            $scope.pagina = $state.params.pagina;
+            $scope.tipo = $state.params.tipo;
+
+            catalogoFactory.getModelos($scope.tipo, $scope.filtros, $scope.pagina, 12).then(function (response) {
+                $scope.mods = response.data.modelos;
+                $scope.pags = Math.ceil(response.data.numero / 9);
+                $scope.modelos = [];
+                for (var i = 0; i < $scope.mods.length; i += 4) {
+                    $scope.modelos.push($scope.mods.slice(i, i + 4));
+                }
+                $scope.cols = 3;
+
+                $scope.paginas = [];
+                for (var i = 1; i <= $scope.pags; i++) {
+                    $scope.paginas.push(i);
+                }
+            });
+
+            $scope.ir = function (id) {
+                $state.go('modeloDetail', {
+                    modeloId: id
+                }, {
+                    reload: true
+                });
+            };
+
+            $scope.prev = function () {
+                if ($scope.pagina !== 1) {
+                    $state.go('noAdv', {
+                        filtros: $scope.filtros,
+                        pagina: $scope.pagina - 1,
+                        tipo: $scope.tipo
+                    }, {
+                        reload: true
+                    });
+                }
+            };
+            $scope.next = function () {
+                if ($scope.pagina !== $scope.pags) {
+                    $state.go('noAdv', {
+                        filtros: $scope.filtros,
+                        pagina: $scope.pagina + 1,
+                        tipo: $scope.tipo
+                    }, {
+                        reload: true
+                    });
+                }
+            };
+
+
         }
+
     ]);
 }
 )(window.angular);

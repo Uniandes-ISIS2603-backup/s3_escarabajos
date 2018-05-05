@@ -7,8 +7,28 @@
         background-color: white;
         cursor: pointer;
     }
+    .swatch {
+        width:50px;
+        height:50px;
+        border-radius:100px;
+        border: 2px solid #666;
+    }
+    .swatch2 {
+        width:100px;
+        height:50px;
+        border-radius:100px;
+        border: 2px solid #666;
+    }
+    .swatch-clickable:hover {
+        border: 2px solid #000;
+        cursor: pointer;
+    }
+
+    .dropdown-menu {
+        padding:10px;
+    }
 </style>
-<div class="row">
+<div class="row" ng-if="itemActual !== null">
     <div class="col-xs-1"></div>
     <div class="col-xs-10">
         <div class="well">
@@ -58,12 +78,26 @@
                 </div>
                 <div  class="texto col-xs-5">
                     <h4>Referencia:         {{modeloActual.referencia}}</h4>
-                    <h4 ng-if="categoria !== undefined">Categoria:      {{categoria}} </h4>
+                    <br>
+                    <h4> Categoria:      {{itemActual.categoria}} </h4>
+                    <br>
                     <h4 style="color:DodgerBlue;">{{modeloActual.precio|currency}}</h4>
+                    <br>
                     <h4>
-                        Color:
-
+                        Color: 
                     </h4>
+                    <div class="dropdown text-center">
+                        <a class="dropdown-toggle btn btn-default swatch2" data-toggle="dropdown" style="background-color:{{itemActual.color}}"></a>
+                        <div class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <table>
+                                <tr ng-repeat="color in colores">
+                                    <td>
+                                        <div class="swatch swatch-clickable" style="background-color:{{color}}" ></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                     <br>
                     <div style="position: relative;" class="row">
                         <div class="col-sm-4">
@@ -78,7 +112,7 @@
 
                         <div class="col-sm-4">
                             <button type="button"  class="btn btn-default" >
-                                <a class="glyphicon glyphicon-gift"></a>
+                                <a class="glyphiconglyphicon-gift"></a>
                             </button>
                         </div>
 
@@ -90,4 +124,18 @@
         </div>
     </div>
     <div class="col-xs-1"></div>
+</div>
+<div ng-if="    itemActual === null">
+    <br>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-xs-3" ></div>
+        <div cla    ss="col-xs-6 text-center" >
+            <img class="img-responsive" src="data/Imagenes/oops!.png" >
+            <br>
+            <h2>El modelo no esta disponible!</h2>
+        </div>
+        <div class="col-xs-3" ></div>
+    </div>
 </div>

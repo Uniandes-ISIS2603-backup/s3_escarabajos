@@ -224,34 +224,52 @@
         <div class="row"> 
             <p class="text" style="color: #FFF; font-size: 18px; text-align: center;">Color</p>
         </div>
-        <div class="row" style='height: 30px' ng-repeat="color in colores">
+        <div class="row" style='height: 40px' ng-repeat="color in filtros.colores">
             <div class="col-xs-2" >
             </div>
-            <div class="col-xs-10" >
-                <label class="container" style="color: #FFF; font-size: 16px;">{{color.nombre}}    
-                    <input type="checkbox" ng-checked='color.activado' ng-change="cambiarColor(color.nombre)" ng-model="color.activado">
-                    <span class="checkmark"></span>
-                </label>
+            <div class="col-xs-6" >
+                <div style="background-color: {{color}} ; width:100%; height:35px; border-radius:5px; border: 2px solid #666; ">        
+                </div>
             </div>
+            <div class="col-xs-2 text-center" >
+                <div class="row"> 
+                    <a  ng-click="cambiarColor(color)" class="btn btn-danger" >
+                        <span class="glyphicon glyphicon-remove" style="color:white; font-size: 15px; text-align: center"></span></a>
+                </div>
+            </div>
+            <br>
         </div>
         <div ng-if="coloresCol.length > 0">
-            <div id="verMasColores" class="collapse">
-                <div class="row" style='height: 30px' ng-repeat="color in coloresCol">
-                    <div class="col-xs-2" >
-                    </div>
-                    <div class="col-xs-10" >
-                        <label class="container" style="color: #FFF; font-size: 16px;">{{color.nombre}}    
-                            <input type="checkbox" ng-checked='color.activado' ng-change="cambiarColor(color.nombre)" ng-model="color.activado">
-                            <span class="checkmark"></span>
-                        </label>
-                    </div>
+            <style>
+                .swatch {
+                    width:50px;
+                    height:50px;
+                    border-radius:100px;
+                    border: 2px solid #666;
+                }
+                .swatch-clickable:hover {
+                    border: 2px solid #000;
+                    cursor: pointer;
+                }
+
+                .dropdown-menu {
+                    padding:10px;
+                }
+            </style>
+            <div class="dropdown text-center">
+                <button type="button" class="btn  btn-success" data-toggle="dropdown" >Agregar Color</button>
+                <div class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <table>
+                        <tr ng-repeat="colores in coloresCol">
+                            <td ng-repeat="color in colores">
+                                <div class="swatch swatch-clickable" style="background-color:{{color.nombre}}" ng-click="cambiarColor(color.nombre)"></div>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-12 text-center" >
-                    <button type="button" class="btn  btn-success" data-toggle="collapse" data-target="#verMasColores" >Ver Mas</button>
-                </div>
-            </div>  
+
+            <!--Agregar color-->
         </div>
     </div>
 </div>

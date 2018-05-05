@@ -3,7 +3,10 @@
     mod.controller('filtrosCtrl', ['$scope', '$state', 'catalogoFactory',
         function ($scope, $state, catalogoFactory) {
             $scope.pagina = $state.params.pagina;
+            $scope.adv = $state.params.adv;
             $scope.filtros = $state.params.filtros;
+
+            //Marcas
             catalogoFactory.getMarcas($state.params.tipo).then(function (response) {
                 $scope.marc = response.data;
                 for (var j = 0; j < $scope.marc.length; j++) {
@@ -25,6 +28,7 @@
                 }
             });
 
+            //Categorias
             catalogoFactory.getCategorias($state.params.tipo).then(function (response) {
                 $scope.cat = response.data;
                 for (var j = 0; j < $scope.cat.length; j++) {
@@ -46,31 +50,36 @@
                 }
             });
 
+            //Colores
             catalogoFactory.getColores($state.params.tipo).then(function (response) {
                 $scope.col = response.data;
+                $scope.coloresCol = [];
+                $scope.coloresNoAct = [];
                 for (var j = 0; j < $scope.col.length; j++) {
-                    $scope.col[j].activado = false;
+                    var enc = false;
                     for (var i = 0; i < $scope.filtros.colores.length; i++) {
                         if ($scope.filtros.colores[i] === $scope.col[j].nombre) {
-                            $scope.col[j].activado = true;
+                            enc = true;
                         }
                     }
-                }
-                $scope.coloresCol = [];
-                $scope.colores = [];
-                for (var i = 0; i < $scope.col.length; i++) {
-                    if (i < 5) {
-                        $scope.colores.push($scope.col[i]);
-                    } else {
-                        $scope.coloresCol.push($scope.col[i]);
+                    if (enc === false)
+                    {
+                        $scope.coloresNoAct.push($scope.col[j]);
                     }
+                }
+                for (var i = 0; i < $scope.coloresNoAct.length; i += 5) {
+                    $scope.coloresCol.push($scope.coloresNoAct.slice(i, i + 5));
                 }
             });
 
-
+            //Calificacion!
             $(':radio').change(function () {
                 $scope.filtros.calificacionMin = this.value;
-                $state.go('adv', {
+                var adv = 'adv';
+                if (!$scope.adv) {
+                    adv = 'noAdv';
+                }
+                $state.go(adv, {
                     filtros: $scope.filtros,
                     pagina: $scope.pagina,
                     tipo: $scope.tipo
@@ -79,78 +88,7 @@
                 });
             });
 
-            $scope.cambiarMarca = function (marca) {
-                var enc = false;
-                var temp = [];
-                for (var i = 0; i < $scope.filtros.marcas.length && !enc; i++) {
-
-                    if ($scope.filtros.marcas[i] === marca) {
-                        enc = true;
-                    } else {
-                        temp.push($scope.filtros.marcas[i]);
-                    }
-                }
-                if (!enc) {
-                    temp.push(marca);
-                }
-                $scope.filtros.marcas = temp;
-                $state.go('adv', {
-                    filtros: $scope.filtros,
-                    pagina: $scope.pagina,
-                    tipo: $scope.tipo
-                }, {
-                    reload: true
-                });
-            };
-
-            $scope.cambiarCategoria = function (categoria) {
-                var enc = false;
-                var temp = [];
-                for (var i = 0; i < $scope.filtros.categorias.length && !enc; i++) {
-
-                    if ($scope.filtros.categorias[i] === categoria) {
-                        enc = true;
-                    } else {
-                        temp.push($scope.filtros.categorias[i]);
-                    }
-                }
-                if (!enc) {
-                    temp.push(categoria);
-                }
-                $scope.filtros.categorias = temp;
-                $state.go('adv', {
-                    filtros: $scope.filtros,
-                    pagina: $scope.pagina,
-                    tipo: $scope.tipo
-                }, {
-                    reload: true
-                });
-            };
-
-            $scope.cambiarColor = function (color) {
-                var enc = false;
-                var temp = [];
-                for (var i = 0; i < $scope.filtros.colores.length && !enc; i++) {
-
-                    if ($scope.filtros.colores[i] === color) {
-                        enc = true;
-                    } else {
-                        temp.push($scope.filtros.colores[i]);
-                    }
-                }
-                if (!enc) {
-                    temp.push(color);
-                }
-                $scope.filtros.colores = temp;
-                $state.go('adv', {
-                    filtros: $scope.filtros,
-                    pagina: $scope.pagina,
-                    tipo: $scope.tipo
-                }, {
-                    reload: true
-                });
-            };
-
+            //Precio
             catalogoFactory.getPrecioMax($state.params.tipo).then(function (response) {
                 $scope.max = parseFloat(response.data.nombre);
                 $scope.min = 0;
@@ -182,7 +120,11 @@
                     change: function (event, ui) {
                         $scope.filtros.precioMin = ui.values[0] * 1000;
                         $scope.filtros.precioMax = ui.values[1] * 1000;
-                        $state.go('adv', {
+                        var adv = 'adv';
+                        if (!$scope.adv) {
+                            adv = 'noAdv';
+                        }
+                        $state.go(adv, {
                             filtros: $scope.filtros,
                             pagina: $scope.pagina,
                             tipo: $scope.tipo
@@ -193,11 +135,87 @@
                 });
             });
 
+            $scope.cambiarMarca = function (marca) {
+                var enc = false;
+                var temp = [];
+                for (var i = 0; i < $scope.filtros.marcas.length && !enc; i++) {
+                    if ($scope.filtros.marcas[i] === marca) {
+                        enc = true;
+                    } else {
+                        temp.push($scope.filtros.marcas[i]);
+                    }
+                }
+                if (!enc) {
+                    temp.push(marca);
+                }
+                $scope.filtros.marcas = temp;
+                var adv = 'adv';
+                if (!$scope.adv) {
+                    adv = 'noAdv';
+                }
+                $state.go(adv, {
+                    filtros: $scope.filtros,
+                    pagina: $scope.pagina,
+                    tipo: $scope.tipo
+                }, {
+                    reload: true
+                });
+            };
 
+            $scope.cambiarCategoria = function (categoria) {
+                var enc = false;
+                var temp = [];
+                for (var i = 0; i < $scope.filtros.categorias.length && !enc; i++) {
 
+                    if ($scope.filtros.categorias[i] === categoria) {
+                        enc = true;
+                    } else {
+                        temp.push($scope.filtros.categorias[i]);
+                    }
+                }
+                if (!enc) {
+                    temp.push(categoria);
+                }
+                $scope.filtros.categorias = temp;
+                var adv = 'adv';
+                if (!$scope.adv) {
+                    adv = 'noAdv';
+                }
+                $state.go(adv, {
+                    filtros: $scope.filtros,
+                    pagina: $scope.pagina,
+                    tipo: $scope.tipo
+                }, {
+                    reload: true
+                });
+            };
 
-
-
+            $scope.cambiarColor = function (color) {
+                var enc = false;
+                var temp = [];
+                for (var i = 0; i < $scope.filtros.colores.length; i++) {
+                    if ($scope.filtros.colores[i] === color) {
+                        enc = true;
+                    } else {
+                        temp.push($scope.filtros.colores[i]);
+                    }
+                }
+                if (!enc) {
+                    temp.push(color);
+                }
+                $scope.filtros.colores = temp;
+                var adv = 'adv';
+                if (!$scope.adv) {
+                    adv = 'noAdv';
+                }
+                $state.go(adv, {
+                    filtros: $scope.filtros,
+                    pagina: $scope.pagina,
+                    tipo: $scope.tipo
+                }, {
+                    reload: true
+                });
+            };
         }
     ]);
 }
