@@ -19,11 +19,11 @@
                 }
                 $scope.marcasCol = [];
                 $scope.marcas = [];
-                for (var i = 0; i < $scope.marc.length; i++) {
-                    if (i < 5) {
-                        $scope.marcas.push($scope.marc[i]);
+                for (var k = 0; k < $scope.marc.length; k++) {
+                    if (k < 5) {
+                        $scope.marcas.push($scope.marc[k]);
                     } else {
-                        $scope.marcasCol.push($scope.marc[i]);
+                        $scope.marcasCol.push($scope.marc[k]);
                     }
                 }
             });
@@ -41,11 +41,11 @@
                 }
                 $scope.categoriasCol = [];
                 $scope.categorias = [];
-                for (var i = 0; i < $scope.cat.length; i++) {
-                    if (i < 5) {
-                        $scope.categorias.push($scope.cat[i]);
+                for (var l = 0; l < $scope.cat.length; l++) {
+                    if (l < 5) {
+                        $scope.categorias.push($scope.cat[l]);
                     } else {
-                        $scope.categoriasCol.push($scope.cat[i]);
+                        $scope.categoriasCol.push($scope.cat[l]);
                     }
                 }
             });
@@ -67,8 +67,8 @@
                         $scope.coloresNoAct.push($scope.col[j]);
                     }
                 }
-                for (var i = 0; i < $scope.coloresNoAct.length; i += 5) {
-                    $scope.coloresCol.push($scope.coloresNoAct.slice(i, i + 5));
+                for (var m = 0; m < $scope.coloresNoAct.length; m += 5) {
+                    $scope.coloresCol.push($scope.coloresNoAct.slice(m, m + 5));
                 }
             });
 

@@ -55,6 +55,7 @@ public class FiltrosDTO {
      * Constructor por defecto
      */
     public FiltrosDTO() {
+        //Empty
     }
 
     /**

@@ -127,6 +127,7 @@ public class CatalogoResource {
 
     /**
      * Metodo que se encarga de convertir una lista de strings a InfoDTO
+     *
      * @param entityList lista de strings.
      * @return lista de InfoDTO
      */
@@ -279,8 +280,11 @@ public class CatalogoResource {
     @Path("modelos/bicicletas/{pagina: \\d+}/{records: \\d+}")
     public PaginacionDTO getModelosBicicletasByFiltros(FiltrosDTO filtros, @PathParam("pagina") Integer pagina,
             @PathParam("records") Integer maxRecords) throws BusinessLogicException {
-        return new PaginacionDTO(listModeloEntity2DetailDTO(catalogoLogic.getModelosBicicletasFiltrados(filtros.getMarcas(),
-                filtros.getCategorias(), filtros.getColores(), filtros.getPrecioMin(), filtros.getPrecioMax(), filtros.getCalificacionMin(),
+        List<List<String>> listas = new ArrayList<>();
+        listas.add(filtros.getMarcas());
+        listas.add(filtros.getCategorias());
+        listas.add(filtros.getColores());
+        return new PaginacionDTO(listModeloEntity2DetailDTO(catalogoLogic.getModelosBicicletasFiltrados(listas, filtros.getPrecioMin(), filtros.getPrecioMax(), filtros.getCalificacionMin(),
                 pagina, maxRecords)), catalogoLogic.getNumeroBicicletasConFiltros(filtros.getMarcas(),
                         filtros.getCategorias(), filtros.getColores(), filtros.getPrecioMin(), filtros.getPrecioMax(), filtros.getCalificacionMin()));
     }
@@ -301,8 +305,11 @@ public class CatalogoResource {
     @Path("modelos/accesorios/{pagina: \\d+}/{records: \\d+}")
     public PaginacionDTO getModelosAccesoriosByFiltros(FiltrosDTO filtros, @PathParam("pagina") Integer pagina,
             @PathParam("records") Integer maxRecords) throws BusinessLogicException {
-        return new PaginacionDTO(listModeloEntity2DetailDTO(catalogoLogic.getModelosAccesoriosFiltrados(filtros.getMarcas(),
-                filtros.getCategorias(), filtros.getColores(), filtros.getPrecioMin(), filtros.getPrecioMax(), filtros.getCalificacionMin(),
+        List<List<String>> listas = new ArrayList<>();
+        listas.add(filtros.getMarcas());
+        listas.add(filtros.getCategorias());
+        listas.add(filtros.getColores());
+        return new PaginacionDTO(listModeloEntity2DetailDTO(catalogoLogic.getModelosAccesoriosFiltrados(listas, filtros.getPrecioMin(), filtros.getPrecioMax(), filtros.getCalificacionMin(),
                 pagina, maxRecords)), catalogoLogic.getNumeroAccesoriosConFiltros(filtros.getMarcas(),
                         filtros.getCategorias(), filtros.getColores(), filtros.getPrecioMin(), filtros.getPrecioMax(), filtros.getCalificacionMin()));
     }

@@ -33,6 +33,7 @@ public class InfoDTO {
      * Constructor por defecto
      */
     public InfoDTO() {
+        //Empty
     }
     public InfoDTO(String nombre)
     {

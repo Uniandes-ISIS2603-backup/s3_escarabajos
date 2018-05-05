@@ -16,8 +16,8 @@
                 $scope.cols = 3;
 
                 $scope.paginas = [];
-                for (var i = 1; i <= $scope.pags; i++) {
-                    $scope.paginas.push(i);
+                for (var j = 1; j <= $scope.pags; j++) {
+                    $scope.paginas.push(j);
                 }
             });
 

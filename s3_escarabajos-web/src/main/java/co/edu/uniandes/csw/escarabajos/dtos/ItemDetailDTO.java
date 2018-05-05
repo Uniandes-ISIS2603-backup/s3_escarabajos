@@ -71,6 +71,7 @@ public class ItemDetailDTO extends ItemDTO {
      * Constructor por defecto
      */
     public ItemDetailDTO() {
+        //Empty
     }
 
     /**

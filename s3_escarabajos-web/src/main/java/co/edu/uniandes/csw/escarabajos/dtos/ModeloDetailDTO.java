@@ -112,30 +112,25 @@ public class ModeloDetailDTO extends ModeloDTO {
      */
     public ModeloDetailDTO(ModeloEntity entity) {
         super(entity);
-        if (entity != null) {
-            precio = Double.MAX_VALUE;
-            url = "https://17a6ky3xia123toqte227ibf-wpengine.netdna-ssl.com/wp-content/uploads/2016/12/bike-home-template-optimized.jpg";
-            if (entity.getItems() != null) {
-                items = new ArrayList<>();
-                for (ItemEntity entityItem : entity.getItems()) {
-                    items.add(new ItemDetailDTO(entityItem, entity.getReferencia()));
-                    if (entityItem.getPrecio() < precio && !(entityItem instanceof BicicletaUsadaEntity)) {
-                        precio = entityItem.getPrecio();
-                        try {
-                            url = entityItem.getAlbum().get(0);
-                        } catch (Exception e) {
-
-                        }
-                    }
-                }
-            }
-            if (entity.getCalificaciones() != null) {
-                calificaciones = new ArrayList<>();
-                for (CalificacionEntity entityCalificacion : entity.getCalificaciones()) {
-                    calificaciones.add(new CalificacionDTO(entityCalificacion));
+        precio = Double.MAX_VALUE;
+        url = "https://17a6ky3xia123toqte227ibf-wpengine.netdna-ssl.com/wp-content/uploads/2016/12/bike-home-template-optimized.jpg";
+        if (entity != null && entity.getItems() != null) {
+            items = new ArrayList<>();
+            for (ItemEntity entityItem : entity.getItems()) {
+                items.add(new ItemDetailDTO(entityItem, entity.getReferencia()));
+                if (entityItem.getPrecio() < precio && entityItem.getAlbum() != null && !entityItem.getAlbum().isEmpty() && !(entityItem instanceof BicicletaUsadaEntity)) {
+                    precio = entityItem.getPrecio();
+                    url = entityItem.getAlbum().get(0);
                 }
             }
         }
+        if (entity != null && entity.getCalificaciones() != null) {
+            calificaciones = new ArrayList<>();
+            for (CalificacionEntity entityCalificacion : entity.getCalificaciones()) {
+                calificaciones.add(new CalificacionDTO(entityCalificacion));
+            }
+        }
+
     }
 
     /**

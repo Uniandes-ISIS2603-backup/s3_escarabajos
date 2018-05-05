@@ -78,7 +78,7 @@ public class ModeloItemsResource {
      * Error de lógica que se genera cuando no se encuentra el modelo.
      */
     @GET
-    public List<ItemDetailDTO> listItems(@PathParam("modelosId") Long modelosId) {
+    public List<ItemDetailDTO> listItems(@PathParam("modelosId") Long modelosId) throws WebApplicationException {
         try {
             return itemsListEntity2DTO(modeloLogic.listItems(modelosId));
         } catch (BusinessLogicException ex) {
@@ -112,7 +112,7 @@ public class ModeloItemsResource {
      */
     @GET
     @Path("{itemsId: \\d+}")
-    public ItemDetailDTO getItem(@PathParam("modelosId") Long modelosId, @PathParam("itemsId") Long itemsId) {
+    public ItemDetailDTO getItem(@PathParam("modelosId") Long modelosId, @PathParam("itemsId") Long itemsId) throws WebApplicationException {
         try {
             ItemEntity entity = modeloLogic.getItem(modelosId, itemsId);
             return new ItemDetailDTO(entity, modeloLogic.getReferenciaItem(entity));
@@ -153,7 +153,7 @@ public class ModeloItemsResource {
      */
     @DELETE
     @Path("{itemsId: \\d+}")
-    public void removeItems(@PathParam("modelosId") Long modelosId, @PathParam("itemsId") Long itemsId) {
+    public void removeItems(@PathParam("modelosId") Long modelosId, @PathParam("itemsId") Long itemsId) throws WebApplicationException {
         try {
             modeloLogic.removeItem(itemsId);
         } catch (BusinessLogicException ex) {
