@@ -13,7 +13,8 @@
           'moduloFacturas',
           'vendedoresModule',
           'catalogoModule',
-          'modelosModule'
+          'modelosModule',
+          'adminModule'
 
 
 

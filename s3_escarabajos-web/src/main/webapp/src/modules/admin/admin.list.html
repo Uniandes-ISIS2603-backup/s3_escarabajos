@@ -1,0 +1,12 @@
+<alert class="alert alert-danger" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
+
+<div style="background-color:black"  style = "height:100%;width:100%">
+    <nav class="navbar navbar-inverse" style="background-color:black" data-spy="affix" data-offset-top="147">
+                <div class="container-fluid">
+                    <ul class="nav navbar-nav">  
+                        <li><a ui-sref="clientesList">Clientes</a></li>
+                        <li><a ui-sref="vendedoresList">Vendedores</a></li>
+                    </ul>
+                </div>
+            </nav>
+</div>
