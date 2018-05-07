@@ -197,7 +197,6 @@ public class ReclamoLogicTest
         ReclamoEntity resp = em.find(ReclamoEntity.class, pojoEntity.getId());
 
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
-        Assert.assertEquals(pojoEntity.getMensaje(), resp.getMensaje());
         Assert.assertEquals(pojoEntity.getRazon(), resp.getRazon());
         Assert.assertTrue(resp.isEnProceso());
     }

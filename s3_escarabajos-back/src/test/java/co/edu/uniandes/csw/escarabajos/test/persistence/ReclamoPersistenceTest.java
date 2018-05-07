@@ -157,7 +157,7 @@ public class ReclamoPersistenceTest
        Assert.assertNull(resp);
     }
     @Test
-    public void updateCalificacionTest()
+    public void updateReclamo()
     {
         ReclamoEntity entity = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();

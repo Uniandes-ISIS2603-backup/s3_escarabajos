@@ -4,6 +4,7 @@ delete from clienteEntity_itementity;
 delete from item_album;
 delete from reclamo_album;
 delete from ItemEntity;
+delete from calificacionEntity;
 delete from ModeloEntity;
 delete from CarritoEntity;
 delete from ClienteEntity;

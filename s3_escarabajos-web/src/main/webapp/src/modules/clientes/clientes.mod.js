@@ -1,14 +1,14 @@
 (function (ng) {
-var mod = ng.module("clientesModule", []);
+    var mod = ng.module("clientesModule", []);
     mod.constant("clientesContext", "api/clientes");
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             var basePath = 'src/modules/clientes/';
-            
+
             $urlRouterProvider.otherwise("/clientesList");
 
             $stateProvider.state('clientesList', {
                 url: '/clientes',
-                parent:'adminList',
+                parent: 'adminList',
                 views: {
                     'childrenView': {
                         controller: 'clientesCtrl',
@@ -35,10 +35,13 @@ var mod = ng.module("clientesModule", []);
                     }
                 }
             }).state('clientesSignIn', {
-                url: '/clientesSignIn',
+                url: '/login',
+                data: {
+                    requireLogin: false
+                },
                 views: {
                     'mainView': {
-                        controller: 'clientesCtrl',
+                        controller: 'loginCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'clientes.signIn.html'
                     }
