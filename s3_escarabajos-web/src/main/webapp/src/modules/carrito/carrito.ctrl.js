@@ -5,6 +5,18 @@
 
             var ruta = 'api/carrito/';
             
+            /*$scope.carritoR = {};
+            $http.get(context).then(function (response) {
+                $scope.carritoR = response.data[0];
+                
+            }); */
+            
+             this.crearFactura = function(idCliente) {
+                $http.get('api/clientes/' + 1 + '/carrito/factura').then(function () {
+                             $state.go('carritoList');
+            });
+            }  
+            
             // cambiar el 1 de la ruta por el id del cliente que este logeado
             $http.get('api/clientes/' + 1 + '/carrito').then(function (response) {
 

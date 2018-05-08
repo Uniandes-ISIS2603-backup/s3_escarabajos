@@ -46,7 +46,14 @@
             controller: "vaciarCarritoCtrl"
           }
         }
-      })
+      }).state('comprar', {
+                views: {
+                    'mainView': {
+                        controller: 'carritoCtrl',
+                        templateUrl: 'src/modules/comprar/comprar.list.html'
+                    }
+                }
+            })
   }]);
 
 })(window.angular);
