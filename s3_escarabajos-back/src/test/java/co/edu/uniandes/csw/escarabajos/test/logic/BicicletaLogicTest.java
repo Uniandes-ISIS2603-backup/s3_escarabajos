@@ -6,12 +6,9 @@
 package co.edu.uniandes.csw.escarabajos.test.logic;
 
 import co.edu.uniandes.csw.escarabajos.ejb.BicicletaLogic;
-import co.edu.uniandes.csw.escarabajos.ejb.BicicletaLogic;
-import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
 import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
-import co.edu.uniandes.csw.escarabajos.persistence.BicicletaPersistence;
 import co.edu.uniandes.csw.escarabajos.persistence.BicicletaPersistence;
 import java.util.ArrayList;
 import java.util.List;

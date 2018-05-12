@@ -1,10 +1,8 @@
 package co.edu.uniandes.csw.escarabajos.resources;
 
-import co.edu.uniandes.csw.escarabajos.dtos.BicicletaDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.BicicletaUsadaDTO;
 import co.edu.uniandes.csw.escarabajos.ejb.BicicletaUsadaLogic;
 import co.edu.uniandes.csw.escarabajos.ejb.ModeloLogic;
-import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
 import co.edu.uniandes.csw.escarabajos.entities.BicicletaUsadaEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
