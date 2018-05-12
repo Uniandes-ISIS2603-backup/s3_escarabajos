@@ -36,7 +36,8 @@ import java.util.logging.Logger;
         "compras": [{@FacturaDTO}],
         "mediosPago": [{@MedioPagoDTO}],
         "reclamos": [{@ReclamoDTO}],
-        "regalos": [{@ReclamoDTO}]
+        "carrito": {@CarritoDTO},
+        "listaDeseos": {@ListaDeseosDTO}
  * }
  * </pre>
  * Por ejemplo un cliente se representa asi:<br>
@@ -53,7 +54,9 @@ import java.util.logging.Logger;
         "compras": [],
         "mediosPago": [],
         "reclamos": [],
-        "regalos": []
+        "regalos": [],
+        "carrito": {},
+        "listaDeseos": {}
     }
  * </pre>
  * @author s.beltran
@@ -66,6 +69,8 @@ public class ClienteDetailDTO extends ClienteDTO{
     
     
     private CarritoDTO carrito;
+    
+    private ListaDeseosDTO listaDeseos;
 
     private List<FacturaDTO> compras;
     
@@ -106,19 +111,11 @@ public class ClienteDetailDTO extends ClienteDTO{
             } else {
                 entity.setCarrito(null);
             }
-            
-            if (entity.getDeseados()!= null) {
-            regalos = new ArrayList<ItemDTO>();
-                for (ItemEntity itemEntity : entity.getDeseados()) {
-                    if (itemEntity instanceof AccesorioEntity) {
-                       regalos.add(new AccesorioDTO((AccesorioEntity)itemEntity)); 
-                    }
-                    else if (itemEntity instanceof BicicletaEntity) {
-                       regalos.add(new BicicletaDTO((BicicletaEntity)itemEntity)); 
-                    }
-                }
-            }
-                
+            if (entity.getListaDeseos()!= null) {
+                this.listaDeseos = new ListaDeseosDTO(entity.getListaDeseos());
+            } else {
+                entity.setListaDeseos(null);
+            } 
 
                 compras = new ArrayList<>();
                 for (FacturaEntity entityCompras : entity.getCompras()) {
@@ -153,7 +150,8 @@ public class ClienteDetailDTO extends ClienteDTO{
         }
         
     }
-
+    
+    
     /**
      * Transformar un DTO a un Entity
      *
@@ -167,20 +165,16 @@ public class ClienteDetailDTO extends ClienteDTO{
             entity.setCarrito(this.getCarrito().toEntity());
         }
         
+        if (this.getListaDeseos()!= null) {
+            entity.setListaDeseos(this.getListaDeseos().toEntity());
+        }
+        
         if (compras != null) {
             List<FacturaEntity> comprasEntity = new ArrayList<>();
             for (FacturaDTO dtoFactura : compras) {
                 comprasEntity.add(dtoFactura.toEntity());
             }
             entity.setCompras(comprasEntity);
-        }
-        
-       if (getRegalos() != null) {
-            List<ItemEntity> itemsEntities = new ArrayList<>();
-            for (ItemDTO itemDto : getRegalos()) {
-                itemsEntities.add(itemDto.toEntity());
-            }
-            entity.setDeseados(itemsEntities);
         }
         
         if (reclamos != null) {
@@ -315,5 +309,15 @@ public class ClienteDetailDTO extends ClienteDTO{
     public void setBicicletasUsadas(List<BicicletaUsadaDTO> bicicletasUsadas) {
         this.bicicletasUsadas = bicicletasUsadas;
     }
+
+    public ListaDeseosDTO getListaDeseos() {
+        return listaDeseos;
+    }
+
+    public void setListaDeseos(ListaDeseosDTO listaDeseos) {
+        this.listaDeseos = listaDeseos;
+    }
+    
+    
 
 }

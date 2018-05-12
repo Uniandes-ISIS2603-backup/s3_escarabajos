@@ -6,6 +6,8 @@
 package co.edu.uniandes.csw.escarabajos.persistence;
 
 import co.edu.uniandes.csw.escarabajos.entities.CarritoEntity;
+import co.edu.uniandes.csw.escarabajos.entities.ListaDeseosEntity;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
@@ -83,10 +85,17 @@ public class CarritoPersistence {
         
         LOGGER.log(Level.INFO, "Consultando el carrito del cliente con id= {0}", clienteId);
         TypedQuery<CarritoEntity> q = em.createQuery("select u from CarritoEntity u where u.cliente.id = :id", CarritoEntity.class);
-        LOGGER.info("ya hizo el createQuery");
+        
         q = q.setParameter("id", clienteId);
-        LOGGER.info("ya agrego el parametro");
-        LOGGER.info(q.getParameters().toString());
-        return q.getSingleResult();
+        
+        List<CarritoEntity> lista =q.getResultList();
+        
+        if (lista.isEmpty()) {
+
+            return null;
+            
+        } else {
+            return lista.get(0);
+        }
     }
 }

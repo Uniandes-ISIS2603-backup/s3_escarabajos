@@ -1,6 +1,6 @@
 (function (ng) {
     var mod = ng.module("ListadeseosMod");
-    mod.constant("listadeseosContext", "api/carrito/2/items/");
+    mod.constant("listadeseosContext", 'api/clientes/' + 1 + '/listadeseos');
     mod.controller('deleteListaDeseosCtrl', ['$scope', '$http', 'listadeseosContext', '$state',
         function ($scope, $http, listadeseosContext, $state) {
             

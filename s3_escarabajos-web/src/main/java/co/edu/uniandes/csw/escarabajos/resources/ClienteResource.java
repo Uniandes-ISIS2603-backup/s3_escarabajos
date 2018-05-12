@@ -218,6 +218,31 @@ public class ClienteResource {
         return ClienteCarritoResource.class;
     }
     
+    
+    /**
+     * <h1>GET /api/clientes/{id} : Obtener carrito cliente por id.</h1>
+     * 
+     * <pre>Busca cliente con el id asociado recibido en la URL y la devuelve con su carrito.
+     * 
+     * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Devuelve cliente correspondiente al id.
+     * </code> 
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 404 Not Found No existe un cliente con el id dado.
+     * </code> 
+     * </pre>
+     * @param id Identificador del cliente que se esta buscando. Este debe ser una cadena de dígitos.
+     * @return JSON {@link ClienteDetailDTO} - El cliente buscado
+     */
+    @Path("{idCliente: \\d+}/listadeseos")
+    public Class<ClienteListaDeseosResource> getClienteListaDeseos(@PathParam("idCliente") Long idCliente) {
+        ClienteEntity entity = logic.getCliente(idCliente);
+        if (entity == null) {
+            throw new WebApplicationException("El recurso /clientes/" + idCliente + "/carrito no existe.", 404);
+        }
+        return ClienteListaDeseosResource.class;
+    }
 
     /**
      * <h1>GET /api/clientes/{id} : Obtener calificacion de cliente por id.</h1>

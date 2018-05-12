@@ -26,7 +26,7 @@ import uk.co.jemos.podam.common.PodamExclude;
  * @author Mateo
  */
 @Entity
-public class CarritoEntity implements Serializable{
+public class ListaDeseosEntity implements Serializable{
     
     //----------------------------------------------------
     // Atributos
@@ -40,20 +40,20 @@ public class CarritoEntity implements Serializable{
     private Long id;
     
     /**
-     * precio total del carrito
+     * precio total del listadeseos
      */
     private Double precioTotal=0.0;
     
     /**
-     *  lista de items del carrito
+     *  lista de items del listadeseos
      */
     @PodamExclude
     @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "CAR_ITEMS", joinColumns = @JoinColumn(name = "CAR_ID"), inverseJoinColumns = @JoinColumn(name="ITEM_ID"))
+    @JoinTable(name = "LISTA_DESEOS_ITEMS", joinColumns = @JoinColumn(name = "LISTA_DESEOS_ID"), inverseJoinColumns = @JoinColumn(name="ITEM_ID"))
     private List<ItemEntity> items = new ArrayList<>();
     
     /**
-     * cliente dueño del carrito
+     * cliente dueño del listadeseos
      */
     @PodamExclude
     @OneToOne(fetch = FetchType.LAZY)
@@ -66,7 +66,7 @@ public class CarritoEntity implements Serializable{
     //----------------------------------------------------
 
     /**
-     * @return el precio total del carrito 
+     * @return el precio total del listadeseos 
      */
     public Double getPrecioTotal() {
         return precioTotal;
@@ -82,14 +82,14 @@ public class CarritoEntity implements Serializable{
     
     /**
      * 
-     * @return la lista de items del carrito
+     * @return la lista de items del listadeseos
      */
     public List<ItemEntity> getItems() {
         return items;
     }
 
     /**
-     * asigna la lista de items del carrito
+     * asigna la lista de items del listadeseos
      * @param items la nueva lista de items
      */
     public void setItems(List<ItemEntity> items) {
@@ -97,13 +97,13 @@ public class CarritoEntity implements Serializable{
     }
     /**
      * 
-     * @return el cliente dueño del carrito 
+     * @return el cliente dueño del listadeseos 
      */
     public ClienteEntity getCliente() {
         return cliente;
     }
     /**
-     * asigna el cliente del carrito
+     * asigna el cliente del listadeseos
      * @param cliente  el nuevo cliente
      */
     public void setCliente(ClienteEntity cliente) {
@@ -135,7 +135,7 @@ public class CarritoEntity implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final CarritoEntity other = (CarritoEntity) obj;
+        final ListaDeseosEntity other = (ListaDeseosEntity) obj;
         return Objects.equals(this.id, other.id);
     }
 

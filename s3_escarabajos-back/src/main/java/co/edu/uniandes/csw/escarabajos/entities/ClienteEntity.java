@@ -39,6 +39,10 @@ public class ClienteEntity implements Serializable {
     @PodamExclude
     @OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     private CarritoEntity carrito;
+    
+    @PodamExclude
+    @OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+    private ListaDeseosEntity listaDeseos;
 
     @PodamExclude
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
@@ -56,13 +60,6 @@ public class ClienteEntity implements Serializable {
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<ReclamoEntity> reclamos = new ArrayList<ReclamoEntity>();
     
-    
-    @PodamExclude
-    @OneToMany(cascade = CascadeType.PERSIST)
-    /*@JoinTable(name = " CLNT_ITEMS", joinColumns = @JoinColumn(name = "CLNT_ID"), inverseJoinColumns = @JoinColumn(name="ITEM_ID"))
-    */
-    private List<ItemEntity> deseados = new ArrayList<>();
-    
     @PodamExclude
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST,orphanRemoval = true)
     private List<BicicletaUsadaEntity> bicicletasUsadas = new ArrayList<BicicletaUsadaEntity>();
@@ -73,6 +70,16 @@ public class ClienteEntity implements Serializable {
     public void setCarrito(CarritoEntity carrito){
         this.carrito = carrito;
     }
+
+    public ListaDeseosEntity getListaDeseos() {
+        return listaDeseos;
+    }
+
+    public void setListaDeseos(ListaDeseosEntity listaDeseos) {
+        this.listaDeseos = listaDeseos;
+    }
+    
+        
     public String getNombre(){
         return nombre;
     }
@@ -217,20 +224,5 @@ public class ClienteEntity implements Serializable {
         }
         return super.hashCode();
     }
-
-    /**
-     * @return the deseados
-     */
-    public List<ItemEntity> getDeseados() {
-        return deseados;
-    }
-
-    /**
-     * @param deseados the deseados to set
-     */
-    public void setDeseados(List<ItemEntity> deseados) {
-        this.deseados = deseados;
-    }
-
     
 }

@@ -26,7 +26,7 @@
                     $scope.carrito = response.data;
 
                     var lista2 = [];
-
+                    
                     var lista = $scope.carrito;
 
                     var total = 0;
