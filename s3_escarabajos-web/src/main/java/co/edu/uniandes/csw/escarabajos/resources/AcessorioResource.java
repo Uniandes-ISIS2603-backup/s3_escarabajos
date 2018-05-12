@@ -154,7 +154,7 @@ public class AcessorioResource {
     @Path("{id: \\d+}")
     public AccesorioDTO updateAccesorio(@PathParam("id") Long id, AccesorioDTO accesorio) throws BusinessLogicException {
         //TODO si no existe el recurso debe disparar WebApplicationException
-        return new AccesorioDTO(logic.updateAccesorio(accesorio.toEntity(), accesorio.getModeloId()));
+        return new AccesorioDTO(logic.updateAccesorio(accesorio.toEntity()));
     }
 
     /**
@@ -179,7 +179,10 @@ public class AcessorioResource {
     @Path("{id: \\d+}")
     public void deleteAccesorio(@PathParam("id") Long id) throws BusinessLogicException {
         
-        logic.deleteAccesorio(id);
+        logic.deleteAccesorio(id); 
+        
+        
+        
     }
 
     private List<AccesorioDTO> listBookEntity2DetailDTO(List<AccesorioEntity> entityList) {
