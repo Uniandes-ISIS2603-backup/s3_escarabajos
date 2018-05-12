@@ -179,7 +179,10 @@ public class AcessorioResource {
     @Path("{id: \\d+}")
     public void deleteAccesorio(@PathParam("id") Long id) throws BusinessLogicException {
         
-        logic.deleteAccesorio(id);
+        logic.deleteAccesorio(id); 
+        
+        
+        
     }
 
     private List<AccesorioDTO> listBookEntity2DetailDTO(List<AccesorioEntity> entityList) {
