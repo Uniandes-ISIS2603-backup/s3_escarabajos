@@ -3,6 +3,7 @@ delete from car_Items;
 delete from clienteEntity_itementity;
 delete from item_album;
 delete from reclamo_album;
+delete from calificacionEntity;
 delete from ItemEntity;
 delete from ModeloEntity;
 delete from CarritoEntity;
@@ -75,6 +76,16 @@ insert into car_items values(1,1);
 insert into car_items values(1,2);
 insert into car_items values(1,3);
 insert into car_items values(1,6);
+
+--Datos calificacion
+insert into CalificacionEntity values(1, 'Muy lindo color', 5, 1, 1);
+insert into CalificacionEntity values(2, 'Muy lindo color', 5, 1, 1);
+insert into CalificacionEntity values(3, 'Muy lindo color', 5, 1, 2);
+insert into CalificacionEntity values(4, 'Muy lindo color', 5, 1, 2);
+insert into CalificacionEntity values(5, 'Horrible', 3, 1, 3);
+insert into CalificacionEntity values(6, 'Feo', 5, 1, 3);
+insert into CalificacionEntity values(7, 'Bonito', 5, 1, 4);
+insert into CalificacionEntity values(8, 'Muy buenos frenos', 5, 1, 4);
 
 --datos lista de deseos
 insert into carritoentity values(2,0.0, null);

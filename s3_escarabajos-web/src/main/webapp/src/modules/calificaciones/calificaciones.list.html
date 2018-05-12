@@ -33,7 +33,7 @@ and open the template in the editor.
     <div class="panel-group" id="accordion">
         <div class="panel panel-default" ng-repeat = "cal in calificaciones">
             <div class="panel-heading">
-                <label>Usuario Pendiente de conexión</label>
+                <label>{{cal.cliente.usuario}}</label>
                 <div align  = "Right">
                     <font size = "4px">{{cal.puntaje}}</font>
                     <span class = "glyphicon glyphicon-star"></span>

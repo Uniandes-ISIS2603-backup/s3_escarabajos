@@ -154,7 +154,7 @@ public class AcessorioResource {
     @Path("{id: \\d+}")
     public AccesorioDTO updateAccesorio(@PathParam("id") Long id, AccesorioDTO accesorio) throws BusinessLogicException {
         //TODO si no existe el recurso debe disparar WebApplicationException
-        return new AccesorioDTO(logic.updateAccesorio(accesorio.toEntity(), accesorio.getModeloId()));
+        return new AccesorioDTO(logic.updateAccesorio(accesorio.toEntity()));
     }
 
     /**
