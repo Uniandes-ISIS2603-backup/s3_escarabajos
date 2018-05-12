@@ -127,9 +127,8 @@ public class CalificacionLogicTest {
     public void createCalificacionTest() throws BusinessLogicException{
         CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
         newEntity.setPuntaje(3);
+        newEntity.setCliente(clientesdata.get(3));
         CalificacionEntity result = calificacionLogic.crearCalificacion(newEntity, modelosData.get(0).getId(), clientesdata.get(3).getId());
-        Assert.assertNotNull(result);
-
         CalificacionEntity entity = em.find(CalificacionEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
         Assert.assertEquals(newEntity.getComentario(), entity.getComentario());
@@ -142,8 +141,9 @@ public class CalificacionLogicTest {
             newEntity.setPuntaje(3);
             newEntity.setId(Long.MAX_VALUE);
             result = calificacionLogic.crearCalificacion(newEntity, modelosData.get(0).getId(), clientesdata.get(0).getId());
+            Assert.fail("Deberia fallar");
         } catch (Exception e) {
-            Assert.fail();
+            Assert.assertNotNull(e);
         }
     }
 
@@ -233,7 +233,7 @@ public class CalificacionLogicTest {
         Assert.assertEquals(modelo2.size(), 1);
 
         CalificacionEntity e = factory.manufacturePojo(CalificacionEntity.class);
-        calificacionLogic.crearCalificacion(e, modelosData.get(0).getId(), clientesdata.get(0).getId());
+        calificacionLogic.crearCalificacion(e, modelosData.get(0).getId(), clientesdata.get(3).getId());
         modelo0 = calificacionLogic.getCalificacionesPorModelo(modelosData.get(0).getId());
         Assert.assertEquals(2, modelo0.size());
     }
@@ -259,7 +259,7 @@ public class CalificacionLogicTest {
 
         CalificacionEntity e = factory.manufacturePojo(CalificacionEntity.class);
         e.setPuntaje(3);
-        calificacionLogic.crearCalificacion(e, modelosData.get(0).getId(), clientesdata.get(0).getId());
+        calificacionLogic.crearCalificacion(e, modelosData.get(0).getId(), clientesdata.get(3).getId());
         Assert.assertEquals(-1, calificacionLogic.getCalificacionMedia(Long.MIN_VALUE), 0.01);
     }
 }
