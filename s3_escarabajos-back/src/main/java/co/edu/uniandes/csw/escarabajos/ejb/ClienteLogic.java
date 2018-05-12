@@ -47,7 +47,6 @@ public class ClienteLogic {
 
     public ClienteEntity getCliente(Long id) {
         LOGGER.info("Inicia proceso de consultar clientes");
-
         return persistence.find(id);
     }
 

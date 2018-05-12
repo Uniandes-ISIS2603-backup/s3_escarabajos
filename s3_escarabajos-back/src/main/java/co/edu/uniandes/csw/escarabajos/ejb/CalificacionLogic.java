@@ -38,25 +38,26 @@ public class CalificacionLogic {
 
     public CalificacionEntity crearCalificacion(CalificacionEntity cal, Long modeloId, Long clienteId) throws BusinessLogicException {
         if (!isInRange(cal.getPuntaje())) {
+            LOGGER.info("[ERROR] El puntaje no está en rango");
             throw new BusinessLogicException("El puntaje debe ser un valor entre 0 y 5");
         }
         if (cal.getComentario() == null || cal.getComentario().isEmpty()) {
+            LOGGER.info("[ERROR] El comentario está vacío");
             throw new BusinessLogicException("Por favor ingrese un comentario");
         }
-        if (!getCalificacionesPorClienteAndModelo(clienteId, modeloId).isEmpty()) {
-            throw new BusinessLogicException("Usted ya ha calificado a este modelo");
+        if (clienteId != null) {
+            if (!getCalificacionesPorClienteAndModelo(clienteId, modeloId).isEmpty()) {
+                LOGGER.info("[ERROR] Usted ya ha calificado a este modelo");
+                throw new BusinessLogicException("Usted ya ha calificado a este modelo");
+            }
         }
         // TODO: DONE QUitar las líneas que no sirven
         ModeloEntity model = modeloLogic.getModelo(modeloId);
-//        ClienteEntity cliente = clienteLogic.getCliente(clienteId);
+        LOGGER.info(model.getMarca());
+        ClienteEntity cliente = clienteLogic.getCliente(clienteId);
         cal.setModelo(model);
-//        cal.setCliente(cliente);
+        cal.setCliente(cliente);
         CalificacionEntity nueva = calificacionPersistence.create(cal);
-        model.getCalificaciones().add(nueva);
-        model.setCalificacionMedia(getCalificacionMedia(modeloId));
-        modeloLogic.updateModelo(model.getId(), model);
-//        cliente.getCalificaciones().add(cal);
-//        clienteLogic.updateCliente(cliente);
         return nueva;
     }
 
@@ -117,21 +118,10 @@ public class CalificacionLogic {
         return cals;
     }
 
-    public List<CalificacionEntity> getCalificacionesPorCliente(Long clienteId) {
-        LOGGER.info("Inicia el proceso de buscar todas las calificaciones del modelo " + clienteId);
-        List<CalificacionEntity> cals = calificacionPersistence.getCalificacionesPorCliente(clienteId);
-        LOGGER.info("Termina el proceso de buscar todas las calificaciones del modelo " + clienteId);
-        return cals;
-    }
-
     public List<CalificacionEntity> getCalificacionesPorClienteAndModelo(Long clienteId, Long modeloId) throws BusinessLogicException {
         LOGGER.info("Inicia el proceso de buscar todas las calificaciones del modelo " + modeloId + " y el cliente " + clienteId);
         List<CalificacionEntity> cals = calificacionPersistence.getCalificacionesPorClienteAndModelo(clienteId, modeloId);
-        LOGGER.info("Termina el proceso de buscar todas las calificaciones del modelo " + modeloId);
-        if (cals == null || cals.isEmpty()) {
-            throw new BusinessLogicException("No existe una calificación creada por el cliente "
-                    + clienteId + " para el modelo " + modeloId);
-        }
+        LOGGER.info("Termina el proceso de buscar todas las calificaciones del modelo " + modeloId + " y el cliente " + clienteId);
         return cals;
     }
 

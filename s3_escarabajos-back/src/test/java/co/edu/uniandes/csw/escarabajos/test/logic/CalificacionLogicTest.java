@@ -1,4 +1,3 @@
-
 package co.edu.uniandes.csw.escarabajos.test.logic;
 
 import co.edu.uniandes.csw.escarabajos.ejb.*;
@@ -29,8 +28,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author n.gaitan
  */
 @RunWith(Arquillian.class)
-public class CalificacionLogicTest 
-{
+public class CalificacionLogicTest {
 
     private PodamFactory factory = new PodamFactoryImpl();
 
@@ -44,7 +42,7 @@ public class CalificacionLogicTest
     private UserTransaction utx;
 
     private List<CalificacionEntity> data = new ArrayList<CalificacionEntity>();
-    
+
     private List<ModeloEntity> modelosData = new ArrayList<ModeloEntity>();
 
     private List<ClienteEntity> clientesdata = new ArrayList<ClienteEntity>();
@@ -98,22 +96,19 @@ public class CalificacionLogicTest
      *
      *
      */
-    private void insertData() 
-    {
-        for (int i = 0; i < 3; i++) 
-        {
+    private void insertData() {
+        for (int i = 0; i < 3; i++) {
             ModeloEntity entity = factory.manufacturePojo(ModeloEntity.class);
             em.persist(entity);
             modelosData.add(entity);
         }
-        for (int i = 0; i < 3; i++) 
-        {
+        for (int i = 0; i < 4; i++) {
             ClienteEntity entity = factory.manufacturePojo(ClienteEntity.class);
             em.persist(entity);
             clientesdata.add(entity);
+
         }
-        for (int i = 0; i < 3; i++) 
-        {
+        for (int i = 0; i < 3; i++) {
             CalificacionEntity entity = factory.manufacturePojo(CalificacionEntity.class);
             entity.setModelo(modelosData.get(i));
             entity.setCliente(clientesdata.get(i));
@@ -129,19 +124,27 @@ public class CalificacionLogicTest
      *
      */
     @Test
-    public void createCalificacionTest() throws BusinessLogicException 
-    {
+    public void createCalificacionTest() throws BusinessLogicException{
         CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
         newEntity.setPuntaje(3);
-        CalificacionEntity result = calificacionLogic.crearCalificacion(newEntity, modelosData.get(0).getId(), clientesdata.get(0).getId());
+        CalificacionEntity result = calificacionLogic.crearCalificacion(newEntity, modelosData.get(0).getId(), clientesdata.get(3).getId());
         Assert.assertNotNull(result);
-        
+
         CalificacionEntity entity = em.find(CalificacionEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
         Assert.assertEquals(newEntity.getComentario(), entity.getComentario());
         Assert.assertTrue(newEntity.getPuntaje() == entity.getPuntaje());
         Assert.assertEquals(newEntity.getModelo(), entity.getModelo());
         Assert.assertEquals(newEntity.getCliente(), entity.getCliente());
+
+        try {
+            newEntity = factory.manufacturePojo(CalificacionEntity.class);
+            newEntity.setPuntaje(3);
+            newEntity.setId(Long.MAX_VALUE);
+            result = calificacionLogic.crearCalificacion(newEntity, modelosData.get(0).getId(), clientesdata.get(0).getId());
+        } catch (Exception e) {
+            Assert.fail();
+        }
     }
 
     /**
@@ -179,7 +182,7 @@ public class CalificacionLogicTest
         Assert.assertEquals(resultEntity.getComentario(), entity.getComentario());
         Assert.assertEquals(resultEntity.getModelo(), entity.getModelo());
         Assert.assertEquals(resultEntity.getCliente(), entity.getCliente());
-        
+
     }
 
     /**
@@ -216,60 +219,40 @@ public class CalificacionLogicTest
         Assert.assertEquals(pojoEntity.getModelo(), resp.getModelo());
         Assert.assertEquals(pojoEntity.getCliente(), resp.getCliente());
     }
+
     /**
      * Prueba para verificar las calificaciones de un modelo.
      */
     @Test
-    public void darCalificacionesPorModeloTest() throws BusinessLogicException
-    {
+    public void darCalificacionesPorModeloTest() throws BusinessLogicException {
         List<CalificacionEntity> modelo0 = calificacionLogic.getCalificacionesPorModelo(modelosData.get(0).getId());
         Assert.assertEquals(modelo0.size(), 1);
         List<CalificacionEntity> modelo1 = calificacionLogic.getCalificacionesPorModelo(modelosData.get(1).getId());
         Assert.assertEquals(modelo1.size(), 1);
         List<CalificacionEntity> modelo2 = calificacionLogic.getCalificacionesPorModelo(modelosData.get(2).getId());
         Assert.assertEquals(modelo2.size(), 1);
-        
+
         CalificacionEntity e = factory.manufacturePojo(CalificacionEntity.class);
         calificacionLogic.crearCalificacion(e, modelosData.get(0).getId(), clientesdata.get(0).getId());
         modelo0 = calificacionLogic.getCalificacionesPorModelo(modelosData.get(0).getId());
         Assert.assertEquals(2, modelo0.size());
     }
+
     @Test
-    public void darCalificacionesPorClienteTest() throws BusinessLogicException
-    {
-        List<CalificacionEntity> cliente0 = calificacionLogic.getCalificacionesPorCliente(clientesdata.get(0).getId());
-        Assert.assertEquals(cliente0.size(), 1);
-        List<CalificacionEntity> cliente1 = calificacionLogic.getCalificacionesPorCliente(clientesdata.get(1).getId());
-        Assert.assertEquals(cliente1.size(), 1);
-        List<CalificacionEntity> cliente2 = calificacionLogic.getCalificacionesPorCliente(clientesdata.get(2).getId());
-        Assert.assertEquals(cliente2.size(), 1);
-        
-        CalificacionEntity e = factory.manufacturePojo(CalificacionEntity.class);
-        calificacionLogic.crearCalificacion(e, modelosData.get(0).getId(), clientesdata.get(0).getId());
-        cliente0 = calificacionLogic.getCalificacionesPorCliente(clientesdata.get(0).getId());
-        Assert.assertEquals(1, cliente0.size());
-    }
-    @Test
-    public void getCalificacionesPorClienteAndModeloTest() throws BusinessLogicException
-    {
+    public void getCalificacionesPorClienteAndModeloTest() throws BusinessLogicException {
         List<CalificacionEntity> mc0 = calificacionLogic.getCalificacionesPorClienteAndModelo(clientesdata.get(0).getId(), modelosData.get(0).getId());
         Assert.assertEquals(mc0.size(), 1);
         List<CalificacionEntity> mc1 = calificacionLogic.getCalificacionesPorClienteAndModelo(clientesdata.get(1).getId(), modelosData.get(1).getId());
         Assert.assertEquals(mc1.size(), 1);
         List<CalificacionEntity> mc2 = calificacionLogic.getCalificacionesPorClienteAndModelo(clientesdata.get(2).getId(), modelosData.get(2).getId());
         Assert.assertEquals(mc2.size(), 1);
-        
-        CalificacionEntity e = factory.manufacturePojo(CalificacionEntity.class);
-        calificacionLogic.crearCalificacion(e, modelosData.get(0).getId(), clientesdata.get(0).getId());
-        mc0 = calificacionLogic.getCalificacionesPorClienteAndModelo(clientesdata.get(0).getId(), modelosData.get(0).getId());
-        Assert.assertEquals(1, mc0.size());
     }
+
     /**
      * Prueba para verificar la calificacion media de un modelo.
      */
     @Test
-    public void calificacionMediaModelo() throws BusinessLogicException
-    {
+    public void calificacionMediaModelo() throws BusinessLogicException {
         Assert.assertEquals(1, calificacionLogic.getCalificacionMedia(modelosData.get(0).getId()), 0.01);
         Assert.assertEquals(2, calificacionLogic.getCalificacionMedia(modelosData.get(1).getId()), 0.01);
         Assert.assertEquals(3, calificacionLogic.getCalificacionMedia(modelosData.get(2).getId()), 0.01);

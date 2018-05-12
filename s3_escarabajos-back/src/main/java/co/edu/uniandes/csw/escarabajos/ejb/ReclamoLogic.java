@@ -151,16 +151,9 @@ public class ReclamoLogic {
         if (ent.getMensaje() == null || ent.getMensaje().isEmpty()) {
             throw new BusinessLogicException("Por favor ingrese el mensaje.");
         }
-        // if (emptyList(ent.getAlbum())) {
-        //   throw new BusinessLogicException("Debe ingresar al menos 1 foto con evidencia.");
-        //}
-
-        //FacturaEntity f = facturaLogic.getFactura(facturaId);
-        //  ent.setFactura(f);
         ReclamoEntity actualizado = reclamoPersistence.find(reclId);
         actualizado.setMensaje(actualizado.getMensaje() + "@@@@@@@" + ent.getMensaje());
         actualizado = reclamoPersistence.update(actualizado);
-        //f.setReclamo(actualizado);
         LOGGER.info("Finalizando el proceso de actualizar un reclamo");
         return actualizado;
     }

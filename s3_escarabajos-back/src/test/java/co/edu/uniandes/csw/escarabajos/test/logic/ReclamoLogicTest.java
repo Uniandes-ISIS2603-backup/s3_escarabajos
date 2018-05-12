@@ -191,13 +191,13 @@ public class ReclamoLogicTest
     public void updateReclamoTest() throws BusinessLogicException {
         ReclamoEntity entity = data.get(0);
         ReclamoEntity pojoEntity = factory.manufacturePojo(ReclamoEntity.class);
+        reclamoLogic.updateMensajeReclamo(pojoEntity, entity.getId());
         pojoEntity.setId(entity.getId());
-        reclamoLogic.updateMensajeReclamo(pojoEntity, pojoEntity.getId());
-
-        ReclamoEntity resp = em.find(ReclamoEntity.class, pojoEntity.getId());
+        ReclamoEntity resp = em.find(ReclamoEntity.class, entity.getId());
 
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
-        Assert.assertEquals(pojoEntity.getRazon(), resp.getRazon());
+        Assert.assertTrue(resp.getMensaje().contains(pojoEntity.getMensaje()));
+        Assert.assertEquals(resp.getRazon(), entity.getRazon());
         Assert.assertTrue(resp.isEnProceso());
     }
     /**
