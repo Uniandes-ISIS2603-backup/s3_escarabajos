@@ -124,13 +124,7 @@ public class ModeloDetailDTO extends ModeloDTO {
                 }
             }
         }
-        if (entity != null && entity.getCalificaciones() != null) {
-            calificaciones = new ArrayList<>();
-            for (CalificacionEntity entityCalificacion : entity.getCalificaciones()) {
-                calificaciones.add(new CalificacionDTO(entityCalificacion));
-            }
-        }
-
+        verificarCalificaciones(entity);
     }
 
     /**
@@ -213,6 +207,19 @@ public class ModeloDetailDTO extends ModeloDTO {
      */
     public void setPrecio(Double precio) {
         this.precio = precio;
+    }
+    
+   /**
+    *  Metodo que se encarga de verificar las calificaciones de un entity.
+    * @param entity 
+    */
+    private void verificarCalificaciones(ModeloEntity entity) {
+        if (entity != null && entity.getCalificaciones() != null) {
+            calificaciones = new ArrayList<>();
+            for (CalificacionEntity entityCalificacion : entity.getCalificaciones()) {
+                calificaciones.add(new CalificacionDTO(entityCalificacion));
+            }
+        }
     }
 
 }

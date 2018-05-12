@@ -41,7 +41,6 @@ public class AccesorioLogic {
 
         LOGGER.info("Inicia proceso de creación de un accesorio");
         itemLogic.verificarItem(entity);
-        //DONE: QUitar las líneas que no sirven
         // Verifica la regla de negocio que dice que no puede haber dos accesorios con el mismo nombre
         if (persistence.find(entity.getId()) != null) {
             throw new BusinessLogicException("Ya existe un accesorio el id \"" + entity.getId()+ "\"");
@@ -57,11 +56,10 @@ public class AccesorioLogic {
      * actualiza un accesorio
      *
      * @param entity el entity que se desea actualizar
-     * @param idModelo id del modelo que se desea actualizar
      * @return el accesorio
      * @throws BusinessLogicException si no se logra actualizar
      */
-    public AccesorioEntity updateAccesorio(AccesorioEntity entity, Long idModelo) throws BusinessLogicException {
+    public AccesorioEntity updateAccesorio(AccesorioEntity entity) throws BusinessLogicException {
 
         AccesorioEntity acc = persistence.find(entity.getId());
         if (acc == null) {

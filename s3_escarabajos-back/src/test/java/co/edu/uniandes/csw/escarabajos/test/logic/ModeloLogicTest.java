@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.escarabajos.test.logic;
 
 import co.edu.uniandes.csw.escarabajos.ejb.AccesorioLogic;
-import co.edu.uniandes.csw.escarabajos.ejb.ItemLogic;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,9 +44,6 @@ public class ModeloLogicTest {
 
     @Inject
     private ModeloLogic modeloLogic;
-
-    @Inject
-    private AccesorioLogic accLogic;
 
     @PersistenceContext
     private EntityManager em;

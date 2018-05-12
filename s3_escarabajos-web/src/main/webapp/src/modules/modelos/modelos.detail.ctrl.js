@@ -10,7 +10,9 @@
                     $scope.items = $scope.modeloActual.items;
                     $scope.itemActual = null; //Si no encuentra ninguno deberia mandar un oops!!!!
                     $scope.precio = Number.MAX_VALUE;
+                    $scope.precioUsadas = Number.MAX_VALUE;
                     $scope.colores = [];
+                    $scope.usadas = [];
                     $scope.cargarImagenes = function (item) {
                         $scope.imagenes = item.album;
                         $scope.actuales = [];
@@ -25,7 +27,6 @@
                                 if (!enc) {
                                     enc = true;
                                     $scope.fin = i - 1;
-
                                 }
                             }
                         }
@@ -42,7 +43,6 @@
                     $scope.mostrarImagen = function (url) {
                         $scope.imagen = url;
                     };
-
                     $scope.nextImagen = function () {
                         if ($scope.fin !== $scope.imagenes.length - 1) {
                             $scope.ini++;
@@ -53,11 +53,11 @@
                                     $scope.actuales[i] = $scope.imagenes[$scope.ini + i];
                                 } else {
                                     $scope.actuales[null];
-                                    if (!enc) {
-                                        enc = true;
-                                        $scope.fin = i - 1;
-                                    }
                                 }
+                            }
+                            if (!enc) {
+                                enc = true;
+                                $scope.fin = i - 1;
                             }
                         }
                     };
@@ -71,37 +71,56 @@
                                     $scope.actuales[i] = $scope.imagenes[$scope.ini + i];
                                 } else {
                                     $scope.actuales[null];
-                                    if (!enc) {
-                                        enc = true;
-                                        $scope.fin = i - 1;
-                                    }
                                 }
+                            }
+                            if (!enc) {
+                                enc = true;
+                                $scope.fin = i - 1;
                             }
                         }
                     };
-
                     for (var i = 0; i < $scope.items.length; i++) {
                         if ($scope.items[i].disponible && $scope.items[i].precio < $scope.precio) {
                             $scope.itemActual = $scope.items[i];
                             $scope.precio = $scope.items[i].precio;
-                            var enc = false;
-                            for (var j = 0; j < $scope.colores && !enc; j++) {
-                                if ($scope.items[i].color === $scope.colores[j]) {
-                                    enc = true;
-                                }
-                            }
-                            if (!enc) {
-                                $scope.colores.push($scope.items[i].color);
+                        }
+                        if ($scope.items[i].disponible && $scope.tipo === 'Bicicleta' && $scope.items[i].tipo === 'BicicletaUsada') {
+                            $scope.usadas.push($scope.items[i]);
+                            if ($scope.precioUsadas > $scope.items[i].precio) {
+                                $scope.precioUsadas = $scope.items[i].precio;
                             }
                         }
                     }
+                    for (var i = 0; i < $scope.items.length; i++) {
+                        var enc = false;
+                        for (var j = 0; j < $scope.colores.length && !enc; j++) {
+                            if ($scope.items[i].color === $scope.colores[j]) {
+                                enc = true;
+                            }
+                        }
+                        if (!enc && $scope.items[i].color !== $scope.itemActual.color) {
+                            $scope.colores.push($scope.items[i].color);
+                        }
+                    }
                     $scope.cargarImagenes($scope.itemActual);
-                    console.log($scope);
-                });
+                    $scope.cambiarColor = function (color) {
+                        for (var i = 0; i < $scope.items.length; i++) {
+                            if ($scope.items[i].disponible && $scope.items[i].color === color) {
+                                $scope.colores.push($scope.itemActual.color);
+                                for (var h = 0; h < $scope.colores.length; h++) {
+                                    if ($scope.colores[h] === color) {
+                                        $scope.colores.splice(h, 1);
+                                    }
+                                }
+                                $scope.itemActual = $scope.items[i];
+                                $scope.cargarImagenes($scope.itemActual);
+                            }
+                        }
 
+                    };
+                });
             }
 
 
         }]);
-
 })(window.angular);

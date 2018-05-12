@@ -14,9 +14,9 @@
         border: 2px solid #666;
     }
     .swatch2 {
-        width:100px;
+        width:160px;
         height:50px;
-        border-radius:100px;
+        border-radius:5px;
         border: 2px solid #666;
     }
     .swatch-clickable:hover {
@@ -49,9 +49,9 @@
                     <br>
                     <div class="row text-center">
                         <div id="thumbs">
-                            <div class=" col-xs-2"ng-if="imagenes.length > 1" >
+                            <div class=" col-xs-2">
                                 <br>
-                                <a  ng-click ="prevImagen()" class="btn btn-primary" ng-disabled="ini === 0">
+                                <a  ng-click ="prevImagen()" class="btn btn-primary" ng-disabled="ini === 0" ng-if="imagenes.length > 4" >
                                     <span class="glyphicon glyphicon-triangle-left" style="font-size: 3em"></span></a>
                             </div>
                             <div class=" col-xs-2" ng-if=" actuales[0] !== undefined && actuales[0] !== null" >
@@ -67,9 +67,9 @@
                                 <img ng-src="{{actuales[3]}}" class="img-thumbnail" ng-click="mostrarImagen(actuales[3])">
                             </div>
 
-                            <div class=" col-xs-2" ng-if="imagenes.length > 1">
+                            <div class=" col-xs-2">
                                 <br>
-                                <a  ng-click ="nextImagen()" class="btn btn-primary" ng-disabled="fin === imagenes.length - 1">
+                                <a  ng-click ="nextImagen()" class="btn btn-primary" ng-disabled="fin === imagenes.length - 1" ng-if="imagenes.length > 4">
                                     <span class="glyphicon glyphicon-triangle-right" style="font-size: 3em"></span></a>
                             </div>
 
@@ -77,22 +77,34 @@
                     </div>
                 </div>
                 <div  class="texto col-xs-5">
-                    <h4>Referencia:         {{modeloActual.referencia}}</h4>
+                    <div class="row">
+                        <h2>Referencia:         {{modeloActual.referencia}}</h2>
+                    </div>
                     <br>
-                    <h4> Categoria:      {{itemActual.categoria}} </h4>
+                    <div class="row">
+                        <h3>Marca:      {{modeloActual.marca}} </h3>
+                    </div>
                     <br>
-                    <h4 style="color:DodgerBlue;">{{modeloActual.precio|currency}}</h4>
+                    <div class="row">
+                        <h4>Categoria:      {{itemActual.categoria}} </h4>
+                    </div>
                     <br>
-                    <h4>
-                        Color: 
-                    </h4>
-                    <div class="dropdown text-center">
+                    <div class="row text-center">
+                        <h4 style="color:DodgerBlue;font-size: 25px;height: 40px">{{modeloActual.precio|currency}}</h4>
+                        <div ng-if="usadas.length >= 0">
+                            <h5 ng-click="verUsadas(modeloActual.id)" style="color:DodgerBlue; height: 20px; text-decoration: underline; cursor: pointer;"> O {{usadas.length}} usadas desde: {{precioUsadas|currency}}</h5>
+                        </div>
+                    </div>
+                    <h4>Color: </h4>
+                    <a class="btn swatch2" disabled style="background-color:{{itemActual.color}}" ng-if="colores.length === 0"></a>
+                    <br>
+                    <div class="dropdown " ng-if="colores.length > 0">
                         <a class="dropdown-toggle btn btn-default swatch2" data-toggle="dropdown" style="background-color:{{itemActual.color}}"></a>
                         <div class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                             <table>
-                                <tr ng-repeat="color in colores">
+                                <tr ng-repeat="color in colores" style="height: 60px">
                                     <td>
-                                        <div class="swatch swatch-clickable" style="background-color:{{color}}" ></div>
+                                        <div class="swatch2 swatch-clickable" style="background-color:{{color}}" ng-click="cambiarColor(color)" ></div>
                                     </td>
                                 </tr>
                             </table>
@@ -111,9 +123,8 @@
                     <div style="position:relative;" class="row">
 
                         <div class="col-sm-4">
-                            <button type="button"  class="btn btn-default" >
-                                <a class="glyphiconglyphicon-gift"></a>
-                            </button>
+                            <a  ui-sref ="addItemCarrito({itemId: modeloActual.items[0].id})" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-gift" ></span></a>
                         </div>
 
                         <h6 style="font-size: 10px">Agregar Lista Deseos</h6>

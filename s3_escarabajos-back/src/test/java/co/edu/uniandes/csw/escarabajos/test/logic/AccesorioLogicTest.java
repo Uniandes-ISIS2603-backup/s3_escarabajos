@@ -34,24 +34,23 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class AccesorioLogicTest {
-    
+
     private PodamFactory factory = new PodamFactoryImpl();
-    
+
     @Inject
     private AccesorioLogic logic;
-    
-    
+
     @Inject
     private ModeloLogic logicModelo;
-    
+
     @PersistenceContext
     private EntityManager em;
-    
+
     @Inject
     private UserTransaction utx;
 
     private List<AccesorioEntity> data = new ArrayList<AccesorioEntity>();
-    
+
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -61,7 +60,7 @@ public class AccesorioLogicTest {
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
+
     /**
      * Configuración inicial de la prueba.
      *
@@ -100,7 +99,7 @@ public class AccesorioLogicTest {
      *
      */
     private void insertData() {
-        
+
         for (int i = 0; i < 3; i++) {
             AccesorioEntity entity = factory.manufacturePojo(AccesorioEntity.class);
 
@@ -109,15 +108,15 @@ public class AccesorioLogicTest {
         }
 
     }
-    
+
     /**
      * prueba el metodo createAccesorio
-     * @throws BusinessLogicException 
+     *
+     * @throws BusinessLogicException
      */
     @Test
-    public void createAccesorioTest() throws BusinessLogicException{
-        
-        
+    public void createAccesorioTest() throws BusinessLogicException {
+
         ModeloEntity modelo = factory.manufacturePojo(ModeloEntity.class);
         modelo.setTipoModelo(ModeloLogic.ACCESORIO);
         logicModelo.createModelo(modelo);
@@ -126,28 +125,55 @@ public class AccesorioLogicTest {
         AccesorioEntity result = logic.createAccesorio(newEntity);
         Assert.assertNotNull(result);
         AccesorioEntity entity = em.find(AccesorioEntity.class, result.getId());
-        
+
         Assert.assertEquals(entity, result);
     }
-    
+
     /**
      * prueba el metodo updateAccesorio
-     * @throws BusinessLogicException 
+     *
+     * @throws BusinessLogicException
      */
     @Test
     public void updateAccesorioTest() throws BusinessLogicException {
-        
+
         AccesorioEntity entity = data.get(0);
         AccesorioEntity pojoEntity = factory.manufacturePojo(AccesorioEntity.class);
 
         pojoEntity.setId(entity.getId());
         pojoEntity.setModeloId(entity.getModeloId());
 
-        logic.updateAccesorio(pojoEntity, pojoEntity.getModeloId());
+        logic.updateAccesorio(pojoEntity);
 
         AccesorioEntity resp = em.find(AccesorioEntity.class, entity.getId());
 
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
+
+        pojoEntity = factory.manufacturePojo(AccesorioEntity.class);
+        pojoEntity.setId(Long.MIN_VALUE);
+        try {
+            logic.updateAccesorio(pojoEntity);
+            Assert.fail();
+        } catch (BusinessLogicException e) {
+            Assert.assertNotNull(e);
+        }
+        pojoEntity = factory.manufacturePojo(AccesorioEntity.class);
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setPrecio(-1.0);
+        try {
+            logic.updateAccesorio(pojoEntity);
+            Assert.fail();
+        } catch (BusinessLogicException e) {
+            Assert.assertNotNull(e);
+        }
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setModeloId(Long.MIN_VALUE);
+        try {
+            logic.updateAccesorio(pojoEntity);
+            Assert.fail();
+        } catch (BusinessLogicException e) {
+            Assert.assertNotNull(e);
+        }
     }
 
     /**
@@ -160,7 +186,7 @@ public class AccesorioLogicTest {
         AccesorioEntity deleted = em.find(AccesorioEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
-    
+
     /**
      * prueba el metodo getAccesorios
      */
@@ -178,7 +204,7 @@ public class AccesorioLogicTest {
             Assert.assertTrue(found);
         }
     }
-    
+
     /**
      * prueba el metodo getAccesorio
      */
@@ -188,5 +214,7 @@ public class AccesorioLogicTest {
         AccesorioEntity resultEntity = logic.getAccesorio(entity.getId());
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
+        resultEntity = logic.getAccesorio(Long.MIN_VALUE);
+        Assert.assertNull(resultEntity);
     }
 }
