@@ -12,11 +12,12 @@ import java.util.List;
 
 import co.edu.uniandes.csw.escarabajos.ejb.ModeloLogic;
 import co.edu.uniandes.csw.escarabajos.entities.AccesorioEntity;
+import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
+import co.edu.uniandes.csw.escarabajos.entities.BicicletaUsadaEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
+import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.ModeloPersistence;
-import java.util.Objects;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -40,6 +41,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class CatalogoLogicTest {
 
+    private final static Logger LOGGER = Logger.getLogger(AccesorioLogic.class.getName());
     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
@@ -239,5 +241,96 @@ public class CatalogoLogicTest {
             }
             Assert.assertTrue(found);
         }
+    }
+
+    @Test
+    public void getModelosBicicletasFiltradosTest() {
+        ArrayList<List<String>> filtros = new ArrayList<>();
+        ArrayList<String> marcas = new ArrayList<>();
+        ArrayList<String> categorias = new ArrayList<>();
+        ArrayList<String> colores = new ArrayList<>();
+        int contadorModelo = 0;
+        double precioMax = 0.0;
+        for (ModeloEntity modeloEntity : data) {
+            if (modeloEntity.getTipoModelo().equals(ModeloLogic.BICICLETA)) {
+                if (!marcas.contains(modeloEntity.getMarca())) {
+                    marcas.add(modeloEntity.getMarca());
+                }
+                contadorModelo++;
+            }
+        }
+        for (ItemEntity itemEntity : itemsData) {
+            if (itemEntity instanceof BicicletaEntity) {
+                if (!(itemEntity instanceof BicicletaUsadaEntity) && itemEntity.getPrecio() > precioMax) {
+                    precioMax = itemEntity.getPrecio();
+                }
+                if (!categorias.contains(itemEntity.getCategoria())) {
+                    categorias.add(itemEntity.getCategoria());
+                }
+                if (!colores.contains(itemEntity.getColor())) {
+                    colores.add(itemEntity.getColor());
+                }
+            }
+        }
+        filtros.add(marcas);
+        filtros.add(categorias);
+        filtros.add(colores);
+        try {
+            List<ModeloEntity> modelos = catalogoLogic.getModelosBicicletasFiltrados(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, Integer.MAX_VALUE);
+            Assert.assertEquals(modelos.size(), contadorModelo);
+            int numero = catalogoLogic.getNumeroBicicletasConFiltros(filtros.get(0), filtros.get(1), filtros.get(2), 0.0, Double.MAX_VALUE, 0.0);
+            Assert.assertEquals(numero, contadorModelo);
+        } catch (BusinessLogicException ex) {
+            Assert.assertNotNull(ex);
+            Assert.fail();
+        }
+        double precio = catalogoLogic.getPrecioBicicletas();
+        Assert.assertEquals("" + precio, "" + precioMax);
+    }
+
+    @Test
+    public void getModelosAccesoriosFiltradosTest() {
+        ArrayList<List<String>> filtros = new ArrayList<>();
+        ArrayList<String> marcas = new ArrayList<>();
+        ArrayList<String> categorias = new ArrayList<>();
+        ArrayList<String> colores = new ArrayList<>();
+        int contadorModelo = 0;
+        double precioMax = 0.0;
+        for (ModeloEntity modeloEntity : data) {
+            if (modeloEntity.getTipoModelo().equals(ModeloLogic.ACCESORIO)) {
+                if (!marcas.contains(modeloEntity.getMarca())) {
+                    marcas.add(modeloEntity.getMarca());
+                }
+                contadorModelo++;
+            }
+        }
+        for (ItemEntity itemEntity : itemsData) {
+            if (itemEntity instanceof AccesorioEntity) {
+                if (itemEntity.getPrecio() > precioMax) {
+                    precioMax = itemEntity.getPrecio();
+                }
+                if (!categorias.contains(itemEntity.getCategoria())) {
+                    categorias.add(itemEntity.getCategoria());
+                }
+                if (!colores.contains(itemEntity.getColor())) {
+                    colores.add(itemEntity.getColor());
+                }
+            }
+        }
+        filtros.add(marcas);
+        filtros.add(categorias);
+        filtros.add(colores);
+        try {
+            List<ModeloEntity> modelos = catalogoLogic.getModelosAccesoriosFiltrados(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, Integer.MAX_VALUE);
+            Assert.assertEquals(modelos.size(), contadorModelo);
+            int numero = catalogoLogic.getNumeroAccesoriosConFiltros(filtros.get(0), filtros.get(1), filtros.get(2), 0.0, Double.MAX_VALUE, 0.0);
+            Assert.assertEquals(numero, contadorModelo);
+        } catch (BusinessLogicException ex) {
+            Assert.assertNotNull(ex);
+            Assert.fail();
+        }
+        double precio = catalogoLogic.getPrecioAccesorios();
+        Assert.assertEquals("" + precio, "" + precioMax);
+
     }
 }

@@ -33,10 +33,6 @@ public class BicicletaLogic {
      */
     @Inject
     private ItemLogic logic;
-    /**
-     * Injecta la persistencia de modelo.
-     */
-    //TODO: DONE
 
     /**
      * Devuelve todos los bicicletas que hay en la base de datos.
