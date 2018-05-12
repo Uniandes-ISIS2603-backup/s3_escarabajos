@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.uniandes.csw.escarabajos.resources;
-
 
 import co.edu.uniandes.csw.escarabajos.dtos.FacturaDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.FacturaDetailDTO;
@@ -13,6 +7,7 @@ import co.edu.uniandes.csw.escarabajos.entities.FacturaEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -26,19 +21,31 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 
 /**
+ * <pre>Clase que implementa el recurso "facturas".
+ * URL: /api/facturas
+ * </pre>
+ * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta "/api" y
+ * este recurso tiene la ruta "facturas".</i>
  *
- * @author jp.carreno
+ * <h2>Anotaciones </h2>
+ * <pre>
+ * Path: indica la dirección después de "api" para acceder al recurso
+ * Produces/Consumes: indica que los servicios definidos en este recurso reciben y devuelven objetos en formato JSON
+ * RequestScoped: Inicia una transacción desde el llamado de cada método (servicio). 
+ * </pre>
+  * @author c.santacruza
  */
+
 @Path("facturas")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
-
 public class FacturaResource {
     
+     private static final Logger LOGGER = Logger.getLogger(FacturaResource.class.getName());
     @Inject
     FacturaLogic logic;
-    
+     
     private List<FacturaDetailDTO> listEntity2DTO(List<FacturaEntity> entityList) {
         List<FacturaDetailDTO> list = new ArrayList<>();
         for (FacturaEntity entity : entityList) {
@@ -47,10 +54,10 @@ public class FacturaResource {
         return list;
     }
     
-     /**
+    /**
      * <h1>POST /api/facturas : Crear una factura.</h1>
      * 
-     * <pre>Cuerpo de petición: JSON {@link FacturaDetailDTO}.
+     * <pre>Cuerpo de petición: JSON {@link BicicletaDTO}.
      * 
      * Crea una nueva factura con la informacion que se recibe en el cuerpo 
      * de la petición y se regresa un objeto identico con un id auto-generado 
@@ -64,12 +71,12 @@ public class FacturaResource {
      * 412 Precodition Failed: Ya existe la factura.
      * </code>
      * </pre>
-     * @param factura {@link FacturaDetailDTO} - La factura que se desea guardar.
-     * @return JSON {@link FacturaDetailDTO}  - La factura guardada con el atributo id autogenerado.
+     * @param factura {@link FacturaDTO} - La factura que se desea guardar.
+     * @return JSON {@link FacturaDTO}  - La factura guardada con el atributo id autogenerado.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la factura.
      */
     @POST
-    public FacturaDetailDTO createFactura(FacturaDetailDTO factura) throws BusinessLogicException {
+    public FacturaDetailDTO createFactura(FacturaDTO factura) throws BusinessLogicException {
         FacturaEntity temp = logic.createFactura(factura.toEntity());
         return new FacturaDetailDTO(temp);
     }
@@ -83,15 +90,15 @@ public class FacturaResource {
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Devuelve todas las facturas de la aplicacion.</code> 
      * </pre>
-     * @return JSONArray {@link FacturaDetailDTO} - Las facturas encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
+     * @return JSONArray {@link FacturaDTO} - Las facturas encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
      */
     @GET
-    public List<FacturaDetailDTO> getFacturas(@PathParam("idCliente")Long idCliente) throws BusinessLogicException {
-        return listEntity2DTO(logic.getFacturas(idCliente));
+    public List<FacturaDetailDTO> getFacturas() {
+        return listEntity2DTO(logic.getFacturas());
     }
     
    /**
-     * <h1>GET /api/facturas/{id} : Obtener factura por id.</h1>
+     * <h1>GET /api/facturas/{id} : Obtener bicicleta por id.</h1>
      * 
      * <pre>Busca la factura con el id asociado recibido en la URL y la devuelve.
      * 
@@ -104,21 +111,22 @@ public class FacturaResource {
      * </code> 
      * </pre>
      * @param id Identificador de la factura que se esta buscando. Este debe ser una cadena de dígitos.
-     * @return JSON {@link FacturaDetailDTO} - La factura buscada
+     * @return JSON {@link FacturaDTO} - La factura buscada
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
      */
     @GET
     @Path("{id: \\d+}")
-    public FacturaDetailDTO getFactura(@PathParam("idCliente")Long idCliente,@PathParam("id") Long id) throws BusinessLogicException {
-        FacturaEntity entity = logic.getFacturaCLiente(idCliente, id);
+    public FacturaDetailDTO getFactura(@PathParam("id") Long id) throws BusinessLogicException,WebApplicationException {
+        FacturaEntity entity = logic.getFactura(id);
         if(entity == null){
-            throw new WebApplicationException("El recurso /clientes/" + idCliente + "/facturas/" + id + "no existe.", 404);
+            throw new WebApplicationException("El recurso /facutura/" + id + " no existe.", 404);
         }
-        return new FacturaDetailDTO(entity);
+        return new FacturaDetailDTO(entity) ;
     }
     
     /**
      * <h1>PUT /api/facturas/{id} : Actualizar factura con el id dado.</h1>
-     * <pre>Cuerpo de petición: JSON {@link BicicletaDetailDTO}.
+     * <pre>Cuerpo de petición: JSON {@link FacturaDTO}.
      * 
      * Actualiza la factura con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
      * 
@@ -132,17 +140,19 @@ public class FacturaResource {
      * @param id Identificador de la factura que se desea actualizar.Este debe ser una cadena de dígitos.
      * @param factura {@link FacturaDetailDTO} La factura que se desea guardar.
      * @return JSON {@link FacturaDetailDTO} - La factura guardada.
-     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar la factura porque ya existe una con ese nombre.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar la bicicleta porque ya existe una con ese nombre.
      */
     @PUT
     @Path("{id: \\d+}")
-    public FacturaDetailDTO updateFactura(@PathParam("idCliente")Long idCliente, @PathParam("id") Long id, FacturaDetailDTO factura) throws BusinessLogicException {
-        factura.setId(id);
-       FacturaEntity entity = logic.getFacturaCLiente(idCliente, id);
-        if(entity == null){
-            throw new WebApplicationException("El recurso /clientes/" + idCliente + "/facturas/" + id + " no existe.", 404);
+    public FacturaDetailDTO updateFactura(@PathParam("id") Long id, FacturaDetailDTO factura) throws BusinessLogicException {
+        FacturaEntity entity = factura.toEntity();
+        entity.setId(id);
+        FacturaEntity antes = logic.getFactura(id);
+        if(antes == null){
+            throw new WebApplicationException("El recurso /facturas/" + id + " no existe.", 404);
         }
-        return new FacturaDetailDTO(logic.updateFactura(idCliente, factura.toEntity()));
+     
+        return new FacturaDetailDTO(logic.updateFactura(id, entity));
     }
     
     /**
@@ -158,14 +168,16 @@ public class FacturaResource {
      * </code>
      * </pre>
      * @param id Identificador de la factura que se desea borrar. Este debe ser una cadena de dígitos.
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
      */
     @DELETE
     @Path("{id: \\d+}")
-     public void deleteFactura(@PathParam("idVendedor")Long idCliente, @PathParam("id") Long id) throws BusinessLogicException {
-       FacturaEntity entity = logic.getFacturaCLiente(idCliente,id);
+     public void deleteFactura(@PathParam("id") Long id) throws BusinessLogicException,WebApplicationException {
+       FacturaEntity entity = logic.getFactura(id);
        if(entity == null){
-           throw new WebApplicationException("El recurso /clientes/" + idCliente + "/facturas/" + id + " no existe.", 404);
+           throw new WebApplicationException("El recurso /facturas/" + id + " no existe.", 404);
        }
-       logic.deleteFactura(entity);
+       logic.deleteFactura(id);
     }
+    
 }

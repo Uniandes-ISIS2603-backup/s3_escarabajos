@@ -5,7 +5,7 @@
  */
 package co.edu.uniandes.csw.escarabajos.ejb;
 
-import co.edu.uniandes.csw.escarabajos.entities.*;
+import co.edu.uniandes.csw.escarabajos.entities.FacturaEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.FacturaPersistence;
 import java.util.List;
@@ -16,80 +16,88 @@ import javax.inject.Inject;
 
 /**
  *
- * @author jp.carreno
+ * @author c.santacruza
  */
 @Stateless
 public class FacturaLogic {
+
     private static final Logger LOGGER = Logger.getLogger(FacturaLogic.class.getName());
 
-    @Inject
-    private FacturaPersistence persistence; // Variable para acceder a la persistencia de la aplicación. Es una inyección de dependencias.
-
     /**
-     * Injecta la logica de cliente.
+     * Injecta la persistencia de Factura.
      */
     @Inject
-    private ClienteLogic logicCliente;
-    
-    //TODO: Factura no tiene ninguna regla de negocio.
-     public FacturaEntity createFactura(FacturaEntity entity) throws BusinessLogicException {
-        LOGGER.info("Inicia proceso de creación de factura");
+    private FacturaPersistence persistence;
+
+    /**
+     * Devuelve todos los facturas que hay en la base de datos.
+     *
+     * @return Lista de entidades de tipo factura.
+     */
+    public List<FacturaEntity> getFacturas() {
+        LOGGER.info("Inicia proceso de consultar todas las facturas");
+        List<FacturaEntity> facturas = persistence.findAll();
+        LOGGER.info("Termina proceso de consultar todas las facturas");
+        return facturas;
+    }
+
+    /**
+     * Devuelve una factura especifica
+     * @param id de la factura
+     * @return Datos de la factura especifica
+     * @throws BusinessLogicException Por reglas de negocio
+     */
+    public FacturaEntity getFactura(Long id) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar factura con id={0}", id);
+        FacturaEntity factura = persistence.find(id);
+        if (factura == null) {
+            LOGGER.log(Level.SEVERE, "La factura con el id {0} no existe", id);
+            throw new BusinessLogicException("La bicicleta con el id " + id + "no existe");
+        }
+        LOGGER.log(Level.INFO, "Termina proceso de consultar factura con id={0}", factura.getId());
+        return factura;
+    }
+
+    /**
+     * Guardar una nueva factura
+     *
+     * @param entity La entidad de tipo factura de la factura a
+     * persistir.
+     * @return La entidad luego de persistirla
+     */
+    public FacturaEntity createFactura(FacturaEntity entity){
+        LOGGER.info("Inicia proceso de creación de bicicleta");
         persistence.create(entity);
-        LOGGER.info("Termina proceso de creación de factura");
+        LOGGER.info("Termina proceso de creación de bicicleta");
         return entity;
     }
-//TODO: Cambiar lo de editorials
-    public List<FacturaEntity> getFacturas(Long idCliente) throws BusinessLogicException {
-         LOGGER.info("Inicia proceso de consultar todas las facturas");
-        ClienteEntity cliente = logicCliente.getCliente(idCliente);
-        if (cliente.getCompras()== null || cliente.getCompras().isEmpty()) {
-            throw new BusinessLogicException("El vendedor aun no tiene ninguna factura");
-        }
-        LOGGER.info("Termina proceso de consultar todas las facturas");
-        return persistence.findAll(idCliente);
-    }
-    
-    public FacturaEntity getFactura(Long idFactura) throws BusinessLogicException{
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar factura con id={0}", idFactura);
-        FacturaEntity factura = persistence.find(idFactura);
+
+    /**
+     * Actualizar un factura especifica
+     *
+     * @param id El ID de la factura a actualizar
+     * @param entity La entidad de factura con los cambios deseados
+     * @return La entidad de factura luego de actualizarla
+     * @throws BusinessLogicException Si el atributo usada es false o si no esta
+     * asociada a una categoria o si no esta asociada a un modelo
+     */
+    public FacturaEntity updateFactura(Long id, FacturaEntity entity) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar una factura ");
+        FacturaEntity factura = persistence.find(id);
         if (factura == null) {
-            LOGGER.log(Level.SEVERE, "La factura con el id {0} no existe", idFactura);
-            throw new BusinessLogicException("La factura con el id " + idFactura + "no existe");
+            throw new BusinessLogicException("No existe una factura con el id" + id + "\"");
         }
-        LOGGER.log(Level.INFO, "Termina proceso de consultar factura con id={0}", idFactura);
-        return factura;
+        return persistence.update(entity);
     }
 
-    public FacturaEntity getFacturaCLiente(Long idCliente, Long idFactura) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar factura con id={0}", idFactura);
-        FacturaEntity factura = persistence.findFacturaCliente(idCliente, idFactura);
-        if (factura == null) {
-            LOGGER.log(Level.SEVERE, "La factura con el id {0} no existe", idFactura);
-            throw new BusinessLogicException("No existe una bicicleta usada con el id " + idFactura);
-        }
-        LOGGER.log(Level.INFO, "Termina proceso de consultar factura con id={0}", idFactura);
-        return factura;
-    }
-
-    public FacturaEntity updateFactura(Long idCliente, FacturaEntity entity) throws BusinessLogicException  {
-        LOGGER.log(Level.INFO, "Inicia proceso de actualizar bicicleta usada con id={0}", entity.getId());
-        return null;
-    }
-    //TODO: que pasa si no existe la Factura? 
-    public void deleteFactura(FacturaEntity entity){
-        LOGGER.log(Level.INFO, "Inicia proceso de borrar la factura con id={0}", entity.getId());    
-        persistence.delete(entity.getId());
-        LOGGER.log(Level.INFO, "Termina proceso de borrar la factura con id={0}", entity.getId());
-    }
-
-    public FacturaEntity getFactura(Long idCliente, Long idFactura) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar factura con id={0}", idFactura);
-        FacturaEntity factura = persistence.findFacturaCliente(idCliente, idFactura);
-        if (factura == null) {
-            LOGGER.log(Level.SEVERE, "La factura con el id {0} no existe", idFactura);
-            throw new BusinessLogicException("No existe una factura con el id " + idFactura);
-        }
-        LOGGER.log(Level.INFO, "Termina proceso de consultar factura con id={0}", idFactura);
-        return factura;
+    /**
+     * Eliminar un factura especifica
+     *
+     * @param id de la factura a borrar
+     */
+    public void deleteFactura(Long id) {
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar factura con id={0}", id);
+        persistence.delete(id);
+        LOGGER.log(Level.INFO, "Termina proceso de borrar factura con id={0}", id);
     }
 }

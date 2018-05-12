@@ -145,8 +145,24 @@ public class ClienteCarritoResource {
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar el carrito.
      */
     @PUT
-    public CarritoDetailDTO updateCarrito(CarritoDetailDTO carrito) throws BusinessLogicException {
-        return new CarritoDetailDTO( logic.updateCarrito(carrito.toEntity()) );
+    public CarritoDetailDTO updateCarrito(@PathParam("idCliente") Long idCliente, CarritoDetailDTO carrito) throws BusinessLogicException {
+        ClienteEntity cliente = logicCliente.getCliente(idCliente);
+        
+        if( cliente == null ){
+            throw new WebApplicationException("El recurso /cliente/" + idCliente + " no existe.", 404);
+        }
+        
+        CarritoEntity carritoLlega = carrito.toEntity();
+        
+        Double precio = carritoLlega.getPrecioTotal();
+        
+        CarritoEntity carrito2 = logic.getCarritoByClienteId(idCliente);
+        
+        carrito2.setPrecioTotal(precio);
+
+        CarritoDetailDTO carritoCreado = new CarritoDetailDTO(logic.updateCarrito(carrito2));
+        
+        return carritoCreado;
     }
     
      /**

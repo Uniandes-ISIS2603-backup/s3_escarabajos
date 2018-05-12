@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.uniandes.csw.escarabajos.test.persistence;
 
-import co.edu.uniandes.csw.escarabajos.entities.*;
+import co.edu.uniandes.csw.escarabajos.entities.FacturaEntity;
 import co.edu.uniandes.csw.escarabajos.persistence.FacturaPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +21,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
- * @author jp.carreno
+ * @author c.santacruza
  */
 @RunWith(Arquillian.class)
 public class FacturaPersistenceTest {
@@ -35,7 +30,7 @@ public class FacturaPersistenceTest {
      *
      * @return Devuelve el jar que Arquillian va a desplegar en el Glassfish
      * embebido. El jar contiene las clases de Factura, el descriptor de la
-     * base de datos y el archivo benas.xml para resolver la inyección de
+     * base de datos y el archivo beans.xml para resolver la inyección de
      * dependencias.
      */
     @Deployment
@@ -52,10 +47,10 @@ public class FacturaPersistenceTest {
      * se van a probar.
      */
     @Inject
-    private FacturaPersistence facturaPersistence;
+    private FacturaPersistence persistence;
 
     /**
-     * Contexto de Persostencia que se va autilizar para acceder a la Base de
+     * Contexto de Persistencia que se va a utilizar para acceder a la Base de
      * datos por fuera de los métodos que se están probando.
      */
     @PersistenceContext
@@ -98,14 +93,12 @@ public class FacturaPersistenceTest {
      */
     private void clearData() {
         em.createQuery("delete from FacturaEntity").executeUpdate();
-        em.createQuery("delete from ClienteEntity").executeUpdate();
     }
 
     /**
      *
      */
     private List<FacturaEntity> data = new ArrayList<FacturaEntity>();
-    private List<ClienteEntity> dataCliente = new ArrayList<ClienteEntity>();
 
     /**
      * Inserta los datos iniciales para el correcto funcionamiento de las
@@ -115,36 +108,30 @@ public class FacturaPersistenceTest {
      */
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
-        for (int i = 0; i < 3; i++) {
-            ClienteEntity entity = factory.manufacturePojo(ClienteEntity.class);
-
-            em.persist(entity);
-            dataCliente.add(entity);
-        }
+        
         for (int i = 0; i < 3; i++) {
             FacturaEntity entity = factory.manufacturePojo(FacturaEntity.class);
-            entity.setCliente(dataCliente.get(0));
+         
             em.persist(entity);
             data.add(entity);
         }
     }
 
     /**
-     * Prueba para crear una Factura.
-     *
-     *
+     * Prueba para crear un Bicicleta.
      */
     @Test
     public void createFacturaTest() {
         PodamFactory factory = new PodamFactoryImpl();
         FacturaEntity newEntity = factory.manufacturePojo(FacturaEntity.class);
-        FacturaEntity result = facturaPersistence.create(newEntity);
+        FacturaEntity result = persistence.create(newEntity);
 
         Assert.assertNotNull(result);
-        
+
         FacturaEntity entity = em.find(FacturaEntity.class, result.getId());
-        Assert.assertEquals(newEntity.getCliente(), entity.getCliente());
-        Assert.assertTrue(newEntity.getDinero().equals( entity.getDinero()));
+
+        Assert.assertEquals(newEntity.getDinero(), entity.getDinero());
+        
     }
 
     /**
@@ -154,9 +141,7 @@ public class FacturaPersistenceTest {
      */
     @Test
     public void getFacturasTest() {
-        ClienteEntity cliente = dataCliente.get(0);
-        cliente.setCompras(data);
-        List<FacturaEntity> list = facturaPersistence.findAll(cliente.getId());
+        List<FacturaEntity> list = persistence.findAll();
         Assert.assertEquals(data.size(), list.size());
         for (FacturaEntity ent : list) {
             boolean found = false;
@@ -170,33 +155,34 @@ public class FacturaPersistenceTest {
     }
 
     /**
-     * Prueba para consultar una Factura.
+     * Prueba para consultar un Factura.
      *
      *
      */
     @Test
     public void getFacturaTest() {
         FacturaEntity entity = data.get(0);
-        FacturaEntity newEntity = facturaPersistence.find(entity.getId());
+        FacturaEntity newEntity = persistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
-        Assert.assertEquals(newEntity.getCliente(), entity.getCliente());
+
+        Assert.assertEquals(newEntity.getDinero(),entity.getDinero());
     }
 
     /**
-     * Prueba para eliminar una Factura.
+     * Prueba para eliminar un Factura.
      *
      *
      */
     @Test
     public void deleteFacturaTest() {
         FacturaEntity entity = data.get(0);
-        facturaPersistence.delete(entity.getId());
+        persistence.delete(entity.getId());
         FacturaEntity deleted = em.find(FacturaEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
 
     /**
-     * Prueba para actualizar una Factura.
+     * Prueba para actualizar un Factura.
      *
      *
      */
@@ -207,10 +193,11 @@ public class FacturaPersistenceTest {
         FacturaEntity newEntity = factory.manufacturePojo(FacturaEntity.class);
 
         newEntity.setId(entity.getId());
-        facturaPersistence.update(newEntity);
+
+        persistence.update(newEntity);
 
         FacturaEntity resp = em.find(FacturaEntity.class, entity.getId());
 
         Assert.assertEquals(newEntity.getDinero(), resp.getDinero());
-    }  
+    }
 }
