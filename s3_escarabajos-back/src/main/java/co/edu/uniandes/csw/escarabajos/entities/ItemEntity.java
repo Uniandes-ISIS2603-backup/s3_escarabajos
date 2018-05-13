@@ -108,14 +108,6 @@ public class ItemEntity implements Serializable {
         return Objects.equals(this.id, other.id);
     }
 
-    @Override
-    public int hashCode() {
-        if (this.getId() != null) {
-            return this.getId().hashCode();
-        }
-        return super.hashCode();
-    }
-
     /**
      * @return the color
      */

@@ -34,10 +34,10 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class AccesorioPersistenceTest {
-    
+
     /**
-     * Inyección de la dependencia a la clase XYZPersistence cuyos métodos
-     * se van a probar.
+     * Inyección de la dependencia a la clase XYZPersistence cuyos métodos se
+     * van a probar.
      */
     @Inject
     private AccesorioPersistence persistence;
@@ -56,7 +56,7 @@ public class AccesorioPersistenceTest {
     @Inject
     UserTransaction utx;
 
-     /**
+    /**
      * Contenedor para el conjunto de datos de prueba.
      */
     private List<AccesorioEntity> data = new ArrayList<AccesorioEntity>();
@@ -103,14 +103,13 @@ public class AccesorioPersistenceTest {
     private void clearData() {
         em.createQuery("delete from AccesorioEntity").executeUpdate();
     }
-
-
+    
     private void insertData() {
         
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
             AccesorioEntity entity = factory.manufacturePojo(AccesorioEntity.class);
-
+            
             em.persist(entity);
             data.add(entity);
         }
@@ -125,12 +124,13 @@ public class AccesorioPersistenceTest {
      */
     @Test
     public void testCreate() {
-
+        
         PodamFactory factory = new PodamFactoryImpl();
         AccesorioEntity newEntity = factory.manufacturePojo(AccesorioEntity.class);
+        newEntity.setAlbum(new ArrayList<>());
         AccesorioEntity result = persistence.create(newEntity);
-
         Assert.assertNotNull(result);
+        Assert.assertNotNull(result.getAlbum());
         AccesorioEntity entity = em.find(AccesorioEntity.class, result.getId());
         //Assert.assertNotNull(entity);
         Assert.assertEquals(newEntity.getId(), entity.getId());

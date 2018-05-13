@@ -14,8 +14,12 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.container.AsyncResponse;
+import javax.ws.rs.container.Suspended;
 
 /**
  * <pre>Clase que implementa el recurso "modelos/{id}/items".
@@ -60,34 +64,6 @@ public class ModeloItemsResource {
     }
 
     /**
-     * <h1>GET /api/modelos/{modelosId}/items : Obtener todos los items de un
-     * modelo.</h1>
-     *
-     * <pre>Busca y devuelve todos los items que existen en el modelo.
-     *
-     * Codigos de respuesta:
-     * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Devuelve todos los items del aplicacion.</code>
-     * </pre>
-     *
-     * @param modelosId Identificador del modelo que se esta buscando. Este debe
-     * ser un cadena de dígitos.
-     * @return JSONArray {@link ItemDetailDTO} - Los items encontrados en el
-     * modelo. Si no hay ninguno retorna un lista vacía.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra el modelo.
-     */
-    @GET
-    public List<ItemDetailDTO> listItems(@PathParam("modelosId") Long modelosId) throws WebApplicationException {
-        try {
-            return itemsListEntity2DTO(modeloLogic.listItems(modelosId));
-        } catch (BusinessLogicException ex) {
-            LOGGER.info(ex.getMessage());
-            throw new WebApplicationException("No deberia passar? Verificando que el otro resource mire si existe.", 404);
-        }
-    }
-
-    /**
      * <h1>GET /api/modelos/{modelosId}/items/{itemsId} : Obtener item por id
      * del modelo por id.</h1>
      *
@@ -107,19 +83,14 @@ public class ModeloItemsResource {
      * @param itemsId Identificador del item que se esta buscando. Este debe ser
      * un cadena de dígitos.
      * @return JSON {@link ItemDetailDTO} - El item buscado
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra el modelo.
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
+     * si falla la logica
      */
     @GET
     @Path("{itemsId: \\d+}")
-    public ItemDetailDTO getItem(@PathParam("modelosId") Long modelosId, @PathParam("itemsId") Long itemsId) throws WebApplicationException {
-        try {
-            ItemEntity entity = modeloLogic.getItem(modelosId, itemsId);
-            return new ItemDetailDTO(entity, modeloLogic.getReferenciaItem(entity));
-        } catch (BusinessLogicException ex) {
-            LOGGER.info(ex.getMessage());
-            throw new WebApplicationException("No existe este item en este modelo", 404);
-        }
+    public ItemDetailDTO getItem(@PathParam("modelosId") Long modelosId, @PathParam("itemsId") Long itemsId) throws BusinessLogicException {
+        ItemEntity entity = modeloLogic.getItem(modelosId, itemsId);
+        return new ItemDetailDTO(entity, modeloLogic.getReferenciaItem(entity));
     }
 
     /**
@@ -160,6 +131,26 @@ public class ModeloItemsResource {
             LOGGER.info(ex.getMessage());
             throw new WebApplicationException("No existe este item en este modelo", 404);
         }
+    }
+
+    private ExecutorService executorService = java.util.concurrent.Executors.newCachedThreadPool();
+
+    @GET
+    public void listItems(@Suspended final AsyncResponse asyncResponse, @PathParam(value = "modelosId") final Long modelosId) {
+        executorService.submit(new Runnable() {
+            public void run() {
+                asyncResponse.resume(doListItems(modelosId));
+            }
+        });
+    }
+
+    private List<ItemDetailDTO> doListItems(@PathParam("modelosId") Long modelosId) {
+        try {
+            return itemsListEntity2DTO(modeloLogic.listItems(modelosId));
+        } catch (BusinessLogicException ex) {
+            Logger.getLogger(ModeloItemsResource.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return new ArrayList<>();
     }
 
 }

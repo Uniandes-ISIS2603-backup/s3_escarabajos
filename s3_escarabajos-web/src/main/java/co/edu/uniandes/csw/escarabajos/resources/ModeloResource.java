@@ -143,10 +143,11 @@ public class ModeloResource {
      * una cadena de dígitos.
      * @param modelo {@link ModeloDetailDTO} - El modelo que se desea guardar.
      * @return JSON {@link ModeloDetailDTO} - El modelo guardado.
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException si falla la logica.
      */
     @PUT
     @Path("{id: \\d+}")
-    public ModeloDetailDTO updateModelo(@PathParam("id") Long id, ModeloDetailDTO modelo) throws BusinessLogicException, WebApplicationException {
+    public ModeloDetailDTO updateModelo(@PathParam("id") Long id, ModeloDetailDTO modelo) throws BusinessLogicException{
         modelo.setId(id);
         ModeloEntity entity = modeloLogic.getModelo(id);
          expt(entity, id);
