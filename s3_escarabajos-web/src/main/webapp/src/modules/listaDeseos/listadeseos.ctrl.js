@@ -5,16 +5,15 @@
             // cambiar el 1 de la ruta por el id del cliente que este logeado
             $http.get('api/clientes/' + 1 + '/listadeseos').then(function (response) {
 
-                ruta = ruta + response.data.id + '/items';
+                ruta = 'api/listadeseos/' + response.data.id + '/items';
                 
-                console.log(ruta);
-                
+                                
                 $http.get(ruta).then(function (response) {
-                    $scope.carrito = response.data;
+                    $scope.listadeseos = response.data;
 
                     var lista2 = [];
 
-                    var lista = $scope.carrito;
+                    var lista = $scope.listadeseos;
 
                     var total = 0;
 
@@ -44,7 +43,7 @@
 
                     $scope.total = total;
 
-                    $scope.carrito = lista2;
+                    $scope.listadeseos = lista2;
 
                 });
 

@@ -22,7 +22,7 @@
                             <p>Precio:</p>
                             <h4>${{item.precio}}</h4>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             <p>Cantidad:</p>
 
                             <label>{{item.cantidad}}</label>
@@ -35,7 +35,7 @@
 
                         </div>
                         
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             <p>Eliminar</p>
                             <a  ui-sref ="deleteItemListadeseos({itemId: item.id})" class="btn btn-danger"><span class="glyphicon glyphicon-trash" style="color:white"></span></a>
 
@@ -59,17 +59,14 @@
         </style>    
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <a ui-sref="catalogo" class="btn btn-success text-white" style="margin-top: 10px">Volver</a>
                 </div>
-                <div class="col-md-2 top-buffer10 text-white" style="margin-top: 10px">
+                <div class="col-md-3 top-buffer10 text-white" style="margin-top: 10px">
                     <p style="margin-top: 5px">Total: ${{total}}</p>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1">
                     <a ui-sref="vaciarListadeseos" class="btn btn-success text-white " style="margin-top: 10px">Vaciar</a>
-                </div>
-                <div class="col-md-2">
-                    <a ui-sref="comprar" class="btn btn-success text-white" style="margin-top: 10px">Comprar</a>
                 </div>
             </div>
         </div>

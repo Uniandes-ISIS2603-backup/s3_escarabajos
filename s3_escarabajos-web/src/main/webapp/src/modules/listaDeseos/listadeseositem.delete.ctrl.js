@@ -1,17 +1,22 @@
 (function (ng) {
     var mod = ng.module("ListadeseosMod");
-    mod.constant("listadeseosContext", 'api/clientes/' + 1 + '/listadeseos');
-    mod.controller('deleteListaDeseosCtrl', ['$scope', '$http', 'listadeseosContext', '$state',
-        function ($scope, $http, listadeseosContext, $state) {
+    mod.controller('deleteListaDeseosCtrl', ['$scope', '$http', '$state',
+        function ($scope, $http, $state) {
             
-            var itemId = $state.params.itemId;
+            // cambiar el 1 de la ruta por el id del cliente que este logeado
+            $http.get('api/clientes/' + 1 + '/listadeseos').then(function (response) {
+
+                ruta = 'api/listadeseos/' + response.data.id + '/items/';
+            
+                var itemId = $state.params.itemId;
 
                 
-                $http.delete(listadeseosContext + itemId).then(function (response) {
+                $http.delete(ruta + itemId).then(function (response) {
                     $state.go('listadeseos', {itemId: response.data.id}, {reload: true});
                 });
 
 
+            });
         }
     ]);
 }
