@@ -37,6 +37,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class CatalogoLogicTest {
+
     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
@@ -281,6 +282,28 @@ public class CatalogoLogicTest {
         }
         double precio = catalogoLogic.getPrecioBicicletas();
         Assert.assertEquals("" + precio, "" + precioMax);
+
+        try {
+            filtros = new ArrayList<>();
+            filtros.add(null);
+            filtros.add(null);
+            filtros.add(null);
+            catalogoLogic.getModelosBicicletasFiltrados(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, Integer.MAX_VALUE);
+            Assert.fail();
+        } catch (BusinessLogicException e) {
+            Assert.assertNotNull(e);
+        }
+
+        try {
+            filtros = new ArrayList<>();
+            filtros.add(null);
+            filtros.add(null);
+            filtros.add(null);
+            catalogoLogic.getNumeroBicicletasConFiltros(null, null, null, 0.0, Double.MAX_VALUE, 0.0);
+            Assert.fail();
+        } catch (BusinessLogicException e) {
+            Assert.assertNotNull(e);
+        }
     }
 
     @Test
@@ -326,6 +349,28 @@ public class CatalogoLogicTest {
         }
         double precio = catalogoLogic.getPrecioAccesorios();
         Assert.assertEquals("" + precio, "" + precioMax);
+
+        try {
+            filtros = new ArrayList<>();
+            filtros.add(null);
+            filtros.add(null);
+            filtros.add(null);
+            catalogoLogic.getModelosAccesoriosFiltrados(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, Integer.MAX_VALUE);
+            Assert.fail();
+        } catch (BusinessLogicException e) {
+            Assert.assertNotNull(e);
+        }
+
+        try {
+            filtros = new ArrayList<>();
+            filtros.add(null);
+            filtros.add(null);
+            filtros.add(null);
+            catalogoLogic.getNumeroAccesoriosConFiltros(null, null, null, 0.0, Double.MAX_VALUE, 0.0);
+            Assert.fail();
+        } catch (BusinessLogicException e) {
+            Assert.assertNotNull(e);
+        }
 
     }
 }

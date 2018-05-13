@@ -3,7 +3,6 @@ package co.edu.uniandes.csw.escarabajos.ejb;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.CatalogoPersistence;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -15,6 +14,7 @@ import javax.inject.Inject;
 @Stateless
 public class CatalogoLogic {
 
+    private static final String ERROR = "Los Filtros no estan en el formato adecuado!";
     @Inject
     private CatalogoPersistence persistence;
 
@@ -99,12 +99,12 @@ public class CatalogoLogic {
      * adecuado!
      */
     public List<ModeloEntity> getModelosBicicletasFiltrados(List<List<String>> filtros, Double precioMin, Double precioMax, Double calificacionMin, Integer pagina, Integer numModelos) throws BusinessLogicException {
-        if (filtros.get(0) != null && filtros.get(1) != null && filtros.get(2) != null) {
-            if (precioMin >= 0 && precioMax >= -1 && calificacionMin >= 0) {
-                return persistence.filtrarBicicletas(filtros, precioMin, precioMax, calificacionMin, pagina, numModelos);
-            }
+        if (filtros.get(0) != null && filtros.get(1) != null && filtros.get(2) != null && precioMin >= 0 && precioMax >= -1 && calificacionMin >= 0) {
+
+            return persistence.filtrarBicicletas(filtros, precioMin, precioMax, calificacionMin, pagina, numModelos);
+
         }
-        throw new BusinessLogicException("Los Filtros no estan en el formato adecuado!");
+        throw new BusinessLogicException(ERROR);
 
     }
 
@@ -123,12 +123,11 @@ public class CatalogoLogic {
      * adecuado!
      */
     public List<ModeloEntity> getModelosAccesoriosFiltrados(List<List<String>> filtros, Double precioMin, Double precioMax, Double calificacionMin, Integer pagina, Integer numModelos) throws BusinessLogicException {
-        if (filtros.get(0) != null && filtros.get(1) != null && filtros.get(2) != null) {
-            if (precioMin >= 0 && precioMax >= -1 && calificacionMin >= 0) {
-                return persistence.filtrarAccesorios(filtros, precioMin, precioMax, calificacionMin, pagina, numModelos);
-            }
+        if (filtros.get(0) != null && filtros.get(1) != null && filtros.get(2) != null && precioMin >= 0 && precioMax >= -1 && calificacionMin >= 0) {
+            return persistence.filtrarAccesorios(filtros, precioMin, precioMax, calificacionMin, pagina, numModelos);
+
         }
-        throw new BusinessLogicException("Los Filtros no estan en el formato adecuado!");
+        throw new BusinessLogicException(ERROR);
 
     }
 
@@ -147,12 +146,12 @@ public class CatalogoLogic {
      * adecuado!
      */
     public Integer getNumeroBicicletasConFiltros(List<String> marcas, List<String> categorias, List<String> colores, Double precioMin, Double precioMax, Double calificacionMin) throws BusinessLogicException {
-        if (marcas != null && categorias != null && colores != null) {
-            if (precioMin >= 0 && precioMax >= -1 && calificacionMin >= 0) {
-                return persistence.contarBicicletasFiltradas(marcas, categorias, colores, precioMin, precioMax, calificacionMin);
-            }
+        if (marcas != null && categorias != null && colores != null && precioMin >= 0 && precioMax >= -1 && calificacionMin >= 0) {
+
+            return persistence.contarBicicletasFiltradas(marcas, categorias, colores, precioMin, precioMax, calificacionMin);
+
         }
-        throw new BusinessLogicException("Los Filtros no estan en el formato adecuado!");
+        throw new BusinessLogicException(ERROR);
     }
 
     /**
@@ -170,12 +169,11 @@ public class CatalogoLogic {
      * adecuado!
      */
     public Integer getNumeroAccesoriosConFiltros(List<String> marcas, List<String> categorias, List<String> colores, Double precioMin, Double precioMax, Double calificacionMin) throws BusinessLogicException {
-        if (marcas != null && categorias != null && colores != null) {
-            if (precioMin >= 0 && precioMax >= -1 && calificacionMin >= 0) {
-                return persistence.contarAccesoriosFiltrados(marcas, categorias, colores, precioMin, precioMax, calificacionMin);
-            }
+        if (marcas != null && categorias != null && colores != null && precioMin >= 0 && precioMax >= -1 && calificacionMin >= 0) {
+            return persistence.contarAccesoriosFiltrados(marcas, categorias, colores, precioMin, precioMax, calificacionMin);
+
         }
-        throw new BusinessLogicException("Los Filtros no estan en el formato adecuado!");
+        throw new BusinessLogicException(ERROR);
     }
 
     /**

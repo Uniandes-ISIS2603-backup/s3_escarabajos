@@ -23,9 +23,9 @@ import javax.persistence.TypedQuery;
  */
 @Stateless
 public class CatalogoPersistence {
-
+    
     public static final Logger LOGGER = Logger.getLogger(CatalogoPersistence.class.getName());
-
+    
     @PersistenceContext(unitName = "EscarabajosPU")
     protected EntityManager em;
 
@@ -65,10 +65,10 @@ public class CatalogoPersistence {
                 break;
         }
         List<String> lista = query.getResultList();
-
+        
         if (lista == null) {
             lista = new ArrayList<>();
-
+            
         }
         LOGGER.log(Level.INFO, lista.toString());
         return lista;
@@ -98,7 +98,7 @@ public class CatalogoPersistence {
         List<String> lista = query.getResultList();
         if (lista == null) {
             lista = new ArrayList<>();
-
+            
         }
         return lista;
     }
@@ -121,7 +121,7 @@ public class CatalogoPersistence {
         LOGGER.info(filtros.get(0).toString());
         LOGGER.info(filtros.get(1).toString());
         LOGGER.info(filtros.get(2).toString());
-
+        
         String sql = "Select e From ModeloEntity e where e.calificacionMedia >= :calificacionMin ";
         if (!filtros.get(0).isEmpty()) {
             sql += " AND e.marca IN :marcas ";
@@ -195,7 +195,7 @@ public class CatalogoPersistence {
         TypedQuery query = em.createQuery(sql, ModeloEntity.class);
         query.setParameter("calificacionMin", calificacionMin);
         query.setParameter("precioMin", precioMin);
-        if (precioMax == -1) {
+        if ((int) ((double) precioMax) == -1) {
             query.setParameter("precioMax", Double.MAX_VALUE);
         } else {
             query.setParameter("precioMax", precioMax);
@@ -255,7 +255,7 @@ public class CatalogoPersistence {
         TypedQuery query = em.createQuery(sql, String.class);
         query.setParameter("calificacionMin", calificacionMin);
         query.setParameter("precioMin", precioMin);
-        if (precioMax == -1) {
+        if ((int) ((double) precioMax) == -1) {
             query.setParameter("precioMax", Double.MAX_VALUE);
         } else {
             query.setParameter("precioMax", precioMax);
@@ -307,7 +307,7 @@ public class CatalogoPersistence {
         TypedQuery query = em.createQuery(sql, String.class);
         query.setParameter("calificacionMin", calificacionMin);
         query.setParameter("precioMin", precioMin);
-        if (precioMax == -1) {
+        if ((int) ((double) precioMax) == -1) {
             query.setParameter("precioMax", Double.MAX_VALUE);
         } else {
             query.setParameter("precioMax", precioMax);
@@ -342,6 +342,7 @@ public class CatalogoPersistence {
             resp = Double.parseDouble(temp);
         } catch (NullPointerException e) {
             resp = 0.0;
+            LOGGER.info(e.getMessage());
         }
         return resp;
     }
@@ -357,12 +358,8 @@ public class CatalogoPersistence {
         TypedQuery query;
         query = em.createQuery("Select max(e.precio) From AccesorioEntity e ", String.class);
         Double resp;
-        try {
-            String temp = query.getSingleResult().toString();
-            resp = Double.parseDouble(temp);
-        } catch (NullPointerException e) {
-            resp = 0.0;
-        }
+        String temp = query.getSingleResult().toString();
+        resp = Double.parseDouble(temp);
         return resp;
     }
 
@@ -373,9 +370,8 @@ public class CatalogoPersistence {
      * @return lista de modelos que contienen la busqueda
      */
     public List<ModeloEntity> buscar(String busqueda) {
+        LOGGER.info("Inicia proceso de busqueda");
         String[] busquedas = busqueda.split(" ");
-        LOGGER.info(busquedas[0]);
-        LOGGER.info(busquedas.toString());
         List<ModeloEntity> lista = new ArrayList<>();
         for (String string : busquedas) {
             String sql = "SELECT e FROM modeloEntity e WHERE e.referencia = :busqueda OR e.marca = :busqueda OR "
@@ -397,7 +393,7 @@ public class CatalogoPersistence {
         LOGGER.info(lista.toString());
         return lista;
     }
-
+    
     public List<ItemEntity> getItems() {
         List<ItemEntity> items = new ArrayList<>();
         String sql = "SELECT e FROM ItemEntity ";

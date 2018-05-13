@@ -116,16 +116,12 @@ public class ModeloResource {
      * @param id Identificador del modelo que se esta buscando. Este debe ser
      * una cadena de dígitos.
      * @return JSON {@link ModeloDetailDTO} - El modelo buscado throws
-     * WebApplicationException {@link WebApplicationExceptionMapper} - Error de
-     * lógica que se genera cuando no se encuentra el modelo
      */
     @GET
     @Path("{id: \\d+}")
     public ModeloDetailDTO getModelo(@PathParam("id") Long id) throws WebApplicationException {
         ModeloEntity entity = modeloLogic.getModelo(id);
-        if (entity == null) {
-            throw new WebApplicationException("El recurso /modelos/" + id + " no existe.", 404);
-        }
+        expt(entity, id);
         return new ModeloDetailDTO(entity);
     }
 
@@ -147,17 +143,13 @@ public class ModeloResource {
      * una cadena de dígitos.
      * @param modelo {@link ModeloDetailDTO} - El modelo que se desea guardar.
      * @return JSON {@link ModeloDetailDTO} - El modelo guardado.
-     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
-     * Error de lógica que se genera al no poder actualizar el modelo.
      */
     @PUT
     @Path("{id: \\d+}")
     public ModeloDetailDTO updateModelo(@PathParam("id") Long id, ModeloDetailDTO modelo) throws BusinessLogicException, WebApplicationException {
         modelo.setId(id);
         ModeloEntity entity = modeloLogic.getModelo(id);
-        if (entity == null) {
-            throw new WebApplicationException("El recurso /modelos/" + id + " no existe.", 404);
-        }
+         expt(entity, id);
         return new ModeloDetailDTO(modeloLogic.updateModelo(id, modelo.toEntity()));
     }
 
@@ -179,7 +171,7 @@ public class ModeloResource {
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteModelo(@PathParam("id") Long id) throws WebApplicationException {
+    public void deleteModelo(@PathParam("id") Long id) {
         try {
             modeloLogic.deleteModelo(id);
         } catch (BusinessLogicException ex) {
@@ -198,15 +190,11 @@ public class ModeloResource {
      *
      * @param id El ID del modelo con respecto al cual se accede al servicio.
      * @return El servicio de items para ese modelo en paricular.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra el modelo.
      */
     @Path("{id: \\d+}/items")
-    public Class<ModeloItemsResource> getModeloItemsResource(@PathParam("id") Long id) throws WebApplicationException {
+    public Class<ModeloItemsResource> getModeloItemsResource(@PathParam("id") Long id){
         ModeloEntity entity = modeloLogic.getModelo(id);
-        if (entity == null) {
-            throw new WebApplicationException("El recurso /modelos/" + id + "/items no existe", 404);
-        }
+        expt(entity, id);
         return ModeloItemsResource.class;
     }
 
@@ -238,11 +226,20 @@ public class ModeloResource {
      * @return El servicio de calificaciones para ese modelo en paricular.
      */
     @Path("{modelosId: \\d+}/calificaciones")
-    public Class<ModeloCalificacionResource> getModeloCalificacionResource(@PathParam("modelosId") Long modelosId) throws WebApplicationException {
+    public Class<ModeloCalificacionResource> getModeloCalificacionResource(@PathParam("modelosId") Long modelosId){
         ModeloEntity modelo = modeloLogic.getModelo(modelosId);
-        if (modelo == null) {
-            throw new WebApplicationException("El recurso /modelos/" + modelosId + "/calificaciones no existe", 404);
-        }
+        expt(modelo, modelosId);
         return ModeloCalificacionResource.class;
+    }
+
+    /**
+     * metodo que se encarga de lanzar la exception.
+     *
+     * @param id
+     */
+    private void expt(Object entity, Long id) {
+        if (entity == null) {
+            throw new WebApplicationException("El recurso /modelos/" + id + "/items no existe", 404);
+        }
     }
 }

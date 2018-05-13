@@ -306,6 +306,19 @@ public class CatalogoPersistenceTest {
         categorias = new ArrayList<>();
         colores = new ArrayList<>();
         marcas.add(modelosData.get(0).getMarca());
+        colores.add(itemsData.get(0).getColor());
+        filtros.add(marcas);
+        filtros.add(categorias);
+        filtros.add(colores);
+        modelos = persistence.filtrarAccesorios(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, modelosData.size() + 1);
+        Assert.assertEquals(1, modelos.size());
+        Assert.assertEquals(1, (int) persistence.contarAccesoriosFiltrados(marcas, categorias, colores, 0.0, -1.0, 0.0));
+
+        filtros = new ArrayList<>();
+        marcas = new ArrayList<>();
+        categorias = new ArrayList<>();
+        colores = new ArrayList<>();
+        marcas.add(modelosData.get(0).getMarca());
         categorias.add(itemsData.get(0).getCategoria());
         colores.add(itemsData.get(0).getColor());
         filtros.add(marcas);
@@ -369,6 +382,18 @@ public class CatalogoPersistenceTest {
         colores = new ArrayList<>();
         marcas.add(modelosData.get(3).getMarca());
         categorias.add(itemsData.get(6).getCategoria());
+        filtros.add(marcas);
+        filtros.add(categorias);
+        filtros.add(colores);
+        modelos = persistence.filtrarBicicletas(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, modelosData.size() + 1);
+        Assert.assertEquals(1, modelos.size());
+        Assert.assertEquals(1, (int) persistence.contarBicicletasFiltradas(marcas, categorias, colores, 0.0, -1.0, 0.0));
+
+        filtros = new ArrayList<>();
+        marcas = new ArrayList<>();
+        categorias = new ArrayList<>();
+        colores = new ArrayList<>();
+        marcas.add(modelosData.get(3).getMarca());
         colores.add(itemsData.get(6).getColor());
         filtros.add(marcas);
         filtros.add(categorias);
