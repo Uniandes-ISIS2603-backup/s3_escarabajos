@@ -5,11 +5,9 @@
  */
 package co.edu.uniandes.csw.escarabajos.test.logic;
 
-import co.edu.uniandes.csw.escarabajos.ejb.AccesorioLogic;
 import co.edu.uniandes.csw.escarabajos.ejb.CatalogoLogic;
 import java.util.ArrayList;
 import java.util.List;
-
 import co.edu.uniandes.csw.escarabajos.ejb.ModeloLogic;
 import co.edu.uniandes.csw.escarabajos.entities.AccesorioEntity;
 import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
@@ -18,7 +16,6 @@ import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.ModeloPersistence;
-import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -40,8 +37,6 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class CatalogoLogicTest {
-
-    private final static Logger LOGGER = Logger.getLogger(AccesorioLogic.class.getName());
     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject

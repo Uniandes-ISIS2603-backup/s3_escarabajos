@@ -204,34 +204,6 @@ public class CatalogoLogic {
      * @return modelos que cumplen con la busqueda.
      */
     public List<ModeloEntity> buscar(String busqueda) {
-        List<ModeloEntity> lista = new ArrayList<>();
-        String[] busquedas = busqueda.split(" ");
-        for (String busqueda1 : busquedas) {
-            List<ModeloEntity> temp = persistence.buscarAccesorios(busqueda1);
-            for (ModeloEntity modeloEntity : temp) {
-                boolean encontrado = false;
-                for (int i = 0; i < lista.size() && !encontrado; i++) {
-                    if (modeloEntity.getId().equals(lista.get(i).getId())) {
-                        encontrado = true;
-                    }
-                }
-                if (!encontrado) {
-                    lista.add(modeloEntity);
-                }
-            }
-            temp = persistence.buscarBicicletas(busqueda1);
-            for (ModeloEntity modeloEntity : temp) {
-                boolean encontrado = false;
-                for (int i = 0; i < lista.size() && !encontrado; i++) {
-                    if (modeloEntity.getId().equals(lista.get(i).getId())) {
-                        encontrado = true;
-                    }
-                }
-                if (!encontrado) {
-                    lista.add(modeloEntity);
-                }
-            }
-        }
-        return lista;
+        return persistence.buscar(busqueda);
     }
 }

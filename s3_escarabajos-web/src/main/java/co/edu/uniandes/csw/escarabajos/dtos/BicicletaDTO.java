@@ -60,7 +60,7 @@ public class BicicletaDTO extends ItemDTO {
      * Constructor por defecto
      */
     public BicicletaDTO() {
-        
+        //Empty
     }
 
     /**

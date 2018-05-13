@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.escarabajos.persistence;
 
 import co.edu.uniandes.csw.escarabajos.ejb.ModeloLogic;
+import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import java.util.ArrayList;
 import java.util.List;
@@ -116,8 +117,11 @@ public class CatalogoPersistence {
      * @return lista de modelos filtrados.
      */
     public List<ModeloEntity> filtrarAccesorios(List<List<String>> filtros, Double precioMin, Double precioMax, Double calificacionMin, Integer page, Integer maxRecords) {
-
         LOGGER.log(Level.INFO, "Inicia proceso de filtrar Acesorios");
+        LOGGER.info(filtros.get(0).toString());
+        LOGGER.info(filtros.get(1).toString());
+        LOGGER.info(filtros.get(2).toString());
+
         String sql = "Select e From ModeloEntity e where e.calificacionMedia >= :calificacionMin ";
         if (!filtros.get(0).isEmpty()) {
             sql += " AND e.marca IN :marcas ";
@@ -133,7 +137,7 @@ public class CatalogoPersistence {
         TypedQuery query = em.createQuery(sql, ModeloEntity.class);
         query.setParameter("calificacionMin", calificacionMin);
         query.setParameter("precioMin", precioMin);
-        if (precioMax == -1) {
+        if (precioMax == -1.0) {
             query.setParameter("precioMax", Double.MAX_VALUE);
         } else {
             query.setParameter("precioMax", precioMax);
@@ -152,6 +156,7 @@ public class CatalogoPersistence {
         if (!filtros.get(2).isEmpty()) {
             query.setParameter("colores", filtros.get(2));
         }
+        LOGGER.info(query.toString());
         List<ModeloEntity> lista = query.getResultList();
         if (lista == null) {
             lista = new ArrayList<>();
@@ -367,35 +372,36 @@ public class CatalogoPersistence {
      * @param busqueda String a buscar en la base de datos;
      * @return lista de modelos que contienen la busqueda
      */
-    public List<ModeloEntity> buscarAccesorios(String busqueda) {
-        String sql = "SELECT e FROM modeloEntity e WHERE e.referencia = :busqueda OR e.marca = :busqueda OR ";
-        sql += "e.id in (SELECT a.modeloId FROM AccesorioEntity a WHERE a.categoria = :busqueda OR a.color = :busqueda) ORDER BY e.calificacionMedia DESC";
-        TypedQuery query = em.createQuery(sql, ModeloEntity.class);
-        query.setParameter("busqueda", busqueda);
-        List<ModeloEntity> lista = query.getResultList();
-        if (lista == null) {
-            lista = new ArrayList<>();
+    public List<ModeloEntity> buscar(String busqueda) {
+        String[] busquedas = busqueda.split(" ");
+        LOGGER.info(busquedas[0]);
+        LOGGER.info(busquedas.toString());
+        List<ModeloEntity> lista = new ArrayList<>();
+        for (String string : busquedas) {
+            String sql = "SELECT e FROM modeloEntity e WHERE e.referencia = :busqueda OR e.marca = :busqueda OR "
+                    + "e.id in (SELECT a.modeloId FROM AccesorioEntity a WHERE a.categoria = :busqueda OR a.color = :busqueda)"
+                    + " OR e.id in (SELECT a.modeloId FROM BicicletaEntity a WHERE a.categoria = :busqueda OR a.color = :busqueda)"
+                    + " ORDER BY e.calificacionMedia DESC";
+            TypedQuery query = em.createQuery(sql, ModeloEntity.class);
+            LOGGER.info("!!!!!");
+            query.setParameter("busqueda", string);
+            List<ModeloEntity> temp = query.getResultList();
+            if (temp != null) {
+                for (ModeloEntity modeloEntity : temp) {
+                    if (!lista.contains(modeloEntity)) {
+                        lista.add(modeloEntity);
+                    }
+                }
+            }
         }
-        LOGGER.log(Level.INFO, lista.toString());
+        LOGGER.info(lista.toString());
         return lista;
     }
 
-    /**
-     * Metodo que se encarga de buscar bicicletas en la basde de datos.
-     *
-     * @param busqueda String a buscar en la base de datos;
-     * @return lista de modelos que contienen la busqueda
-     */
-    public List<ModeloEntity> buscarBicicletas(String busqueda) {
-        String sql = "SELECT e FROM modeloEntity e WHERE e.referencia = :busqueda OR e.marca = :busqueda OR ";
-        sql += "e.id in (SELECT a.modeloId FROM BicicletaEntity a WHERE a.categoria = :busqueda OR a.color = :busqueda) ORDER BY e.calificacionMedia DESC";
-        TypedQuery query = em.createQuery(sql, ModeloEntity.class);
-        query.setParameter("busqueda", busqueda);
-        List<ModeloEntity> lista = query.getResultList();
-        if (lista == null) {
-            lista = new ArrayList<>();
-        }
-        LOGGER.log(Level.INFO, lista.toString());
-        return lista;
+    public List<ItemEntity> getItems() {
+        List<ItemEntity> items = new ArrayList<>();
+        String sql = "SELECT e FROM ItemEntity ";
+        TypedQuery query = em.createQuery(sql, ItemEntity.class);
+        return query.getResultList();
     }
 }

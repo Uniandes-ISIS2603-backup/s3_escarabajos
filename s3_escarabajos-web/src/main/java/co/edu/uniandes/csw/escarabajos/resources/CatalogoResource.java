@@ -328,4 +328,30 @@ public class CatalogoResource {
         }
         return list;
     }
+
+    /**
+     * <h1>GET /api/catalogo/buscar: Obtener los modelos que cumplen con la
+     * busqueda dada.
+     * </h1>
+     *
+     * <pre>busca todos los modelos que cumplen con la busqueda.
+     *
+     * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK la lista de modelos.
+     * </code>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 404 Not Found No existen modelos..
+     * </code>
+     * </pre>
+     *
+     * @param busqueda busqueda.
+     * @return JSONArray {@link ModeloDetailDTO} - Los modelo encontrados en la
+     * aplicación. Si no hay ninguno retorna una lista vacía.
+     */
+    @GET
+    @Path("buscar/{busqueda}")
+    public List<ModeloDetailDTO> buscar(@PathParam("busqueda") String busqueda) {
+        return listModeloEntity2DetailDTO(catalogoLogic.buscar(busqueda));
+    }
 }

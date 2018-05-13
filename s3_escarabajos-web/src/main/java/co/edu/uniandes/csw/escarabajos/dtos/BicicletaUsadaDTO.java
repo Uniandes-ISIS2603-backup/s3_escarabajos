@@ -60,7 +60,7 @@ public class BicicletaUsadaDTO extends BicicletaDTO {
      * Por defecto.
      */
     public BicicletaUsadaDTO() {
-
+        //Empty
     }
 
     /**
