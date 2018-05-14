@@ -21,13 +21,12 @@ import javax.inject.Inject;
 @Stateless
 public class AccesorioLogic {
 
-    private static final Logger LOGGER = Logger.getLogger(AccesorioLogic.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(AccesorioLogic.class.getName());
 
     @Inject
     private AccesorioPersistence persistence;
 
     @Inject
-    // DONE: falta private
     private ItemLogic itemLogic;
 
     /**
@@ -44,7 +43,7 @@ public class AccesorioLogic {
         entity.setMultiplicador(1.0);
         // Verifica la regla de negocio que dice que no puede haber dos accesorios con el mismo nombre
         if (persistence.find(entity.getId()) != null) {
-            throw new BusinessLogicException("Ya existe un accesorio el id \"" + entity.getId()+ "\"");
+            throw new BusinessLogicException("Ya existe un accesorio el id \"" + entity.getId() + "\"");
         }
         entity.setDisponible(Boolean.TRUE);
         // Invoca la persistencia para crear la city
