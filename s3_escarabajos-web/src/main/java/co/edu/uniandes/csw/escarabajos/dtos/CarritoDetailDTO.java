@@ -76,11 +76,10 @@ public class CarritoDetailDTO extends CarritoDTO {
     /**
      * Crea un carrito de la nada y le asigna un cliente que llega por parametro
      */
-    //TODO: Revisar este método. cuándo se usaría?
     public CarritoDetailDTO( ClienteDTO cliente ){
         
         super();
-        this.items = new ArrayList<ItemDTO>();
+        this.items = new ArrayList<>();
         this.cliente = cliente;
     }
     
@@ -91,14 +90,14 @@ public class CarritoDetailDTO extends CarritoDTO {
     public CarritoDetailDTO( CarritoEntity entity ) {
         
         super(entity);
-       //TODO: entity podría ser null
+        
         if (entity.getCliente()!= null) {
             this.cliente = new ClienteDTO(entity.getCliente());
         } else {
             entity.setCliente(null);
         }
         if (entity.getItems()!= null) {
-            items = new ArrayList<ItemDTO>();
+            items = new ArrayList<>();
             for (ItemEntity itemEntity : entity.getItems()) {
                 if (itemEntity instanceof AccesorioEntity) {
                    items.add(new AccesorioDTO((AccesorioEntity)itemEntity)); 
@@ -125,7 +124,7 @@ public class CarritoDetailDTO extends CarritoDTO {
      * asigna los items
      * @param items 
      */
-    public void setItems(ArrayList<ItemDTO> items) {
+    public void setItems(List<ItemDTO> items) {
         this.items = items;
     }
 

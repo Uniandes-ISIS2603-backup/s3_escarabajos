@@ -1,16 +1,18 @@
 (function (ng) {
     var mod = ng.module("ListadeseosMod");
-    mod.constant("listadeseosContext", "api/listadeseos/"+1+"/items");
-    mod.controller('vaciarListadeseosCtrl', ['$scope', '$http', 'listadeseosContext', '$state',
-        function ($scope, $http, listadeseosContext, $state) {
+    mod.controller('vaciarListadeseosCtrl', ['$scope', '$http', '$state',
+        function ($scope, $http, $state) {
+            
+              // cambiar el 1 de la ruta por el id del cliente que este logeado
+            $http.get('api/clientes/' + 1 + '/listadeseos').then(function (response) {
 
-
+                ruta = 'api/listadeseos/' + response.data.id + '/items';
                 
-                $http.delete(listadeseosContext).then(function (response) {
+                $http.delete(ruta).then(function (response) {
                     $state.go('listadeseos', {reload: true});
                 });
 
-
+            });
         }
     ]);
 }

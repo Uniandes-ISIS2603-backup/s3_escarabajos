@@ -76,11 +76,10 @@ public class ListaDeseosDetailDTO extends ListaDeseosDTO {
     /**
      * Crea un listadeseos de la nada y le asigna un cliente que llega por parametro
      */
-    //TODO: Revisar este método. cuándo se usaría?
     public ListaDeseosDetailDTO( ClienteDTO cliente ){
         
         super();
-        this.items = new ArrayList<ItemDTO>();
+        this.items = new ArrayList<>();
         this.cliente = cliente;
     }
     
@@ -91,14 +90,13 @@ public class ListaDeseosDetailDTO extends ListaDeseosDTO {
     public ListaDeseosDetailDTO( ListaDeseosEntity entity ) {
         
         super(entity);
-       //TODO: entity podría ser null
         if (entity.getCliente()!= null) {
             this.cliente = new ClienteDTO(entity.getCliente());
         } else {
             entity.setCliente(null);
         }
         if (entity.getItems()!= null) {
-            items = new ArrayList<ItemDTO>();
+            items = new ArrayList<>();
             for (ItemEntity itemEntity : entity.getItems()) {
                 if (itemEntity instanceof AccesorioEntity) {
                    items.add(new AccesorioDTO((AccesorioEntity)itemEntity)); 
@@ -125,7 +123,7 @@ public class ListaDeseosDetailDTO extends ListaDeseosDTO {
      * asigna los items
      * @param items 
      */
-    public void setItems(ArrayList<ItemDTO> items) {
+    public void setItems(List<ItemDTO> items) {
         this.items = items;
     }
 
