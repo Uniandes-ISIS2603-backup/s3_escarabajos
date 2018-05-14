@@ -109,7 +109,7 @@ public class CatalogoPersistence {
     /**
      * Metodo auxiliar que se encarga de disminiur repeticiones.
      *
-     * @param sql string sql.
+     * @param sql2 string sql.
      * @param filtros lista de marcas,categorias y colores
      * @param precioMin precio min que debe tener.
      * @param precioMax precio max que deben tener los modelos. si es -1 no hay
@@ -119,7 +119,8 @@ public class CatalogoPersistence {
      * @param maxRecords numero me modelos a mostrar por pagina
      * @return lista de modelos filtrados.
      */
-    public TypedQuery accQuery(String sql, List<List<String>> filtros, Double precioMin, Double precioMax, Double calificacionMin, Integer page, Integer maxRecords) {
+    public TypedQuery accQuery(String sql2, List<List<String>> filtros, Double precioMin, Double precioMax, Double calificacionMin, Integer page, Integer maxRecords) {
+        String sql = sql2;
         sql = accQuery2(filtros, sql);
         sql += "AND e.id IN (SELECT a.modeloId FROM AccesorioEntity a WHERE a.precio between :precioMin AND :precioMax AND a.disponible = TRUE) ";
         TypedQuery query = em.createQuery(sql, ModeloEntity.class);
@@ -151,10 +152,11 @@ public class CatalogoPersistence {
      * Metodo auxiliar que se encarga de disminuir la deuda tecnica.
      *
      * @param filtros a agregar
-     * @param sql a cambiar.
+     * @param sql2 a cambiar.
      * @return sql
      */
-    public String accQuery2(List<List<String>> filtros, String sql) {
+    public String accQuery2(List<List<String>> filtros, String sql2) {
+        String sql = sql2;
         if (!filtros.get(0).isEmpty()) {
             sql += " AND e.marca IN :marcas ";
         }
@@ -216,14 +218,13 @@ public class CatalogoPersistence {
         filtros.add(categorias);
         filtros.add(colores);
         TypedQuery query = accQuery(sql, filtros, precioMin, precioMax, calificacionMin, null, null);
-        Integer resp = Integer.parseInt(query.getSingleResult().toString());
-        return resp;
+        return Integer.parseInt(query.getSingleResult().toString());
     }
 
     /**
      * Metodo auxiliar que se encarga de disminiur repeticiones.
      *
-     * @param sql string sql.
+     * @param sql2 string sql.
      * @param filtros lista de marcas,categorias y colores
      * @param precioMin precio min que debe tener.
      * @param precioMax precio max que deben tener los modelos. si es -1 no hay
@@ -233,7 +234,8 @@ public class CatalogoPersistence {
      * @param maxRecords numero me modelos a mostrar por pagina
      * @return lista de modelos filtrados.
      */
-    public TypedQuery biciQuery(String sql, List<List<String>> filtros, Double precioMin, Double precioMax, Double calificacionMin, Integer page, Integer maxRecords) {
+    public TypedQuery biciQuery(String sql2, List<List<String>> filtros, Double precioMin, Double precioMax, Double calificacionMin, Integer page, Integer maxRecords) {
+        String sql = sql2;
         sql = biciQuery2(filtros, sql);
         sql += "AND e.id IN (SELECT a.modeloId FROM BicicletaEntity a WHERE a.precio between :precioMin AND :precioMax AND a.disponible = TRUE AND a.usada = FALSE) ";
         TypedQuery query = em.createQuery(sql, ModeloEntity.class);
@@ -265,10 +267,11 @@ public class CatalogoPersistence {
      * Metodo auxiliar que se encarga de disminuir la deuda tecnica.
      *
      * @param filtros a agregar
-     * @param sql a cambiar.
+     * @param sql2 a cambiar.
      * @return sql
      */
-    public String biciQuery2(List<List<String>> filtros, String sql) {
+    public String biciQuery2(List<List<String>> filtros, String sql2) {
+        String sql = sql2;
         if (!filtros.get(0).isEmpty()) {
             sql += " AND e.marca IN :marcas ";
         }
@@ -330,9 +333,7 @@ public class CatalogoPersistence {
         filtros.add(categorias);
         filtros.add(colores);
         TypedQuery query = biciQuery(sql, filtros, precioMin, precioMax, calificacionMin, null, null);
-        Integer resp = Integer.parseInt(query.getSingleResult().toString());
-        LOGGER.log(Level.INFO, resp.toString());
-        return resp;
+        return Integer.parseInt(query.getSingleResult().toString());
     }
 
     /**
@@ -345,15 +346,8 @@ public class CatalogoPersistence {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar el precio de las bicicletas.");
         TypedQuery query;
         query = em.createQuery("Select max(e.precio) From BicicletaEntity e where e.usada=FALSE", String.class);
-        Double resp;
-        try {
-            String temp = query.getSingleResult().toString();
-            resp = Double.parseDouble(temp);
-        } catch (NullPointerException e) {
-            resp = 0.0;
-            LOGGER.info(e.toString());
-        }
-        return resp;
+        String temp = query.getSingleResult().toString();
+        return Double.parseDouble(temp);
     }
 
     /**
@@ -366,10 +360,8 @@ public class CatalogoPersistence {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar el precio de los accesorios");
         TypedQuery query;
         query = em.createQuery("Select max(e.precio) From AccesorioEntity e ", String.class);
-        Double resp;
         String temp = query.getSingleResult().toString();
-        resp = Double.parseDouble(temp);
-        return resp;
+        return Double.parseDouble(temp);
     }
 
     /**
