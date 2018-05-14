@@ -1,6 +1,6 @@
 (function (ng) {
     var mod = ng.module("CarritoMod");
-    mod.controller('vaciarCarritoCtrl', ['$scope', '$http', 'carritoContext', '$state',
+    mod.controller('vaciarCarritoCtrl', ['$scope', '$http', '$state',
          function ($scope, $http, $state) {
             
               // cambiar el 1 de la ruta por el id del cliente que este logeado

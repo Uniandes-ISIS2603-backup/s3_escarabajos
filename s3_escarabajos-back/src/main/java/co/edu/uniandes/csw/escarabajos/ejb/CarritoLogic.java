@@ -31,8 +31,7 @@ public class CarritoLogic {
     @Inject
     private CarritoPersistence persistence;
     
-     
-    
+
     @Inject
     private ItemLogic itemLogic;
     
