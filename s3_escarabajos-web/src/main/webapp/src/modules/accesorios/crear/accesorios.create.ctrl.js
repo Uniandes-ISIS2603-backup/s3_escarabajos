@@ -19,9 +19,7 @@
              * @param {Object} accesorio Objeto con la nueva de la accesorio.
              */
             $scope.createAccesorio = function () {
-                
-                console.log($scope.data);
-                
+                                
                 var input = {};
                 
                 input.id = 0;
@@ -37,8 +35,6 @@
                 input.tipoAccesorio = $scope.tipoAccesorio;
                 
                 input.descripcion = $scope.descripcion;
-                
-                console.log(input);
                 
                 $http.post(accesorioContext, input).then(function (response) {
                     

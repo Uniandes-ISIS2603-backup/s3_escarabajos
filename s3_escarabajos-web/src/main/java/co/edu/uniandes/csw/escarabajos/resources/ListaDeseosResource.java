@@ -118,7 +118,7 @@ public class ListaDeseosResource {
      */
     @PUT
     @Path("{id: \\d+}")
-    public ListaDeseosDTO updateListaDeseos(@PathParam("id") Long id, ListaDeseosDTO listadeseos) throws BusinessLogicException {
+    public ListaDeseosDTO updateListaDeseos(ListaDeseosDTO listadeseos) throws BusinessLogicException {
         return new ListaDeseosDTO( logic.updateListaDeseos(listadeseos.toEntity()) );
     }
     

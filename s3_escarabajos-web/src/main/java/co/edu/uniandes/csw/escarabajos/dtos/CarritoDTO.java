@@ -54,7 +54,7 @@ public class CarritoDTO {
      * Constructor por defecto
      */
     public CarritoDTO() {
-
+        // Do nothing because of JPA
     }
 
     /**

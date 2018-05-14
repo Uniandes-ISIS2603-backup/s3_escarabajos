@@ -6,9 +6,6 @@
     mod.controller('accesorioEditCtrl', ['$scope', '$http', 'accesorioContext', '$state',
         function ($scope, $http, accesorioContext, $state) {
 
-        console.log($state.params.accesorioId);
-
-
             if ($state.params.accesorioId !== undefined && $state.params.accesorioId !== null) {
 
                 $http.get(accesorioContext + '/' + $state.params.accesorioId).then(function (response) {

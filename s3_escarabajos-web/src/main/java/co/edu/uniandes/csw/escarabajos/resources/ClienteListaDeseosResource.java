@@ -4,25 +4,17 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.escarabajos.resources;
-//TODO: Borrar lo que no se use
-import co.edu.uniandes.csw.escarabajos.dtos.AccesorioDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.ListaDeseosDetailDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.ClienteDTO;
-import co.edu.uniandes.csw.escarabajos.dtos.ClienteDetailDTO;
 import co.edu.uniandes.csw.escarabajos.ejb.ListaDeseosLogic;
 import co.edu.uniandes.csw.escarabajos.ejb.ClienteLogic;
 import co.edu.uniandes.csw.escarabajos.entities.ListaDeseosEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.mappers.BusinessLogicExceptionMapper;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
-
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -61,8 +53,8 @@ public class ClienteListaDeseosResource {
     @Inject
     ClienteLogic logicCliente;
     
-    private static final Logger LOGGER = Logger.getLogger(ClienteListaDeseosResource.class.getName());
-    
+    private static final String NOEXISTE = "No existe";
+        
      /**
      * <h1>POST /api/clientes/{idCLiente}/listadeseos : Agrega el listadeseos.</h1>
      * no deberia haber esta solicitud http porque el listadeseos se agrega automaticamente cuando se crea el cliente
@@ -74,7 +66,7 @@ public class ClienteListaDeseosResource {
         ClienteEntity clienteEntity = logicCliente.getCliente(idCliente);
 
         if( clienteEntity == null ){
-            throw new WebApplicationException("El recurso /clientes/" + idCliente + " no existe.", 404);
+            throw new WebApplicationException("El recurso /clientes/" + idCliente + NOEXISTE, 404);
         }
 
         if( clienteEntity.getListaDeseos() != null ){
@@ -86,9 +78,7 @@ public class ClienteListaDeseosResource {
 
         ListaDeseosEntity listadeseosEntity = logic.createListaDeseos(listadeseos.toEntity());
 
-        ListaDeseosDetailDTO listadeseosCreado = new ListaDeseosDetailDTO(listadeseosEntity);
-
-        return listadeseosCreado;
+        return new ListaDeseosDetailDTO(listadeseosEntity);
     }
     
      /**
@@ -112,23 +102,21 @@ public class ClienteListaDeseosResource {
         ClienteEntity cliente = logicCliente.getCliente(idCliente);
         
         if( cliente == null ){
-            throw new WebApplicationException("El recurso /cliente/" + idCliente + " no existe.", 404);
+            throw new WebApplicationException("El recurso /cliente/" + idCliente + NOEXISTE, 404);
         }
         
         ListaDeseosEntity listadeseos = logic.getListaDeseosByClienteId(idCliente);
         
-        ListaDeseosDetailDTO rpta = null;
-        
+                
         if( listadeseos == null ){
             
-            rpta = createListaDeseosDeCliente(idCliente);
+            return createListaDeseosDeCliente(idCliente);
         }
         else{
         
-            rpta = new ListaDeseosDetailDTO(listadeseos);
+            return new ListaDeseosDetailDTO(listadeseos);
         }
         
-        return rpta;
     }
     
      /**
@@ -145,8 +133,23 @@ public class ClienteListaDeseosResource {
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar el listadeseos.
      */
     @PUT
-    public ListaDeseosDetailDTO updateListaDeseos(ListaDeseosDetailDTO listadeseos) throws BusinessLogicException {
-        return new ListaDeseosDetailDTO( logic.updateListaDeseos(listadeseos.toEntity()) );
+    public ListaDeseosDetailDTO updateListaDeseos(@PathParam("idCliente") Long idCliente, ListaDeseosDetailDTO listadeseos) throws BusinessLogicException {
+        ClienteEntity cliente = logicCliente.getCliente(idCliente);
+        
+        if( cliente == null ){
+            throw new WebApplicationException("El recurso /cliente/" + idCliente +NOEXISTE, 404);
+        }
+        
+        ListaDeseosEntity listadeseosLlega = listadeseos.toEntity();
+        
+        Double precio = listadeseosLlega.getPrecioTotal();
+        
+        ListaDeseosEntity listadeseos2 = logic.getListaDeseosByClienteId(idCliente);
+        
+        listadeseos2.setPrecioTotal(precio);
+
+        return new ListaDeseosDetailDTO(logic.updateListaDeseos(listadeseos2));
+
     }
     
      /**

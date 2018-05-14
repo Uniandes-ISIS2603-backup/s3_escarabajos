@@ -8,8 +8,6 @@
 
             var id = $state.params.itemId;
             
-            console.log(id);
-            
             $http.delete(accesorioContext + "/" + id).then(function (response) {
                 $state.go('accesoriosList',{itemId: response.data.id}, {reload: true});
             });
