@@ -11,7 +11,13 @@
                 var itemId = $state.params.itemId;
                 
                 $http.post(ruta + itemId).then(function (response) {
+                                        
                     $state.go('carrito', {itemId: response.data.id}, {reload: true});
+                }, function(response){
+                    
+                    if(response.status === 500){
+                        $state.go('yaEsta', {itemId: response.data.id}, {reload: true});
+                    }
                 });
 
 
