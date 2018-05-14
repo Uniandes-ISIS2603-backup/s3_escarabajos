@@ -119,7 +119,7 @@ public class ModeloLogicTest {
             entity.setItems(items);
             em.persist(entity);
             data.add(entity);
-            
+
         }
         for (ModeloEntity modelo : modeloLogic.getModelos()) {
             for (ItemEntity item : modelo.getItems()) {
@@ -230,6 +230,19 @@ public class ModeloLogicTest {
     }
 
     /**
+     * Prueba que agregue un item al modelo
+     */
+    @Test
+    public void addItem() {
+        try {
+            AccesorioEntity items = factory.manufacturePojo(AccesorioEntity.class);
+            modeloLogic.addItem(items, data.get(0).getId());
+        } catch (BusinessLogicException e) {
+            Assert.fail();
+        }
+    }
+
+    /**
      * Prueba que se borre un item de un modelo.
      */
     @Test
@@ -237,7 +250,7 @@ public class ModeloLogicTest {
         try {
             modeloLogic.removeItem(itemsData.get(2).getId());
         } catch (BusinessLogicException ex) {
-          Assert.fail();
+            Assert.fail();
         }
     }
 

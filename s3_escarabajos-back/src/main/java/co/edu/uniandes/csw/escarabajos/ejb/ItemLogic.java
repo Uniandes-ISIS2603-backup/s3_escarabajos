@@ -143,11 +143,16 @@ public class ItemLogic {
         return items;
     }
 
+    /**
+     * Metodo que se encarga de desactivar un item en el catalogo
+     *
+     * @param id del item a desactiva
+     * @return item comprado
+     * @throws BusinessLogicException si el item no existe o ya esta comprado.
+     */
     public ItemEntity comprarItem(Long id) throws BusinessLogicException {
-        int tipo = 1;
         ItemEntity item = biciPers.find(id);
         if (item == null) {
-            tipo = 2;
             item = accPers.find(id);
         }
         if (item == null) {
@@ -155,11 +160,15 @@ public class ItemLogic {
             throw new BusinessLogicException("El item no existe!");
 
         } else {
-
             if (!item.getDisponible()) {
                 throw new BusinessLogicException("El item no esta disponible!");
             }
             item.setDisponible(Boolean.TRUE);
+            if (item instanceof AccesorioEntity) {
+                accPers.update((AccesorioEntity) item);
+            } else if (item instanceof BicicletaEntity) {
+                biciPers.update((BicicletaEntity) item);
+            }
             return item;
         }
     }
