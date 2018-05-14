@@ -58,7 +58,7 @@ public class ListaDeseosDTO {
     public ListaDeseosDTO() {
         
     }
-    //TODO: actualizar la documentación
+    
         /**
      * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
      * la entidad que viene de argumento.
@@ -66,9 +66,12 @@ public class ListaDeseosDTO {
      * @param bici: Es la entidad que se va a convertir a DTO
      */
     public ListaDeseosDTO(ListaDeseosEntity listadeseos) {
-        //TODO: listadeseos podría ser null
-        this.id = listadeseos.getId();
-        this.precioTotal = listadeseos.getPrecioTotal();
+        
+        
+        if (listadeseos != null) {
+            this.id = listadeseos.getId();
+            this.precioTotal = listadeseos.getPrecioTotal();
+        }
     }
     
 
