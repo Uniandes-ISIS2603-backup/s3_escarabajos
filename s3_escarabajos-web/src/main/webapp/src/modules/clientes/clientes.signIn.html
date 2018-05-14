@@ -1,49 +1,54 @@
- <alert class="alert alert-danger" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
- <form class="form-horizontal">
+<alert class="alert alert-danger" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
+<form class="form-horizontal">
     <!-- Form Name -->
     <legend>SignIn</legend>
 
     <div class="container">
-      <div class="row profile">
-        
-        <div class="col-md-9">
-          <div class="profile-content">
-            <fieldset>
+        <div class="row profile">
 
-              <!-- Text input-->
-              <div class="form-group">
-                <label class="col-md-4 control-label" for="textinput">Username</label>
-                <div class="col-md-4">
-                  <input id="textinput" name="textinput" type="text" placeholder="UserName" class="form-control input-md">
+            <div class="col-md-9">
+                <div class="profile-content">
+                    <fieldset>
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="textinput">Nombre de usuario</label>
+                            <div class="col-md-4">
+                                <input id="textinput" name="textinput" type="text"  class="form-control input-md" ng-model = "data.username">
 
+                            </div>
+                        </div>
+
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="textinput">Contraseña</label>
+                            <div class="col-md-4">
+                                <input id="textinput" name="textinput" type="text" class="form-control input-md" required="" autofocus="" ng-model="data.password">
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Rol</label>
+                            <select class="form-control" id="sel1" style = "width:30%;margin-left:100px" ng-model = "data.rol">
+                                <option>Administrador</option>
+                                <option>Cliente</option>
+                            </select>
+                        </div>
+                        <!-- Button (Double) -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="btnsave"></label>
+                            <div class="col-md-8">
+                                <button id="btnsave" name="btnsave" class="btn btn-success" ng-click="autenticar()">Ingresar</button>
+                            </div>
+                        </div>
+
+                    </fieldset>
                 </div>
-              </div>
-
-              <!-- Text input-->
-              <div class="form-group">
-                <label class="col-md-4 control-label" for="textinput">Contraseña</label>
-                <div class="col-md-4">
-                  <input id="textinput" name="textinput" type="text" placeholder="contraseña" class="form-control input-md" required="" autofocus="" ng-model="data.username">
-
-                </div>
-              </div>
-
-              <!-- Button (Double) -->
-              <div class="form-group">
-                <label class="col-md-4 control-label" for="btnsave"></label>
-                <div class="col-md-8">
-                  <button id="btnsave" name="btnsave" class="btn btn-success" ng-click="ctrl.getRecord(id)">Ingresar</button>
-                </div>
-              </div>
-
-            </fieldset>
-          </div>
+            </div>
         </div>
-      </div>
     </div>
 
 
-  </form>
- 
+</form>
+
 
 

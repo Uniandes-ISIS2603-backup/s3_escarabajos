@@ -22,11 +22,12 @@
         function ($scope, $http, $state, $rootScope) {
 
             $scope.user = {};
-            $scope.data = {};
-            
-            $http.get('api/clientes').then(function (response) {
+            $scope.data = $state.data;
+
+            $http.get('data/usuarios.json').then(function (response) {
                 $scope.users = response.data;
             });
+
 
             /**
              * @ngdoc function
@@ -38,13 +39,13 @@
              */
             $scope.autenticar = function () {
                 var flag = false;
-                $http.post('api/clientes',$scope.data).then(function(response){
-
                 for (var item in $scope.users) {
-                    if ($scope.users[item].user === response.data.username && $scope.users[item].password === response.data.password) {
+
+                    if ($scope.users[item].user === $scope.data.username && $scope.users[item].password === $scope.data.password && $scope.users[item].rol === $scope.data.rol) {
+                        console.log('Entra');
                         flag = true;
                         $scope.user = $scope.users[item];
-                        $state.go('booksList', {}, {reload: true});
+                        $state.go('adv', {}, {reload: true});
                         break;
                     }
                 }
@@ -53,10 +54,10 @@
                 } else {
                     sessionStorage.token = $scope.user.token;
                     sessionStorage.setItem("username", $scope.user.user);
-                    sessionStorage.setItem("name", $scope.user.name);
-                    $rootScope.currentUser = $scope.user.name; 
+                    sessionStorage.setItem("rol", $scope.user.rol);
+                    sessionStorage.setItem("id", $scope.user.id);
+                    $rootScope.currentUser = $scope.user;
                 }
-                });
             };
         }
     ]);

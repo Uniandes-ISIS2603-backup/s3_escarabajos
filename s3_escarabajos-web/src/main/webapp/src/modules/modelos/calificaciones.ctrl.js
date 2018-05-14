@@ -14,7 +14,7 @@
                 $scope.createCalificacion = function ()
                 {
                     $http.post(calificacionContext + '/' + $state.params.modeloId + '/calificaciones',  $scope.data).then(
-                            $state.go('^.modeloDetail', {modeloId: $state.params.modeloId}, {reload: true}));
+                            $state.go('modeloDetail', {modeloId: $state.params.modeloId}, {reload: true}));
                 };
             }
         }]);
