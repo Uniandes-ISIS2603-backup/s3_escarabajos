@@ -373,4 +373,10 @@ public class CatalogoLogicTest {
         }
 
     }
+
+    @Test
+    public void BuscarTest() {
+        List<ModeloEntity> lista = catalogoLogic.buscar(data.get(0).getMarca());
+        Assert.assertNotNull(lista);
+    }
 }

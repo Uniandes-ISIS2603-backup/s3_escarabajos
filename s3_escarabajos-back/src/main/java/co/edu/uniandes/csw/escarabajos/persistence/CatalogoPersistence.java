@@ -4,9 +4,7 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.escarabajos.persistence;
-
 import co.edu.uniandes.csw.escarabajos.ejb.ModeloLogic;
-import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import java.util.ArrayList;
 import java.util.List;
@@ -374,12 +372,11 @@ public class CatalogoPersistence {
         String[] busquedas = busqueda.split(" ");
         List<ModeloEntity> lista = new ArrayList<>();
         for (String string : busquedas) {
-            String sql = "SELECT e FROM modeloEntity e WHERE e.referencia = :busqueda OR e.marca = :busqueda OR "
+            String sql = "SELECT e FROM ModeloEntity e WHERE e.referencia = :busqueda OR e.marca = :busqueda OR "
                     + "e.id in (SELECT a.modeloId FROM AccesorioEntity a WHERE a.categoria = :busqueda OR a.color = :busqueda)"
                     + " OR e.id in (SELECT a.modeloId FROM BicicletaEntity a WHERE a.categoria = :busqueda OR a.color = :busqueda)"
                     + " ORDER BY e.calificacionMedia DESC";
             TypedQuery query = em.createQuery(sql, ModeloEntity.class);
-            LOGGER.info("!!!!!");
             query.setParameter("busqueda", string);
             List<ModeloEntity> temp = query.getResultList();
             if (temp != null) {
@@ -392,12 +389,5 @@ public class CatalogoPersistence {
         }
         LOGGER.info(lista.toString());
         return lista;
-    }
-    
-    public List<ItemEntity> getItems() {
-        List<ItemEntity> items = new ArrayList<>();
-        String sql = "SELECT e FROM ItemEntity ";
-        TypedQuery query = em.createQuery(sql, ItemEntity.class);
-        return query.getResultList();
     }
 }

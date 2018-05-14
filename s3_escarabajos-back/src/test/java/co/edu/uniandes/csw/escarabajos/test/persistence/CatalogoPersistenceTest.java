@@ -187,6 +187,8 @@ public class CatalogoPersistenceTest {
             }
             Assert.assertTrue(found);
         }
+        list = persistence.findMarcas(ModeloLogic.BICICLETAUSADA);
+        Assert.assertNotNull(list);
     }
 
     /**
@@ -216,16 +218,8 @@ public class CatalogoPersistenceTest {
             }
             Assert.assertTrue(found);
         }
-        list = persistence.findCategorias(ModeloLogic.BICICLETAUSADA);
-        for (String categoria : list) {
-            boolean found = false;
-            for (ItemEntity item : itemsData) {
-                if (categoria.equals(item.getCategoria())) {
-                    found = true;
-                }
-            }
-            Assert.assertTrue(found);
-        }
+        list = persistence.findMarcas(ModeloLogic.BICICLETAUSADA);
+        Assert.assertNotNull(list);
     }
 
     /**
@@ -423,6 +417,12 @@ public class CatalogoPersistenceTest {
     @Test
     public void getPrecioBicicletasTest() {
         Assert.assertEquals(10, (int) ((double) persistence.getPrecioBicicletas()));
+    }
+
+    @Test
+    public void buscarTest() {
+        List<ModeloEntity> lista = persistence.buscar(modelosData.get(0).getMarca()+" "+itemsData.get(0).getCategoria()+" "+"NOT");
+        Assert.assertNotNull(lista);
     }
 
 }

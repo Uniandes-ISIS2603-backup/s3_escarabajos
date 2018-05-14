@@ -51,6 +51,7 @@ public class CatalogoResource {
 
     @Inject
     CatalogoLogic catalogoLogic;
+    
 
     /**
      * <h1>GET /api/catalogo/marcas/accesorios : Obtener todas las marcas de la
@@ -353,7 +354,7 @@ public class CatalogoResource {
      */
     @GET
     @Path("buscar/{busqueda}")
-    public List<ModeloDetailDTO> buscar(@PathParam("busqueda") String busqueda) {
+    public List<ModeloDetailDTO> buscar(@PathParam("busqueda")String busqueda) {
         return listModeloEntity2DetailDTO(catalogoLogic.buscar(busqueda));
     }
 
