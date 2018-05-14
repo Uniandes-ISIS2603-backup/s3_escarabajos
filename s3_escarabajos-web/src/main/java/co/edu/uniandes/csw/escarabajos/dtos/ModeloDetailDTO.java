@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.escarabajos.dtos;
 
+import co.edu.uniandes.csw.escarabajos.ejb.ModeloLogic;
 import co.edu.uniandes.csw.escarabajos.entities.BicicletaUsadaEntity;
 import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
@@ -25,7 +26,8 @@ import java.util.List;
  *      "calificacionMedia": double,
  *      "tipoModelo":String,
  *      "url": String,
- *      "precio"double,
+ *      "precio":double,
+ *      "nuevo":boolean,
  *      "items": [{@ItemDetailDTO}],
  *      "calficaciones": [{
  * @CalificacionDTO}]}
@@ -98,6 +100,11 @@ public class ModeloDetailDTO extends ModeloDTO {
     private Double precio;
 
     /**
+     * Boolean que representa si el metodo es nuevo.
+     */
+    private Boolean nuevo;
+
+    /**
      * Constructor por defecto
      */
     public ModeloDetailDTO() {
@@ -124,6 +131,7 @@ public class ModeloDetailDTO extends ModeloDTO {
                 }
             }
         }
+        nuevo = entity != null && entity.getCreacion() != null && (((new java.util.Date()).getTime() - entity.getCreacion().getTime()) / 1000 / 60 / 60 / 24) < 10;
         verificarCalificaciones(entity);
     }
 
@@ -208,11 +216,12 @@ public class ModeloDetailDTO extends ModeloDTO {
     public void setPrecio(Double precio) {
         this.precio = precio;
     }
-    
-   /**
-    *  Metodo que se encarga de verificar las calificaciones de un entity.
-    * @param entity 
-    */
+
+    /**
+     * Metodo que se encarga de verificar las calificaciones de un entity.
+     *
+     * @param entity
+     */
     private void verificarCalificaciones(ModeloEntity entity) {
         if (entity != null && entity.getCalificaciones() != null) {
             calificaciones = new ArrayList<>();
@@ -220,6 +229,20 @@ public class ModeloDetailDTO extends ModeloDTO {
                 calificaciones.add(new CalificacionDTO(entityCalificacion));
             }
         }
+    }
+
+    /**
+     * @return the nuevo
+     */
+    public Boolean getNuevo() {
+        return nuevo;
+    }
+
+    /**
+     * @param nuevo the nuevo to set
+     */
+    public void setNuevo(Boolean nuevo) {
+        this.nuevo = nuevo;
     }
 
 }

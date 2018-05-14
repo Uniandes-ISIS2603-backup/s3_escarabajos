@@ -75,6 +75,7 @@ public class BicicletaLogic {
     public BicicletaEntity createBicicleta(BicicletaEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de bicicleta");
         entity.setUsada(Boolean.FALSE);
+        entity.setMultiplicador(1.0);
         logic.verificarItem(entity);
         verificarBicicleta(entity);
         // TODO: DONE 

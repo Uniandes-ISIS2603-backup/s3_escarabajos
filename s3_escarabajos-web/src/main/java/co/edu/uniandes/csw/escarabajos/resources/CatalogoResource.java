@@ -12,6 +12,7 @@ import co.edu.uniandes.csw.escarabajos.dtos.PaginacionDTO;
 import co.edu.uniandes.csw.escarabajos.ejb.CatalogoLogic;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -19,6 +20,7 @@ import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -354,4 +356,41 @@ public class CatalogoResource {
     public List<ModeloDetailDTO> buscar(@PathParam("busqueda") String busqueda) {
         return listModeloEntity2DetailDTO(catalogoLogic.buscar(busqueda));
     }
+
+    /**
+     * <h1>PUT /api/catalogo/propagandas : Crear una propaganda.</h1>
+     *
+     * <pre>Cuerpo de petición
+     *
+     * Crea una propaganda con el multiplicador ingresado por parametro.
+     *
+     * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Creó el nuevo modelo.
+     * </code>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 412 Precodition Failed: Ya existe el modelo.
+     * </code>
+     * </pre>
+     *
+     * @param idModelo id del modelo a cambiar.
+     * @param pDescuento descuento de la propaganda.
+     * @return JSON {@link ModeloDetailDTO} - el modelo guardado con el atributo
+     * id autogenerado.
+     *
+     */
+    @PUT
+    @Path("propagandas/{idModelo: \\d+}/{descuento: \\d+}")
+    public ModeloDetailDTO crearPropaganda(@PathParam("idModelo") Long idModelo, @PathParam("descuento") BigDecimal pDescuento) {
+        double descuento = Double.valueOf(pDescuento.toString());
+//        //ModeloEntity modelo = catalogoLogic.crearPropaganda(idModelo, descuento);
+//        if (modelo == null) {
+//            throw new WebApplicationException("El recurso /modelos/" + idModelo + "/items no existe", 404);
+//        }
+//        return new ModeloDetailDTO(modelo);
+        return null;
+    }
+    
+    
+
 }

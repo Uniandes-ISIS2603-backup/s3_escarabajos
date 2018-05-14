@@ -11,7 +11,11 @@ import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.ModeloPersistence;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
@@ -29,6 +33,7 @@ public class ModeloLogic {
     public static final String BICICLETAUSADA = "BicicletaUsada";
 
     private static final Logger LOGGER = Logger.getLogger(ModeloLogic.class.getName());
+    public static final SimpleDateFormat creacionFormat = new SimpleDateFormat("yyyy/MM/dd");
 
     @Inject
     private ModeloPersistence persistence;
@@ -90,6 +95,8 @@ public class ModeloLogic {
         if (modeloEntity != null) {
             throw new BusinessLogicException("El modelo ya existe!");
         }
+        Date dia = new Date();
+        entity.setCreacion(dia);
         modeloEntity = persistence.findByReferencia(entity.getReferencia());
         if (modeloEntity != null) {
             throw new BusinessLogicException("El modelo ya existe!");

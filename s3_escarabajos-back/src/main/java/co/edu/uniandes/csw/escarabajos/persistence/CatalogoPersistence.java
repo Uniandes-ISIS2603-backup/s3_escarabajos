@@ -191,7 +191,7 @@ public class CatalogoPersistence {
         } else if (!filtros.get(2).isEmpty()) {
             sql += "AND e.id IN (SELECT a.modeloId FROM BicicletaEntity a WHERE a.color IN :colores) ";
         }
-        sql += "AND e.id IN (SELECT a.modeloId FROM BicicletaEntity a WHERE a.precio between :precioMin AND :precioMax AND a.disponible = TRUE) ";
+        sql += "AND e.id IN (SELECT a.modeloId FROM BicicletaEntity a WHERE a.precio between :precioMin AND :precioMax AND a.disponible = TRUE AND a.usada = FALSE) ";
         TypedQuery query = em.createQuery(sql, ModeloEntity.class);
         query.setParameter("calificacionMin", calificacionMin);
         query.setParameter("precioMin", precioMin);

@@ -41,6 +41,7 @@ public class AccesorioLogic {
 
         LOGGER.info("Inicia proceso de creación de un accesorio");
         itemLogic.verificarItem(entity);
+        entity.setMultiplicador(1.0);
         // Verifica la regla de negocio que dice que no puede haber dos accesorios con el mismo nombre
         if (persistence.find(entity.getId()) != null) {
             throw new BusinessLogicException("Ya existe un accesorio el id \"" + entity.getId()+ "\"");

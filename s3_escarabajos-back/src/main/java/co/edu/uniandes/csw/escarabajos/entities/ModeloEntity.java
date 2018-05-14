@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.escarabajos.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
@@ -16,6 +17,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamExclude;
 /**
  *
@@ -31,6 +34,9 @@ public class ModeloEntity implements Serializable
     private String marca;
     private String tipoModelo;
     private Double calificacionMedia;
+    
+    @Temporal(TemporalType.DATE)
+    private Date creacion;
     
     @PodamExclude
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -164,4 +170,20 @@ public class ModeloEntity implements Serializable
         }
         return super.hashCode();
     }
+
+    /**
+     * @return the creacion
+     */
+    public Date getCreacion() {
+        return creacion;
+    }
+
+    /**
+     * @param creacion the creacion to set
+     */
+    public void setCreacion(Date creacion) {
+        this.creacion = creacion;
+    }
+    
+    
 }

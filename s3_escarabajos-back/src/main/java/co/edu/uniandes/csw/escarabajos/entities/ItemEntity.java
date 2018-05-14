@@ -52,6 +52,11 @@ public class ItemEntity implements Serializable {
     private Boolean disponible;
 
     /**
+     * Atributo que representa el multiplicador del precio.
+     */
+    private Double multiplicador;
+
+    /**
      * @return the id
      */
     public Long getId() {
@@ -106,6 +111,14 @@ public class ItemEntity implements Serializable {
         }
         final ItemEntity other = (ItemEntity) obj;
         return Objects.equals(this.id, other.id);
+    }
+
+    @Override
+    public int hashCode() {
+        if (this.getId() != null) {
+            return this.getId().hashCode();
+        }
+        return super.hashCode();
     }
 
     /**
@@ -177,4 +190,19 @@ public class ItemEntity implements Serializable {
     public void setAlbum(List<String> album) {
         this.album = album;
     }
+
+    /**
+     * @return the multiplicador
+     */
+    public Double getMultiplicador() {
+        return multiplicador;
+    }
+
+    /**
+     * @param multiplicador the multiplicador to set
+     */
+    public void setMultiplicador(Double multiplicador) {
+        this.multiplicador = multiplicador;
+    }
+
 }

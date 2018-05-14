@@ -27,7 +27,8 @@ import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
  *      "album": [{@String}],
  *      "tipo": String,
  *      "referencia": String,
- *      "disponible": Boolean
+ *      "disponible": Boolean,
+ *      "multiplicador": Double
  *   }
  * </pre> Por ejemplo un item se representa asi:<br>
  *
@@ -52,7 +53,8 @@ import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
  *      ],
  *      "tipo": "Accesorio",
  *      "referencia": "1234-abcd",
- *      "disponible": true
+ *      "disponible": true,
+ *      "multiplicador":1.0
  *
  *   }
  * </pre>
@@ -66,6 +68,8 @@ public class ItemDetailDTO extends ItemDTO {
     private String referencia;
 
     private Boolean disponible;
+    
+    private Double multiplicador;
 
     /**
      * Constructor por defecto
@@ -95,6 +99,7 @@ public class ItemDetailDTO extends ItemDTO {
             }
             this.referencia = referencia;
             this.disponible = entity.getDisponible();
+            this.multiplicador = entity.getMultiplicador();
         }
     }
 
@@ -144,5 +149,19 @@ public class ItemDetailDTO extends ItemDTO {
      */
     public void setDisponible(Boolean disponible) {
         this.disponible = disponible;
+    }
+
+    /**
+     * @return the multiplicador
+     */
+    public Double getMultiplicador() {
+        return multiplicador;
+    }
+
+    /**
+     * @param multiplicador the multiplicador to set
+     */
+    public void setMultiplicador(Double multiplicador) {
+        this.multiplicador = multiplicador;
     }
 }
