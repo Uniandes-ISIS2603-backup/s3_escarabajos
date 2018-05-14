@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.escarabajos.persistence;
+
 import co.edu.uniandes.csw.escarabajos.ejb.ModeloLogic;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import java.util.ArrayList;
@@ -21,9 +22,15 @@ import javax.persistence.TypedQuery;
  */
 @Stateless
 public class CatalogoPersistence {
-    
+
     public static final Logger LOGGER = Logger.getLogger(CatalogoPersistence.class.getName());
-    
+    public static final String CALIF = "calificacionMin";
+    public static final String PRECIOMIN = "precioMin";
+    public static final String PRECIOMAX = "precioMax";
+    public static final String MARCAS = "marcas";
+    public static final String CATEGORIAS = "categorias";
+    public static final String COLORES = "colores";
+
     @PersistenceContext(unitName = "EscarabajosPU")
     protected EntityManager em;
 
@@ -37,8 +44,7 @@ public class CatalogoPersistence {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar marcas");
         TypedQuery query = em.createQuery("Select distinct(e.marca) From ModeloEntity e where e.tipoModelo =  :name", String.class);
         query.setParameter("name", nombre);
-        List<String> lista = query.getResultList();
-        return lista;
+        return query.getResultList();
     }
 
     /**
@@ -63,12 +69,11 @@ public class CatalogoPersistence {
                 break;
         }
         List<String> lista = query.getResultList();
-        
+
         if (lista == null) {
             lista = new ArrayList<>();
-            
+
         }
-        LOGGER.log(Level.INFO, lista.toString());
         return lista;
     }
 
@@ -96,7 +101,7 @@ public class CatalogoPersistence {
         List<String> lista = query.getResultList();
         if (lista == null) {
             lista = new ArrayList<>();
-            
+
         }
         return lista;
     }
@@ -119,7 +124,7 @@ public class CatalogoPersistence {
         LOGGER.info(filtros.get(0).toString());
         LOGGER.info(filtros.get(1).toString());
         LOGGER.info(filtros.get(2).toString());
-        
+
         String sql = "Select e From ModeloEntity e where e.calificacionMedia >= :calificacionMin ";
         if (!filtros.get(0).isEmpty()) {
             sql += " AND e.marca IN :marcas ";
@@ -133,12 +138,12 @@ public class CatalogoPersistence {
         }
         sql += "AND e.id IN (SELECT a.modeloId FROM AccesorioEntity a WHERE a.precio between :precioMin AND :precioMax AND a.disponible = TRUE) ";
         TypedQuery query = em.createQuery(sql, ModeloEntity.class);
-        query.setParameter("calificacionMin", calificacionMin);
-        query.setParameter("precioMin", precioMin);
+        query.setParameter(CALIF, calificacionMin);
+        query.setParameter(PRECIOMIN, precioMin);
         if (precioMax == -1.0) {
-            query.setParameter("precioMax", Double.MAX_VALUE);
+            query.setParameter(PRECIOMAX, Double.MAX_VALUE);
         } else {
-            query.setParameter("precioMax", precioMax);
+            query.setParameter(PRECIOMAX, precioMax);
         }
         if (page != null && maxRecords != null) {
             query.setFirstResult((page
@@ -146,13 +151,13 @@ public class CatalogoPersistence {
             query.setMaxResults(maxRecords);
         }
         if (!filtros.get(0).isEmpty()) {
-            query.setParameter("marcas", filtros.get(0));
+            query.setParameter(MARCAS, filtros.get(0));
         }
         if (!filtros.get(1).isEmpty()) {
-            query.setParameter("categorias", filtros.get(1));
+            query.setParameter(CATEGORIAS, filtros.get(1));
         }
         if (!filtros.get(2).isEmpty()) {
-            query.setParameter("colores", filtros.get(2));
+            query.setParameter(COLORES, filtros.get(2));
         }
         LOGGER.info(query.toString());
         List<ModeloEntity> lista = query.getResultList();
@@ -191,12 +196,12 @@ public class CatalogoPersistence {
         }
         sql += "AND e.id IN (SELECT a.modeloId FROM BicicletaEntity a WHERE a.precio between :precioMin AND :precioMax AND a.disponible = TRUE AND a.usada = FALSE) ";
         TypedQuery query = em.createQuery(sql, ModeloEntity.class);
-        query.setParameter("calificacionMin", calificacionMin);
-        query.setParameter("precioMin", precioMin);
+        query.setParameter(CALIF, calificacionMin);
+        query.setParameter(PRECIOMIN, precioMin);
         if ((int) ((double) precioMax) == -1) {
-            query.setParameter("precioMax", Double.MAX_VALUE);
+            query.setParameter(PRECIOMAX, Double.MAX_VALUE);
         } else {
-            query.setParameter("precioMax", precioMax);
+            query.setParameter(PRECIOMAX, precioMax);
         }
         if (page != null && maxRecords != null) {
             query.setFirstResult((page
@@ -204,13 +209,13 @@ public class CatalogoPersistence {
             query.setMaxResults(maxRecords);
         }
         if (!filtros.get(0).isEmpty()) {
-            query.setParameter("marcas", filtros.get(0));
+            query.setParameter(MARCAS, filtros.get(0));
         }
         if (!filtros.get(1).isEmpty()) {
-            query.setParameter("categorias", filtros.get(1));
+            query.setParameter(CATEGORIAS, filtros.get(1));
         }
         if (!filtros.get(2).isEmpty()) {
-            query.setParameter("colores", filtros.get(2));
+            query.setParameter(COLORES, filtros.get(2));
         }
         List<ModeloEntity> lista = query.getResultList();
         if (lista == null) {
@@ -251,21 +256,21 @@ public class CatalogoPersistence {
         }
         sql += "AND e.id IN (SELECT a.modeloId FROM AccesorioEntity a WHERE a.precio between :precioMin AND :precioMax AND a.disponible = TRUE) ";
         TypedQuery query = em.createQuery(sql, String.class);
-        query.setParameter("calificacionMin", calificacionMin);
-        query.setParameter("precioMin", precioMin);
+        query.setParameter(CALIF, calificacionMin);
+        query.setParameter(PRECIOMIN, precioMin);
         if ((int) ((double) precioMax) == -1) {
-            query.setParameter("precioMax", Double.MAX_VALUE);
+            query.setParameter(PRECIOMAX, Double.MAX_VALUE);
         } else {
-            query.setParameter("precioMax", precioMax);
+            query.setParameter(PRECIOMAX, precioMax);
         }
         if (!marcas.isEmpty()) {
-            query.setParameter("marcas", marcas);
+            query.setParameter(MARCAS, marcas);
         }
         if (!categorias.isEmpty()) {
-            query.setParameter("categorias", categorias);
+            query.setParameter(CATEGORIAS, categorias);
         }
         if (!colores.isEmpty()) {
-            query.setParameter("colores", colores);
+            query.setParameter(COLORES, colores);
         }
         Integer resp = Integer.parseInt(query.getSingleResult().toString());
         LOGGER.log(Level.INFO, resp.toString());
@@ -303,24 +308,23 @@ public class CatalogoPersistence {
         }
         sql += "AND e.id IN (SELECT a.modeloId FROM BicicletaEntity a WHERE a.precio between :precioMin AND :precioMax AND a.disponible = TRUE) ";
         TypedQuery query = em.createQuery(sql, String.class);
-        query.setParameter("calificacionMin", calificacionMin);
-        query.setParameter("precioMin", precioMin);
+        query.setParameter(CALIF, calificacionMin);
+        query.setParameter(PRECIOMIN, precioMin);
         if ((int) ((double) precioMax) == -1) {
-            query.setParameter("precioMax", Double.MAX_VALUE);
+            query.setParameter(PRECIOMAX, Double.MAX_VALUE);
         } else {
-            query.setParameter("precioMax", precioMax);
+            query.setParameter(PRECIOMAX, precioMax);
         }
         if (!marcas.isEmpty()) {
-            query.setParameter("marcas", marcas);
+            query.setParameter(MARCAS, marcas);
         }
         if (!categorias.isEmpty()) {
-            query.setParameter("categorias", categorias);
+            query.setParameter(CATEGORIAS, categorias);
         }
         if (!colores.isEmpty()) {
-            query.setParameter("colores", colores);
+            query.setParameter(COLORES, colores);
         }
         Integer resp = Integer.parseInt(query.getSingleResult().toString());
-        LOGGER.log(Level.INFO, resp.toString());
         return resp;
     }
 
@@ -340,7 +344,7 @@ public class CatalogoPersistence {
             resp = Double.parseDouble(temp);
         } catch (NullPointerException e) {
             resp = 0.0;
-            LOGGER.info(e.getMessage());
+            LOGGER.info(e.toString());
         }
         return resp;
     }

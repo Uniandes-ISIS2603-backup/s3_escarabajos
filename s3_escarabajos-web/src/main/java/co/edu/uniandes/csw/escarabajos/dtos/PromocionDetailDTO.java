@@ -5,12 +5,8 @@
  */
 package co.edu.uniandes.csw.escarabajos.dtos;
 
-import co.edu.uniandes.csw.escarabajos.entities.BicicletaUsadaEntity;
-import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Clase que extiende de {@link ModeloDTO} para manejar la transformacion entre
@@ -104,11 +100,11 @@ public class PromocionDetailDTO extends ModeloDetailDTO {
         if (entity != null) {
             double max = 0.0;
             for (ItemEntity item : entity.getItems()) {
-                if (item.getMultiplicador() != 1.0 && item.getMultiplicador() > max) {
+                if (Integer.parseInt((item.getMultiplicador().toString())) != 1 && item.getMultiplicador() > max) {
                     max = item.getMultiplicador();
                 }
             }
-            if (max != 0.0) {
+            if ((int) max != 0) {
                 descuento = (int) ((1.0 - max) * 100);
             }
         }

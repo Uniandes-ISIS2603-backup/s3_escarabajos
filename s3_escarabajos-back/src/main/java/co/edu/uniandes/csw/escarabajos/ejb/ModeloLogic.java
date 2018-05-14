@@ -11,9 +11,6 @@ import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.ModeloPersistence;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Date;
 import java.util.logging.Level;
@@ -31,9 +28,10 @@ public class ModeloLogic {
     public static final String BICICLETA = "Bicicleta";
     public static final String ACCESORIO = "Accesorio";
     public static final String BICICLETAUSADA = "BicicletaUsada";
+    public static final String MODELONOEXISTE = "El modelo no existe!";
+    public static final String MODELOEXISTE = "El modelo ya existe!";
 
     private static final Logger LOGGER = Logger.getLogger(ModeloLogic.class.getName());
-    public static final SimpleDateFormat creacionFormat = new SimpleDateFormat("yyyy/MM/dd");
 
     @Inject
     private ModeloPersistence persistence;
@@ -93,13 +91,13 @@ public class ModeloLogic {
         LOGGER.log(Level.INFO, "Inicia proceso de crear un modelo ");
         ModeloEntity modeloEntity = getModelo(entity.getId());
         if (modeloEntity != null) {
-            throw new BusinessLogicException("El modelo ya existe!");
+            throw new BusinessLogicException(MODELOEXISTE);
         }
         Date dia = new Date();
         entity.setCreacion(dia);
         modeloEntity = persistence.findByReferencia(entity.getReferencia());
         if (modeloEntity != null) {
-            throw new BusinessLogicException("El modelo ya existe!");
+            throw new BusinessLogicException(MODELOEXISTE);
         }
         LOGGER.log(Level.INFO, "Finaliza proceso de crear un modelo ");
         return persistence.create(entity);
@@ -133,7 +131,7 @@ public class ModeloLogic {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar un modelo ");
         ModeloEntity modeloEntity = getModelo(id);
         if (modeloEntity == null) {
-            throw new BusinessLogicException("El modelo no existe!");
+            throw new BusinessLogicException(MODELONOEXISTE);
         }
         for (ItemEntity item : modeloEntity.getItems()) {
             if (item instanceof BicicletaEntity) {
@@ -158,7 +156,7 @@ public class ModeloLogic {
     public ItemEntity addItem(ItemEntity item, Long modeloId) throws BusinessLogicException {
         ModeloEntity modeloEntity = getModelo(modeloId);
         if (modeloEntity == null) {
-            throw new BusinessLogicException("El modelo no existe!");
+            throw new BusinessLogicException(MODELONOEXISTE);
         }
         List<ItemEntity> resp = modeloEntity.getItems();
         resp.add(item);
@@ -178,7 +176,7 @@ public class ModeloLogic {
     public ItemEntity getItem(Long modeloId, Long itemId) throws BusinessLogicException {
         ModeloEntity modeloEntity = getModelo(modeloId);
         if (modeloEntity == null) {
-            throw new BusinessLogicException("El modelo no existe!");
+            throw new BusinessLogicException(MODELONOEXISTE);
         }
         List<ItemEntity> items = itemLogic.getItemsModelo(modeloId);
         ItemEntity item = itemLogic.getItem(itemId);
@@ -217,7 +215,7 @@ public class ModeloLogic {
         }
         ModeloEntity modelo = persistence.find(item.getModeloId());
         if (modelo == null) {
-            throw new BusinessLogicException("El modelo no existe");
+            throw new BusinessLogicException(MODELONOEXISTE);
         }
         List<ItemEntity> resp = modelo.getItems();
         resp.remove(item);
