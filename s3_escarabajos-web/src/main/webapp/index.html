@@ -111,7 +111,7 @@
                         <li class="active"> <a ui-sref="adv({adv:true,tipo:'bicicletas',filtros:{marcas:[],categorias:[],colores:[],precioMin:0.0,precioMax:999999999.9,calificacionMin:0.0}})">Catalogo</a></li>
                         <li><a ui-sref="adv({adv:true,tipo:'bicicletas',filtros:{marcas:[],categorias:[],colores:[],precioMin:0.0,precioMax:999999999.9,calificacionMin:0.0}})">Bicicletas</a></li>
                         <li><a ui-sref="adv({adv:true,tipo:'accesorios',filtros:{marcas:[],categorias:[],colores:[],precioMin:0.0,precioMax:999999999.9,calificacionMin:0.0}})">Accesorios</a></li>
-                        <li><a ui-sref="adminList">Administrador</a></li>
+                        <li ng-if = " hasPermissions()"><a ui-sref="adminList">Administrador</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right" Style="margin-right: 70px;">
                         <li>
@@ -126,20 +126,20 @@
                                 </div>
                             </form>
                         </li>
-                        <li><a ui-sref="clientesSignUp"><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>
-                        <li><a ui-sref="clientesSignIn"><span class="glyphicon glyphicon-log-in"></span> Iniciar Sesión</a></li>
-                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <img src = "data/Imagenes/Logo.png" style = "width:20px;margin-bottom:1px"> Perfil<span class="caret"></span></a>
+                        <li ng-if = "!isAuthenticated()"><a ui-sref="clientesSignUp"><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>
+                        <li ng-if = "!isAuthenticated()"><a ui-sref="clientesSignIn"><span class="glyphicon glyphicon-log-in"></span> Iniciar Sesión</a></li>
+                        <li class="dropdown" ng-if = "isAuthenticated()"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <img src = "data/Imagenes/Logo.png" style = "width:20px;margin-bottom:1px">{{currentUser.name}}<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a ui-sref="clientesProfile">Mi perfil</a></li>
                                 <li><a ui-sref = "listadeseos">Lista de deseos</a></li>
                                 <li><a ui-sref = "facturasList">Mis compras</a></li>
                                 <li><a href="#">Mis ventas</a></li>
                                 <li><a ui-sref="reclamosList">Mis reclamos</a></li>
-                                <!--                                <li><a ui-sref="">Cerrar Sesión</a></li>-->
+                                <li><a ng-click = "logOut()">Cerrar Sesión</a></li>
                             </ul>
                         </li>
-                        <li><a ui-sref="carrito"><span class="glyphicon glyphicon-shopping-cart"></span> Carrito</a></li>
+                        <li ng-if = "isAuthenticated()"><a ui-sref="carrito" ><span class="glyphicon glyphicon-shopping-cart"></span> Carrito</a></li>
                     </ul>
                 </div>
             </nav>

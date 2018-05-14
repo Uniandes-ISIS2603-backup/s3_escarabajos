@@ -23,7 +23,7 @@
     app.config(['$qProvider', function ($qProvider) {
             $qProvider.errorOnUnhandledRejections(false);
         }]);
-    app.run(['$rootScope', function ($rootScope){
+    app.run(['$rootScope', "$state", function ($rootScope, $state) {
 
 
             /**
@@ -35,12 +35,10 @@
              * @returns {Boolean} Verdadero si está dentro de su cuenta.
              */
             $rootScope.isAuthenticated = function () {
-
-                if (sessionStorage.getItem("username") != null) {
-                    $rootScope.currentUser = sessionStorage.getItem("name");
-                    return true;
-                } else {
+                if (sessionStorage.getItem("username") === "null") {
                     return false;
+                } else {
+                    return true;
                 }
             };
 
@@ -53,11 +51,20 @@
              * @returns {Boolean} Verdadero si el usuario tiene permisos.
              */
             $rootScope.hasPermissions = function () {
-                if (($rootScope.isAuthenticated) && (roles.indexOf(sessionStorage.getItem("rol")) > -1)) {
+                if (($rootScope.isAuthenticated) && (sessionStorage.getItem("rol") === "Administrador")) {
                     return true;
                 } else {
                     return false;
                 }
+            };
+            $rootScope.logOut = function ()
+            {
+                sessionStorage.token = null;
+                sessionStorage.setItem("username", null);
+                sessionStorage.setItem("rol", null);
+                sessionStorage.setItem("id", null);
+                sessionStorage.setItem("name", null);
+                $state.go('adv',{}, {reload: true});
             };
         }]);
 })(window.angular);

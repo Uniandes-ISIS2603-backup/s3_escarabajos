@@ -6,28 +6,30 @@ and open the template in the editor.
 -->
 <div class="col-sm-2"></div>
 <div class="col-sm-8" >
-    <legend>Calificaciones</legend>
-    <div align = "right">
-        <a class="btn btn-primary" data-toggle="collapse" data-target = "#mensaje" >
-            <span class="glyphicon glyphicon-pencil" style = "width:10px"></span>
-        </a>
-    </div>
-    <div id="mensaje" class="collapse" align = "right">
-        <br>
-        <label for="sel1">Seleccione el puntaje</label>
-        <select class="form-control" id="sel1" style = "width:50px" ng-model = "data.puntaje"  ng-show="data.puntaje.$error.require">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-        </select>
-        <br>
-        <textarea class="form-control" rows="5" id="comment" ng-model = "data.comentario" ng-show="data.comentario.$error.require" ></textarea>
-        <br>
-        <a class="btn btn-success" ng-click = "createCalificacion()">
-            Calificar
-        </a>
+    <div ng-if = "isAuthenticated()">
+        <legend>Calificaciones</legend>
+        <div align = "right">
+            <a class="btn btn-primary" data-toggle="collapse" data-target = "#mensaje" >
+                <span class="glyphicon glyphicon-pencil" style = "width:10px"></span>
+            </a>
+        </div>
+        <div id="mensaje" class="collapse" align = "right">
+            <br>
+            <label for="sel1">Seleccione el puntaje</label>
+            <select class="form-control" id="sel1" style = "width:50px" ng-model = "data.puntaje">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+            <br>
+            <textarea class="form-control" rows="5" id="comment" ng-model = "data.comentario"></textarea>
+            <br>
+            <a class="btn btn-success" ng-click = "createCalificacion()">
+                Calificar
+            </a>
+        </div>
     </div>
     <br>
     <div class="panel-group" id="accordion">
