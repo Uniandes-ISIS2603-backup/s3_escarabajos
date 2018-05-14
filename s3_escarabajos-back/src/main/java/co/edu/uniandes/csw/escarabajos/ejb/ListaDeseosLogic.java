@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.escarabajos.ejb;
 
 import co.edu.uniandes.csw.escarabajos.entities.ListaDeseosEntity;
-import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 import co.edu.uniandes.csw.escarabajos.entities.FacturaEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
@@ -26,6 +25,8 @@ import javax.inject.Inject;
 public class ListaDeseosLogic {
     
     private static final Logger LOGGER = Logger.getLogger(ListaDeseosLogic.class.getName());
+    
+    private static final String NOEXISTE = "No existe un listadeseos con el id";
     
     @Inject
     private ListaDeseosPersistence persistence;
@@ -74,7 +75,7 @@ public class ListaDeseosLogic {
     public ListaDeseosEntity updateListaDeseos( ListaDeseosEntity entity ) throws BusinessLogicException{
         
         if (persistence.find(entity.getId()) == null) {
-            throw new BusinessLogicException("No existe un listadeseos con el id" + entity.getId()+ "\"");
+            throw new BusinessLogicException(NOEXISTE + entity.getId()+ "\"");
         }
         return persistence.update(entity);
     }
@@ -98,7 +99,7 @@ public class ListaDeseosLogic {
     public List<ItemEntity> getItems( Long idListaDeseos ) throws BusinessLogicException{
         
         if (persistence.find(idListaDeseos) == null) {
-            throw new BusinessLogicException("No existe un listadeseos con el id" + idListaDeseos + "\"");
+            throw new BusinessLogicException(NOEXISTE + idListaDeseos + "\"");
         }
         
         ListaDeseosEntity listadeseos = persistence.find(idListaDeseos);
@@ -118,7 +119,7 @@ public class ListaDeseosLogic {
         ListaDeseosEntity listadeseos = persistence.find(idListaDeseos);
         
         if (listadeseos == null) {
-            throw new BusinessLogicException("No existe un listadeseos con el id " + idListaDeseos + "\"");
+            throw new BusinessLogicException(NOEXISTE + idListaDeseos + "\"");
         }
         
         if (listadeseos.getItems().contains(itemLogic.getItem(itemId))) {
@@ -129,7 +130,7 @@ public class ListaDeseosLogic {
         
         if( item == null ) {
             
-            throw new BusinessLogicException("No existe un item con el id " + itemId );
+            throw new BusinessLogicException(NOEXISTE + itemId );
         }
         
         List<ItemEntity> rpta = listadeseos.getItems();
@@ -155,7 +156,7 @@ public class ListaDeseosLogic {
     public ItemEntity removeItem( Long idListaDeseos, Long itemId ) throws BusinessLogicException{
         ListaDeseosEntity listadeseos = persistence.find(idListaDeseos);
         if (listadeseos == null) {
-            throw new BusinessLogicException("No existe un listadeseos con el id" + idListaDeseos + "\"");
+            throw new BusinessLogicException(NOEXISTE + idListaDeseos + "\"");
         }
         
         ItemEntity item = itemLogic.getItem(itemId);
@@ -177,7 +178,7 @@ public class ListaDeseosLogic {
     public FacturaEntity crearFactura( Long id ) throws BusinessLogicException{
         ListaDeseosEntity listadeseos = persistence.find(id);
         if ( listadeseos== null) {
-            throw new BusinessLogicException("No existe un listadeseos con el id" + id+ "\"");
+            throw new BusinessLogicException(NOEXISTE + id+ "\"");
         }
         if(listadeseos.getItems().isEmpty()) {
             throw new BusinessLogicException("No se puede generar factura porque el listadeseos aun no contiene items");
@@ -192,9 +193,7 @@ public class ListaDeseosLogic {
         factura.setDinero(listadeseos.getPrecioTotal());
         
         factura.setCliente(listadeseos.getCliente());
-        
-        //factura.setItems(listadeseos.getItems());
-        
+                
         listadeseos = persistence.find(id);
         
         listadeseos.setItems(new ArrayList<>());

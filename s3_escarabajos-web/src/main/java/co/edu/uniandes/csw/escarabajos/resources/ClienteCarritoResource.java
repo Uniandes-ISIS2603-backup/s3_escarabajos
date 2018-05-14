@@ -4,25 +4,17 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.escarabajos.resources;
-//TODO: Borrar lo que no se use
-import co.edu.uniandes.csw.escarabajos.dtos.AccesorioDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.CarritoDetailDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.ClienteDTO;
-import co.edu.uniandes.csw.escarabajos.dtos.ClienteDetailDTO;
 import co.edu.uniandes.csw.escarabajos.ejb.CarritoLogic;
 import co.edu.uniandes.csw.escarabajos.ejb.ClienteLogic;
 import co.edu.uniandes.csw.escarabajos.entities.CarritoEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.mappers.BusinessLogicExceptionMapper;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
-
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -61,8 +53,8 @@ public class ClienteCarritoResource {
     @Inject
     ClienteLogic logicCliente;
     
-    private static final Logger LOGGER = Logger.getLogger(ClienteCarritoResource.class.getName());
-    
+    private static final String NOEXISTE = "No existe";
+        
      /**
      * <h1>POST /api/clientes/{idCLiente}/carrito : Agrega el carrito.</h1>
      * no deberia haber esta solicitud http porque el carrito se agrega automaticamente cuando se crea el cliente
@@ -74,7 +66,7 @@ public class ClienteCarritoResource {
         ClienteEntity clienteEntity = logicCliente.getCliente(idCliente);
 
         if( clienteEntity == null ){
-            throw new WebApplicationException("El recurso /clientes/" + idCliente + " no existe.", 404);
+            throw new WebApplicationException("El recurso /clientes/" + idCliente + NOEXISTE, 404);
         }
 
         if( clienteEntity.getCarrito() != null ){
@@ -86,9 +78,7 @@ public class ClienteCarritoResource {
 
         CarritoEntity carritoEntity = logic.createCarrito(carrito.toEntity());
 
-        CarritoDetailDTO carritoCreado = new CarritoDetailDTO(carritoEntity);
-
-        return carritoCreado;
+        return new CarritoDetailDTO(carritoEntity);
     }
     
      /**
@@ -112,23 +102,21 @@ public class ClienteCarritoResource {
         ClienteEntity cliente = logicCliente.getCliente(idCliente);
         
         if( cliente == null ){
-            throw new WebApplicationException("El recurso /cliente/" + idCliente + " no existe.", 404);
+            throw new WebApplicationException("El recurso /cliente/" + idCliente + NOEXISTE, 404);
         }
         
         CarritoEntity carrito = logic.getCarritoByClienteId(idCliente);
         
-        CarritoDetailDTO rpta = null;
-        
+                
         if( carrito == null ){
             
-            rpta = createCarritoDeCliente(idCliente);
+            return createCarritoDeCliente(idCliente);
         }
         else{
         
-            rpta = new CarritoDetailDTO(carrito);
+            return new CarritoDetailDTO(carrito);
         }
         
-        return rpta;
     }
     
      /**
@@ -149,7 +137,7 @@ public class ClienteCarritoResource {
         ClienteEntity cliente = logicCliente.getCliente(idCliente);
         
         if( cliente == null ){
-            throw new WebApplicationException("El recurso /cliente/" + idCliente + " no existe.", 404);
+            throw new WebApplicationException("El recurso /cliente/" + idCliente +NOEXISTE, 404);
         }
         
         CarritoEntity carritoLlega = carrito.toEntity();
@@ -160,9 +148,8 @@ public class ClienteCarritoResource {
         
         carrito2.setPrecioTotal(precio);
 
-        CarritoDetailDTO carritoCreado = new CarritoDetailDTO(logic.updateCarrito(carrito2));
-        
-        return carritoCreado;
+        return new CarritoDetailDTO(logic.updateCarrito(carrito2));
+
     }
     
      /**

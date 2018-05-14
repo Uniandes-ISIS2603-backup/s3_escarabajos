@@ -22,6 +22,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 
 /**
  * <pre>Clase que implementa el recurso "accesorios".
@@ -80,7 +81,6 @@ public class AcessorioResource {
     @POST
     public AccesorioDTO createAccesorio(AccesorioDTO accesorio) throws BusinessLogicException {
         AccesorioEntity temp = logic.createAccesorio(accesorio.toEntity());
-        //TODO: No entiendo este código
         return new AccesorioDTO((AccesorioEntity) modeloLogic.addItem(temp, temp.getModeloId()));
     }
 
@@ -123,7 +123,13 @@ public class AcessorioResource {
     @GET
     @Path("{id: \\d+}")
     public AccesorioDTO getAccesorio(@PathParam("id") Long id) {
-        //TODO si no existe el recurso debe disparar WebApplicationException
+        AccesorioEntity entity = logic.getAccesorio(id);
+        
+        if(entity == null){
+            
+            throw new WebApplicationException("El accesorio no existe");
+        }
+        
         return new AccesorioDTO(logic.getAccesorio(id));
     }
 
@@ -153,7 +159,14 @@ public class AcessorioResource {
     @PUT
     @Path("{id: \\d+}")
     public AccesorioDTO updateAccesorio(@PathParam("id") Long id, AccesorioDTO accesorio) throws BusinessLogicException {
-        //TODO si no existe el recurso debe disparar WebApplicationException
+        
+        AccesorioEntity entity = logic.getAccesorio(id);
+        
+        if(entity == null){
+            
+            throw new WebApplicationException("El accesorio no existe");
+        }
+        
         return new AccesorioDTO(logic.updateAccesorio(accesorio.toEntity()));
     }
 

@@ -21,7 +21,7 @@ import javax.inject.Inject;
 @Stateless
 public class AccesorioLogic {
 
-    private final static Logger LOGGER = Logger.getLogger(AccesorioLogic.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(AccesorioLogic.class.getName());
 
     @Inject
     private AccesorioPersistence persistence;

@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.escarabajos.persistence;
 
 import co.edu.uniandes.csw.escarabajos.entities.CarritoEntity;
-import co.edu.uniandes.csw.escarabajos.entities.ListaDeseosEntity;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;

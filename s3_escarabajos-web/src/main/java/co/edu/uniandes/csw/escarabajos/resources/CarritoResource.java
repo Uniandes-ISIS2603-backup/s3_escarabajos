@@ -111,22 +111,14 @@ public class CarritoResource {
      * 404 Not Found. No existe un carrito con el id dado.
      * </code> 
      * </pre>
-     * @param id Identificador del carrito que se desea actualizar.Este debe ser una cadena de dígitos.
      * @param carrito {@link CarritoDTO} - El carrito que se desea guardar.
      * @return JSON {@link CarritoDTO} - El carrito guardado.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar el carrito.
      */
     @PUT
     @Path("{id: \\d+}")
-    public CarritoDTO updateCarrito(@PathParam("id") Long id, CarritoDTO carrito) throws BusinessLogicException {
+    public CarritoDTO updateCarrito( CarritoDTO carrito) throws BusinessLogicException {
         return new CarritoDTO( logic.updateCarrito(carrito.toEntity()) );
     }
     
-    /**
-     *No existe metodo delete carrito porque un carrito nunca debe ser borrado 
-     */
-    @DELETE
-    @Path("{id: \\d+}")
-     public void deleteAccesorio(@PathParam("id") Long id) throws BusinessLogicException {
-    }
 }

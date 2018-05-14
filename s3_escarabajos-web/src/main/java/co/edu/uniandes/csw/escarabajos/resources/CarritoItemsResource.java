@@ -5,14 +5,11 @@
  */
 package co.edu.uniandes.csw.escarabajos.resources;
 
-import co.edu.uniandes.csw.escarabajos.dtos.CarritoDetailDTO;
-import co.edu.uniandes.csw.escarabajos.dtos.ClienteDetailDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.ItemDetailDTO;
 import co.edu.uniandes.csw.escarabajos.ejb.CarritoLogic;
 import co.edu.uniandes.csw.escarabajos.ejb.ClienteLogic;
 import co.edu.uniandes.csw.escarabajos.ejb.ItemLogic;
 import co.edu.uniandes.csw.escarabajos.entities.CarritoEntity;
-import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
@@ -49,6 +46,7 @@ import javax.ws.rs.WebApplicationException;
 @RequestScoped
 public class CarritoItemsResource {
     
+        
     @Inject
     ItemLogic itemLogic;
     
@@ -57,6 +55,8 @@ public class CarritoItemsResource {
     
     @Inject
     ClienteLogic clienteLogic;
+    
+    private static final String NOEXISTE = "No existe el carrito con id ";
     
      /**
      * <h1>POST /api/clientes/{idCLiente}/carrito/items/{idItem} : Agrega un item al carrito.</h1>
@@ -73,7 +73,6 @@ public class CarritoItemsResource {
      * 412 Precodition Failed: No existe el item.
      * </code>
      * </pre>
-     * @param idCliente Identificador del cliente dueño del carrito al que se desea agregar. Este debe ser una cadena de dígitos.
      * @param idItem Identificador del item que se desea agregar. Este debe ser una cadena de dígitos.
      * @return JSON {@link ItemDetailDTO} - el item agregado.
      */
@@ -88,19 +87,19 @@ public class CarritoItemsResource {
             CarritoEntity carritoEntity = carritoLogic.findCarrito(idCarrito);
             
             if(carritoEntity==null){
-                throw new WebApplicationException("El recurso /carrito/" + idCarrito + " no existe.", 404);
+                throw new WebApplicationException(NOEXISTE + idCarrito, 404);
             }
             
             ItemEntity itemEntity = itemLogic.getItem(idItem);
             
             if(itemEntity==null){
-                throw new WebApplicationException("El recurso /items/" + idItem + " no existe.", 404);
+                throw new WebApplicationException("El item " + idItem + " no existe.", 404);
             }
             
             List<ItemDetailDTO> items =getItemsCarrito(idCarrito);
             
             if (items.contains(new ItemDetailDTO(itemEntity,itemLogic.getReferenciaItem(itemEntity)))) {
-                throw new WebApplicationException("El item ya esta en su carrito", 404);
+                throw new WebApplicationException("El item ya esta en su carrito", 500);
             }
             itemEntity = itemLogic.getItem(idItem);
             return new ItemDetailDTO( carritoLogic.addItem(idCarrito, idItem ),itemLogic.getReferenciaItem(itemEntity));
@@ -141,13 +140,13 @@ public class CarritoItemsResource {
             CarritoEntity carritoEntity = carritoLogic.findCarrito(idCarrito);
             
             if(carritoEntity==null){
-                throw new WebApplicationException("El recurso /carrito/" + idCarrito + " no existe.", 404);
+                throw new WebApplicationException(NOEXISTE + idCarrito, 404);
             }
             
             ItemEntity itemEntity = itemLogic.getItem(idItem);
             
             if(itemEntity==null){
-                throw new WebApplicationException("El recurso /items/" + idItem + " no existe.", 404);
+                throw new WebApplicationException("El item " + idItem + " no existe.", 404);
             }
             
             return new ItemDetailDTO( carritoLogic.removeItem(idCarrito, idItem),itemLogic.getReferenciaItem(itemEntity) );
@@ -186,14 +185,13 @@ public class CarritoItemsResource {
     public List<ItemDetailDTO> getItemsCarrito( @PathParam("idCarrito") Long idCarrito ) {
         //DONE si no existe el recurso cliente con idCliente debe disparar WebApplicationException
         //DONE si no existe el recurso item con idItem debe disparar WebApplicationException
-        //Este todo no tiene sentido porque si no hay items se debe devolver una lista vacia
         //DONE: Este try catch está mal
         try {
             
             CarritoEntity carritoEntity = carritoLogic.findCarrito(idCarrito);
             
             if(carritoEntity==null){
-                throw new WebApplicationException("El recurso /carrito/" + idCarrito + " no existe.", 404);
+                throw new WebApplicationException(NOEXISTE + idCarrito, 404);
             }
             
             return listEntity2DTO(carritoLogic.getItems(idCarrito));
