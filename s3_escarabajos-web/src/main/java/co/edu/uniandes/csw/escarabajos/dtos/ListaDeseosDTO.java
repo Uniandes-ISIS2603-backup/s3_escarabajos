@@ -56,7 +56,7 @@ public class ListaDeseosDTO {
      * Constructor por defecto
      */
     public ListaDeseosDTO() {
-        
+        // Do nothing because of JPA
     }
     
         /**

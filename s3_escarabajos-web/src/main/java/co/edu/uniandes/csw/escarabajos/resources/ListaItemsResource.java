@@ -5,14 +5,11 @@
  */
 package co.edu.uniandes.csw.escarabajos.resources;
 
-import co.edu.uniandes.csw.escarabajos.dtos.ListaDeseosDetailDTO;
-import co.edu.uniandes.csw.escarabajos.dtos.ClienteDetailDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.ItemDetailDTO;
 import co.edu.uniandes.csw.escarabajos.ejb.ListaDeseosLogic;
 import co.edu.uniandes.csw.escarabajos.ejb.ClienteLogic;
 import co.edu.uniandes.csw.escarabajos.ejb.ItemLogic;
 import co.edu.uniandes.csw.escarabajos.entities.ListaDeseosEntity;
-import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
@@ -49,6 +46,7 @@ import javax.ws.rs.WebApplicationException;
 @RequestScoped
 public class ListaItemsResource {
     
+        
     @Inject
     ItemLogic itemLogic;
     
@@ -57,6 +55,8 @@ public class ListaItemsResource {
     
     @Inject
     ClienteLogic clienteLogic;
+    
+    private static final String NOEXISTE = "No existe el listadeseos con id ";
     
      /**
      * <h1>POST /api/clientes/{idCLiente}/listadeseos/items/{idItem} : Agrega un item al listadeseos.</h1>
@@ -73,7 +73,6 @@ public class ListaItemsResource {
      * 412 Precodition Failed: No existe el item.
      * </code>
      * </pre>
-     * @param idCliente Identificador del cliente dueño del listadeseos al que se desea agregar. Este debe ser una cadena de dígitos.
      * @param idItem Identificador del item que se desea agregar. Este debe ser una cadena de dígitos.
      * @return JSON {@link ItemDetailDTO} - el item agregado.
      */
@@ -88,26 +87,26 @@ public class ListaItemsResource {
             ListaDeseosEntity listadeseosEntity = listadeseosLogic.findListaDeseos(idListaDeseos);
             
             if(listadeseosEntity==null){
-                throw new WebApplicationException("El recurso /listadeseos/" + idListaDeseos + " no existe.", 404);
+                throw new WebApplicationException(NOEXISTE + idListaDeseos, 404);
             }
             
             ItemEntity itemEntity = itemLogic.getItem(idItem);
             
             if(itemEntity==null){
-                throw new WebApplicationException("El recurso /items/" + idItem + " no existe.", 404);
+                throw new WebApplicationException("El item " + idItem + " no existe.", 404);
             }
             
             List<ItemDetailDTO> items =getItemsListaDeseos(idListaDeseos);
             
             if (items.contains(new ItemDetailDTO(itemEntity,itemLogic.getReferenciaItem(itemEntity)))) {
-                throw new WebApplicationException("El item ya esta en su listadeseos", 404);
+                throw new WebApplicationException("El item ya esta en su listadeseos", 500);
             }
             itemEntity = itemLogic.getItem(idItem);
             return new ItemDetailDTO( listadeseosLogic.addItem(idListaDeseos, idItem ),itemLogic.getReferenciaItem(itemEntity));
         }
         catch (BusinessLogicException ex) {
             
-            throw new WebApplicationException(ex.getMessage(), 500);
+            throw new WebApplicationException(ex, 500);
         }
     }
     
@@ -141,18 +140,18 @@ public class ListaItemsResource {
             ListaDeseosEntity listadeseosEntity = listadeseosLogic.findListaDeseos(idListaDeseos);
             
             if(listadeseosEntity==null){
-                throw new WebApplicationException("El recurso /listadeseos/" + idListaDeseos + " no existe.", 404);
+                throw new WebApplicationException(NOEXISTE + idListaDeseos, 404);
             }
             
             ItemEntity itemEntity = itemLogic.getItem(idItem);
             
             if(itemEntity==null){
-                throw new WebApplicationException("El recurso /items/" + idItem + " no existe.", 404);
+                throw new WebApplicationException("El item " + idItem + " no existe.", 404);
             }
             
             return new ItemDetailDTO( listadeseosLogic.removeItem(idListaDeseos, idItem),itemLogic.getReferenciaItem(itemEntity) );
         } catch (BusinessLogicException ex) {
-            throw new WebApplicationException(ex.getMessage(),500);
+            throw new WebApplicationException(ex,500);
         }
     }
     
@@ -186,20 +185,19 @@ public class ListaItemsResource {
     public List<ItemDetailDTO> getItemsListaDeseos( @PathParam("idListaDeseos") Long idListaDeseos ) {
         //DONE si no existe el recurso cliente con idCliente debe disparar WebApplicationException
         //DONE si no existe el recurso item con idItem debe disparar WebApplicationException
-        //Este todo no tiene sentido porque si no hay items se debe devolver una lista vacia
         //DONE: Este try catch está mal
         try {
             
             ListaDeseosEntity listadeseosEntity = listadeseosLogic.findListaDeseos(idListaDeseos);
             
             if(listadeseosEntity==null){
-                throw new WebApplicationException("El recurso /listadeseos/" + idListaDeseos + " no existe.", 404);
+                throw new WebApplicationException(NOEXISTE + idListaDeseos, 404);
             }
             
             return listEntity2DTO(listadeseosLogic.getItems(idListaDeseos));
             
         } catch (BusinessLogicException ex) {
-            throw new WebApplicationException(ex.getMessage(), 500);
+            throw new WebApplicationException(ex, 500);
         }
     }
     

@@ -106,7 +106,7 @@ public class CarritoItemsResource {
         }
         catch (BusinessLogicException ex) {
             
-            throw new WebApplicationException(ex.getMessage(), 500);
+            throw new WebApplicationException(ex, 500);
         }
     }
     
@@ -151,7 +151,7 @@ public class CarritoItemsResource {
             
             return new ItemDetailDTO( carritoLogic.removeItem(idCarrito, idItem),itemLogic.getReferenciaItem(itemEntity) );
         } catch (BusinessLogicException ex) {
-            throw new WebApplicationException(ex.getMessage(),500);
+            throw new WebApplicationException(ex,500);
         }
     }
     
@@ -197,7 +197,7 @@ public class CarritoItemsResource {
             return listEntity2DTO(carritoLogic.getItems(idCarrito));
             
         } catch (BusinessLogicException ex) {
-            throw new WebApplicationException(ex.getMessage(), 500);
+            throw new WebApplicationException(ex, 500);
         }
     }
     

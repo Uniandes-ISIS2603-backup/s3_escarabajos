@@ -9,7 +9,6 @@ import co.edu.uniandes.csw.escarabajos.dtos.CarritoDetailDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.FacturaDetailDTO;
 import co.edu.uniandes.csw.escarabajos.ejb.CarritoLogic;
 import co.edu.uniandes.csw.escarabajos.ejb.ClienteLogic;
-import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -60,8 +59,6 @@ public class CarritoFacturaResource {
             
         CarritoDetailDTO carrito = clienteCarrito.getCarrito(idCliente);
         
-        FacturaDetailDTO factura= new FacturaDetailDTO(logicCarrito.crearFactura(carrito.getId()));
-        
-        return factura;
+        return new FacturaDetailDTO(logicCarrito.crearFactura(carrito.getId()));
     }
 }

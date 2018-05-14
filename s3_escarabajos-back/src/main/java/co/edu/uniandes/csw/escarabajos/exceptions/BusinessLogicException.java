@@ -33,6 +33,7 @@ import javax.ejb.ApplicationException;
 public class BusinessLogicException extends Exception {
 
     public BusinessLogicException() {
+        // Do nothing because of JPA
     }
 
     /**

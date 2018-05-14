@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.escarabajos.entities;
 
 import java.io.Serializable;
-import java.util.Objects;
 import javax.persistence.Entity;
 
 /**
@@ -36,13 +35,4 @@ public class AccesorioEntity extends ItemEntity implements Serializable{
         this.descripcion = descripcion;
     }
     
-    @Override
-    public boolean equals(Object obj) {
-    if (obj == this) {
-      return true;
-    }
-    else {
-        return false;
-    }
-  }
 }
