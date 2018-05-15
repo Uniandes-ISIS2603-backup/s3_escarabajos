@@ -1,275 +1,177 @@
-<style>
-    /* The container */
-    .container {
-        display: block;
-        position: relative;
-        padding-left: 35px;
-        margin-bottom: 12px;
-        cursor: pointer;
-        font-size: 22px;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
-
-    /* Hide the browser's default checkbox */
-    .container input {
-        position: absolute;
-        opacity: 0;
-        cursor: pointer;
-    }
-
-    /* Create a custom checkbox */
-    .checkmark {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 25px;
-        width: 25px;
-        background-color: #eee;
-    }
-
-    /* On mouse-over, add a grey background color */
-    .container:hover input ~ .checkmark {
-        background-color: #ccc;
-    }
-
-    /* When the checkbox is checked, add a blue background */
-    .container input:checked ~ .checkmark {
-        background-color: #00C851;
-    }
-
-    /* Create the checkmark/indicator (hidden when not checked) */
-    .checkmark:after {
-        content: "";
-        position: absolute;
-        display: none;
-    }
-
-    /* Show the checkmark when checked */
-    .container input:checked ~ .checkmark:after {
-        display: block;
-    }
-
-    /* Style the checkmark/indicator */
-    .container .checkmark:after {
-        left: 9px;
-        top: 7px;
-        width: 8px;
-        height: 10px;
-        border: solid white;
-        border-width: 0 3px 3px 0;
-        -webkit-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-        transform: rotate(45deg);
-    }
-
-    #custom-handle1 {
-        width: 4em;
-        height: 1.6em;
-        top: 50%;
-        margin-top: -.8em;
-        text-align: center;
-        font-size: 100%;
-        line-height: 1.6em;
-    }
-    #custom-handle2 {
-        width: 4em;
-        height: 1.6em;
-        top: 50%;
-        margin-top: -.8em;
-        text-align: center;
-        font-size: 100%;
-        line-height: 1.6em;
-    }
-</style>
-
-
-<p></p>
-<div class="row"> 
-    <div class="well"  style="background-color:grey" >
-        <div class="row"> 
-            <p class="text" style="color: #FFF; font-size: 18px; text-align: center;">Marcas</p>
-        </div>
-        <div class="row" style='height: 30px' ng-repeat="marca in marcas">
-            <div class="col-xs-2" >
+<link rel="stylesheet" href="src/modules/catalogo/filtros.css" />
+<br>
+<div class="filtros">
+    <div class="row"> 
+        <div class="well"   >
+            <div class="row"> 
+                <p class="text" style="color:#82CD73; font-size: 18px; text-align: center;">Marcas</p>
+                <hr>
             </div>
-            <div class="col-xs-10" >
-                <label class="container" style="color: #FFF; font-size: 16px;">{{marca.nombre}}    
-                    <input type="checkbox" ng-checked='marca.activado' ng-change="cambiarMarca(marca.nombre)" ng-model="marca.activado">
-                    <span class="checkmark"></span>
-                </label>
+            <div class="row" style='height: 30px' ng-repeat="marca in marcas">
+                <div class="col-xs-2" >
+                </div>
+                <div class="col-xs-10" >
+                    <label class="container" style="font-size: 16px;">{{marca.nombre}}    
+                        <input type="checkbox" ng-checked='marca.activado' ng-change="cambiarMarca(marca.nombre)" ng-model="marca.activado">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
             </div>
-        </div>
-        <div ng-if="marcasCol.length > 0">
-            <div id="verMasMarcas" class="collapse">
-                <div class="row" style='height: 30px' ng-repeat="marca in marcasCol">
-                    <div class="col-xs-2" >
-                    </div>
-                    <div class="col-xs-10" >
-                        <label class="container" style="color: #FFF; font-size: 16px;">{{marca.nombre}}    
-                            <input type="checkbox" ng-checked='marca.activado' ng-change="cambiarMarca(marca.nombre)" ng-model="marca.activado">
-                            <span class="checkmark"></span>
-                        </label>
+            <div ng-if="marcasCol.length > 0">
+                <div id="verMasMarcas" class="collapse">
+                    <div class="row" style='height: 30px' ng-repeat="marca in marcasCol">
+                        <div class="col-xs-2" >
+                        </div>
+                        <div class="col-xs-10" >
+                            <label class="container" style=" font-size: 16px;">{{marca.nombre}}    
+                                <input type="checkbox" ng-checked='marca.activado' ng-change="cambiarMarca(marca.nombre)" ng-model="marca.activado">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-xs-12 text-center" >
+                        <button type="button" class="btn  btn-success" data-toggle="collapse" data-target="#verMasMarcas" >Ver Mas</button>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+    <div class="row"> 
+        <div class="well"  >
+            <div class="row"> 
+                <p class="text" style="color:#82CD73; font-size: 18px; text-align: center;">Precio</p>
+                <hr>
             </div>
             <div class="row">
-                <div class="col-xs-12 text-center" >
-                    <button type="button" class="btn  btn-success" data-toggle="collapse" data-target="#verMasMarcas" >Ver Mas</button>
-                </div>
-            </div>  
-        </div>
-    </div>
-</div>
-<div class="row"> 
-    <div class="well"  style="background-color:gray" >
-        <div class="row"> 
-            <p class="text" style="color: #FFF; font-size: 18px; text-align: center;">Precio</p>
-        </div>
-        <div class="row">
-            <div class="col-xs-10 text-center" >
-                <div id="slider-range">
-                    <div id="custom-handle1" class="ui-slider-handle"></div>
-                    <div id="custom-handle2" class="ui-slider-handle"></div>
-                </div>
-            </div>
-            <div class="col-xs-2" ></div>
-        </div>      
-    </div>
-</div>
-<div class="row"> 
-    <div class="well"  style="background-color:gray" >
-        <div class="row"> 
-            <p class="text" style="color: #FFF; font-size: 18px; text-align: center;">Categoria</p>
-        </div>
-        <div class="row" style='height: 30px' ng-repeat="categoria in categorias">
-            <div class="col-xs-2" >
-            </div>
-            <div class="col-xs-10" >
-                <label class="container" style="color: #FFF; font-size: 16px;">{{categoria.nombre}}    
-                    <input type="checkbox" ng-checked='categoria.activado' ng-change="cambiarCategoria(categoria.nombre)" ng-model="categoria.activado">
-                    <span class="checkmark"></span>
-                </label>
-            </div>
-        </div>
-        <div ng-if="categoriasCol.length > 0">
-            <div id="verMasCategorias" class="collapse">
-                <div class="row" style='height: 30px' ng-repeat="categoria in categoriasCol">
-                    <div class="col-xs-2" >
+                <div class="col-xs-10 text-center" >
+                    <div id="slider-range">
+                        <div id="custom-handle1" class="ui-slider-handle"></div>
+                        <div id="custom-handle2" class="ui-slider-handle"></div>
                     </div>
-                    <div class="col-xs-10" >
-                        <label class="container" style="color: #FFF; font-size: 16px;">{{categoria.nombre}}    
-                            <input type="checkbox" ng-checked='categoria.activado' ng-change="cambiarCategoria(categoria.nombre)" ng-model="categoria.activado">
-                            <span class="checkmark"></span>
+                </div>
+                <div class="col-xs-2" ></div>
+            </div>      
+        </div>
+    </div>
+    <div class="row"> 
+        <div class="well"   >
+            <div class="row"> 
+                <p class="text" style="color:#82CD73; font-size: 18px; text-align: center;">Categoria</p>
+                <hr>
+            </div>
+            <div class="row" style='height: 30px' ng-repeat="categoria in categorias">
+                <div class="col-xs-2" >
+                </div>
+                <div class="col-xs-10" >
+                    <label class="container" style=" font-size: 16px;">{{categoria.nombre}}    
+                        <input type="checkbox" ng-checked='categoria.activado' ng-change="cambiarCategoria(categoria.nombre)" ng-model="categoria.activado">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+            </div>
+            <div ng-if="categoriasCol.length > 0">
+                <div id="verMasCategorias" class="collapse">
+                    <div class="row" style='height: 30px' ng-repeat="categoria in categoriasCol">
+                        <div class="col-xs-2" >
+                        </div>
+                        <div class="col-xs-10" >
+                            <label class="container" style=" font-size: 16px;">{{categoria.nombre}}    
+                                <input type="checkbox" ng-checked='categoria.activado' ng-change="cambiarCategoria(categoria.nombre)" ng-model="categoria.activado">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 text-center" >
+                        <button type="button" class="btn  btn-success" data-toggle="collapse" data-target="#verMasCategorias" >Ver Mas</button>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+    <div class="row"> 
+        <div class="well">
+            <div class="row"> 
+                <p class="text" style="color:#82CD73; font-size: 18px; text-align: center;">Calificación</p>
+                <hr>
+                <div class="col-xs-12 text-center" >
+                    <form class="rating">
+                        <label>
+                            <input type="radio" name="stars" value="1" ng-checked="filtros.calificacionMin === '1'" />
+                            <span class="icon">★</span>
                         </label>
+                        <label >
+                            <input type="radio" name="stars" value="2" ng-checked="filtros.calificacionMin === '2'"/>
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="stars" value="3"  ng-checked="filtros.calificacionMin === '3'"/>
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>   
+                        </label>
+                        <label>
+                            <input type="radio" name="stars" value="4" ng-checked="filtros.calificacionMin === '4'"/>
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="stars" value="5" ng-checked="filtros.calificacionMin === '5'"/>
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                        </label>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row"> 
+        <div class="well"  >
+            <div class="row"> 
+                <p class="text" style="color:#82CD73; font-size: 18px; text-align: center;">Color</p>
+                <hr>
+            </div>
+            <div class="row" style='height: 40px' ng-repeat="color in filtros.colores">
+                <div class="col-xs-2" >
+                </div>
+                <div class="col-xs-6" >
+                    <div style="background-color: {{color}} ; width:100%; height:35px; border-radius:5px; border: 2px solid #666; ">        
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 text-center" >
-                    <button type="button" class="btn  btn-success" data-toggle="collapse" data-target="#verMasCategorias" >Ver Mas</button>
+                <div class="col-xs-2 text-center" >
+                    <div class="row"> 
+                        <a  ng-click="cambiarColor(color)" class="btn btn-danger" >
+                            <span class="glyphicon glyphicon-remove" style="color:white; font-size: 15px; text-align: center"></span></a>
+                    </div>
                 </div>
-            </div>  
-        </div>
-    </div>
-</div>
-<div class="row"> 
-    <div class="well"  style="background-color:gray" >
-        <div class="row"> 
-            <p class="text" style="color: #FFF; font-size: 18px; text-align: center;">Calificacion</p>
-
-
-            <div class="col-xs-12 text-center" >
-                <form class="rating">
-                    <label>
-                        <input type="radio" name="stars" value="1" ng-checked="filtros.calificacionMin === '1'" />
-                        <span class="icon">★</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="stars" value="2" ng-checked="filtros.calificacionMin === '2'"/>
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="stars" value="3"  ng-checked="filtros.calificacionMin === '3'"/>
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>   
-                    </label>
-                    <label>
-                        <input type="radio" name="stars" value="4" ng-checked="filtros.calificacionMin === '4'"/>
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="stars" value="5" ng-checked="filtros.calificacionMin === '5'"/>
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                    </label>
-                </form>
-
+                <br>
             </div>
-        </div>
-    </div>
-</div>
-<div class="row"> 
-    <div class="well"  style="background-color:gray" >
-        <div class="row"> 
-            <p class="text" style="color: #FFF; font-size: 18px; text-align: center;">Color</p>
-        </div>
-        <div class="row" style='height: 40px' ng-repeat="color in filtros.colores">
-            <div class="col-xs-2" >
-            </div>
-            <div class="col-xs-6" >
-                <div style="background-color: {{color}} ; width:100%; height:35px; border-radius:5px; border: 2px solid #666; ">        
+            <div ng-if="coloresCol.length > 0">
+                <div class="dropdown text-center">
+                    <button type="button" class="btn  btn-success" data-toggle="dropdown" >Agregar Color</button>
+                    <div class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <table>
+                            <tr ng-repeat="colores in coloresCol">
+                                <td ng-repeat="color in colores">
+                                    <div class="swatch swatch-clickable" style="background-color:{{color.nombre}}" ng-click="cambiarColor(color.nombre)"></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
-            </div>
-            <div class="col-xs-2 text-center" >
-                <div class="row"> 
-                    <a  ng-click="cambiarColor(color)" class="btn btn-danger" >
-                        <span class="glyphicon glyphicon-remove" style="color:white; font-size: 15px; text-align: center"></span></a>
-                </div>
-            </div>
-            <br>
-        </div>
-        <div ng-if="coloresCol.length > 0">
-            <style>
-                .swatch {
-                    width:50px;
-                    height:50px;
-                    border-radius:100px;
-                    border: 2px solid #666;
-                }
-                .swatch-clickable:hover {
-                    border: 2px solid #000;
-                    cursor: pointer;
-                }
 
-                .dropdown-menu {
-                    padding:10px;
-                }
-            </style>
-            <div class="dropdown text-center">
-                <button type="button" class="btn  btn-success" data-toggle="dropdown" >Agregar Color</button>
-                <div class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                    <table>
-                        <tr ng-repeat="colores in coloresCol">
-                            <td ng-repeat="color in colores">
-                                <div class="swatch swatch-clickable" style="background-color:{{color.nombre}}" ng-click="cambiarColor(color.nombre)"></div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+                <!--Agregar color-->
             </div>
-
-            <!--Agregar color-->
         </div>
     </div>
 </div>

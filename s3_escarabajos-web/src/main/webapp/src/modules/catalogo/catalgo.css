@@ -1,0 +1,8 @@
+@media screen and (min-widht:910px){
+    .main>.VistaCatalogo{
+        box-sizing: border-box;
+        margin:0px;
+        padding: 0px;    
+    }
+    
+}
