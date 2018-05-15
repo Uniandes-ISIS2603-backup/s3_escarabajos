@@ -216,7 +216,7 @@ public class ModeloResource {
 
     /**
      * Conexión con el servicio de autores para un libro.
-     * {@link ModeloCalificacionResource}
+     * {@link ModeloClienteCalificacionResource}
      *
      * Este método conecta la ruta de /modelos con las rutas de /calificaciones
      * que dependen del modelo, es una redirección al servicio que maneja el
@@ -227,10 +227,10 @@ public class ModeloResource {
      * @return El servicio de calificaciones para ese modelo en paricular.
      */
     @Path("{modelosId: \\d+}/calificaciones")
-    public Class<ModeloCalificacionResource> getModeloCalificacionResource(@PathParam("modelosId") Long modelosId){
+    public Class<ModeloClienteCalificacionResource> getModeloCalificacionResource(@PathParam("modelosId") Long modelosId){
         ModeloEntity modelo = modeloLogic.getModelo(modelosId);
         expt(modelo, modelosId);
-        return ModeloCalificacionResource.class;
+        return ModeloClienteCalificacionResource.class;
     }
 
     /**

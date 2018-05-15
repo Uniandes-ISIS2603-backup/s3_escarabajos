@@ -37,6 +37,7 @@ public class CalificacionLogic {
     }
 
     public CalificacionEntity crearCalificacion(CalificacionEntity cal, Long modeloId, Long clienteId) throws BusinessLogicException {
+        LOGGER.info("[LOGIC] Comienza el proceso de crear una calificación y conectarla con el cliente " + clienteId + " y el modelo " + modeloId);
         if (!isInRange(cal.getPuntaje())) {
             LOGGER.info("[ERROR] El puntaje no está en rango");
             throw new BusinessLogicException("El puntaje debe ser un valor entre 0 y 5");
@@ -58,6 +59,7 @@ public class CalificacionLogic {
         cal.setModelo(model);
         cal.setCliente(cliente);
         CalificacionEntity nueva = calificacionPersistence.create(cal);
+        LOGGER.info("[LOGIC] Termina el proceso de crear una calificación y conectarla con el cliente " + clienteId + " y el modelo " + modeloId + ", su id es " + nueva.getId());
         return nueva;
     }
 

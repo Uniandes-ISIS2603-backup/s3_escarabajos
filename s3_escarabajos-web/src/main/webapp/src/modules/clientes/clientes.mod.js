@@ -17,7 +17,7 @@
                     }
                 }
             }).state('clientesSignUp', {
-                url: '/clientesSignUp',
+                url: '/signUp',
                 views: {
                     'mainView': {
                         controller: 'clientesCreateCtrl',

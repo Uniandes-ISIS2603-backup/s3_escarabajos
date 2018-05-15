@@ -42,15 +42,18 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author n.gaitan
  */
-@Path("modelos/{modelosId: \\d+}/calificaciones")
+@Path("modelos/{modelosId: \\d+}")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
-public class ModeloCalificacionResource {
+public class ModeloClienteCalificacionResource {
 
     @Inject
     CalificacionLogic cal;
-
+    @Inject
+    ModeloLogic mod;
+    @Inject
+    ClienteLogic cli;
     /**
      * Convierte una lista de entities a una lista de DTOs
      *
@@ -66,7 +69,7 @@ public class ModeloCalificacionResource {
     }
 
     /**
-     * <h1>POST /api/modelos/{modelosId}/calificaciones/{calificacionesId} :
+     * <h1>POST /api/modelos/{modelosId}/clientes/{clientesId}/calificaciones :
      * Crear una calificacion.</h1>
      *
      * <pre>Cuerpo de petición: JSON {@link CalificacionDetailDTO}.
@@ -88,17 +91,23 @@ public class ModeloCalificacionResource {
      * se desea guardar.
      * @param modeloId el modelo al que hacer referencia la calificacion
      * @param clienteId el cliente que hace la calificacion
-     * @param id el id de la calificacion
      * @return JSON {@link CalificacionDetailDTO} - la calificacion guardado con
      * el atributo id autogenerado.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
      * Error de lógica que se genera cuando ya existe un reclamo.
      */
     @POST
+    @Path("/clientes/{clientesId: \\d+}/calificaciones")
     public CalificacionDetailDTO createCalificacion(CalificacionDetailDTO calificacion,
-            @PathParam("modelosId") Long modeloId) throws BusinessLogicException {
-
-        return new CalificacionDetailDTO(cal.crearCalificacion(calificacion.toEntity(),modeloId, new Long(3)));
+            @PathParam("modelosId") Long modeloId, @PathParam("clientesId") Long clienteId) throws BusinessLogicException {
+        if(cli.getCliente(clienteId) == null){
+            throw new WebApplicationException("El cliente no existe" , 404);
+        }
+        if(mod.getModelo(modeloId) == null)
+        {
+             throw new WebApplicationException("El modelo no existe" , 404);
+        }
+        return new CalificacionDetailDTO(cal.crearCalificacion(calificacion.toEntity(),modeloId, clienteId));
         
     }
 
@@ -118,7 +127,12 @@ public class ModeloCalificacionResource {
      * encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
      */
     @GET
+    @Path("/calificaciones")
     public List<CalificacionDetailDTO> getCalificaciones(@PathParam("modelosId") Long modeloId) {
+        if(mod.getModelo(modeloId) == null)
+        {
+             throw new WebApplicationException("El modelo no existe" , 404);
+        }
         return list2DTO(cal.getCalificacionesPorModelo(modeloId));
     }
 }
