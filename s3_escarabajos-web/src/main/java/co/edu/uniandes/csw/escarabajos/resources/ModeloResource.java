@@ -118,8 +118,9 @@ public class ModeloResource {
      * @return JSON {@link ModeloDetailDTO} - El modelo buscado throws
      */
     @GET
-    @Path("{id: \\d+}")
+    @Path("/{id: \\d+}")
     public ModeloDetailDTO getModelo(@PathParam("id") Long id) throws WebApplicationException {
+        LOGGER.info("!!!!");
         ModeloEntity entity = modeloLogic.getModelo(id);
         expt(entity, id);
         return new ModeloDetailDTO(entity);
@@ -143,14 +144,16 @@ public class ModeloResource {
      * una cadena de dígitos.
      * @param modelo {@link ModeloDetailDTO} - El modelo que se desea guardar.
      * @return JSON {@link ModeloDetailDTO} - El modelo guardado.
-     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException si falla la logica.
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
+     * si falla la logica.
      */
     @PUT
-    @Path("{id: \\d+}")
-    public ModeloDetailDTO updateModelo(@PathParam("id") Long id, ModeloDetailDTO modelo) throws BusinessLogicException{
+    @Path("/{id: \\d+}")
+    public ModeloDetailDTO updateModelo(@PathParam("id") Long id, ModeloDetailDTO modelo) throws BusinessLogicException {
         modelo.setId(id);
+        LOGGER.info("@@@@");
         ModeloEntity entity = modeloLogic.getModelo(id);
-         expt(entity, id);
+        expt(entity, id);
         return new ModeloDetailDTO(modeloLogic.updateModelo(id, modelo.toEntity()));
     }
 
@@ -171,7 +174,7 @@ public class ModeloResource {
      * cadena de dígitos.
      */
     @DELETE
-    @Path("{id: \\d+}")
+    @Path("/{id: \\d+}")
     public void deleteModelo(@PathParam("id") Long id) {
         try {
             modeloLogic.deleteModelo(id);
@@ -192,8 +195,8 @@ public class ModeloResource {
      * @param id El ID del modelo con respecto al cual se accede al servicio.
      * @return El servicio de items para ese modelo en paricular.
      */
-    @Path("{id: \\d+}/items")
-    public Class<ModeloItemsResource> getModeloItemsResource(@PathParam("id") Long id){
+    @Path("/{id: \\d+}/items")
+    public Class<ModeloItemsResource> getModeloItemsResource(@PathParam("id") Long id) {
         ModeloEntity entity = modeloLogic.getModelo(id);
         expt(entity, id);
         return ModeloItemsResource.class;
@@ -214,25 +217,24 @@ public class ModeloResource {
         return list;
     }
 
-    /**
-     * Conexión con el servicio de autores para un libro.
-     * {@link ModeloClienteCalificacionResource}
-     *
-     * Este método conecta la ruta de /modelos con las rutas de /calificaciones
-     * que dependen del modelo, es una redirección al servicio que maneja el
-     * segmento de la URL que se encarga de las calificaciones.
-     *
-     * @param modelosId El ID del libro con respecto al cual se accede al
-     * servicio.
-     * @return El servicio de calificaciones para ese modelo en paricular.
-     */
-    @Path("{modelosId: \\d+}/calificaciones")
-    public Class<ModeloClienteCalificacionResource> getModeloCalificacionResource(@PathParam("modelosId") Long modelosId){
-        ModeloEntity modelo = modeloLogic.getModelo(modelosId);
-        expt(modelo, modelosId);
-        return ModeloClienteCalificacionResource.class;
-    }
-
+//    /**
+//     * Conexión con el servicio de autores para un libro.
+//     * {@link ModeloClienteCalificacionResource}
+//     *
+//     * Este método conecta la ruta de /modelos con las rutas de /calificaciones
+//     * que dependen del modelo, es una redirección al servicio que maneja el
+//     * segmento de la URL que se encarga de las calificaciones.
+//     *
+//     * @param modelosId El ID del libro con respecto al cual se accede al
+//     * servicio.
+//     * @return El servicio de calificaciones para ese modelo en paricular.
+//     */
+//    @Path("/{modelosId: \\d+}/calificaciones")
+//    public Class<ModeloClienteCalificacionResource> getModeloCalificacionResource(@PathParam("modelosId") Long modelosId){
+//        ModeloEntity modelo = modeloLogic.getModelo(modelosId);
+//        expt(modelo, modelosId);
+//        return ModeloClienteCalificacionResource.class;
+//    }
     /**
      * metodo que se encarga de lanzar la exception.
      *

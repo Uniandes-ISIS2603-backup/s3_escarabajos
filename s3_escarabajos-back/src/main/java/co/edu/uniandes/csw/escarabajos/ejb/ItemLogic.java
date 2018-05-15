@@ -92,7 +92,7 @@ public class ItemLogic {
             throw new BusinessLogicException("Ya existe un accesorio el id \"" + entity.getId() + "\"");
         }
         ModeloEntity modelo = modeloPers.find(entity.getModeloId());
-        verificarModelo(modelo,entity);
+        verificarModelo(modelo, entity);
     }
 
     /**
@@ -104,7 +104,7 @@ public class ItemLogic {
      * @throws BusinessLogicException si no se cumple una de las reglas de
      * negocio.
      */
-    public void verificarModelo(ModeloEntity modelo,ItemEntity entity) throws BusinessLogicException {
+    public void verificarModelo(ModeloEntity modelo, ItemEntity entity) throws BusinessLogicException {
         if (modelo == null) {
             throw new BusinessLogicException("El item debe tener un modelo");
         }
@@ -183,6 +183,32 @@ public class ItemLogic {
             }
             return item;
         }
+    }
+
+    /**
+     * Metodo que se encarga de actualizar un item en el catalogo que no este comprado
+     *
+     * @param multiplicador del item a actualizar
+     * @param id a actualizar
+     * @return item comprado
+     * @throws BusinessLogicException si el item no existe o ya esta comprado.
+     */
+    public ItemEntity multiplicarItem(Double multiplicador, Long id) throws BusinessLogicException {
+        ItemEntity item = getItem(id);
+        if (item == null) {
+            LOGGER.log(Level.SEVERE, "El item con el id {0} no existe", id);
+            throw new BusinessLogicException("El item no existe!");
+        }
+        if (item.getDisponible()) {
+            item.setMultiplicador(multiplicador);
+            if (item instanceof AccesorioEntity) {
+                accPers.update((AccesorioEntity) item);
+            } else if (item instanceof BicicletaEntity) {
+                biciPers.update((BicicletaEntity) item);
+            }
+        }
+        return item;
+
     }
 
     /**

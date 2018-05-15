@@ -282,4 +282,8 @@ public class CatalogoPersistence {
         LOGGER.info(lista.toString());
         return lista;
     }
+
+    public List<ModeloEntity> getPropagandas(String tipo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
