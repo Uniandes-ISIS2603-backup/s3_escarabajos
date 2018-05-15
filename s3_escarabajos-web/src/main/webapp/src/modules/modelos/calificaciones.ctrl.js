@@ -7,7 +7,7 @@
             $scope.data = {};
             if ($state.params.modeloId !== undefined && $state.params.modeloId !== null) {
 
-                $http.get('api/modelos/' + $state.params.modeloId + '/calificaciones').then(function (response) {
+                $http.get('api/modelos/' + $state.params.modeloId + '/clientes/calificaciones', ).then(function (response) {
                     $scope.calificaciones = response.data;
                 });
                 $scope.createCalificacion = function ()
