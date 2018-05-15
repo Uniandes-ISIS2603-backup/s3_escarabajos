@@ -39,6 +39,8 @@ public class ReclamoDetailDTO extends ReclamoDTO {
     private FacturaDTO factura;
 
     private List<String> album;
+    
+    private ClienteDTO cliente;
 
     /**
      * Constructor vacio
@@ -61,6 +63,10 @@ public class ReclamoDetailDTO extends ReclamoDTO {
 //            }
             if (entity.getFactura() != null) {
                 factura = new FacturaDTO(entity.getFactura());
+            }
+            if ( entity.getCliente() != null )
+            {
+                cliente = new ClienteDTO(entity.getCliente());
             }
         }
 
@@ -113,6 +119,17 @@ public class ReclamoDetailDTO extends ReclamoDTO {
      */
     public void setFactura(FacturaDTO factura) {
         this.factura = factura;
+    }
+    /**
+     * Obtiene el cliente asociado al reclamo
+     * @return el 
+     */
+    public ClienteDTO getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(ClienteDTO cliente) {
+        this.cliente = cliente;
     }
 
 }

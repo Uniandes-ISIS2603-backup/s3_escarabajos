@@ -3,8 +3,8 @@
     mod.controller('deleteCarritoCtrl', ['$scope', '$http', '$state',
         function ($scope, $http, $state) {
             
-            // cambiar el 1 de la ruta por el id del cliente que este logeado
-            $http.get('api/clientes/' + 1 + '/carrito').then(function (response) {
+            
+            $http.get('api/clientes/' + sessionStorage.getItem("id") + '/carrito').then(function (response) {
 
                 ruta = 'api/carrito/' + response.data.id + '/items/';
             
