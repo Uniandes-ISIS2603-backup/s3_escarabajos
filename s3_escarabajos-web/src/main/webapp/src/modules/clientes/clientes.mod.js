@@ -8,9 +8,8 @@
 
             $stateProvider.state('clientesList', {
                 url: '/clientes',
-                parent: 'adminList',
                 views: {
-                    'childrenView': {
+                    'mainView': {
                         controller: 'clientesCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'clientes.list.html'

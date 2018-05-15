@@ -1,0 +1,56 @@
+ <form class="form-horizontal" name="signUp">
+    <!-- Form Name -->
+    <legend>Crea modelo</legend>
+
+    <div class="container">
+      <div class="row profile">
+        
+        <div class="col-md-9">
+          <div class="profile-content">
+            <fieldset>
+
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Id</label>
+                <div class="col-md-4">
+                   <input id="id" name="id" class="input-field" type="text" required ng-model="modeloActual.id">             
+                </div>
+              </div>
+
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Marca</label>
+                <div class="col-md-4">
+                  <input id="marca" name="marca" class="input-field" type="text" required ng-model="modeloActual.marca">             
+                </div>
+              </div>
+              
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Referencia</label>
+                <div class="col-md-4">
+                    <input id="referencia" name="referencia" class="input-field" type="text" required ng-model="modeloActual.referencia">             
+                </div>
+              </div>
+              
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Tipo Modelo</label>
+                <div class="col-md-4">
+                  <input id="tipoModelo" name="tipoModelo" class="input-field" type="text" required ng-model="modeloActual.tipoModelo">             
+                </div>
+              </div>
+
+              <!-- Button (Double) -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="btnsave"></label>
+                <div class="col-md-8" >
+                    <button id="btnsave" name="btnsave" class="btn btn-success" ng-click="createModelo()">Crear Modelo</button>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>

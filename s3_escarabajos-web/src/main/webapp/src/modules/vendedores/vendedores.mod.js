@@ -7,9 +7,8 @@ var mod = ng.module("vendedoresModule", []);
 
             $stateProvider.state('vendedoresList', {
                 url: '/vendedores',
-                parent:'adminList',
                 views: {
-                    'childrenView': {
+                    'mainView': {
                         controller: 'vendedoresCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'vendedores.list.html'
