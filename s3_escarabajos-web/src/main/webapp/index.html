@@ -111,7 +111,15 @@
                         <li class="active"> <a ui-sref="adv({adv:true,tipo:'bicicletas',filtros:{marcas:[],categorias:[],colores:[],precioMin:0.0,precioMax:999999999.9,calificacionMin:0.0}})">Catalogo</a></li>
                         <li><a ui-sref="adv({adv:true,tipo:'bicicletas',filtros:{marcas:[],categorias:[],colores:[],precioMin:0.0,precioMax:999999999.9,calificacionMin:0.0}})">Bicicletas</a></li>
                         <li><a ui-sref="adv({adv:true,tipo:'accesorios',filtros:{marcas:[],categorias:[],colores:[],precioMin:0.0,precioMax:999999999.9,calificacionMin:0.0}})">Accesorios</a></li>
-                        <li ng-if = " hasPermissions()"><a ui-sref="adminList">Administrador</a></li>
+                        <li class="dropdown" ng-if = "hasPermissions()"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Administrador<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a ui-sref="clientesList">Clientes</a></li>
+                                <li><a ui-sref="vendedoresList">Vendedores</a></li>
+                                <li><a ui-sref="facturasList">Facturas</a></li>
+                                <li><a ui-sref="bicisList">Bicicletas</a></li>
+                            </ul>
+                        </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right" Style="margin-right: 70px;">
                         <li>

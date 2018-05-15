@@ -47,7 +47,7 @@ public class ReclamoEntity  implements Serializable
    
     @PodamExclude
     private Boolean enProceso = true;
-    
+      
     @PodamExclude
     @ElementCollection
     @CollectionTable(name = "RECLAMO_ALBUM")
