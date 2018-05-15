@@ -133,7 +133,7 @@ public class BicicletaLogic {
      * @throws BusinessLogicException  por reglas de negocio
      */
     public BicicletaEntity verificarBicicleta(BicicletaEntity entity) throws BusinessLogicException {
-        if (entity.getUsada() != false) {
+        if (entity.getUsada()) {
             throw new BusinessLogicException("La bicicleta debe ser nueva");
         }
         if (entity.getCategoria() == null || entity.getCategoria().equals(" ")) {
