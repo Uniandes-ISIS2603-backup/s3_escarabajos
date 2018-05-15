@@ -64,7 +64,8 @@
                 sessionStorage.setItem("rol", null);
                 sessionStorage.setItem("id", null);
                 sessionStorage.setItem("name", null);
-                $state.go('adv',{}, {reload: true});
+                $state.go('adv',{adv:true,tipo:'bicicletas',filtros:{marcas:[],categorias:[],colores:[],precioMin:0.0,precioMax:999999999.9,calificacionMin:0.0}}, {reload: true});
+                alert('Se ha cerrado correctamente la sesión');
             };
         }]);
 })(window.angular);
