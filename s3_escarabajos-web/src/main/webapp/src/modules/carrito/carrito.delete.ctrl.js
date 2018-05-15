@@ -6,9 +6,9 @@
             
             $http.get('api/clientes/' + sessionStorage.getItem("id") + '/carrito').then(function (response) {
 
-                ruta = 'api/carrito/' + response.data.id + '/items';
+                var ruta = 'api/carrito/' + response.data.id + '/items';
                 
-                $http.delete(ruta).then(function (response) {
+                $http.delete(ruta).then(function (){
                     $state.go('carrito', {reload: true});
                 });
 

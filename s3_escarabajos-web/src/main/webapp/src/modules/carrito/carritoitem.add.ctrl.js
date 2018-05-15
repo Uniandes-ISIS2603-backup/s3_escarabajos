@@ -6,7 +6,7 @@
             
             $http.get('api/clientes/' + sessionStorage.getItem("id") + '/carrito').then(function (response) {
 
-                ruta = 'api/carrito/' + response.data.id + '/items/';
+                var ruta = 'api/carrito/' + response.data.id + '/items/';
             
                 var itemId = $state.params.itemId;
                 

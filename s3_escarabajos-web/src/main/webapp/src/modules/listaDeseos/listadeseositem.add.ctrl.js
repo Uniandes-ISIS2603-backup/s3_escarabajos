@@ -6,7 +6,7 @@
             // cambiar el 1 de la ruta por el id del cliente que este logeado
             $http.get('api/clientes/' + sessionStorage.getItem("id") + '/listadeseos').then(function (response) {
 
-                ruta = 'api/listadeseos/' + response.data.id + '/items/';
+                var ruta = 'api/listadeseos/' + response.data.id + '/items/';
 
                 var itemId = $state.params.itemId;
 
