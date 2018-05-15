@@ -2,13 +2,15 @@
 delete from car_Items;
 delete from item_album;
 delete from reclamo_album;
+delete from factura_items;
+delete from ReclamoEntity;
+delete from FacturaEntity;
 delete from calificacionEntity;
 delete from ItemEntity;
 delete from ModeloEntity;
 delete from CarritoEntity;
 delete from ClienteEntity;
-delete from FacturaEntity;
-delete from ReclamoEntity;
+
 --Datos de prueba ModeloEntity con tipo modelo Bicicleta
 
 insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (1, 'Cayman', 'EUR', 18, 'Bicicleta');
@@ -44,15 +46,28 @@ insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod
 
 --Datos de prueba VendedorEntity(con telefono y direccion no null)
 insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (1, '9898989', 'coc@hotmale.com', 'Camilo','pedro69','468651684','Frankfurtcalle8-9');
-insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (2, '1111111', 'hol@gmail.com', 'Felipe','saga','1232123','calle8-9');
-insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (3, '1111111', 'hol@gmail.com', 'Pedro','saga2','12345','Elm Street');
-insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (4, '9898989', 'jorge@hotmale.com', 'Jorge','giorginio1232','468651684','Frankfurtcalle8-9');
-insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (5, '1111111', 'sant@gmail.com', 'Santiago','s.beltran','1232123','calle8-9');
-insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (6, '1111111', 'and@gmail.com', 'Andres','a.varonm','12345','Elm Street');
-insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (7, '9898989', 'mate@hotmale.com', 'Mateo','m.devia','468651684','Frankfurtcalle8-9');
-insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (8, '1111111', 'nico@gmail.com', 'Nicolas','n.gaitan','1232123','calle8-9');
-insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (9, '1111111', 'preubaCliente@gmail.com', 'Test Cliente','testC','12345','Elm Street');
-insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (10, '1111111', 'pruebaAdmin@gmail.com', 'Test Admin','testA','12345','Elm Street');
+insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (2, '123', 'bss@gmail.com', 'Felipe','saga','1232123','calle8-9');
+insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (3, '1234', 'a121@gmail.com', 'Pedro','saga2','12345','Elm Street');
+insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (4, '12334', 'jorge@hotmale.com', 'Jorge','giorginio1232','468651684','Frankfurtcalle8-9');
+insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (5, '433211', 'sant@gmail.com', 'Santiago','s.beltran','12332123','calle8-9');
+insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (6, '2211123', 'and@gmail.com', 'Andres','a.varonm','122345','Elm Street');
+insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (7, '9898989', 'mate@hotmale.com', 'Mateo','m.devia','4686511684','Frankfurtcalle8-9');
+insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (8, '22211234', 'nico@gmail.com', 'Nicolas','n.gaitan','11232123','calle8-9');
+insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (9, '2212145', 'preubaCliente@gmail.com', 'Test Cliente','testC','12322245','Elm Street');
+insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (10, '1122', 'pruebaAdmin@gmail.com', 'Test Admin','testA','1211121345','Elm Street');
+
+--Datos de pruebaFacturaEntity
+insert into FacturaEntity values (1, 200000.0, 1);
+insert into FacturaEntity values (2, 200000.0, 2);
+insert into FacturaEntity values (3, 200000.0, 3);
+insert into FacturaEntity values (4, 200000.0, 4);
+insert into FacturaEntity values (5, 200000.0, 5);
+insert into FacturaEntity values (6, 200000.0, 9);
+insert into FacturaEntity values (7, 200000.0, 9);
+insert into FacturaEntity values (8, 200000.0, 9);
+insert into FacturaEntity values (9, 200000.0, 9);
+insert into FacturaEntity values (10, 200000.0, 9);
+
 
 
 --Datos de prueba BicicletUsadaEntity
@@ -67,13 +82,30 @@ insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod
 insert into Item_album (itemEntity_ID, album) values (400, 'data/Imagenes/BicicletaTest1.jpg');
 insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado,cliente_id,disponible,multiplicador) values (500,'BicicletaUsadaEntity', 929000.71, '#5BBBEF', 1, 'Escort', 5, 5, 'https://netlog.com/in.jpg', 'En proceso',2,1,1.0);
 insert into Item_album (itemEntity_ID, album) values (500, 'data/Imagenes/BicicletaTest2.jpg');
---Datos de prueba ClienteEntity
+
+--Join Factura Items
+insert into Factura_Items values (1, 1);
+insert into Factura_Items values (2, 2);
+insert into Factura_Items values (3, 3);
+insert into Factura_Items values (4, 4);
+insert into Factura_Items values (5, 5);
+insert into Factura_Items values (6, 6);
+insert into Factura_Items values (7, 7);
+insert into Factura_Items values (8, 8);
+insert into Factura_Items values (9, 100);
+insert into Factura_Items values (10, 200);
+
 --Datos de prueba ReclamoEntity
-insert into ReclamoEntity values (1,1, 'La bicicleta no ha llegado. La pedí hace 2 semanas y no he recibido información alguna sobre su estado, estoy pendiente a respuesta.', 'El pedido no ha llegado', null, null);
-insert into ReclamoEntity values (2,0, 'Las rodilleras me llegaron en una talla menor a la pedida', 'Rodilleras pequeñas', null, null);
-insert into ReclamoEntity values (3,1, 'Quiero exigir la garantía por una bicicleta que se rompió', 'Garantía', null, null);
-insert into ReclamoEntity values (4,1, 'Los frenos no funcionan correctamente, se demoran mucho en comenzar a funcionar', 'Frenos dañados', null, null);
-insert into ReclamoEntity values (5,0, 'El casco llegó sin seguro.', 'El casco llegó sin seguro.', null, null);
+insert into ReclamoEntity values (1,1, 'La bicicleta no ha llegado. La pedí hace 2 semanas y no he recibido información alguna sobre su estado, estoy pendiente a respuesta.', 'El pedido no ha llegado', 1, 1);
+insert into ReclamoEntity values (2,0, 'Las rodilleras me llegaron en una talla menor a la pedida', 'Rodilleras pequeñas', 2, 2);
+insert into ReclamoEntity values (3,1, 'Quiero exigir la garantía por una bicicleta que se rompió', 'Garantía', 3, 3);
+insert into ReclamoEntity values (4,1, 'Los frenos no funcionan correctamente, se demoran mucho en comenzar a funcionar', 'Frenos dañados', 4, 4);
+insert into ReclamoEntity values (5,0, 'El casco llegó sin seguro.', 'El casco llegó sin seguro.', 5, 5);
+insert into ReclamoEntity values (6,1, 'La bicicleta no ha llegado. La pedí hace 2 semanas y no he recibido información alguna sobre su estado, estoy pendiente a respuesta.', 'El pedido no ha llegado', 9, 6);
+insert into ReclamoEntity values (7,0, 'Las rodilleras me llegaron en una talla menor a la pedida', 'Rodilleras pequeñas', 9, 7);
+insert into ReclamoEntity values (8,1, 'Quiero exigir la garantía por una bicicleta que se rompió', 'Garantía', 9, 8);
+insert into ReclamoEntity values (9,1, 'Los frenos no funcionan correctamente, se demoran mucho en comenzar a funcionar', 'Frenos dañados', 9, 9);
+insert into ReclamoEntity values (10,0, 'El casco llegó sin seguro.', 'El casco llegó sin seguro.', 9, 10);
 
 
 --Datos carrito

@@ -149,14 +149,6 @@ public class ReclamoPersistenceTest
         Assert.assertEquals(data.size(), list.size());
     }
     @Test
-    public void deleteCalificacionTest()
-    {
-       ReclamoEntity cal = data.get(0);
-       reclamoPersistence.delete(cal.getId());
-       ReclamoEntity resp = em.find(ReclamoEntity.class, cal.getId());
-       Assert.assertNull(resp);
-    }
-    @Test
     public void updateReclamo()
     {
         ReclamoEntity entity = data.get(0);
