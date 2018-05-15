@@ -101,7 +101,7 @@ public class CatalogoLogic {
     public List<ModeloEntity> getModelosBicicletasFiltrados(List<List<String>> filtros, Double precioMin, Double precioMax, Double calificacionMin, Integer pagina, Integer numModelos) throws BusinessLogicException {
         if (filtros.get(0) != null && filtros.get(1) != null && filtros.get(2) != null && precioMin >= 0 && precioMax >= -1 && calificacionMin >= 0) {
 
-            return persistence.filtrarBicicletas(filtros, precioMin, precioMax, calificacionMin, pagina, numModelos);
+            return persistence.filtrar(filtros, precioMin, precioMax, calificacionMin, pagina, numModelos, ModeloLogic.BICICLETA);
 
         }
         throw new BusinessLogicException(ERROR);
@@ -124,7 +124,7 @@ public class CatalogoLogic {
      */
     public List<ModeloEntity> getModelosAccesoriosFiltrados(List<List<String>> filtros, Double precioMin, Double precioMax, Double calificacionMin, Integer pagina, Integer numModelos) throws BusinessLogicException {
         if (filtros.get(0) != null && filtros.get(1) != null && filtros.get(2) != null && precioMin >= 0 && precioMax >= -1 && calificacionMin >= 0) {
-            return persistence.filtrarAccesorios(filtros, precioMin, precioMax, calificacionMin, pagina, numModelos);
+            return persistence.filtrar(filtros, precioMin, precioMax, calificacionMin, pagina, numModelos, ModeloLogic.ACCESORIO);
 
         }
         throw new BusinessLogicException(ERROR);
@@ -147,8 +147,7 @@ public class CatalogoLogic {
      */
     public Integer getNumeroBicicletasConFiltros(List<String> marcas, List<String> categorias, List<String> colores, Double precioMin, Double precioMax, Double calificacionMin) throws BusinessLogicException {
         if (marcas != null && categorias != null && colores != null && precioMin >= 0 && precioMax >= -1 && calificacionMin >= 0) {
-
-            return persistence.contarBicicletasFiltradas(marcas, categorias, colores, precioMin, precioMax, calificacionMin);
+            return persistence.contarFiltrados(marcas, categorias, colores, precioMin, precioMax, calificacionMin, ModeloLogic.BICICLETA);
 
         }
         throw new BusinessLogicException(ERROR);
@@ -170,7 +169,7 @@ public class CatalogoLogic {
      */
     public Integer getNumeroAccesoriosConFiltros(List<String> marcas, List<String> categorias, List<String> colores, Double precioMin, Double precioMax, Double calificacionMin) throws BusinessLogicException {
         if (marcas != null && categorias != null && colores != null && precioMin >= 0 && precioMax >= -1 && calificacionMin >= 0) {
-            return persistence.contarAccesoriosFiltrados(marcas, categorias, colores, precioMin, precioMax, calificacionMin);
+            return persistence.contarFiltrados(marcas, categorias, colores, precioMin, precioMax, calificacionMin, ModeloLogic.ACCESORIO);
 
         }
         throw new BusinessLogicException(ERROR);
@@ -182,7 +181,7 @@ public class CatalogoLogic {
      * @return precio de la bicicleta mas cara de la aplicacion.
      */
     public Double getPrecioBicicletas() {
-        return persistence.getPrecioBicicletas();
+        return persistence.getPrecio(ModeloLogic.BICICLETA);
     }
 
     /**
@@ -191,7 +190,7 @@ public class CatalogoLogic {
      * @return precio del accesorios mas cara de la aplicacion.
      */
     public Double getPrecioAccesorios() {
-        return persistence.getPrecioAccesorios();
+        return persistence.getPrecio(ModeloLogic.ACCESORIO);
     }
 
     /**
