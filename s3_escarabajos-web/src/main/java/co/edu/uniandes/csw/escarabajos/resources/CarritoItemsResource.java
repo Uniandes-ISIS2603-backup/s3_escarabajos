@@ -178,14 +178,11 @@ public class CarritoItemsResource {
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Devueve los items del carrito del cliente.</code> 
      * </pre>
-     * @param idCLiente El ID del cliente dueño del carrito del cual se buscan los items
+     * @param idCarrito
      * @return JSONArray {@link ItemDetailDTO} - los items del carrito del cliente. Si no hay ninguna retorna una lista vacía.
      */
     @GET
     public List<ItemDetailDTO> getItemsCarrito( @PathParam("idCarrito") Long idCarrito ) {
-        //DONE si no existe el recurso cliente con idCliente debe disparar WebApplicationException
-        //DONE si no existe el recurso item con idItem debe disparar WebApplicationException
-        //DONE: Este try catch está mal
         try {
             
             CarritoEntity carritoEntity = carritoLogic.findCarrito(idCarrito);

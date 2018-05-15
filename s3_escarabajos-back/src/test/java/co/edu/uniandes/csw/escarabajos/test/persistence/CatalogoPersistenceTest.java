@@ -266,9 +266,9 @@ public class CatalogoPersistenceTest {
         filtros.add(new ArrayList<>());
         filtros.add(new ArrayList<>());
         filtros.add(new ArrayList<>());
-        List<ModeloEntity> modelos = persistence.filtrarAccesorios(filtros, 0.0, -1.0, 0.0, null, null);
+        List<ModeloEntity> modelos = persistence.filtrar(filtros, 0.0, -1.0, 0.0, null, null, ModeloLogic.ACCESORIO);
         Assert.assertEquals(3, modelos.size());
-        Assert.assertEquals(3, (int) persistence.contarAccesoriosFiltrados(new ArrayList<String>(), new ArrayList<String>(), new ArrayList<String>(), 0.0, -1.0, 0.0));
+        Assert.assertEquals(3, (int) persistence.contarFiltrados(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), 0.0, -1.0, 0.0, ModeloLogic.ACCESORIO));
 
         filtros = new ArrayList<>();
         ArrayList<String> marcas = new ArrayList<>();
@@ -278,9 +278,9 @@ public class CatalogoPersistenceTest {
         filtros.add(marcas);
         filtros.add(categorias);
         filtros.add(colores);
-        modelos = persistence.filtrarAccesorios(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, modelosData.size() + 1);
+        modelos = persistence.filtrar(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, modelosData.size() + 1, ModeloLogic.ACCESORIO);
         Assert.assertEquals(1, modelos.size());
-        Assert.assertEquals(1, (int) persistence.contarAccesoriosFiltrados(marcas, categorias, colores, 0.0, -1.0, 0.0));
+        Assert.assertEquals(1, (int) persistence.contarFiltrados(marcas, categorias, colores, 0.0, -1.0, 0.0, ModeloLogic.ACCESORIO));
 
         filtros = new ArrayList<>();
         marcas = new ArrayList<>();
@@ -291,9 +291,9 @@ public class CatalogoPersistenceTest {
         filtros.add(marcas);
         filtros.add(categorias);
         filtros.add(colores);
-        modelos = persistence.filtrarAccesorios(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, modelosData.size() + 1);
+        modelos = persistence.filtrar(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, modelosData.size() + 1, ModeloLogic.ACCESORIO);
         Assert.assertEquals(1, modelos.size());
-        Assert.assertEquals(1, (int) persistence.contarAccesoriosFiltrados(marcas, categorias, colores, 0.0, -1.0, 0.0));
+        Assert.assertEquals(1, (int) persistence.contarFiltrados(marcas, categorias, colores, 0.0, -1.0, 0.0, ModeloLogic.ACCESORIO));
 
         filtros = new ArrayList<>();
         marcas = new ArrayList<>();
@@ -304,9 +304,9 @@ public class CatalogoPersistenceTest {
         filtros.add(marcas);
         filtros.add(categorias);
         filtros.add(colores);
-        modelos = persistence.filtrarAccesorios(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, modelosData.size() + 1);
+        modelos = persistence.filtrar(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, modelosData.size() + 1, ModeloLogic.ACCESORIO);
         Assert.assertEquals(1, modelos.size());
-        Assert.assertEquals(1, (int) persistence.contarAccesoriosFiltrados(marcas, categorias, colores, 0.0, -1.0, 0.0));
+        Assert.assertEquals(1, (int) persistence.contarFiltrados(marcas, categorias, colores, 0.0, -1.0, 0.0, ModeloLogic.ACCESORIO));
 
         filtros = new ArrayList<>();
         marcas = new ArrayList<>();
@@ -318,9 +318,9 @@ public class CatalogoPersistenceTest {
         filtros.add(marcas);
         filtros.add(categorias);
         filtros.add(colores);
-        modelos = persistence.filtrarAccesorios(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, modelosData.size() + 1);
+        modelos = persistence.filtrar(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, modelosData.size() + 1, ModeloLogic.ACCESORIO);
         Assert.assertEquals(1, modelos.size());
-        Assert.assertEquals(1, (int) persistence.contarAccesoriosFiltrados(marcas, categorias, colores, 0.0, -1.0, 0.0));
+        Assert.assertEquals(1, (int) persistence.contarFiltrados(marcas, categorias, colores, 0.0, -1.0, 0.0, ModeloLogic.ACCESORIO));
 
         filtros = new ArrayList<>();
         marcas = new ArrayList<>();
@@ -330,20 +330,20 @@ public class CatalogoPersistenceTest {
         filtros.add(marcas);
         filtros.add(categorias);
         filtros.add(colores);
-        modelos = persistence.filtrarAccesorios(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, modelosData.size() + 1);
+        modelos = persistence.filtrar(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, modelosData.size() + 1, ModeloLogic.ACCESORIO);
         Assert.assertEquals(0, modelos.size());
-        Assert.assertEquals(0, (int) persistence.contarAccesoriosFiltrados(marcas, categorias, colores, 0.0, -1.0, 0.0));
+        Assert.assertEquals(0, (int) persistence.contarFiltrados(marcas, categorias, colores, 0.0, -1.0, 0.0, ModeloLogic.ACCESORIO));
     }
 
     @Test
-    public void filtrarBicicletasTest() {
+    public void filtrarTest() {
         ArrayList<List<String>> filtros = new ArrayList<>();
         filtros.add(new ArrayList<>());
         filtros.add(new ArrayList<>());
         filtros.add(new ArrayList<>());
-        List<ModeloEntity> modelos = persistence.filtrarBicicletas(filtros, 0.0, -1.0, 0.0, null, null);
+        List<ModeloEntity> modelos = persistence.filtrar(filtros, 0.0, -1.0, 0.0, null, null, ModeloLogic.BICICLETA);
         Assert.assertEquals(3, modelos.size());
-        Assert.assertEquals(3, (int) persistence.contarBicicletasFiltradas(new ArrayList<String>(), new ArrayList<String>(), new ArrayList<String>(), 0.0, -1.0, 0.0));
+        Assert.assertEquals(3, (int) persistence.contarFiltrados(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), 0.0, -1.0, 0.0, ModeloLogic.BICICLETA));
 
         filtros = new ArrayList<>();
         ArrayList<String> marcas = new ArrayList<>();
@@ -353,9 +353,9 @@ public class CatalogoPersistenceTest {
         filtros.add(marcas);
         filtros.add(categorias);
         filtros.add(colores);
-        modelos = persistence.filtrarBicicletas(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, modelosData.size() + 1);
+        modelos = persistence.filtrar(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, modelosData.size() + 1, ModeloLogic.BICICLETA);
         Assert.assertEquals(1, modelos.size());
-        Assert.assertEquals(1, (int) persistence.contarBicicletasFiltradas(marcas, categorias, colores, 0.0, -1.0, 0.0));
+        Assert.assertEquals(1, (int) persistence.contarFiltrados(marcas, categorias, colores, 0.0, -1.0, 0.0, ModeloLogic.BICICLETA));
 
         filtros = new ArrayList<>();
         marcas = new ArrayList<>();
@@ -366,9 +366,9 @@ public class CatalogoPersistenceTest {
         filtros.add(marcas);
         filtros.add(categorias);
         filtros.add(colores);
-        modelos = persistence.filtrarBicicletas(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, modelosData.size() + 1);
+        modelos = persistence.filtrar(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, modelosData.size() + 1, ModeloLogic.BICICLETA);
         Assert.assertEquals(1, modelos.size());
-        Assert.assertEquals(1, (int) persistence.contarBicicletasFiltradas(marcas, categorias, colores, 0.0, -1.0, 0.0));
+        Assert.assertEquals(1, (int) persistence.contarFiltrados(marcas, categorias, colores, 0.0, -1.0, 0.0, ModeloLogic.BICICLETA));
 
         filtros = new ArrayList<>();
         marcas = new ArrayList<>();
@@ -379,9 +379,9 @@ public class CatalogoPersistenceTest {
         filtros.add(marcas);
         filtros.add(categorias);
         filtros.add(colores);
-        modelos = persistence.filtrarBicicletas(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, modelosData.size() + 1);
+        modelos = persistence.filtrar(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, modelosData.size() + 1, ModeloLogic.BICICLETA);
         Assert.assertEquals(1, modelos.size());
-        Assert.assertEquals(1, (int) persistence.contarBicicletasFiltradas(marcas, categorias, colores, 0.0, -1.0, 0.0));
+        Assert.assertEquals(1, (int) persistence.contarFiltrados(marcas, categorias, colores, 0.0, -1.0, 0.0, ModeloLogic.BICICLETA));
 
         filtros = new ArrayList<>();
         marcas = new ArrayList<>();
@@ -392,9 +392,9 @@ public class CatalogoPersistenceTest {
         filtros.add(marcas);
         filtros.add(categorias);
         filtros.add(colores);
-        modelos = persistence.filtrarBicicletas(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, modelosData.size() + 1);
+        modelos = persistence.filtrar(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, modelosData.size() + 1, ModeloLogic.BICICLETA);
         Assert.assertEquals(1, modelos.size());
-        Assert.assertEquals(1, (int) persistence.contarBicicletasFiltradas(marcas, categorias, colores, 0.0, -1.0, 0.0));
+        Assert.assertEquals(1, (int) persistence.contarFiltrados(marcas, categorias, colores, 0.0, -1.0, 0.0, ModeloLogic.BICICLETA));
 
         filtros = new ArrayList<>();
         marcas = new ArrayList<>();
@@ -404,24 +404,24 @@ public class CatalogoPersistenceTest {
         filtros.add(marcas);
         filtros.add(categorias);
         filtros.add(colores);
-        modelos = persistence.filtrarBicicletas(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, modelosData.size() + 1);
+        modelos = persistence.filtrar(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, modelosData.size() + 1, ModeloLogic.BICICLETA);
         Assert.assertEquals(0, modelos.size());
-        Assert.assertEquals(0, (int) persistence.contarBicicletasFiltradas(marcas, categorias, colores, 0.0, -1.0, 0.0));
+        Assert.assertEquals(0, (int) persistence.contarFiltrados(marcas, categorias, colores, 0.0, -1.0, 0.0, ModeloLogic.BICICLETA));
     }
 
     @Test
     public void getPrecioAccesoriosTest() {
-        Assert.assertEquals(10, (int) ((double) persistence.getPrecioAccesorios()));
+        Assert.assertEquals(10, (int) ((double) persistence.getPrecio(ModeloLogic.ACCESORIO)));
     }
 
     @Test
     public void getPrecioBicicletasTest() {
-        Assert.assertEquals(10, (int) ((double) persistence.getPrecioBicicletas()));
+        Assert.assertEquals(10, (int) ((double) persistence.getPrecio(ModeloLogic.BICICLETA)));
     }
 
     @Test
     public void buscarTest() {
-        List<ModeloEntity> lista = persistence.buscar(modelosData.get(0).getMarca()+" "+itemsData.get(0).getCategoria()+" "+"NOT");
+        List<ModeloEntity> lista = persistence.buscar(modelosData.get(0).getMarca() + " " + itemsData.get(0).getCategoria() + " " + "NOT");
         Assert.assertNotNull(lista);
     }
 

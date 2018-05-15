@@ -119,18 +119,13 @@ public class ModeloItemsResource {
      * ser un cadena de dígitos.
      * @param itemsId Identificador del item que se desea guardar. Este debe ser
      * un cadena de dígitos.
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * @throws BusinessLogicException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el modelo.
      */
     @DELETE
     @Path("{itemsId: \\d+}")
-    public void removeItems(@PathParam("modelosId") Long modelosId, @PathParam("itemsId") Long itemsId) throws WebApplicationException {
-        try {
+    public void removeItems(@PathParam("modelosId") Long modelosId, @PathParam("itemsId") Long itemsId) throws BusinessLogicException {
             modeloLogic.removeItem(itemsId);
-        } catch (BusinessLogicException ex) {
-            LOGGER.info(ex.getMessage());
-            throw new WebApplicationException("No existe este item en este modelo", 404);
-        }
     }
 
     private ExecutorService executorService = java.util.concurrent.Executors.newCachedThreadPool();
