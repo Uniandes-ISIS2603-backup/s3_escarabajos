@@ -5,28 +5,28 @@
             <i class="fa fa-cog icon"></i>
             Editar Bicicleta
         </h2>
-        <label for="bicicletaUsadaModelo">Modelo</label>
-        <div class="input-container">
+        <label for="bicicletaUsadaModelo" ng-if="!hasPermissions()">Modelo</label>
+        <div class="input-container" ng-if="!hasPermissions()">
             <input id="bicicletaUsadaModelo" class="input-field" type="text" required ng-model="biciUsadaActual.modeloId" placeholder="{{biciUsadaActual.modeloId}}" disabled>
         </div>
-        <label for="bicicletaUsadaPrecio">Precio</label>
-        <div class="input-container">
+        <label for="bicicletaUsadaPrecio" ng-if="!hasPermissions()">Precio</label>
+        <div class="input-container" ng-if="!hasPermissions()">
             <input id="bicicletaUsadaPrecio" class="input-field" type="text" required ng-model="biciUsadaActual.precio" placeholder="{{biciUsadaActual.precio}}" >
         </div>
-        <label for="bicicletaUsadaCategoria">Categoria</label>
-        <div class="input-container">
+        <label for="bicicletaUsadaCategoria" ng-if="!hasPermissions()">Categoria</label>
+        <div class="input-container" ng-if="!hasPermissions()">
             <input id="bicicletaUsadaCategoria" class="input-field" type="text" required ng-model="biciUsadaActual.categoria" placeholder="{{biciUsadaActual.categoria}}">
         </div>
-         <label for="bicicletaUsadaAlbum">Fotos</label>
-        <div class="input-container">
+         <label for="bicicletaUsadaAlbum" ng-if="!hasPermissions()">Fotos</label>
+        <div class="input-container" ng-if="!hasPermissions()">
             <input id="bicicletaUsadaAlbum" class="input-field" type="text" required ng-model="biciUsadaActual.album" placeholder="{{biciUsadaActual.album}}">
         </div>
-        <label for="bicicletaUsadaFacturaOriginal">Factura</label>
-        <div class="input-container">
+        <label for="bicicletaUsadaFacturaOriginal" ng-if="!hasPermissions()">Factura</label>
+        <div class="input-container" ng-if="!hasPermissions()">
             <input id="bicicletaUsadaFacturaOriginal" class="input-field" type="url" required ng-model="biciUsadaActual.facturaOriginal" placeholder="{{biciUsadaActual.facturaOriginal}}">
         </div>
-        <label for="bicicletaUsadaEstado">Estado</label>
-        <div class="input-container">
+        <label for="bicicletaUsadaEstado" ng-if="hasPermissions()">Estado</label>
+        <div class="input-container" ng-if="hasPermissions()">
             <select class="form-control" id="bicicletaUsadaEstado" ng-model="biciUsadaActual.estado" required>
                 <option selected="true" disabled="disabled">{{biciUsadaActual.estado}}</option>
                 <option value="En proceso">En proceso</option>

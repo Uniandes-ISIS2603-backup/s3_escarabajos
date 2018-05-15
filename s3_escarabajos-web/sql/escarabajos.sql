@@ -13,16 +13,16 @@ delete from ClienteEntity;
 
 --Datos de prueba ModeloEntity con tipo modelo Bicicleta
 
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (1, 'Cayman', 'EUR', 18, 'Bicicleta');
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (2, 'Element', 'PHP', 44, 'Bicicleta');
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (3, '6 Series', 'IDR', 11, 'Bicicleta');
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (4, 'Hombre', 'KPW', 10, 'Bicicleta');
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (5, 'Elantra', 'CNY', 17, 'Bicicleta');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (1, 'Cayman', 'EUR', 5, 'Bicicleta');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (2, 'Element', 'PHP', 4, 'Bicicleta');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (3, '6 Series', 'IDR', 3, 'Bicicleta');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (4, 'Hombre', 'KPW', 3.2, 'Bicicleta');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (5, 'Elantra', 'CNY', 1, 'Bicicleta');
 
 
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (6, '6 Series', 'SILAA BMX', 11, 'Accesorio');
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (7, 'Hombre', 'CASCO BMX', 10, 'Accesorio');
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (8, 'Elantra', 'RODILLERAS BMX', 17, 'Accesorio');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (6, '6 Series', 'SILAA BMX', 5, 'Accesorio');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (7, 'Hombre', 'CASCO BMX', 4, 'Accesorio');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (8, 'Elantra', 'RODILLERAS BMX', 3, 'Accesorio');
 
 --Datos de prueba BicicletaEntity
 

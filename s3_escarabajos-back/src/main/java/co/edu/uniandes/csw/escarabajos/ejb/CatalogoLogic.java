@@ -1,5 +1,7 @@
 package co.edu.uniandes.csw.escarabajos.ejb;
 
+import static co.edu.uniandes.csw.escarabajos.ejb.ModeloLogic.MODELOEXISTE;
+import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.CatalogoPersistence;
@@ -17,6 +19,12 @@ public class CatalogoLogic {
     private static final String ERROR = "Los Filtros no estan en el formato adecuado!";
     @Inject
     private CatalogoPersistence persistence;
+
+    @Inject
+    private ModeloLogic modeloLogic;
+
+    @Inject
+    private ItemLogic itemLogic;
 
     /**
      * Obtiene una colección de todas las marcas de accesorios en el sistema
@@ -247,5 +255,34 @@ public class CatalogoLogic {
      */
     public List<ModeloEntity> buscar(String busqueda) {
         return persistence.buscar(busqueda);
+    }
+
+    /**
+     * Metodo que se encarga de crear una propaganda!
+     *
+     * @param idModelo del modelo a promocionar
+     * @param multiplicador del modelo
+     * @return modelo actualizado.
+     * @throws BusinessLogicException
+     */
+    public ModeloEntity crearPropaganda(Long idModelo, Double multiplicador) throws BusinessLogicException {
+        ModeloEntity modelo = modeloLogic.getModelo(idModelo);
+        if (modelo == null) {
+            throw new BusinessLogicException(ModeloLogic.MODELONOEXISTE);
+        }
+        for (ItemEntity item : modelo.getItems()) {
+            itemLogic.multiplicarItem(multiplicador, item.getId());
+        }
+        return modeloLogic.getModelo(idModelo);
+    }
+
+    /**
+     * Metodo que se encarga de retornar las propaganads de un tipo de la
+     * aplicacion.
+     * @param tipo de propagandas a buscar
+     * @return lista de modelos en propaganda
+     */
+    public List<ModeloEntity> getPropagandas(String tipo){
+        return persistence.getPropagandas(tipo);
     }
 }

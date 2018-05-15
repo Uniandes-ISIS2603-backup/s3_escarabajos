@@ -24,6 +24,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -51,7 +52,6 @@ public class CatalogoResource {
 
     @Inject
     CatalogoLogic catalogoLogic;
-    
 
     /**
      * <h1>GET /api/catalogo/marcas/accesorios : Obtener todas las marcas de la
@@ -354,7 +354,7 @@ public class CatalogoResource {
      */
     @GET
     @Path("buscar/{busqueda}")
-    public List<ModeloDetailDTO> buscar(@PathParam("busqueda")String busqueda) {
+    public List<ModeloDetailDTO> buscar(@PathParam("busqueda") String busqueda) {
         return listModeloEntity2DetailDTO(catalogoLogic.buscar(busqueda));
     }
 
@@ -378,20 +378,17 @@ public class CatalogoResource {
      * @param pDescuento descuento de la propaganda.
      * @return JSON {@link ModeloDetailDTO} - el modelo guardado con el atributo
      * id autogenerado.
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
      *
      */
     @PUT
     @Path("propagandas/{idModelo: \\d+}/{descuento: \\d+}")
-    public ModeloDetailDTO crearPropaganda(@PathParam("idModelo") Long idModelo, @PathParam("descuento") BigDecimal pDescuento) {
-        double descuento = Double.valueOf(pDescuento.toString());
-//        //ModeloEntity modelo = catalogoLogic.crearPropaganda(idModelo, descuento);
-//        if (modelo == null) {
-//            throw new WebApplicationException("El recurso /modelos/" + idModelo + "/items no existe", 404);
-//        }
-//        return new ModeloDetailDTO(modelo);
-        return null;
+    public ModeloDetailDTO crearPropaganda(@PathParam("idModelo") Long idModelo, @PathParam("descuento") BigDecimal pDescuento) throws BusinessLogicException {
+        ModeloEntity modelo = catalogoLogic.crearPropaganda(idModelo, Double.valueOf(pDescuento.toString()));
+        if (modelo == null) {
+            throw new WebApplicationException("El recurso /modelos/" + idModelo + "/items no existe", 404);
+        }
+        return new ModeloDetailDTO(modelo);
     }
-    
-    
 
 }

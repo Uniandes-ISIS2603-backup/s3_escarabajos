@@ -28,7 +28,7 @@
                 url: '/clientesProfile',
                 views: {
                     'mainView': {
-                        controller: 'clientesCtrl',
+                        controller: 'clientesProfileCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'clientes.profile.html'
                     }
