@@ -346,8 +346,13 @@ public class CatalogoPersistence {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar el precio de las bicicletas.");
         TypedQuery query;
         query = em.createQuery("Select max(e.precio) From BicicletaEntity e where e.usada=FALSE", String.class);
-        String temp = query.getSingleResult().toString();
-        return Double.parseDouble(temp);
+        Object temp = query.getSingleResult();
+        if (temp != null) {
+            temp = temp.toString();
+        } else {
+            temp = 0.0;
+        }
+        return Double.parseDouble(temp.toString());
     }
 
     /**
