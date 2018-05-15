@@ -46,76 +46,173 @@ public class ClienteEntity implements Serializable {
 
     @PodamExclude
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<FacturaEntity> compras = new ArrayList<FacturaEntity>();
+    private List<FacturaEntity> compras = new ArrayList<>();
     
     @PodamExclude
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<MedioPagoEntity> mediosPago = new ArrayList<MedioPagoEntity>();
+    private List<MedioPagoEntity> mediosPago = new ArrayList<>();
     
     @PodamExclude
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
+    private List<CalificacionEntity> calificaciones = new ArrayList<>();
     
     @PodamExclude
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<ReclamoEntity> reclamos = new ArrayList<ReclamoEntity>();
+    private List<ReclamoEntity> reclamos = new ArrayList<>();
     
     @PodamExclude
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST,orphanRemoval = true)
-    private List<BicicletaUsadaEntity> bicicletasUsadas = new ArrayList<BicicletaUsadaEntity>();
+    private List<BicicletaUsadaEntity> bicicletasUsadas = new ArrayList<>();
  
-    public CarritoEntity getCarrito(){
+   
+    
+     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ClienteEntity other = (ClienteEntity) obj;
+        return Objects.equals(this.getId(), other.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        if (this.getId() != null) {
+            return this.getId().hashCode();
+        }
+        return super.hashCode();
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * @return the correo
+     */
+    public String getCorreo() {
+        return correo;
+    }
+
+    /**
+     * @param correo the correo to set
+     */
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    /**
+     * @return the usuario
+     */
+    public String getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    /**
+     * @return the cedula
+     */
+    public String getCedula() {
+        return cedula;
+    }
+
+    /**
+     * @param cedula the cedula to set
+     */
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+
+    /**
+     * @return the direccion
+     */
+    public String getDireccion() {
+        return direccion;
+    }
+
+    /**
+     * @param direccion the direccion to set
+     */
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    /**
+     * @return the telefono
+     */
+    public String getTelefono() {
+        return telefono;
+    }
+
+    /**
+     * @param telefono the telefono to set
+     */
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    /**
+     * @return the carrito
+     */
+    public CarritoEntity getCarrito() {
         return carrito;
     }
-    public void setCarrito(CarritoEntity carrito){
+
+    /**
+     * @param carrito the carrito to set
+     */
+    public void setCarrito(CarritoEntity carrito) {
         this.carrito = carrito;
     }
 
+    /**
+     * @return the listaDeseos
+     */
     public ListaDeseosEntity getListaDeseos() {
         return listaDeseos;
     }
 
+    /**
+     * @param listaDeseos the listaDeseos to set
+     */
     public void setListaDeseos(ListaDeseosEntity listaDeseos) {
         this.listaDeseos = listaDeseos;
-    }
-    
-        
-    public String getNombre(){
-        return nombre;
-    }
-    public void setNombre(String nombre){
-        this.nombre = nombre;
-    }
-    public String getCorreo(){
-        return correo;
-    }
-    public void setCorreo(String correo){
-        this.correo = correo;
-    }
-    public String getUsuario(){
-        return usuario;
-    }
-    public void setUsuario(String usuario){
-        this.usuario = usuario;
-    }
-    public String getCedula(){
-        return cedula;
-    }
-    public void setCedula(String cedula){
-        this.cedula = cedula;
-    } 
-    
-    public String getDireccion(){
-        return direccion;
-    }
-    public void setDireccion(String direccion){
-        this.direccion = direccion;
-    }
-    public String getTelefono(){
-        return telefono;
-    }
-    public void setTelefono(String telefono){
-        this.telefono = telefono;
     }
 
     /**
@@ -173,7 +270,7 @@ public class ClienteEntity implements Serializable {
     public void setReclamos(List<ReclamoEntity> reclamos) {
         this.reclamos = reclamos;
     }
-    
+
     /**
      * @return the bicicletasUsadas
      */
@@ -186,43 +283,6 @@ public class ClienteEntity implements Serializable {
      */
     public void setBicicletasUsadas(List<BicicletaUsadaEntity> bicicletasUsadas) {
         this.bicicletasUsadas = bicicletasUsadas;
-    }
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
-     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final ClienteEntity other = (ClienteEntity) obj;
-        return Objects.equals(this.id, other.id);
-    }
-
-    @Override
-    public int hashCode() {
-        if (this.getId() != null) {
-            return this.getId().hashCode();
-        }
-        return super.hashCode();
     }
     
 }
