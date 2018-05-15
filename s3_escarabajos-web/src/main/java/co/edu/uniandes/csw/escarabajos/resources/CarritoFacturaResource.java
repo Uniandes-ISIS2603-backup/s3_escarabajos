@@ -6,14 +6,18 @@
 package co.edu.uniandes.csw.escarabajos.resources;
 
 import co.edu.uniandes.csw.escarabajos.dtos.CarritoDetailDTO;
-import co.edu.uniandes.csw.escarabajos.dtos.FacturaDetailDTO;
+import co.edu.uniandes.csw.escarabajos.dtos.FacturaDTO;
 import co.edu.uniandes.csw.escarabajos.ejb.CarritoLogic;
 import co.edu.uniandes.csw.escarabajos.ejb.ClienteLogic;
+import co.edu.uniandes.csw.escarabajos.ejb.FacturaLogic;
+import co.edu.uniandes.csw.escarabajos.entities.FacturaEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -28,12 +32,18 @@ import javax.ws.rs.Produces;
 @RequestScoped
 public class CarritoFacturaResource {
     
+    private static final Logger LOGGER = Logger.getLogger(CarritoFacturaResource.class.getName());
+    
     @Inject
     CarritoLogic logicCarrito;
     
     @Inject
     ClienteLogic logicCliente;
     
+    @Inject
+    FacturaLogic logicFactura;
+    
+    @Inject
     ClienteCarritoResource clienteCarrito;
     
      /**
@@ -52,13 +62,19 @@ public class CarritoFacturaResource {
      * @return JSON {@link FacturaDetailDTO} - la factura generada por el carritp
      * lanza excepcion si no hay items en el carrito.
      */
-    @GET
-    public FacturaDetailDTO getFacturCarrito(@PathParam("idCliente") Long idCliente) throws BusinessLogicException {
+    @POST
+    public FacturaDTO getFacturaCarrito(@PathParam("idCliente") Long idCliente) throws BusinessLogicException {
         //DONE: Revisar este código. Es un GET pero hace un create?
         //asi es como queremos que sea para que cuando le den generar get factura se genere y se devuelve la factura que se genero
             
         CarritoDetailDTO carrito = clienteCarrito.getCarrito(idCliente);
-        
-        return new FacturaDetailDTO(logicCarrito.crearFactura(carrito.getId()));
+        LOGGER.info("encontro carrito");
+        FacturaEntity factura = logicCarrito.crearFactura(carrito.getId());
+        LOGGER.info("genero factura");
+        factura.setCliente(logicCliente.getCliente(idCliente));
+        LOGGER.info("agrego cliente");
+        FacturaEntity factura2 = logicFactura.createFactura(factura);
+        LOGGER.info("guardo factura");
+        return new FacturaDTO(factura2);
     }
 }

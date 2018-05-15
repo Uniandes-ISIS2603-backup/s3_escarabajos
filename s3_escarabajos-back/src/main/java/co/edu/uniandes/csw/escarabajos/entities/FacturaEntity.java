@@ -45,7 +45,7 @@ public class FacturaEntity implements Serializable {
     private MedioPagoEntity medioDePago;
     
     @PodamExclude
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private ClienteEntity cliente;
     
     @PodamExclude

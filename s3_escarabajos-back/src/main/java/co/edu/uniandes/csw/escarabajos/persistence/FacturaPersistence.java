@@ -29,7 +29,7 @@ public class FacturaPersistence {
     public FacturaEntity create(FacturaEntity entity) {
         LOGGER.info("Creando una factura nueva");
         em.persist(entity);
-        LOGGER.info("Creando una factura nueva");
+        LOGGER.info("Se creo una factura nueva");
         return entity;
     }
 
@@ -73,5 +73,17 @@ public class FacturaPersistence {
     public void delete(Long id) {
         FacturaEntity factura = find(id);
         em.remove(factura);
+    }
+    
+    public List<FacturaEntity> findFacturasByClienteId(Long idCliente){
+        
+        LOGGER.log(Level.INFO, "Consultando la factura del cliente con id= {0}", idCliente);
+        TypedQuery<FacturaEntity> q = em.createQuery("select u from FacturaEntity u where u.cliente.id = :id", FacturaEntity.class);
+        
+        q = q.setParameter("id", idCliente);
+        
+        List<FacturaEntity> lista = q.getResultList();
+        
+        return lista;
     }
 }
