@@ -57,15 +57,6 @@ public class ReclamoPersistence
     {
          return em.merge(entity);
     }
-    
-    public void delete(ReclamoEntity entity) 
-    {
-        em.remove(entity);
-    }
-    public void delete(Long id)
-    {
-      delete(find(id));  
-    }
     public List<ReclamoEntity> getReclamosByFactura(Long facturaId)
     {
         TypedQuery<ReclamoEntity> q = em.createQuery("select p from ReclamoEntity p where (p.factura.id = :facturaId)", ReclamoEntity.class);
@@ -88,10 +79,17 @@ public class ReclamoPersistence
         return results;
     }
 
-    public List<ReclamoEntity> getReclamoPorFactura(Long facturaId)
+    public ReclamoEntity getReclamoPorFactura(Long facturaId)
     {
         TypedQuery<ReclamoEntity> q = em.createQuery("select p from ReclamoEntity p where (p.factura.id = :facturaId)", ReclamoEntity.class);
         q.setParameter("facturaId", facturaId);
+        List<ReclamoEntity> results = q.getResultList();
+        return results.get(0);
+    }
+    public List<ReclamoEntity> getReclamoPorCliente(Long clienteId)
+    {
+        TypedQuery<ReclamoEntity> q = em.createQuery("select p from ReclamoEntity p where (p.cliente.id = :clienteId)", ReclamoEntity.class);
+        q.setParameter("clienteId", clienteId);
         List<ReclamoEntity> results = q.getResultList();
         return results;
     }

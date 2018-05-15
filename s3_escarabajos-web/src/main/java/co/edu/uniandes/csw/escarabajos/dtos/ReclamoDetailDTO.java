@@ -86,6 +86,10 @@ public class ReclamoDetailDTO extends ReclamoDTO {
         if (getFactura() != null) {
             entity.setFactura(factura.toEntity());
         }
+        if(getCliente() != null)
+        {
+            entity.setCliente(cliente.toEntity());
+        }
         return entity;
     }
 

@@ -47,6 +47,8 @@ public class ReclamoLogicTest
 
     private List<FacturaEntity> facturaData = new ArrayList<FacturaEntity>();
     
+    private List<ClienteEntity> clienteData = new ArrayList<ClienteEntity>();
+
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -101,10 +103,17 @@ public class ReclamoLogicTest
             em.persist(entity);
             facturaData.add(entity);
         }
+         for (int i = 0; i < 3; i++) {
+            ClienteEntity entity = factory.manufacturePojo(ClienteEntity.class);
+
+            em.persist(entity);
+            clienteData.add(entity);
+        }
         for (int i = 0; i < 3; i++) {
             ReclamoEntity entity = factory.manufacturePojo(ReclamoEntity.class);
             entity.renaudar();
             entity.setFactura(facturaData.get(i));
+            entity.setCliente(clienteData.get(i));
             em.persist(entity);
             data.add(entity);
         }
@@ -121,7 +130,7 @@ public class ReclamoLogicTest
         List<String> pics = new ArrayList<>();
         pics.add(factory.manufacturePojo(String.class));
         //newEntity.setAlbum(pics);
-        ReclamoEntity result = reclamoLogic.createReclamo(newEntity, facturaData.get(0).getId());
+        ReclamoEntity result = reclamoLogic.createReclamo(newEntity, facturaData.get(0).getId(), clienteData.get(0).getId());
         Assert.assertNotNull(result);
         ReclamoEntity entity = em.find(ReclamoEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
@@ -170,19 +179,6 @@ public class ReclamoLogicTest
     }
 
     /**
-     * Prueba para eliminar un Reclamo
-     *
-     *
-     */
-    @Test
-    public void deleteReclamoTest() {
-        ReclamoEntity entity = data.get(0);
-        reclamoLogic.delete(entity.getId());
-        ReclamoEntity deleted = em.find(ReclamoEntity.class, entity.getId());
-        Assert.assertNull(deleted);
-    }
-
-    /**
      * Prueba para actualizar un Reclamo
      *
      *
@@ -200,19 +196,6 @@ public class ReclamoLogicTest
         Assert.assertEquals(resp.getRazon(), entity.getRazon());
         Assert.assertTrue(resp.isEnProceso());
     }
-    /**
-     * Prueba para obtener un reclamo por su factura
-     */
-    @Test
-    public void getReclamoByFactura()
-    {
-        List<ReclamoEntity> factura0 = reclamoLogic.findByFactura(facturaData.get(0).getId());
-        Assert.assertEquals(factura0.size(), 1);
-        List<ReclamoEntity> factura1 = reclamoLogic.findByFactura(facturaData.get(1).getId());
-        Assert.assertEquals(factura1.size(), 1);
-        List<ReclamoEntity> factura2 = reclamoLogic.findByFactura(facturaData.get(2).getId());
-        Assert.assertEquals(factura2.size(), 1);
-    }
     @Test
      /**
      * Prueba para terminar un reclamo
@@ -227,14 +210,8 @@ public class ReclamoLogicTest
     @Test
     public void getReclamoByFacturaTest()
     {
-        Assert.assertEquals(data.get(0), reclamoLogic.getReclamoPorfactura(facturaData.get(0).getId()).get(0));
-        Assert.assertEquals(data.get(1), reclamoLogic.getReclamoPorfactura(facturaData.get(1).getId()).get(0));
-        Assert.assertEquals(data.get(2), reclamoLogic.getReclamoPorfactura(facturaData.get(2).getId()).get(0));
-    }
-    @Test
-    public void deleteByFacturaTest() throws BusinessLogicException
-    {
-        reclamoLogic.deleteReclamoByFacturaId(facturaData.get(0).getId(), data.get(0).getId());
-        Assert.assertNull(reclamoLogic.find(data.get(0).getId()));
+        Assert.assertEquals(data.get(0), reclamoLogic.getReclamoPorfactura(facturaData.get(0).getId()));
+        Assert.assertEquals(data.get(1), reclamoLogic.getReclamoPorfactura(facturaData.get(1).getId()));
+        Assert.assertEquals(data.get(2), reclamoLogic.getReclamoPorfactura(facturaData.get(2).getId()));
     }
 }

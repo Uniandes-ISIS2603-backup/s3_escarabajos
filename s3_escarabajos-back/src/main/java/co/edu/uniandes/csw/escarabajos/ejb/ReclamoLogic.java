@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.escarabajos.ejb;
+import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
+import co.edu.uniandes.csw.escarabajos.entities.FacturaEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ReclamoEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.ReclamoPersistence;
@@ -28,44 +30,26 @@ public class ReclamoLogic {
     @Inject
     private FacturaLogic facturaLogic;
 
-
-    public ReclamoEntity createReclamo(ReclamoEntity ent, Long facturaId) throws BusinessLogicException {
+    @Inject
+    private ClienteLogic clienteLogic; 
+    public ReclamoEntity createReclamo(ReclamoEntity ent, Long facturaId, Long clienteId) throws BusinessLogicException {
         LOGGER.info("Iniciando el proceso de crear un reclamo.");
         if (ent.getMensaje() == null || ent.getMensaje().isEmpty()) {
             throw new BusinessLogicException("Por favor ingrese los detalles del reclamo.");
         }
-        // if(emptyList(ent.getAlbum()))
-        //{
-        //  throw new BusinessLogicException("Debe ingresar al menos 1 foto con evidencia.");
-        //}
         if (ent.getRazon() == null || ent.getRazon().isEmpty()) {
             throw new BusinessLogicException("Por favor ingrese el motivo de su reclamo");
         }
-        // FacturaEntity f = facturaLogic.getFactura(facturaId);
-
+        FacturaEntity f = facturaLogic.getFactura(facturaId);
+        ClienteEntity c = clienteLogic.getCliente(clienteId);
+        
+        ent.setCliente(c);
+        ent.setFactura(f);
+        
         ReclamoEntity nuevo = reclamoPersistence.create(ent);
-        // ent.setFactura(f);
-        // f.setReclamo(nuevo);
         LOGGER.info("Finalizando el proceso de crear un reclamo");
         return nuevo;
     }
-
-    public ReclamoEntity updateReclamo(ReclamoEntity ent, Long facturaId) throws BusinessLogicException {
-        LOGGER.info("Iniciando el proceso de actualizar un reclamo.");
-        if (ent == null || ent.getMensaje().isEmpty()) {
-            throw new BusinessLogicException("Por favor ingrese los detalles del reclamo.");
-        }
-        // if (emptyList(ent.getAlbum())) {
-        //   throw new BusinessLogicException("Debe ingresar al menos 1 foto con evidencia.");
-        //FacturaEntity f = facturaLogic.getFactura(facturaId);
-        //  ent.setFactura(f);
-        ReclamoEntity actualizado = reclamoPersistence.find(ent.getId());
-        actualizado = reclamoPersistence.update(actualizado);
-        //f.setReclamo(actualizado);
-        LOGGER.info("Finalizando el proceso de actualizar un reclamo");
-        return actualizado;
-    }
-
     public ReclamoEntity find(Long id) {
         LOGGER.info("Inicia el proceso de buscar un calificaciòn.");
         ReclamoEntity answ = reclamoPersistence.find(id);
@@ -73,43 +57,10 @@ public class ReclamoLogic {
         return answ;
     }
 
-    public void delete(ReclamoEntity ent) {
-        LOGGER.info("Inicia el proceso de eliminar un reclamo.");
-        reclamoPersistence.delete(ent);
-        LOGGER.info("Termina el proceso de eliminar un reclamo.");
-    }
-
-    public void delete(Long id) {
-        LOGGER.info("Inicia el proceso de eliminar un reclamo por id.");
-        reclamoPersistence.delete(id);
-        LOGGER.info("Termina el proceso de eliminar un reclamo por id.");
-    }
-
     public List<ReclamoEntity> findAll() {
         LOGGER.info("Inicia el proceso de mostrar todos los reclamos.");
         List<ReclamoEntity> answ = reclamoPersistence.findAll();
         LOGGER.info("Termina el proceso de mostrar todos los reclamos.");
-        return answ;
-    }
-
-    public List<ReclamoEntity> findByFactura(Long facturaId) {
-        LOGGER.info("Inicia el proceso de mostrar todos los reclamos de una factura.");
-        List<ReclamoEntity> answ = reclamoPersistence.getReclamosByFactura(facturaId);
-        LOGGER.info("Termina el proceso de mostrar todos los reclamos de una factura.");
-        return answ;
-    }
-
-    public List<ReclamoEntity> getReclamosEnProceso() {
-        LOGGER.info("Inicia el proceso de mostrar todos los reclamos de una factura.");
-        List<ReclamoEntity> answ = reclamoPersistence.getReclamosEnProceso();
-        LOGGER.info("Termina el proceso de mostrar todos los reclamos de una factura.");
-        return answ;
-    }
-
-    public List<ReclamoEntity> getReclamosTerminados() {
-        LOGGER.info("Inicia el proceso de mostrar todos los reclamos de una factura.");
-        List<ReclamoEntity> answ = reclamoPersistence.getReclamosTerminados();
-        LOGGER.info("Termina el proceso de mostrar todos los reclamos de una factura.");
         return answ;
     }
 
@@ -129,21 +80,11 @@ public class ReclamoLogic {
         reclamoPersistence.update(temp);
     }
 
-    public List<ReclamoEntity> getReclamoPorfactura(Long facturaId) {
+    public ReclamoEntity getReclamoPorfactura(Long facturaId) {
         LOGGER.info("Inicia el proceso de mostrar todos los reclamos de una factura.");
-        List<ReclamoEntity> answ = reclamoPersistence.getReclamoPorFactura(facturaId);
+        ReclamoEntity answ = reclamoPersistence.getReclamoPorFactura(facturaId);
         LOGGER.info("Termina el proceso de mostrar todos los reclamos de una factura.");
         return answ;
-    }
-
-    public void deleteReclamoByFacturaId(Long facturaId, Long reclamoId) throws BusinessLogicException {
-        ReclamoEntity e1 = find(reclamoId);
-        ReclamoEntity e2 = findByFactura(facturaId).get(0);
-        if (!Objects.equals(e1.getId(), e2.getId())) {
-            throw new BusinessLogicException("El reclamo no pertenece a la factura.");
-        }
-        facturaLogic.getFactura(facturaId).setReclamo(null);
-        delete(reclamoId);
     }
 
     public ReclamoEntity updateMensajeReclamo(ReclamoEntity ent, Long reclId) throws BusinessLogicException {
@@ -156,5 +97,11 @@ public class ReclamoLogic {
         actualizado = reclamoPersistence.update(actualizado);
         LOGGER.info("Finalizando el proceso de actualizar un reclamo");
         return actualizado;
+    }
+    public List<ReclamoEntity> getReclamoByCliente(Long clienteId) {
+        LOGGER.info("Inicia el proceso de mostrar todos los reclamos de un cliente.");
+        List<ReclamoEntity> answ = reclamoPersistence.getReclamoPorCliente(clienteId);
+        LOGGER.info("Termina el proceso de mostrar todos los reclamos de un cliente.");
+        return answ;
     }
 }

@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,15 +37,15 @@ public class FacturaEntity implements Serializable {
     private Long id;
     private Double dinero;
     @PodamExclude
-    @OneToOne(mappedBy = "factura", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "factura", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     private ReclamoEntity reclamo;
     
     @PodamExclude
-    @OneToOne(mappedBy = "factura",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "factura",cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     private MedioPagoEntity medioDePago;
     
     @PodamExclude
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private ClienteEntity cliente;
     
     @PodamExclude

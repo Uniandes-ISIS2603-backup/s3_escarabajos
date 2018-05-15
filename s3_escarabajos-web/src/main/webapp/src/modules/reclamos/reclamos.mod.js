@@ -1,7 +1,7 @@
 (function (ng) {
     // Definición del módulo
     var mod = ng.module("reclamosModule", ['ui.router']);
-    mod.constant("reclamosContext", "api/reclamos");
+    mod.constant("reclamosContext", "api/clientes");
     // Configuración de los estados del módulo
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             // En basePath se encuentran los templates y controladores de módulo
@@ -17,7 +17,7 @@
                         templateUrl: basePath + 'reclamos.list.html',
                         controller: 'reclamosCtrl',
                         controllerAs: 'ctrl'
-                    },
+                    }
                 }
             });
             $stateProvider.state('reclamosCreate', {
@@ -36,7 +36,7 @@
             });
             $stateProvider.state('reclamosDetail', {
                 // Url que aparecerá en el browser
-                url: '/reclamos/{reclamoId:int}',
+                url: 'clientes/reclamos/{reclamoId:int}',
                 param: {
                     reclamoId: null
                 },
@@ -48,6 +48,17 @@
                     }
                 },
                 data: {
+                }
+            });
+            $stateProvider.state('reclamosAdminList', {
+                // Url que aparecerá en el browser
+                url: '/reclamos/list',
+                views: {
+                    'mainView': {
+                        templateUrl: basePath + 'reclamos.AdminList.html',
+                        controller: 'reclamosAdminCtrl',
+                        controllerAs: 'ctrl'
+                    }
                 }
             });
         }
