@@ -165,6 +165,19 @@ public class BicicletaLogicTest {
             Assert.assertNotNull(e);
             Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
         }
+        
+        newEntity = factory.manufacturePojo(BicicletaEntity.class);
+        newEntity.setModeloId(dataModelo.get(0).getId());
+        newEntity.setUsada(Boolean.FALSE);
+        newEntity.setCategoria(" ");
+
+        try {
+            logic.verificarBicicleta(newEntity);
+            Assert.fail();
+        } catch (BusinessLogicException e) {
+            Assert.assertNotNull(e);
+            Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
 
     /**

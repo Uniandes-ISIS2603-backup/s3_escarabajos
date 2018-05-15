@@ -11,8 +11,11 @@ import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.BicicletaUsadaPersistence;
+
+import java.util.logging.Logger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -34,26 +37,24 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class BicicletaUsadaLogicTest {
-
+    
     private PodamFactory factory = new PodamFactoryImpl();
-
-      @Inject
+    
+    @Inject
     private BicicletaUsadaLogic logic;
-
     
     @PersistenceContext
     private EntityManager em;
-
- 
+    
     @Inject
     private UserTransaction utx;
-
-  
-    private List<BicicletaUsadaEntity> data = new ArrayList<BicicletaUsadaEntity>();
-
-    private List<ClienteEntity> dataVendedor = new ArrayList<ClienteEntity>();
-
-    private List<ModeloEntity> dataModelo = new ArrayList<ModeloEntity>();
+    
+    private List<BicicletaUsadaEntity> data = new ArrayList<>();
+    
+    private List<ClienteEntity> dataVendedor = new ArrayList<>();
+    
+    private List<ModeloEntity> dataModelo = new ArrayList<>();
+    
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -68,7 +69,7 @@ public class BicicletaUsadaLogicTest {
     /**
      * Configuración inicial de la prueba.
      *
-     * 
+     *
      */
     @Before
     public void configTest() {
@@ -90,7 +91,7 @@ public class BicicletaUsadaLogicTest {
     /**
      * Limpia las tablas que están implicadas en la prueba.
      *
-     * 
+     *
      */
     private void clearData() {
         em.createQuery("delete from BicicletaUsadaEntity").executeUpdate();
@@ -102,7 +103,7 @@ public class BicicletaUsadaLogicTest {
      * Inserta los datos iniciales para el correcto funcionamiento de las
      * pruebas.
      *
-     * 
+     *
      */
     private void insertData() {
         
@@ -129,18 +130,35 @@ public class BicicletaUsadaLogicTest {
             data.add(entity);
         }
     }
+    
+    @Test
+    public void verificarBicicletaTest() {
+        
+        BicicletaUsadaEntity newEntity = factory.manufacturePojo(BicicletaUsadaEntity.class);
+        newEntity.setModeloId(dataModelo.get(0).getId());
+        newEntity.setUsada(Boolean.FALSE);
+        
+        try {
+            logic.verificarBiciUsada(newEntity);
+            Assert.fail();
+        } catch (BusinessLogicException e) {
+            Assert.assertNotNull(e);
+            Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
 
     /**
      * Prueba para crear un BicicletaUsada
      *
-     * 
+     *
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
      */
     @Test
     public void createBicicletaUsadaTest() throws BusinessLogicException {
         BicicletaUsadaEntity newEntity = factory.manufacturePojo(BicicletaUsadaEntity.class);
         newEntity.setModeloId(dataModelo.get(0).getId());
         newEntity.setEstado("En proceso");
-        BicicletaUsadaEntity result = logic.createBicicleta(data.get(0).getCliente().getId(),newEntity);
+        BicicletaUsadaEntity result = logic.createBicicleta(data.get(0).getCliente().getId(), newEntity);
         Assert.assertNotNull(result);
         BicicletaUsadaEntity entity = em.find(BicicletaUsadaEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
@@ -150,11 +168,12 @@ public class BicicletaUsadaLogicTest {
 
     /**
      * Prueba para consultar la lista de BicicletaUsadas de un vendedor
+     *
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
      */
-    
     @Test
     public void getBicicletaUsadasTest() throws BusinessLogicException {
-        List<BicicletaUsadaEntity> list = logic.getBicicletasDelVendedor(dataVendedor.get(1).getId());        
+        List<BicicletaUsadaEntity> list = logic.getBicicletasDelVendedor(dataVendedor.get(1).getId());
         Assert.assertEquals(data.size(), list.size());
         for (BicicletaUsadaEntity entity : list) {
             boolean found = false;
@@ -166,11 +185,13 @@ public class BicicletaUsadaLogicTest {
             Assert.assertTrue(found);
         }
     }
-     
+
     /**
-     * Prueba para consultar un BicicletaUsada especifica de un vendedor especifico
+     * Prueba para consultar un BicicletaUsada especifica de un vendedor
+     * especifico
+     *
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
      */
-    
     @Test
     public void getBicicletaUsadaTest() throws BusinessLogicException {
         BicicletaUsadaEntity entity = data.get(0);
@@ -179,12 +200,21 @@ public class BicicletaUsadaLogicTest {
         Assert.assertEquals(entity.getId(), resultEntity.getId());
         Assert.assertEquals(entity.getEstado(), resultEntity.getEstado());
         Assert.assertEquals(entity.getFacturaOriginal(), resultEntity.getFacturaOriginal());
+        
+        try {
+            logic.getBicicleta(Long.MIN_VALUE, Long.MIN_VALUE);
+            Assert.fail();
+        } catch (BusinessLogicException e) {
+            Assert.assertNotNull(e);
+            Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
 
     /**
-     * Prueba para eliminar un BicicletaUsada 
+     * Prueba para eliminar un BicicletaUsada
+     *
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
      */
- 
     @Test
     public void deleteBicicletaUsadaTest() throws BusinessLogicException {
         BicicletaUsadaEntity entity = data.get(0);
@@ -195,22 +225,51 @@ public class BicicletaUsadaLogicTest {
 
     /**
      * Prueba para actualizar un BicicletaUsada
+     *
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
      */
- @Test
+    @Test
     public void updateBicicletaUsadaTest() throws BusinessLogicException {
         BicicletaUsadaEntity entity = data.get(1);
         BicicletaUsadaEntity pojoEntity = factory.manufacturePojo(BicicletaUsadaEntity.class);
-
+        
         pojoEntity.setId(entity.getId());
         pojoEntity.setEstado("En proceso");
         pojoEntity.setModeloId(dataModelo.get(0).getId());
         
         logic.updateBicicleta(dataVendedor.get(1).getId(), pojoEntity);
-
+        
         BicicletaUsadaEntity resp = em.find(BicicletaUsadaEntity.class, entity.getId());
-
+        
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
         Assert.assertEquals(pojoEntity.getEstado(), resp.getEstado());
         Assert.assertEquals(pojoEntity.getFacturaOriginal(), resp.getFacturaOriginal());
+        
+        pojoEntity = factory.manufacturePojo(BicicletaUsadaEntity.class);
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setEstado("En proceso");
+        pojoEntity.setPrecio(-1.0);
+        
+        try {
+            logic.updateBicicleta(dataVendedor.get(1).getId(), pojoEntity);
+            Assert.fail();
+        } catch (BusinessLogicException e) {
+            Assert.assertNotNull(e);
+            Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
+        }
+        
+        pojoEntity = factory.manufacturePojo(BicicletaUsadaEntity.class);
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setEstado("En proceso");
+        pojoEntity.setModeloId(Long.MIN_VALUE);
+        
+        try {
+            logic.updateBicicleta(dataVendedor.get(1).getId(), pojoEntity);
+            Assert.fail();
+        } catch (BusinessLogicException e) {
+            Assert.assertNotNull(e);
+            Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
+        }
+        
     }
 }
