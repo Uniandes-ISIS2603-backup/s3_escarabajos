@@ -14,7 +14,7 @@
                     sessionStorage.setItem("rol", "Administrador");
                     sessionStorage.setItem("id", response.data.id);
                     sessionStorage.setItem("name", response.data.nombre);
-                    $state.go('adv',{}, {reload: true});
+                    $state.go('adv',{adv:true,tipo:'bicicletas',filtros:{marcas:[],categorias:[],colores:[],precioMin:0.0,precioMax:999999999.9,calificacionMin:0.0}}, {reload: true});
                     $http.post("data/usuarios.json", sessionStorage);
                 });
             };
