@@ -45,7 +45,7 @@
                         console.log('Entra');
                         flag = true;
                         $scope.user = $scope.users[item];
-                        $state.go('adv', {}, {reload: true});
+                        $state.go('adv', {adv:true,tipo:'bicicletas',filtros:{marcas:[],categorias:[],colores:[],precioMin:0.0,precioMax:999999999.9,calificacionMin:0.0}}, {reload: true});
                         break;
                     }
                 }

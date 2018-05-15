@@ -1,21 +1,67 @@
 [{
         "id": 1,
-        "rol": "Cliente", 
+        "rol": "Usuario", 
         "user": "pedro69",
         "name": "Camilo",
         "passowrd": "1234"
     },
     {
         "id": 2,
-        "rol": "Administrador", 
+        "rol": "Usuario", 
         "user": "saga",
         "name": "Felipe",
         "password": "1234"
     },
     {
         "id": 3,
-        "rol": "Cliente", 
+        "rol": "Usuario", 
         "user": "saga2",
         "name": "pedro",
+        "password": "1234"
+    },{
+        "id": 4,
+        "rol": "Usuario", 
+        "user": "giorginio1232",
+        "name": "Jorge",
+        "passowrd": "1234"
+    },
+    {
+        "id": 5,
+        "rol": "Usuario", 
+        "user": "s.beltran",
+        "name": "Santiago",
+        "password": "1234"
+    },
+    {
+        "id": 6,
+        "rol": "Usuario", 
+        "user": "a.varonm",
+        "name": "Andres",
+        "password": "1234"
+    },{
+        "id": 7,
+        "rol": "Usuario", 
+        "user": "m.devia",
+        "name": "Mateo",
+        "passowrd": "1234"
+    },
+    {
+        "id": 8,
+        "rol": "Usuario", 
+        "user": "n.gaitan",
+        "name": "Nicolas",
+        "password": "1234"
+    },
+    {
+        "id": 9,
+        "rol": "Usuario", 
+        "user": "testC",
+        "name": "Test Cliente",
+        "password": "1234"
+    },{
+        "id": 10,
+        "rol": "Administrador", 
+        "user": "testA",
+        "name": "Test Admin",
         "password": "1234"
     }]
