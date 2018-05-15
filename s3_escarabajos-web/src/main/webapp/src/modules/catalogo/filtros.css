@@ -84,6 +84,7 @@ hr{
     text-align: center;
     font-size: 100%;
     line-height: 1.6em;
+    border-radius:50%;
 }
 #custom-handle2 {
     width: 4em;
@@ -93,6 +94,7 @@ hr{
     text-align: center;
     font-size: 100%;
     line-height: 1.6em;
+    border-radius: 50%;
 }
 .swatch {
     width:50px;
