@@ -99,9 +99,9 @@ public class CatalogoLogic {
      * adecuado!
      */
     public List<ModeloEntity> getModelosBicicletasFiltrados(List<List<String>> filtros, Double precioMin, Double precioMax, Double calificacionMin, Integer pagina, Integer numModelos) throws BusinessLogicException {
-        if (filtros.get(0) != null && filtros.get(1) != null && filtros.get(2) != null && precioMin >= 0 && precioMax >= -1 && calificacionMin >= 0) {
+        if (precioMin >= 0 && precioMax >= -1 && calificacionMin >= 0) {
 
-            return persistence.filtrar(filtros, precioMin, precioMax, calificacionMin, pagina, numModelos, ModeloLogic.BICICLETA);
+            return filtrar(filtros, precioMin, precioMax, calificacionMin, pagina, numModelos, ModeloLogic.BICICLETA);
 
         }
         throw new BusinessLogicException(ERROR);
@@ -123,12 +123,35 @@ public class CatalogoLogic {
      * adecuado!
      */
     public List<ModeloEntity> getModelosAccesoriosFiltrados(List<List<String>> filtros, Double precioMin, Double precioMax, Double calificacionMin, Integer pagina, Integer numModelos) throws BusinessLogicException {
-        if (filtros.get(0) != null && filtros.get(1) != null && filtros.get(2) != null && precioMin >= 0 && precioMax >= -1 && calificacionMin >= 0) {
+        if (precioMin >= 0 && precioMax >= -1 && calificacionMin >= 0) {
             return persistence.filtrar(filtros, precioMin, precioMax, calificacionMin, pagina, numModelos, ModeloLogic.ACCESORIO);
 
         }
         throw new BusinessLogicException(ERROR);
 
+    }
+
+    /**
+     * Metodo que se encarga de llamar el metodo que cuenta el numero de modelos
+     * de tipo bicicleta con los filtros datos. los modelos.
+     *
+     *
+     * @param filtros lista de marcas,categorias y colores
+     * @param precioMin precioMin de los modelos a filtrar
+     * @param precioMax precioMax de los modelos a filtrar
+     * @param calificacionMin calificacion minima de los modelos a filtrar
+     * @param tipo tipo a contar
+     * @param pagina pagina a buscar
+     * @param numModelos numero de modelos a filtrar.
+     * @return lista de modeloEntity filtrados.
+     * @throws BusinessLogicException si los filtros no estan en el formato
+     * adecuado!
+     */
+    public List<ModeloEntity> filtrar(List<List<String>> filtros, Double precioMin, Double precioMax, Double calificacionMin, Integer pagina, Integer numModelos, String tipo) throws BusinessLogicException {
+        if (filtros.get(0) != null && filtros.get(1) != null && filtros.get(2) != null) {
+            return persistence.filtrar(filtros, precioMin, precioMax, calificacionMin, pagina, numModelos, tipo);
+        }
+        throw new BusinessLogicException(ERROR);
     }
 
     /**
@@ -146,9 +169,31 @@ public class CatalogoLogic {
      * adecuado!
      */
     public Integer getNumeroBicicletasConFiltros(List<String> marcas, List<String> categorias, List<String> colores, Double precioMin, Double precioMax, Double calificacionMin) throws BusinessLogicException {
-        if (marcas != null && categorias != null && colores != null && precioMin >= 0 && precioMax >= -1 && calificacionMin >= 0) {
-            return persistence.contarFiltrados(marcas, categorias, colores, precioMin, precioMax, calificacionMin, ModeloLogic.BICICLETA);
+        if (precioMin >= 0 && precioMax >= -1 && calificacionMin >= 0) {
+            return contarFiltrados(marcas, categorias, colores, precioMin, precioMax, calificacionMin, ModeloLogic.BICICLETA);
 
+        }
+        throw new BusinessLogicException(ERROR);
+    }
+
+    /**
+     * Metodo que se encarga de llamar el metodo que cuenta el numero de modelos
+     * de tipo bicicleta con los filtros datos. los modelos.
+     *
+     * @param marcas marcas a filtrar.
+     * @param categorias categorias a filtrar
+     * @param colores colores a filtrar
+     * @param precioMin precioMin de los modelos a filtrar
+     * @param precioMax precioMax de los modelos a filtrar
+     * @param calificacionMin calificacion minima de los modelos a filtrar
+     * @param tipo tipo a contar
+     * @return lista de modeloEntity filtrados.
+     * @throws BusinessLogicException si los filtros no estan en el formato
+     * adecuado!
+     */
+    public Integer contarFiltrados(List<String> marcas, List<String> categorias, List<String> colores, Double precioMin, Double precioMax, Double calificacionMin, String tipo) throws BusinessLogicException {
+        if (marcas != null && categorias != null && colores != null) {
+            return persistence.contarFiltrados(marcas, categorias, colores, precioMin, precioMax, calificacionMin, tipo);
         }
         throw new BusinessLogicException(ERROR);
     }
@@ -168,8 +213,8 @@ public class CatalogoLogic {
      * adecuado!
      */
     public Integer getNumeroAccesoriosConFiltros(List<String> marcas, List<String> categorias, List<String> colores, Double precioMin, Double precioMax, Double calificacionMin) throws BusinessLogicException {
-        if (marcas != null && categorias != null && colores != null && precioMin >= 0 && precioMax >= -1 && calificacionMin >= 0) {
-            return persistence.contarFiltrados(marcas, categorias, colores, precioMin, precioMax, calificacionMin, ModeloLogic.ACCESORIO);
+        if (precioMin >= 0 && precioMax >= -1 && calificacionMin >= 0) {
+            return contarFiltrados(marcas, categorias, colores, precioMin, precioMax, calificacionMin, ModeloLogic.ACCESORIO);
 
         }
         throw new BusinessLogicException(ERROR);

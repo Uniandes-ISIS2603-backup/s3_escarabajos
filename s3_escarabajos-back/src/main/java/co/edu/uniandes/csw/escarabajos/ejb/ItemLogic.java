@@ -92,6 +92,19 @@ public class ItemLogic {
             throw new BusinessLogicException("Ya existe un accesorio el id \"" + entity.getId() + "\"");
         }
         ModeloEntity modelo = modeloPers.find(entity.getModeloId());
+        verificarModelo(modelo,entity);
+    }
+
+    /**
+     * Metodo que verifica todas las reglas de negocio de un item antes de
+     * crearlo.
+     *
+     * @param modelo a verificar
+     * @param entity item a verificar
+     * @throws BusinessLogicException si no se cumple una de las reglas de
+     * negocio.
+     */
+    public void verificarModelo(ModeloEntity modelo,ItemEntity entity) throws BusinessLogicException {
         if (modelo == null) {
             throw new BusinessLogicException("El item debe tener un modelo");
         }
@@ -99,7 +112,6 @@ public class ItemLogic {
         if (!(tipo.equals(ModeloLogic.BICICLETA) && entity instanceof BicicletaEntity || tipo.equals(ModeloLogic.ACCESORIO) && entity instanceof AccesorioEntity)) {
             throw new BusinessLogicException("El item debe ser del mismo tipo que el modelo");
         }
-
     }
 
     /**

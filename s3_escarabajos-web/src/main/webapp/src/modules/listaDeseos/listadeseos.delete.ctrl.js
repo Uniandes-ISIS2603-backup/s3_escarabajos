@@ -4,11 +4,11 @@
         function ($scope, $http, $state) {
             
               // cambiar el 1 de la ruta por el id del cliente que este logeado
-            $http.get('api/clientes/' + 1 + '/listadeseos').then(function (response) {
+            $http.get('api/clientes/' + sessionStorage.getItem("id") + '/listadeseos').then(function (response) {
 
-                ruta = 'api/listadeseos/' + response.data.id + '/items';
+                var ruta = 'api/listadeseos/' + response.data.id + '/items';
                 
-                $http.delete(ruta).then(function (response) {
+                $http.delete(ruta).then(function () {
                     $state.go('listadeseos', {reload: true});
                 });
 

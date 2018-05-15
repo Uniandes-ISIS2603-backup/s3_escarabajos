@@ -48,6 +48,7 @@ public class BicicletaLogic {
 
     /**
      * Devuelve una bicicleta especifica
+     *
      * @param id de la bicicleta
      * @return Datos de la biciccleta especifica
      * @throws BusinessLogicException Por reglas de negocio
@@ -78,7 +79,6 @@ public class BicicletaLogic {
         entity.setMultiplicador(1.0);
         logic.verificarItem(entity);
         verificarBicicleta(entity);
-        // TODO: DONE 
         persistence.create(entity);
         entity.setDisponible(Boolean.TRUE);
         LOGGER.info("Termina proceso de creación de bicicleta");
@@ -104,8 +104,8 @@ public class BicicletaLogic {
         entity.setUsada(Boolean.FALSE);
         if (entity.getPrecio() <= 0) {
             throw new BusinessLogicException("La bicicleta debe tener un precio mayor a 0");
-        } 
-        if (entity.getModeloId()!= bici.getModeloId()) {
+        }
+        if (entity.getModeloId() != bici.getModeloId()) {
             throw new BusinessLogicException("No se le puede cambiar el modelo a una bicicleta!");
         }
         verificarBicicleta(entity);
@@ -128,25 +128,28 @@ public class BicicletaLogic {
 
     /**
      * Metodo que verifica las reglas de negocio.
+     *
      * @param entity Datos de la bicicleta a veficar
      * @return bicicleta cumpliendo las reglas de negocio.
-     * @throws BusinessLogicException  por reglas de negocio
+     * @throws BusinessLogicException por reglas de negocio
      */
     public BicicletaEntity verificarBicicleta(BicicletaEntity entity) throws BusinessLogicException {
         if (entity.getUsada()) {
             throw new BusinessLogicException("La bicicleta debe ser nueva");
         }
-        if (entity.getCategoria() == null || entity.getCategoria().equals(" ")) {
+        if (entity.getCategoria() == null || " ".equals(entity.getCategoria())) {
             throw new BusinessLogicException("La bicicleta debe estar asociada a una categoria valida");
         }
         return entity;
     }
+
     /**
      * Encuentra todas las bicicletas con un modelo especifico
+     *
      * @param id del modelo para filtrar
      * @return lista de bicicletas.
      */
-    public List<BicicletaEntity> findByModelo(Long id ){
+    public List<BicicletaEntity> findByModelo(Long id) {
         return persistence.findByModelo(id);
     }
 }

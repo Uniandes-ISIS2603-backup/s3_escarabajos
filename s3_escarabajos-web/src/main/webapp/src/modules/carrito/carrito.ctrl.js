@@ -17,8 +17,8 @@
             });
             }  
             
-            // cambiar el 1 de la ruta por el id del cliente que este logeado
-            $http.get('api/clientes/' + 1 + '/carrito').then(function (response) {
+            
+            $http.get('api/clientes/' + sessionStorage.getItem("id") + '/carrito').then(function (response) {
 
                 ruta = ruta + response.data.id + '/items';
                 
@@ -31,19 +31,22 @@
 
                     var total = 0;
 
-                    for (i = 0; i < lista.length; i++) {
+                    for (var i = 0; i < lista.length; i++) {
 
                         total = total + lista[i].precio;
 
                         var repetido = false;
 
-                        for (j = 0; j < lista2.length; j++) {
+                        for (var j = 0; j < lista2.length; j++) {
 
-                            if (lista[i].color === lista[j].color && lista[i].modelo === lista[j].modelo && lista[i].precio === lista[j].precio && lista[i].tipo === lista[j].tipo && lista[i].referencia === lista[j].referencia) {
+                            if (lista[i].color === lista[j].color && lista[i].modelo === lista[j].modelo) {
 
-                                lista2[j].cantidad = lista2[j].cantidad + 1;
+                                if ( lista[i].precio === lista[j].precio && lista[i].tipo === lista[j].tipo && lista[i].referencia === lista[j].referencia ){
 
-                                repetido = true;
+                                    lista2[j].cantidad = lista2[j].cantidad + 1;
+
+                                    repetido = true;
+                                }
                             }
                         }
 

@@ -1,4 +1,4 @@
-(function (ng) {
+(function () {
     var mod = angular.module('ListadeseosMod', ['ui.router']);
 
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
