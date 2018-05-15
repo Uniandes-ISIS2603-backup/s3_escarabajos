@@ -69,12 +69,7 @@
     </div>
     <br><br><br><br><br><br><br><br><br>
 </div>
-<div ng-if="!isAuthenticated()">
-    <img src= "data/Imagenes/oops!.png" class="img-responsive center-block" style="width:400px;height:200px;">
-    <h1 style ="text-align: center">
-        Inicia sesion para poder ver tu carrito de compras
-    </h1>
-</div>
+
 <div class="row" ng-if= "!isAuthenticated()">
-    <a ui-sref="adv({adv:true,tipo:'bicicletas',filtros:{marcas:[],categorias:[],colores:[],precioMin:0.0,precioMax:999999999.9,calificacionMin:0.0}})" class="btn btn-success text-white" style="margin-left: 10px">Seguir Explorando</a>
+    <a ui-sref="clientesSignIn" class="btn btn-success text-white" style="margin-left: 10px">Seguir Explorando</a>
 </div>

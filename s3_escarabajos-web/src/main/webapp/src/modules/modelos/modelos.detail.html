@@ -111,7 +111,7 @@
                         </div>
                     </div>
                     <br>
-                    <div style="position: relative;" class="row">
+                    <div style="position: relative;" class="row" ng-if="isAuthenticated()">
                         <div class="col-sm-4">
                             <a  ui-sref ="addItemCarrito({itemId: modeloActual.items[0].id})" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart" style="color:white"></span></a>
                         </div>
@@ -119,11 +119,29 @@
                             <h6 style="font-size: 10px">Agregar Carrito</h6>
                         </div>
                     </div>
+                    <div style="position: relative;" class="row" ng-if="!isAuthenticated()">
+                        <div class="col-sm-4">
+                            <a  ui-sref ="clientesSignIn" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart" style="color:white"></span></a>
+                        </div>
+                        <div class="col-xs-6">
+                            <h6 style="font-size: 10px">Agregar Carrito</h6>
+                        </div>
+                    </div>
                     <br>
-                    <div style="position:relative;" class="row">
+                    <div style="position:relative;" class="row" ng-if="isAuthenticated()">
 
                         <div class="col-sm-4">
                             <a  ui-sref ="addItemListaDeseos({itemId: modeloActual.items[0].id})" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-gift" ></span></a>
+                        </div>
+
+                        <h6 style="font-size: 10px">Agregar Lista Deseos</h6>
+
+                    </div>
+                    <div style="position:relative;" class="row" ng-if="!isAuthenticated()">
+
+                        <div class="col-sm-4">
+                            <a  ui-sref ="clientesSignIn" class="btn btn-primary">
                                 <span class="glyphicon glyphicon-gift" ></span></a>
                         </div>
 
