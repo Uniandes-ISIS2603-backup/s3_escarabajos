@@ -12,6 +12,8 @@ import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.BicicletaPersistence;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -126,18 +128,48 @@ public class BicicletaLogicTest {
         BicicletaEntity newEntity = factory.manufacturePojo(BicicletaEntity.class);
         newEntity.setModeloId(dataModelo.get(0).getId());
         newEntity.setUsada(Boolean.FALSE);
-        
+
         BicicletaEntity result = logic.createBicicleta(newEntity);
         Assert.assertNotNull(result);
-        
+
         BicicletaEntity entity = em.find(BicicletaEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
         Assert.assertEquals(newEntity.getCategoria(), entity.getCategoria());
         Assert.assertFalse(entity.getUsada());
     }
 
+    @Test
+    public void verificarBicicletaTest() {
+
+        BicicletaEntity newEntity = factory.manufacturePojo(BicicletaEntity.class);
+        newEntity.setModeloId(dataModelo.get(0).getId());
+        newEntity.setUsada(Boolean.TRUE);
+
+        try {
+            logic.verificarBicicleta(newEntity);
+            Assert.fail();
+        } catch (BusinessLogicException e) {
+            Assert.assertNotNull(e);
+            Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+        newEntity = factory.manufacturePojo(BicicletaEntity.class);
+        newEntity.setModeloId(dataModelo.get(0).getId());
+        newEntity.setUsada(Boolean.FALSE);
+        newEntity.setCategoria(null);
+
+        try {
+            logic.verificarBicicleta(newEntity);
+            Assert.fail();
+        } catch (BusinessLogicException e) {
+            Assert.assertNotNull(e);
+            Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
     /**
      * Prueba para consultar la lista de Bicicletas de un vendedor
+     *
      * @throws BusinessLogicException Por reglas de negocio
      */
     @Test
@@ -153,11 +185,18 @@ public class BicicletaLogicTest {
             }
             Assert.assertTrue(found);
         }
+        try {
+            logic.getBicicleta(Long.MIN_VALUE);
+            Assert.fail();
+        } catch (BusinessLogicException e) {
+            Assert.assertNotNull(e);
+            Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
 
     /**
-     * Prueba para consultar un Bicicleta especifica de un vendedor
-     * especifico
+     * Prueba para consultar un Bicicleta especifica de un vendedor especifico
+     *
      * @throws BusinessLogicException Por reglas de negocio
      */
     @Test
@@ -172,6 +211,7 @@ public class BicicletaLogicTest {
 
     /**
      * Prueba para eliminar un Bicicleta
+     *
      * @throws BusinessLogicException Por reglas de negocio
      */
     @Test
@@ -184,6 +224,7 @@ public class BicicletaLogicTest {
 
     /**
      * Prueba para actualizar un Bicicleta
+     *
      * @throws BusinessLogicException Por reglas de negocio
      */
     @Test
@@ -202,5 +243,49 @@ public class BicicletaLogicTest {
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
         Assert.assertEquals(pojoEntity.getCategoria(), resp.getCategoria());
         Assert.assertFalse(resp.getUsada());
+
+        try {
+            logic.updateBicicleta(Long.MIN_VALUE, null);
+            Assert.fail();
+        } catch (BusinessLogicException e) {
+            Assert.assertNotNull(e);
+            Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+        entity = data.get(1);
+        pojoEntity = factory.manufacturePojo(BicicletaEntity.class);
+
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setUsada(Boolean.FALSE);
+        pojoEntity.setModeloId(entity.getModeloId());
+        pojoEntity.setPrecio(-1.0);
+        try {
+            logic.updateBicicleta(entity.getId(), pojoEntity);
+            Assert.fail();
+        } catch (BusinessLogicException e) {
+            Assert.assertNotNull(e);
+            Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+        entity = data.get(1);
+        pojoEntity = factory.manufacturePojo(BicicletaEntity.class);
+
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setUsada(Boolean.FALSE);
+        pojoEntity.setModeloId(Long.MIN_VALUE);
+        pojoEntity.setPrecio(20.0);
+
+        try {
+            logic.updateBicicleta(entity.getId(), pojoEntity);
+            Assert.fail();
+        } catch (BusinessLogicException e) {
+            Assert.assertNotNull(e);
+            Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
+    @Test
+    public void findByModelo() {
+        Assert.assertNotNull(logic.findByModelo(data.get(1).getModeloId()));
     }
 }

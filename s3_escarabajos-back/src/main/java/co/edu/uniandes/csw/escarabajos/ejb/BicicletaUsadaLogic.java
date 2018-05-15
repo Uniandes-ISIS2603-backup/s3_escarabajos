@@ -50,12 +50,12 @@ public class BicicletaUsadaLogic {
     /**
      * Metodo que verifica las reglas de negocio.
      *
-     * @param entity datos de la bicicleta a verficar 
+     * @param entity datos de la bicicleta a verficar
      * @return bicicleta cumpliendo las reglas de negocio.
      * @throws BusinessLogicException Por reglas de negocio
      */
     public BicicletaUsadaEntity verificarBiciUsada(BicicletaUsadaEntity entity) throws BusinessLogicException {
-        if (entity.getUsada() != true) {
+        if (!entity.getUsada()) {
             throw new BusinessLogicException("La bicicleta usada debe tener el estado de usada en true");
         }
         return entity;
