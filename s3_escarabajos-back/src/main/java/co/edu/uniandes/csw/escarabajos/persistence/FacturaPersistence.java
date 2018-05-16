@@ -61,7 +61,6 @@ public class FacturaPersistence {
      * @return factura con nuevos datos.
      */
     public FacturaEntity update(FacturaEntity entity) {
-        LOGGER.info("LLego aca " + entity.getDinero() + " " + entity.getId());
         return em.merge(entity);
     }
 
@@ -75,6 +74,12 @@ public class FacturaPersistence {
         em.remove(factura);
     }
     
+    /**
+     * Encuentra las facturas de un cliente especifico
+     *
+     * @param idCliente id del cliente 
+     * @return lista de facturas
+     */
     public List<FacturaEntity> findFacturasByClienteId(Long idCliente){
         
         LOGGER.log(Level.INFO, "Consultando la factura del cliente con id= {0}", idCliente);
