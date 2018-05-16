@@ -33,7 +33,8 @@
             }).state('addItemListaDeseos', {
 
                 params: {
-                    itemId: null
+                    itemId: null,
+                    color: null
                 },
 
                 views: {

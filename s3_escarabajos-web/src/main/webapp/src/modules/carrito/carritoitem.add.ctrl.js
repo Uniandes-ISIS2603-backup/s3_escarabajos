@@ -12,10 +12,6 @@
 
                 var color = $state.params.color;
 
-                console.log(modeloId);
-
-                console.log(color);
-
                 var modelo = {};
 
                 $http.get('api/modelos/' + modeloId).then(function (response0) {
@@ -29,10 +25,6 @@
 
                     var itemId = modeloItems[0].id;
 
-                    console.log(modeloItems);
-
-
-
                     $http.get('api/carrito/' + response.data.id + '/items').then(function (response2) {
 
                         var items = response2.data;
@@ -43,11 +35,7 @@
 
                             var estaEnCarrito = false;
 
-                            console.log(m);
-
                             for (var a = 0; a < items.length && !estaEnCarrito; a++) {
-
-                                console.log(m + " " + a);
 
                                 if (items[a].id === modeloItems[m].id) {
 
@@ -58,11 +46,9 @@
                             if (!estaEnCarrito) {
 
 
-                                if (color === null || color === modeloItems[m].color) {
+                                if ((color === null && !modeloItems[m].comprado) || (color === modeloItems[m].color && !modeloItems[m].comprado)) {
 
                                     itemId = modeloItems[m].id;
-
-                                    console.log("encontro: " + itemId);
 
                                     encontro = true;
                                 }
@@ -70,19 +56,23 @@
 
                         }
 
-                        var ruta = 'api/carrito/' + response.data.id + '/items/';
+                        if (encontro) {
 
-                        console.log("itemId: " + itemId);
+                            var ruta = 'api/carrito/' + response.data.id + '/items/';
 
-                        $http.post(ruta + itemId).then(function (response) {
+                            $http.post(ruta + itemId).then(function (response) {
 
-                            $state.go('carrito', {itemId: response.data.id}, {reload: true});
-                        }, function (response) {
+                                $state.go('carrito', {itemId: response.data.id}, {reload: true});
+                            }, function (response) {
 
-                            if (response.status === 500) {
-                                $state.go('yaEsta', {itemId: response.data.id}, {reload: true});
-                            }
-                        });
+                                if (response.status === 500) {
+                                    $state.go('yaEsta', {itemId: response.data.id}, {reload: true});
+                                }
+                            });
+                        } else {
+
+                            $state.go('yaEsta', {itemId: response.data.id}, {reload: true});
+                        }
                     });
 
 
