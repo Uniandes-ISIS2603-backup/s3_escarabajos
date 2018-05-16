@@ -10,7 +10,7 @@
                 views: {
                     mainView: {
                         templateUrl: "src/modules/errores/erroresDeServidor.html",
-                        controller: "carritoCtrl"
+                        controller: "errorCtrl"
                     }
                 }
             });

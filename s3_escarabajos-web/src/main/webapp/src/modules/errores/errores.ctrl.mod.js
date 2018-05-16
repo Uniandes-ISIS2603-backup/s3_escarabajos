@@ -7,7 +7,6 @@
     mod.controller('errorCtrl',['$scope', '$state',
         function($scope, $state){
             
-            
     }]);
 
 })(window.angular);
