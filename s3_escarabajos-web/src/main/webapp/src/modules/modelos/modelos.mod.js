@@ -16,7 +16,8 @@
                 url: '/{modeloId:int}/detail',
                 parent: 'modelos',
                 params: {
-                    modeloId: null
+                    modeloId: null,
+                    exception: false
                 },
                 views: {
                     'detailView': {

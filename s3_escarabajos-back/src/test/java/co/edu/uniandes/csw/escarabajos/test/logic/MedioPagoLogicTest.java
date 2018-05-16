@@ -120,7 +120,7 @@ public class MedioPagoLogicTest {
 
         pojoEntity.setId(entity.getId());
 
-        logic.updateMedioPago(pojoEntity);
+        logic.updateMedioPago(entity.getId(), pojoEntity);
 
         MedioPagoEntity resp = em.find(MedioPagoEntity.class, entity.getId());
 
@@ -130,7 +130,7 @@ public class MedioPagoLogicTest {
     @Test
     public void deleteMedioPagoTest() {
         MedioPagoEntity entity = data.get(0);
-        logic.deleteMedioPago(entity);
+        logic.deleteMedioPago(entity.getId());
         MedioPagoEntity deleted = em.find(MedioPagoEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
@@ -151,7 +151,7 @@ public class MedioPagoLogicTest {
     }
     
     @Test
-    public void getMedioPagoTest() {
+    public void getMedioPagoTest() throws BusinessLogicException {
         MedioPagoEntity entity = data.get(0);
         MedioPagoEntity resultEntity = logic.getMedioPago(entity.getId());
         Assert.assertNotNull(resultEntity);

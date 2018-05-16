@@ -1,5 +1,5 @@
-(function () {
-    var mod = angular.module('CarritoMod', ['ui.router']);
+(function (ng) {
+    var mod = ng.module('CarritoMod', ['ui.router']);
 
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
@@ -28,7 +28,8 @@
             }).state('addItemCarrito', {
 
                 params: {
-                    itemId: null
+                    itemId: null,
+                    color: null
                 },
 
                 views: {
@@ -49,7 +50,7 @@
             }).state('comprar', {
                 views: {
                     'mainView': {
-                        controller: 'carritoCtrl',
+                        controller: 'comprarCtrl',
                         templateUrl: 'src/modules/comprar/comprar.list.html'
                     }
                 }

@@ -26,7 +26,7 @@ and open the template in the editor.
             </div>
             <div class="list-group-item" style = "margin-top:10px">
                 <h1>Razón: {{reclamoActual.razon}}</h1>
-                <p><label>Item:</label> Pendiente del join</p>
+                <p><label>Factura:</label>{{reclamoActual.factura.id}}</p>
                 <div class ="container-fluid">
                     <label>Mensajes:</label>
                     <p ng-repeat = "msj in reclamoActual.mensaje.split('@@@@@@@')" ng-if = "msj != ''"><label>Usuario:</label> {{msj}}</p>

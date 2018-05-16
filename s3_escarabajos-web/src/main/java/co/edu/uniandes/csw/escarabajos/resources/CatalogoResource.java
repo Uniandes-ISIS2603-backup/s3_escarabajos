@@ -9,7 +9,9 @@ import co.edu.uniandes.csw.escarabajos.dtos.FiltrosDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.InfoDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.ModeloDetailDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.PaginacionDTO;
+import co.edu.uniandes.csw.escarabajos.dtos.PromocionDetailDTO;
 import co.edu.uniandes.csw.escarabajos.ejb.CatalogoLogic;
+import co.edu.uniandes.csw.escarabajos.ejb.ModeloLogic;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import java.math.BigDecimal;
@@ -382,13 +384,40 @@ public class CatalogoResource {
      *
      */
     @PUT
-    @Path("propagandas/{idModelo: \\d+}/{descuento: \\d+}")
+    @Path("promociones/{idModelo: \\d+}/{descuento: \\d+}")
     public ModeloDetailDTO crearPropaganda(@PathParam("idModelo") Long idModelo, @PathParam("descuento") BigDecimal pDescuento) throws BusinessLogicException {
         ModeloEntity modelo = catalogoLogic.crearPropaganda(idModelo, Double.valueOf(pDescuento.toString()));
         if (modelo == null) {
             throw new WebApplicationException("El recurso /modelos/" + idModelo + "/items no existe", 404);
         }
         return new ModeloDetailDTO(modelo);
+    }
+
+    @GET
+    @Path("promociones/accesorios")
+    public List<PromocionDetailDTO> getPropagandasAccesorios() {
+        return listModeloEntity2PromocionDetailDTO(catalogoLogic.getPropagandas(ModeloLogic.ACCESORIO));
+    }
+
+    @GET
+    @Path("promociones/bicicletas")
+    public List<PromocionDetailDTO> getPropagandasBicicletas() {
+        return listModeloEntity2PromocionDetailDTO(catalogoLogic.getPropagandas(ModeloLogic.BICICLETA));
+    }
+
+    /**
+     * Metodo que se encarga de pasar una lista de modeloEntity a
+     * modeloDetailDTO
+     *
+     * @param entityList lista de entities a transferir
+     * @return lista de detailDTOS
+     */
+    private List<PromocionDetailDTO> listModeloEntity2PromocionDetailDTO(List<ModeloEntity> entityList) {
+        List<PromocionDetailDTO> list = new ArrayList<>();
+        for (ModeloEntity entity : entityList) {
+            list.add(new PromocionDetailDTO(entity));
+        }
+        return list;
     }
 
 }

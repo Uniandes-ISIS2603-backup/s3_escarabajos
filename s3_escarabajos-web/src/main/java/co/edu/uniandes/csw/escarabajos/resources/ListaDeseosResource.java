@@ -94,7 +94,7 @@ public class ListaDeseosResource {
      */
     @GET
     @Path("{id: \\d+}")
-    public ListaDeseosDetailDTO getListaDeseos(@PathParam("id") Long id) {
+    public ListaDeseosDetailDTO getListaDeseos(@PathParam("id") Long id) throws BusinessLogicException {
         return new ListaDeseosDetailDTO( logic.findListaDeseos(id) );
     }
     

@@ -71,6 +71,7 @@
         <script src="src/modules/clientes/clientes.ctrl.js" type="text/javascript"></script>
         <script src="src/modules/clientes/clientes.detail.ctrl.js" type="text/javascript"></script>
         <script src="src/modules/clientes/clientes.create.ctrl.js" type="text/javascript"></script>
+        <script src="src/modules/clientes/clientes.profile.js" type="text/javascript"></script>
         <script src="src/modules/clientes/login.ctrl.js" type="text/javascript"></script>
         <script src="src/modules/vendedores/vendedores.mod.js" type="text/javascript"></script>
         <script src="src/modules/vendedores/vendedores.ctrl.js" type="text/javascript"></script>
@@ -92,6 +93,7 @@
         <!--Facturas-->
         <script src="src/modules/facturas/facturas.mod.js" type="text/javascript"></script>
         <script src="src/modules/facturas/facturas.ctrl.js" type="text/javascript"></script>
+        <script src="src/modules/facturas/facturas.cliente.ctrl.js" type="text/javascript"></script>
 
         <!--Modelos-->
         <script src="src/modules/modelos/modelos.mod.js" type="text/javascript"></script>
@@ -99,6 +101,10 @@
 
         <!-- Calificaciones-->
         <script src="src/modules/modelos/calificaciones.ctrl.js" type="text/javascript"></script>
+        
+        <!-- Comprar-->
+        <script src="src/modules/comprar/comprar.mod.js" type="text/javascript"></script>
+        <script src="src/modules/comprar/comprar.ctrl.js" type="text/javascript"></script>
 
     </head>
     <body>
@@ -122,6 +128,7 @@
                                 <li><a ui-sref="bicisList">Bicicletas</a></li>
                                 <li><a ui-sref="accesoriosList">Accesorios</a></li>
                                 <li><a ui-sref="adminCategorias">Modelos</a></li>
+                                <li><a ui-sref="reclamosAdminList">Reclamos</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -145,7 +152,7 @@
                             <ul class="dropdown-menu">
                                 <li><a ui-sref="clientesProfile">Mi perfil</a></li>
                                 <li><a ui-sref = "listadeseos">Lista de deseos</a></li>
-                                <li><a ui-sref = "facturasList">Mis compras</a></li>
+                                <li><a ui-sref = "facturasCliente">Mis compras</a></li>
                                 <li><a href="#">Mis ventas</a></li>
                                 <li><a ui-sref="reclamosList">Mis reclamos</a></li>
                                 <li><a ng-click = "logOut()">Cerrar Sesión</a></li>

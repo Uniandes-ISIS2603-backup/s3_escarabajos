@@ -19,6 +19,8 @@ import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.ListaDeseosPersistence;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -164,12 +166,22 @@ public class ListaDeseosLogicTest {
      * prueba el metodo findListaDeseos
      */
     @Test
-    public void findListaDeseosTest() {
+    public void findListaDeseosTest() throws BusinessLogicException {
 
         ListaDeseosEntity entity = data.get(3);
         ListaDeseosEntity resultEntity = logic.findListaDeseos(entity.getId());
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
+        
+        try {
+            
+            logic.findListaDeseos(Long.MAX_VALUE);
+           Assert.fail();
+        }
+        catch(Exception e){
+           Assert.assertNotNull(e);
+           Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
 
     /**
@@ -190,6 +202,17 @@ public class ListaDeseosLogicTest {
         ListaDeseosEntity resp = em.find(ListaDeseosEntity.class, entity.getId());
 
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
+        
+        try {
+            
+           ListaDeseosEntity listadeseos = logic.findListaDeseos(Long.MAX_VALUE);
+           logic.updateListaDeseos(listadeseos);
+           Assert.fail();
+        }
+        catch(Exception e){
+           Assert.assertNotNull(e);
+           Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
 
     /**
@@ -220,6 +243,54 @@ public class ListaDeseosLogicTest {
         listadeseos = logic.findListaDeseos(listadeseos.getId());
         
         assert(listadeseos.getItems().contains(item));
+        
+        try {
+           logic.addItem(Long.MAX_VALUE, Long.MAX_VALUE);
+           Assert.fail();
+        }
+        catch(Exception e){
+           Assert.assertNotNull(e);
+           Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
+        }
+        
+        try {
+           logic.addItem(data.get(0).getId(), Long.MAX_VALUE);
+           Assert.fail();
+        }
+        catch(Exception e){
+           Assert.assertNotNull(e);
+           Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
+        }
+        
+        try {
+            ListaDeseosEntity listadeseos2 = data.get(0);
+            ItemEntity item2 = dataItems.get(0);
+            logic.addItem(listadeseos2.getId(), item2.getId());
+            logic.addItem(listadeseos2.getId(), item2.getId());
+           Assert.fail();
+        }
+        catch(Exception e){
+           Assert.assertNotNull(e);
+           Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+    
+    @Test
+    public void getItemsTest () throws BusinessLogicException {
+        
+        ListaDeseosEntity listadeseos = data.get(0);
+        
+        logic.getItems(listadeseos.getId());
+        
+        try {
+
+           logic.getItems(Long.MAX_VALUE);
+           Assert.fail();
+        }
+        catch(Exception e){
+           Assert.assertNotNull(e);
+           Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
 
     /**
@@ -235,5 +306,62 @@ public class ListaDeseosLogicTest {
         logic.removeItem(listadeseos.getId(), item.getId());
 
         assert(listadeseos.getItems().isEmpty());
+        
+        try {
+           
+           ListaDeseosEntity listadeseos3 = logic.findListaDeseos(Long.MAX_VALUE);
+           logic.removeItem(listadeseos3.getId(), Long.MAX_VALUE);
+           Assert.fail();
+        }
+        catch(Exception e){
+           Assert.assertNotNull(e);
+           Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
+    /**
+     * prueba el metodo crearFactura
+     *
+     * @throws BusinessLogicException
+     */
+    @Test
+    public void crearFacturaTest() throws BusinessLogicException {
+
+        ListaDeseosEntity listadeseos = data.get(4);
+
+        ItemEntity item1 = dataItems.get(1);
+        ItemEntity item2 = dataItems.get(2);
+
+        listadeseos.setPrecioTotal(0.0);
+        logic.addItem(listadeseos.getId(), item1.getId());
+        logic.addItem(listadeseos.getId(), item2.getId());
+        FacturaEntity facturaGenerada = logic.crearFactura(listadeseos.getId());
+        listadeseos = logic.findListaDeseos(listadeseos.getId());
+
+        double precioTotal = item1.getPrecio() + item2.getPrecio();
+
+        assert (facturaGenerada.getDinero() == precioTotal);
+        
+        try {
+           
+           ListaDeseosEntity listadeseos4 = logic.findListaDeseos(Long.MAX_VALUE);
+           logic.crearFactura(listadeseos4.getId());
+           Assert.fail();
+        }
+        catch(Exception e){
+           Assert.assertNotNull(e);
+           Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
+        }
+        try {
+           
+           ListaDeseosEntity listadeseos4 = data.get(0);
+           logic.crearFactura(listadeseos4.getId());
+           Assert.fail();
+        }
+        catch(Exception e){
+           Assert.assertNotNull(e);
+           Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
+        }
+
     }
 }

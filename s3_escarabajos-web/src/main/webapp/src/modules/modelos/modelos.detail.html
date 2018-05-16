@@ -42,8 +42,11 @@
                                 <div class=" col-xs-2" ng-if=" actuales[0] !== undefined && actuales[0] !== null" >
                                     <img ng-src="{{actuales[0]}}" class="img-thumbnail" ng-click="mostrarImagen(actuales[0])">
                                 </div>
-                                <div class=" col-xs-2" ng-if=" actuales[1] !== undefined && actuales[1] !== null" >
-                                    <img ng-src="{{actuales[1]}}" class="img-thumbnail" ng-click="mostrarImagen(actuales[1])">
+                            </div>
+                            <br>
+                            <div style="position: relative;" class="row" ng-if="isAuthenticated()">
+                                <div class="col-sm-4">
+                                    <a  ui-sref ="addItemCarrito({itemId: modeloActual.id, color: itemActual.color})" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart" style="color:white"></span></a>
                                 </div>
                                 <div class=" col-xs-2" ng-if=" actuales[2] !== undefined && actuales[2] !== null" >
                                     <img ng-src="{{actuales[2]}}" class="img-thumbnail" ng-click="mostrarImagen(actuales[2])">

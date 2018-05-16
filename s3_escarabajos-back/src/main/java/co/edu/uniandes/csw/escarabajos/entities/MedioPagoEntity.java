@@ -23,17 +23,34 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class MedioPagoEntity implements Serializable {
    
+    /**
+     * modela el tipo de pago por pse
+     */
+    public final static String TIPO_PSE = "pse";
+    
+    /**
+     * modela el tipo de pago por paypal
+     */
+    public final static String TIPO_PAYPAL = "paypal";
+    
+    /**
+     * modela el tipo de pago por tarjeta de credito
+     */
+    public final static String TIPO_TARJETA_CREDITO = "tarjeta de credito";
+    
+    /**
+     * modela el tipo de pago por tarjeta debito
+     */
+    public final static String TIPO_TARJETA_DEBITO = "tarjeta debito";
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-   // private Integer numeroTarjeta;
-    
     private String tipo;
     
     @PodamExclude
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private ClienteEntity cliente;
     
     @PodamExclude

@@ -33,7 +33,7 @@ import javax.ws.rs.WebApplicationException;
  * Produces/Consumes: indica que los servicios definidos en este recurso reciben y devuelven objetos en formato JSON
  * RequestScoped: Inicia una transacción desde el llamado de cada método (servicio). 
  * </pre>
-  * @author c.santacruza
+  * @author jp.carreno
  */
 
 @Path("facturas")
@@ -46,10 +46,10 @@ public class FacturaResource {
     @Inject
     FacturaLogic logic;
      
-    private List<FacturaDetailDTO> listEntity2DTO(List<FacturaEntity> entityList) {
-        List<FacturaDetailDTO> list = new ArrayList<>();
+    private List<FacturaDTO> listEntity2DTO(List<FacturaEntity> entityList) {
+        List<FacturaDTO> list = new ArrayList<>();
         for (FacturaEntity entity : entityList) {
-            list.add(new FacturaDetailDTO(entity));
+            list.add(new FacturaDTO(entity));
         }
         return list;
     }
@@ -76,9 +76,9 @@ public class FacturaResource {
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la factura.
      */
     @POST
-    public FacturaDetailDTO createFactura(FacturaDTO factura) throws BusinessLogicException {
+    public FacturaDTO createFactura(FacturaDTO factura) throws BusinessLogicException {
         FacturaEntity temp = logic.createFactura(factura.toEntity());
-        return new FacturaDetailDTO(temp);
+        return new FacturaDTO(temp);
     }
 
     /**
@@ -93,7 +93,7 @@ public class FacturaResource {
      * @return JSONArray {@link FacturaDTO} - Las facturas encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
      */
     @GET
-    public List<FacturaDetailDTO> getFacturas() {
+    public List<FacturaDTO> getFacturas() {
         return listEntity2DTO(logic.getFacturas());
     }
     
@@ -116,12 +116,12 @@ public class FacturaResource {
      */
     @GET
     @Path("{id: \\d+}")
-    public FacturaDetailDTO getFactura(@PathParam("id") Long id) throws BusinessLogicException,WebApplicationException {
+    public FacturaDTO getFactura(@PathParam("id") Long id) throws BusinessLogicException,WebApplicationException {
         FacturaEntity entity = logic.getFactura(id);
         if(entity == null){
             throw new WebApplicationException("El recurso /facutura/" + id + " no existe.", 404);
         }
-        return new FacturaDetailDTO(entity) ;
+        return new FacturaDTO(entity) ;
     }
     
     /**
@@ -144,7 +144,7 @@ public class FacturaResource {
      */
     @PUT
     @Path("{id: \\d+}")
-    public FacturaDetailDTO updateFactura(@PathParam("id") Long id, FacturaDetailDTO factura) throws BusinessLogicException {
+    public FacturaDTO updateFactura(@PathParam("id") Long id, FacturaDetailDTO factura) throws BusinessLogicException {
         FacturaEntity entity = factura.toEntity();
         entity.setId(id);
         FacturaEntity antes = logic.getFactura(id);
@@ -152,7 +152,7 @@ public class FacturaResource {
             throw new WebApplicationException("El recurso /facturas/" + id + " no existe.", 404);
         }
      
-        return new FacturaDetailDTO(logic.updateFactura(id, entity));
+        return new FacturaDTO(logic.updateFactura(id, entity));
     }
     
     /**
@@ -178,6 +178,23 @@ public class FacturaResource {
            throw new WebApplicationException("El recurso /facturas/" + id + " no existe.", 404);
        }
        logic.deleteFactura(id);
+    }
+    
+    /**
+     * <h1>GET /api/facturas/cliente/{id} : Obtener todas las facturas de un cliente.</h1>
+     * 
+     * <pre>Busca y devuelve todas las facturas de un cliente con id dado por parametro que existen en la aplicacion.
+     * 
+     * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Devuelve todas las facturas de un cliente de la aplicacion.</code> 
+     * </pre>
+     * @return JSONArray {@link FacturaDTO} - Las facturas encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
+     */
+    @GET
+    @Path("cliente/{idCliente: \\d+}")
+    public List<FacturaDTO> getFacturasCliente(@PathParam("idCliente") Long idCliente){
+        return listEntity2DTO(logic.getFacturasCliente(idCliente));
     }
     
 }

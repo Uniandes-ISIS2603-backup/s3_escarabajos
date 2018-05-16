@@ -5,19 +5,6 @@
 
             var ruta = 'api/carrito/';
             
-            /*$scope.carritoR = {};
-            $http.get(context).then(function (response) {
-                $scope.carritoR = response.data[0];
-                
-            }); */
-            
-             this.crearFactura = function(idCliente) {
-                $http.get('api/clientes/' + 1 + '/carrito/factura').then(function () {
-                             $state.go('carritoList');
-            });
-            }  
-            
-            
             $http.get('api/clientes/' + sessionStorage.getItem("id") + '/carrito').then(function (response) {
 
                 ruta = ruta + response.data.id + '/items';

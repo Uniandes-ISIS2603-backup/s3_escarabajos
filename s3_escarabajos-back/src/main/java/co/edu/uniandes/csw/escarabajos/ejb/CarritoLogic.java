@@ -59,12 +59,13 @@ public class CarritoLogic {
      * @param id el id del carrito a buscar
      * @return el carrito encontrado
      */
-    public CarritoEntity findCarrito( Long id ){
+    public CarritoEntity findCarrito( Long id )throws BusinessLogicException{
         
         LOGGER.log(Level.INFO, "Inicia proceso de consultar el carrito con id={0}", id);
         CarritoEntity carrito = persistence.find(id);
         if (carrito == null) {
             LOGGER.log(Level.SEVERE, "El carrito con el id {0} no existe", id);
+            throw new BusinessLogicException();
         }
         LOGGER.log(Level.INFO, "Termina proceso de consultar carrito con id={0}", id);
         return carrito;
@@ -197,14 +198,6 @@ public class CarritoLogic {
         factura.setDinero(carrito.getPrecioTotal());
         
         factura.setCliente(carrito.getCliente());
-        
-        carrito = persistence.find(id);
-        
-        carrito.setItems(new ArrayList<>());
-        
-        carrito.setPrecioTotal(0.0);
-        
-        persistence.update(carrito);
         
         return factura;
     }

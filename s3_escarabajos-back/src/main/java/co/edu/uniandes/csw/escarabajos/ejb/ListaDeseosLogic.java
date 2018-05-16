@@ -55,12 +55,13 @@ public class ListaDeseosLogic {
      * @param id el id del listadeseos a buscar
      * @return el listadeseos encontrado
      */
-    public ListaDeseosEntity findListaDeseos( Long id ){
+    public ListaDeseosEntity findListaDeseos( Long id ) throws BusinessLogicException{
         
         LOGGER.log(Level.INFO, "Inicia proceso de consultar el listadeseos con id={0}", id);
         ListaDeseosEntity listadeseos = persistence.find(id);
         if (listadeseos == null) {
             LOGGER.log(Level.SEVERE, "El listadeseos con el id {0} no existe", id);
+            throw new BusinessLogicException();
         }
         LOGGER.log(Level.INFO, "Termina proceso de consultar listadeseos con id={0}", id);
         return listadeseos;

@@ -52,10 +52,10 @@
             });
             $stateProvider.state('reclamosAdminList', {
                 // Url que aparecerá en el browser
-                url: '/reclamos/list',
+                url: '/admin/reclamos/list',
                 views: {
                     'mainView': {
-                        templateUrl: basePath + 'reclamos.AdminList.html',
+                        templateUrl: basePath + 'reclamos.admin.list.html',
                         controller: 'reclamosAdminCtrl',
                         controllerAs: 'ctrl'
                     }

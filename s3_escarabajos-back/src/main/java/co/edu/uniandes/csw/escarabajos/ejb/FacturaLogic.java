@@ -16,7 +16,7 @@ import javax.inject.Inject;
 
 /**
  *
- * @author c.santacruza
+ * @author jp.carreno
  */
 @Stateless
 public class FacturaLogic {
@@ -52,7 +52,7 @@ public class FacturaLogic {
         FacturaEntity factura = persistence.find(id);
         if (factura == null) {
             LOGGER.log(Level.SEVERE, "La factura con el id {0} no existe", id);
-            throw new BusinessLogicException("La bicicleta con el id " + id + "no existe");
+            throw new BusinessLogicException("La factura con el id " + id + "no existe");
         }
         LOGGER.log(Level.INFO, "Termina proceso de consultar factura con id={0}", factura.getId());
         return factura;
@@ -66,10 +66,8 @@ public class FacturaLogic {
      * @return La entidad luego de persistirla
      */
     public FacturaEntity createFactura(FacturaEntity entity){
-        LOGGER.info("Inicia proceso de creación de bicicleta");
-        persistence.create(entity);
-        LOGGER.info("Termina proceso de creación de bicicleta");
-        return entity;
+        LOGGER.info("Inicia proceso de creación de factura");
+        return persistence.create(entity);
     }
 
     /**
@@ -78,8 +76,7 @@ public class FacturaLogic {
      * @param id El ID de la factura a actualizar
      * @param entity La entidad de factura con los cambios deseados
      * @return La entidad de factura luego de actualizarla
-     * @throws BusinessLogicException Si el atributo usada es false o si no esta
-     * asociada a una categoria o si no esta asociada a un modelo
+     * @throws BusinessLogicException Si no existe una factura con el id dado
      */
     public FacturaEntity updateFactura(Long id, FacturaEntity entity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar una factura ");
@@ -99,5 +96,17 @@ public class FacturaLogic {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar factura con id={0}", id);
         persistence.delete(id);
         LOGGER.log(Level.INFO, "Termina proceso de borrar factura con id={0}", id);
+    }
+    
+    /**
+     * Devuelve todos los facturas de un cliente que hay en la base de datos.
+     * @param idCliente id del cliente del que se buscan las facturas
+     * @return Lista de entidades de tipo factura.
+     */
+    public List<FacturaEntity> getFacturasCliente(Long idCliente){
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar facturas de un cliente");
+        List <FacturaEntity> facturas = persistence.findFacturasByClienteId(idCliente);
+        LOGGER.log(Level.INFO, "Termina proceso de consultar facturas de un cliente");
+        return facturas;
     }
 }

@@ -26,21 +26,21 @@ insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) 
 
 --Datos de prueba BicicletaEntity
 
-insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (1,'BicicletaEntity', 760000.78, '#EF5B5B', 0, 'MKT', 1,1,1,1.0);
+insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (1,'BicicletaEntity', 760000.78, '#EF5B5B', 0, 'MKT', 1,1,1,0.8);
 insert into Item_album (itemEntity_ID, album) values (1, 'data/Imagenes/BicicletaTest1.jpg');
 insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (2,'BicicletaEntity', 397000.10, '#5BEF68', 0, 'Suburban 2500', 2,2,1,1.0);
 insert into Item_album (itemEntity_ID, album) values (2, 'data/Imagenes/BicicletaTest2.jpg');
 insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (3,'BicicletaEntity', 331000.52, '#5BBBEF', 0, 'Jetta', 3,3,1,1.0);
 insert into Item_album (itemEntity_ID, album) values (3, 'data/Imagenes/BicicletaTest3.jpg');
-insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (4,'BicicletaEntity', 251000.36, '#8F5BEF', 0, 'A3', 4,4,1,1.0);
+insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (4,'BicicletaEntity', 251000.36, '#8F5BEF', 0, 'A3', 4,4,1,0.4);
 insert into Item_album (itemEntity_ID, album) values (4, 'data/Imagenes/BicicletaTest1.jpg');
 insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (5,'BicicletaEntity', 118000.77, '#8F5BEF', 0, 'C70', 5,5,1,1.0);
 insert into Item_album (itemEntity_ID, album) values (5, 'data/Imagenes/BicicletaTest2.jpg');
-insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (6,'BicicletaEntity', 760000.78, '#EF5B5B', 0, 'MKT', 1,1,1,1.0);
+insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (6,'BicicletaEntity', 760000.78, '#EF5B5B', 0, 'MKT', 1,1,1,0.5);
 
 
-insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (7,'AccesorioEntity', 760000.78, '#EF5B5B', 0, 'C60', 6,6,1,1.0);
-insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (8,'AccesorioEntity', 760000.78, '#5BBBEF', 0, 'MYK', 7,7,1,1.0);
+insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (7,'AccesorioEntity', 760000.78, '#EF5B5B', 0, 'C60', 6,6,1,0.6);
+insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (8,'AccesorioEntity', 760000.78, '#5BBBEF', 0, 'MYK', 7,7,1,0.8);
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (9,'AccesorioEntity', 760000.78, '#8F5BEF', 0, 'QWE', 8,8,1,1.0);
 
 
