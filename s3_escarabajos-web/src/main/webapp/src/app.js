@@ -17,9 +17,6 @@
         'adminModule',
         'moduloComprar',
         'moduloMediosPago',
-
-
-
     ]);
     // Resuelve problemas de las promesas
     app.config(['$qProvider', function ($qProvider) {
@@ -30,7 +27,7 @@
             if (!a)
             {
                 a = true;
-                $state.go('principal', {pagina:1}, {reload: true});
+                $state.go('principal', {pagina: 1}, {reload: true});
             }
             /**
              * @ngdoc function
@@ -46,6 +43,26 @@
                 } else {
                     return true;
                 }
+            };
+
+            /**
+             * @ngdoc function
+             * @name irBicicletas
+             * @methodOf mainApp.module:mainApp
+             * @description Esta funcion se usa para ir al catalogo de bicicletas sin filtros.
+             */
+            $rootScope.irBicicletas = function () {
+                $state.go('adv', {adv: true, tipo: 'bicicletas', filtros: {marcas: [], categorias: [], colores: [], precioMin: 0.0, precioMax: 999999999.9, calificacionMin: 0.0}}, {reload: true});
+            };
+
+            /**
+             * @ngdoc function
+             * @name irBicicletas
+             * @methodOf mainApp.module:mainApp
+             * @description Esta funcion se usa para ir al catalogo de bicicletas sin filtros.
+             */
+            $rootScope.irAccesorios = function () {
+                $state.go('adv', {adv: true, tipo: 'accesorios', filtros: {marcas: [], categorias: [], colores: [], precioMin: 0.0, precioMax: 999999999.9, calificacionMin: 0.0}}, {reload: true});
             };
 
             /**

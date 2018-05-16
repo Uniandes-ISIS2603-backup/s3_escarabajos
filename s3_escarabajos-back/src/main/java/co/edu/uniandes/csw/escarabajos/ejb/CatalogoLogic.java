@@ -1,6 +1,4 @@
 package co.edu.uniandes.csw.escarabajos.ejb;
-
-import static co.edu.uniandes.csw.escarabajos.ejb.ModeloLogic.MODELOEXISTE;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;

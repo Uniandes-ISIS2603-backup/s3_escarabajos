@@ -407,7 +407,8 @@ public class CatalogoResource {
     @PUT
     @Path("promociones/{idModelo: \\d+}/{descuento: \\d+}")
     public PromocionDetailDTO crearPropaganda(@PathParam("idModelo") Long idModelo, @PathParam("descuento")Integer descuento) throws BusinessLogicException {
-        Double multiplicador = 1.0 - (descuento / 100);
+        Double multiplicador =((double)descuento)/100;
+        multiplicador = 1.0 - multiplicador;
         ModeloEntity modelo = catalogoLogic.crearPropaganda(idModelo, multiplicador);
         if (modelo == null) {
             throw new WebApplicationException("El recurso /modelos/" + idModelo + "/items no existe", 404);
