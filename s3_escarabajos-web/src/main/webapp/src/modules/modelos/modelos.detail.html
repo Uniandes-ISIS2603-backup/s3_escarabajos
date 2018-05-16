@@ -1,33 +1,4 @@
 <link rel="stylesheet" href="src/modules/modelos/detalle.css" />
-<style>
-    #thumbs { padding-top: 10px; overflow: hidden; }
-    #thumbs img {
-        border: 1px solid gray;
-        padding: 4px;
-        background-color: white;
-        cursor: pointer;
-    }
-    .swatch {
-        width:50px;
-        height:50px;
-        border-radius:100px;
-        border: 2px solid #666;
-    }
-    .swatch2 {
-        width:80px;
-        height:50px;
-        border-radius:5px;
-        border: 2px solid #666;
-    }
-    .swatch-clickable:hover {
-        border: 2px solid #000;
-        cursor: pointer;
-    }
-
-    .dropdown-menu {
-        padding:10px;
-    }
-</style>
 <br>
 
 <div class="row" ng-if="itemActual !== null">
@@ -44,154 +15,152 @@
     <div class="row">
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
-            <div class="well" style="overflow:auto;">
-                <div class="container col-sm-8" >
-                    <div class="row">
-                        <div class=" col-xs-7" > 
-                            <div class="row text-center" >
-                                <br>
-                                <div class="row text-center">
-                                    <div class="col-xs-2"></div>
-                                    <div class="col-xs-8 text-center">
-                                        <div class="container" style="height: 25em;width: 100%">
-                                            <img src="{{imagen}}" style=" max-height:100%;max-width: 100%" alt="{{referencia}}" />
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-2"></div>
-                                </div>
-                            </div>
+            <div class="well" style="position:absolute; width:100%;">
+
+                <div class="row">
+                    <div class=" col-xs-9" style="width: 65%; right:30px;" >    
+                        <div class="row text-center" >
                             <br>
                             <div class="row text-center">
-                                <div id="thumbs">
-                                    <div class=" col-xs-2">
-                                        <br>
-                                        <a  ng-click ="prevImagen()" class="btn btn-primary" ng-disabled="ini === 0" ng-if="imagenes.length > 4" >
-                                            <span class="glyphicon glyphicon-triangle-left" style="font-size: 3em"></span></a>
+                                <div class="col-xs-2"></div>
+                                <div class="col-xs-8 text-center"style="left:2px;">
+                                    <div class="container" style="height: 25em;width: 100%">
+                                        <img src="{{imagen}}" style=" max-height:100%;max-width: 100%" alt="{{referencia}}" />
                                     </div>
-                                    <div class=" col-xs-2" ng-if=" actuales[0] !== undefined && actuales[0] !== null" >
-                                        <img ng-src="{{actuales[0]}}" class="img-thumbnail" ng-click="mostrarImagen(actuales[0])">
-                                    </div>
-                                    <div class=" col-xs-2" ng-if=" actuales[1] !== undefined && actuales[1] !== null" >
-                                        <img ng-src="{{actuales[1]}}" class="img-thumbnail" ng-click="mostrarImagen(actuales[1])">
-                                    </div>
-                                    <div class=" col-xs-2" ng-if=" actuales[2] !== undefined && actuales[2] !== null" >
-                                        <img ng-src="{{actuales[2]}}" class="img-thumbnail" ng-click="mostrarImagen(actuales[2])">
-                                    </div>
-                                    <div class=" col-xs-2" ng-if=" actuales[3] !== undefined && actuales[3] !== null" >
-                                        <img ng-src="{{actuales[3]}}" class="img-thumbnail" ng-click="mostrarImagen(actuales[3])">
-                                    </div>
-
-                                    <div class=" col-xs-2">
-                                        <br>
-                                        <a  ng-click ="nextImagen()" class="btn btn-primary" ng-disabled="fin === imagenes.length - 1" ng-if="imagenes.length > 4">
-                                            <span class="glyphicon glyphicon-triangle-right" style="font-size: 3em"></span></a>
-                                    </div>
-
                                 </div>
+                                <div class="col-xs-2"></div>
                             </div>
                         </div>
-
-                        <div class="col-sm-1"></div>
-                        <div  class="texto col-sm-3">
-                            <div class="row">
-                                <h2>Referencia:         {{modeloActual.referencia}}</h2>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <h3>Marca:      {{modeloActual.marca}} </h3>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <h4>Categoria:      {{itemActual.categoria}} </h4>
-                            </div>
-                            <br>
-                            <div class="row text-center">
-                                <h4 style="color:DodgerBlue;font-size: 25px;height: 40px">{{modeloActual.precio|currency}}</h4>
-                                <div ng-if="usadas.length >= 0">
-                                    <h5 ng-click="verUsadas(modeloActual.id)" style="color:DodgerBlue; height: 20px; text-decoration: underline; cursor: pointer;"> O {{usadas.length}} usadas desde: {{precioUsadas|currency}}</h5>
+                        <br>
+                        <div class="row text-center">
+                            <div id="thumbs">
+                                <div class=" col-xs-2">
+                                    <br>
+                                    <a  ng-click ="prevImagen()" class="btn btn-primary" ng-disabled="ini === 0" ng-if="imagenes.length > 4" >
+                                        <span class="glyphicon glyphicon-triangle-left" style="font-size: 3em"></span></a>
                                 </div>
-                            </div>
-                            <h4>Color: </h4>
-                            <a class="btn swatch2" disabled style="background-color:{{itemActual.color}}" ng-if="colores.length === 0"></a>
-                            <br>
-                            <div class="dropdown " ng-if="colores.length > 0">
-                                <a class="dropdown-toggle btn btn-default swatch2" data-toggle="dropdown" style="background-color:{{itemActual.color}}"></a>
-                                <div class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                    <table>
-                                        <tr ng-repeat="color in colores" style="height: 60px">
-                                            <td>
-                                                <div class="swatch2 swatch-clickable" style="background-color:{{color}}" ng-click="cambiarColor(color)" ></div>
-                                            </td>
-                                        </tr>
-                                    </table>
+                                <div class=" col-xs-2" ng-if=" actuales[0] !== undefined && actuales[0] !== null" >
+                                    <img ng-src="{{actuales[0]}}" class="img-thumbnail" ng-click="mostrarImagen(actuales[0])">
                                 </div>
-                            </div>
-                            <br>
-                            <div style="position: relative;" class="row" ng-if="isAuthenticated()">
-                                <div class="col-sm-4">
-                                    <a  ui-sref ="addItemCarrito({itemId: modeloActual.items[0].id})" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart" style="color:white"></span></a>
+                                <div class=" col-xs-2" ng-if=" actuales[1] !== undefined && actuales[1] !== null" >
+                                    <img ng-src="{{actuales[1]}}" class="img-thumbnail" ng-click="mostrarImagen(actuales[1])">
                                 </div>
-                                <div class="col-xs-6">
-                                    <h6 style="font-size: 10px">Agregar Carrito</h6>
+                                <div class=" col-xs-2" ng-if=" actuales[2] !== undefined && actuales[2] !== null" >
+                                    <img ng-src="{{actuales[2]}}" class="img-thumbnail" ng-click="mostrarImagen(actuales[2])">
                                 </div>
-                            </div>
-                            <div style="position: relative;" class="row" ng-if="!isAuthenticated()">
-                                <div class="col-sm-4">
-                                    <a  ui-sref ="clientesSignIn" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart" style="color:white"></span></a>
-                                </div>
-                                <div class="col-xs-6">
-                                    <h6 style="font-size: 10px">Agregar Carrito</h6>
-                                </div>
-                            </div>
-                            <br>
-                            <div style="position:relative;" class="row" ng-if="isAuthenticated()">
-
-                                <div class="col-sm-4">
-                                    <a  ui-sref ="addItemListaDeseos({itemId: modeloActual.items[0].id})" class="btn btn-primary">
-                                        <span class="glyphicon glyphicon-gift" ></span></a>
+                                <div class=" col-xs-2" ng-if=" actuales[3] !== undefined && actuales[3] !== null" >
+                                    <img ng-src="{{actuales[3]}}" class="img-thumbnail" ng-click="mostrarImagen(actuales[3])">
                                 </div>
 
-                                <h6 style="font-size: 10px">Agregar Lista Deseos</h6>
-
-                            </div>
-                            <div style="position:relative;" class="row" ng-if="!isAuthenticated()">
-
-                                <div class="col-sm-4">
-                                    <a  ui-sref ="clientesSignIn" class="btn btn-primary">
-                                        <span class="glyphicon glyphicon-gift" ></span></a>
+                                <div class=" col-xs-2">
+                                    <br>
+                                    <a  ng-click ="nextImagen()" class="btn btn-primary" ng-disabled="fin === imagenes.length - 1" ng-if="imagenes.length > 4">
+                                        <span class="glyphicon glyphicon-triangle-right" style="font-size: 3em"></span></a>
                                 </div>
 
-                                <h6 style="font-size: 10px">Agregar Lista Deseos</h6>
-
-                            </div> 
+                            </div>
                         </div>
                     </div>
+                    
+                    <div  class="texto col-sm-3">
+                        <div class="row">
+                            <h2>Referencia:         {{modeloActual.referencia}}</h2>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <h3>Marca:      {{modeloActual.marca}} </h3>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <h4>Categoria:      {{itemActual.categoria}} </h4>
+                        </div>
+                        <br>
+                        <div class="row text-center">
+                            <h4 style="color:DodgerBlue;font-size: 25px;height: 40px">{{modeloActual.precio|currency}}</h4>
+                            <div ng-if="usadas.length >= 0">
+                                <h5 ng-click="verUsadas(modeloActual.id)" style="color:DodgerBlue; height: 20px; text-decoration: underline; cursor: pointer;"> O {{usadas.length}} usadas desde: {{precioUsadas|currency}}</h5>
+                            </div>
+                        </div>
+                        <h4>Color: </h4>
+                        <a class="btn swatch2" disabled style="background-color:{{itemActual.color}}" ng-if="colores.length === 0"></a>
+                        <br>
+                        <div class="dropdown"  style="width:50px;" ng-if="colores.length > 0">
+                            <a class="dropdown-toggle btn btn-default swatch2" data-toggle="dropdown" style="background-color:{{itemActual.color}}"></a>
+                            <div class="dropdown-menu responsive" role="menu" aria-labelledby="dLabel">
+                                <table style="width:50px;">
+                                    <tr ng-repeat="color in colores" style="height: 60px;">
+                                        <td>
+                                            <div class="swatch2 swatch-clickable" style="background-color:{{color}}" ng-click="cambiarColor(color)" ></div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <br>
+                        <div style="position: relative;" class="row" ng-if="isAuthenticated()">
+                            <div class="col-sm-4">
+                                <a  ui-sref ="addItemCarrito({itemId: modeloActual.items[0].id})" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart" style="color:white"></span></a>
+                            </div>
+                            <div class="col-xs-6">
+                                <h6 style="font-size: 10px">Agregar Carrito</h6>
+                            </div>
+                        </div>
+                        <div style="position: relative;" class="row" ng-if="!isAuthenticated()">
+                            <div class="col-sm-4">
+                                <a  ui-sref ="clientesSignIn" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart" style="color:white"></span></a>
+                            </div>
+                            <div class="col-xs-6">
+                                <h6 style="font-size: 10px">Agregar Carrito</h6>
+                            </div>
+                        </div>
+                        <br>
+                        <div style="position:relative;" class="row" ng-if="isAuthenticated()">
+
+                            <div class="col-sm-4">
+                                <a  ui-sref ="addItemListaDeseos({itemId: modeloActual.items[0].id})" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-gift" ></span></a>
+                            </div>
+
+                            <h6 style="font-size: 10px">Agregar Lista Deseos</h6>
+
+                        </div>
+                        <div style="position:relative;" class="row" ng-if="!isAuthenticated()">
+
+                            <div class="col-sm-4">
+                                <a  ui-sref ="clientesSignIn" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-gift" ></span></a>
+                            </div>
+
+                            <h6 style="font-size: 10px">Agregar Lista Deseos</h6>
+                        </div>
+                    </div> 
                 </div>
             </div>
         </div>
-        <div class="col-xs-1"></div>
     </div>
-    <div ng-if="    itemActual === null">
-        <div style="position: absolute;left: 100px; " ng-if="modelo.tipo === bicicletas">
-            <button type="button" ui-sref="adv({adv:true,tipo:'bicicletas',filtros:{marcas:[],categorias:[],colores:[],precioMin:0.0,precioMax:999999999.9,calificacionMin:0.0}})" class="btn btn-default">
-                <a ui-sref="adv({adv:true,tipo:'bicicletas',filtros:{marcas:[],categorias:[],colores:[],precioMin:0.0,precioMax:999999999.9,calificacionMin:0.0}})" class="glyphicon glyphicon-chevron-left"></a>
-            </button>
-        </div>
-        <div style="position: absolute;left: 100px; " ng-if="modelo.tipo === accesorios">
-            <button type="button" ui-sref="adv({adv:true,tipo:'accesorios',filtros:{marcas:[],categorias:[],colores:[],precioMin:0.0,precioMax:999999999.9,calificacionMin:0.0}})" class="btn btn-default">
-                <a ui-sref="adv({adv:true,tipo:'accesorios',filtros:{marcas:[],categorias:[],colores:[],precioMin:0.0,precioMax:999999999.9,calificacionMin:0.0}})" class="glyphicon glyphicon-chevron-left"></a>
-            </button>
-        </div>
-        <br>
-        <br>
-        <br>
-        <div class="row">
-            <div class="col-xs-3" ></div>
-            <div cla    ss="col-xs-6 text-center" >
-                <img class="img-responsive" src="data/Imagenes/oops!.png" >
-                <br>
-                <h2>El modelo no esta disponible!</h2>
-            </div>
-            <div class="col-xs-3" ></div>
-        </div>
+    <div class="col-xs-1"></div>
+</div>
+<div ng-if="    itemActual === null">
+    <div style="position: absolute;left: 100px; " ng-if="modelo.tipo === bicicletas">
+        <button type="button" ui-sref="adv({adv:true,tipo:'bicicletas',filtros:{marcas:[],categorias:[],colores:[],precioMin:0.0,precioMax:999999999.9,calificacionMin:0.0}})" class="btn btn-default">
+            <a ui-sref="adv({adv:true,tipo:'bicicletas',filtros:{marcas:[],categorias:[],colores:[],precioMin:0.0,precioMax:999999999.9,calificacionMin:0.0}})" class="glyphicon glyphicon-chevron-left"></a>
+        </button>
     </div>
+    <div style="position: absolute;left: 100px; " ng-if="modelo.tipo === accesorios">
+        <button type="button" ui-sref="adv({adv:true,tipo:'accesorios',filtros:{marcas:[],categorias:[],colores:[],precioMin:0.0,precioMax:999999999.9,calificacionMin:0.0}})" class="btn btn-default">
+            <a ui-sref="adv({adv:true,tipo:'accesorios',filtros:{marcas:[],categorias:[],colores:[],precioMin:0.0,precioMax:999999999.9,calificacionMin:0.0}})" class="glyphicon glyphicon-chevron-left"></a>
+        </button>
+    </div>                                                                                                                                                                                                                                                                                                                                                  
+    <br>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-xs-3" ></div>
+        <div cla    ss="col-xs-6 text-center" >
+            <img class="img-responsive" src="data/Imagenes/oops!.png" >
+            <br>
+            <h2>El modelo no esta disponible!</h2>
+        </div>
+        <div class="col-xs-3" ></div>
+    </div>
+</div>
