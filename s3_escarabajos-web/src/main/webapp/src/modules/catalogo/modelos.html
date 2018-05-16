@@ -4,8 +4,8 @@
     <div class="row" ng-repeat="chunk in modelos">
         <div class="col-xs-{{cols}}" ng-repeat="modelo in chunk">
             <div class="panel panel-default" style="display: inline-block;">
-                <div class="nuevo" ng-if="modelo.nuevo === true">
-                    Nuevo
+                <div class="c-nuevo" ng-if="modelo.nuevo === true">
+                    <div class="nuevo"> Nuevo</div>
                 </div>
                 <div class="panel-body">
                         <div class="col-xs-8 col-xs-offset-2 Imagen">

@@ -39,26 +39,29 @@
     background-color: #ddd;
     border-radius: 5px;
 }
-/*.nuevo{
-    position: relative;
-    top: -1px;
+.c-nuevo{
+    position: absolute;
+    top: 1px;
     overflow: hidden;
-    width: 70px;
-    height: 70px;
-    z-index: 3;
-}*/
+    width: 80px;
+    height:80px;
+    z-index:1;
+}
 .nuevo{
     -webkit-transform: rotate(-40deg);
-    transform: rotate(-40deg);
-    width: 100px;
-    font-size: 10px;
-    font-weight:200;
+     width: 100px;
+    font-size: 12px;
+    font-weight: 700;
     text-align:center;
     text-transform:uppercase;
     line-height: 20px;
+    margin-right:20px;
+    margin-top: 15px;
+    margin-left:-18px;
     color:white;
     z-index:2;
     background-color: green;
+    transform: rotate(-40deg);
 }
 .nuevo:before {
     left: 0;
