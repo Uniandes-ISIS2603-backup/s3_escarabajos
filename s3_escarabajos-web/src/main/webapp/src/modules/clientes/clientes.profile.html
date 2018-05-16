@@ -1,9 +1,9 @@
 <alert class="alert alert-danger" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
 
 <div class = "container-fluid" ng-if="!hasPermissions()">
-    <div class = "row">
+    <div class = "container-fluid">
         <div class = "col-sm-1"></div>
-        <div class="vertical-menu col-sm-3" style = "margin-top:45px">
+        <div class="vertical-menu col-sm-2" style = "margin-top:45px">
             <a class="active" ui-sref = "clientesProfile">Mi Perfil</a>
             <a href="#">Lista de deseos</a>
             <a href="#">Mis Compras</a>
@@ -12,128 +12,127 @@
             <a href="#">Eliminar Cuenta</a>
             <a href="#">Cerrar Sesión</a>
         </div>
-        
-        <div class="row col-sm-12">
-    <form class="form-horizontal col-sm-12" name="signUp">
-        <!-- Form Name -->
-        <legend>Perfil</legend>
 
-        <div class="container">
-            <div class="row profile">
-                <div class="col-md-3">
-                    <div class="profile-sidebar">
-                        <!-- SIDEBAR USERPIC -->
-                        <div class="profile-userpic">
-                            <img src="https://thumb1.shutterstock.com/display_pic_with_logo/2213711/664577617/stock-vector-bug-line-icon-outline-vector-sign-linear-style-pictogram-isolated-on-white-symbol-logo-664577617.jpg" class="img-responsive" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-9">
-                    <div class="profile-content">
-                        <fieldset>
+        <div class="container-fluid col-sm-7">
+            <form class="form-horizontal" name="signUp">
+                <!-- Form Name -->
+                <legend>Perfil</legend>
 
-                            <!-- Text input-->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="textinput">Username</label>
-                                <div class="col-md-4">
-                                    <input id="usuario" name="username" class="input-field" type="text" required ng-model="clienteActual.usuario" placeholder="{{clienteActual.usuario}}">
+                <div class="container">
+                    <div class="row profile">
+                        <div class="col-sm-4">
+                            <div class="profile-sidebar">
+                                <!-- SIDEBAR USERPIC -->
+                                <div class="profile-userpic">
+                                    <img style = "width:100%" src="data/Imagenes/Logo.png" alt="">
                                 </div>
                             </div>
-
-                            <!-- Text input-->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="textinput">Nombre</label>
-                                <div class="col-md-4">
-                                    <input id="nombre" name="nombre" class="input-field" type="text" required ng-model="clienteActual.nombre" placeholder="{{clienteActual.nombre}}">             
-                                    
-                                </div>
-                            </div>
-
-                            <!-- Text input-->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="textinput">Cedula</label>
-                                <div class="col-md-4">
-                                    <input id="cedula" name="cedula" class="input-field" type="text" required ng-model="clienteActual.cedula" placeholder="{{clienteActual.cedula}}">             
-                                </div>
-                            </div>
-
-                            <!-- Text input-->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="textinput">Email</label>
-                                <div class="col-md-4">
-                                    <input id="correo" name="email" class="input-field" type="text" required ng-model="clienteActual.correo" placeholder="{{clienteActual.correo}}">             
-                                </div>
-                            </div>
-                            
-                            <!-- Text input-->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="textinput">Teléfono</label>
-                                <div class="col-md-4">
-                                    <input id="telefono" name="telefono" class="input-field" type="text" required ng-model="clienteActual.telefono" placeholder="{{clienteActual.telefono}}">             
-                                </div>
-                            </div>
-                            
-                            <!-- Text input-->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="textinput">Dirección</label>
-                                <div class="col-md-4">
-                                    <input id="direccion" name="direccion" class="input-field" type="text" required ng-model="clienteActual.direccion" placeholder="{{clienteActual.direccion}}">             
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <div class="col-sm-1"></div>
-                                <div class="col-sm-12">
-                                    <a ui-sref ="bicisUsadaList({clienteId: clienteActual.id})" class="btn btn-primary">Ver  <i class="fa fa-bicycle icon"></i></a>
-                                    <div class="row">
-                                        <hr>
-                                        <div ui-view="childrenView"></div>
-                                        <hr>
-                                    </div>
-                                </div>
-                            </div>
- 
-                            <!-- Button (Double) -->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="btnsave">Guardar Cambios</label>
-                                <div class="col-md-8">
+                            <center><div class="form-group">
+                                <label class=" control-label" for="btnsave">Guardar Cambios</label>
+                                <div>
                                     <button id="btnsave" name="btnsave" class="btn btn-success" type="submit" ng-click="updateCliente()">Si</button>
-                                    <button id="btncancel" name="btncancel" class="btn btn-danger" ui-sref="clientesList">No</button>
+                                    <button id="btncancel" name="btncancel" class="btn btn-danger" ui-sref="adv({adv:true,tipo:'bicicletas',filtros:{marcas:[],categorias:[],colores:[],precioMin:0.0,precioMax:999999999.9,calificacionMin:0.0}})">No</button>
                                 </div>
-                            </div>
-                            <div class="alert-warning">
-                                <span ng-show="signUp.direccion.$error.required">
-                                    Pon tu direccion si quieres ser vendedor
-                                </span>
-                                <span ng-show="signUp.telefono.$error.required">
-                                    <br>Pon tu teléfono si quieres ser vendedor
-                                </span>
-                                <span ng-show="signUp.username.$error.required">
-                                    <br>Usuario es requerido
-                                </span>
-                                <span ng-show="signUp.nombre.$error.required">
-                                    <br>nombre es requerido
-                                </span>
-                                <span ng-show="signUp.cedula.$error.required">
-                                    <br>cedula es requerida
-                                </span>
-                                <span ng-show="signUp.email.$error.required">
-                                    <br>Email es requerido
-                                </span>
-                                <span ng-show="signUp.email.$error.email">
-                                    <br>direccion email errada
-                                </span>
-                            </div>
+                            </div> </center>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="profile-content">
+                                <fieldset>
 
-                        </fieldset>
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="control-label" for="textinput">Username</label>
+                                        <div>
+                                            <input id="usuario" name="username" class="input-field" type="text" required ng-model="clienteActual.usuario" placeholder="{{clienteActual.usuario}}" style = "width: 700px">
+                                        </div>
+                                    </div>
+
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label for="textinput">Nombre</label>
+                                        <div>
+                                            <input id="nombre" name="nombre" class="input-field" type="text" required ng-model="clienteActual.nombre" placeholder="{{clienteActual.nombre}}" style = "width: 700px">             
+                                        </div>
+                                    </div>
+
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="control-label" for="textinput">Cedula</label>
+                                        <div>
+                                            <input id="cedula" name="cedula" class="input-field" type="text" required ng-model="clienteActual.cedula" placeholder="{{clienteActual.cedula}}" style = "width: 700px">             
+                                        </div>
+                                    </div>
+
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class=" control-label" for="textinput">Email</label>
+                                        <div>
+                                            <input id="correo" name="email" class="input-field" type="text" required ng-model="clienteActual.correo" placeholder="{{clienteActual.correo}}" style = "width: 700px">             
+                                        </div>
+                                    </div>
+
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="control-label" for="textinput">Teléfono</label>
+                                        <div>
+                                            <input id="telefono" name="telefono" class="input-field" type="text" required ng-model="clienteActual.telefono" placeholder="{{clienteActual.telefono}}" style = "width: 700px">             
+                                        </div>
+                                    </div>
+
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="control-label" for="textinput">Dirección</label>
+                                        <div>
+                                            <input id="direccion" name="direccion" class="input-field" type="text" required ng-model="clienteActual.direccion" placeholder="{{clienteActual.direccion}}" style = "width: 700px">             
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div>
+                                            <a ui-sref ="bicisUsadaList({clienteId: clienteActual.id})" class="btn btn-primary">Ver  <i class="fa fa-bicycle icon"></i></a>
+                                            <div class="row">
+                                                <hr>
+                                                <div ui-view="childrenView"></div>
+                                                <hr>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Button (Double) -->
+                                    <div class="alert-warning">
+                                        <span ng-show="signUp.direccion.$error.required">
+                                            Pon tu direccion si quieres ser vendedor
+                                        </span>
+                                        <span ng-show="signUp.telefono.$error.required">
+                                            <br>Pon tu teléfono si quieres ser vendedor
+                                        </span>
+                                        <span ng-show="signUp.username.$error.required">
+                                            <br>Usuario es requerido
+                                        </span>
+                                        <span ng-show="signUp.nombre.$error.required">
+                                            <br>nombre es requerido
+                                        </span>
+                                        <span ng-show="signUp.cedula.$error.required">
+                                            <br>cedula es requerida
+                                        </span>
+                                        <span ng-show="signUp.email.$error.required">
+                                            <br>Email es requerido
+                                        </span>
+                                        <span ng-show="signUp.email.$error.email">
+                                            <br>direccion email errada
+                                        </span>
+                                    </div>
+
+                                </fieldset>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
-    </form>
-</div>
 
-        
+
         <div class = "col-sm-1"></div>
     </div>
 </div>
