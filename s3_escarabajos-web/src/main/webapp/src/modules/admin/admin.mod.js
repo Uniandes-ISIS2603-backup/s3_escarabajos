@@ -18,7 +18,7 @@ var mod = ng.module("adminModule", []);
                     'mainView': {
                         controller: 'adminCtrl',
                         controllerAs: 'ctrl',
-                        templateUrl: basePath + 'admin.categoria.html'
+                        templateUrl: basePath + 'admin.modeloLista.html'
                     }
                 }
             }).state('adminModelosDetail', {
@@ -37,6 +37,16 @@ var mod = ng.module("adminModule", []);
                         controller: 'adminCreateCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'admin.createModelo.html'
+                    }
+                }
+            })
+            .state('adminPromocion', {
+                url: '/adminPromocion',
+                views: {
+                    'mainView': {
+                        controller: 'adminPromocionesCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'admin.promocion.html'
                     }
                 }
             });

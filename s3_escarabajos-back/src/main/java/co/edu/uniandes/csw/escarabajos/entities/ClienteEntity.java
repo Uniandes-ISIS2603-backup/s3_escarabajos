@@ -35,6 +35,7 @@ public class ClienteEntity implements Serializable {
     private String cedula;
     private String direccion;
     private String telefono;
+    private String vendedor;
     
     @PodamExclude
     @OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
@@ -285,4 +286,12 @@ public class ClienteEntity implements Serializable {
         this.bicicletasUsadas = bicicletasUsadas;
     }
     
+    
+    public String getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(String vendedor) {
+        this.vendedor = vendedor;
+    }
 }

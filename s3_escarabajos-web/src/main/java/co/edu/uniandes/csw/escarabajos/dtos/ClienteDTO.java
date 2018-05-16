@@ -21,7 +21,8 @@ import java.util.logging.Logger;
   "nombre": String,
   "correo": String,
   "usuario": String,
-  "cedula": Integer
+  "cedula": Integer,
+  "vendedor":String
  }
  *   }
  * </pre> Por ejemplo un cliente se representa asi:<br>
@@ -33,7 +34,8 @@ import java.util.logging.Logger;
   "nombre": "Ariel",
   "correo": "asnar0@discuz.net",
   "usuario": "␣",
-  "cedula": "8643803030"
+  "cedula": "8643803030",
+  "vendedor":String
 }
  *
  * </pre>
@@ -53,6 +55,7 @@ public class ClienteDTO {
     private String cedula;
     private String direccion;
     private String telefono;
+    private String vendedor;
     
     private static final Logger LOGGER = Logger.getLogger(ClienteDetailDTO.class.getName());
     
@@ -77,7 +80,16 @@ public class ClienteDTO {
             this.cedula = cliente.getCedula();
             this.direccion = cliente.getDireccion();
             this.telefono = cliente.getTelefono();
+            this.vendedor = cliente.getVendedor();
         }
+    }
+
+    public String getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(String vendedor) {
+        this.vendedor = vendedor;
     }
     
     public String getNombre(){
@@ -127,6 +139,7 @@ public class ClienteDTO {
      */
     public ClienteEntity toEntity() {
         ClienteEntity entity = new ClienteEntity();
+        entity.setVendedor(this.getVendedor());
         entity.setId(this.getId());
         entity.setNombre(this.getNombre());
         entity.setCorreo(this.getCorreo());

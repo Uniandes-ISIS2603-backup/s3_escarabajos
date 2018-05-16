@@ -1,0 +1,40 @@
+<alert class="alert alert-danger" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
+<div class="row col-sm-12">
+    <form class="form-horizontal col-sm-12" name="signUp">
+        <!-- Form Name -->
+        <legend>Ver modelo</legend>
+
+        <div class="container">
+            <div class="row profile">
+                <div class="col-md-9">
+                    <div class="profile-content">
+                        <fieldset>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="textinput">Id del modelo</label>
+                                <div class="col-md-4">
+                                    <input id="usuario" name="username" class="input-field" type="text" required ng-model="modeloActual.id">
+                                </div>
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="textinput">Descuento</label>
+                                <div class="col-md-4">
+                                    <input id="nombre" name="nombre" class="input-field" type="text" required ng-model="modeloActual.nombre" placeholder="{{modeloActual.nombre}}">             
+                                    
+                                </div>
+                            </div>
+                                <div class="col-md-8">
+                                    <button id="btnsave" name="btnsave" class="btn btn-success" type="submit" ng-click="updateCliente()">Crear promocion</button>
+                                </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
