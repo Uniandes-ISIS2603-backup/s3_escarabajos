@@ -49,6 +49,24 @@ var mod = ng.module("adminModule", []);
                         templateUrl: basePath + 'admin.promocion.html'
                     }
                 }
+            }).state('adminCategoria', {
+                url: '/adminCategoria',
+                views: {
+                    'mainView': {
+                        controller: 'adminCategoriaCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'admin.categoria.html'
+                    }
+                }
+            }).state('adminModelo', {
+                url: '/adminCategoria',
+                views: {
+                    'mainView': {
+                        controller: 'adminModeloCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'admin.modelo.html'
+                    }
+                }
             });
         }]);
 

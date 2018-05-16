@@ -1,5 +1,5 @@
 <alert class="alert alert-danger" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}}</alert>
-<div class="container-fluid">    
+<div class="container-fluid" ng-if="hasPermissions() || isVendedor()">    
     <div class="panel-group">
         <div class="panel panel-primary">
             <div class="panel-heading"><label>Mis bicicletas</label></div>

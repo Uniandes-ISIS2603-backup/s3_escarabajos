@@ -1,21 +1,15 @@
 (function (ng) {
     var mod = ng.module("adminModule");
 
-    mod.constant("adminContext", "api/catalogo/promociones");
+    mod.constant("adminContextPromocion", "api/catalogo/promociones");
 
-    mod.controller("adminPromocionesCtrl", ['$scope','$http','adminContext', '$state',
-        function ($scope, $http, adminContext, $state) {  
+    mod.controller("adminPromocionesCtrl", ['$scope','$http','adminContextPromocion', '$state',
+        function ($scope, $http, adminContextPromocion, $state) {  
             
             $scope.crearPromocion = function () {
-
-                        var input = {};
-
-                        input.usuario = $scope.clienteActual.usuario;
-                        
-                        input.nombre = $scope.clienteActual.nombre;
-                        
-                        $http.put(adminContext + '/' + $state.params.clienteId, input).then(function (response) {
-                            $state.go('clientesList', {clienteId: response.data.id}, {reload: true});
+                        console.log($scope);
+                        $http.put(adminContextPromocion + '/' + $scope.modelo.id + '/'+ $scope.descuento.d).then(function () {
+                            $state.go('adminCategorias',{reload: true});
                         });
                     };
         }]);
