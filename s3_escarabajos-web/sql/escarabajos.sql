@@ -28,8 +28,8 @@ insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) 
 
 --Datos de prueba BicicletaEntity
 
-insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (1000,'BicicletaEntity', 760000.78, '#EF5B5B', 0, 'MKT', 1000,1000,1,0.8);
-insert into Item_album (itemEntity_ID, album) values (1000, 'data/Imagenes/BicicletaTest1.jpg');
+insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (1000,'BicicletaEntity', 760000.78, '#c40824', 0, 'MKT', 1000,1000,1,0.8);
+insert into Item_album (itemEntity_ID, album) values (1000, 'https://images-eu.ssl-images-amazon.com/images/I/51gYunrvF8L._AC_US200_.jpg');
 insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (2000,'BicicletaEntity', 397000.10, '#5BEF68', 0, 'Suburban 2500', 2000,2000,1,1.0);
 insert into Item_album (itemEntity_ID, album) values (2000, 'data/Imagenes/BicicletaTest2.jpg');
 insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (3000,'BicicletaEntity', 331000.52, '#5BBBEF', 0, 'Jetta', 3000,3000,1,1.0);
@@ -50,16 +50,16 @@ insert into Item_album (itemEntity_ID, album) values (9000, 'data/Imagenes/Bicic
 
 
 --Datos de prueba ClienteEntity(con telefono y direccion no null)
-insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (1000, '9898989', 'coc@hotmale.com', 'Camilo','pedro69','468651684','Frankfurtcalle8-9');
-insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (2000, '123', 'bss@gmail.com', 'Felipe','saga','1232123','calle8-9');
-insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (3000, '1234', 'a121@gmail.com', 'Pedro','saga2','12345','Elm Street');
-insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (4000, '12334', 'jorge@hotmale.com', 'Jorge','giorginio1232','468651684','Frankfurtcalle8-9');
-insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (5000, '433211', 'sant@gmail.com', 'Santiago','s.beltran','12332123','calle8-9');
-insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (6000, '2211123', 'and@gmail.com', 'Andres','a.varonm','122345','Elm Street');
-insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (7000, '9898989', 'mate@hotmale.com', 'Mateo','m.devia','4686511684','Frankfurtcalle8-9');
-insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (8000, '22211234', 'nico@gmail.com', 'Nicolas','n.gaitan','11232123','calle8-9');
-insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (9000, '2212145', 'preubaCliente@gmail.com', 'Test Cliente','testC','12322245','Elm Street');
-insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion) values (10000, '1122', 'pruebaAdmin@gmail.com', 'Test Admin','testA','1211121345','Elm Street');
+insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion, vendedor) values (1000, '9898989', 'coc@hotmale.com', 'Camilo','pedro69','468651684','Frankfurtcalle8-9', null);
+insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion, vendedor) values (2000, '123', 'bss@gmail.com', 'Felipe','saga','1232123','calle8-9', null);
+insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion, vendedor) values (3000, '1234', 'a121@gmail.com', 'Pedro','saga2','12345','Elm Street', null);
+insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion, vendedor) values (4000, '12334', 'jorge@hotmale.com', 'Jorge','giorginio1232','468651684','Frankfurtcalle8-9', null);
+insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion, vendedor) values (5000, '433211', 'sant@gmail.com', 'Santiago','s.beltran','12332123','calle8-9', null);
+insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion, vendedor) values (6000, '2211123', 'and@gmail.com', 'Andres','a.varonm','122345','Elm Street', null);
+insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion, vendedor) values (7000, '9898989', 'mate@hotmale.com', 'Mateo','m.devia','4686511684','Frankfurtcalle8-9', null);
+insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion, vendedor) values (8000, '22211234', 'nico@gmail.com', 'Nicolas','n.gaitan','11232123','calle8-9', null);
+insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion, vendedor) values (9000, '2212145', 'preubaCliente@gmail.com', 'Test Cliente','testC','12322245','Elm Street', null);
+insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion, vendedor) values (10000, '1122', 'pruebaAdmin@gmail.com', 'Test Admin','testA','1211121345','Elm Street', null);
 
 --Datos de pruebaFacturaEntity
 insert into FacturaEntity values (1000, 200000.0, 1000);
