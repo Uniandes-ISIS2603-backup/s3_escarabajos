@@ -90,9 +90,9 @@ public class ModeloPersistence {
     public List<ModeloEntity> findAll(Integer page, Integer maxRecords) {
         LOGGER.info("Consultando todos los modelos");
         // Se crea un query para buscar todos los modelos en la base de datos.
-        String sql = "select u from ModeloEntity u";
+        String sql = "select u from ModeloEntity u ";
         if (page != null && maxRecords != null) {
-            sql += "u.id in (SELECT a.modeloId FROM AccesorioEntity a) OR u.id in (SELECT a.modeloId FROM BicicletaEntity a )";
+            sql += "where u.id in (SELECT a.modeloId FROM AccesorioEntity a) OR u.id in (SELECT a.modeloId FROM BicicletaEntity a ) ";
         }
         sql += "ORDER BY u.calificacionMedia DESC";
         TypedQuery query = em.createQuery(sql, ModeloEntity.class);

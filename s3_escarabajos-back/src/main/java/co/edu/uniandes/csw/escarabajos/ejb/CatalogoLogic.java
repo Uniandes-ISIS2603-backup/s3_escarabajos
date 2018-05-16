@@ -6,6 +6,7 @@ import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.CatalogoPersistence;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -16,6 +17,7 @@ import javax.inject.Inject;
 @Stateless
 public class CatalogoLogic {
 
+    private static final Logger LOGGER = Logger.getLogger(CatalogoLogic.class.getName());
     private static final String ERROR = "Los Filtros no estan en el formato adecuado!";
     @Inject
     private CatalogoPersistence persistence;
@@ -272,6 +274,8 @@ public class CatalogoLogic {
         if (modelo == null) {
             throw new BusinessLogicException(ModeloLogic.MODELONOEXISTE);
         }
+        LOGGER.info(idModelo+"   "+multiplicador);
+        
         for (ItemEntity item : modelo.getItems()) {
             itemLogic.multiplicarItem(multiplicador, item.getId());
         }

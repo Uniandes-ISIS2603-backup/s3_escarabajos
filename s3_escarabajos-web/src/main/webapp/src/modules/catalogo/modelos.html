@@ -4,7 +4,7 @@
     <div class="row" ng-repeat="chunk in modelos">
         <div class="col-xs-{{cols}}" ng-repeat="modelo in chunk">
             <div class="panel panel-default" style="display: inline-block;">
-                <div class="nuevo" ng-if="modelo.nuevo === false">
+                <div class="nuevo" ng-if="modelo.nuevo === true">
                     Nuevo
                 </div>
                 <div class="panel-body">
@@ -53,28 +53,18 @@
                     <div class="row text-center" style="display: inline-block" ng-show="modelo.options" >
                         <br>
                         <br>
-                        <div class="col-xs-3"  ng-if="hasPermissions()">
+                        <div class="col-xs-3"  >
                             <a class="btn btn-default" ui-sref="biciUpdate({biciId: bici.id})"><span class="glyphicon glyphicon-edit"></span></a>
                         </div>
-                        <div class="col-xs-3" ng-if="hasPermissions()">
+                        <div class="col-xs-3">
                             <a class="btn btn-danger" ui-sref="biciDelete({biciId: bici.id})"><span class="glyphicon glyphicon-trash"></span></a>
                         </div>
-                        
-                        <div class="col-xs-3 "ng-if="isAuthenticated()">
+                        <div class="col-xs-3 ">
                             <a  ui-sref ="addItemCarrito({itemId: modelo.items[0].id})" class="btn btn-primary">
                                 <span class="glyphicon glyphicon-shopping-cart" style="color:white"></span></a>
                         </div>
-                        <div class="col-xs-3"ng-if="isAuthenticated()">
+                        <div class="col-xs-3">
                             <a  ui-sref ="addItemListaDeseos({itemId: modelo.items[0].id})" class="btn btn-primary">
-                                <span class="glyphicon glyphicon-gift" style="color:white"></span></a>
-                        </div>
-                        
-                        <div class="col-xs-3 "ng-if="!isAuthenticated()">
-                            <a  ui-sref ="clientesSignIn" class="btn btn-primary">
-                                <span class="glyphicon glyphicon-shopping-cart" style="color:white"></span></a>
-                        </div>
-                        <div class="col-xs-3" ng-if="!isAuthenticated()">
-                            <a  ui-sref ="clientesSignIn" class="btn btn-primary">
                                 <span class="glyphicon glyphicon-gift" style="color:white"></span></a>
                         </div>
                     </div>
@@ -82,7 +72,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" ng-if="pagina!==null">
         <div class="col-xs-12 text-center" >
 
             <div class="pagination">

@@ -14,7 +14,6 @@ import co.edu.uniandes.csw.escarabajos.ejb.CatalogoLogic;
 import co.edu.uniandes.csw.escarabajos.ejb.ModeloLogic;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -336,9 +335,9 @@ public class CatalogoResource {
      */
     @GET
     @Path("modelos/{pagina: \\d+}/{records: \\d+}")
-    public List<ModeloDetailDTO> getModelos(@PathParam("pagina") Integer pagina,
+    public PaginacionDTO getModelos(@PathParam("pagina") Integer pagina,
             @PathParam("records") Integer maxRecords) {
-        return listModeloEntity2DetailDTO(catalogoLogic.getModelosPaginacion(pagina, maxRecords));
+        return new PaginacionDTO(listModeloEntity2DetailDTO(catalogoLogic.getModelosPaginacion(pagina, maxRecords)), listModeloEntity2DetailDTO(catalogoLogic.getModelosPaginacion(1, Integer.MAX_VALUE)).size());
     }
 
     /**
@@ -383,7 +382,7 @@ public class CatalogoResource {
     }
 
     /**
-     * <h1>PUT /api/catalogo/propagandas : Crear una propaganda.</h1>
+     * <h1>PUT /api/catalogo/promociones : Crear una propaganda.</h1>
      *
      * <pre>Cuerpo de petición
      *
@@ -406,14 +405,14 @@ public class CatalogoResource {
      *
      */
     @PUT
-    @Path("promociones/{idModelo: \\d+}/{descuento}")
-    public ModeloDetailDTO crearPropaganda(@PathParam("idModelo") Long idModelo, @PathParam("descuento")int descuento) throws BusinessLogicException {
-        Double multiplicador = 1.0-(descuento/100);
+    @Path("promociones/{idModelo: \\d+}/{descuento: \\d+}")
+    public PromocionDetailDTO crearPropaganda(@PathParam("idModelo") Long idModelo, @PathParam("descuento")Integer descuento) throws BusinessLogicException {
+        Double multiplicador = 1.0 - (descuento / 100);
         ModeloEntity modelo = catalogoLogic.crearPropaganda(idModelo, multiplicador);
         if (modelo == null) {
             throw new WebApplicationException("El recurso /modelos/" + idModelo + "/items no existe", 404);
         }
-        return new ModeloDetailDTO(modelo);
+        return new PromocionDetailDTO(modelo);
     }
 
     @GET

@@ -30,7 +30,7 @@
             if (!a)
             {
                 a = true;
-                $state.go('adv', {adv: true, tipo: 'bicicletas', filtros: {marcas: [], categorias: [], colores: [], precioMin: 0.0, precioMax: 999999999.9, calificacionMin: 0.0}}, {reload: true});
+                $state.go('principal', {pagina:1}, {reload: true});
             }
             /**
              * @ngdoc function

@@ -100,9 +100,8 @@ public class PromocionDetailDTO extends ModeloDetailDTO {
         descuento = 0;
         if (entity != null) {
             double min = Double.MAX_VALUE;
-            for (ItemEntity item : entity.getItems()) {
-                
-                if (((int) Math.round(Double.parseDouble(item.getMultiplicador().toString()))) != 1 && item.getMultiplicador() <min) {
+            for (ItemEntity item : entity.getItems()) {     
+                if (item.getMultiplicador()!=1.0 && item.getMultiplicador() <min) {
                     min = item.getMultiplicador();
                 }
             }
