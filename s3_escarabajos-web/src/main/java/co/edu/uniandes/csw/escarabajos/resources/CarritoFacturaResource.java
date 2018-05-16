@@ -42,6 +42,9 @@ public class CarritoFacturaResource {
     @Inject
     ClienteCarritoResource clienteCarrito;
     
+    @Inject
+    CarritoItemsResource carritoR;
+    
      /**
      * <h1>GET /api/clientes/{idCliente}/carrito/factura : Obtener el carrito del cliente.</h1>
      * 
@@ -67,6 +70,7 @@ public class CarritoFacturaResource {
         FacturaEntity factura = logicCarrito.crearFactura(carrito.getId());
         factura.setCliente(logicCliente.getCliente(idCliente));
         FacturaEntity factura2 = logicFactura.createFactura(factura);
+        carritoR.vaciarCarrito(carrito.getId());
         return new FacturaDTO(factura2);
     }
 }

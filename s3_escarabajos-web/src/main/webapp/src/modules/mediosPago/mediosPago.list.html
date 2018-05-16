@@ -1,0 +1,50 @@
+<alert class="alert alert-danger" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}}</alert>
+<div class="container-fluid">    
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><label>Medios de pago</label></div>
+            <div class="panel-body">
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                        <a class="btn btn-info" ui-sref="facturaCreate"><span class="glyphicon glyphicon-plus-sign"></span>Nuevo Medio de pago</a>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Id</th>   
+                                <th>Tipo</th>  
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="medio in medios">
+                                <td id="{{$index}}-id"><a ui-sref="medioPagoDetail({medioPagoId:medio.id})">{{medio.id}}</a></td>
+                                <td id="{{$index}}-tipo">{{medio.tipo}}</td>
+                                <td id="{{$index}}-actions">
+                                    <a class="btn btn-default btn-sm" ui-sref="medioPagoUpdate({medioPagoId:medio.id})"><span class="glyphicon glyphicon-edit"></span></a>
+                                    <a class="btn btn-danger btn-sm" ui-sref="medioPagoDelete({medioPagoId:medio.id})"><span class="glyphicon glyphicon-trash"></span></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <form>
+
+                 <div class="form-group row">
+                    <div class="form-group col-sm-12">
+                        <a class="btn btn-info" ui-sref="pagar">Pagar</a>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="form-group col-sm-12">
+                        <a class="btn btn-info" ui-sref="carrito">Cancelar</a>
+                    </div>
+                </div>
+               
+            </form>
+            </div>
+        </div>
+    </div>
+</div>

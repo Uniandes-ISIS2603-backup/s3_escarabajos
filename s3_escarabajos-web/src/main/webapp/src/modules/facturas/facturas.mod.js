@@ -30,9 +30,6 @@
             }).state('facturasCliente', {
                 url: '/cliente',
                 parent:'facturas',
-                param:{
-                    idCliente:null
-                },
                 views: {
                     'listView': {
                          templateUrl: basePath + 'facturas.cliente.html',

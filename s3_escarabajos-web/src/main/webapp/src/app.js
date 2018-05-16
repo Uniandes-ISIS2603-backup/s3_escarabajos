@@ -15,7 +15,8 @@
         'catalogoModule',
         'modelosModule',
         'adminModule',
-        'moduloComprar'
+        'moduloComprar',
+        'moduloMediosPago',
 
 
 
