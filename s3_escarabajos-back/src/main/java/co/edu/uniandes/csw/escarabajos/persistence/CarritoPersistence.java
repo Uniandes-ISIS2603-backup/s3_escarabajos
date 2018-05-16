@@ -87,6 +87,7 @@ public class CarritoPersistence {
         
         q = q.setParameter("id", clienteId);
         
+        
         List<CarritoEntity> lista =q.getResultList();
         
         if (lista.isEmpty()) {
