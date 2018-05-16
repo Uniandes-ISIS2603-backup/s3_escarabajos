@@ -44,27 +44,22 @@
                                 </div>
                             </div>
                             <br>
-                            <div style="position: relative;" class="row" ng-if="isAuthenticated()">
-                                <div class="col-sm-4">
-                                    <a  ui-sref ="addItemCarrito({itemId: modeloActual.id, color: itemActual.color})" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart" style="color:white"></span></a>
-                                </div>
-                                <div class=" col-xs-2" ng-if=" actuales[2] !== undefined && actuales[2] !== null" >
-                                    <img ng-src="{{actuales[2]}}" class="img-thumbnail" ng-click="mostrarImagen(actuales[2])">
-                                </div>
-                                <div class=" col-xs-2" ng-if=" actuales[3] !== undefined && actuales[3] !== null" >
-                                    <img ng-src="{{actuales[3]}}" class="img-thumbnail" ng-click="mostrarImagen(actuales[3])">
-                                </div>
 
-                                <div class=" col-xs-2">
-                                    <br>
-                                    <a  ng-click ="nextImagen()" class="btn btn-primary" ng-disabled="fin === imagenes.length - 1" ng-if="imagenes.length > 4">
-                                        <span class="glyphicon glyphicon-triangle-right" style="font-size: 3em"></span></a>
-                                </div>
+                            <div class=" col-xs-2" ng-if=" actuales[2] !== undefined && actuales[2] !== null" >
+                                <img ng-src="{{actuales[2]}}" class="img-thumbnail" ng-click="mostrarImagen(actuales[2])">
+                            </div>
+                            <div class=" col-xs-2" ng-if=" actuales[3] !== undefined && actuales[3] !== null" >
+                                <img ng-src="{{actuales[3]}}" class="img-thumbnail" ng-click="mostrarImagen(actuales[3])">
+                            </div>
 
+                            <div class=" col-xs-2">
+                                <br>
+                                <a  ng-click ="nextImagen()" class="btn btn-primary" ng-disabled="fin === imagenes.length - 1" ng-if="imagenes.length > 4">
+                                    <span class="glyphicon glyphicon-triangle-right" style="font-size: 3em"></span></a>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div  class="texto col-sm-3">
                         <div class="row">
                             <h2>Referencia:         {{modeloActual.referencia}}</h2>
