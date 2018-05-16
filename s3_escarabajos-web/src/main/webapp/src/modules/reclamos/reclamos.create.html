@@ -30,17 +30,14 @@ and open the template in the editor.
                         <textarea class="form-control" rows="5" id="comment" ng-model="data.mensaje"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="sel1">Seleccione el item</label>
-                        <select class="form-control" id="sel1">
-                            <option>Item 1</option>
-                            <option>Item 2</option>
-                            <option>Item 3</option>
-                            <option>Item i</option>
+                        <label for="sel1">Seleccione la factura, usando su código de referencia</label>
+                        <select class="form-control" id="selfact" ng-model = "facturaId">
+                            <option ng-repeat = "factura in facturas2"> {{factura.id}}</option>
                         </select>
                     </div>
                 </form>
                 <div align="right">
-                <a ng-click = "createReclamo()"class="btn btn-success">
+                <a ng-click = "createReclamo()" class="btn btn-success">
                      Aceptar
                 </a>
                 <a ui-sref="reclamosList" class="btn btn-danger">
