@@ -132,7 +132,7 @@ public class CatalogoLogic {
      */
     public List<ModeloEntity> getModelosAccesoriosFiltrados(List<List<String>> filtros, Double precioMin, Double precioMax, Double calificacionMin, Integer pagina, Integer numModelos) throws BusinessLogicException {
         if (precioMin >= 0 && precioMax >= -1 && calificacionMin >= 0) {
-            return persistence.filtrar(filtros, precioMin, precioMax, calificacionMin, pagina, numModelos, ModeloLogic.ACCESORIO);
+            return filtrar(filtros, precioMin, precioMax, calificacionMin, pagina, numModelos, ModeloLogic.ACCESORIO);
 
         }
         throw new BusinessLogicException(ERROR);
