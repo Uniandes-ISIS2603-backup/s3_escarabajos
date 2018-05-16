@@ -33,8 +33,19 @@
                 parent: 'mediosPago',
                 views: {
                     'listView': {
-                        templateUrl: basePath + '/crear/mediosPago.create.html',
+                        templateUrl: basePath + 'crear/mediosPago.create.html',
                         controller: 'mediosPagoCreateCtrl'
+                    }
+                }
+            }).state('mediosPagoDelete', {
+                parent: 'mediosPago',
+                params:{
+                    medioPagoId: null
+                },
+                views: {
+                    'listView': {
+                        templateUrl: basePath + 'mediosPago.list.html',
+                        controller: 'mediosPagoDeleteCtrl'
                     }
                 }
             });
