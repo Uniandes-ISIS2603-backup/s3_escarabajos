@@ -122,7 +122,7 @@ public class CatalogoLogicTest {
             data.add(entity);
 
         }
-        for (ModeloEntity modelo : modeloLogic.getModelos()) {
+        for (ModeloEntity modelo : modeloLogic.getModelos(null,null)) {
             for (ItemEntity item : modelo.getItems()) {
                 item.setModeloId(modelo.getId());
                 em.merge(item);

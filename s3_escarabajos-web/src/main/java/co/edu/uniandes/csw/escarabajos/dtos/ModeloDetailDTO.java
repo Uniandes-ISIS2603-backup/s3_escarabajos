@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.escarabajos.dtos;
+
 import co.edu.uniandes.csw.escarabajos.entities.BicicletaUsadaEntity;
 import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
@@ -123,11 +124,15 @@ public class ModeloDetailDTO extends ModeloDTO {
             items = new ArrayList<>();
             for (ItemEntity entityItem : entity.getItems()) {
                 items.add(new ItemDetailDTO(entityItem, entity.getReferencia()));
-                if (entityItem.getPrecio() < precio && entityItem.getAlbum() != null && !entityItem.getAlbum().isEmpty() && !(entityItem instanceof BicicletaUsadaEntity)) {
-                    precio = entityItem.getPrecio();
-                    url = entityItem.getAlbum().get(0);
+                double temp = entityItem.getPrecio() * entityItem.getMultiplicador();
+                if (entityItem.getDisponible() && temp < precio && !(entityItem instanceof BicicletaUsadaEntity)) {
+                    precio = temp;
+                    if (entityItem.getAlbum() != null && !entityItem.getAlbum().isEmpty()) {
+                        url = entityItem.getAlbum().get(0);
+                    }
                 }
             }
+
         }
         nuevo = entity != null && entity.getCreacion() != null && (((new java.util.Date()).getTime() - entity.getCreacion().getTime()) / 1000 / 60 / 60 / 24) < 10;
         verificarCalificaciones(entity);

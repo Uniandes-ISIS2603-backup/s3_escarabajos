@@ -96,7 +96,7 @@ public class ModeloResource {
      */
     @GET
     public List<ModeloDetailDTO> getModelos() {
-        return listModeloEntity2DetailDTO(modeloLogic.getModelos());
+        return listModeloEntity2DetailDTO(modeloLogic.getModelos(null,null));
     }
 
     /**
@@ -120,7 +120,6 @@ public class ModeloResource {
     @GET
     @Path("/{id: \\d+}")
     public ModeloDetailDTO getModelo(@PathParam("id") Long id) throws WebApplicationException {
-        LOGGER.info("!!!!");
         ModeloEntity entity = modeloLogic.getModelo(id);
         expt(entity, id);
         return new ModeloDetailDTO(entity);
@@ -151,7 +150,6 @@ public class ModeloResource {
     @Path("/{id: \\d+}")
     public ModeloDetailDTO updateModelo(@PathParam("id") Long id, ModeloDetailDTO modelo) throws BusinessLogicException {
         modelo.setId(id);
-        LOGGER.info("@@@@");
         ModeloEntity entity = modeloLogic.getModelo(id);
         expt(entity, id);
         return new ModeloDetailDTO(modeloLogic.updateModelo(id, modelo.toEntity()));

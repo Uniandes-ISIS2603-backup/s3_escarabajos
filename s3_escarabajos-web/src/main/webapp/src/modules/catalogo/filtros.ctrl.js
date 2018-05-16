@@ -81,7 +81,7 @@
                 }
                 $state.go(adv, {
                     filtros: $scope.filtros,
-                    pagina: $scope.pagina,
+                    pagina: 1,
                     tipo: $scope.tipo
                 }, {
                     reload: true
@@ -126,7 +126,7 @@
                         }
                         $state.go(adv, {
                             filtros: $scope.filtros,
-                            pagina: $scope.pagina,
+                            pagina: 1,
                             tipo: $scope.tipo
                         }, {
                             reload: true
@@ -155,7 +155,7 @@
                 }
                 $state.go(adv, {
                     filtros: $scope.filtros,
-                    pagina: $scope.pagina,
+                    pagina: 1,
                     tipo: $scope.tipo
                 }, {
                     reload: true
@@ -183,7 +183,7 @@
                 }
                 $state.go(adv, {
                     filtros: $scope.filtros,
-                    pagina: $scope.pagina,
+                    pagina: 1,
                     tipo: $scope.tipo
                 }, {
                     reload: true
@@ -210,7 +210,7 @@
                 }
                 $state.go(adv, {
                     filtros: $scope.filtros,
-                    pagina: $scope.pagina,
+                    pagina: 1,
                     tipo: $scope.tipo
                 }, {
                     reload: true

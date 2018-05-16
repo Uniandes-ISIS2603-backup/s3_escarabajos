@@ -77,7 +77,7 @@ public abstract class ItemDTO {
     public ItemDTO(ItemEntity entity) {
         if (entity != null) {
             this.id = entity.getId();
-            this.precio = entity.getMultiplicador() * entity.getPrecio();
+            this.precio = entity.getPrecio();
             this.modeloId = entity.getModeloId();
             this.color = entity.getColor();
             this.categoria = entity.getCategoria();

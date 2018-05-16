@@ -97,15 +97,17 @@ public class PromocionDetailDTO extends ModeloDetailDTO {
      */
     public PromocionDetailDTO(ModeloEntity entity) {
         super(entity);
+        descuento = 0;
         if (entity != null) {
-            double max = 0.0;
+            double min = Double.MAX_VALUE;
             for (ItemEntity item : entity.getItems()) {
-                if (((int) Math.round(Double.parseDouble(item.getMultiplicador().toString()))) != 1 && item.getMultiplicador() > max) {
-                    max = item.getMultiplicador();
+                
+                if (((int) Math.round(Double.parseDouble(item.getMultiplicador().toString()))) != 1 && item.getMultiplicador() <min) {
+                    min = item.getMultiplicador();
                 }
             }
-            if ((int) Math.round(max) != 0) {
-                descuento = (int) ((1.0 - max) * 100);
+            if (min <1) {
+                descuento = (int) ((1.0 - min) * 100);
             }
         }
 
