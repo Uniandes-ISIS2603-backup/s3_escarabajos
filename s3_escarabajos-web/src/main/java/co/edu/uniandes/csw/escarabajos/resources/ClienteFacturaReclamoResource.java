@@ -41,7 +41,7 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author n.gaitan
  */
-@Path("clientes")
+@Path("clientes/reclamos")
 @RequestScoped
 @Produces("application/json")
 @Consumes("application/json")
@@ -94,7 +94,7 @@ public class ClienteFacturaReclamoResource {
      * existe una con ese id.
      */
     @PUT
-    @Path("/reclamos/{reclamosId: \\d+}")
+    @Path("/{reclamosId: \\d+}")
     public ReclamoDetailDTO updatereclamo(ReclamoDetailDTO reclamo, @PathParam("reclamosId") Long id) throws BusinessLogicException {
         //TODO si no existe el recurso factura debe disparar WebApplicationException
         ReclamoEntity recl = this.reclamo.find(id);
@@ -105,9 +105,9 @@ public class ClienteFacturaReclamoResource {
     }
 
     @POST
-    @Path("/{clientesId: \\d+}/facturas/{facturasId: \\d+}/reclamos")
+    @Path("/{clientesId: \\d+}/facturas/%20{facturasId: \\d+}")
     public ReclamoDetailDTO createReclamo(ReclamoDetailDTO reclamo,
-            @PathParam("reclamosId") Long clienteId, @PathParam("facturasId") Long facturaId) throws BusinessLogicException {
+            @PathParam("clientesId") Long clienteId, @PathParam("facturasId") Long facturaId) throws BusinessLogicException {
         if (cliente.getCliente(clienteId) == null) {
             throw new WebApplicationException("El cliente no existe", 404);
         }
@@ -118,7 +118,7 @@ public class ClienteFacturaReclamoResource {
     }
 
     @PUT
-    @Path("/reclamos/{reclamosId: \\d+}/finalizar")
+    @Path("/{reclamosId: \\d+}/finalizar")
     public void finalizarReclamo(@PathParam("reclamosId") Long id) throws BusinessLogicException {
         //TODO si no existe el recurso factura debe disparar WebApplicationException
         ReclamoEntity recl = this.reclamo.find(id);
@@ -129,7 +129,7 @@ public class ClienteFacturaReclamoResource {
     }
 
     @PUT
-    @Path("/reclamos/{reclamosId: \\d+}/renaudar")
+    @Path("/{reclamosId: \\d+}/renaudar")
     public void renaudarReclamo(@PathParam("reclamosId") Long id) throws BusinessLogicException {
         //TODO si no existe el recurso factura debe disparar WebApplicationException
         ReclamoEntity recl = this.reclamo.find(id);
@@ -139,7 +139,7 @@ public class ClienteFacturaReclamoResource {
         reclamo.renaudarReclamo(id);
     }
     @GET
-    @Path("/reclamos/{reclamosId: \\d+}")
+    @Path("/{reclamosId: \\d+}")
     public ReclamoDetailDTO updatereclamo(@PathParam("reclamosId") Long id) throws BusinessLogicException {
         //TODO si no existe el recurso factura debe disparar WebApplicationException
         ReclamoEntity recl = this.reclamo.find(id);
@@ -149,7 +149,7 @@ public class ClienteFacturaReclamoResource {
         return new ReclamoDetailDTO(recl);
     }
     @GET
-    @Path("/{clientesId: \\d+}/reclamos/")
+    @Path("/detail/{clientesId: \\d+}")
     public List<ReclamoDetailDTO> getByCliente(@PathParam("clientesId") Long idCliente) throws BusinessLogicException {
         //TODO si no existe el recurso factura debe disparar WebApplicationException
         if (cliente.getCliente(idCliente) == null) {
@@ -158,7 +158,6 @@ public class ClienteFacturaReclamoResource {
         return list2DTO(reclamo.getReclamoByCliente(idCliente));
     }
     @GET
-    @Path("/reclamos")
     public List<ReclamoDetailDTO> getEnProceso() throws BusinessLogicException {
         
         return list2DTO(reclamo.findAll());
