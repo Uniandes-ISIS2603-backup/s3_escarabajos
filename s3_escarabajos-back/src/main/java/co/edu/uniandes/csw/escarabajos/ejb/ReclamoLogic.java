@@ -34,6 +34,10 @@ public class ReclamoLogic {
     private ClienteLogic clienteLogic; 
     public ReclamoEntity createReclamo(ReclamoEntity ent, Long facturaId, Long clienteId) throws BusinessLogicException {
         LOGGER.info("Iniciando el proceso de crear un reclamo.");
+        if(getReclamoByCliente(clienteId).contains(getReclamoPorfactura(facturaId)))
+        {
+            throw new BusinessLogicException("Usted ya ha realizado un reclamo para esta factura");
+        }
         if (ent.getMensaje() == null || ent.getMensaje().isEmpty()) {
             throw new BusinessLogicException("Por favor ingrese los detalles del reclamo.");
         }
@@ -51,9 +55,9 @@ public class ReclamoLogic {
         return nuevo;
     }
     public ReclamoEntity find(Long id) {
-        LOGGER.info("Inicia el proceso de buscar un calificaciòn.");
+        LOGGER.info("Inicia el proceso de buscar un reclamo.");
         ReclamoEntity answ = reclamoPersistence.find(id);
-        LOGGER.info("Termina el proceso de buscar un calificaciòn.");
+        LOGGER.info("Termina el proceso de buscar un reclamo.");
         return answ;
     }
 

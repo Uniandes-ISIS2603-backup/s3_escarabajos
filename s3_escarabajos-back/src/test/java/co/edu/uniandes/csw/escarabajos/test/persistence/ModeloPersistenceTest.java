@@ -149,7 +149,7 @@ public class ModeloPersistenceTest {
      */
     @Test
     public void getModelosTest() {
-        List<ModeloEntity> list = modeloPersistence.findAll();
+        List<ModeloEntity> list = modeloPersistence.findAll(null,null);
         Assert.assertEquals(data.size(), list.size());
         for (ModeloEntity ent : list) {
             boolean found = false;

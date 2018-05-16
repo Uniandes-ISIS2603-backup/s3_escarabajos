@@ -84,7 +84,7 @@ public class ReclamoPersistence
         TypedQuery<ReclamoEntity> q = em.createQuery("select p from ReclamoEntity p where (p.factura.id = :facturaId)", ReclamoEntity.class);
         q.setParameter("facturaId", facturaId);
         List<ReclamoEntity> results = q.getResultList();
-        return results.get(0);
+        return results.isEmpty()? null: results.get(0);
     }
     public List<ReclamoEntity> getReclamoPorCliente(Long clienteId)
     {

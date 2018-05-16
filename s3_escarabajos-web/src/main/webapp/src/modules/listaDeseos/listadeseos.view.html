@@ -1,50 +1,56 @@
 <!--comment-->
 <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
-<div class = "container-fluid" id = "div1">
-
-    <table class = "table">
-        <tr ng-repeat="item in listadeseos">
-            <td>
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-2" ng-repeat='foto in item.album|limitTo:1'>
+<div class = "container - fluid co-sm-12" id = "div1">
+    <div class = "col-sm-1"></div>
+    <div class="vertical-menu col-sm-3" style = "margin-top:45px">
+        <a ui-sref="clientesProfile">Mi Perfil</a>
+        <a  class="active" ui-sref = "listadeseos">Lista de deseos</a>
+        <a ui-sref = "facturasCliente">Mis Compras</a>
+        <a ui-sref="reclamosList">Mis Reclamos</a>
+        <a ng-click = "logOut()">Cerrar Sesión</a>
+    </div>
+    <div class = "col-sm-8">
+        <legend> Lista de Deseos </legend>
+        <table class = "table">
+            <tr ng-repeat="item in listadeseos" >
+                <td>
+                    <div class="container-fluid">
+                        <div ng-repeat='foto in item.album|limitTo:1' class = "col-sm-2">
                             <img src= "{{foto}}" class="img-responsive center-block" alt="Cinque Terre" style="width:100px;height:100px;">
                         </div>
-                        <div class="col-md-4">
-                            <p>
-                                <h4>Referencia: {{item.referencia}}</h4><br>
-                                Color: {{item.color}}<br>
-                                Modelo: {{item.modeloId}}<br>
-                                Tipo Modelo: {{item.tipo}}<br>
-                            </p>
+                        <div class = "col-sm-2">
+
+                            <h4>Referencia: {{item.referencia}}</h4>
+                            Tipo: {{item.tipo}}<br>
+                            <div class="well" style="background-color:{{item.color}}; width:10px; height:10px; align-content:flex-end;"></div>
+
                         </div>
-                        <div class="col-md-2">
+                        <div class = "col-sm-2">
                             <p>Precio:</p>
                             <h4>${{item.precio}}</h4>
                         </div>
-                        <div class="col-md-1">
+                        <div class = "col-sm-2">
                             <p>Cantidad:</p>
 
                             <label>{{item.cantidad}}</label>
 
                         </div>
-                        
-                        <div class="col-md-2">
-                            <p>Agregar al Carrito</p>
-                            <a  ui-sref ="addItemCarrito({itemId: item.id})" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart" style="color:white"></span></a>
+                        <div class ="row">
+                            <div class = "col-sm-1">
+                                <br>
+                                <a  ui-sref ="addItemCarrito({itemId: item.id})" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart" style="color:white"></span></a>
 
-                        </div>
-                        
-                        <div class="col-md-1">
-                            <p>Eliminar</p>
-                            <a  ui-sref ="deleteItemListadeseos({itemId: item.id})" class="btn btn-danger"><span class="glyphicon glyphicon-trash" style="color:white"></span></a>
-
+                            </div>
+                            <div class = "col-sm-1">
+                                <br>
+                                <a  ui-sref ="deleteItemListadeseos({itemId: item.id})" class="btn btn-danger"><span class="glyphicon glyphicon-trash" style="color:white"></span></a>
+                            </div>
                         </div>
                     </div>
-                </div> 
-            </td>
-        </tr>
-    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
     <div class="container-fluid footer" >
         <style>
             .footer {

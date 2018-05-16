@@ -81,14 +81,21 @@ public class ModeloPersistence {
     /**
      * Devuelve todos los modelos de la base de datos.
      *
+     * @param page pagina de modelos
+     * @param maxRecords numero de modelos por pagina
      * @return una lista con todos losmodelos que encuentre en la base de datos,
      * "select u from ModeloEntity u" es como un "select * from ModeloEntity;" -
      * "SELECT * FROM table_name" en SQL.
      */
-    public List<ModeloEntity> findAll() {
+    public List<ModeloEntity> findAll(Integer page, Integer maxRecords) {
         LOGGER.info("Consultando todos los modelos");
         // Se crea un query para buscar todos los modelos en la base de datos.
-        TypedQuery query = em.createQuery("select u from ModeloEntity u", ModeloEntity.class);
+        TypedQuery query = em.createQuery("select u from ModeloEntity u ORDER BY u.calificacionMedia DESC", ModeloEntity.class);
+          if (page != null && maxRecords != null) {
+            query.setFirstResult((page
+                    - 1) * maxRecords);
+            query.setMaxResults(maxRecords);
+        }
         // Note que en el query se hace uso del método getResultList() que obtiene una lista de modelos.
         return query.getResultList();
     }

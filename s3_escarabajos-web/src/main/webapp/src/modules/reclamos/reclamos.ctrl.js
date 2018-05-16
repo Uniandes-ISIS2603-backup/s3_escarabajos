@@ -1,9 +1,9 @@
 (function (ng) {
     var mod = ng.module("reclamosModule");
-    mod.constant("reclamosContext", "api/clientes");
+    mod.constant("reclamosContext", "api/clientes/reclamos");
     mod.controller('reclamosCtrl', ['$scope', '$http', 'reclamosContext',
         function ($scope, $http, reclamosContext) {
-            $http.get(reclamosContext + "/" + sessionStorage.getItem("id") + "/reclamos").then(function (response) {
+            $http.get(reclamosContext + "/detail/" + sessionStorage.getItem("id")).then(function (response) {
                 $scope.reclamosRecords = response.data;
             });
         }
@@ -13,20 +13,20 @@
             if ($state.params.reclamoId !== undefined && $state.params.reclamoId !== null) {
                 $scope.data = {};
 
-                $http.get(reclamosContext + "/reclamos/" + $state.params.reclamoId).then(function (response) {
+                $http.get(reclamosContext + "/" + $state.params.reclamoId).then(function (response) {
                     $scope.reclamoActual = response.data;
                 });
                 $scope.terminar = function () {
-                    $http.put(reclamosContext + "/reclamos/" + $state.params.reclamoId + "/finalizar").then(
+                    $http.put(reclamosContext + "/" + $state.params.reclamoId + "/finalizar").then(
                             $state.go('^.reclamosDetail', {reclamoId: $state.params.reclamoId}, {reload: true}));
                 };
                 $scope.renaudar = function () {
-                    $http.put(reclamosContext + "/reclamos/" + $state.params.reclamoId + "/renaudar").then(
+                    $http.put(reclamosContext + "/" + $state.params.reclamoId + "/renaudar").then(
                             $state.go('^.reclamosDetail', {reclamoId: $state.params.reclamoId}, {reload: true}));
                 };
                 $scope.updateMensaje = function () {
 
-                    $http.put(reclamosContext + "/reclamos/" + $state.params.reclamoId, $scope.data).then(function (response) {
+                    $http.put(reclamosContext + "/" + $state.params.reclamoId, $scope.data).then(function (response) {
                         $state.go('^.reclamosDetail', {reclamoId: $state.params.reclamoId}, {reload: true});
                     });
                 };
@@ -36,8 +36,15 @@
         function ($scope, $http, reclamosContext, $state, $rootScope) {
             $rootScope.edit = false;
             $scope.data = {};
+            $scope.facturaId = null;
+            if ((sessionStorage.getItem("id") !== undefined)&& (sessionStorage.getItem("id") !== null)) {
+                
+                $http.get('api/facturas/cliente/' + sessionStorage.getItem("id")).then(function (response) {
+                    $scope.facturas2 = response.data;
+                });
+            };
             $scope.createReclamo = function () {
-                $http.post(reclamosContext, $scope.data).then(function (response) {
+                $http.post(reclamosContext + '/' + sessionStorage.getItem("id") +'/facturas/' +  $scope.facturaId, $scope.data).then(function (response) {
                     $state.go('reclamosList', {reclamoId: response.data.id}, {reload: true});
                 });
             };
@@ -45,7 +52,7 @@
     ]);
      mod.controller('reclamosAdminCtrl', ['$scope', '$http', 'reclamosContext',
         function ($scope, $http, reclamosContext) {
-            $http.get(reclamosContext + "/reclamos").then(function (response) {
+            $http.get(reclamosContext).then(function (response) {
                 $scope.reclamosRecords = response.data;
             });
         }

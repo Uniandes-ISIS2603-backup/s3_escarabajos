@@ -48,11 +48,13 @@ public class ModeloLogic {
     /**
      * Obtiene la lista de los registros de Modelo.
      *
+     * @param pagina pagina de modelos 
+     * @param numModelos numero de modelos por pagina
      * @return Colección de objetos de ModeloEntity.
      */
-    public List<ModeloEntity> getModelos() {
+    public List<ModeloEntity> getModelos(Integer pagina, Integer numModelos) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los modelos");
-        List<ModeloEntity> lista = persistence.findAll();
+        List<ModeloEntity> lista = persistence.findAll(pagina,numModelos);
         LOGGER.log(Level.INFO, "Finaliza proceso de consultar todos los modelos");
         return lista;
     }
@@ -134,13 +136,10 @@ public class ModeloLogic {
             throw new BusinessLogicException(MODELONOEXISTE);
         }
         for (ItemEntity item : modeloEntity.getItems()) {
-            if (item instanceof BicicletaEntity) {
-                biciLogic.deleteBicicleta(item.getId());
-            } else if (item instanceof AccesorioEntity) {
-                accLogic.deleteAccesorio(item.getId());
+            if (item.getDisponible()) {
+                itemLogic.comprarItem(item.getId());
             }
         }
-        persistence.delete(id);
         LOGGER.log(Level.INFO, "Finaliza proceso de borrar un modelo ");
     }
 

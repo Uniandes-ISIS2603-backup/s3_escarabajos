@@ -6,7 +6,13 @@
             $scope.pagina = $state.params.pagina;
             $scope.tipo = $state.params.tipo;
             if ($scope.tipo !== null) {
-                $scope.promociones = catalogoFactory.getPromociones($scope.tipo);
+                catalogoFactory.getPromociones($scope.tipo).then(function (response) {
+                    $scope.promos = response.data;
+                    $scope.promociones = [];
+                    for (var i = 0; i < $scope.promos.length; i += 3) {
+                        $scope.promociones.push($scope.promos.slice(i, i + 3));
+                    }
+                });
             }
         }
     ]);
