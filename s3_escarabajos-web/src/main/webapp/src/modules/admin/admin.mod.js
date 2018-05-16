@@ -58,13 +58,13 @@ var mod = ng.module("adminModule", []);
                         templateUrl: basePath + 'admin.categoria.html'
                     }
                 }
-            }).state('adminModelo', {
-                url: '/adminCategoria',
+            }).state('adminMarca', {
+                url: '/adminMarca',
                 views: {
                     'mainView': {
-                        controller: 'adminModeloCtrl',
+                        controller: 'adminMarcaCtrl',
                         controllerAs: 'ctrl',
-                        templateUrl: basePath + 'admin.modelo.html'
+                        templateUrl: basePath + 'admin.marca.html'
                     }
                 }
             });
