@@ -40,8 +40,11 @@ insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod
 
 
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (7,'AccesorioEntity', 760000.78, '#EF5B5B', 0, 'C60', 6,6,1,0.6);
+insert into Item_album (itemEntity_ID, album) values (7, 'data/Imagenes/BicicletaTest1.jpg');
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (8,'AccesorioEntity', 760000.78, '#5BBBEF', 0, 'MYK', 7,7,1,0.8);
+insert into Item_album (itemEntity_ID, album) values (8, 'data/Imagenes/BicicletaTest1.jpg');
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (9,'AccesorioEntity', 760000.78, '#8F5BEF', 0, 'QWE', 8,8,1,1.0);
+insert into Item_album (itemEntity_ID, album) values (9, 'data/Imagenes/BicicletaTest1.jpg');
 
 
 --Datos de prueba VendedorEntity(con telefono y direccion no null)
