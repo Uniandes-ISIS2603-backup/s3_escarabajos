@@ -18,7 +18,7 @@ and open the template in the editor.
             <div class="list-group-item" ng-repeat = "reclamo in reclamosRecords" style = "margin-top:10px">
                 <h1>Razón: {{reclamo.razon}}</h1>
                 <h2>Usuario: {{reclamo.cliente.usuario}}</h2>
-                <p><label>Factura:</label> {{reclamo.factura}}</p>
+                <p><label>ID de la Factura:</label> {{reclamo.factura.id}}</p>
                 <p ng-if = "!reclamo.enProceso"><label>Estado:</label> Finalizado</p>
                 <p ng-if = "reclamo.enProceso"><label>Estado:</label> En Proceso</p>
                 <div align="right">
