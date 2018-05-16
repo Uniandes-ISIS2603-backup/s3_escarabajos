@@ -53,20 +53,34 @@
                     <div class="row text-center" style="display: inline-block" ng-show="modelo.options" >
                         <br>
                         <br>
-                        <div class="col-xs-3"  ng-if="hasPermissions()">
+                        <div class="col-xs-3 "  ng-if="hasPermissions()">
                             <a class="btn btn-default" ui-sref="biciUpdate({biciId: bici.id})"><span class="glyphicon glyphicon-edit"></span></a>
                         </div>
-                        <div class="col-xs-3" ng-if="hasPermissions()">
+                        <div class="col-xs-3 " ng-if="hasPermissions()">
                             <a class="btn btn-danger" ui-sref="biciDelete({biciId: bici.id})"><span class="glyphicon glyphicon-trash"></span></a>
                         </div>
-                        <div class="col-xs-3 " ng-if="isAuthenticated()">
+                        <div class="col-xs-3 " ng-if="hasPermissions()">
                             <a  ui-sref ="addItemCarrito({itemId: modelo.items[0].id})" class="btn btn-primary">
                                 <span class="glyphicon glyphicon-shopping-cart" style="color:white"></span></a>
                         </div>
-                        <div class="col-xs-3" ng-if="isAuthenticated()">
+                        <div class="col-xs-3" ng-if="hasPermissions()">
                             <a  ui-sref ="addItemListaDeseos({itemId: modelo.items[0].id})" class="btn btn-primary">
                                 <span class="glyphicon glyphicon-gift" style="color:white"></span></a>
                         </div>
+                        
+                        <div class="col-xs-3 " ng-if="isAuthenticated() && !hasPermissions()"></div>
+                        
+                        <div class="col-xs-3 " ng-if="isAuthenticated() && !hasPermissions()">
+                            <a  ui-sref ="addItemCarrito({itemId: modelo.items[0].id})" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-shopping-cart" style="color:white"></span></a>
+                        </div>
+                        <div class="col-xs-3" ng-if="isAuthenticated() && !hasPermissions()">
+                            <a  ui-sref ="addItemListaDeseos({itemId: modelo.items[0].id})" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-gift" style="color:white"></span></a>
+                        </div>
+                        <div class="col-xs-3" ng-if="isAuthenticated() && !hasPermissions()"></div>
+                        
+                        <div class="col-xs-3" ng-if="!isAuthenticated()"></div>
                         <div class="col-xs-3 " ng-if="!isAuthenticated()">
                             <a  ui-sref ="clientesSignIn" class="btn btn-primary">
                                 <span class="glyphicon glyphicon-shopping-cart" style="color:white"></span></a>
@@ -75,6 +89,7 @@
                             <a  ui-sref ="clientesSignIn" class="btn btn-primary">
                                 <span class="glyphicon glyphicon-gift" style="color:white"></span></a>
                         </div>
+                        <div class="col-xs-3"ng-if="!isAuthenticated()"></div>
                     </div>
                 </div>
             </div>
