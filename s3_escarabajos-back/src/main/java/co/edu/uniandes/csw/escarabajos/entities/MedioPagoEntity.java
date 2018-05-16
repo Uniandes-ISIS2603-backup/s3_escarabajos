@@ -22,37 +22,37 @@ import uk.co.jemos.podam.common.PodamExclude;
  */
 @Entity
 public class MedioPagoEntity implements Serializable {
-   
+
     /**
      * modela el tipo de pago por pse
      */
-    public final static String TIPO_PSE = "pse";
-    
+    public final static String TIPO_PSE = "PSE";
+
     /**
      * modela el tipo de pago por paypal
      */
-    public final static String TIPO_PAYPAL = "paypal";
-    
+    public final static String TIPO_PAYPAL = "PayPal";
+
     /**
      * modela el tipo de pago por tarjeta de credito
      */
-    public final static String TIPO_TARJETA_CREDITO = "tarjeta de credito";
-    
+    public final static String TIPO_TARJETA_CREDITO = "Tarjeta de Credito";
+
     /**
      * modela el tipo de pago por tarjeta debito
      */
-    public final static String TIPO_TARJETA_DEBITO = "tarjeta debito";
-    
+    public final static String TIPO_TARJETA_DEBITO = "Tarjeta Debito";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     private String tipo;
-    
+
     @PodamExclude
     @ManyToOne
     private ClienteEntity cliente;
-    
+
     @PodamExclude
     @OneToOne
     private FacturaEntity factura;
@@ -68,7 +68,22 @@ public class MedioPagoEntity implements Serializable {
      * @param tipo the tipo to set
      */
     public void setTipo(String tipo) {
-        this.tipo = tipo;
+       if(tipo.equalsIgnoreCase(TIPO_PAYPAL))
+       {
+           this.tipo = TIPO_PAYPAL;
+       }
+       else if(tipo.equalsIgnoreCase(TIPO_PSE))
+       {
+           this.tipo = TIPO_PSE;
+       }
+       else if(tipo.equalsIgnoreCase(TIPO_TARJETA_CREDITO))
+       {
+           this.tipo = TIPO_TARJETA_CREDITO;
+       }
+       else if(tipo.equalsIgnoreCase(TIPO_TARJETA_DEBITO))
+       {
+           this.tipo = TIPO_TARJETA_DEBITO;
+       }
     }
 
     /**
@@ -112,8 +127,8 @@ public class MedioPagoEntity implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    
-     @Override
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
