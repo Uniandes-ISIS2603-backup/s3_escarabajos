@@ -1,0 +1,15 @@
+.triangulo{  
+    width: 0;
+    height: 0;
+    margin-top:-87px;
+    border-right: 55px solid transparent;
+    border-top: 55px solid transparent;
+    border-left: 55px solid red;
+    border-bottom: 55px solid red;
+    transform:rotate(270deg);
+    z-index:2;
+    position:absolute;
+}
+.c-triangulo{
+    
+}

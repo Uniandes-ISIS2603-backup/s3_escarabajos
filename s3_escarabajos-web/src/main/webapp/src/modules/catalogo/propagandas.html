@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="src/modules/catalogo/propagandas.css" />
 <p></p>
 <div class="well"  style="background-color: #82CD73" >
 
@@ -14,7 +15,10 @@
             <div class="item"ng-class="{active:!$index}" ng-repeat="chunk in promociones" >
                 <div class="col-xs-12 text-center">
                     <div class="row" ng-repeat="promo in chunk">
-                        <div class="panel panel-default"  >
+                        <div class="panel panel-default">
+                            <div class="c-triangulo">
+                                <span class="triangulo">{{promo.descuento}}% Descuento</span>
+                            </div>
                             <div class="panel-body" >
                                 <div class="col-xs-8 col-xs-offset-2">
                                     <img class="img-responsive" src="{{promo.url}}" alt="{{promo.referencia}}">
