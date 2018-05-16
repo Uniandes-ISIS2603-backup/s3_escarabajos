@@ -17,6 +17,7 @@
         'adminModule',
         'moduloComprar',
         'moduloMediosPago',
+        'errorMod'
     ]);
     // Resuelve problemas de las promesas
     app.config(['$qProvider', function ($qProvider) {

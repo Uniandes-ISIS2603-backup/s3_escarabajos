@@ -38,27 +38,39 @@
              * $scope.
              */
             $scope.autenticar = function () {
-                var flag = false;
+                $scope.flag = false;
                 for (var item in $scope.users) {
-                    
-                    if ($scope.users[item].user === $scope.data.username && $scope.users[item].password === $scope.data.password && ($scope.users[item].rol !== null || $scope.users[item].rol !== undefined)) 
-                    {
-                        flag = true;
-                        $scope.user = $scope.users[item];
-                        $state.go('adv', {adv:true,tipo:'bicicletas',filtros:{marcas:[],categorias:[],colores:[],precioMin:0.0,precioMax:999999999.9,calificacionMin:0.0}}, {reload: true});
-                        break;
-                    }
-                }
-                if (!flag) {
-                    $rootScope.alerts.push({type: "danger", msg: "Incorrect username or password."});
-                } else {
-                    sessionStorage.token = $scope.user.token;
-                    sessionStorage.setItem("username", $scope.user.user);
-                    sessionStorage.setItem("rol", $scope.user.rol);
-                    sessionStorage.setItem("id", $scope.user.id);
-                    sessionStorage.setItem("name", $scope.user.name);
 
-                    $rootScope.currentUser = $scope.user;
+                    if ($scope.users[item].user === $scope.data.username && $scope.users[item].password === $scope.data.password)
+                    {
+                        if ($scope.users[item].rol === $scope.data.rol)
+                        {
+                            $scope.flag = true;
+                            $scope.user = $scope.users[item];
+                            sessionStorage.token = $scope.user.token;
+                            sessionStorage.setItem("username", $scope.user.user);
+                            sessionStorage.setItem("rol", $scope.data.rol);
+                            sessionStorage.setItem("id", $scope.user.id);
+                            sessionStorage.setItem("name", $scope.user.name);
+
+                            $rootScope.currentUser = $scope.user;
+                            $state.go('adv', {adv: true, tipo: 'bicicletas', filtros: {marcas: [], categorias: [], colores: [], precioMin: 0.0, precioMax: 999999999.9, calificacionMin: 0.0}}, {reload: true});
+                            break;
+                        } else if ($scope.users[item].rol === "Usuario" && $scope.data.rol !== "Administrador" && $scope.data.rol !== undefined && $scope.data.rol !== null)
+                        {
+                            $scope.flag = true;
+                            $scope.user = $scope.users[item];
+                            sessionStorage.token = $scope.user.token;
+                            sessionStorage.setItem("username", $scope.user.user);
+                            sessionStorage.setItem("rol", $scope.data.rol);
+                            sessionStorage.setItem("id", $scope.user.id);
+                            sessionStorage.setItem("name", $scope.user.name);
+
+                            $rootScope.currentUser = $scope.user;
+                            $state.go('adv', {adv: true, tipo: 'bicicletas', filtros: {marcas: [], categorias: [], colores: [], precioMin: 0.0, precioMax: 999999999.9, calificacionMin: 0.0}}, {reload: true});
+                            break;
+                        }
+                    }
                 }
             };
         }

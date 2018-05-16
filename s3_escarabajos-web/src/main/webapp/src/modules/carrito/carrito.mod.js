@@ -1,11 +1,12 @@
 (function (ng) {
     var mod = ng.module('CarritoMod', ['ui.router']);
-
+    var urlCarrito = '/cliente/' + sessionStorage.getItem("id") + '/carrito';
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
             $urlRouterProvider.otherwise("/carrito");
 
             $stateProvider.state('carrito', {
+                url: urlCarrito,
                 views: {
                     mainView: {
                         templateUrl: "src/modules/carrito/carrito.view.html",
@@ -13,6 +14,7 @@
                     }
                 }
             }).state('deleteItemCarrito', {
+                url: urlCarrito,
 
                 params: {
                     itemId: null
@@ -26,6 +28,7 @@
                 }
 
             }).state('addItemCarrito', {
+                url: urlCarrito,
 
                 params: {
                     itemId: null,
@@ -40,6 +43,7 @@
                 }
 
             }).state('vaciarCarrito', {
+                url: urlCarrito,
 
                 views: {
                     mainView: {
@@ -48,6 +52,8 @@
                     }
                 }
             }).state('comprar', {
+                                url: urlCarrito,
+
                 views: {
                     'mainView': {
                         controller: 'comprarCtrl',
@@ -55,6 +61,8 @@
                     }
                 }
             }).state('yaEsta', {
+                url: urlCarrito + '/error',
+
                 views: {
                     'mainView': {
                         templateUrl: 'src/modules/carrito/carrito.error.yaesta.view.html'

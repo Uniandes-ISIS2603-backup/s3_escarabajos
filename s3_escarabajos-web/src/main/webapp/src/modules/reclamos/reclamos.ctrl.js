@@ -37,20 +37,39 @@
             $rootScope.edit = false;
             $scope.data = {};
             $scope.facturaId = null;
-            if ((sessionStorage.getItem("id") !== undefined)&& (sessionStorage.getItem("id") !== null)) {
-                
+            if ((sessionStorage.getItem("id") !== undefined) && (sessionStorage.getItem("id") !== null)) {
+
                 $http.get('api/facturas/cliente/' + sessionStorage.getItem("id")).then(function (response) {
                     $scope.facturas2 = response.data;
+                    console.log(response);
                 });
-            };
+
+
+            }
+            ;
             $scope.createReclamo = function () {
-                $http.post(reclamosContext + '/' + sessionStorage.getItem("id") +'/facturas/' +  $scope.facturaId, $scope.data).then(function (response) {
+                $http.post(reclamosContext + '/' + sessionStorage.getItem("id") + '/facturas/' + $scope.facturaId, $scope.data).then(function (response) {
                     $state.go('reclamosList', {reclamoId: response.data.id}, {reload: true});
+                }, function (response) {
+                    if (response.status !== 200)
+                    {
+                        $state.go('error');
+                        console.log(response);
+                        if (response.status === 412)
+                        {
+                            $scope.errorCode = "ERROR" 
+                        } else
+                        {
+                             $scope.errorCode = "ERROR -" + response.status;
+                             console.log($scope.errorCode);
+                        }
+                       $scope.errorMessage = response.statusText;
+                    }
                 });
             };
         }
     ]);
-     mod.controller('reclamosAdminCtrl', ['$scope', '$http', 'reclamosContext',
+    mod.controller('reclamosAdminCtrl', ['$scope', '$http', 'reclamosContext',
         function ($scope, $http, reclamosContext) {
             $http.get(reclamosContext).then(function (response) {
                 $scope.reclamosRecords = response.data;

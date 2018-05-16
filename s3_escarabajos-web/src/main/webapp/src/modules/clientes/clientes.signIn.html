@@ -38,7 +38,7 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="btnsave"></label>
                             <div class="col-md-8">
-                                <button id="btnsave" name="btnsave" class="btn btn-success" ng-click="autenticar()">Ingresar</button>
+                                <button id="btnsave" name="btnsave" class="btn btn-success" ng-click="autenticar()" data-toggle="modal" data-target="#myModal">Ingresar</button>
                             </div>
                         </div>
 
@@ -47,9 +47,24 @@
             </div>
         </div>
     </div>
-
-
+    <div class="modal fade" id="myModal" role="dialog" ng-if = "!flag">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Error</h4>
+                </div>
+                <div class="modal-body">
+                    <p id = "modalError">Los datos ingresados no son correctos</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </form>
+
+
 
 
 
