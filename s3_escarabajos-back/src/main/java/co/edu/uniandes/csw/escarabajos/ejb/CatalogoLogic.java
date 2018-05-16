@@ -1,8 +1,10 @@
 package co.edu.uniandes.csw.escarabajos.ejb;
+
 import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.CatalogoPersistence;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
@@ -251,8 +253,6 @@ public class CatalogoLogic {
      * persistencia.
      *
      * @param busqueda string a buscar
-     * @param pagina
-     * @param max
      * @return modelos que cumplen con la busqueda.
      */
     public List<ModeloEntity> buscar(String busqueda) {
@@ -272,8 +272,6 @@ public class CatalogoLogic {
         if (modelo == null) {
             throw new BusinessLogicException(ModeloLogic.MODELONOEXISTE);
         }
-        LOGGER.info(idModelo+"   "+multiplicador);
-        
         for (ItemEntity item : modelo.getItems()) {
             itemLogic.multiplicarItem(multiplicador, item.getId());
         }
@@ -283,14 +281,55 @@ public class CatalogoLogic {
     /**
      * Metodo que se encarga de retornar las propaganads de un tipo de la
      * aplicacion.
+     *
      * @param tipo de propagandas a buscar
      * @return lista de modelos en propaganda
      */
-    public List<ModeloEntity> getPropagandas(String tipo){
+    public List<ModeloEntity> getPropagandas(String tipo) {
         return persistence.getPropagandas(tipo);
     }
-    
-    public List<ModeloEntity> getModelosPaginacion(Integer pagina, Integer numModelos){
+
+    public List<ModeloEntity> getModelosPaginacion(Integer pagina, Integer numModelos) {
         return modeloLogic.getModelos(pagina, numModelos);
+    }
+
+    /**
+     * Metodo que se encarga de borrar todos los modelos de una marca
+     * @param marca a borrar
+     * @throws BusinessLogicException si falla la busqueda
+     */
+    public void deleteMarca(String marca) throws BusinessLogicException {
+        List<List<String>> filtros = new ArrayList<>();
+        ArrayList<String> marcas = new ArrayList<>();
+        marcas.add(marca);
+        filtros.add(marcas);
+        filtros.add(new ArrayList<>());
+        filtros.add(new ArrayList<>());
+        for (ModeloEntity modelo : getModelosAccesoriosFiltrados(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, Integer.MAX_VALUE)) {
+            modeloLogic.deleteModelo(modelo.getId());
+        }
+        for (ModeloEntity modelo : getModelosBicicletasFiltrados(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, Integer.MAX_VALUE)) {
+            modeloLogic.deleteModelo(modelo.getId());
+        }
+    }
+
+    /**
+     * Metodo que se encarga de borrar los modelos que tienen la categoria ingresada por parametro
+     * @param categoria
+     * @throws BusinessLogicException 
+     */
+    public void deleteCategoria(String categoria) throws BusinessLogicException {
+        List<List<String>> filtros = new ArrayList<>();
+        ArrayList<String> categorias = new ArrayList<>();
+        categorias.add(categoria);
+        filtros.add(new ArrayList<>());
+        filtros.add(categorias);
+        filtros.add(new ArrayList<>());
+        for (ModeloEntity modelo : getModelosAccesoriosFiltrados(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, Integer.MAX_VALUE)) {
+            modeloLogic.deleteModelo(modelo.getId());
+        }
+        for (ModeloEntity modelo : getModelosBicicletasFiltrados(filtros, 0.0, Double.MAX_VALUE, 0.0, 1, Integer.MAX_VALUE)) {
+            modeloLogic.deleteModelo(modelo.getId());
+        }
     }
 }

@@ -19,6 +19,7 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -406,8 +407,8 @@ public class CatalogoResource {
      */
     @PUT
     @Path("promociones/{idModelo: \\d+}/{descuento: \\d+}")
-    public PromocionDetailDTO crearPropaganda(@PathParam("idModelo") Long idModelo, @PathParam("descuento")Integer descuento) throws BusinessLogicException {
-        Double multiplicador =((double)descuento)/100;
+    public PromocionDetailDTO crearPropaganda(@PathParam("idModelo") Long idModelo, @PathParam("descuento") Integer descuento) throws BusinessLogicException {
+        Double multiplicador = ((double) descuento) / 100;
         multiplicador = 1.0 - multiplicador;
         ModeloEntity modelo = catalogoLogic.crearPropaganda(idModelo, multiplicador);
         if (modelo == null) {
@@ -441,6 +442,53 @@ public class CatalogoResource {
             list.add(new PromocionDetailDTO(entity));
         }
         return list;
+    }
+
+    /**
+     * <h1>DELETE /api/catalogo/marcas/{marca} : Borrar modelos por marcas.</h1>
+     *
+     * <pre>Borra todos los modelos que tengan la marca ingresada por parametro..
+     *
+     * Códigos de respuesta:<br>
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Elimina el modelo correspondiente al id dado.</code>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 404 Not Found. No existe un modelo con el id dado.
+     * </code>
+     * </pre>
+     *
+     * @param marca dentificador del modelo que se desea borrar. Este debe ser
+     * una cadena de dígitos.
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
+     */
+    @DELETE
+    @Path("/marcas/{marca}")
+    public void deleteMarca(@PathParam("marca") String marca) throws BusinessLogicException {
+        catalogoLogic.deleteMarca(marca);
+    }
+
+    /**
+     * <h1>DELETE /api/catalogo/categorias/{categoria} : Borrar modelos por
+     * marcas.</h1>
+     *
+     * <pre>Borra todos los modelos que tengan la marca ingresada por parametro..
+     *
+     * Códigos de respuesta:<br>
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Elimina el modelo correspondiente al id dado.</code>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 404 Not Found. No existe un modelo con el id dado.
+     * </code>
+     * </pre>
+     *
+     * @param categoria dentificador del modelo que se desea borrar. Este debe
+     * ser una cadena de dígitos.
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
+     */
+    @DELETE
+    @Path("/categorias/{categoria}")
+    public void deleteCategoria(@PathParam("categoria") String categoria) throws BusinessLogicException {
+        catalogoLogic.deleteCategoria(categoria);
     }
 
 }
