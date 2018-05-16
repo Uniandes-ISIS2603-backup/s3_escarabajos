@@ -27,6 +27,19 @@
                         templateUrl: basePath + 'facturas.list.html'
                     }
                 }
+            }).state('facturasCliente', {
+                url: '/cliente',
+                parent:'facturas',
+                param:{
+                    idCliente:null
+                },
+                views: {
+                    'listView': {
+                         templateUrl: basePath + 'facturas.cliente.html',
+                        controller: 'facturaClienteCtrl',
+                        controllerAs: 'ctrl'
+                    }
+                }
             });
         }]);
 })(window.angular)

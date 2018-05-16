@@ -6,7 +6,6 @@
             <div class="panel-body">
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <div class="btn-group mr-2" role="group" aria-label="First group">
-                        <a class="btn btn-info" ui-sref="facturaCreate"><span class="glyphicon glyphicon-plus-sign"></span>Nueva Factura</a>
                     </div>
                 </div>
                 <div class="col-md-8">
@@ -14,12 +13,12 @@
                         <thead>
                             <tr>
                                 <th>Id</th>   
-                                <th>Dinero</th>  
+                                <th>vasdv</th>  
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="factura in facturas">
+                            <tr ng-repeat="factura in facturas2">
                                 <td id="{{$index}}-id"><a ui-sref="facturaDetail({facturaId:factura.id})">{{factura.id}}</a></td>
                                 <td id="{{$index}}-dinero">{{factura.dinero}}</td>
                                 <td id="{{$index}}-actions">

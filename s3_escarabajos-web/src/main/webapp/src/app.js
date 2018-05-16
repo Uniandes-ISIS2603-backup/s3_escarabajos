@@ -14,7 +14,8 @@
         'vendedoresModule',
         'catalogoModule',
         'modelosModule',
-        'adminModule'
+        'adminModule',
+        'moduloComprar'
 
 
 
