@@ -62,6 +62,13 @@
                     return false;
                 }
             };
+            $rootScope.isVendedor = function () {
+                if (($rootScope.isAuthenticated) && (sessionStorage.getItem("rol") === "Vendedor")) {
+                    return true;
+                } else {
+                    return false;
+                }
+            };
             $rootScope.logOut = function ()
             {
                 sessionStorage.token = null;

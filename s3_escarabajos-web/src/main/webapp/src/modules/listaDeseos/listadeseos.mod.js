@@ -1,9 +1,10 @@
 (function () {
     var mod = angular.module('ListadeseosMod', ['ui.router']);
-
+    var baseUrl = '/clientes/' + sessionStorage.getItem("id");
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             $urlRouterProvider.otherwise("/listadeseos");
             $stateProvider.state('listadeseos', {
+                url: baseUrl + '/listaDeDesos',
                 views: {
                     mainView: {
                         templateUrl: "src/modules/listaDeseos/listadeseos.view.html",
@@ -11,18 +12,21 @@
                     }
                 }
             }).state('deleteItemListadeseos', {
-
+                url: baseUrl + '/listaDeDesos',
                 params: {
                     itemId: null
                 },
 
                 views: {
+                    url: baseUrl + '/listaDeDesos',
+
                     mainView: {
                         templateUrl: "src/modules/listaDeseos/listadeseos.view.html",
                         controller: "deleteListaDeseosCtrl"
                     }
                 }
             }).state('vaciarListadeseos', {
+                url: baseUrl + '/listaDeDesos',
 
                 views: {
                     mainView: {
@@ -31,6 +35,7 @@
                     }
                 }
             }).state('addItemListaDeseos', {
+                url: baseUrl + '/listaDeDesos',
 
                 params: {
                     itemId: null,
