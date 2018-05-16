@@ -9,12 +9,32 @@
 
 
             $stateProvider.state('mediosPago', {
-                url: '/cliente',
+                url: '/mediosPago',
+                abstract: true,
                 views: {
                     'mainView': {
+                        templateUrl: basePath + 'mediosPago.html',
+                        controller: 'mediosPagoCtrl',
+                        controllerAs: 'ctrl'
+                    }
+                }
+            }).state('mediosPagoList', {
+                url: '/list',
+                parent: 'mediosPago',
+                views: {
+                    'listView': {
                          templateUrl: basePath + 'mediosPago.list.html',
                         controller: 'mediosPagoCtrl',
                         controllerAs: 'ctrl'
+                    }
+                }
+            }).state('mediosCreate', {
+                url: '/create',
+                parent: 'mediosPago',
+                views: {
+                    'listView': {
+                        templateUrl: basePath + '/crear/mediosPago.create.html',
+                        controller: 'mediosPagoCreateCtrl'
                     }
                 }
             });

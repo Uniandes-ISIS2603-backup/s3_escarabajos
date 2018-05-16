@@ -6,7 +6,7 @@
             <div class="panel-body">
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <div class="btn-group mr-2" role="group" aria-label="First group">
-                        <a class="btn btn-info" ui-sref="facturaCreate"><span class="glyphicon glyphicon-plus-sign"></span>Nuevo Medio de pago</a>
+                        <a class="btn btn-info" ui-sref="mediosCreate" style='background-color: #82CD73;border-color:#82CD73'><span class="glyphicon glyphicon-plus-sign"></span>Nuevo Medio de pago</a>
                     </div>
                 </div>
                 <div class="col-md-8">
@@ -14,7 +14,8 @@
                         <thead>
                             <tr>
                                 <th>Id</th>   
-                                <th>Tipo</th>  
+                                <th>Tipo</th>
+                                <th></th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -22,7 +23,28 @@
                             <tr ng-repeat="medio in medios">
                                 <td id="{{$index}}-id"><a ui-sref="medioPagoDetail({medioPagoId:medio.id})">{{medio.id}}</a></td>
                                 <td id="{{$index}}-tipo">{{medio.tipo}}</td>
+                                <td ng-if="medio.tipo === 'PSE'">
+                                    <div style="width: 50px;height: 50px">
+                                        <img src = "data/Imagenes/pse.jpg" style = "height:100%">
+                                    </div>
+                                </td>
+                                <td ng-if="medio.tipo === 'Tarjeta de Credito'">
+                                    <div style="width: 50px;height: 50px">
+                                        <img src = "data/Imagenes/tarjetaCredito.png" style = "height:100%">
+                                    </div>
+                                </td>
+                                <td ng-if="medio.tipo === 'Tarjeta Debito'">
+                                    <div style="width: 50px;height: 50px">
+                                        <img src = "data/Imagenes/tarjetaCredito.png" style = "height:100%">
+                                    </div>
+                                </td>
+                                <td ng-if="medio.tipo === 'PayPal'">
+                                    <div style="width: 50px;height: 50px">
+                                        <img src = "data/Imagenes/paypal.png" style = "height:100%">
+                                    </div>
+                                </td>
                                 <td id="{{$index}}-actions">
+                                    <a style='margin-right:16px; background-color: #82CD73; border-color:#82CD73' class="btn btn-info" ui-sref="pagar"><span class="glyphicon glyphicon-plus-sign"></span>Pagar</a>
                                     <a class="btn btn-default btn-sm" ui-sref="medioPagoUpdate({medioPagoId:medio.id})"><span class="glyphicon glyphicon-edit"></span></a>
                                     <a class="btn btn-danger btn-sm" ui-sref="medioPagoDelete({medioPagoId:medio.id})"><span class="glyphicon glyphicon-trash"></span></a>
                                 </td>
@@ -31,19 +53,13 @@
                     </table>
                 </div>
                 <form>
+                    <div class="form-group row">
+                        <div class="form-group col-sm-12">
+                            <a class="btn btn-info" style='background-color: #82CD73;border-color:#82CD73' ui-sref="carrito">Cancelar</a>
+                        </div>
+                    </div>
 
-                 <div class="form-group row">
-                    <div class="form-group col-sm-12">
-                        <a class="btn btn-info" ui-sref="pagar">Pagar</a>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="form-group col-sm-12">
-                        <a class="btn btn-info" ui-sref="carrito">Cancelar</a>
-                    </div>
-                </div>
-               
-            </form>
+                </form>
             </div>
         </div>
     </div>

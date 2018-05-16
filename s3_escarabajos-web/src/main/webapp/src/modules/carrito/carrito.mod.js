@@ -51,7 +51,7 @@
                 views: {
                     'mainView': {
                         controller: 'comprarCtrl',
-                        templateUrl: 'src/modules/comprar/comprar.list.html'
+                        templateUrl: 'src/modules/mediosPago/mediosPago.list.html'
                     }
                 }
             }).state('yaEsta', {

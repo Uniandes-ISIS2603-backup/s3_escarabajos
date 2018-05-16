@@ -43,7 +43,7 @@ public class MedioPagoDTO {
      *  modela el tipo de medio de pago que uso el cliente
      */
     private String tipo;
-
+    
     //-----------------------------------------------------------
     // Constructor
     //-----------------------------------------------------------
@@ -82,11 +82,11 @@ public class MedioPagoDTO {
         return entity;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }
