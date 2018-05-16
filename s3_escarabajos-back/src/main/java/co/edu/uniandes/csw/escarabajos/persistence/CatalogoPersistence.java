@@ -42,7 +42,9 @@ public class CatalogoPersistence {
      */
     public List<String> findMarcas(String nombre) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar marcas");
-        TypedQuery query = em.createQuery("Select distinct(e.marca) From ModeloEntity e where e.tipoModelo =  :name", String.class);
+        String sql = "Select distinct(e.marca) From ModeloEntity e where e.tipoModelo = :name AND e.id in (SELECT a.modeloId FROM " + nombre + "Entity a WHERE a.disponible = TRUE)";
+        
+        TypedQuery query = em.createQuery(sql, String.class);
         query.setParameter("name", nombre);
         return query.getResultList();
     }

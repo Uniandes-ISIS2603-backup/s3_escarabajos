@@ -4,7 +4,7 @@
     mod.factory('catalogoFactory', ['$http', 'catalogoContext', function ($http, catalogoContext) {
             var dataFactory = {};
             dataFactory.getPromociones = function (tipo) {
-                return $http.get(catalogoContext+"/promociones/"+tipo);
+                return $http.get(catalogoContext + "/promociones/" + tipo);
             };
 
             dataFactory.getMarcas = function (tipo) {
@@ -19,13 +19,20 @@
             dataFactory.getPrecioMax = function (tipo) {
                 return $http.get(catalogoContext + '/precio/' + tipo);
             };
-
             dataFactory.getModelos = function (tipo, filtros, pagina, numeroModelos) {
                 var temp = angular.toJson(filtros);
                 temp.precioMin = parseFloat(filtros.precioMin);
                 temp.precioMax = parseFloat(filtros.precioMax);
                 temp.calificacionMin = parseFloat(filtros.calificacionMin);
                 return $http.post(catalogoContext + '/modelos/' + tipo + '/' + pagina + '/' + numeroModelos, temp);
+            };
+
+            dataFactory.getPrincipal = function (pagina, numeroModelos) {
+                return $http.get(catalogoContext + '/modelos/' + pagina + '/' + numeroModelos);
+            };
+
+            dataFactory.getBusqueda = function (busqueda) {
+                return $http.get(catalogoContext + '/buscar/' + busqueda);
             };
             return dataFactory;
         }]);

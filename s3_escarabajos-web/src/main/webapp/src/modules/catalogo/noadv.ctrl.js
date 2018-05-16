@@ -29,6 +29,16 @@
                 });
             };
 
+            $scope.irPagina = function (temp) {
+                $state.go('noAdv', {
+                    filtros: $scope.filtros,
+                    pagina: temp,
+                    tipo: $scope.tipo
+                }, {
+                    reload: true
+                });
+            };
+
             $scope.prev = function () {
                 if ($scope.pagina !== 1) {
                     $state.go('noAdv', {

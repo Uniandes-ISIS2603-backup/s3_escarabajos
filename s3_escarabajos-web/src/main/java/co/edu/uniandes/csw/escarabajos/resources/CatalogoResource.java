@@ -320,6 +320,28 @@ public class CatalogoResource {
     }
 
     /**
+     * <h1>GET /api/modelos : Obtener todas los modelos.</h1>
+     *
+     * <pre>Busca y devuelve todos los modelos que existen en la aplicacion.
+     *
+     * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Devuelve todas los modelos de la aplicacion.</code>
+     * </pre>
+     *
+     * @param pagina pagina actual.
+     * @param maxRecords numero total de modelos por pagina.
+     * @return JSONArray {@link ModeloDetailDTO} - Los modelo encontrados en la
+     * aplicación. Si no hay ninguno retorna una lista vacía.
+     */
+    @GET
+    @Path("modelos/{pagina: \\d+}/{records: \\d+}")
+    public List<ModeloDetailDTO> getModelos(@PathParam("pagina") Integer pagina,
+            @PathParam("records") Integer maxRecords) {
+        return listModeloEntity2DetailDTO(catalogoLogic.getModelosPaginacion(pagina, maxRecords));
+    }
+
+    /**
      * Metodo que se encarga de pasar una lista de modeloEntity a
      * modeloDetailDTO
      *
@@ -377,16 +399,17 @@ public class CatalogoResource {
      * </pre>
      *
      * @param idModelo id del modelo a cambiar.
-     * @param pDescuento descuento de la propaganda.
+     * @param descuento descuento de la propaganda.
      * @return JSON {@link ModeloDetailDTO} - el modelo guardado con el atributo
      * id autogenerado.
      * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
      *
      */
     @PUT
-    @Path("promociones/{idModelo: \\d+}/{descuento: \\d+}")
-    public ModeloDetailDTO crearPropaganda(@PathParam("idModelo") Long idModelo, @PathParam("descuento") BigDecimal pDescuento) throws BusinessLogicException {
-        ModeloEntity modelo = catalogoLogic.crearPropaganda(idModelo, Double.valueOf(pDescuento.toString()));
+    @Path("promociones/{idModelo: \\d+}/{descuento}")
+    public ModeloDetailDTO crearPropaganda(@PathParam("idModelo") Long idModelo, @PathParam("descuento")int descuento) throws BusinessLogicException {
+        Double multiplicador = 1.0-(descuento/100);
+        ModeloEntity modelo = catalogoLogic.crearPropaganda(idModelo, multiplicador);
         if (modelo == null) {
             throw new WebApplicationException("El recurso /modelos/" + idModelo + "/items no existe", 404);
         }

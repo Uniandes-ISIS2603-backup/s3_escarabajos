@@ -251,6 +251,8 @@ public class CatalogoLogic {
      * persistencia.
      *
      * @param busqueda string a buscar
+     * @param pagina
+     * @param max
      * @return modelos que cumplen con la busqueda.
      */
     public List<ModeloEntity> buscar(String busqueda) {
