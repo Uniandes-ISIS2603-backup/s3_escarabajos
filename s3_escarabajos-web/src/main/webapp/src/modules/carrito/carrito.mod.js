@@ -28,7 +28,8 @@
             }).state('addItemCarrito', {
 
                 params: {
-                    itemId: null
+                    itemId: null,
+                    color: null
                 },
 
                 views: {

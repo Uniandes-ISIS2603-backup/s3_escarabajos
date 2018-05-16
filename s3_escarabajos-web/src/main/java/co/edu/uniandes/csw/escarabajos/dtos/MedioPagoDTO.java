@@ -15,8 +15,6 @@ import co.edu.uniandes.csw.escarabajos.entities.MedioPagoEntity;
  * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
  * <pre>
  *   {
- *      "dineroTransaccion": double,
- *      "numeroTarjeta": int,
  *      "tipo": String
  *      ]
  *   }
@@ -25,8 +23,6 @@ import co.edu.uniandes.csw.escarabajos.entities.MedioPagoEntity;
  * <pre>
  *
  *   {
- *      "dineroTransaccion": 100000,
- *      "numeroTarjeta": 1018505033,
  *      "tipo": "Tarjeta de Credito"
  *   }
  *
@@ -37,39 +33,11 @@ import co.edu.uniandes.csw.escarabajos.entities.MedioPagoEntity;
 public class MedioPagoDTO {
     
     //-----------------------------------------------------------
-    // Constantes
-    //-----------------------------------------------------------
-    
-    /**
-     * modela el tipo de pago por pse
-     */
-    public final static String TIPO_PSE = "pse";
-    
-    /**
-     * modela el tipo de pago por paypal
-     */
-    public final static String TIPO_PAYPAL = "paypal";
-    
-    /**
-     * modela el tipo de pago por tarjeta de credito
-     */
-    public final static String TIPO_TARJETA_CREDITO = "tarjeta de credito";
-    
-    /**
-     * modela el tipo de pago por tarjeta debito
-     */
-    public final static String TIPO_TARJETA_DEBITO = "tarjeta debito";
-    
-    //-----------------------------------------------------------
     // Atributos
     //-----------------------------------------------------------
     
     //TODO: no puede ser long debe ser Long. arreglar también set/get
-    private long id;
-    /**
-     *  modela el numero de tarjeta de credito del cliente que realizo la transaccion
-     */
-   // private int numeroTarjeta;
+    private Long id;
     
     /**
      *  modela el tipo de medio de pago que uso el cliente
@@ -89,11 +57,12 @@ public class MedioPagoDTO {
     // Getters and Setters
     //-----------------------------------------------------------
 
-    MedioPagoDTO(MedioPagoEntity entity) {
+    public MedioPagoDTO(MedioPagoEntity entity) {
         //TODO: entity podría ser null
-        this.id = entity.getId();
-       // this.numeroTarjeta = entity.getNumeroTarjeta();
-        this.tipo = entity.getTipo();
+        if(entity!=null){
+            this.id = entity.getId();
+            this.tipo = entity.getTipo();
+        }
     }
 
 
@@ -106,8 +75,10 @@ public class MedioPagoDTO {
     }
 
     //Falta hacerlo TODO
-    MedioPagoEntity toEntity() {
+    public MedioPagoEntity toEntity() {
         MedioPagoEntity entity = new MedioPagoEntity();
+        entity.setId(this.id);
+        entity.setTipo(this.tipo);
         return entity;
     }
 

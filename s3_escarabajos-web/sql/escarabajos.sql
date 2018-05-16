@@ -3,12 +3,14 @@ delete from car_Items;
 delete from item_album;
 delete from reclamo_album;
 delete from factura_items;
+delete from ClienteEntity_ItemEntity;
+delete from lista_deseos_items;
 delete from ReclamoEntity;
 delete from FacturaEntity;
-delete from calificacionEntity;
+delete from CalificacionEntity;
+delete from CarritoEntity;
 delete from ItemEntity;
 delete from ModeloEntity;
-delete from CarritoEntity;
 delete from ClienteEntity;
 
 --Datos de prueba ModeloEntity con tipo modelo Bicicleta
@@ -70,6 +72,7 @@ insert into FacturaEntity values (7, 200000.0, 9);
 insert into FacturaEntity values (8, 200000.0, 9);
 insert into FacturaEntity values (9, 200000.0, 9);
 insert into FacturaEntity values (10, 200000.0, 9);
+insert into FacturaEntity values (11, 200000.0, 9);
 
 
 
@@ -97,6 +100,8 @@ insert into Factura_Items values (7, 7);
 insert into Factura_Items values (8, 8);
 insert into Factura_Items values (9, 100);
 insert into Factura_Items values (10, 200);
+insert into Factura_Items values (11, 300);
+
 
 --Datos de prueba ReclamoEntity
 insert into ReclamoEntity values (1,1, 'La bicicleta no ha llegado. La pedí hace 2 semanas y no he recibido información alguna sobre su estado, estoy pendiente a respuesta.', 'El pedido no ha llegado', 1, 1);

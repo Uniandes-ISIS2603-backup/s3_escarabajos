@@ -40,6 +40,7 @@ public class ApplicationConfig extends Application {
         resources.add(co.edu.uniandes.csw.escarabajos.resources.ClienteCarritoResource.class);
         resources.add(co.edu.uniandes.csw.escarabajos.resources.ClienteFacturaReclamoResource.class);
         resources.add(co.edu.uniandes.csw.escarabajos.resources.ClienteListaDeseosResource.class);
+        resources.add(co.edu.uniandes.csw.escarabajos.resources.ClienteMedioPagoResource.class);
         resources.add(co.edu.uniandes.csw.escarabajos.resources.ClienteResource.class);
         resources.add(co.edu.uniandes.csw.escarabajos.resources.FacturaResource.class);
         resources.add(co.edu.uniandes.csw.escarabajos.resources.ItemResource.class);
