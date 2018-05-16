@@ -66,10 +66,8 @@ public class FacturaLogic {
      * @return La entidad luego de persistirla
      */
     public FacturaEntity createFactura(FacturaEntity entity){
-        LOGGER.info("Inicia proceso de creación de bicicleta");
-        persistence.create(entity);
-        LOGGER.info("Termina proceso de creación de bicicleta");
-        return entity;
+        LOGGER.info("Inicia proceso de creación de factura");
+        return persistence.create(entity);
     }
 
     /**
@@ -99,5 +97,12 @@ public class FacturaLogic {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar factura con id={0}", id);
         persistence.delete(id);
         LOGGER.log(Level.INFO, "Termina proceso de borrar factura con id={0}", id);
+    }
+    
+    public List<FacturaEntity> getFacturasCliente(Long idCliente){
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar facturas de un cliente0");
+        List <FacturaEntity> facturas = persistence.findFacturasByClienteId(idCliente);
+        LOGGER.log(Level.INFO, "Termina proceso de consultar facturas de un cliente0");
+        return facturas;
     }
 }

@@ -49,7 +49,7 @@
             }).state('comprar', {
                 views: {
                     'mainView': {
-                        controller: 'carritoCtrl',
+                        controller: 'comprarCtrl',
                         templateUrl: 'src/modules/comprar/comprar.list.html'
                     }
                 }

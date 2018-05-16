@@ -199,14 +199,6 @@ public class CarritoLogic {
         
         factura.setCliente(carrito.getCliente());
         
-        carrito = persistence.find(id);
-        
-        carrito.setItems(new ArrayList<>());
-        
-        carrito.setPrecioTotal(0.0);
-        
-        persistence.update(carrito);
-        
         return factura;
     }
     
