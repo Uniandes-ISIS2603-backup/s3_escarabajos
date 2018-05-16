@@ -285,4 +285,8 @@ public class CatalogoLogic {
     public List<ModeloEntity> getPropagandas(String tipo){
         return persistence.getPropagandas(tipo);
     }
+    
+    public List<ModeloEntity> getModelosPaginacion(Integer pagina, Integer numModelos){
+        return modeloLogic.getModelos(pagina, numModelos);
+    }
 }

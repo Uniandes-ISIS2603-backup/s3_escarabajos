@@ -121,7 +121,7 @@ public class ModeloLogicTest {
             data.add(entity);
 
         }
-        for (ModeloEntity modelo : modeloLogic.getModelos()) {
+        for (ModeloEntity modelo : modeloLogic.getModelos(null,null)) {
             for (ItemEntity item : modelo.getItems()) {
                 item.setModeloId(modelo.getId());
                 em.merge(item);
@@ -159,7 +159,7 @@ public class ModeloLogicTest {
     @Test
     public void getModelosTest() {
 
-        List<ModeloEntity> list = modeloLogic.getModelos();
+        List<ModeloEntity> list = modeloLogic.getModelos(1,Integer.MAX_VALUE);
         Assert.assertEquals(data.size(), list.size());
         for (ModeloEntity entity : list) {
             boolean found = false;
