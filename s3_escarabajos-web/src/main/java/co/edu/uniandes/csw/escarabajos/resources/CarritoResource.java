@@ -93,7 +93,7 @@ public class CarritoResource {
      */
     @GET
     @Path("{id: \\d+}")
-    public CarritoDetailDTO getCarrito(@PathParam("id") Long id) {
+    public CarritoDetailDTO getCarrito(@PathParam("id") Long id) throws BusinessLogicException {
         return new CarritoDetailDTO( logic.findCarrito(id) );
     }
     
