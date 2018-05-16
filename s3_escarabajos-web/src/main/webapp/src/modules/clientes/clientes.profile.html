@@ -3,14 +3,12 @@
 <div class = "container-fluid" ng-if="!hasPermissions()">
     <div class = "container-fluid">
         <div class = "col-sm-1"></div>
-        <div class="vertical-menu col-sm-2" style = "margin-top:45px">
+        <div class="vertical-menu col-sm-3" style = "margin-top:45px">
             <a class="active" ui-sref = "clientesProfile">Mi Perfil</a>
-            <a href="#">Lista de deseos</a>
-            <a href="#">Mis Compras</a>
+            <a >Lista de deseos</a>
+            <a ui-sref="facturasCliente">Mis Compras</a>
             <a ui-sref="reclamosList">Mis Reclamos</a>
-            <a href="#">Editar Información</a>
-            <a href="#">Eliminar Cuenta</a>
-            <a href="#">Cerrar Sesión</a>
+            <a ng-click = "logOut()">Cerrar Sesión</a>
         </div>
 
         <div class="container-fluid col-sm-7">
@@ -20,7 +18,7 @@
 
                 <div class="container">
                     <div class="row profile">
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <div class="profile-sidebar">
                                 <!-- SIDEBAR USERPIC -->
                                 <div class="profile-userpic">

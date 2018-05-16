@@ -145,6 +145,7 @@
                                 </div>
                             </form>
                         </li>
+
                         <li ng-if = "!isAuthenticated()"><a ui-sref="clientesSignUp"><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>
                         <li ng-if = "!isAuthenticated()"><a ui-sref="clientesSignIn"><span class="glyphicon glyphicon-log-in"></span> Iniciar Sesión</a></li>
                         <li class="dropdown" ng-if = "isAuthenticated()"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -167,7 +168,8 @@
         <div class="container-fluid">
             <div class="span4" ui-view="mainView"></div>  
             <!--<div ui-view = "ofertasView"></div>-->
-        </div>
+        </div>                       
+
         <br>
         <br>
         <br>

@@ -11,11 +11,9 @@ and open the template in the editor.
         <div class="vertical-menu col-sm-3" style = "margin-top:45px">
             <a ui-sref="clientesProfile">Mi Perfil</a>
             <a href="#">Lista de deseos</a>
-            <a href="#">Mis Compras</a>
+            <a ui-sref = "facturasCliente">Mis Compras</a>
             <a class="active" ui-sref="reclamosList">Mis Reclamos</a>
-            <a href="#">Editar Información</a>
-            <a href="#">Eliminar Cuenta</a>
-            <a href="#">Cerrar Sesión</a>
+            <a ng-click = "logOut()">Cerrar Sesión</a>
         </div>
         <div class="list-group col-sm-7" ui-view = "reclamoPanel">
             <legend>Mis Reclamos</legend>
