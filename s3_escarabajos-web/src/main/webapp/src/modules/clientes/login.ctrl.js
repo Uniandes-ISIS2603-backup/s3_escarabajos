@@ -41,7 +41,8 @@
                 var flag = false;
                 for (var item in $scope.users) {
                     
-                    if ($scope.users[item].user === $scope.data.username && $scope.users[item].password === $scope.data.password && $scope.users[item].rol === $scope.data.rol) {
+                    if ($scope.users[item].user === $scope.data.username && $scope.users[item].password === $scope.data.password && ($scope.users[item].rol !== null || $scope.users[item].rol !== undefined)) 
+                    {
                         flag = true;
                         $scope.user = $scope.users[item];
                         $state.go('adv', {adv:true,tipo:'bicicletas',filtros:{marcas:[],categorias:[],colores:[],precioMin:0.0,precioMax:999999999.9,calificacionMin:0.0}}, {reload: true});

@@ -4,8 +4,8 @@
     <div class = "col-sm-1"></div>
     <div class="vertical-menu col-sm-3" style = "margin-top:45px">
         <a ui-sref="clientesProfile">Mi Perfil</a>
-        <a href="#">Lista de deseos</a>
-        <a class="active" ui-sref = "facturasCliente">Mis Compras</a>
+        <a  class="active" ui-sref = "listadeseos">Lista de deseos</a>
+        <a ui-sref = "facturasCliente">Mis Compras</a>
         <a ui-sref="reclamosList">Mis Reclamos</a>
         <a ng-click = "logOut()">Cerrar Sesión</a>
     </div>
@@ -35,15 +35,16 @@
                             <label>{{item.cantidad}}</label>
 
                         </div>
-                        <h4 style = "color:white">aaaa</h4>
-                        <div class = "col-sm-1">
-                            <a  ui-sref ="addItemCarrito({itemId: item.id})" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart" style="color:white"></span></a>
+                        <div class ="row">
+                            <div class = "col-sm-1">
+                                <br>
+                                <a  ui-sref ="addItemCarrito({itemId: item.id})" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart" style="color:white"></span></a>
 
-                        </div>
-                        <h4 style = "color:white">aaaa</h4>
-                        <div class = "col-sm-1">
-                            <a  ui-sref ="deleteItemListadeseos({itemId: item.id})" class="btn btn-danger"><span class="glyphicon glyphicon-trash" style="color:white"></span></a>
-
+                            </div>
+                            <div class = "col-sm-1">
+                                <br>
+                                <a  ui-sref ="deleteItemListadeseos({itemId: item.id})" class="btn btn-danger"><span class="glyphicon glyphicon-trash" style="color:white"></span></a>
+                            </div>
                         </div>
                     </div>
                 </td>
