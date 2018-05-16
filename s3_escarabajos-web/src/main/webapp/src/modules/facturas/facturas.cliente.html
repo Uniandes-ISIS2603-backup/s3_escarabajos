@@ -1,6 +1,14 @@
 <alert class="alert alert-danger" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}}</alert>
-<div class="container-fluid">    
-    <div class="panel-group">
+<div class="container-fluid">   
+    <div class = "col-sm-1"></div>
+    <div class="vertical-menu col-sm-3" style = "margin-top:45px">
+        <a ui-sref="clientesProfile">Mi Perfil</a>
+        <a ui-sref = "listadeseos">Lista de deseos</a>
+        <a class="active" ui-sref = "facturasCliente">Mis Compras</a>
+        <a ui-sref="reclamosList">Mis Reclamos</a>
+        <a ng-click = "logOut()">Cerrar Sesión</a>
+    </div>
+    <div class="panel-group col-sm-7">
         <div class="panel panel-primary">
             <div class="panel-heading"><label>Facturas</label></div>
             <div class="panel-body">
@@ -13,18 +21,13 @@
                         <thead>
                             <tr>
                                 <th>Id</th>   
-                                <th>vasdv</th>  
-                                <th>Actions</th>
+                                <th>Dinero</th> 
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="factura in facturas2">
                                 <td id="{{$index}}-id"><a ui-sref="facturaDetail({facturaId:factura.id})">{{factura.id}}</a></td>
                                 <td id="{{$index}}-dinero">{{factura.dinero}}</td>
-                                <td id="{{$index}}-actions">
-                                    <a class="btn btn-default btn-sm" ui-sref="facturaUpdate({facturaId:factura.id})"><span class="glyphicon glyphicon-edit"></span></a>
-                                    <a class="btn btn-danger btn-sm" ui-sref="facturaDelete({facturaId:factura.id})"><span class="glyphicon glyphicon-trash"></span></a>
-                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -32,4 +35,6 @@
             </div>
         </div>
     </div>
+    <div class = "col-sm-1"></div>
+
 </div>

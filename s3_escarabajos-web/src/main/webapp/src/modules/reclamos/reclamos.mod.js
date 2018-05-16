@@ -39,7 +39,7 @@
             });
             $stateProvider.state('reclamosDetail', {
                 // Url que aparecerá en el browser
-                url: 'clientes/reclamos/{reclamoId:int}',
+                url: '/clientes/reclamos/{reclamoId:int}',
                 param: {
                     reclamoId: null
                 },

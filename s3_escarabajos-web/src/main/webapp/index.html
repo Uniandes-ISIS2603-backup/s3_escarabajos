@@ -94,6 +94,8 @@
         <script src="src/modules/facturas/facturas.mod.js" type="text/javascript"></script>
         <script src="src/modules/facturas/facturas.ctrl.js" type="text/javascript"></script>
         <script src="src/modules/facturas/facturas.cliente.ctrl.js" type="text/javascript"></script>
+        <script src="src/modules/facturas/facturas.delete.ctrl.js" type="text/javascript"></script>
+        <script src="src/modules/facturas/editar/facturas.edit.ctrl.js" type="text/javascript"></script>
 
         <!--Modelos-->
         <script src="src/modules/modelos/modelos.mod.js" type="text/javascript"></script>
@@ -105,6 +107,10 @@
         <!-- Comprar-->
         <script src="src/modules/comprar/comprar.mod.js" type="text/javascript"></script>
         <script src="src/modules/comprar/comprar.ctrl.js" type="text/javascript"></script>
+        
+        <!-- Medios de Pago-->
+        <script src="src/modules/mediosPago/mediosPago.mod.js" type="text/javascript"></script>
+        <script src="src/modules/mediosPago/mediosPago.ctrl.js" type="text/javascript"></script>
 
     </head>
     <body>
@@ -145,6 +151,7 @@
                                 </div>
                             </form>
                         </li>
+
                         <li ng-if = "!isAuthenticated()"><a ui-sref="clientesSignUp"><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>
                         <li ng-if = "!isAuthenticated()"><a ui-sref="clientesSignIn"><span class="glyphicon glyphicon-log-in"></span> Iniciar Sesión</a></li>
                         <li class="dropdown" ng-if = "isAuthenticated()"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -167,7 +174,8 @@
         <div class="container-fluid">
             <div class="span4" ui-view="mainView"></div>  
             <!--<div ui-view = "ofertasView"></div>-->
-        </div>
+        </div>                       
+
         <br>
         <br>
         <br>

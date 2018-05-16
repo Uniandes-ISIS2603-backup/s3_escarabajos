@@ -15,7 +15,8 @@
         'catalogoModule',
         'modelosModule',
         'adminModule',
-        'moduloComprar'
+        'moduloComprar',
+        'moduloMediosPago',
 
 
 
@@ -25,8 +26,12 @@
             $qProvider.errorOnUnhandledRejections(false);
         }]);
     app.run(['$rootScope', "$state", function ($rootScope, $state) {
-
-
+            var a = false;
+            if (!a)
+            {
+                a = true;
+                $state.go('adv', {adv: true, tipo: 'bicicletas', filtros: {marcas: [], categorias: [], colores: [], precioMin: 0.0, precioMax: 999999999.9, calificacionMin: 0.0}}, {reload: true});
+            }
             /**
              * @ngdoc function
              * @name isAuthenticated
@@ -36,7 +41,7 @@
              * @returns {Boolean} Verdadero si está dentro de su cuenta.
              */
             $rootScope.isAuthenticated = function () {
-                if (sessionStorage.getItem("username") === "null" || sessionStorage.getItem("id") === null ) {
+                if (sessionStorage.getItem("username") === "null" || sessionStorage.getItem("id") === null) {
                     return false;
                 } else {
                     return true;
@@ -58,6 +63,13 @@
                     return false;
                 }
             };
+            $rootScope.isVendedor = function () {
+                if (($rootScope.isAuthenticated) && (sessionStorage.getItem("rol") === "Vendedor")) {
+                    return true;
+                } else {
+                    return false;
+                }
+            };
             $rootScope.logOut = function ()
             {
                 sessionStorage.token = null;
@@ -65,7 +77,7 @@
                 sessionStorage.setItem("rol", null);
                 sessionStorage.setItem("id", null);
                 sessionStorage.setItem("name", null);
-                $state.go('adv',{adv:true,tipo:'bicicletas',filtros:{marcas:[],categorias:[],colores:[],precioMin:0.0,precioMax:999999999.9,calificacionMin:0.0}}, {reload: true});
+                $state.go('adv', {adv: true, tipo: 'bicicletas', filtros: {marcas: [], categorias: [], colores: [], precioMin: 0.0, precioMax: 999999999.9, calificacionMin: 0.0}}, {reload: true});
                 alert('Se ha cerrado correctamente la sesión');
             };
         }]);
