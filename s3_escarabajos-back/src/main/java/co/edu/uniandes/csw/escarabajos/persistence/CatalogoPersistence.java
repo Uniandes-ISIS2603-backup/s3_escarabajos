@@ -284,6 +284,16 @@ public class CatalogoPersistence {
     }
 
     public List<ModeloEntity> getPropagandas(String tipo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "Select e From ModeloEntity e WHERE e.id IN (SELECT a.modeloId FROM " + tipo + "Entity a WHERE a.multiplicador < 1  AND a.disponible = TRUE";
+        if (tipo.equals(ModeloLogic.BICICLETA)) {
+            sql += " AND a.usada = FALSE";
+        }
+        sql += ") ORDER BY e.calificacionMedia DESC";
+        TypedQuery query = em.createQuery(sql, ModeloEntity.class);
+        List<ModeloEntity> lista = query.getResultList();
+        if (lista == null) {
+            lista = new ArrayList<>();
+        }
+        return lista;
     }
 }

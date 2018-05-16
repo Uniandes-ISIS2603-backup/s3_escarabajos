@@ -9,8 +9,8 @@ import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 
 /**
- * Clase que extiende de {@link ModeloDTO} para manejar la transformacion entre
- * los objetos JSON y las Entidades de la base de datos.
+ * Clase que extiende de {@link PromocionDetailDTO} para manejar la
+ * transformacion entre los objetos JSON y las Entidades de la base de datos.
  *
  * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
  * <pre>
@@ -23,7 +23,7 @@ import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
  *      "url": String,
  *      "precio":double,
  *      "nuevo":boolean,
- *      "descuento": Integer,
+ *      "descuento": int,
  *      "items": [{@ItemDetailDTO}],
  *      "calficaciones": [{
  * @CalificacionDTO}]}
@@ -100,11 +100,11 @@ public class PromocionDetailDTO extends ModeloDetailDTO {
         if (entity != null) {
             double max = 0.0;
             for (ItemEntity item : entity.getItems()) {
-                if (Integer.parseInt(item.getMultiplicador().toString()) != 1 && item.getMultiplicador() > max) {
+                if (((int) Math.round(Double.parseDouble(item.getMultiplicador().toString()))) != 1 && item.getMultiplicador() > max) {
                     max = item.getMultiplicador();
                 }
             }
-            if ((int) max != 0) {
+            if ((int) Math.round(max) != 0) {
                 descuento = (int) ((1.0 - max) * 100);
             }
         }

@@ -8,17 +8,8 @@ and open the template in the editor.
 <div class = "container-fluid">
     <div class = "row">
         <div class = "col-sm-1"></div>
-        <div class="vertical-menu col-sm-3" style = "margin-top:45px">
-            <a ui-sref="clientesProfile">Mi Perfil</a>
-            <a href="#">Lista de deseos</a>
-            <a href="#">Mis Compras</a>
-            <a class="active" ui-sref="reclamosList">Mis Reclamos</a>
-            <a href="#">Editar Información</a>
-            <a href="#">Eliminar Cuenta</a>
-            <a href="#">Cerrar Sesión</a>
-        </div>
-        <div class="list-group col-sm-7" ui-view = "reclamoPanel">
-            <legend>Mis Reclamos</legend>
+        <div class="list-group col-sm-10" ui-view = "reclamoPanel">
+            <legend>Reclamos</legend>
             <div align="right">
                 <a ui-sref="reclamosCreate" class="btn btn-primary">
                     <span class="glyphicon glyphicon-plus-sign" style = "width:10px"></span> Añadir reclamo
@@ -26,6 +17,7 @@ and open the template in the editor.
             </div>
             <div class="list-group-item" ng-repeat = "reclamo in reclamosRecords" style = "margin-top:10px">
                 <h1>Razón: {{reclamo.razon}}</h1>
+                <h2>Usuario: {{reclamo.cliente.usuario}}</h2>
                 <p><label>Factura:</label> {{reclamo.factura}}</p>
                 <p ng-if = "!reclamo.enProceso"><label>Estado:</label> Finalizado</p>
                 <p ng-if = "reclamo.enProceso"><label>Estado:</label> En Proceso</p>
