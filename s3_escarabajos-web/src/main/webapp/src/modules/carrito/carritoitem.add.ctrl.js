@@ -20,7 +20,6 @@
 
                     var modeloItems = modelo.items;
 
-
                     var encontro = false;
 
                     var itemId = modeloItems[0].id;
