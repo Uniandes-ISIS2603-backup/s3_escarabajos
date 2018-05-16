@@ -30,6 +30,8 @@ insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) 
 
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (1000,'BicicletaEntity', 760000.78, '#c40824', 0, 'MKT', 1000,1000,1,0.8);
 insert into Item_album (itemEntity_ID, album) values (1000, 'https://images-eu.ssl-images-amazon.com/images/I/51gYunrvF8L._AC_US200_.jpg');
+insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (14000,'BicicletaEntity', 660000.78, '#c40825', 0, 'MKT', 1000,1000,1,0.8);
+insert into Item_album (itemEntity_ID, album) values (14000, 'https://images-eu.ssl-images-amazon.com/images/I/51gYunrvF8L._AC_US200_.jpg');
 insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (2000,'BicicletaEntity', 397000.10, '#5BEF68', 0, 'Suburban 2500', 2000,2000,1,1.0);
 insert into Item_album (itemEntity_ID, album) values (2000, 'data/Imagenes/BicicletaTest2.jpg');
 insert into ItemEntity (id, dtype,precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (3000,'BicicletaEntity', 331000.52, '#5BBBEF', 0, 'Jetta', 3000,3000,1,1.0);
@@ -78,16 +80,16 @@ insert into FacturaEntity values (11000, 200000.0, 9000);
 
 --Datos de prueba BicicletUsadaEntity
 
-insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado,cliente_id,disponible,multiplicador) values (10000,'BicicletaUsadaEntity', 276000.71, '#EF5B5B', 1, 'Aerostar', 1000, 1000, 'http://intel.com/vestibulum/rutrum/rutrum.json', 'En proceso',1000,1,1.0);
-insert into Item_album (itemEntity_ID, album) values (1000, 'data/Imagenes/BicicletaTest1.jpg');
-insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado,cliente_id,disponible,multiplicador) values (20000,'BicicletaUsadaEntity', 395000.40, '#EFC55B', 1, 'Rabbit', 2000, 2000, 'http://discovery.com/montes/nascetur/ridiculus/mus/etiam/vel/augue.js', 'En proceso',1000,1,1.0);
-insert into Item_album (itemEntity_ID, album) values (2000, 'data/Imagenes/BicicletaTest2.jpg');
-insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado,cliente_id,disponible,multiplicador) values (30000,'BicicletaUsadaEntity', 757000.94, '#8F5BEF', 1, 'LS', 3000, 3000, 'https://blogger.com/ultrices/posuere.jsp', 'En proceso',1000,1,1.0);
-insert into Item_album (itemEntity_ID, album) values (3000, 'data/Imagenes/BicicletaTest3.jpg');
-insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado,cliente_id,disponible,multiplicador) values (40000,'BicicletaUsadaEntity', 757000.05, '#8F5BEF', 1, 'G', 4000, 4000, 'https://dagondesign.com/aliquam.js', 'En proceso',2000,1,1.0);
-insert into Item_album (itemEntity_ID, album) values (4000, 'data/Imagenes/BicicletaTest1.jpg');
-insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado,cliente_id,disponible,multiplicador) values (50000,'BicicletaUsadaEntity', 929000.71, '#5BBBEF', 1, 'Escort', 5000, 5000, 'https://netlog.com/in.jpg', 'En proceso',2000,1,1.0);
-insert into Item_album (itemEntity_ID, album) values (5000, 'data/Imagenes/BicicletaTest2.jpg');
+insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado,cliente_id,disponible,multiplicador) values (6000,'BicicletaUsadaEntity', 276000.71, '#EF5B5B', 1, 'Aerostar', 1000, 1000, 'http://intel.com/vestibulum/rutrum/rutrum.json', 'En proceso',1000,1,1.0);
+insert into Item_album (itemEntity_ID, album) values (6000, 'data/Imagenes/BicicletaTest1.jpg');
+insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado,cliente_id,disponible,multiplicador) values (7000,'BicicletaUsadaEntity', 395000.40, '#EFC55B', 1, 'Rabbit', 2000, 2000, 'http://discovery.com/montes/nascetur/ridiculus/mus/etiam/vel/augue.js', 'En proceso',1000,1,1.0);
+insert into Item_album (itemEntity_ID, album) values (7000, 'data/Imagenes/BicicletaTest2.jpg');
+insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado,cliente_id,disponible,multiplicador) values (8000,'BicicletaUsadaEntity', 757000.94, '#8F5BEF', 1, 'LS', 3000, 3000, 'https://blogger.com/ultrices/posuere.jsp', 'En proceso',1000,1,1.0);
+insert into Item_album (itemEntity_ID, album) values (8000, 'data/Imagenes/BicicletaTest3.jpg');
+insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado,cliente_id,disponible,multiplicador) values (90000,'BicicletaUsadaEntity', 757000.05, '#8F5BEF', 1, 'G', 4000, 4000, 'https://dagondesign.com/aliquam.js', 'En proceso',2000,1,1.0);
+insert into Item_album (itemEntity_ID, album) values (9000, 'data/Imagenes/BicicletaTest1.jpg');
+insert into ItemEntity (id,dtype, precio, color, usada, categoria, modeloId, mod_id, facturaOriginal, estado,cliente_id,disponible,multiplicador) values (100000,'BicicletaUsadaEntity', 929000.71, '#5BBBEF', 1, 'Escort', 5000, 5000, 'https://netlog.com/in.jpg', 'En proceso',2000,1,1.0);
+insert into Item_album (itemEntity_ID, album) values (10000, 'data/Imagenes/BicicletaTest2.jpg');
 
 --Join Factura Items
 insert into Factura_Items values (1000, 1000);
