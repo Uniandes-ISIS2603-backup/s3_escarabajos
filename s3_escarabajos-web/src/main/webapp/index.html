@@ -110,7 +110,7 @@
         <!-- Comprar-->
         <script src="src/modules/comprar/comprar.mod.js" type="text/javascript"></script>
         <script src="src/modules/comprar/comprar.ctrl.js" type="text/javascript"></script>
-        
+
         <!-- Medios de Pago-->
         <script src="src/modules/mediosPago/mediosPago.mod.js" type="text/javascript"></script>
         <script src="src/modules/mediosPago/mediosPago.ctrl.js" type="text/javascript"></script>
@@ -126,8 +126,8 @@
                 <div class="container-fluid">
                     <ul class="nav navbar-nav" Style="margin-left: 70px;">
                         <li class="active"> <a ui-sref="principal({pagina:1})">Catalogo</a></li>
-                        <li><a ui-sref="adv({adv:true,tipo:'bicicletas',filtros:{marcas:[],categorias:[],colores:[],precioMin:0.0,precioMax:999999999.9,calificacionMin:0.0}})">Bicicletas</a></li>
-                        <li><a ui-sref="adv({adv:true,tipo:'accesorios',filtros:{marcas:[],categorias:[],colores:[],precioMin:0.0,precioMax:999999999.9,calificacionMin:0.0}})">Accesorios</a></li>
+                        <li><a style="cursor: pointer;" ng-click="irBicicletas()">Bicicletas</a></li>
+                        <li><a style="cursor: pointer;" ng-click="irAccesorios()">Accesorios</a></li>
                         <li class="dropdown" ng-if = "hasPermissions()"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 Administrador<span class="caret"></span></a>
                             <ul class="dropdown-menu">
