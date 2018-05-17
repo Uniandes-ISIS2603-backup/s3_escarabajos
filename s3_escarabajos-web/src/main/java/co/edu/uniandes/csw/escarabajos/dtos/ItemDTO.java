@@ -51,21 +51,41 @@ import java.util.List;
  */
 public abstract class ItemDTO {
 
+    /**
+     * Modela el id del item.
+     */
     private Long id;
+
+    /**
+     * Modela el precio del item.
+     */
     private double precio;
 
+    /**
+     * Modela el modelo del item.
+     */
     private Long modeloId;
 
+    /**
+     * Modela el color del item.
+     */
     private String color;
 
+    /**
+     * Modela la categoria del item.
+     */
     private String categoria;
 
+    /**
+     * Modela el album del item.
+     */
     private List<String> album;
 
     /**
-     * Constructor por defecto
+     * Constructor por defecto.
      */
     public ItemDTO() {
+        //empty
     }
 
     /**
@@ -85,6 +105,11 @@ public abstract class ItemDTO {
         }
     }
 
+    /**
+     * Abstract
+     *
+     * @return
+     */
     public abstract ItemEntity toEntity();
 
     /**
@@ -104,27 +129,35 @@ public abstract class ItemDTO {
     }
 
     /**
-     * @return the id
+     * Devuelve el id.
+     *
+     * @return id
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * @param id the id to set
+     * Modifica el id.
+     *
+     * @param id nuevo id
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * @return the precio
+     * Devuelve el precio.
+     *
+     * @return precio
      */
     public double getPrecio() {
         return precio;
     }
 
     /**
+     * Modifica el precio.
+     *
      * @param precio the precio to set
      */
     public void setPrecio(double precio) {
@@ -132,56 +165,72 @@ public abstract class ItemDTO {
     }
 
     /**
-     * @return the album
+     * Devuelve el album.
+     *
+     * @return album
      */
     public List<String> getAlbum() {
         return album;
     }
 
     /**
-     * @param album the album to set
+     * Modifica el album.
+     *
+     * @param album nuevo album
      */
     public void setAlbum(List<String> album) {
         this.album = album;
     }
 
     /**
-     * @return the modeloId
+     * Devuelve el modelo.
+     *
+     * @return modeloId
      */
     public long getModeloId() {
         return modeloId;
     }
 
     /**
-     * @param modeloId the modeloId to set
+     * Modifica el modelo.
+     *
+     * @param modeloId nuevo modeloId
      */
     public void setModeloId(long modeloId) {
         this.modeloId = modeloId;
     }
 
     /**
-     * @return the color
+     * Devuelve el color.
+     *
+     * @return color
      */
     public String getColor() {
         return color;
     }
 
     /**
-     * @param color the color to set
+     * Modifica el color.
+     *
+     * @param color nuevo color
      */
     public void setColor(String color) {
         this.color = color;
     }
 
     /**
-     * @return the categoria
+     * Devolver la categoria.
+     *
+     * @return categoria
      */
     public String getCategoria() {
         return categoria;
     }
 
     /**
-     * @param categoria the categoria to set
+     * Modificar la categoria.
+     *
+     * @param categoria nueva categoria
      */
     public void setCategoria(String categoria) {
         this.categoria = categoria;

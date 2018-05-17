@@ -79,12 +79,12 @@ import java.util.List;
 public class ModeloDetailDTO extends ModeloDTO {
 
     /**
-     * Lista que representa todos los items de un modelo
+     * Lista que representa todos los items de un modelo.
      */
     private List<ItemDetailDTO> items;
 
     /**
-     * Lista que representa todas las calficaciones de un modelo
+     * Lista que representa todas las calficaciones de un modelo.
      */
     private List<CalificacionDTO> calificaciones;
 
@@ -104,7 +104,7 @@ public class ModeloDetailDTO extends ModeloDTO {
     private Boolean nuevo;
 
     /**
-     * Constructor por defecto
+     * Constructor por defecto.
      */
     public ModeloDetailDTO() {
         //empty
@@ -165,56 +165,72 @@ public class ModeloDetailDTO extends ModeloDTO {
     }
 
     /**
-     * @return the calificaciones
+     * Devuelve las calificaciones
+     *
+     * @return calificaciones
      */
     public List<CalificacionDTO> getCalificaciones() {
         return calificaciones;
     }
 
     /**
-     * @param calificaciones the calificaciones to set
+     * Modifica las calificaciones
+     *
+     * @param calificaciones nuevas calificaciones
      */
     public void setCalificaciones(List<CalificacionDTO> calificaciones) {
         this.calificaciones = calificaciones;
     }
 
     /**
-     * @return the items
+     * Devuelve los items
+     *
+     * @return items
      */
     public List<ItemDetailDTO> getItems() {
         return items;
     }
 
     /**
-     * @param items the items to set
+     * Modifica los items
+     *
+     * @param items nuevos items
      */
     public void setItems(List<ItemDetailDTO> items) {
         this.items = items;
     }
 
     /**
-     * @return the url
+     * Devuelve el url
+     *
+     * @return url
      */
     public String getUrl() {
         return url;
     }
 
     /**
-     * @param url the url to set
+     * Modifica el url
+     *
+     * @param url nueva url
      */
     public void setUrl(String url) {
         this.url = url;
     }
 
     /**
-     * @return the precio
+     * Devuelve el precio
+     *
+     * @return precio
      */
     public Double getPrecio() {
         return precio;
     }
 
     /**
-     * @param precio the precio to set
+     * Modifica el precio
+     *
+     * @param precio nuevo precio
      */
     public void setPrecio(Double precio) {
         this.precio = precio;
@@ -235,14 +251,18 @@ public class ModeloDetailDTO extends ModeloDTO {
     }
 
     /**
-     * @return the nuevo
+     * Devuelve si es nuevo o no
+     *
+     * @return nuevo
      */
     public Boolean getNuevo() {
         return nuevo;
     }
 
     /**
-     * @param nuevo the nuevo to set
+     * Modifica si es nuevo o no
+     *
+     * @param nuevo nuevo Nuevo
      */
     public void setNuevo(Boolean nuevo) {
         this.nuevo = nuevo;

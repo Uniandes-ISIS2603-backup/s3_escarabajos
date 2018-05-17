@@ -78,12 +78,12 @@ import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 public class PromocionDetailDTO extends ModeloDetailDTO {
 
     /**
-     * Atributo que representa el porcentaje de descuento de un modelo
+     * Atributo que representa el porcentaje de descuento de un modelo.
      */
     private Integer descuento;
 
     /**
-     * Constructor por defecto
+     * Constructor por defecto.
      */
     public PromocionDetailDTO() {
         //empty
@@ -100,27 +100,31 @@ public class PromocionDetailDTO extends ModeloDetailDTO {
         descuento = 0;
         if (entity != null) {
             double min = Double.MAX_VALUE;
-            for (ItemEntity item : entity.getItems()) {     
-                if (!item.getMultiplicador().toString().equals("1.0") && item.getMultiplicador() <min) {
+            for (ItemEntity item : entity.getItems()) {
+                if (!item.getMultiplicador().toString().equals("1.0") && item.getMultiplicador() < min) {
                     min = item.getMultiplicador();
                 }
             }
-            if (min <1) {
+            if (min < 1) {
                 descuento = (int) ((1.0 - min) * 100);
             }
-        }
 
+        }
     }
 
     /**
-     * @return the descuento
+     * Devuelve el descuento
+     *
+     * @return descuento
      */
     public Integer getDescuento() {
         return descuento;
     }
 
     /**
-     * @param descuento the descuento to set
+     * Modifica el descuento
+     *
+     * @param descuento nuevo descuento
      */
     public void setDescuento(Integer descuento) {
         this.descuento = descuento;

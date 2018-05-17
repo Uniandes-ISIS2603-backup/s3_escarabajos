@@ -41,29 +41,29 @@ import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 public class ModeloDTO {
 
     /**
-     * Atributo que modela el id unico del modelo
+     * Atributo que modela el id unico del modelo.
      */
     private Long id;
     /**
-     * Atributo que modela la marca del modelo
+     * Atributo que modela la marca del modelo.
      */
     private String marca;
     /**
-     * Atributo que modela la referencia del modelo
+     * Atributo que modela la referencia del modelo.
      */
     private String referencia;
 
     /**
-     * Atributo que modela la calificacionMedia del modelo
+     * Atributo que modela la calificacionMedia del modelo.
      */
     private Double calificacionMedia;
     /**
-     * Atributo que modela la el tipo de modelo
+     * Atributo que modela la el tipo de modelo.
      */
     private String tipoModelo;
 
     /**
-     * Constructor por defecto
+     * Constructor por defecto.
      */
     public ModeloDTO() {
         //empty
@@ -88,7 +88,6 @@ public class ModeloDTO {
     // Métodos
     //-----------------------------------------------------------
 
-   
     /**
      * Convertir DTO a Entity
      *
@@ -105,48 +104,62 @@ public class ModeloDTO {
     }
 
     /**
-     * @return the id
+     * Devuelve el id
+     *
+     * @return id
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * @param id the id to set
+     * Modifica el id
+     *
+     * @param id nuevo id
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * @return the marca
+     * Devuelve la marca
+     *
+     * @return marca
      */
     public String getMarca() {
         return marca;
     }
 
     /**
-     * @param marca the marca to set
+     * Modifica la marca
+     *
+     * @param marca nueva marca
      */
     public void setMarca(String marca) {
         this.marca = marca;
     }
 
     /**
-     * @return the referencia
+     * Devuelve la referencia
+     *
+     * @return referencia
      */
     public String getReferencia() {
         return referencia;
     }
 
     /**
-     * @param referencia the referencia to set
+     * Modifica la referencia
+     *
+     * @param referencia nueva referencia
      */
     public void setReferencia(String referencia) {
         this.referencia = referencia;
     }
 
     /**
+     * Devuelve calificacion media
+     *
      * @return the calificacionMedia
      */
     public Double getCalificacionMedia() {
@@ -154,21 +167,27 @@ public class ModeloDTO {
     }
 
     /**
-     * @param calificacionMedia the calificacionMedia to set
+     * Modifica calificacion media
+     *
+     * @param calificacionMedia nueva calificacionMedia
      */
     public void setCalificacionMedia(Double calificacionMedia) {
         this.calificacionMedia = calificacionMedia;
     }
 
     /**
-     * @return the tipoModelo
+     * Devuelve el tipo de modelo
+     *
+     * @return tipoModelo
      */
     public String getTipoModelo() {
         return tipoModelo;
     }
 
     /**
-     * @param tipoModelo the tipoModelo to set
+     * Modifica el tipo de modelo
+     *
+     * @param tipoModelo nuevo tipo de Modelo
      */
     public void setTipoModelo(String tipoModelo) {
         this.tipoModelo = tipoModelo;

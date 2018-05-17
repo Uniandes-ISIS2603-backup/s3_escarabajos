@@ -9,41 +9,49 @@ import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 import co.edu.uniandes.csw.escarabajos.entities.MedioPagoEntity;
 
 /**
- * Clase que extiende de {@link MedioPagoDTO} para manejar la transformacion entre
- * los objetos JSON y las Entidades de la base de datos. Para conocer el
+ * Clase que extiende de {@link MedioPagoDTO} para manejar la transformacion
+ * entre los objetos JSON y las Entidades de la base de datos. Para conocer el
  * contenido de la ciudad vaya a la documentacion de {@link MedioPagoDTO}
+ *
  * @author jp.carreno
  */
 public class MedioPagoDetailDTO extends MedioPagoDTO {
-    
+
     //-----------------------------------------------------------
     // Atributos
     //-----------------------------------------------------------
+    /**
+     * Modela el cliente del medio de pago.
+     */
     private ClienteEntity cliente;
     //-----------------------------------------------------------
     // Constructor
     //-----------------------------------------------------------
-    
-    public MedioPagoDetailDTO(){
+
+    /**
+     * Constructor por defecto.
+     */
+    public MedioPagoDetailDTO() {
         //vacio
     }
-    
+
     /**
      * Constructor para transformar un Entity a un DTO
      *
-     * @param entity La entidad de medio de pago a partir de la cual se construye el objeto
+     * @param entity La entidad de medio de pago a partir de la cual se
+     * construye el objeto
      */
     public MedioPagoDetailDTO(MedioPagoEntity entity) {
         super(entity);
-        if(entity!=null){
+        if (entity != null) {
             this.cliente = entity.getCliente();
         }
     }
-    
+
     /**
      * Transformar un DTO a un Entity
      *
-     * @return  La entidad construida a partir del DTO.
+     * @return La entidad construida a partir del DTO.
      */
     @Override
     public MedioPagoEntity toEntity() {
@@ -51,15 +59,24 @@ public class MedioPagoDetailDTO extends MedioPagoDTO {
         medioPagoE.setCliente(this.cliente);
         return medioPagoE;
     }
-    
+
     //-----------------------------------------------------------
     // Getters and Setters
     //-----------------------------------------------------------
-
+    /**
+     * Devuelve el cliente
+     *
+     * @return cliente
+     */
     public ClienteEntity getCliente() {
         return cliente;
     }
 
+    /**
+     * Modifica el cliente
+     *
+     * @param cliente nuevo cliente
+     */
     public void setCliente(ClienteEntity cliente) {
         this.cliente = cliente;
     }

@@ -34,16 +34,26 @@ import java.util.List;
  */
 public class ReclamoDetailDTO extends ReclamoDTO {
 
+    /**
+     * Modela la factura del reclamo.
+     */
     private FacturaDTO factura;
 
+    /**
+     * Modela el album de reclamo.
+     */
     private List<String> album;
-    
+
+    /**
+     * Modela el cliente del reclamo.
+     */
     private ClienteDTO cliente;
 
     /**
-     * Constructor vacio
+     * Constructor por defecto.
      */
     public ReclamoDetailDTO() {
+        //empty
     }
 
     /**
@@ -54,16 +64,11 @@ public class ReclamoDetailDTO extends ReclamoDTO {
      */
     public ReclamoDetailDTO(ReclamoEntity entity) {
         super(entity);
-        //TODO: DONE entity podría ser null
         if (entity != null) {
-//            if (entity.getAlbum() != null) {
-//                album = entity.getAlbum();
-//            }
             if (entity.getFactura() != null) {
                 factura = new FacturaDTO(entity.getFactura());
             }
-            if ( entity.getCliente() != null )
-            {
+            if (entity.getCliente() != null) {
                 cliente = new ClienteDTO(entity.getCliente());
             }
         }
@@ -75,31 +80,30 @@ public class ReclamoDetailDTO extends ReclamoDTO {
      *
      * @return La entidad construida a partir del DTO.
      */
-    //TODO: DONE falta @Override, el Override solo se pone si la clase es implementada, mas no heredadas
     public ReclamoEntity toEntiy() {
         ReclamoEntity entity = super.toEntity();
-        if (getAlbum() != null) {
-//            entity.setAlbum(album);
-        }
         if (getFactura() != null) {
             entity.setFactura(factura.toEntity());
         }
-        if(getCliente() != null)
-        {
+        if (getCliente() != null) {
             entity.setCliente(cliente.toEntity());
         }
         return entity;
     }
 
     /**
-     * @return the album
+     * Devuelve el album
+     *
+     * @return album
      */
     public List<String> getAlbum() {
         return album;
     }
 
     /**
-     * @param album the album to set
+     * Modifica el album
+     *
+     * @param album nuevo album
      */
     public void setAlbum(List<String> album) {
         this.album = album;
@@ -122,14 +126,21 @@ public class ReclamoDetailDTO extends ReclamoDTO {
     public void setFactura(FacturaDTO factura) {
         this.factura = factura;
     }
+
     /**
-     * Obtiene el cliente asociado al reclamo
-     * @return el 
+     * Devuelve el cliente asociado al reclamo
+     *
+     * @return cliente
      */
     public ClienteDTO getCliente() {
         return cliente;
     }
 
+    /**
+     * Modifica el cliente
+     *
+     * @param cliente nuevo cliente
+     */
     public void setCliente(ClienteDTO cliente) {
         this.cliente = cliente;
     }

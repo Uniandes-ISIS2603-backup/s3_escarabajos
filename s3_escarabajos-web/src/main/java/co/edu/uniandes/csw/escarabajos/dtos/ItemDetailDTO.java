@@ -63,16 +63,28 @@ import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
  */
 public class ItemDetailDTO extends ItemDTO {
 
+    /**
+     * Modela el tipo de item.
+     */
     private String tipo;
 
+    /**
+     * Modela la referencia de item.
+     */
     private String referencia;
 
+    /**
+     * Modela si el item esta disponible.
+     */
     private Boolean disponible;
-    
+
+    /**
+     * Modela el multiplicador de item.
+     */
     private Double multiplicador;
 
     /**
-     * Constructor por defecto
+     * Constructor por defecto.
      */
     public ItemDetailDTO() {
         //Empty
@@ -103,6 +115,11 @@ public class ItemDetailDTO extends ItemDTO {
         }
     }
 
+    /**
+     * Convertir DTO a Entity
+     *
+     * @return Un Entity con los valores del DTO
+     */
     @Override
     public ItemEntity toEntity() {
         //ATENCION !!! --ESTE METODO NO SE PUEDE LLAMAR, Si quieren el toEntity() de un ITEM toca por las subclases para no perder informacion.
@@ -110,56 +127,72 @@ public class ItemDetailDTO extends ItemDTO {
     }
 
     /**
-     * @return the tipo
+     * Devuelve el tipo.
+     *
+     * @return tipo
      */
     public String getTipo() {
         return tipo;
     }
 
     /**
-     * @param tipo the tipo to set
+     * Modifica el tipo.
+     *
+     * @param tipo nuevo tipo
      */
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
     /**
-     * @return the referencia
+     * Devuelve la referencia.
+     *
+     * @return referencia
      */
     public String getReferencia() {
         return referencia;
     }
 
     /**
-     * @param referencia the referencia to set
+     * Modifica la referencia.
+     *
+     * @param referencia nueva referencia
      */
     public void setReferencia(String referencia) {
         this.referencia = referencia;
     }
 
     /**
-     * @return the disponible
+     * Devuelve si esta disponible.
+     *
+     * @return disponible
      */
     public Boolean getDisponible() {
         return disponible;
     }
 
     /**
-     * @param disponible the disponible to set
+     * Modifica si esta disponible.
+     *
+     * @param disponible nuevo disponible
      */
     public void setDisponible(Boolean disponible) {
         this.disponible = disponible;
     }
 
     /**
-     * @return the multiplicador
+     * Devuelve el multiplicador.
+     *
+     * @return multiplicador
      */
     public Double getMultiplicador() {
         return multiplicador;
     }
 
     /**
-     * @param multiplicador the multiplicador to set
+     * Modifica el multiplicador.
+     *
+     * @param multiplicador nuevo multiplicador
      */
     public void setMultiplicador(Double multiplicador) {
         this.multiplicador = multiplicador;

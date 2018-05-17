@@ -66,7 +66,7 @@ import java.util.List;
 public class PaginacionDTO {
 
     /**
-     * Lista que representa todos modelos de una pagina
+     * Lista que representa todos modelos de una pagina.
      */
     private List<ModeloDetailDTO> modelos;
 
@@ -76,7 +76,7 @@ public class PaginacionDTO {
     private Integer numero;
 
     /**
-     * Constructor por defecto
+     * Constructor por defecto.
      */
     public PaginacionDTO() {
         //empty
@@ -94,28 +94,36 @@ public class PaginacionDTO {
     }
 
     /**
-     * @return the modelos
+     * Devuelve los modelos
+     *
+     * @return modelos
      */
     public List<ModeloDetailDTO> getModelos() {
         return modelos;
     }
 
     /**
-     * @param modelos the modelos to set
+     * Modifica los modelos.
+     *
+     * @param modelos nuevos modelos
      */
     public void setModelos(List<ModeloDetailDTO> modelos) {
         this.modelos = modelos;
     }
 
     /**
-     * @return the numero
+     * Devuelve el numero
+     *
+     * @return numero
      */
     public Integer getNumero() {
         return numero;
     }
 
     /**
-     * @param numero the numero to set
+     * Modifica el numero
+     *
+     * @param numero nuevo numero
      */
     public void setNumero(Integer numero) {
         this.numero = numero;

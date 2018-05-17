@@ -40,24 +40,24 @@ import co.edu.uniandes.csw.escarabajos.entities.ReclamoEntity;
 public class ReclamoDTO {
 
     /**
-     * El id del reclamo
+     * El id del reclamo.
      */
     private Long id;
     /**
-     * El mensaje del reclamo
+     * El mensaje del reclamo.
      */
     private String mensaje;
     /**
-     * El motivo del reclamo
+     * El motivo del reclamo.
      */
     private String razon;
     /**
-     * Indica si el reclamo ya terminó o si sigue en proceso
+     * Indica si el reclamo ya terminó o si sigue en proceso.
      */
     private boolean enProceso;
 
     /**
-     * Constructor por defecto
+     * Constructor por defecto.
      */
     public ReclamoDTO() {
 
@@ -98,7 +98,7 @@ public class ReclamoDTO {
     }
 
     /**
-     * Retorna la razon del reclam
+     * Retorna la razon del reclamo
      *
      * @return la razon del reclamo
      */
@@ -123,14 +123,16 @@ public class ReclamoDTO {
     public Long getId() {
         return id;
     }
+
     /**
      * Actualiza el id del reclamo
+     *
      * @param id el nuveo id del relcamo
      */
-    public void setId(Long id)
-    {
+    public void setId(Long id) {
         this.id = id;
     }
+
     /**
      * Método que define si un reclamo está en proceso.
      *
