@@ -18,25 +18,29 @@ import javax.persistence.TypedQuery;
  *
  * @author Mateo
  */
-
 @Stateless
 public class CarritoPersistence {
-    
+
     //--------------------------------------------------------------
     // Atributos
     //--------------------------------------------------------------
-    
+    /**
+     * LOGGER de la clase CarritoPersistence.
+     */
     private static final Logger LOGGER = Logger.getLogger(CarritoPersistence.class.getName());
 
+    /**
+     * Contexto de la persistencia.
+     */
     @PersistenceContext(unitName = "EscarabajosPU")
     protected EntityManager em;
-    
+
     //--------------------------------------------------------------
     // Metodos CRUD
     //--------------------------------------------------------------
-
     /**
      * encuentra un carrito
+     *
      * @param clienteId el id del cliente
      * @return el carrito
      */
@@ -44,11 +48,12 @@ public class CarritoPersistence {
         LOGGER.log(Level.INFO, "Consultando carrito con id={0}", clienteId);
         return em.find(CarritoEntity.class, clienteId);
     }
-    
+
     /**
-     * crea un carrito
+     * Crea un nuevo carrito.
+     *
      * @param entity el carrito a crear
-     * @return el carrito
+     * @return el carrito creado
      */
     public CarritoEntity create(CarritoEntity entity) {
         LOGGER.info("Creando un carrito nuevo");
@@ -56,44 +61,49 @@ public class CarritoPersistence {
         LOGGER.info("Carrito creado");
         return entity;
     }
+
     /**
-     * actualiza un carrito
-     * @param entity el carrito a actualizar
-     * @return el carrito
+     * Actualiza un carrito especifico.
+     *
+     * @param entity el carrito con los datos a actualizar
+     * @return el carrito actualizado
      */
     public CarritoEntity update(CarritoEntity entity) {
         LOGGER.log(Level.INFO, "Actualizando carrito con id={0}", entity.getId());
         return em.merge(entity);
     }
+
     /**
-     * borra el carrito
-     * @param id  el id del carrito a borrar
+     * Elimina un carrito especifico.
+     *
+     * @param id carrito a eliminar
      */
-    public void deleteCarrito(Long id){
-        
+    public void deleteCarrito(Long id) {
+
         LOGGER.log(Level.INFO, "Borrando carrito con id={0}", id);
         CarritoEntity entity = em.find(CarritoEntity.class, id);
         em.remove(entity);
     }
-    
+
     /**
-     * retorna el carrito perteneciente al cliente que entra por parametro
-     * @param id del cliente dueño del carrito
+     * Devuelve el carrito perteneciente a un cliente especifico.
+     *
+     * @param clienteId cliente especifico
+     * @return carrito encontrado
      */
-    public CarritoEntity findCarritoByClienteId( Long clienteId ){
-        
+    public CarritoEntity findCarritoByClienteId(Long clienteId) {
+
         LOGGER.log(Level.INFO, "Consultando el carrito del cliente con id= {0}", clienteId);
         TypedQuery<CarritoEntity> q = em.createQuery("select u from CarritoEntity u where u.cliente.id = :id", CarritoEntity.class);
-        
+
         q = q.setParameter("id", clienteId);
-        
-        
-        List<CarritoEntity> lista =q.getResultList();
-        
+
+        List<CarritoEntity> lista = q.getResultList();
+
         if (lista.isEmpty()) {
 
             return null;
-            
+
         } else {
             return lista.get(0);
         }

@@ -24,8 +24,14 @@ public class ListaDeseosPersistence {
     //--------------------------------------------------------------
     // Atributos
     //--------------------------------------------------------------
+    /**
+     * LOGGER de la clase ListaDeseosPersistence.
+     */
     private static final Logger LOGGER = Logger.getLogger(ListaDeseosPersistence.class.getName());
 
+    /**
+     * Contexto de la persistencia.
+     */
     @PersistenceContext(unitName = "EscarabajosPU")
     protected EntityManager em;
 
@@ -33,10 +39,10 @@ public class ListaDeseosPersistence {
     // Metodos CRUD
     //--------------------------------------------------------------
     /**
-     * encuentra un listadeseos
+     * Devuelve una lista de deseos especifica.
      *
      * @param clienteId el id del cliente
-     * @return el listadeseos
+     * @return la lista de deseos encontrada
      */
     public ListaDeseosEntity find(Long clienteId) {
         LOGGER.log(Level.INFO, "Consultando listadeseos con id={0}", clienteId);
@@ -44,10 +50,10 @@ public class ListaDeseosPersistence {
     }
 
     /**
-     * crea un listadeseos
+     * Crea una nueva lista de deseos.
      *
-     * @param entity el listadeseos a crear
-     * @return el listadeseos
+     * @param entity la lista de deseos que se va a crear
+     * @return la lista de deseos creada
      */
     public ListaDeseosEntity create(ListaDeseosEntity entity) {
         LOGGER.info("Creando un listadeseos nuevo");
@@ -57,10 +63,10 @@ public class ListaDeseosPersistence {
     }
 
     /**
-     * actualiza un listadeseos
+     * Actualiza una lista de deseos especifica.
      *
-     * @param entity el listadeseos a actualizar
-     * @return el listadeseos
+     * @param entity la lista de deseos con los datos a actualizar
+     * @return la lista de deseos actualizada
      */
     public ListaDeseosEntity update(ListaDeseosEntity entity) {
         LOGGER.log(Level.INFO, "Actualizando listadeseos con id={0}", entity.getId());
@@ -68,9 +74,9 @@ public class ListaDeseosPersistence {
     }
 
     /**
-     * borra el listadeseos
+     * Elimina una lista de deseos especifica.
      *
-     * @param id el id del listadeseos a borrar
+     * @param id el id de la lista de deseos a eliminar
      */
     public void deleteListaDeseos(Long id) {
 
@@ -80,23 +86,24 @@ public class ListaDeseosPersistence {
     }
 
     /**
+     * Devuelve la lista de deseos de un cliente especifico.
      *
-     * @param clienteId
-     * @return
+     * @param clienteId cliente especifico
+     * @return lista de deseos encontrada
      */
     public ListaDeseosEntity findListaDeseosByClienteId(Long clienteId) {
 
         LOGGER.log(Level.INFO, "Consultando el listadeseos del cliente con id= {0}", clienteId);
         TypedQuery<ListaDeseosEntity> q = em.createQuery("select u from ListaDeseosEntity u where u.cliente.id = :clienteId", ListaDeseosEntity.class);
-        
+
         q = q.setParameter("clienteId", clienteId);
 
-        List<ListaDeseosEntity> lista =q.getResultList();
-        
+        List<ListaDeseosEntity> lista = q.getResultList();
+
         if (lista.isEmpty()) {
 
             return null;
-            
+
         } else {
             return lista.get(0);
         }

@@ -16,12 +16,19 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class FacturaPersistence {
 
+    /**
+     * LOGGER de la clase FacturaPersistence.
+     */
     private static final Logger LOGGER = Logger.getLogger(FacturaPersistence.class.getName());
 
+    /**
+     * Contexto de la persistencia.
+     */
     @PersistenceContext(unitName = "EscarabajosPU")
     protected EntityManager em;
 
     /**
+     * Crea una factura nueva.
      *
      * @param entity objeto factura que se creará en la base de datos
      * @return devuelve la entidad creada con un id dado por la base de datos.
@@ -34,7 +41,7 @@ public class FacturaPersistence {
     }
 
     /**
-     * Devuelve todas las facturas.
+     * Devuelve todas las facturas en la base de datos.
      *
      * @return lista de facturas
      */
@@ -45,10 +52,10 @@ public class FacturaPersistence {
     }
 
     /**
-     * Encuentra una factura especifica
+     * Encuentra una factura especifica.
      *
-     * @param id de la factura 
-     * @return factura
+     * @param id factura buscada
+     * @return factura encontrada
      */
     public FacturaEntity find(Long id) {
         return em.find(FacturaEntity.class, id);
@@ -67,28 +74,28 @@ public class FacturaPersistence {
     /**
      * Elimina una factura
      *
-     * @param id factura a eliminar
+     * @param id factura que se va a eliminar
      */
     public void delete(Long id) {
         FacturaEntity factura = find(id);
         em.remove(factura);
     }
-    
+
     /**
-     * Encuentra las facturas de un cliente especifico
+     * Devuelve las facturas de un cliente especifico
      *
-     * @param idCliente id del cliente 
+     * @param idCliente id del cliente
      * @return lista de facturas
      */
-    public List<FacturaEntity> findFacturasByClienteId(Long idCliente){
-        
+    public List<FacturaEntity> findFacturasByClienteId(Long idCliente) {
+
         LOGGER.log(Level.INFO, "Consultando la factura del cliente con id= {0}", idCliente);
         TypedQuery<FacturaEntity> q = em.createQuery("select u from FacturaEntity u where u.cliente.id = :id", FacturaEntity.class);
-        
+
         q = q.setParameter("id", idCliente);
-        
+
         List<FacturaEntity> lista = q.getResultList();
-        
+
         return lista;
     }
 }
