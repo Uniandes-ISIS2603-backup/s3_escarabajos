@@ -36,19 +36,39 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class MedioPagoLogicTest {
 
+    /**
+     * PodamFactory.
+     */
     private PodamFactory factory = new PodamFactoryImpl();
 
+    /**
+     * Inyecta la logica de medio de pago.
+     */
     @Inject
     private MedioPagoLogic logic;
 
+    /**
+     * EntityManager.
+     */
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     * UserTransaction.
+     */
     @Inject
     private UserTransaction utx;
 
+    /**
+     * Datos de medio de pago.
+     */
     private List<MedioPagoEntity> data = new ArrayList<MedioPagoEntity>();
 
+    /**
+     * Creacion del deployment
+     *
+     * @return deployment
+     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -106,6 +126,11 @@ public class MedioPagoLogicTest {
         }
     }
 
+    /**
+     * Prueba el metodo createMedioPago.
+     *
+     * @throws BusinessLogicException
+     */
     @Test
     public void createMedioPagoTest() throws BusinessLogicException {
 
@@ -139,6 +164,11 @@ public class MedioPagoLogicTest {
         }
     }
 
+    /**
+     * Prueba el metodo updateMedioPago.
+     *
+     * @throws BusinessLogicException
+     */
     @Test
     public void updateMedioPagoTest() throws BusinessLogicException {
 
@@ -199,6 +229,9 @@ public class MedioPagoLogicTest {
         Assert.assertNull(deleted);
     }
 
+    /**
+     * Prueba el metodo getMedioPagos.
+     */
     @Test
     public void getMedioPagosTest() {
         List<MedioPagoEntity> list = logic.getMedioPagos();
@@ -214,6 +247,11 @@ public class MedioPagoLogicTest {
         }
     }
 
+    /**
+     * Prueba el metodo getMedioPago.
+     *
+     * @throws BusinessLogicException
+     */
     @Test
     public void getMedioPagoTest() throws BusinessLogicException {
         MedioPagoEntity entity = data.get(0);

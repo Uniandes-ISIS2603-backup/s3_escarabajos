@@ -1,4 +1,3 @@
-
 package co.edu.uniandes.csw.escarabajos.test.logic;
 
 import co.edu.uniandes.csw.escarabajos.ejb.*;
@@ -29,26 +28,51 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author n.gaitan
  */
 @RunWith(Arquillian.class)
-public class ReclamoLogicTest 
-{
+public class ReclamoLogicTest {
 
+    /**
+     * PodamFactory.
+     */
     private PodamFactory factory = new PodamFactoryImpl();
 
+    /**
+     * Inyecta la logica de reclamo.
+     */
     @Inject
     private ReclamoLogic reclamoLogic;
 
+    /**
+     * EntityManager.
+     */
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     * UserTransaction.
+     */
     @Inject
     private UserTransaction utx;
 
+    /**
+     * Datos de reclamos.
+     */
     private List<ReclamoEntity> data = new ArrayList<ReclamoEntity>();
 
+    /**
+     * Datos de factura.
+     */
     private List<FacturaEntity> facturaData = new ArrayList<FacturaEntity>();
-    
+
+    /**
+     * Datos de cliente.
+     */
     private List<ClienteEntity> clienteData = new ArrayList<ClienteEntity>();
 
+    /**
+     * Creacion del deployment
+     *
+     * @return deployment
+     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -103,7 +127,7 @@ public class ReclamoLogicTest
             em.persist(entity);
             facturaData.add(entity);
         }
-         for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             ClienteEntity entity = factory.manufacturePojo(ClienteEntity.class);
 
             em.persist(entity);
@@ -120,9 +144,7 @@ public class ReclamoLogicTest
     }
 
     /**
-     * Prueba para crear un Reclamo
-     *
-     *
+     * Prueba para crear un Reclamo.
      */
     @Test
     public void createReclamoTest() throws BusinessLogicException {
@@ -139,9 +161,7 @@ public class ReclamoLogicTest
     }
 
     /**
-     * Prueba para consultar la lista de Reclamos
-     *
-     *
+     * Prueba para consultar la lista de Reclamos.
      */
     @Test
     public void getReclamosTest() {
@@ -159,9 +179,7 @@ public class ReclamoLogicTest
     }
 
     /**
-     * Prueba para consultar un Reclamo
-     *
-     *
+     * Prueba para consultar un Reclamo.
      */
     @Test
     public void getReclamoTest() {
@@ -177,9 +195,9 @@ public class ReclamoLogicTest
     }
 
     /**
-     * Prueba para actualizar un Reclamo
+     * Prueba para actualizar un Reclamo.
      *
-     *
+     * @throws BusinessLogicException
      */
     @Test
     public void updateReclamoTest() throws BusinessLogicException {
@@ -194,20 +212,23 @@ public class ReclamoLogicTest
         Assert.assertEquals(resp.getRazon(), entity.getRazon());
         Assert.assertTrue(resp.isEnProceso());
     }
+
     @Test
-     /**
-     * Prueba para terminar un reclamo
+    /**
+     * Prueba para terminar un reclamo.
      */
-    public void terminarReclamoTest()
-    {
+    public void terminarReclamoTest() {
         Assert.assertTrue(reclamoLogic.find(data.get(0).getId()).isEnProceso());
         reclamoLogic.terminarReclamo(data.get(0).getId());
         Assert.assertFalse(reclamoLogic.find(data.get(0).getId()).isEnProceso());
-                
+
     }
+
+    /**
+     * Prueba el metodo getReclamoPorFactura.
+     */
     @Test
-    public void getReclamoByFacturaTest()
-    {
+    public void getReclamoByFacturaTest() {
         Assert.assertEquals(data.get(0), reclamoLogic.getReclamoPorfactura(facturaData.get(0).getId()));
         Assert.assertEquals(data.get(1), reclamoLogic.getReclamoPorfactura(facturaData.get(1).getId()));
         Assert.assertEquals(data.get(2), reclamoLogic.getReclamoPorfactura(facturaData.get(2).getId()));
