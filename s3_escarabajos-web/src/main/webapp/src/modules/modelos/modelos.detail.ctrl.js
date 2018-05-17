@@ -56,7 +56,6 @@
                                 }
                             }
                             if (!enc) {
-                                enc = true;
                                 $scope.fin = i - 1;
                             }
                         }
@@ -74,20 +73,20 @@
                                 }
                             }
                             if (!enc) {
-                                enc = true;
+                              
                                 $scope.fin = i - 1;
                             }
                         }
                     };
-                    for (var i = 0; i < $scope.items.length; i++) {
-                        if ($scope.items[i].disponible && $scope.items[i].precio < $scope.precio) {
-                            $scope.itemActual = $scope.items[i];
-                            $scope.precio = $scope.items[i].precio;
+                    for (var u = 0; u < $scope.items.length; u++) {
+                        if ($scope.items[u].disponible && $scope.items[u].precio < $scope.precio) {
+                            $scope.itemActual = $scope.items[u];
+                            $scope.precio = $scope.items[u].precio;
                         }
-                        if ($scope.items[i].disponible && $scope.tipo === 'Bicicleta' && $scope.items[i].tipo === 'BicicletaUsada') {
-                            $scope.usadas.push($scope.items[i]);
-                            if ($scope.precioUsadas > $scope.items[i].precio) {
-                                $scope.precioUsadas = $scope.items[i].precio;
+                        if ($scope.items[u].disponible && $scope.tipo === 'Bicicleta' && $scope.items[u].tipo === 'BicicletaUsada') {
+                            $scope.usadas.push($scope.items[u]);
+                            if ($scope.precioUsadas > $scope.items[u].precio) {
+                                $scope.precioUsadas = $scope.items[u].precio;
                             }
                         }
                     }

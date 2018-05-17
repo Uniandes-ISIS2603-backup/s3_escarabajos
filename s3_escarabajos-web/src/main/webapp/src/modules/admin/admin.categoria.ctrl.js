@@ -13,8 +13,8 @@
      * funciones que se definen en este controlador y que son utilizadas 
      * desde el HTML.
      * @param {Object} $http Objeto injectado para la manejar consultas HTTP
-     * @param {Object} accesorioContext Constante injectada que contiene la ruta
-     * donde se encuentra el API de Accesorios en el Backend.
+     * @param {Object} adminContextCategoria Constante injectada que contiene la ruta
+     * donde se encuentra el API de Categorias en el Backend.
      * @param {Object} $state Dependencia injectada en la que se recibe el 
      * estado actual de la navegación definida en el módulo.
      */
