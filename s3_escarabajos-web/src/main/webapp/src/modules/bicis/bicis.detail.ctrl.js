@@ -28,7 +28,6 @@
                 
                 $http.get(biciContext + '/' + $state.params.biciId).then(function (response) {
                     $scope.biciActual = response.data;
-                    console.log($scope.biciActual);
                 });
             }
         }]);

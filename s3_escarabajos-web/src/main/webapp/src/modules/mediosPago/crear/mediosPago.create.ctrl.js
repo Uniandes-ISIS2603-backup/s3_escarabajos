@@ -9,14 +9,12 @@
             $scope.data = {};
             
             $scope.createMediosP = function () {
-                console.log($scope.data + " este es data")
                 var input = {};
                 
                 input.id = 9999;
                 
                 input.tipo = $scope.data.tipo;
                 
-                console.log(input)
                 $http.post(mediosPagoContext + '/' + sessionStorage.getItem("id") + '/mediospago', input).then(function (response) {
                     $state.go('mediosPagoList', {biciUsadaId: response.data.id}, {reload: true});
                 });

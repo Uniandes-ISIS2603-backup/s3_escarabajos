@@ -26,7 +26,6 @@
         function ($scope, $http, adminContextMarca, $state) {  
             
             $scope.deleteMarca = function () {
-                        console.log($scope);
                         $http.delete(adminContextMarca + '/' + $scope.marca.nombre).then(function () {
                             $state.go('adminCategorias',{reload: true});
                         });

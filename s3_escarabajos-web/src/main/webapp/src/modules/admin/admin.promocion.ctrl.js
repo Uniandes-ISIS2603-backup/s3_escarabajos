@@ -26,7 +26,6 @@
         function ($scope, $http, adminContextPromocion, $state) {  
             
             $scope.crearPromocion = function () {
-                        console.log($scope);
                         $http.put(adminContextPromocion + '/' + $scope.modelo.id + '/'+ $scope.descuento.d).then(function () {
                             $state.go('adminCategorias',{reload: true});
                         });

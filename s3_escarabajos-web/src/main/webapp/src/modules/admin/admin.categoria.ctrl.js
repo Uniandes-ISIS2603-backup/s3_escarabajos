@@ -26,7 +26,6 @@
         function ($scope, $http, adminContextCategoria, $state) {  
             
             $scope.deleteCategoria = function () {
-                        console.log($scope);
                         $http.delete(adminContextCategoria + '/' + $scope.categoria.nombre).then(function () {
                             $state.go('adminCategorias',{reload: true});
                         });

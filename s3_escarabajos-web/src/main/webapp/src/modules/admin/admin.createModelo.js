@@ -34,7 +34,6 @@
                 input.referencia = $scope.modeloActual.referencia;
                 input.marca = $scope.modeloActual.marca;
                 
-                console.log.data;
                 $http.post(modeloContext, input).then(function () {
                     $state.go('adminCategorias',{reload: true});
                 });

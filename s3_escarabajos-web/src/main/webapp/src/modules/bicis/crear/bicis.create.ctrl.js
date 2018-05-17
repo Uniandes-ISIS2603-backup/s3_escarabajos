@@ -36,7 +36,6 @@
              */
             
             $scope.createBici = function () {
-                console.log($scope.data + " este es data")
                 var input = {};
                 
                 input.id = 9999;
@@ -55,7 +54,6 @@
                 
                 input.disponible  = true;
                 
-                console.log(input)
                 $http.post(biciContext, input).then(function (response) {
                     $state.go('bicisList', {biciId: response.data.id}, {reload: true});
                 });

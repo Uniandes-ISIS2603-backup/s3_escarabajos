@@ -20,8 +20,6 @@
                         input.id = $scope.facturaActual.id;
 
                         input.dinero = $scope.facturaActual.dinero;
-
-                        console.log(input);
                         
                         $http.put(facturaContext + '/' + $state.params.facturaId, input).then(function (response) {
                             $state.go('facturasList', {facturaId: response.data.id}, {reload: true});
