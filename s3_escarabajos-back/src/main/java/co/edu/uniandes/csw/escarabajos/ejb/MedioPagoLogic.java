@@ -41,11 +41,7 @@ public class MedioPagoLogic {
      */
     public MedioPagoEntity createMedioPago(MedioPagoEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de medio de pago");
-        String tipo = entity.getTipo();
-        LOGGER.info("AAAAAAAAAAAAAAAAA" + entity);
-        LOGGER.info("AAAAAAAAAAAAAAAAA" + tipo);
-
-        if (!tipo.equalsIgnoreCase("pse") && !tipo.equalsIgnoreCase("paypal") && !tipo.equalsIgnoreCase("tarjeta de credito") && !tipo.equalsIgnoreCase("tarjeta debito")) {
+        if (entity.getTipo()==null) {
             throw new BusinessLogicException("El tipo de medio de pago no es valido");
         }
         // Invoca la persistencia para crear el cliente
@@ -98,7 +94,7 @@ public class MedioPagoLogic {
             throw new BusinessLogicException("No existe un medio de pago con el id" + id + "\"");
         }
         String tipo = entity.getTipo();
-        if (!tipo.equalsIgnoreCase("pse") && !tipo.equalsIgnoreCase("paypal") && !tipo.equalsIgnoreCase("tarjeta de credito") && !tipo.equalsIgnoreCase("tarjeta debito")) {
+        if (!"pse".equalsIgnoreCase(tipo) && !"paypal".equalsIgnoreCase(tipo) && !"tarjeta de credito".equalsIgnoreCase(tipo) && !"tarjeta de debito".equalsIgnoreCase(tipo)) {
             throw new BusinessLogicException("El tipo de medio de pago no es valido");
         }
         return persistence.update(entity);

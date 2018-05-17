@@ -11,6 +11,9 @@ import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.MedioPagoPersistence;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -32,19 +35,20 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class MedioPagoLogicTest {
+
     private PodamFactory factory = new PodamFactoryImpl();
-    
+
     @Inject
     private MedioPagoLogic logic;
-    
+
     @PersistenceContext
     private EntityManager em;
-    
+
     @Inject
     private UserTransaction utx;
 
     private List<MedioPagoEntity> data = new ArrayList<MedioPagoEntity>();
-    
+
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -54,7 +58,7 @@ public class MedioPagoLogicTest {
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
+
     /**
      * Configuración inicial de la prueba.
      *
@@ -94,39 +98,97 @@ public class MedioPagoLogicTest {
      */
     private void insertData() {
         for (int i = 0; i < 3; i++) {
-            
+
             MedioPagoEntity entity = factory.manufacturePojo(MedioPagoEntity.class);
-            
             em.persist(entity);
-            
+
             data.add(entity);
         }
     }
-    
+
     @Test
-    public void createMedioPagoTest() throws BusinessLogicException{
-        
+    public void createMedioPagoTest() throws BusinessLogicException {
+
         MedioPagoEntity newEntity = factory.manufacturePojo(MedioPagoEntity.class);
         newEntity.setTipo("pse");
         MedioPagoEntity result = logic.createMedioPago(newEntity);
         Assert.assertNotNull(result);
-        MedioPagoEntity entity = em.find(MedioPagoEntity.class, result.getId());
+
+        newEntity = factory.manufacturePojo(MedioPagoEntity.class);
+        newEntity.setTipo("paypal");
+        result = logic.createMedioPago(newEntity);
+        Assert.assertNotNull(result);
+
+        newEntity = factory.manufacturePojo(MedioPagoEntity.class);
+        newEntity.setTipo("tarjeta de credito");
+        result = logic.createMedioPago(newEntity);
+        Assert.assertNotNull(result);
+
+        newEntity = factory.manufacturePojo(MedioPagoEntity.class);
+        newEntity.setTipo("tarjeta debito");
+        result = logic.createMedioPago(newEntity);
+        Assert.assertNotNull(result);
+
+        newEntity = factory.manufacturePojo(MedioPagoEntity.class);
+        newEntity.setTipo("tarjeta debit1");
+        try {
+            logic.createMedioPago(newEntity);
+            Assert.fail();
+        } catch (BusinessLogicException ex) {
+            Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
+
     @Test
     public void updateMedioPagoTest() throws BusinessLogicException {
-        
+
         MedioPagoEntity entity = data.get(0);
         MedioPagoEntity pojoEntity = factory.manufacturePojo(MedioPagoEntity.class);
-
         pojoEntity.setId(entity.getId());
         pojoEntity.setTipo("pse");
-
         logic.updateMedioPago(entity.getId(), pojoEntity);
-
         MedioPagoEntity resp = em.find(MedioPagoEntity.class, entity.getId());
-
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
+
+        pojoEntity = factory.manufacturePojo(MedioPagoEntity.class);
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setTipo("paypal");
+        logic.updateMedioPago(entity.getId(), pojoEntity);
+        resp = em.find(MedioPagoEntity.class, entity.getId());
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+
+        pojoEntity = factory.manufacturePojo(MedioPagoEntity.class);
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setTipo("tarjeta de credito");
+        logic.updateMedioPago(entity.getId(), pojoEntity);
+        resp = em.find(MedioPagoEntity.class, entity.getId());
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+
+        pojoEntity = factory.manufacturePojo(MedioPagoEntity.class);
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setTipo("tarjeta debito");
+        logic.updateMedioPago(entity.getId(), pojoEntity);
+        resp = em.find(MedioPagoEntity.class, entity.getId());
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+
+        pojoEntity = factory.manufacturePojo(MedioPagoEntity.class);
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setTipo("NOT");
+        try {
+            logic.getMedioPago(Long.MIN_VALUE);
+            Assert.fail();
+        } catch (BusinessLogicException ex) {
+            Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        resp = em.find(MedioPagoEntity.class, entity.getId());
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+
+        try {
+            logic.getMedioPago(Long.MIN_VALUE);
+            Assert.fail();
+        } catch (BusinessLogicException ex) {
+            Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Test
@@ -136,7 +198,7 @@ public class MedioPagoLogicTest {
         MedioPagoEntity deleted = em.find(MedioPagoEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
-    
+
     @Test
     public void getMedioPagosTest() {
         List<MedioPagoEntity> list = logic.getMedioPagos();
@@ -151,12 +213,19 @@ public class MedioPagoLogicTest {
             Assert.assertTrue(found);
         }
     }
-    
+
     @Test
     public void getMedioPagoTest() throws BusinessLogicException {
         MedioPagoEntity entity = data.get(0);
         MedioPagoEntity resultEntity = logic.getMedioPago(entity.getId());
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
+
+        try {
+            logic.getMedioPago(Long.MIN_VALUE);
+            Assert.fail();
+        } catch (BusinessLogicException ex) {
+            Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
