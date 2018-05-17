@@ -96,7 +96,7 @@ public class ModeloResource {
      */
     @GET
     public List<ModeloDetailDTO> getModelos() {
-        return listModeloEntity2DetailDTO(modeloLogic.getModelos(null,null));
+        return listModeloEntity2DetailDTO(modeloLogic.getModelos(null, null));
     }
 
     /**
@@ -170,16 +170,12 @@ public class ModeloResource {
      *
      * @param id Identificador del modelo que se desea borrar. Este debe ser una
      * cadena de dígitos.
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException si no encuentra el modelo
      */
     @DELETE
     @Path("/{id: \\d+}")
-    public void deleteModelo(@PathParam("id") Long id) {
-        try {
-            modeloLogic.deleteModelo(id);
-        } catch (BusinessLogicException ex) {
-            LOGGER.info(ex.getMessage());
-            throw new WebApplicationException("El recurso /modelos/" + id + " no existe.", 404);
-        }
+    public void deleteModelo(@PathParam("id") Long id) throws BusinessLogicException {
+        modeloLogic.deleteModelo(id);
     }
 
     /**

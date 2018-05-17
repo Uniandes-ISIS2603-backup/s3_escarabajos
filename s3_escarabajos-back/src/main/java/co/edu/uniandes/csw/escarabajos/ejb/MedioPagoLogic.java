@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -94,7 +95,7 @@ public class MedioPagoLogic {
             throw new BusinessLogicException("No existe un medio de pago con el id" + id + "\"");
         }
         String tipo = entity.getTipo();
-        if (!"pse".equalsIgnoreCase(tipo) && !"paypal".equalsIgnoreCase(tipo) && !"tarjeta de credito".equalsIgnoreCase(tipo) && !"tarjeta de debito".equalsIgnoreCase(tipo)) {
+        if (!"pse".equalsIgnoreCase(tipo) && !"paypal".equalsIgnoreCase(tipo) && !"tarjeta de credito".equalsIgnoreCase(tipo) && !"tarjeta debito".equalsIgnoreCase(tipo)) {
             throw new BusinessLogicException("El tipo de medio de pago no es valido");
         }
         return persistence.update(entity);
