@@ -256,6 +256,7 @@ insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccio
 insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion, vendedor) values (8000, '22211234', 'nico@gmail.com', 'Nicolas','n.gaitan','11232123','calle8-9', null);
 insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion, vendedor) values (9000, '2212145', 'preubaCliente@gmail.com', 'Test Cliente','testC','12322245','Elm Street', null);
 insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion, vendedor) values (10000, '1122', 'pruebaAdmin@gmail.com', 'Test Admin','testA','1211121345','Elm Street', null);
+insert into ClienteEntity (id, cedula, correo, nombre, usuario,telefono,direccion, vendedor) values (11000, '1121112', 'pruebaVendedor@gmail.com', 'Test Vendedor','testV','1211121345','Elm Street 32', 'YO');
 
 --Datos de pruebaFacturaEntity
 insert into FacturaEntity values (1000, 200000.0, 1000);
