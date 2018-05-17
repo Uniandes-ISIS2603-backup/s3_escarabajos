@@ -1,16 +1,30 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<alert class="alert alert-danger" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
+<div class="row col-sm-12">
+    <form class="form-horizontal col-sm-12" name="signUp">
+        <!-- Form Name -->
+        <legend>Elimina una marca</legend>
+
+        <div class="container">
+            <div class="row profile">
+                <div class="col-md-9">
+                    <div class="profile-content">
+                        <fieldset>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="textinput">Marca a eliminar</label>
+                                <div class="col-md-4">
+                                    <input id="nombre" name="nombre" class="input-field" type="text" required ng-model="marca.nombre">             
+                                    
+                                </div>
+                            </div>
+                                <div class="col-md-8">
+                                    <button id="btnsave" name="btnsave" class="btn btn-success" ng-click="deleteMarca()">Eliminar marca</button>
+                                </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

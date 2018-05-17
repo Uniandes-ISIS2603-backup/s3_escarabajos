@@ -1,14 +1,14 @@
 (function (ng) {
     var mod = ng.module("adminModule");
 
-    mod.constant("adminContextCategoria", "api/catalogo/promociones");
+    mod.constant("adminContextCategoria", "api/catalogo/categorias");
 
     mod.controller("adminCategoriaCtrl", ['$scope','$http','adminContextCategoria', '$state',
         function ($scope, $http, adminContextCategoria, $state) {  
             
-            $scope.crearPromocion = function () {
+            $scope.deleteCategoria = function () {
                         console.log($scope);
-                        $http.put(adminContextCategoria + '/' + $scope.modelo.id + '/'+ $scope.descuento.d).then(function () {
+                        $http.delete(adminContextCategoria + '/' + $scope.categoria.nombre).then(function () {
                             $state.go('adminCategorias',{reload: true});
                         });
                     };
