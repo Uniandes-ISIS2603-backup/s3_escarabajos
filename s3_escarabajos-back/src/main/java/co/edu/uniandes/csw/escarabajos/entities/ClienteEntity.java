@@ -26,48 +26,105 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class ClienteEntity implements Serializable {
 
+    /**
+     * Atributo que representa el id del cliente. id autogenerado
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    /**
+     * Atributo que representa el nombre del cliente.
+     */
     private String nombre;
+
+    /**
+     * Atributo que representa el correo del cliente.
+     */
     private String correo;
+
+    /**
+     * Atributo que representa el usuario del cliente.
+     */
     private String usuario;
+
+    /**
+     * Atributo que representa la cedula del cliente.
+     */
     private String cedula;
+
+    /**
+     * Atributo que representa la direccion del cliente.
+     */
     private String direccion;
+
+    /**
+     * Atributo que representa el telefono del cliente.
+     */
     private String telefono;
+
+    /**
+     * Atributo que representa si el cliente es vendedor o no.
+     */
     private String vendedor;
-    
+
+    /**
+     * Atributo que representa el carrito del cliente.
+     */
     @PodamExclude
     @OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     private CarritoEntity carrito;
-    
+
+    /**
+     * Atributo que representa la lista de deseos del cliente.
+     */
     @PodamExclude
     @OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     private ListaDeseosEntity listaDeseos;
 
+    /**
+     * Atributo que representa las facturas del cliente.
+     */
     @PodamExclude
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<FacturaEntity> compras = new ArrayList<>();
-    
+
+    /**
+     * Atributo que representa los medios de pago del cliente.
+     */
     @PodamExclude
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<MedioPagoEntity> mediosPago = new ArrayList<>();
-    
+
+    /**
+     * Atributo que representa las calificaciones del cliente.
+     */
     @PodamExclude
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<CalificacionEntity> calificaciones = new ArrayList<>();
-    
+
+    /**
+     * Atributo que representa los reclamos del cliente.
+     */
     @PodamExclude
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<ReclamoEntity> reclamos = new ArrayList<>();
-    
+
+    /**
+     * Atributo que representa las bicicletas usadas del cliente.
+     */
     @PodamExclude
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST,orphanRemoval = true)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<BicicletaUsadaEntity> bicicletasUsadas = new ArrayList<>();
- 
-   
-    
-     @Override
+
+    /**
+     * Compara si dos objetos son iguales.
+     *
+     * @param obj objeto a comparar
+     * @return boolean Si son iguales retorna true. De lo contrario retorna
+     * false
+     */
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -82,6 +139,11 @@ public class ClienteEntity implements Serializable {
         return Objects.equals(this.getId(), other.getId());
     }
 
+    /**
+     * Metodo predeterminado hashCode.
+     *
+     * @return el hashCode creado
+     */
     @Override
     public int hashCode() {
         if (this.getId() != null) {
@@ -91,206 +153,271 @@ public class ClienteEntity implements Serializable {
     }
 
     /**
-     * @return the id
+     * Devuelve el id.
+     *
+     * @return id
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * @param id the id to set
+     * Modifica el id.
+     *
+     * @param id nuevo id
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * @return the nombre
+     * Devuelve el nombre.
+     *
+     * @return nombre
      */
     public String getNombre() {
         return nombre;
     }
 
     /**
-     * @param nombre the nombre to set
+     * Modifica el nombre del cliente.
+     *
+     * @param nombre nuevo nombre
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
     /**
-     * @return the correo
+     * Devuelve el correo del cliente.
+     *
+     * @return correo
      */
     public String getCorreo() {
         return correo;
     }
 
     /**
-     * @param correo the correo to set
+     * Modifica el correo del cliente.
+     *
+     * @param correo nuevo correo
      */
     public void setCorreo(String correo) {
         this.correo = correo;
     }
 
     /**
-     * @return the usuario
+     * Devuelve el usuario del cliente.
+     *
+     * @return usuario
      */
     public String getUsuario() {
         return usuario;
     }
 
     /**
-     * @param usuario the usuario to set
+     * Modifica el usuario del cliente.
+     *
+     * @param usuario nuevo usuario
      */
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
 
     /**
-     * @return the cedula
+     * Devuelve la cedula del cliente.
+     *
+     * @return cedula
      */
     public String getCedula() {
         return cedula;
     }
 
     /**
-     * @param cedula the cedula to set
+     * Modifica la cedula del cliente.
+     *
+     * @param cedula nueva cedula
      */
     public void setCedula(String cedula) {
         this.cedula = cedula;
     }
 
     /**
-     * @return the direccion
+     * Devuelve la direccion del cliente.
+     *
+     * @return direccion
      */
     public String getDireccion() {
         return direccion;
     }
 
     /**
-     * @param direccion the direccion to set
+     * Modifica la direccion del cliente.
+     *
+     * @param direccion nueva direccion
      */
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
 
     /**
-     * @return the telefono
+     * Devuelve el telefono del cliente.
+     *
+     * @return
      */
     public String getTelefono() {
         return telefono;
     }
 
     /**
-     * @param telefono the telefono to set
+     * Modifica el telefono del cliente.
+     *
+     * @param telefono nuevo telefono
      */
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
     /**
-     * @return the carrito
+     * Devuelve el carrito del cliente.
+     *
+     * @return carrito
      */
     public CarritoEntity getCarrito() {
         return carrito;
     }
 
     /**
-     * @param carrito the carrito to set
+     * Modifica el carrito del cliente.
+     *
+     * @param carrito nuevo carrito
      */
     public void setCarrito(CarritoEntity carrito) {
         this.carrito = carrito;
     }
 
     /**
-     * @return the listaDeseos
+     * Devuelve la lista de deseos del cliente.
+     *
+     * @return lista de Deseos
      */
     public ListaDeseosEntity getListaDeseos() {
         return listaDeseos;
     }
 
     /**
-     * @param listaDeseos the listaDeseos to set
+     * Modifica la lista de deseos del cliente.
+     *
+     * @param listaDeseos nueva lista de Deseos
      */
     public void setListaDeseos(ListaDeseosEntity listaDeseos) {
         this.listaDeseos = listaDeseos;
     }
 
     /**
-     * @return the compras
+     * Devuelve las facturas del cliente.
+     *
+     * @return compras
      */
     public List<FacturaEntity> getCompras() {
         return compras;
     }
 
     /**
-     * @param compras the compras to set
+     * Modifica las facturas del cliente.
+     *
+     * @param compras nuevas compras
      */
     public void setCompras(List<FacturaEntity> compras) {
         this.compras = compras;
     }
 
     /**
-     * @return the mediosPago
+     * Devuelve los medios de pago del cliente.
+     *
+     * @return mediosPago
      */
     public List<MedioPagoEntity> getMediosPago() {
         return mediosPago;
     }
 
     /**
-     * @param mediosPago the mediosPago to set
+     * Modifica los medios de pago del cliente.
+     *
+     * @param mediosPago nuevos medios de pago
      */
     public void setMediosPago(List<MedioPagoEntity> mediosPago) {
         this.mediosPago = mediosPago;
     }
 
     /**
-     * @return the calificaciones
+     * Devuelve las calificaciones del cliente.
+     *
+     * @return calificaciones
      */
     public List<CalificacionEntity> getCalificaciones() {
         return calificaciones;
     }
 
     /**
-     * @param calificaciones the calificaciones to set
+     * Modifica las calificaciones del cliente.
+     *
+     * @param calificaciones nuevas calificaciones
      */
     public void setCalificaciones(List<CalificacionEntity> calificaciones) {
         this.calificaciones = calificaciones;
     }
 
     /**
-     * @return the reclamos
+     * Devuelve los reclamos del cliente.
+     *
+     * @return reclamos
      */
     public List<ReclamoEntity> getReclamos() {
         return reclamos;
     }
 
     /**
-     * @param reclamos the reclamos to set
+     * Modifica los reclamos del cliente.
+     *
+     * @param reclamos nuevos reclamos
      */
     public void setReclamos(List<ReclamoEntity> reclamos) {
         this.reclamos = reclamos;
     }
 
     /**
-     * @return the bicicletasUsadas
+     * Devuelve las bicicletas usadas del cliente.
+     *
+     * @return bicicletasUsadas
      */
     public List<BicicletaUsadaEntity> getBicicletasUsadas() {
         return bicicletasUsadas;
     }
 
     /**
-     * @param bicicletasUsadas the bicicletasUsadas to set
+     * Modifica las bicicletas usadas del cliente.
+     *
+     * @param bicicletasUsadas nuevas bicicletas usadas
      */
     public void setBicicletasUsadas(List<BicicletaUsadaEntity> bicicletasUsadas) {
         this.bicicletasUsadas = bicicletasUsadas;
     }
-    
-    
+
+    /**
+     * Devuelve si el cliente es vendedor o no.
+     *
+     * @return vendedor
+     */
     public String getVendedor() {
         return vendedor;
     }
 
+    /**
+     * Modifica si el cliente es vendedor o no.
+     *
+     * @param vendedor nuevo vendedor
+     */
     public void setVendedor(String vendedor) {
         this.vendedor = vendedor;
     }

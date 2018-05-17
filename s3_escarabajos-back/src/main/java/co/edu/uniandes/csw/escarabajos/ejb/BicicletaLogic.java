@@ -21,6 +21,9 @@ import javax.inject.Inject;
 @Stateless
 public class BicicletaLogic {
 
+    /**
+     * LOGGER de la clase BicicletaLogic.
+     */
     private static final Logger LOGGER = Logger.getLogger(BicicletaLogic.class.getName());
 
     /**
@@ -47,10 +50,10 @@ public class BicicletaLogic {
     }
 
     /**
-     * Devuelve una bicicleta especifica
+     * Devuelve una bicicleta especifica.
      *
      * @param id de la bicicleta
-     * @return Datos de la biciccleta especifica
+     * @return Datos de la bicicleta especifica
      * @throws BusinessLogicException Por reglas de negocio
      */
     public BicicletaEntity getBicicleta(Long id) throws BusinessLogicException {
@@ -65,9 +68,9 @@ public class BicicletaLogic {
     }
 
     /**
-     * Guardar una nueva bicicleta
+     * Crea una nueva bicicleta.
      *
-     * @param entity La entidad de tipo bicicleta del nuevo bicicleta a
+     * @param entity La entidad de tipo bicicleta de la nueva bicicleta a
      * persistir.
      * @return La entidad luego de persistirla
      * @throws BusinessLogicException Si el atributo usada es false o si no esta
@@ -86,7 +89,7 @@ public class BicicletaLogic {
     }
 
     /**
-     * Actualizar un bicicleta especifica
+     * Actualizar un bicicleta especifica.
      *
      * @param id El ID del bicicleta a actualizar
      * @param entity La entidad del bicicleta con los cambios deseados
@@ -115,9 +118,9 @@ public class BicicletaLogic {
     }
 
     /**
-     * Eliminar un bicicleta especifica
+     * Eliminar una bicicleta especifica.
      *
-     * @param id de la bicicleta a borrar
+     * @param id de la bicicleta a eliminar.
      */
     public void deleteBicicleta(Long id) {
         //Este metodo no se deberia usar. USEN ModeloLogic.removeItem()!!!!!!!!!!!!!!
@@ -144,10 +147,10 @@ public class BicicletaLogic {
     }
 
     /**
-     * Encuentra todas las bicicletas con un modelo especifico
+     * Devuelve todas las bicicletas con un modelo especifico.
      *
      * @param id del modelo para filtrar
-     * @return lista de bicicletas.
+     * @return lista de bicicletas
      */
     public List<BicicletaEntity> findByModelo(Long id) {
         return persistence.findByModelo(id);

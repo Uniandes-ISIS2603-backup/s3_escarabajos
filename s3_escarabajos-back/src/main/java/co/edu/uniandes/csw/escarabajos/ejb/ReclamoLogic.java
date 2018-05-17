@@ -12,7 +12,6 @@ import co.edu.uniandes.csw.escarabajos.persistence.ReclamoPersistence;
 import java.util.logging.Logger;
 import javax.inject.Inject;
 import java.util.List;
-import java.util.Objects;
 import javax.ejb.Stateless;
 
 /**
@@ -22,11 +21,20 @@ import javax.ejb.Stateless;
 @Stateless
 public class ReclamoLogic {
 
+    /**
+     * LOGGER de la clase ReclamoLogic.
+     */
     private final static Logger LOGGER = Logger.getLogger(ReclamoLogic.class.getName());
 
+    /**
+     * Injecta la persistencia de reclamo.
+     */
     @Inject
     private ReclamoPersistence reclamoPersistence;
 
+    /**
+     * Injecta la logica de factura.
+     */
     @Inject
     private FacturaLogic facturaLogic;
 

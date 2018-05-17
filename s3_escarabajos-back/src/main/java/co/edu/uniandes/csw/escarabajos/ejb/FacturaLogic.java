@@ -21,6 +21,9 @@ import javax.inject.Inject;
 @Stateless
 public class FacturaLogic {
 
+    /**
+     * LOGGER de la clase FacturaLogic.
+     */
     private static final Logger LOGGER = Logger.getLogger(FacturaLogic.class.getName());
 
     /**
@@ -59,7 +62,7 @@ public class FacturaLogic {
     }
 
     /**
-     * Guardar una nueva factura
+     * Crea una nueva factura
      *
      * @param entity La entidad de tipo factura de la factura a
      * persistir.
@@ -71,7 +74,7 @@ public class FacturaLogic {
     }
 
     /**
-     * Actualizar un factura especifica
+     * Actualiza un factura especifica
      *
      * @param id El ID de la factura a actualizar
      * @param entity La entidad de factura con los cambios deseados

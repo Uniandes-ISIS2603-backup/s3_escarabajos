@@ -24,6 +24,9 @@ import javax.inject.Inject;
 @Stateless
 public class BicicletaUsadaLogic {
 
+    /**
+     * LOGGER de la clase BicicletaUsadaLogic.
+     */
     private static final Logger LOGGER = Logger.getLogger(BicicletaLogic.class.getName());
 
     /**
@@ -31,16 +34,19 @@ public class BicicletaUsadaLogic {
      */
     @Inject
     private BicicletaUsadaPersistence persistence;
+    
     /**
      * Injecta la logica de item.
      */
     @Inject
     private ItemLogic logicItem;
+    
     /**
      * Injecta la logica de vendedor.
      */
     @Inject
     private ClienteLogic logicVendedor;
+    
     /**
      * Injecta la persistencia de modelo.
      */
@@ -119,7 +125,7 @@ public class BicicletaUsadaLogic {
     }
 
     /**
-     * Modifica una bicleta asociada a un vendedor
+     * Modifica una bicleta asociada a un vendedor.
      *
      * @param idVendedor vendedor especifico
      * @param entity nuevos ddatos de la bicicleta
@@ -144,7 +150,7 @@ public class BicicletaUsadaLogic {
     }
 
     /**
-     * Elimina una bicicleta asociada a un vendedor
+     * Elimina una bicicleta especifica asociada a un vendedor.
      *
      * @param idVendedor vendedor especifico
      * @param idBici bicicleta especifica

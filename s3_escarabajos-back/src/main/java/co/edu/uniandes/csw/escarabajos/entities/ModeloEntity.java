@@ -20,134 +20,202 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamExclude;
+
 /**
  *
  * @author Andres
  */
 @Entity
-public class ModeloEntity implements Serializable
-{
+public class ModeloEntity implements Serializable {
+
+    /**
+     * Atributo que representa el id del modelo. id autogenerado
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    /**
+     * Atributo que representa la referencia del modelo.
+     */
     private String referencia;
+
+    /**
+     * Atributo que representa la marca del modelo.
+     */
     private String marca;
+
+    /**
+     * Atributo que representa el tipo del modelo.
+     */
     private String tipoModelo;
+
+    /**
+     * Atributo que representa la calificacion media del modelo.
+     */
     private Double calificacionMedia;
-    
+
+    /**
+     * Atributo que representa la fecha de creacion del modelo.
+     */
     @Temporal(TemporalType.DATE)
     private Date creacion;
-    
+
+    /**
+     * Atributo que representa los items que pertenecen al modelo.
+     */
     @PodamExclude
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "mod_id")
     private List<ItemEntity> items = new ArrayList<>();
-  
+
+    /**
+     * Atributo que representa las calificaciones hechas al modelo.
+     */
     @PodamExclude
     @OneToMany(mappedBy = "modelo", cascade = CascadeType.ALL)
     private List<CalificacionEntity> calificaciones = new ArrayList<>();
-   
-    public ModeloEntity()
-    {
-        
-    }
+
     /**
-     * @return the tipoModelo
+     * Constructor vacio
+     */
+    public ModeloEntity() {
+        //Constructor vacio
+    }
+
+    /**
+     * Devuelve el tipo.
+     *
+     * @return tipo
      */
     public String getTipoModelo() {
         return tipoModelo;
     }
+
     /**
-     * @param tipoModelo the tipoModelo to set
+     * Modifica el tipo.
+     *
+     * @param tipoModelo nuevo tipo
      */
     public void setTipoModelo(String tipoModelo) {
         this.tipoModelo = tipoModelo;
     }
 
     /**
-     * @return the referencia
+     * Devuelve la referencia.
+     *
+     * @return referencia
      */
     public String getReferencia() {
         return referencia;
     }
 
     /**
-     * @param referencia the referencia to set
+     * Modifica la referencia.
+     *
+     * @param referencia nueva referencia
      */
     public void setReferencia(String referencia) {
         this.referencia = referencia;
     }
 
     /**
-     * @return the marca
+     * Devuelve la marca.
+     *
+     * @return marca
      */
     public String getMarca() {
         return marca;
     }
 
     /**
-     * @param marca the marca to set
+     * Modifica la marca.
+     *
+     * @param marca nueva marca
      */
     public void setMarca(String marca) {
         this.marca = marca;
     }
 
     /**
-     * @return the calificacionMedia
+     * Devuelve la calificacion media.
+     *
+     * @return calificacionMedia
      */
     public double getCalificacionMedia() {
         return calificacionMedia;
     }
 
     /**
-     * @param calificacionMedia the calificacionMedia to set
+     * Modifica la calificacion media
+     *
+     * @param calificacionMedia nueva calificacion media
      */
     public void setCalificacionMedia(double calificacionMedia) {
         this.calificacionMedia = calificacionMedia;
     }
 
     /**
-     * @return the id
+     * Devuelve el id.
+     *
+     * @return id
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * @param id the id to set
+     * Modifica el id.
+     *
+     * @param id nuevo id
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * @return the calificaciones
+     * Devuelve las calificaciones.
+     *
+     * @return calificaciones
      */
     public List<CalificacionEntity> getCalificaciones() {
         return calificaciones;
     }
 
     /**
-     * @param calificaciones the calificaciones to set
+     * Modifica las calificaciones.
+     *
+     * @param calificaciones nuevas calificaciones
      */
     public void setCalificaciones(List<CalificacionEntity> calificaciones) {
         this.calificaciones = calificaciones;
     }
 
     /**
-     * @return the items
+     * Devuelve los items.
+     *
+     * @return items
      */
     public List<ItemEntity> getItems() {
         return items;
     }
 
     /**
-     * @param items the items to set
+     * Modifica los items.
+     *
+     * @param items nuevos items
      */
     public void setItems(List<ItemEntity> items) {
         this.items = items;
     }
 
+    /**
+     * Compara si dos objetos son iguales.
+     *
+     * @param obj objeto a comparar
+     * @return boolean Si son iguales retorna true. De lo contrario retorna
+     * false
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -163,6 +231,11 @@ public class ModeloEntity implements Serializable
         return Objects.equals(this.id, other.id);
     }
 
+    /**
+     * Metodo predeterminado hashCode.
+     *
+     * @return el hashCode creado
+     */
     @Override
     public int hashCode() {
         if (this.getId() != null) {
@@ -172,18 +245,21 @@ public class ModeloEntity implements Serializable
     }
 
     /**
-     * @return the creacion
+     * Devuelve la fecha de creacion.
+     *
+     * @return creacion
      */
     public Date getCreacion() {
         return creacion;
     }
 
     /**
-     * @param creacion the creacion to set
+     * Modifica la fecha de creacion.
+     *
+     * @param creacion nueva fecha de creacion
      */
     public void setCreacion(Date creacion) {
         this.creacion = creacion;
     }
-    
-    
+
 }

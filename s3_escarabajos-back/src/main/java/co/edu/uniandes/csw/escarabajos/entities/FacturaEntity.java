@@ -22,8 +22,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
-
-
 /**
  *
  * @author jp.carreno
@@ -31,93 +29,145 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class FacturaEntity implements Serializable {
 
-    
+    /**
+     * Atributo que representa el id de la factura. id autogenerado
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    /**
+     * Atributo que representa el dinero de la factura.
+     */
     private Double dinero;
+
+    /**
+     * Atributo que representa el reclamo hecho en la factura.
+     */
     @PodamExclude
     @OneToOne(mappedBy = "factura", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     private ReclamoEntity reclamo;
-    
+
+    /**
+     * Atributo que representa el medio de pago con el que se pago la factura.
+     */
     @PodamExclude
-    @OneToOne(mappedBy = "factura",cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+    @OneToOne(mappedBy = "factura", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     private MedioPagoEntity medioDePago;
-    
+
+    /**
+     * Atributo que representa el cliente de la factura.
+     */
     @PodamExclude
     @ManyToOne
     private ClienteEntity cliente;
-    
+
+    /**
+     * Atributo que representa los items de la factura.
+     */
     @PodamExclude
     @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "FACTURA_ITEMS", joinColumns = @JoinColumn(name = "FACTURA_ID"), inverseJoinColumns = @JoinColumn(name="ITEM_ID"))
+    @JoinTable(name = "FACTURA_ITEMS", joinColumns = @JoinColumn(name = "FACTURA_ID"), inverseJoinColumns = @JoinColumn(name = "ITEM_ID"))
     private List<ItemEntity> items = new ArrayList<>();
 
     /**
-     * @return the reclamo
+     * Devuelve el reclamo.
+     *
+     * @return reclamo
      */
     public ReclamoEntity getReclamo() {
         return reclamo;
     }
 
     /**
-     * @param reclamo the reclamo to set
+     * Modifica el reclamo.
+     *
+     * @param reclamo nuevo reclamo
      */
     public void setReclamo(ReclamoEntity reclamo) {
         this.reclamo = reclamo;
     }
 
     /**
-     * @return the cliente
+     * Devuelve el cliente.
+     *
+     * @return cliente
      */
     public ClienteEntity getCliente() {
         return cliente;
     }
 
     /**
-     * @param cliente the cliente to set
+     * Modifica el cliente.
+     *
+     * @param cliente nuevo cliente
      */
     public void setCliente(ClienteEntity cliente) {
         this.cliente = cliente;
     }
 
     /**
-     * @return the medioDePago
+     * Devuelve el medio de pago.
+     *
+     * @return medioDePago
      */
     public MedioPagoEntity getMedioDePago() {
         return medioDePago;
     }
 
     /**
-     * @param medioDePago the medioDePago to set
+     * Modifica el medio de pago.
+     *
+     * @param medioDePago nuevo medio de pago
      */
     public void setMedioDePago(MedioPagoEntity medioDePago) {
         this.medioDePago = medioDePago;
     }
 
+    /**
+     * Devuelve los items.
+     *
+     * @return items
+     */
     public List<ItemEntity> getItems() {
         return items;
     }
 
+    /**
+     * Modifica los items.
+     *
+     * @param items nuevos items
+     */
     public void setItems(List<ItemEntity> items) {
         this.items = items;
     }
-    
+
     /**
-     * @return the id
+     * Devuelve el id
+     *
+     * @return id
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * @param id the id to set
+     * Modifica el id.
+     *
+     * @param id nuevo id
      */
     public void setId(Long id) {
         this.id = id;
     }
-    
-     @Override
+
+    /**
+     * Compara si dos objetos son iguales.
+     *
+     * @param obj objeto a comparar
+     * @return boolean Si son iguales retorna true. De lo contrario retorna
+     * false
+     */
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -132,6 +182,11 @@ public class FacturaEntity implements Serializable {
         return Objects.equals(this.getId(), other.getId());
     }
 
+    /**
+     * Metodo predeterminado hashCode.
+     *
+     * @return el hashCode creado
+     */
     @Override
     public int hashCode() {
         if (this.getId() != null) {
@@ -141,14 +196,18 @@ public class FacturaEntity implements Serializable {
     }
 
     /**
-     * @return the dinero
+     * Devuelve el dinero.
+     *
+     * @return dinero
      */
     public Double getDinero() {
         return dinero;
     }
 
     /**
-     * @param dinero the dinero to set
+     * Modifica el dinero.
+     *
+     * @param dinero nuevo dinero
      */
     public void setDinero(Double dinero) {
         this.dinero = dinero;

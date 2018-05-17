@@ -21,21 +21,48 @@ import javax.ejb.Stateless;
 @Stateless
 public class CalificacionLogic {
 
+    /**
+     * LOGGER de la clase CalificacionLogic.
+     */
     private final static Logger LOGGER = Logger.getLogger(CalificacionLogic.class.getName());
 
+    /**
+     * Injecta la persistencia de calificacion.
+     */
     @Inject
     private CalificacionPersistence calificacionPersistence;
 
+    /**
+     * Injecta la logica de modelo.
+     */
     @Inject
     private ModeloLogic modeloLogic;
 
+    /**
+     * Injecta la logica de cliente.
+     */
     @Inject
     private ClienteLogic clienteLogic;
 
+    /**
+     * Determmina si la calificacion esta en el rango de 0 a 5.
+     *
+     * @param pValue valor de calificacion
+     * @return si esta en rango retorna true. De lo contrario retorna false
+     */
     private boolean isInRange(double pValue) {
         return pValue >= 0 && pValue <= 5;
     }
 
+    /**
+     * Crea una calificacion asociada a un modelo y un cliente.
+     *
+     * @param cal calificacion a crear
+     * @param modeloId modelo espcifico
+     * @param clienteId cliente especifico
+     * @return calificacion creada
+     * @throws BusinessLogicException por reglas de negocio
+     */
     public CalificacionEntity crearCalificacion(CalificacionEntity cal, Long modeloId, Long clienteId) throws BusinessLogicException {
         LOGGER.info("[LOGIC] Comienza el proceso de crear una calificación y conectarla con el cliente " + clienteId + " y el modelo " + modeloId);
         if (!isInRange(cal.getPuntaje())) {
@@ -60,9 +87,20 @@ public class CalificacionLogic {
         cal.setCliente(cliente);
         CalificacionEntity nueva = calificacionPersistence.create(cal);
         LOGGER.info("[LOGIC] Termina el proceso de crear una calificación y conectarla con el cliente " + clienteId + " y el modelo " + modeloId + ", su id es " + nueva.getId());
+        model.setCalificacionMedia(getCalificacionMedia(modeloId));
+        modeloLogic.updateModelo(modeloId, model);
         return nueva;
     }
 
+    /**
+     * Actualiza una calificacion especifica.
+     *
+     * @param cal calificacion especifica
+     * @param modeloId modelo especifico
+     * @param clienteId cliente especifico
+     * @return calificacion actualizada
+     * @throws BusinessLogicException por reglas de negocio
+     */
     public CalificacionEntity updateCalificacion(CalificacionEntity cal, Long modeloId, Long clienteId) throws BusinessLogicException {
         LOGGER.info("Inicia el proceso de actualizar una calificaciòn.");
         if (!isInRange(cal.getPuntaje())) {
@@ -87,6 +125,12 @@ public class CalificacionLogic {
         return nueva;
     }
 
+    /**
+     * Devuelve una calificacion especifica.
+     *
+     * @param id calificacion buscada
+     * @return calificacion encontrada
+     */
     public CalificacionEntity find(Long id) {
         LOGGER.info("Inicia el proceso de buscar una calificaciòn.");
         CalificacionEntity answ = calificacionPersistence.find(id);
@@ -94,18 +138,33 @@ public class CalificacionLogic {
         return answ;
     }
 
+    /**
+     * Elimina una calificacion especifica.
+     *
+     * @param ent calificacion que se va a eliminar
+     */
     public void delete(CalificacionEntity ent) {
         LOGGER.info("Inicia el proceso de eliminar una calificaciòn.");
         calificacionPersistence.delete(ent);
         LOGGER.info("Termina el proceso de eliminar una calificaciòn.");
     }
 
+    /**
+     * Elimina una calificacion especifica.
+     *
+     * @param id calificacion que se va a eliminar
+     */
     public void delete(Long id) {
         LOGGER.info("Inicia el proceso de eliminar una calificaciòn por id.");
         calificacionPersistence.delete(id);
         LOGGER.info("Termina el proceso de eliminar una calificaciòn por id.");
     }
 
+    /**
+     * Devuelve todas las calificaciones en la base de datos.
+     *
+     * @return lista de calificaciones
+     */
     public List<CalificacionEntity> findAll() {
         LOGGER.info("Inicia el proceso de buscar todas las calificaciones.");
         List<CalificacionEntity> answ = calificacionPersistence.findAll();
@@ -113,6 +172,12 @@ public class CalificacionLogic {
         return answ;
     }
 
+    /**
+     * Devuelve las calificaciones de un modelo especifico.
+     *
+     * @param modeloId modelo especifico
+     * @return lista de calificaciones de un modelo
+     */
     public List<CalificacionEntity> getCalificacionesPorModelo(Long modeloId) {
         LOGGER.info("Inicia el proceso de buscar todas las calificaciones del modelo " + modeloId);
         List<CalificacionEntity> cals = calificacionPersistence.getCalificacionesPorModelo(modeloId);
@@ -120,6 +185,15 @@ public class CalificacionLogic {
         return cals;
     }
 
+    /**
+     * Devuelve las calificaciones de un modelo especifico y un cliente
+     * especifico.
+     *
+     * @param clienteId cliente especifico
+     * @param modeloId modelo especifico
+     * @return lista de calificaciones
+     * @throws BusinessLogicException por reglas de negocio
+     */
     public List<CalificacionEntity> getCalificacionesPorClienteAndModelo(Long clienteId, Long modeloId) throws BusinessLogicException {
         LOGGER.info("Inicia el proceso de buscar todas las calificaciones del modelo " + modeloId + " y el cliente " + clienteId);
         List<CalificacionEntity> cals = calificacionPersistence.getCalificacionesPorClienteAndModelo(clienteId, modeloId);
@@ -127,6 +201,13 @@ public class CalificacionLogic {
         return cals;
     }
 
+    /**
+     * Elimina una calificacion especifica de un modelo y cliente especificos
+     *
+     * @param calId calificacion que se va a eliminar
+     * @param clienteId cliente especifico
+     * @param modId modelo especifico
+     */
     public void removeCalificacion(Long calId, Long clienteId, Long modId) {
         ClienteEntity c = clienteLogic.getCliente(clienteId);
         ModeloEntity m = modeloLogic.getModelo(clienteId);
@@ -136,6 +217,13 @@ public class CalificacionLogic {
         delete(cal);
     }
 
+    /**
+     * Devuelve la calificacion media de un modelo especifico.
+     *
+     * @param modeloId modelo especifico
+     * @return calificacion media
+     * @throws BusinessLogicException por reglas de negocio
+     */
     public double getCalificacionMedia(Long modeloId) throws BusinessLogicException {
         List<CalificacionEntity> cals = getCalificacionesPorModelo(modeloId);
         if (cals == null || cals.isEmpty()) {

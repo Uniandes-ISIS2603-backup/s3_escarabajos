@@ -26,62 +26,63 @@ import uk.co.jemos.podam.common.PodamExclude;
  * @author Mateo
  */
 @Entity
-public class CarritoEntity implements Serializable{
-    
+public class CarritoEntity implements Serializable {
+
     //----------------------------------------------------
     // Atributos
     //----------------------------------------------------
-    
     /**
-     * id autogenerado
+     * Atributo que representa el id del carrito. id autogenerado
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     /**
-     * precio total del carrito
+     * Atributo que representa el precio total del carrito. inicializado en 0
      */
-    private Double precioTotal=0.0;
-    
+    private Double precioTotal = 0.0;
+
     /**
-     *  lista de items del carrito
+     * Atributo que representa la lista de items del carrito.
      */
     @PodamExclude
     @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "CAR_ITEMS", joinColumns = @JoinColumn(name = "CAR_ID"), inverseJoinColumns = @JoinColumn(name="ITEM_ID"))
+    @JoinTable(name = "CAR_ITEMS", joinColumns = @JoinColumn(name = "CAR_ID"), inverseJoinColumns = @JoinColumn(name = "ITEM_ID"))
     private List<ItemEntity> items = new ArrayList<>();
-    
+
     /**
-     * cliente dueño del carrito
+     * Atributo que representa el cliente dueño del carrito.
      */
     @PodamExclude
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id")
     private ClienteEntity cliente;
-    
-       
+
     //----------------------------------------------------
     // Getters y Setters
     //----------------------------------------------------
-
     /**
-     * @return el precio total del carrito 
+     * Devuelve el precio total del carrito.
+     *
+     * @return el precio total del carrito
      */
     public Double getPrecioTotal() {
         return precioTotal;
     }
-    
+
     /**
-     * asigna el precio total
+     * Modifica el precio total.
+     *
      * @param precioTotal el nuevo precioTotal
      */
     public void setPrecioTotal(Double precioTotal) {
         this.precioTotal = precioTotal;
     }
-    
+
     /**
-     * 
+     * Devuelve la lista de items del carrito.
+     *
      * @return la lista de items del carrito
      */
     public List<ItemEntity> getItems() {
@@ -89,41 +90,57 @@ public class CarritoEntity implements Serializable{
     }
 
     /**
-     * asigna la lista de items del carrito
+     * Modifica la lista de items del carrito.
+     *
      * @param items la nueva lista de items
      */
     public void setItems(List<ItemEntity> items) {
         this.items = items;
     }
+
     /**
-     * 
-     * @return el cliente dueño del carrito 
+     * Devuelve el cliente dueño del carrito.
+     *
+     * @return el cliente dueño del carrito
      */
     public ClienteEntity getCliente() {
         return cliente;
     }
+
     /**
-     * asigna el cliente del carrito
-     * @param cliente  el nuevo cliente
+     * Modifica el cliente del carrito
+     *
+     * @param cliente el nuevo cliente
      */
     public void setCliente(ClienteEntity cliente) {
         this.cliente = cliente;
     }
 
     /**
-     * @return the id
+     * Devuelve el id
+     *
+     * @return id
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * @param id the id to set
+     * Modifica el id
+     *
+     * @param id nuevo id
      */
     public void setId(Long id) {
         this.id = id;
     }
-    
+
+    /**
+     * Compara si dos objetos son iguales.
+     *
+     * @param obj objeto a comparar
+     * @return boolean Si son iguales retorna true. De lo contrario retorna
+     * false
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -139,6 +156,11 @@ public class CarritoEntity implements Serializable{
         return Objects.equals(this.id, other.id);
     }
 
+    /**
+     * Metodo predeterminado hashCode.
+     *
+     * @return el hashCode creado
+     */
     @Override
     public int hashCode() {
         if (this.getId() != null) {
@@ -146,5 +168,5 @@ public class CarritoEntity implements Serializable{
         }
         return super.hashCode();
     }
-    
+
 }

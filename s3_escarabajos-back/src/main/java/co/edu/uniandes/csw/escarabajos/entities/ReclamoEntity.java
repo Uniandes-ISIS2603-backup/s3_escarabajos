@@ -26,88 +26,157 @@ import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
 @Entity
-public class ReclamoEntity  implements Serializable
+public class ReclamoEntity implements Serializable {
 
-{
-    
+    /**
+     * Atributo que representa el id del reclamo. id autogenerado
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
+    /**
+     * Atributo que representa el mensaje del reclamo.
+     */
     private String mensaje;
+
+    /**
+     * Atributo que representa la razon del reclamo.
+     */
     private String razon;
-    
+
+    /**
+     * Atributo que representa la factura a la cual se hace el reclamo.
+     */
     @PodamExclude
-    @OneToOne( cascade = CascadeType.PERSIST )
+    @OneToOne(cascade = CascadeType.PERSIST)
     private FacturaEntity factura;
 
+    /**
+     * Atributo que representa el cliente que hace el reclamo.
+     */
     @PodamExclude
-    @ManyToOne( cascade = CascadeType.PERSIST )
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private ClienteEntity cliente;
-   
+
+    /**
+     * Atributo que representa si el reclamo esta en proceso o no.
+     */
     @PodamExclude
     private Boolean enProceso = true;
-      
-    @PodamExclude
-    @ElementCollection
-    @CollectionTable(name = "RECLAMO_ALBUM")
-    @Lob
-    private List<String> album = new ArrayList<>();
-    
-    public String getMensaje()
-    {
+
+    /**
+     * Devuelve el mensaje.
+     *
+     * @return mensaje
+     */
+    public String getMensaje() {
         return mensaje;
     }
-    public void setMensaje(String msj)
-    {
+
+    /**
+     * Modifica el mensaje.
+     *
+     * @param msj nuevo mensaje
+     */
+    public void setMensaje(String msj) {
         mensaje = msj;
     }
-     public String getRazon()
-    {
+
+    /**
+     * Devuelve la razon.
+     *
+     * @return razon
+     */
+    public String getRazon() {
         return razon;
     }
-    public void setRazon(String raz)
-    {
+
+    /**
+     * Modifica la razon
+     *
+     * @param raz nueva razon
+     */
+    public void setRazon(String raz) {
         razon = raz;
     }
+
+    /**
+     * Devuelve la factura.
+     *
+     * @return factura
+     */
     public FacturaEntity getFactura() {
         return factura;
     }
 
+    /**
+     * Modifica la factura.
+     *
+     * @param factura nueva factura
+     */
     public void setFactura(FacturaEntity factura) {
         this.factura = factura;
     }
 
+    /**
+     * Devuelve el cliente.
+     *
+     * @return cliente
+     */
     public ClienteEntity getCliente() {
         return cliente;
     }
 
+    /**
+     * Modifica el cliente.
+     *
+     * @param cliente nuevo cliente
+     */
     public void setCliente(ClienteEntity cliente) {
         this.cliente = cliente;
     }
 
     /**
-     * @return the id
+     * Devuelve el id.
+     *
+     * @return id
      */
     public Long getId() {
         return id;
     }
 
-    public void terminar()
-    {
+    /**
+     * Le da valor false a enProceso.
+     */
+    public void terminar() {
         enProceso = false;
     }
-    public void renaudar()
-    {
+
+    /**
+     * Le da valor true a enProceso.
+     */
+    public void renaudar() {
         enProceso = true;
     }
+
     /**
-     * @param id the id to set
+     * Modifica el id.
+     *
+     * @param id nuevo id
      */
     public void setId(Long id) {
         this.id = id;
     }
-      @Override
+
+    /**
+     * Compara si dos objetos son iguales.
+     *
+     * @param obj objeto a comparar
+     * @return boolean Si son iguales retorna true. De lo contrario retorna
+     * false
+     */
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -121,6 +190,12 @@ public class ReclamoEntity  implements Serializable
         final ReclamoEntity other = (ReclamoEntity) obj;
         return Objects.equals(this.id, other.id);
     }
+
+    /**
+     * Metodo predeterminado hashCode.
+     *
+     * @return el hashCode creado
+     */
     @Override
     public int hashCode() {
         if (this.getId() != null) {
@@ -130,23 +205,11 @@ public class ReclamoEntity  implements Serializable
     }
 
     /**
-     * @return the enProceso
+     * Devuelve si esta en proceso o no el reclamo.
+     *
+     * @return enProceso
      */
     public boolean isEnProceso() {
         return enProceso;
-    }
-
-    /**
-     * @return the album
-     */
-    public List<String> getAlbum() {
-        return album;
-    }
-
-    /**
-     * @param album the album to set
-     */
-    public void setAlbum(List<String> album) {
-        this.album = album;
     }
 }

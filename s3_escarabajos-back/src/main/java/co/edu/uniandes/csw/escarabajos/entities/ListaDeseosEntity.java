@@ -26,104 +26,122 @@ import uk.co.jemos.podam.common.PodamExclude;
  * @author Mateo
  */
 @Entity
-public class ListaDeseosEntity implements Serializable{
-    
+public class ListaDeseosEntity implements Serializable {
+
     //----------------------------------------------------
     // Atributos
     //----------------------------------------------------
-    
     /**
-     * id autogenerado
+     * Atributo que representa el id de la lista de deseos. id autogenerado
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     /**
-     * precio total del listadeseos
+     * Atributo que representa el precio total de la lista de deseos.
+     * Inicializado en 0
      */
-    private Double precioTotal=0.0;
-    
+    private Double precioTotal = 0.0;
+
     /**
-     *  lista de items del listadeseos
+     * Atributo que representa la lista de items de la lista de deseos.
      */
     @PodamExclude
     @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "LISTA_DESEOS_ITEMS", joinColumns = @JoinColumn(name = "LISTA_DESEOS_ID"), inverseJoinColumns = @JoinColumn(name="ITEM_ID"))
+    @JoinTable(name = "LISTA_DESEOS_ITEMS", joinColumns = @JoinColumn(name = "LISTA_DESEOS_ID"), inverseJoinColumns = @JoinColumn(name = "ITEM_ID"))
     private List<ItemEntity> items = new ArrayList<>();
-    
+
     /**
-     * cliente dueño del listadeseos
+     * Atributo que representa el cliente dueño de la lista de deseos.
      */
     @PodamExclude
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id")
     private ClienteEntity cliente;
-    
-       
+
     //----------------------------------------------------
     // Getters y Setters
     //----------------------------------------------------
-
     /**
-     * @return el precio total del listadeseos 
+     * Devuelve el precio total.
+     *
+     * @return precioTotal
      */
     public Double getPrecioTotal() {
         return precioTotal;
     }
-    
+
     /**
-     * asigna el precio total
+     * Modifica el precio total.
+     *
      * @param precioTotal el nuevo precioTotal
      */
     public void setPrecioTotal(Double precioTotal) {
         this.precioTotal = precioTotal;
     }
-    
+
     /**
-     * 
-     * @return la lista de items del listadeseos
+     * Devuelve los items.
+     *
+     * @return items
      */
     public List<ItemEntity> getItems() {
         return items;
     }
 
     /**
-     * asigna la lista de items del listadeseos
+     * Modifica la lista de items.
+     *
      * @param items la nueva lista de items
      */
     public void setItems(List<ItemEntity> items) {
         this.items = items;
     }
+
     /**
-     * 
-     * @return el cliente dueño del listadeseos 
+     * Devuelve el cliente.
+     *
+     * @return cliente
      */
     public ClienteEntity getCliente() {
         return cliente;
     }
+
     /**
-     * asigna el cliente del listadeseos
-     * @param cliente  el nuevo cliente
+     * Modifica el cliente.
+     *
+     * @param cliente nuevo cliente
      */
     public void setCliente(ClienteEntity cliente) {
         this.cliente = cliente;
     }
 
     /**
-     * @return the id
+     * Devuelve el id.
+     *
+     * @return id
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * @param id the id to set
+     * Modifica el id.
+     *
+     * @param id nuevo id
      */
     public void setId(Long id) {
         this.id = id;
     }
-    
+
+    /**
+     * Compara si dos objetos son iguales.
+     *
+     * @param obj objeto a comparar
+     * @return boolean Si son iguales retorna true. De lo contrario retorna
+     * false
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -139,6 +157,11 @@ public class ListaDeseosEntity implements Serializable{
         return Objects.equals(this.id, other.id);
     }
 
+    /**
+     * Metodo predeterminado hashCode.
+     *
+     * @return el hashCode creado
+     */
     @Override
     public int hashCode() {
         if (this.getId() != null) {
@@ -146,5 +169,5 @@ public class ListaDeseosEntity implements Serializable{
         }
         return super.hashCode();
     }
-    
+
 }

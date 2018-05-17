@@ -24,36 +24,46 @@ import javax.inject.Inject;
 @Stateless
 public class ListaDeseosLogic {
     
+    /**
+     * LOGGER de la clase ListaDeseosLogic.
+     */
     private static final Logger LOGGER = Logger.getLogger(ListaDeseosLogic.class.getName());
     
+    /**
+     * Constante para modelar que no existe una lista de deseos.
+     */
     private static final String NOEXISTE = "No existe un listadeseos con el id";
     
+    /**
+     * Injecta la persistencia de lista de deseos.
+     */
     @Inject
     private ListaDeseosPersistence persistence;
     
+    /**
+     * Injecta la logica de item.
+     */
     @Inject
     private ItemLogic itemLogic;
-    //DONE: Está variable no se está usando
     
     /**
-     * Crea un carito 
-     * @param entity el listadeseos que se quiere crear
-     * @return el listadeseos agregado
-     * @throws BusinessLogicException  si ya existe el listadeseos
+     * Crea un carito. 
+     * @param entity la lista de deseos que se quiere crear
+     * @return la lista de deseos agregado
+     * @throws BusinessLogicException  si ya existe el lista de deseos
      */
     public ListaDeseosEntity createListaDeseos(ListaDeseosEntity entity) throws BusinessLogicException{
         LOGGER.info("Inicia proceso de creación del listadeseos");
-        // DONE: Esta verificación no está bien porque no se ha creado el listadeseos entonces no tiene aun un id. 
-        
         ListaDeseosEntity rpta = persistence.create(entity);
         LOGGER.info("Termina proceso de creación de listadeseos");
         return rpta;
     }
     
     /**
-     * encuentra un listadeseos
-     * @param id el id del listadeseos a buscar
-     * @return el listadeseos encontrado
+     * Devuelve una lista de deseos especifica.
+     * @param id el id de la lista de deseos a buscar
+     * @return la lista de deseos encontrado
+     * @throws BusinessLogicException por reglas de negocio
      */
     public ListaDeseosEntity findListaDeseos( Long id ) throws BusinessLogicException{
         
@@ -68,9 +78,9 @@ public class ListaDeseosLogic {
     }
     
     /**
-     * actualiza un listadeseos
-     * @param entity el listadeseos con la informacion actualizada
-     * @return el listadeseos actualizado
+     * Actualiza una lista de deseos
+     * @param entity la lista de deseos con la informacion actualizada
+     * @return la lista de deseos actualizada
      * @throws BusinessLogicException si no se puede actualizar
      */
     public ListaDeseosEntity updateListaDeseos( ListaDeseosEntity entity ) throws BusinessLogicException{
@@ -82,8 +92,8 @@ public class ListaDeseosLogic {
     }
     
     /**
-     * borra un listadeseos
-     * @param id el id del listadeseos que se desea borrar
+     * Elimina una lista de deseos
+     * @param id el id de la lista de deseos que se desea borrar
      */
     public void deleteListaDeseos(Long id) {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar listadeseos con id={0}", id);
@@ -92,8 +102,8 @@ public class ListaDeseosLogic {
     }
     
     /**
-     * devuelve la lista de items del listadeseos
-     * @param id el id del listadeseos al que se le quieren consultar los items
+     * Devuelve la lista de items de la lista de deseos
+     * @param idListaDeseos el id de la lista de deseos a la que se le quieren consultar los items
      * @return la lista de items
      * @throws BusinessLogicException si no se puede colsultar
      */
@@ -109,11 +119,11 @@ public class ListaDeseosLogic {
     }
     
     /**
-     * agrega un item a la lista de items
-     * @param idListaDeseos el id del carito al que se le quiere agregar items
+     * Agrega un item a la lista de items
+     * @param idListaDeseos el id del carrito al que se le quiere agregar items
      * @param itemId el id del item que se desea agregar 
      * @return el item agregado
-     * @throws BusinessLogicException si no se encuentra el listadeseos o el item
+     * @throws BusinessLogicException si no se encuentra la lista de deseos o el item
      */
     public ItemEntity addItem( Long idListaDeseos, Long itemId ) throws BusinessLogicException{
                   
@@ -148,11 +158,11 @@ public class ListaDeseosLogic {
     }
     
     /**
-     * quita un item de la lista de items del listadeseos
-     * @param idListaDeseos el id del listadeseos que se le quiere quitar un item
+     * Elimina un item de la lista de items de la lista de deseos
+     * @param idListaDeseos el id de la lista de deseos que se le quiere quitar un item
      * @param itemId el id del item que se desea quitar
      * @return el item eliminado
-     * @throws BusinessLogicException  si no se encuentra el listadeseos o el item
+     * @throws BusinessLogicException  si no se encuentra la lista de deseos o el item
      */
     public ItemEntity removeItem( Long idListaDeseos, Long itemId ) throws BusinessLogicException{
         ListaDeseosEntity listadeseos = persistence.find(idListaDeseos);
@@ -171,10 +181,10 @@ public class ListaDeseosLogic {
     }
     
     /**
-     * genera la factura con los items que tiene el listadeseos y vacia el listadeseos
-     * @param id el id del listadeseos
+     * Genera la factura con los items que tiene la lista de deseos y vacia la lista de deseos
+     * @param id el id de la lista de deseos
      * @return la factura generada
-     * @throws BusinessLogicException si el listadeseos no tiene items 
+     * @throws BusinessLogicException si la lista de deseos no tiene items 
      */
     public FacturaEntity crearFactura( Long id ) throws BusinessLogicException{
         ListaDeseosEntity listadeseos = persistence.find(id);
@@ -207,8 +217,8 @@ public class ListaDeseosLogic {
     }
     
     /**
-     * calcula el procio total del listadeseos y lo actualiza
-     * @param id del listadeseos que se desea actualizar el precio
+     * Calcula el procio total de la lista de deseos y lo actualiza
+     * @param id de la lista de deseos que se desea actualizar el precio
      */
     public void actualizarPrecioTotal( Long id ){
         
@@ -225,8 +235,8 @@ public class ListaDeseosLogic {
     }
     
     /**
-     * retorna el listadeseos perteneciente al cliente que entra por parametro
-     * @param id del cliente dueño del listadeseos
+     * Devuelve la lista de deseos perteneciente al cliente que entra por parametro
+     * @param clienteId del cliente dueño de la lista de deseos
      */
     public ListaDeseosEntity getListaDeseosByClienteId( Long clienteId ){
         

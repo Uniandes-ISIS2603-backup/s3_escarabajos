@@ -22,14 +22,26 @@ import javax.inject.Inject;
 @Stateless
 public class ItemLogic {
 
+    /**
+     * LOGGER de la clase ItemLogic.
+     */
     private static final Logger LOGGER = Logger.getLogger(ItemLogic.class.getName());
 
+    /**
+     * Injecta la persistencia de bicicleta.
+     */
     @Inject
     private BicicletaPersistence biciPers;
 
+    /**
+     * Injecta la persistencia de modelo.
+     */
     @Inject
     private ModeloPersistence modeloPers;
 
+    /**
+     * Injecta la persistencia de accesorio.
+     */
     @Inject
     private AccesorioPersistence accPers;
 
@@ -39,6 +51,7 @@ public class ItemLogic {
       Se crea/busca el modeloId al que se le quiere agregar: 
       se crea el accesorio y se le agrega al modelo.
      */
+    
     /**
      * Devuelve todos los items que hay en la base de datos.
      *
@@ -58,7 +71,7 @@ public class ItemLogic {
     }
 
     /**
-     * Busca un item por ID
+     * Devuelve un item por ID
      *
      * @param id El id del item a buscar
      * @return El item encontrado, null si no lo encuentra.
@@ -115,7 +128,7 @@ public class ItemLogic {
     }
 
     /**
-     * Retorna la referencia de un item que entre por paramentro
+     * Devuelve la referencia de un item que entre por paramentro
      *
      * @param entity al que se le buscara la referencia del modelo.
      * @return referencia del modelo al que le pertenece el item.
@@ -126,7 +139,7 @@ public class ItemLogic {
     }
 
     /**
-     * Retorna una collecion de items asociados a un modelo cada uno con su
+     * Devuelve una collecion de items asociados a un modelo cada uno con su
      * instancia original
      *
      * @param idModelo modelo al cual se le buscaran los items
@@ -177,8 +190,11 @@ public class ItemLogic {
             }
             item.setDisponible(Boolean.FALSE);
             if (item instanceof AccesorioEntity) {
+                  LOGGER.info("@@@3"+item.getDisponible());
                 accPers.update((AccesorioEntity) item);
+                         LOGGER.info("@@@5"+item.getDisponible());
             } else if (item instanceof BicicletaEntity) {
+                  LOGGER.info("@@@4");
                 biciPers.update((BicicletaEntity) item);
             }
             return item;
@@ -212,7 +228,7 @@ public class ItemLogic {
     }
 
     /**
-     * Retorna una collecion de bicicletas asociadas a un modelo cada uno con su
+     * Devuelve una collecion de bicicletas asociadas a un modelo cada uno con su
      * instancia original
      *
      * @param modelosId modelo al cual se le buscaran los bicicletas
@@ -223,7 +239,7 @@ public class ItemLogic {
     }
 
     /**
-     * Retorna una collecion de accesorios asociados a un modelo cada uno con su
+     * Devuelve una collecion de accesorios asociados a un modelo cada uno con su
      * instancia original
      *
      * @param modelosId modelo al cual se le buscaran los accesorios

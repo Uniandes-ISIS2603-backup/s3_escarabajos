@@ -25,20 +25,35 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class ItemEntity implements Serializable {
 
+    /**
+     * Atributo que representa el id de un item. id autogenerado
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * Atributo que representa el precio de un item.
+     */
     private Double precio;
 
+    /**
+     * Atributo que representa el color de un item.
+     */
     private String color;
 
+    /**
+     * Atributo que representa el album de fotos de un item.
+     */
     @PodamExclude
     @ElementCollection
     @CollectionTable(name = "ITEM_ALBUM")
     @Lob
     private List<String> album = new ArrayList<>();
 
+    /**
+     * Atributo que representa el modelo de un item.
+     */
     private Long modeloId;
 
     /**
@@ -47,7 +62,7 @@ public class ItemEntity implements Serializable {
     private String categoria;
 
     /**
-     * Atributo que representa si el item esta disponible para compra
+     * Atributo que representa si el item esta disponible para compra.
      */
     private Boolean disponible;
 
@@ -57,47 +72,66 @@ public class ItemEntity implements Serializable {
     private Double multiplicador;
 
     /**
-     * @return the id
+     * Devuelve el id.
+     *
+     * @return id
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * @param id the id to set
+     * Modifica el id.
+     *
+     * @param id nuevo id
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * @return the precio
+     * Devuelve el precio.
+     *
+     * @return precio
      */
     public double getPrecio() {
         return precio;
     }
 
     /**
-     * @param precio the precio to set
+     * Modifica el precio.
+     *
+     * @param precio nuevo precio
      */
     public void setPrecio(double precio) {
         this.setPrecio((Double) precio);
     }
 
     /**
-     * @return the modeloId
+     * Devuelve el modelo.
+     *
+     * @return modeloId
      */
     public long getModeloId() {
         return modeloId;
     }
 
     /**
-     * @param modeloId the modeloId to set
+     * Modifica el modelo
+     *
+     * @param modeloId nuevo modelo
      */
     public void setModeloId(long modeloId) {
         this.setModeloId((Long) modeloId);
     }
 
+    /**
+     * Compara si dos objetos son iguales.
+     *
+     * @param obj objeto a comparar
+     * @return boolean Si son iguales retorna true. De lo contrario retorna
+     * false
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -113,6 +147,11 @@ public class ItemEntity implements Serializable {
         return Objects.equals(this.id, other.id);
     }
 
+    /**
+     * Metodo predeterminado hashCode.
+     *
+     * @return el hashCode creado
+     */
     @Override
     public int hashCode() {
         if (this.getId() != null) {
@@ -122,84 +161,108 @@ public class ItemEntity implements Serializable {
     }
 
     /**
-     * @return the color
+     * Devuelve el color.
+     *
+     * @return color
      */
     public String getColor() {
         return color;
     }
 
     /**
-     * @param color the color to set
+     * Modifica el color.
+     *
+     * @param color nuevo color
      */
     public void setColor(String color) {
         this.color = color;
     }
 
     /**
-     * @return the categoria
+     * Devuelve la categoria.
+     *
+     * @return categoria
      */
     public String getCategoria() {
         return categoria;
     }
 
     /**
-     * @param categoria the categoria to set
+     * Modifica la categoria.
+     *
+     * @param categoria nueva categoria
      */
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 
     /**
-     * @param precio the precio to set
+     * Modifica el precio.
+     *
+     * @param precio nuevo precio
      */
     public void setPrecio(Double precio) {
         this.precio = precio;
     }
 
     /**
-     * @param modeloId the modeloId to set
+     * Modifica el modelo.
+     *
+     * @param modeloId nuevo modelo
      */
     public void setModeloId(Long modeloId) {
         this.modeloId = modeloId;
     }
 
     /**
-     * @return the disponible
+     * Devuelve si esta disponible.
+     *
+     * @return disponible
      */
     public Boolean getDisponible() {
         return disponible;
     }
 
     /**
-     * @param disponible the disponible to set
+     * Modifica si esta disponible.
+     *
+     * @param disponible nuevo valor de disponible
      */
     public void setDisponible(Boolean disponible) {
         this.disponible = disponible;
     }
 
     /**
-     * @return the album
+     * Devuelve el album de fotos.
+     *
+     * @return album
      */
     public List<String> getAlbum() {
         return album;
     }
 
     /**
-     * @param album the album to set
+     * Modifica el album de fotos.
+     *
+     * @param album nuevo album de fotos
      */
     public void setAlbum(List<String> album) {
         this.album = album;
     }
 
     /**
-     * @return the multiplicador
+     * Devuelve el multiplicador.
+     *
+     * @return multiplicador
      */
     public Double getMultiplicador() {
         return multiplicador;
     }
 
     /**
-     * @param multiplicador the multiplicador to set
+     * Modifica el multiplicador.
+     *
+     * @param multiplicador nuevo multiplicador
      */
     public void setMultiplicador(Double multiplicador) {
         this.multiplicador = multiplicador;

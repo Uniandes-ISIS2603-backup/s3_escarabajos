@@ -26,42 +26,76 @@ import javax.inject.Inject;
 @Stateless
 public class ModeloLogic {
 
+    /**
+     * Constante para modelar el tipo bicicleta.
+     */
     public static final String BICICLETA = "Bicicleta";
+
+    /**
+     * Constante para modelar el tipo accesorio.
+     */
     public static final String ACCESORIO = "Accesorio";
+
+    /**
+     * Constante para modelar el tipo bicicletaUsada.
+     */
     public static final String BICICLETAUSADA = "BicicletaUsada";
+
+    /**
+     * Constante para modelar que el modelo no existe.
+     */
     public static final String MODELONOEXISTE = "El modelo no existe!";
+
+    /**
+     * Constante para modelar que el modelo ya existe.
+     */
     public static final String MODELOEXISTE = "El modelo ya existe!";
 
+    /**
+     * LOGGER de la clase ModeloLogic.
+     */
     private static final Logger LOGGER = Logger.getLogger(ModeloLogic.class.getName());
 
+    /**
+     * Injecta la persistencia de modelo.
+     */
     @Inject
     private ModeloPersistence persistence;
 
+    /**
+     * Injecta la logica de item.
+     */
     @Inject
     private ItemLogic itemLogic;
 
+    /**
+     * Injecta la logica de accesorio.
+     */
     @Inject
     private AccesorioLogic accLogic;
 
+    /**
+     * Injecta la logica de bicicleta.
+     */
     @Inject
     private BicicletaLogic biciLogic;
 
     /**
-     * Obtiene la lista de los registros de Modelo.
+     * Devuelve la lista de los registros de Modelo.
      *
-     * @param pagina pagina de modelos 
+     * @param pagina pagina de modelos
      * @param numModelos numero de modelos por pagina
      * @return Colección de objetos de ModeloEntity.
      */
     public List<ModeloEntity> getModelos(Integer pagina, Integer numModelos) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los modelos");
-        List<ModeloEntity> lista = persistence.findAll(pagina,numModelos);
+        List<ModeloEntity> lista = persistence.findAll(pagina, numModelos);
         LOGGER.log(Level.INFO, "Finaliza proceso de consultar todos los modelos");
         return lista;
     }
 
     /**
-     * Retorna la referencia de un item que entre por paramentro
+     * Devuelve la referencia de un item que entre por paramentro
      *
      * @param entity al que se le buscara la referencia del modelo.
      * @return referencia del modelo al que le pertenece el item.
@@ -71,7 +105,7 @@ public class ModeloLogic {
     }
 
     /**
-     * Obtiene los datos de una instancia de Modelo a partir de su ID.
+     * Devuelve los datos de una instancia de Modelo a partir de su ID.
      *
      * @param id Identificador de la instancia a consultar
      * @return Instancia de ModeloEntity con los datos del Modelo consultado.
@@ -84,7 +118,7 @@ public class ModeloLogic {
     }
 
     /**
-     * Se encarga de crear un Modelo en la base de datos.
+     * Crea un Modelo en la base de datos.
      *
      * @param entity Objeto de ModeloEntity con los datos nuevos
      * @return Objeto de ModeloEntity con los datos nuevos y su ID.
@@ -144,11 +178,12 @@ public class ModeloLogic {
         }
         modeloEntity.setItems(items);
         persistence.update(modeloEntity);
+
         LOGGER.log(Level.INFO, "Finaliza proceso de borrar un modelo ");
     }
 
     /**
-     * Agregar un item al modelo (pre) el item es del mismo tipo que el
+     * Agrega un item al modelo (pre) el item es del mismo tipo que el
      * modelo.(pre)
      *
      * @param item El item a guardar
@@ -169,7 +204,7 @@ public class ModeloLogic {
     }
 
     /**
-     * Retorna un item asociado a un modelo
+     * Devuelve un item asociado a un modelo
      *
      * @param modeloId El id del modelo a buscar.
      * @param itemId El id del item a buscar
@@ -192,7 +227,7 @@ public class ModeloLogic {
     }
 
     /**
-     * Obtiene una colección de instancias de ItemEntity asociadas a una
+     * Devuelve una colección de instancias de ItemEntity asociadas a una
      * instancia de Modelo
      *
      * @param modeloId Identificador de la instancia de Modelo
@@ -206,7 +241,7 @@ public class ModeloLogic {
     }
 
     /**
-     * Borra un item y su relacion con un modelo
+     * Elimina un item y su relacion con un modelo
      *
      * @param itemsId item a borrar
      * @throws BusinessLogicException si el item o el modelo no existen.

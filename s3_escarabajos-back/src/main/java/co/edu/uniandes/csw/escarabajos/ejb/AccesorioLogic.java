@@ -21,16 +21,25 @@ import javax.inject.Inject;
 @Stateless
 public class AccesorioLogic {
 
+    /**
+     * LOGGER de la clase AccesorioLogic.
+     */
     private static final Logger LOGGER = Logger.getLogger(AccesorioLogic.class.getName());
 
+    /**
+     * Injecta la persistencia de Accesorio.
+     */
     @Inject
     private AccesorioPersistence persistence;
 
+    /**
+     * Injecta la logica de item.
+     */
     @Inject
     private ItemLogic itemLogic;
 
     /**
-     * crea un accesorio
+     * Crea un accesorio.
      *
      * @param entity el entity que se desea crear
      * @return el accesorio
@@ -53,7 +62,7 @@ public class AccesorioLogic {
     }
 
     /**
-     * actualiza un accesorio
+     * Actualiza un accesorio.
      *
      * @param entity el entity que se desea actualizar
      * @return el accesorio
@@ -75,7 +84,7 @@ public class AccesorioLogic {
     }
 
     /**
-     * borra un accesorio
+     * Borra un accesorio.
      *
      * @param id el id del accesorio a borrar
      */
@@ -87,6 +96,7 @@ public class AccesorioLogic {
     }
 
     /**
+     * Devuelve todos los accesorios que hay en la base de datos.
      *
      * @return todos los accesorios
      */
@@ -98,7 +108,7 @@ public class AccesorioLogic {
     }
 
     /**
-     * busca un accesorio
+     * Obtiene un accesorio especifico.
      *
      * @param id el id del accesorio de consulta
      * @return el accesorio

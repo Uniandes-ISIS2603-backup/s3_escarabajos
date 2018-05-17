@@ -7,7 +7,6 @@ package co.edu.uniandes.csw.escarabajos.entities;
 
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,110 +23,138 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class MedioPagoEntity implements Serializable {
 
     /**
-     * modela el tipo de pago por pse
+     * Constante que modela el tipo de pago por pse.
      */
     public final static String TIPO_PSE = "PSE";
 
     /**
-     * modela el tipo de pago por paypal
+     * Constante que modela el tipo de pago por paypal.
      */
     public final static String TIPO_PAYPAL = "PayPal";
 
     /**
-     * modela el tipo de pago por tarjeta de credito
+     * Constante que modela el tipo de pago por tarjeta de credito.
      */
     public final static String TIPO_TARJETA_CREDITO = "Tarjeta de Credito";
 
     /**
-     * modela el tipo de pago por tarjeta debito
+     * Constante que modela el tipo de pago por tarjeta debito.
      */
     public final static String TIPO_TARJETA_DEBITO = "Tarjeta Debito";
 
+    /**
+     * Atributo que representa el id del medio de pago. id autogenerado
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * Atributo que representa el tipo del medio de pago.
+     */
     private String tipo;
 
+    /**
+     * Atributo que representa el cliente del medio de pago.
+     */
     @PodamExclude
     @ManyToOne
     private ClienteEntity cliente;
 
+    /**
+     * Atributo que representa la factura del medio de pago.
+     */
     @PodamExclude
     @OneToOne
     private FacturaEntity factura;
 
     /**
-     * @return the tipo
+     * Devuelve el tipo.
+     *
+     * @return tipo
      */
     public String getTipo() {
         return tipo;
     }
 
     /**
-     * @param tipo the tipo to set
+     * Modifica el tipo.
+     *
+     * @param tipo nuevo tipo
      */
     public void setTipo(String tipo) {
-       if(tipo.equalsIgnoreCase(TIPO_PAYPAL))
-       {
-           this.tipo = TIPO_PAYPAL;
-       }
-       else if(tipo.equalsIgnoreCase(TIPO_PSE))
-       {
-           this.tipo = TIPO_PSE;
-       }
-       else if(tipo.equalsIgnoreCase(TIPO_TARJETA_CREDITO))
-       {
-           this.tipo = TIPO_TARJETA_CREDITO;
-       }
-       else if(tipo.equalsIgnoreCase(TIPO_TARJETA_DEBITO))
-       {
-           this.tipo = TIPO_TARJETA_DEBITO;
-       }
+        if (tipo.equalsIgnoreCase(TIPO_PAYPAL)) {
+            this.tipo = TIPO_PAYPAL;
+        } else if (tipo.equalsIgnoreCase(TIPO_PSE)) {
+            this.tipo = TIPO_PSE;
+        } else if (tipo.equalsIgnoreCase(TIPO_TARJETA_CREDITO)) {
+            this.tipo = TIPO_TARJETA_CREDITO;
+        } else if (tipo.equalsIgnoreCase(TIPO_TARJETA_DEBITO)) {
+            this.tipo = TIPO_TARJETA_DEBITO;
+        }
     }
 
     /**
-     * @return the cliente
+     * Devuelve el cliente.
+     *
+     * @return cliente
      */
     public ClienteEntity getCliente() {
         return cliente;
     }
 
     /**
-     * @param cliente the cliente to set
+     * Modifica el cliente.
+     *
+     * @param cliente nuevo cliente
      */
     public void setCliente(ClienteEntity cliente) {
         this.cliente = cliente;
     }
 
     /**
-     * @return the factura
+     * Devuelve la factura.
+     *
+     * @return factura
      */
     public FacturaEntity getFactura() {
         return factura;
     }
 
     /**
-     * @param factura the factura to set
+     * Modifica la factura.
+     *
+     * @param factura nueva factura
      */
     public void setFactura(FacturaEntity factura) {
         this.factura = factura;
     }
 
     /**
-     * @return the id
+     * Devuelve el id.
+     *
+     * @return id
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * @param id the id to set
+     * Modifica el id.
+     *
+     * @param id nuevo id
      */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * Compara si dos objetos son iguales.
+     *
+     * @param obj objeto a comparar
+     * @return boolean Si son iguales retorna true. De lo contrario retorna
+     * false
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -143,6 +170,11 @@ public class MedioPagoEntity implements Serializable {
         return Objects.equals(this.id, other.id);
     }
 
+    /**
+     * Metodo predeterminado hashCode.
+     *
+     * @return el hashCode creado
+     */
     @Override
     public int hashCode() {
         if (this.getId() != null) {

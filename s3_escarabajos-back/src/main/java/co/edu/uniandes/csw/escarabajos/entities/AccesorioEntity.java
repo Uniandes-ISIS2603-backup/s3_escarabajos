@@ -13,26 +13,29 @@ import javax.persistence.Entity;
  * @author Mateo
  */
 @Entity
-public class AccesorioEntity extends ItemEntity implements Serializable{
-    
-    
+public class AccesorioEntity extends ItemEntity implements Serializable {
+
     /**
      * Descripcion del accesorio.
      */
     private String descripcion;
 
     /**
-     * @return the descripcion
+     * Devuelve la descripcion del accesorio.
+     *
+     * @return Descripcion del accesorio
      */
     public String getDescripcion() {
         return descripcion;
     }
 
     /**
-     * @param descripcion the descripcion to set
+     * Modifica la descripcion del accesorio.
+     *
+     * @param descripcion Descripcion del accesorio
      */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
+
 }

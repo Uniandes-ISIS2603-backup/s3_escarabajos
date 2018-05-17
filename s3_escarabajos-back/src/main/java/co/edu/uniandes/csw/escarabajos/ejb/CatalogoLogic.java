@@ -17,78 +17,92 @@ import javax.inject.Inject;
 @Stateless
 public class CatalogoLogic {
 
+    /**
+     * LOGGER de la clase CatalogoLogic.
+     */
     private static final Logger LOGGER = Logger.getLogger(CatalogoLogic.class.getName());
+
+    /**
+     * Constante que modela el error de filtros.
+     */
     private static final String ERROR = "Los Filtros no estan en el formato adecuado!";
+
+    /**
+     * Injecta la persistencia de catalogo.
+     */
     @Inject
     private CatalogoPersistence persistence;
 
+    /**
+     * Injecta la logica de modelo.
+     */
     @Inject
     private ModeloLogic modeloLogic;
 
+    /**
+     * Injecta la logica de item.
+     */
     @Inject
     private ItemLogic itemLogic;
 
     /**
-     * Obtiene una colección de todas las marcas de accesorios en el sistema
+     * Devuelve una colección de todas las marcas de accesorios en la base de
+     * datos.
      *
      * @return Colección de nombres de todas las marcas de accesorios en el
      * sistema
-     *
      */
     public List<String> getMarcasAccesorios() {
         return persistence.findMarcas(ModeloLogic.ACCESORIO);
     }
 
     /**
-     * Obtiene una colección de todas las categorias de accesorios en el sistema
+     * Devuelve una colección de todas las categorias de accesorios en la base
+     * de datos.
      *
      * @return Colección de nombres de todas las categorias de accesorios en el
      * sistema
-     *
      */
     public List<String> getCategoriasAccesorios() {
         return persistence.findCategorias(ModeloLogic.ACCESORIO);
     }
 
     /**
-     * Obtiene una colección de todos los colores de accesorios en el sistema
+     * Devuelve una colección de todos los colores de accesorios en el sistema.
      *
      * @return Colección de nombres de todas los colores de accesorios en el
      * sistema
-     *
      */
     public List<String> getColoresAccesorios() {
         return persistence.findColores(ModeloLogic.ACCESORIO);
     }
 
     /**
-     * Obtiene una colección de todas las marcas de bicicletas en el sistema
+     * Devuelve una colección de todas las marcas de bicicletas en el sistema.
      *
      * @return Colección de nombres de todas las marcas de bicicletas en el
      * sistema
-     *
      */
     public List<String> getMarcasBicicletas() {
         return persistence.findMarcas(ModeloLogic.BICICLETA);
     }
 
     /**
-     * Obtiene una colección de todas las categorias de bicicletas en el sistema
+     * Devuelve una colección de todas las categorias de bicicletas en el
+     * sistema.
      *
      * @return Colección de nombres de todas las categorias de bicicletas en el
      * sistema
-     *
      */
     public List<String> getCategoriasBicicletas() {
         return persistence.findCategorias(ModeloLogic.BICICLETA);
     }
 
     /**
-     * Obtiene una colección de todos los colores de bicicletas en el sistema
+     * Devuelve una colección de todos los colores de bicicletas en el sistema.
      *
      * @return Colección de nombres de todas los colores de bicicletas en el
      * sistema
-     *
      */
     public List<String> getColoresBicicletas() {
         return persistence.findColores(ModeloLogic.BICICLETA);
@@ -295,6 +309,7 @@ public class CatalogoLogic {
 
     /**
      * Metodo que se encarga de borrar todos los modelos de una marca
+     *
      * @param marca a borrar
      * @throws BusinessLogicException si falla la busqueda
      */
@@ -315,9 +330,11 @@ public class CatalogoLogic {
     }
 
     /**
-     * Metodo que se encarga de borrar los modelos que tienen la categoria ingresada por parametro
+     * Metodo que se encarga de borrar los modelos que tienen la categoria
+     * ingresada por parametro
+     *
      * @param categoria
-     * @throws BusinessLogicException 
+     * @throws BusinessLogicException
      */
     public void deleteCategoria(String categoria) throws BusinessLogicException {
         List<List<String>> filtros = new ArrayList<>();
