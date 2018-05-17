@@ -4,10 +4,8 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.escarabajos.dtos;
-//TODO: DONE Borrar lo que no se use
 
 import co.edu.uniandes.csw.escarabajos.entities.ReclamoEntity;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

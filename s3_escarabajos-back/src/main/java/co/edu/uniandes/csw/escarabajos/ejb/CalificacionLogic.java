@@ -79,7 +79,6 @@ public class CalificacionLogic {
                 throw new BusinessLogicException("Usted ya ha calificado a este modelo");
             }
         }
-        // TODO: DONE QUitar las líneas que no sirven
         ModeloEntity model = modeloLogic.getModelo(modeloId);
         LOGGER.info(model.getMarca());
         ClienteEntity cliente = clienteLogic.getCliente(clienteId);

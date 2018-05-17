@@ -56,6 +56,7 @@ public class CalificacionDTO {
      * Constructor por defecto
      */
     public CalificacionDTO() {
+        //Empty
     }
 
     /**
@@ -64,7 +65,6 @@ public class CalificacionDTO {
      * @param cal entidad de la se saca la información
      */
     public CalificacionDTO(CalificacionEntity cal) {
-    //TODO: DONE cal podría ser null
         if (cal != null) {
             id = cal.getId();
             comentario = cal.getComentario();

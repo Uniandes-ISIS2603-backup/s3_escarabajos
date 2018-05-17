@@ -39,7 +39,7 @@ public class FacturaDTO{
      * Constructor por defecto
      */
     public FacturaDTO() {
-
+        //Empty
     }
 
     /**
@@ -49,7 +49,6 @@ public class FacturaDTO{
      * @param factura: Es la entidad que se va a convertir a DTO
      */
     public FacturaDTO(FacturaEntity factura) {
-        //TODO: factura podría ser null
         this.dinero = factura.getDinero();
         this.id = factura.getId();
     }
@@ -62,7 +61,6 @@ public class FacturaDTO{
     public FacturaEntity toEntity() {
         FacturaEntity entity = new FacturaEntity();
         entity.setDinero(this.dinero);
-
         return entity;
     }
     

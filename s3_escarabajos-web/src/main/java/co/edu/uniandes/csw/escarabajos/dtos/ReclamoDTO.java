@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.escarabajos.dtos;
 
 import co.edu.uniandes.csw.escarabajos.entities.ReclamoEntity;
-//TODO: DONE Borrar lo que no se use
 
 /**
  * ReclamoDTO Objeto de transferencia de datos del modelo de la bicicleta. Los
@@ -71,7 +70,6 @@ public class ReclamoDTO {
      * @param recl: Es la entidad que se va a convertir a DTO
      */
     public ReclamoDTO(ReclamoEntity recl) {
-        //TODO: DONE recl podría ser null
         if (recl != null) {
             this.id = recl.getId();
             this.mensaje = recl.getMensaje();

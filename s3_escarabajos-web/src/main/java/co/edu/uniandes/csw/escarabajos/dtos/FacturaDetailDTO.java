@@ -26,7 +26,7 @@ public class FacturaDetailDTO extends FacturaDTO {
      * Constructor por defecto
      */
     public FacturaDetailDTO() {
-        //vacio
+        //Empty
     }
 
     /**
@@ -34,10 +34,8 @@ public class FacturaDetailDTO extends FacturaDTO {
      *
      * @param entity La entidad de factura a partir de la cual se construye el objeto
      */
-    //TODO: qué pasa si entity es null
     public FacturaDetailDTO(FacturaEntity entity) {
        super(entity);
-       //TODO: entity podría ser null
        this.cliente = entity.getCliente();
        this.medioDePago = entity.getMedioDePago();
        this.reclamo = entity.getReclamo();

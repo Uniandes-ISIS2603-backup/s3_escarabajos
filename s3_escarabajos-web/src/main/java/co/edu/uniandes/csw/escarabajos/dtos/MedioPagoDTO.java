@@ -36,7 +36,7 @@ public class MedioPagoDTO {
     // Atributos
     //-----------------------------------------------------------
     
-    //TODO: no puede ser long debe ser Long. arreglar también set/get
+
     private Long id;
     
     /**
@@ -58,7 +58,6 @@ public class MedioPagoDTO {
     //-----------------------------------------------------------
 
     public MedioPagoDTO(MedioPagoEntity entity) {
-        //TODO: entity podría ser null
         if(entity!=null){
             this.id = entity.getId();
             this.tipo = entity.getTipo();
@@ -74,7 +73,6 @@ public class MedioPagoDTO {
         this.tipo = tipo;
     }
 
-    //Falta hacerlo TODO
     public MedioPagoEntity toEntity() {
         MedioPagoEntity entity = new MedioPagoEntity();
         entity.setId(this.id);
