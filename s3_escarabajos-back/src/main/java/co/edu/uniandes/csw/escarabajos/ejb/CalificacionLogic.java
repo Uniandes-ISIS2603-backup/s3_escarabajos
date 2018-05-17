@@ -27,19 +27,19 @@ public class CalificacionLogic {
     private final static Logger LOGGER = Logger.getLogger(CalificacionLogic.class.getName());
 
     /**
-     * Injecta la persistencia de calificacion.
+     * Inyecta la persistencia de calificacion.
      */
     @Inject
     private CalificacionPersistence calificacionPersistence;
 
     /**
-     * Injecta la logica de modelo.
+     * Inyecta la logica de modelo.
      */
     @Inject
     private ModeloLogic modeloLogic;
 
     /**
-     * Injecta la logica de cliente.
+     * Inyecta la logica de cliente.
      */
     @Inject
     private ClienteLogic clienteLogic;

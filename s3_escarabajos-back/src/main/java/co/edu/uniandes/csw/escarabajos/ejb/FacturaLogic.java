@@ -27,7 +27,7 @@ public class FacturaLogic {
     private static final Logger LOGGER = Logger.getLogger(FacturaLogic.class.getName());
 
     /**
-     * Injecta la persistencia de Factura.
+     * Inyecta la persistencia de Factura.
      */
     @Inject
     private FacturaPersistence persistence;

@@ -35,22 +35,45 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class AccesorioLogicTest {
 
+    /**
+     * PodamFactory.
+     */
     private PodamFactory factory = new PodamFactoryImpl();
 
+    /**
+     * Injecta la logica de accesorio.
+     */
     @Inject
     private AccesorioLogic logic;
 
+    /**
+     * Injecta la logica de modelo.
+     */
     @Inject
     private ModeloLogic logicModelo;
 
+    /**
+     * EntityManager.
+     */
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     * UserTransaction.
+     */
     @Inject
     private UserTransaction utx;
 
+    /**
+     * Datos de accesorio.
+     */
     private List<AccesorioEntity> data = new ArrayList<AccesorioEntity>();
 
+    /**
+     * Creacion del deployment.
+     *
+     * @return deployment
+     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -110,7 +133,7 @@ public class AccesorioLogicTest {
     }
 
     /**
-     * prueba el metodo createAccesorio
+     * Prueba el metodo createAccesorio
      *
      * @throws BusinessLogicException
      */
@@ -130,7 +153,7 @@ public class AccesorioLogicTest {
     }
 
     /**
-     * prueba el metodo updateAccesorio
+     * Prueba el metodo updateAccesorio
      *
      * @throws BusinessLogicException
      */
@@ -177,7 +200,7 @@ public class AccesorioLogicTest {
     }
 
     /**
-     * prueba el metodo deleteAccesorio
+     * Prueba el metodo deleteAccesorio.
      */
     @Test
     public void deleteAccesorioTest() {
@@ -188,7 +211,7 @@ public class AccesorioLogicTest {
     }
 
     /**
-     * prueba el metodo getAccesorios
+     * Prueba el metodo getAccesorios.
      */
     @Test
     public void getAccesoriosTest() {
@@ -206,7 +229,7 @@ public class AccesorioLogicTest {
     }
 
     /**
-     * prueba el metodo getAccesorio
+     * Prueba el metodo getAccesorio.
      */
     @Test
     public void getAccesorioTest() {

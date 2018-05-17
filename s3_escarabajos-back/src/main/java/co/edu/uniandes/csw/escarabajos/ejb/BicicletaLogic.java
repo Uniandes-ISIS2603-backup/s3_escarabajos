@@ -27,12 +27,12 @@ public class BicicletaLogic {
     private static final Logger LOGGER = Logger.getLogger(BicicletaLogic.class.getName());
 
     /**
-     * Injecta la persistencia de bicicleta.
+     * Inyecta la persistencia de bicicleta.
      */
     @Inject
     private BicicletaPersistence persistence;
     /**
-     * Injecta la logica de item.
+     * Inyecta la logica de item.
      */
     @Inject
     private ItemLogic logic;

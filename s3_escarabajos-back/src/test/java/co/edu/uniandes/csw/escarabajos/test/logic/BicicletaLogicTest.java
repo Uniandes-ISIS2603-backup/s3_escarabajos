@@ -36,19 +36,37 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class BicicletaLogicTest {
 
+    /**
+     * PodamFactory.
+     */
     private PodamFactory factory = new PodamFactoryImpl();
 
+    /**
+     * Inyecta la logica de bicicleta.
+     */
     @Inject
     private BicicletaLogic logic;
 
+    /**
+     * EntityManager.
+     */
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     * UserTransaction.
+     */
     @Inject
     private UserTransaction utx;
 
+    /**
+     * Datos de bicicleta.
+     */
     private List<BicicletaEntity> data = new ArrayList<BicicletaEntity>();
 
+    /**
+     * Datos de modelo.
+     */
     private List<ModeloEntity> dataModelo = new ArrayList<ModeloEntity>();
 
     @Deployment
@@ -165,7 +183,7 @@ public class BicicletaLogicTest {
             Assert.assertNotNull(e);
             Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
         }
-        
+
         newEntity = factory.manufacturePojo(BicicletaEntity.class);
         newEntity.setModeloId(dataModelo.get(0).getId());
         newEntity.setUsada(Boolean.FALSE);
@@ -297,6 +315,9 @@ public class BicicletaLogicTest {
         }
     }
 
+    /**
+     * Prueba del metodo findByModelo.
+     */
     @Test
     public void findByModelo() {
         Assert.assertNotNull(logic.findByModelo(data.get(1).getModeloId()));

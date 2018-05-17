@@ -28,19 +28,19 @@ public class ItemLogic {
     private static final Logger LOGGER = Logger.getLogger(ItemLogic.class.getName());
 
     /**
-     * Injecta la persistencia de bicicleta.
+     * Inyecta la persistencia de bicicleta.
      */
     @Inject
     private BicicletaPersistence biciPers;
 
     /**
-     * Injecta la persistencia de modelo.
+     * Inyecta la persistencia de modelo.
      */
     @Inject
     private ModeloPersistence modeloPers;
 
     /**
-     * Injecta la persistencia de accesorio.
+     * Inyecta la persistencia de accesorio.
      */
     @Inject
     private AccesorioPersistence accPers;

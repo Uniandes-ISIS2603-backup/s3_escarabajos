@@ -27,13 +27,13 @@ public class AccesorioLogic {
     private static final Logger LOGGER = Logger.getLogger(AccesorioLogic.class.getName());
 
     /**
-     * Injecta la persistencia de Accesorio.
+     * Inyecta la persistencia de Accesorio.
      */
     @Inject
     private AccesorioPersistence persistence;
 
     /**
-     * Injecta la logica de item.
+     * Inyecta la logica de item.
      */
     @Inject
     private ItemLogic itemLogic;

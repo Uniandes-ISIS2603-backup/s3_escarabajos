@@ -28,19 +28,19 @@ public class ReclamoLogic {
     private final static Logger LOGGER = Logger.getLogger(ReclamoLogic.class.getName());
 
     /**
-     * Injecta la persistencia de reclamo.
+     * Inyecta la persistencia de reclamo.
      */
     @Inject
     private ReclamoPersistence reclamoPersistence;
 
     /**
-     * Injecta la logica de factura.
+     * Inyecta la logica de factura.
      */
     @Inject
     private FacturaLogic facturaLogic;
 
     /**
-     * Injecta la logica de cliente.
+     * Inyecta la logica de cliente.
      */
     @Inject
     private ClienteLogic clienteLogic;
