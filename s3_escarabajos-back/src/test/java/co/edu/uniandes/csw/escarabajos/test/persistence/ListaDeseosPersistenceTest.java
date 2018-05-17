@@ -23,7 +23,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
@@ -61,6 +60,13 @@ public class ListaDeseosPersistenceTest {
      */
     private List<ListaDeseosEntity> data = new ArrayList<ListaDeseosEntity>();
     
+    /**
+     *
+     * @return Devuelve el jar que Arquillian va a desplegar en el Glassfish
+     * embebido. El jar contiene las clases de ListaDeseos, el descriptor de la base
+     * de datos y el archivo beans.xml para resolver la inyección de
+     * dependencias.
+     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -70,17 +76,32 @@ public class ListaDeseosPersistenceTest {
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
     
+    /**
+     * Constructor vacio.
+     */
     public ListaDeseosPersistenceTest() {
+        //constructor vacio
     }
     
+    /**
+     * BeforeClass.
+     */
     @BeforeClass
     public static void setUpClass() {
     }
     
+    /**
+     * AfterClass.
+     */
     @AfterClass
     public static void tearDownClass() {
     }
     
+    /**
+     * Configuración inicial de la prueba.
+     *
+     *
+     */
     @Before
     public void setUp() {
         
@@ -100,11 +121,21 @@ public class ListaDeseosPersistenceTest {
         }
     }
     
+    /**
+     * Limpia las tablas que están implicadas en la prueba.
+     *
+     *
+     */
     private void clearData() {
         em.createQuery("delete from ListaDeseosEntity").executeUpdate();
     }
 
-
+    /**
+     * Inserta los datos iniciales para el correcto funcionamiento de las
+     * pruebas.
+     *
+     *
+     */
     private void insertData() {
         
         PodamFactory factory = new PodamFactoryImpl();
@@ -116,6 +147,9 @@ public class ListaDeseosPersistenceTest {
         }
     }
     
+    /**
+     * After.
+     */
     @After
     public void tearDown() {
     }
@@ -165,6 +199,9 @@ public class ListaDeseosPersistenceTest {
         Assert.assertEquals(newEntity.getId(), resp.getId());
     }
     
+    /**
+     * Prueba el metodo deleteListaDeseos.
+     */
     @Test
     public void deleteListaDeseosTest() {
         ListaDeseosEntity entity = data.get(0);

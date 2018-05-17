@@ -23,7 +23,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
@@ -34,7 +33,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class CarritoPersistenceTest {
-    
+
     /**
      * Inyección de la dependencia a la clase CarritoPersistence cuyos métodos
      * se van a probar.
@@ -56,11 +55,11 @@ public class CarritoPersistenceTest {
     @Inject
     UserTransaction utx;
 
-     /**
-     * Contenedor para el conjunto de datos de prueba.
+    /**
+     * Datos de carrito.
      */
     private List<CarritoEntity> data = new ArrayList<CarritoEntity>();
-    
+
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -69,21 +68,36 @@ public class CarritoPersistenceTest {
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
+
+    /**
+     * Constructor vacio.
+     */
     public CarritoPersistenceTest() {
+        //constructor vacio
     }
-    
+
+    /**
+     * BeforeClass.
+     */
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
+    /**
+     * AfterClass.
+     */
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
+    /**
+     * Configuración inicial de la prueba.
+     *
+     *
+     */
     @Before
     public void setUp() {
-        
+
         try {
             utx.begin();
             em.joinTransaction();
@@ -99,14 +113,24 @@ public class CarritoPersistenceTest {
             }
         }
     }
-    
+
+    /**
+     * Limpia las tablas que están implicadas en la prueba.
+     *
+     *
+     */
     private void clearData() {
         em.createQuery("delete from CarritoEntity").executeUpdate();
     }
 
-
+    /**
+     * Inserta los datos iniciales para el correcto funcionamiento de las
+     * pruebas.
+     *
+     *
+     */
     private void insertData() {
-        
+
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
             CarritoEntity entity = factory.manufacturePojo(CarritoEntity.class);
@@ -115,7 +139,7 @@ public class CarritoPersistenceTest {
             data.add(entity);
         }
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -125,7 +149,7 @@ public class CarritoPersistenceTest {
      */
     @Test
     public void testFind() {
-        
+
         CarritoEntity entity = data.get(0);
         CarritoEntity newEntity = persistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
@@ -136,7 +160,7 @@ public class CarritoPersistenceTest {
      * Test of create method, of class CarritoPersistence.
      */
     @Test
-    public void testCreate()  {
+    public void testCreate() {
         PodamFactory factory = new PodamFactoryImpl();
         CarritoEntity newEntity = factory.manufacturePojo(CarritoEntity.class);
         CarritoEntity result = persistence.create(newEntity);
@@ -164,7 +188,7 @@ public class CarritoPersistenceTest {
 
         Assert.assertEquals(newEntity.getId(), resp.getId());
     }
-    
+
     @Test
     public void deleteCarritoTest() {
         CarritoEntity entity = data.get(0);

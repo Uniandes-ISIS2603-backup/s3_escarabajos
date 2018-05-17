@@ -23,7 +23,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
@@ -57,10 +56,15 @@ public class AccesorioPersistenceTest {
     UserTransaction utx;
 
     /**
-     * Contenedor para el conjunto de datos de prueba.
+     * Datos de accesorio.
      */
     private List<AccesorioEntity> data = new ArrayList<AccesorioEntity>();
     
+    /**
+     * Creacion del deployment.
+     *
+     * @return deployment
+     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -70,17 +74,32 @@ public class AccesorioPersistenceTest {
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
     
+    /**
+     * Constructor vacio.
+     */
     public AccesorioPersistenceTest() {
+        //constructor vacio
     }
     
+    /**
+     * BeforeClass.
+     */
     @BeforeClass
     public static void setUpClass() {
     }
     
+    /**
+     * AfterClass.
+     */
     @AfterClass
     public static void tearDownClass() {
     }
     
+    /**
+     * Configuración inicial de la prueba.
+     *
+     *
+     */
     @Before
     public void setUp() {
         
@@ -100,10 +119,21 @@ public class AccesorioPersistenceTest {
         }
     }
     
+    /**
+     * Limpia las tablas que están implicadas en la prueba.
+     *
+     *
+     */
     private void clearData() {
         em.createQuery("delete from AccesorioEntity").executeUpdate();
     }
     
+    /**
+     * Inserta los datos iniciales para el correcto funcionamiento de las
+     * pruebas.
+     *
+     *
+     */
     private void insertData() {
         
         PodamFactory factory = new PodamFactoryImpl();
@@ -115,6 +145,9 @@ public class AccesorioPersistenceTest {
         }
     }
     
+    /**
+     * After.
+     */
     @After
     public void tearDown() {
     }

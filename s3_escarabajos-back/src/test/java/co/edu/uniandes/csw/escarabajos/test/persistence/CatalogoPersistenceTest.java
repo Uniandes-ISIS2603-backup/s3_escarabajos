@@ -11,7 +11,6 @@ import co.edu.uniandes.csw.escarabajos.persistence.CatalogoPersistence;
 import co.edu.uniandes.csw.escarabajos.persistence.ModeloPersistence;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -34,8 +33,6 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class CatalogoPersistenceTest {
-
-    private final static Logger LOGGER = Logger.getLogger(CalificacionPersistenceTest.class.getName());
 
     /**
      *
@@ -121,11 +118,11 @@ public class CatalogoPersistenceTest {
     }
 
     /**
-     * lista que tiene los datos de prueba
+     * Datos de modelo.
      */
     private List<ModeloEntity> modelosData = new ArrayList<>();
     /**
-     * lista que tiene los datos de prueba
+     * Datos de item.
      */
     private List<ItemEntity> itemsData = new ArrayList<>();
 
@@ -260,6 +257,9 @@ public class CatalogoPersistenceTest {
         }
     }
 
+    /**
+     * Prueba el metodo filtrarAccesorios.
+     */
     @Test
     public void filtrarAccesoriosTest() {
         ArrayList<List<String>> filtros = new ArrayList<>();
@@ -335,6 +335,9 @@ public class CatalogoPersistenceTest {
         Assert.assertEquals(0, (int) persistence.contarFiltrados(marcas, categorias, colores, 0.0, -1.0, 0.0, ModeloLogic.ACCESORIO));
     }
 
+    /**
+     * Prueba el metodo filtrar.
+     */
     @Test
     public void filtrarTest() {
         ArrayList<List<String>> filtros = new ArrayList<>();
@@ -409,16 +412,25 @@ public class CatalogoPersistenceTest {
         Assert.assertEquals(0, (int) persistence.contarFiltrados(marcas, categorias, colores, 0.0, -1.0, 0.0, ModeloLogic.BICICLETA));
     }
 
+    /**
+     * Prueba el metodo getPrecioAccesorios.
+     */
     @Test
     public void getPrecioAccesoriosTest() {
         Assert.assertEquals(10, (int) ((double) persistence.getPrecio(ModeloLogic.ACCESORIO)));
     }
 
+    /**
+     * Prueba el metodo getPrecioBicicletas.
+     */
     @Test
     public void getPrecioBicicletasTest() {
         Assert.assertEquals(10, (int) ((double) persistence.getPrecio(ModeloLogic.BICICLETA)));
     }
 
+    /**
+     * Prueba el metodo buscar.
+     */
     @Test
     public void buscarTest() {
         List<ModeloEntity> lista = persistence.buscar(modelosData.get(0).getMarca() + " " + itemsData.get(0).getCategoria() + " " + "NOT");

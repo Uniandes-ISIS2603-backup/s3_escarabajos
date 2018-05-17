@@ -96,7 +96,7 @@ public class BicicletaPersistenceTest {
     }
 
     /**
-     *
+     * Datos de bicicleta.
      */
     private List<BicicletaEntity> data = new ArrayList<BicicletaEntity>();
 
@@ -108,11 +108,11 @@ public class BicicletaPersistenceTest {
      */
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
-        
+
         for (int i = 0; i < 3; i++) {
             BicicletaEntity entity = factory.manufacturePojo(BicicletaEntity.class);
             entity.setUsada(Boolean.FALSE);
-         
+
             em.persist(entity);
             data.add(entity);
         }
@@ -134,7 +134,7 @@ public class BicicletaPersistenceTest {
 
         Assert.assertEquals(newEntity.getCategoria(), entity.getCategoria());
         Assert.assertFalse(result.getUsada());
-        
+
     }
 
     /**
@@ -168,7 +168,7 @@ public class BicicletaPersistenceTest {
         BicicletaEntity newEntity = biciPersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
 
-        Assert.assertEquals(newEntity.getCategoria(),entity.getCategoria());
+        Assert.assertEquals(newEntity.getCategoria(), entity.getCategoria());
         Assert.assertFalse(entity.getUsada());
     }
 
@@ -203,7 +203,6 @@ public class BicicletaPersistenceTest {
 
         BicicletaEntity resp = em.find(BicicletaEntity.class, entity.getId());
 
-       
         Assert.assertEquals(newEntity.getCategoria(), resp.getCategoria());
         Assert.assertFalse(resp.getUsada());
     }
