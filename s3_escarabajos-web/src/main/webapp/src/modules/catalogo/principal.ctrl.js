@@ -4,14 +4,14 @@
         function ($scope, $state, catalogoFactory) {
             $scope.pagina = $state.params.pagina;
             $scope.tipo = null;
-            catalogoFactory.getPrincipal($scope.pagina, 12).then(function (response) {
+            catalogoFactory.getPrincipal($scope.pagina, 18).then(function (response) {
                 $scope.mods = response.data.modelos;
-                $scope.pags = Math.ceil(response.data.numero / 12);
+                $scope.pags = Math.ceil(response.data.numero / 18);
                 $scope.modelos = [];
-                for (var i = 0; i < $scope.mods.length; i += 4) {
-                    $scope.modelos.push($scope.mods.slice(i, i + 4));
+                for (var i = 0; i < $scope.mods.length; i += 6) {
+                    $scope.modelos.push($scope.mods.slice(i, i + 6));
                 }
-                $scope.cols = 3;
+                $scope.cols = 2;
 
                 $scope.paginas = [];
                 for (var j = 1; j <= $scope.pags; j++) {

@@ -1,14 +1,23 @@
 var slideIndex = 1;
 showSlides(slideIndex);
-
+/**
+ * Avanza n slides
+ * @param n el numero de slides
+ */
 function plusSlides(n) {
     showSlides(slideIndex += n);
 }
-
+/**
+ * Muestra el slide en la posicion n
+ * @param n indice del slide
+ */
 function currentSlide(n) {
     showSlides(slideIndex = n);
 }
-
+/**
+ * Muestra n slides
+ * @param n numero de slides
+ */
 function showSlides(n) {
     var i;
     var slides = document.getElementsByClassName("mySlides");

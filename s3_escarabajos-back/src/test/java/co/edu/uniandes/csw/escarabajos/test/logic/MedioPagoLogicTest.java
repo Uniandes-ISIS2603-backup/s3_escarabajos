@@ -107,6 +107,7 @@ public class MedioPagoLogicTest {
     public void createMedioPagoTest() throws BusinessLogicException{
         
         MedioPagoEntity newEntity = factory.manufacturePojo(MedioPagoEntity.class);
+        newEntity.setTipo("pse");
         MedioPagoEntity result = logic.createMedioPago(newEntity);
         Assert.assertNotNull(result);
         MedioPagoEntity entity = em.find(MedioPagoEntity.class, result.getId());
@@ -119,6 +120,7 @@ public class MedioPagoLogicTest {
         MedioPagoEntity pojoEntity = factory.manufacturePojo(MedioPagoEntity.class);
 
         pojoEntity.setId(entity.getId());
+        pojoEntity.setTipo("pse");
 
         logic.updateMedioPago(entity.getId(), pojoEntity);
 

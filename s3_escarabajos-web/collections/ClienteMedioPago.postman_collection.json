@@ -1,20 +1,22 @@
 {
 	"info": {
-		"name": "FacturaCollection",
-		"_postman_id": "4a8e2fbd-f728-30f1-a284-22a35be6af68",
+		"name": "ClienteMedioPago",
+		"_postman_id": "5a1a242c-8bd9-0b40-703c-188db702ee33",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Crear factura",
+			"name": "Crear cliente",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "e495cc59-9e20-429a-968e-34c790564ffd",
+						"id": "1d0b816e-5ef2-4cd8-88d0-feccbb55ee49",
 						"type": "text/javascript",
 						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"cliente_id\",data.id)",
 							"tests[\"Status code is 200\"] = responseCode.code === 200;"
 						]
 					}
@@ -30,10 +32,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"dinero\":\"15000\"\n}"
+					"raw": "{\r\n  \"nombre\": \"Ariel\",\r\n  \"correo\": \"asnar0@discuz.net\",\r\n  \"usuario\": \"␣\",\r\n  \"cedula\": \"8643803030\"\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s3_escarabajos-web/api/facturas",
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -42,22 +44,72 @@
 					"path": [
 						"s3_escarabajos-web",
 						"api",
-						"facturas"
+						"clientes",
+						""
 					]
 				},
-				"description": ""
+				"description": "crea un cliente"
 			},
 			"response": []
 		},
 		{
-			"name": "Obtener todas las facturas",
+			"name": "Crear medio de pago de un cliente copy",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "d11d8d97-58f0-497d-b4e3-3c4175e9f8ce",
+						"id": "70a0c465-440e-4d69-bc5e-f30bfd2e3bd2",
 						"type": "text/javascript",
 						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"mediopago_id\",data.id)",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"tipo\": \"PSE\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/{{cliente_id}}/mediospago",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"clientes",
+						"{{cliente_id}}",
+						"mediospago"
+					]
+				},
+				"description": "crea un cliente"
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar medio de pago del cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "70a0c465-440e-4d69-bc5e-f30bfd2e3bd2",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"mediopago_id\",data.id)",
 							"tests[\"Status code is 200\"] = responseCode.code === 200;"
 						]
 					}
@@ -73,10 +125,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"dinero\":\"10000\"\n}"
+					"raw": "{\r\n  \"tipo\": \"PSE\"\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s3_escarabajos-web/api/facturas",
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/{{cliente_id}}/mediospago",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -85,98 +137,12 @@
 					"path": [
 						"s3_escarabajos-web",
 						"api",
-						"facturas"
+						"clientes",
+						"{{cliente_id}}",
+						"mediospago"
 					]
 				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "Obtener la factura con id 1",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "5e7688ed-3322-4b3d-8d44-0915c325bb35",
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status code is 200\"] = responseCode.code === 200;"
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"dinero\":\"10000\"\n}"
-				},
-				"url": {
-					"raw": "http://localhost:8080/s3_escarabajos-web/api/facturas/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"s3_escarabajos-web",
-						"api",
-						"facturas",
-						"1"
-					]
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "Eliminar factura",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "4dec37d7-b438-45a8-b9ea-8b9a23399765",
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status code is 204\"] = responseCode.code === 204;"
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:8080/s3_escarabajos-web/api/facturas/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"s3_escarabajos-web",
-						"api",
-						"facturas",
-						"1"
-					]
-				},
-				"description": ""
+				"description": "crea un cliente"
 			},
 			"response": []
 		}

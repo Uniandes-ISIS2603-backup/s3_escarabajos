@@ -1,8 +1,7 @@
 {
 	"info": {
 		"name": "ItemCollectio",
-		"_postman_id": "505f59cc-04f3-427d-90c1-409bee8afa89",
-		"description": "",
+		"_postman_id": "d2aad89d-5139-9347-ec45-e97a07df1cd6",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -47,8 +46,7 @@
 						"api",
 						"modelos"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -93,8 +91,7 @@
 						"api",
 						"modelos"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -139,8 +136,7 @@
 						"api",
 						"accesorios"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -185,8 +181,7 @@
 						"api",
 						"accesorios"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -231,8 +226,7 @@
 						"api",
 						"bicis"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -276,8 +270,7 @@
 						"api",
 						"items"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -323,8 +316,7 @@
 						"{{new_id_m}}",
 						"items"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -357,8 +349,7 @@
 						"items",
 						"{{new _id_a}}"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -403,8 +394,7 @@
 						"items",
 						"{{new_id_a}}"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		}

@@ -1,0 +1,116 @@
+{
+	"info": {
+		"name": "ListaDeseosCollection",
+		"_postman_id": "a3b0d523-b0bd-939a-f92c-e37d5372676c",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "crea la lista de deseos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dc2c57ef-c6d2-4d65-86a4-706919f1492d",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id\",data.id);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"console.log(data.id);",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"id\": 18,\r\n    \"precioTotal\": 0.0\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/listadeseos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"listadeseos"
+					],
+					"query": [
+						{
+							"key": "fields",
+							"value": "devices",
+							"equals": true,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "consulta la lista de deseos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9ff40437-e1d1-4815-89e3-2f0bf5943101",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"type\": \"clienteConCarrito\",\r\n        \"cedula\": 2,\r\n        \"correo\": \"String\",\r\n        \"nombre\": \"String\",\r\n        \"usuario\": \"String\",\r\n        \"calificaciones\": [],\r\n        \"compras\": [],\r\n        \"listaDeseos\": [],\r\n        \"mediosPago\": [],\r\n        \"reclamos\": [],   \r\n        \"carrito\": {   \t   \t\r\n        \t\"precioTotal\" : 10, \t\r\n        \t\"items\": [ \t\t\r\n        \t{ \t\t\r\n        \t\t\"id\": 1, \t\t\r\n        \t\t\"categoria\": \"string\",     \t\r\n        \t\t\"marca\": \"string\", \t\r\n        \t\t\"color\": \"string\",     \t\r\n        \t\t\"precio\": 10,     \t\r\n        \t\t\"usada\": false \t\t\r\n        \t\t\r\n        \t}     \r\n        \t]   \r\n        }\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/listadeseos/{{new_id}}?",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"listadeseos",
+						"{{new_id}}"
+					],
+					"query": [
+						{
+							"key": "fields",
+							"value": "devices",
+							"equals": true,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,25 +1,296 @@
 {
-	"id": "013957fb-8697-0e67-1d9e-b55764c5503d",
-	"name": "ClienteVendedorCollection",
-	"description": "Pruebas de collection cliente y vendedor",
-	"order": [
-		"269c074c-2268-962e-d834-b6f6b8bdad2f",
-		"6dc2edcc-ab63-68f8-235c-36ce77dc3dc5",
-		"535ce8d4-e38b-b66d-7170-e31aadf84fb5",
-		"f24c90ae-eec7-1595-dfde-f37dfc8ae083",
-		"daa54efa-f678-e0d8-312c-1785fdad10e1",
-		"c8ebbffa-9d61-d221-7239-605cf5e3a1c3",
-		"ed6c21d2-b7c0-53a7-9c04-caa9a071a539",
-		"f399acba-5673-e114-495f-82025faa4fab",
-		"c5042555-bdbf-0de8-25b0-dc0389c4f3ba",
-		"6eee815e-faa3-1495-7757-d27431909093"
+	"info": {
+		"name": "ClienteVendedorCollection",
+		"_postman_id": "d174ebd3-9e09-3cfe-a473-afebcafa0f91",
+		"description": "Pruebas de collection cliente y vendedor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b8d5e75f-428a-4a9a-91a6-c29653bc7c38",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Ariel\",\r\n  \"correo\": \"asnar0@discuz.net\",\r\n  \"usuario\": \"␣\",\r\n  \"cedula\": \"8643803030\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"clientes",
+						""
+					]
+				},
+				"description": "crea un cliente"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear vendedor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b8d5e75f-428a-4a9a-91a6-c29653bc7c38",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nombre\":\"pibe\",\n\t\"direccion\":\"1585\",\n\t\"telefono\":\"58858\",\n\t\"vendedor\":\"vendedor\"\n\t\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/1000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"clientes",
+						"1000"
+					]
+				},
+				"description": "crea un cliente"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todos los clientes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "83b71d4f-7ef0-4319-8421-fd4d73a632b2",
+						"type": "text/javascript",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nombre\":\"pibe\",\n\t\"direccion\":\"1585\",\n\t\"telefono\":\"58858\"\n\t\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"clientes"
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todos los vendedores",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8bba923e-b207-48c2-ad86-69f0eceb654c",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/vendedores",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"clientes",
+						"vendedores"
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un cliente y un vendedor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/1000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"clientes",
+						"1000"
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un cliente y un vendedor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 204\"] = responseCode.code === 204;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/118",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"clientes",
+						"118"
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "put cliente y vendedor",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"cedula\": \"696969\",\n    \"correo\": \"asnar0@discuz.net\",\n    \"nombre\": \"pibeValderrama\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/117",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"clientes",
+						"117"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
 	],
-	"folders": [],
-	"folders_order": [],
-	"timestamp": 1520352546159,
-	"owner": "3714184",
-	"public": false,
-	"events": [
+	"event": [
 		{
 			"listen": "prerequest",
 			"script": {
@@ -39,371 +310,6 @@
 					""
 				]
 			}
-		}
-	],
-	"variables": [],
-	"auth": null,
-	"requests": [
-		{
-			"id": "269c074c-2268-962e-d834-b6f6b8bdad2f",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/clientes/",
-			"queryParams": [],
-			"events": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "b8d5e75f-428a-4a9a-91a6-c29653bc7c38",
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status code is 200\"] = responseCode.code === 200;"
-						]
-					}
-				}
-			],
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"auth": null,
-			"time": 1520352879627,
-			"name": "Crear cliente",
-			"description": "crea un cliente",
-			"collectionId": "013957fb-8697-0e67-1d9e-b55764c5503d",
-			"responses": [],
-			"preRequestScript": null,
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
-			"currentHelper": null,
-			"helperAttributes": null,
-			"rawModeData": "{\r\n  \"nombre\": \"Ariel\",\r\n  \"correo\": \"asnar0@discuz.net\",\r\n  \"usuario\": \"␣\",\r\n  \"cedula\": \"8643803030\"\r\n}"
-		},
-		{
-			"id": "535ce8d4-e38b-b66d-7170-e31aadf84fb5",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/clientes",
-			"folder": null,
-			"queryParams": [],
-			"events": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "83b71d4f-7ef0-4319-8421-fd4d73a632b2",
-						"type": "text/javascript",
-						"exec": [
-							"var data= JSON.parse(responseBody);",
-							"tests[\"Status code is 200\"] = responseCode.code === 200;",
-							""
-						]
-					}
-				}
-			],
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": [],
-			"dataMode": "raw",
-			"auth": null,
-			"time": 1520783512382,
-			"name": "Obtener todos los clientes",
-			"description": null,
-			"collectionId": "013957fb-8697-0e67-1d9e-b55764c5503d",
-			"preRequestScript": null,
-			"tests": "var data= JSON.parse(responseBody);\ntests[\"Status code is 200\"] = responseCode.code === 200;\n",
-			"currentHelper": null,
-			"helperAttributes": null,
-			"rawModeData": "{\n\t\"nombre\":\"pibe\",\n\t\"direccion\":\"1585\",\n\t\"telefono\":\"58858\"\n\t\n}"
-		},
-		{
-			"id": "6dc2edcc-ab63-68f8-235c-36ce77dc3dc5",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/vendedores/",
-			"queryParams": [],
-			"events": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "b8d5e75f-428a-4a9a-91a6-c29653bc7c38",
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status code is 200\"] = responseCode.code === 200;"
-						]
-					}
-				}
-			],
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"auth": null,
-			"time": 1520783453730,
-			"name": "Crear vendedor",
-			"description": "crea un cliente",
-			"collectionId": "013957fb-8697-0e67-1d9e-b55764c5503d",
-			"responses": [],
-			"preRequestScript": null,
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
-			"currentHelper": null,
-			"helperAttributes": null,
-			"rawModeData": "{\n\t\"nombre\":\"pibe\",\n\t\"direccion\":\"1585\",\n\t\"telefono\":\"58858\"\n\t\n}"
-		},
-		{
-			"id": "6eee815e-faa3-1495-7757-d27431909093",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/clientes/117",
-			"queryParams": [],
-			"pathVariables": {},
-			"pathVariableData": [],
-			"events": [],
-			"auth": null,
-			"method": "PUT",
-			"collectionId": "013957fb-8697-0e67-1d9e-b55764c5503d",
-			"data": [],
-			"dataMode": "raw",
-			"name": "put cliente",
-			"description": "",
-			"descriptionFormat": "html",
-			"time": 1521137485526,
-			"version": 2,
-			"responses": [],
-			"currentHelper": null,
-			"helperAttributes": null,
-			"rawModeData": "{\n\t\"cedula\": \"696969\",\n    \"correo\": \"asnar0@discuz.net\",\n    \"nombre\": \"pibeValderrama\"\n}"
-		},
-		{
-			"id": "c5042555-bdbf-0de8-25b0-dc0389c4f3ba",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/vendedores/2",
-			"queryParams": [],
-			"pathVariables": {},
-			"pathVariableData": [],
-			"events": [],
-			"auth": null,
-			"method": "PUT",
-			"collectionId": "013957fb-8697-0e67-1d9e-b55764c5503d",
-			"data": [],
-			"dataMode": "raw",
-			"name": "put vendedor",
-			"description": "",
-			"descriptionFormat": "html",
-			"time": 1521137266695,
-			"version": 2,
-			"responses": [],
-			"currentHelper": null,
-			"helperAttributes": null,
-			"rawModeData": "{\r\n\t\"nombre\":\"pibeValderrama\",\r\n\t\"direccion\":\"Cra 57 b 121\",\r\n\t\"telefono\":\"5885845\"\r\n}"
-		},
-		{
-			"id": "c8ebbffa-9d61-d221-7239-605cf5e3a1c3",
-			"headers": "",
-			"headerData": [],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/vendedores/2",
-			"folder": null,
-			"queryParams": [],
-			"events": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"console.log(responseBody);",
-							"var data = JSON.parse(responseBody);",
-							"tests[\"Status code is 200\"] = responseCode.code === 200;"
-						]
-					}
-				}
-			],
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": [],
-			"dataMode": null,
-			"auth": null,
-			"time": 1520783587129,
-			"name": "Obtener un vendedor",
-			"description": null,
-			"collectionId": "013957fb-8697-0e67-1d9e-b55764c5503d",
-			"preRequestScript": null,
-			"tests": "console.log(responseBody);\nvar data = JSON.parse(responseBody);\ntests[\"Status code is 200\"] = responseCode.code === 200;",
-			"currentHelper": null,
-			"helperAttributes": null
-		},
-		{
-			"id": "daa54efa-f678-e0d8-312c-1785fdad10e1",
-			"headers": "",
-			"headerData": [],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/clientes/117",
-			"folder": null,
-			"queryParams": [],
-			"events": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"console.log(responseBody);",
-							"var data = JSON.parse(responseBody);",
-							"tests[\"Status code is 200\"] = responseCode.code === 200;"
-						]
-					}
-				}
-			],
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": [],
-			"dataMode": null,
-			"auth": null,
-			"time": 1520783607704,
-			"name": "Obtener un cliente",
-			"description": null,
-			"collectionId": "013957fb-8697-0e67-1d9e-b55764c5503d",
-			"preRequestScript": null,
-			"tests": "console.log(responseBody);\nvar data = JSON.parse(responseBody);\ntests[\"Status code is 200\"] = responseCode.code === 200;",
-			"currentHelper": null,
-			"helperAttributes": null
-		},
-		{
-			"id": "ed6c21d2-b7c0-53a7-9c04-caa9a071a539",
-			"headers": "",
-			"headerData": [],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/clientes/118",
-			"queryParams": [],
-			"events": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status code is 204\"] = responseCode.code === 204;"
-						]
-					}
-				}
-			],
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "DELETE",
-			"data": [],
-			"dataMode": null,
-			"auth": null,
-			"time": 1520783729341,
-			"name": "Borrar un cliente",
-			"description": null,
-			"collectionId": "013957fb-8697-0e67-1d9e-b55764c5503d",
-			"preRequestScript": null,
-			"tests": "tests[\"Status code is 204\"] = responseCode.code === 204;",
-			"currentHelper": null,
-			"helperAttributes": null
-		},
-		{
-			"id": "f24c90ae-eec7-1595-dfde-f37dfc8ae083",
-			"headers": "",
-			"headerData": [],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/vendedores/",
-			"folder": null,
-			"queryParams": [],
-			"events": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "8bba923e-b207-48c2-ad86-69f0eceb654c",
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status code is 200\"] = responseCode.code === 200;",
-							""
-						]
-					}
-				}
-			],
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": [],
-			"dataMode": null,
-			"auth": null,
-			"time": 1520783530750,
-			"name": "Obtener todos los vendedores",
-			"description": null,
-			"collectionId": "013957fb-8697-0e67-1d9e-b55764c5503d",
-			"preRequestScript": null,
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n",
-			"currentHelper": null,
-			"helperAttributes": null
-		},
-		{
-			"id": "f399acba-5673-e114-495f-82025faa4fab",
-			"headers": "",
-			"headerData": [],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/vendedores/3",
-			"queryParams": [],
-			"events": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status code is 204\"] = responseCode.code === 204;"
-						]
-					}
-				}
-			],
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "DELETE",
-			"data": [],
-			"dataMode": null,
-			"auth": null,
-			"time": 1520783767852,
-			"name": "Borrar un vendedor",
-			"description": null,
-			"collectionId": "013957fb-8697-0e67-1d9e-b55764c5503d",
-			"preRequestScript": null,
-			"tests": "tests[\"Status code is 204\"] = responseCode.code === 204;",
-			"currentHelper": null,
-			"helperAttributes": null
 		}
 	]
 }

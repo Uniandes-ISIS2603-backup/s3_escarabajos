@@ -1,79 +1,14 @@
 {
-	"id": "4d687063-8e12-773e-35c1-2f897cf8641b",
-	"name": "MedioPagoCollection",
-	"description": "",
-	"order": [
-		"8e08734f-7417-3fad-f73a-80d4e210b51e",
-		"e261476d-627e-cd1e-fa71-8c8b1c15982d",
-		"15138c82-82bd-4acc-381f-048571300ea2",
-		"bc25ab15-0b0e-af5f-731e-74fa13135247"
-	],
-	"folders": [],
-	"folders_order": [],
-	"timestamp": 1520741302841,
-	"owner": 0,
-	"public": false,
-	"events": [],
-	"variables": [],
-	"auth": null,
-	"requests": [
+	"info": {
+		"name": "MedioPagoCollection",
+		"_postman_id": "6d3ece74-b5a8-76e4-1722-7901ec1f2fa6",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
 		{
-			"id": "15138c82-82bd-4acc-381f-048571300ea2",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/mediospago/",
-			"queryParams": [],
-			"events": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "57cf38f5-47c1-4bb0-9f9c-08068dc48a1b",
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status code is 200\"] = responseCode.code === 200;"
-						]
-					}
-				}
-			],
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"auth": null,
-			"time": 1520741484528,
-			"name": "Obtener todos los medios de pago",
-			"description": "",
-			"collectionId": "4d687063-8e12-773e-35c1-2f897cf8641b",
-			"responses": [],
-			"preRequestScript": null,
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
-			"currentHelper": null,
-			"helperAttributes": null,
-			"rawModeData": "{\n\t\"tipo\":\"tarjeta debito\"\n}"
-		},
-		{
-			"id": "8e08734f-7417-3fad-f73a-80d4e210b51e",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/mediospago",
-			"queryParams": [],
-			"events": [
+			"name": "Crear medio de pago",
+			"event": [
 				{
 					"listen": "test",
 					"script": {
@@ -85,80 +20,38 @@
 					}
 				}
 			],
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"auth": null,
-			"time": 1520741509842,
-			"name": "Crear medio de pago",
-			"description": "",
-			"collectionId": "4d687063-8e12-773e-35c1-2f897cf8641b",
-			"responses": [],
-			"preRequestScript": null,
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
-			"currentHelper": null,
-			"helperAttributes": null,
-			"rawModeData": "{\n\t\"tipo\":\"tarjeta de credito\"\n}"
-		},
-		{
-			"id": "bc25ab15-0b0e-af5f-731e-74fa13135247",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/mediospago/1",
-			"queryParams": [],
-			"events": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "11c6aea4-5c91-40a9-bfde-353938ee6492",
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status code is 204\"] = responseCode.code === 204;"
-						]
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
 					}
-				}
-			],
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "DELETE",
-			"data": [],
-			"dataMode": "raw",
-			"auth": null,
-			"time": 1520741594641,
-			"name": "Eliminar medio de pago",
-			"description": "",
-			"collectionId": "4d687063-8e12-773e-35c1-2f897cf8641b",
-			"responses": [],
-			"preRequestScript": null,
-			"tests": "tests[\"Status code is 204\"] = responseCode.code === 204;",
-			"currentHelper": null,
-			"helperAttributes": null,
-			"rawModeData": ""
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"tipo\":\"tarjeta de credito\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/mediospago",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"mediospago"
+					]
+				},
+				"description": ""
+			},
+			"response": []
 		},
 		{
-			"id": "e261476d-627e-cd1e-fa71-8c8b1c15982d",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/mediospago/1",
-			"queryParams": [],
-			"events": [
+			"name": "Obtener medio de pago con id 1",
+			"event": [
 				{
 					"listen": "test",
 					"script": {
@@ -170,23 +63,123 @@
 					}
 				}
 			],
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"auth": null,
-			"time": 1520741480074,
-			"name": "Obtener medio de pago con id 1",
-			"description": "",
-			"collectionId": "4d687063-8e12-773e-35c1-2f897cf8641b",
-			"responses": [],
-			"preRequestScript": null,
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
-			"currentHelper": null,
-			"helperAttributes": null,
-			"rawModeData": "{\n\t\"tipo\":\"tarjeta de credito\"\n}"
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"tipo\":\"tarjeta de credito\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/mediospago/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"mediospago",
+						"1"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todos los medios de pago",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "57cf38f5-47c1-4bb0-9f9c-08068dc48a1b",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"tipo\":\"tarjeta debito\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/mediospago/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"mediospago",
+						""
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar medio de pago",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "11c6aea4-5c91-40a9-bfde-353938ee6492",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 204\"] = responseCode.code === 204;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/mediospago/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"mediospago",
+						"1"
+					]
+				},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }

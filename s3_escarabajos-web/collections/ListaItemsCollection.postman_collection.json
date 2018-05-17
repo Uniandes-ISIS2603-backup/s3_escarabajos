@@ -1,0 +1,338 @@
+{
+	"info": {
+		"name": "ListaItemsCollection",
+		"_postman_id": "ca5d362a-0212-e850-3f15-850aae57203b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1d0b816e-5ef2-4cd8-88d0-feccbb55ee49",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"cliente_id\",data.id)",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Ariel\",\r\n  \"correo\": \"asnar0@discuz.net\",\r\n  \"usuario\": \"␣\",\r\n  \"cedula\": \"8643803030\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"clientes",
+						""
+					]
+				},
+				"description": "crea un cliente"
+			},
+			"response": []
+		},
+		{
+			"name": "Le crea una lista de deseos al cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ade29844-318e-4e1c-adca-8aa516ac98b3",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"carrito_id\",data.id)",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/{{cliente_id}}/listadeseos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"clientes",
+						"{{cliente_id}}",
+						"listadeseos"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Crea un Modelo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "63121080-2236-4bde-a8eb-8936842da37e",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"modelo_id\",data.id);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"id\": 0,\r\n   \"marca\": \"BIANCHI2\",\r\n   \"referencia\": \"{{$guid}}}}\",\r\n   \"calificacionMedia\": 0,\r\n   \"tipoModelo\": \"Bicicleta\",\r\n   \"items\": [  \r\n   ],\r\n   \"calificaciones\": [\r\n   ]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/modelos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"modelos"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Crea una Bicicleta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "218fc992-a8c7-4226-93e4-ec6d36e5c83c",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"item_id\",data.id);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"id\": 0,\r\n\t\"precio\": 20000,\r\n\t\"modeloId\": {{modelo_id}},\r\n\t\"color\": \"Verde\",\r\n\t\"album\": [],\r\n\t\"usada\": false,\r\n    \"categoria\": \"Deportiva\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/bicis",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"bicis"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "agrega la bicicleta a la lista de deseos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0578658a-9205-4509-b530-08d1d15e434c",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/listadeseos/{{carrito_id}}/items/{{item_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"listadeseos",
+						"{{carrito_id}}",
+						"items",
+						"{{item_id}}"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "sacar la bicicleta de la lista de deseos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0578658a-9205-4509-b530-08d1d15e434c",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/listadeseos/{{carrito_id}}/items/{{item_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"listadeseos",
+						"{{carrito_id}}",
+						"items",
+						"{{item_id}}"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "agrega la bicicleta a la lista de deseos otra vez",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0578658a-9205-4509-b530-08d1d15e434c",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/listadeseos/{{carrito_id}}/items/{{item_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"listadeseos",
+						"{{carrito_id}}",
+						"items",
+						"{{item_id}}"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "vaciar carrito",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0e776803-c0d5-4cca-935c-f3706cf14e7b",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/listadesos/{{carrito_id}}/items",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"listadesos",
+						"{{carrito_id}}",
+						"items"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

@@ -177,17 +177,17 @@ insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) 
 
 --Datos de prueba AccesorioEntity
 
-insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (21000,'AccesorioEntity', 250000, '#000000', 0, 'Cascos', 21000,21000,1,1);
+insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (21000,'AccesorioEntity', 25000000, '#000000', 0, 'Cascos', 21000,21000,1,1);
 insert into Item_album (itemEntity_ID, album) values (21000, 'https://images-na.ssl-images-amazon.com/images/I/71rFOHzTphL._SL1500_.jpg');
-insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (21001,'AccesorioEntity', 250000, '#0000FF', 0, 'Cascos', 21000,21000,1,0.3);
+insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (21001,'AccesorioEntity', 25000000, '#0000FF', 0, 'Cascos', 21000,21000,1,1);
 insert into Item_album (itemEntity_ID, album) values (21001, 'https://images-na.ssl-images-amazon.com/images/I/71rClg8nVeL._SL1500_.jpg');
-insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (21002,'AccesorioEntity', 250000, '#FF0000', 0, 'Cascos', 21000,21000,1,0.2);
+insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (21002,'AccesorioEntity', 25000000, '#FF0000', 0, 'Cascos', 21000,21000,1,1);
 insert into Item_album (itemEntity_ID, album) values (21002, 'https://images-na.ssl-images-amazon.com/images/I/71Qj-JnBaTL._SL1500_.jpg');
-insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (21003,'AccesorioEntity', 250000, '#E5EEF4', 0, 'Cascos', 21000,21000,1,1);
+insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (21003,'AccesorioEntity', 25000000, '#E5EEF4', 0, 'Cascos', 21000,21000,1,1);
 insert into Item_album (itemEntity_ID, album) values (21003, 'https://images-na.ssl-images-amazon.com/images/I/71rhfQJH5DL._SL1500_.jpg');
-insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (21004,'AccesorioEntity', 250000, '#c4f441', 0, 'Cascos', 21000,21000,1,1);
+insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (21004,'AccesorioEntity', 25000000, '#c4f441', 0, 'Cascos', 21000,21000,1,1);
 insert into Item_album (itemEntity_ID, album) values (21004, 'https://images-na.ssl-images-amazon.com/images/I/71s71UaXLkL._SL1500_.jpg');
-insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (21005,'AccesorioEntity', 250000, '#41484D', 0, 'Cascos', 21000,21000,1,1);
+insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (21005,'AccesorioEntity', 25000000, '#41484D', 0, 'Cascos', 21000,21000,1,1);
 insert into Item_album (itemEntity_ID, album) values (21005, 'https://images-na.ssl-images-amazon.com/images/I/61HAq2rbO3L._SL1200_.jpg');
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (22000,'AccesorioEntity', 126000, '#FFFFFF', 0, 'Cascos', 22000,22000,1,0.7);
 insert into Item_album (itemEntity_ID, album) values (22000, 'https://images-na.ssl-images-amazon.com/images/I/71BAYoGYiGL._SL1500_.jpg');
