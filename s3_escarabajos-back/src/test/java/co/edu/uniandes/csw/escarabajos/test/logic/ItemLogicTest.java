@@ -42,28 +42,56 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class ItemLogicTest {
 
+    /**
+     * PodamFactory.
+     */
     private PodamFactory factory = new PodamFactoryImpl();
 
-    private static final Logger LOGGER = Logger.getLogger(ItemLogicTest.class.getName());
+    /**
+     * Inyecta la logica de item.
+     */
     @Inject
     private ItemLogic itemLogic;
 
+    /**
+     * Inyecta la logica de accesorio.
+     */
     @Inject
     private AccesorioLogic accLogic;
 
+    /**
+     * Inyecta la logica de bicicleta.
+     */
     @Inject
     private BicicletaLogic biciLogic;
 
+    /**
+     * EntityManager.
+     */
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     * UserTransaction.
+     */
     @Inject
     private UserTransaction utx;
 
+    /**
+     * Datos de item.
+     */
     private List<ItemEntity> data = new ArrayList<ItemEntity>();
 
+    /**
+     * Datos de modelo.
+     */
     private List<ModeloEntity> dataModelos = new ArrayList<ModeloEntity>();
 
+    /**
+     * Creacion del deployment
+     *
+     * @return deployment
+     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -146,7 +174,7 @@ public class ItemLogicTest {
     }
 
     /**
-     * Prueba para consultar la lista de Authors
+     * Prueba para consultar la lista de items.
      *
      *
      */
@@ -166,7 +194,7 @@ public class ItemLogicTest {
     }
 
     /**
-     * Prueba para consultar un item
+     * Prueba para consultar un item.
      *
      *
      */
@@ -178,8 +206,8 @@ public class ItemLogicTest {
         Assert.assertEquals(entity.getId(), resultEntity.getId());
     }
 
-     /**
-     * Prueba para comprar un item
+    /**
+     * Prueba para comprar un item.
      *
      *
      * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
@@ -191,9 +219,9 @@ public class ItemLogicTest {
         Assert.assertNotNull(resultEntity);
         Assert.assertFalse(resultEntity.getDisponible());
     }
-    
+
     /**
-     * Prueba el metodo que verifica un item
+     * Prueba el metodo que verifica un item.
      */
     @Test
     public void verificarItemTest() {

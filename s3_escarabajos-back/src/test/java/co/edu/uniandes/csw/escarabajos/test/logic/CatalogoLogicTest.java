@@ -38,24 +38,50 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class CatalogoLogicTest {
 
+    /**
+     * PodamFactory.
+     */
     private PodamFactory factory = new PodamFactoryImpl();
 
+    /**
+     * Inyecta la logica de modelo.
+     */
     @Inject
     private ModeloLogic modeloLogic;
 
+    /**
+     * Inyecta la logica de catalogo.
+     */
     @Inject
     private CatalogoLogic catalogoLogic;
 
+    /**
+     * EntityManager.
+     */
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     * UserTransaction.
+     */
     @Inject
     private UserTransaction utx;
 
+    /**
+     * Datos de modelo.
+     */
     private List<ModeloEntity> data = new ArrayList<>();
 
+    /**
+     * Datos de item.
+     */
     private List<ItemEntity> itemsData = new ArrayList();
 
+    /**
+     * Creacion del deployment
+     *
+     * @return deployment
+     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -239,6 +265,9 @@ public class CatalogoLogicTest {
         }
     }
 
+    /**
+     * Prueba el metodo getModelosBicicletasFiltrados.
+     */
     @Test
     public void getModelosBicicletasFiltradosTest() {
         ArrayList<List<String>> filtros = new ArrayList<>();
@@ -306,6 +335,9 @@ public class CatalogoLogicTest {
         }
     }
 
+    /**
+     * Prueba el metodo getModelosAccesoriosFiltrados.
+     */
     @Test
     public void getModelosAccesoriosFiltradosTest() {
         ArrayList<List<String>> filtros = new ArrayList<>();
@@ -374,6 +406,9 @@ public class CatalogoLogicTest {
 
     }
 
+    /**
+     * Prueba el metodo buscar.
+     */
     @Test
     public void BuscarTest() {
         List<ModeloEntity> lista = catalogoLogic.buscar(data.get(0).getMarca());

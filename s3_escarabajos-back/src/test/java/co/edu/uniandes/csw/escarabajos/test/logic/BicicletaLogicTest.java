@@ -69,6 +69,11 @@ public class BicicletaLogicTest {
      */
     private List<ModeloEntity> dataModelo = new ArrayList<ModeloEntity>();
 
+    /**
+     * Creacion del deployment
+     *
+     * @return deployment
+     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -156,6 +161,9 @@ public class BicicletaLogicTest {
         Assert.assertFalse(entity.getUsada());
     }
 
+    /**
+     * Prueba el metodo verificarBicicleta.
+     */
     @Test
     public void verificarBicicletaTest() {
 

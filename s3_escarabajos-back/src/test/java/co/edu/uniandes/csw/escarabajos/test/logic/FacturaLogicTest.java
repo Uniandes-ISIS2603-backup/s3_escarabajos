@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.csw.escarabajos.test.logic;
 
-
 import co.edu.uniandes.csw.escarabajos.ejb.FacturaLogic;
 import co.edu.uniandes.csw.escarabajos.entities.FacturaEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
@@ -34,19 +33,39 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class FacturaLogicTest {
 
+    /**
+     * PodamFactory.
+     */
     private PodamFactory factory = new PodamFactoryImpl();
 
+    /**
+     * Inyecta la logica de factura.
+     */
     @Inject
     private FacturaLogic logic;
 
+    /**
+     * EntityManager.
+     */
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     * UserTransaction.
+     */
     @Inject
     private UserTransaction utx;
 
+    /**
+     * Datos de factura.
+     */
     private List<FacturaEntity> data = new ArrayList<FacturaEntity>();
 
+    /**
+     * Creacion del deployment
+     *
+     * @return deployment
+     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -111,10 +130,10 @@ public class FacturaLogicTest {
     @Test
     public void createFacturaTest() throws BusinessLogicException {
         FacturaEntity newEntity = factory.manufacturePojo(FacturaEntity.class);
-        
+
         FacturaEntity result = logic.createFactura(newEntity);
         Assert.assertNotNull(result);
-        
+
         FacturaEntity entity = em.find(FacturaEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
         Assert.assertEquals(newEntity.getDinero(), entity.getDinero());
@@ -122,6 +141,7 @@ public class FacturaLogicTest {
 
     /**
      * Prueba para consultar la lista de Facturas de un vendedor
+     *
      * @throws BusinessLogicException Por reglas de negocio
      */
     @Test
@@ -140,8 +160,8 @@ public class FacturaLogicTest {
     }
 
     /**
-     * Prueba para consultar un Factura especifica de un vendedor
-     * especifico
+     * Prueba para consultar un Factura especifica de un vendedor especifico
+     *
      * @throws BusinessLogicException Por reglas de negocio
      */
     @Test
@@ -155,6 +175,7 @@ public class FacturaLogicTest {
 
     /**
      * Prueba para eliminar un Factura
+     *
      * @throws BusinessLogicException Por reglas de negocio
      */
     @Test
@@ -167,6 +188,7 @@ public class FacturaLogicTest {
 
     /**
      * Prueba para actualizar un Factura
+     *
      * @throws BusinessLogicException Por reglas de negocio
      */
     @Test

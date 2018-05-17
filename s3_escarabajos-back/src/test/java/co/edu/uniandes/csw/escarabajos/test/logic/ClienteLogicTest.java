@@ -32,21 +32,41 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class ClienteLogicTest {
-    
+
+    /**
+     * PodamFactory.
+     */
     private PodamFactory factory = new PodamFactoryImpl();
-    
+
+    /**
+     * Inyecta la logica de cliente.
+     */
     @Inject
     private ClienteLogic logic;
-    
+
+    /**
+     * EntityManager.
+     */
     @PersistenceContext
     private EntityManager em;
-    
+
+    /**
+     * UserTransaction.
+     */
     @Inject
     private UserTransaction utx;
 
+    /**
+     * Datos de cliente.
+     */
     private List<ClienteEntity> data = new ArrayList<ClienteEntity>();
-    
-     @Deployment
+
+    /**
+     * Creacion del deployment
+     *
+     * @return deployment
+     */
+    @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(ClienteEntity.class.getPackage())
@@ -55,7 +75,7 @@ public class ClienteLogicTest {
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
+
     /**
      * Configuración inicial de la prueba.
      *
@@ -97,37 +117,50 @@ public class ClienteLogicTest {
     private void insertData() throws BusinessLogicException {
 
         for (int i = 0; i < 3; i++) {
-            
+
             ClienteEntity entity = factory.manufacturePojo(ClienteEntity.class);
             logic.createCliente(entity);
             data.add(entity);
         }
     }
-    
+
+    /**
+     * Prueba el metodo getCliente.
+     */
     @Test
     public void findClienteTest() {
-        
+
         ClienteEntity entity = data.get(0);
         ClienteEntity resultEntity = logic.getCliente(entity.getId());
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
     }
-    
+
+    /**
+     * Prueba el metodo updateCliente.
+     *
+     * @throws BusinessLogicException
+     */
     @Test
     public void updateClienteTest() throws BusinessLogicException {
-        
+
         ClienteEntity entity = data.get(0);
         ClienteEntity pojoEntity = factory.manufacturePojo(ClienteEntity.class);
 
         pojoEntity.setId(entity.getId());
 
         logic.updateCliente(pojoEntity);
-            
+
         ClienteEntity resp = logic.getCliente(entity.getId());
 
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
     }
-    
+
+    /**
+     * Prueba el metodo createCliente.
+     *
+     * @throws BusinessLogicException
+     */
     @Test
     public void createClienteTest() throws BusinessLogicException {
 
@@ -136,7 +169,12 @@ public class ClienteLogicTest {
         Assert.assertNotNull(result);
         ClienteEntity entity = logic.getCliente(result.getId());
     }
-    
+
+    /**
+     * Prueba del metodo getClientes.
+     *
+     * @throws BusinessLogicException
+     */
     @Test
     public void getClientesTest() throws BusinessLogicException {
         List<ClienteEntity> list = logic.getClientes();
@@ -151,7 +189,12 @@ public class ClienteLogicTest {
             Assert.assertTrue(found);
         }
     }
-    
+
+    /**
+     * Prueba del metodo deleteCliente.
+     *
+     * @throws BusinessLogicException
+     */
     @Test
     public void deleteClienteTest() throws BusinessLogicException {
         ClienteEntity entity = data.get(0);

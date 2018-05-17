@@ -43,28 +43,67 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class CarritoLogicTest {
 
+    /**
+     * PodamFactory.
+     */
     private PodamFactory factory = new PodamFactoryImpl();
 
+    /**
+     * Inyecta la logica de carrito.
+     */
     @Inject
     private CarritoLogic logic;
+
+    /**
+     * Inyecta la logica de cliente.
+     */
     @Inject
     private ClienteLogic logicCliente;
+
+    /**
+     * Inyecta la logica de accesorio.
+     */
     @Inject
     private AccesorioLogic logicAccesorio;
 
+    /**
+     * Inyecta la logica de modelo.
+     */
     @Inject
     private ModeloLogic logicModelo;
 
+    /**
+     * EntityManager.
+     */
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     * UserTransaction.
+     */
     @Inject
     private UserTransaction utx;
 
+    /**
+     * Datos de carrito.
+     */
     private List<CarritoEntity> data = new ArrayList<>();
+
+    /**
+     * Datos de items.
+     */
     private List<ItemEntity> dataItems = new ArrayList<>();
+
+    /**
+     * Datos de cliente.
+     */
     private List<ClienteEntity> dataClientes = new ArrayList<>();
 
+    /**
+     * Creacion del deployment
+     *
+     * @return deployment
+     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -149,7 +188,7 @@ public class CarritoLogicTest {
     }
 
     /**
-     * prueba el metodo createCarrito
+     * Prueba el metodo createCarrito
      *
      * @throws BusinessLogicException
      */
@@ -163,7 +202,7 @@ public class CarritoLogicTest {
     }
 
     /**
-     * prueba el metodo findCarrito
+     * Prueba el metodo findCarrito.
      */
     @Test
     public void findCarritoTest() throws BusinessLogicException {
@@ -172,20 +211,19 @@ public class CarritoLogicTest {
         CarritoEntity resultEntity = logic.findCarrito(entity.getId());
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
-        
+
         try {
-            
+
             logic.findCarrito(Long.MAX_VALUE);
-           Assert.fail();
-        }
-        catch(Exception e){
-           Assert.assertNotNull(e);
-           Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertNotNull(e);
+            Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
     /**
-     * prueba el metodo updateCarrito
+     * Prueba el metodo updateCarrito.
      *
      * @throws BusinessLogicException
      */
@@ -202,21 +240,20 @@ public class CarritoLogicTest {
         CarritoEntity resp = em.find(CarritoEntity.class, entity.getId());
 
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
-        
+
         try {
-            
-           CarritoEntity carrito = logic.findCarrito(Long.MAX_VALUE);
-           logic.updateCarrito(carrito);
-           Assert.fail();
-        }
-        catch(Exception e){
-           Assert.assertNotNull(e);
-           Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
+
+            CarritoEntity carrito = logic.findCarrito(Long.MAX_VALUE);
+            logic.updateCarrito(carrito);
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertNotNull(e);
+            Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
     /**
-     * prueba el metodo deleteCarrito
+     * Prueba el metodo deleteCarrito.
      */
     @Test
     public void deleteCarritoTest() {
@@ -227,7 +264,7 @@ public class CarritoLogicTest {
     }
 
     /**
-     * prueba el metodo addItem
+     * Prueba el metodo addItem
      *
      * @throws BusinessLogicException
      */
@@ -239,62 +276,63 @@ public class CarritoLogicTest {
         ItemEntity item = dataItems.get(0);
 
         logic.addItem(carrito.getId(), item.getId());
-        
+
         carrito = logic.findCarrito(carrito.getId());
-        
-        assert(carrito.getItems().contains(item));
-        
+
+        assert (carrito.getItems().contains(item));
+
         try {
-           logic.addItem(Long.MAX_VALUE, Long.MAX_VALUE);
-           Assert.fail();
+            logic.addItem(Long.MAX_VALUE, Long.MAX_VALUE);
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertNotNull(e);
+            Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
         }
-        catch(Exception e){
-           Assert.assertNotNull(e);
-           Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
-        }
-        
+
         try {
-           logic.addItem(data.get(0).getId(), Long.MAX_VALUE);
-           Assert.fail();
+            logic.addItem(data.get(0).getId(), Long.MAX_VALUE);
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertNotNull(e);
+            Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
         }
-        catch(Exception e){
-           Assert.assertNotNull(e);
-           Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
-        }
-        
+
         try {
             CarritoEntity carrito2 = data.get(0);
             ItemEntity item2 = dataItems.get(0);
             logic.addItem(carrito2.getId(), item2.getId());
             logic.addItem(carrito2.getId(), item2.getId());
-           Assert.fail();
-        }
-        catch(Exception e){
-           Assert.assertNotNull(e);
-           Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
-        }
-    }
-    
-    @Test
-    public void getItemsTest () throws BusinessLogicException {
-        
-        CarritoEntity carrito = data.get(0);
-        
-        logic.getItems(carrito.getId());
-        
-        try {
-
-           logic.getItems(Long.MAX_VALUE);
-           Assert.fail();
-        }
-        catch(Exception e){
-           Assert.assertNotNull(e);
-           Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertNotNull(e);
+            Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
     /**
-     * prueba el metodo removeItem
+     * Prueba el metodo getItems.
+     *
+     * @throws BusinessLogicException
+     */
+    @Test
+    public void getItemsTest() throws BusinessLogicException {
+
+        CarritoEntity carrito = data.get(0);
+
+        logic.getItems(carrito.getId());
+
+        try {
+
+            logic.getItems(Long.MAX_VALUE);
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertNotNull(e);
+            Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
+    /**
+     * Prueba el metodo removeItem.
      */
     @Test
     public void removeItemTest() throws BusinessLogicException {
@@ -305,22 +343,21 @@ public class CarritoLogicTest {
         logic.addItem(carrito.getId(), item.getId());
         logic.removeItem(carrito.getId(), item.getId());
 
-        assert(carrito.getItems().isEmpty());
-        
+        assert (carrito.getItems().isEmpty());
+
         try {
-           
-           CarritoEntity carrito3 = logic.findCarrito(Long.MAX_VALUE);
-           logic.removeItem(carrito3.getId(), Long.MAX_VALUE);
-           Assert.fail();
-        }
-        catch(Exception e){
-           Assert.assertNotNull(e);
-           Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
+
+            CarritoEntity carrito3 = logic.findCarrito(Long.MAX_VALUE);
+            logic.removeItem(carrito3.getId(), Long.MAX_VALUE);
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertNotNull(e);
+            Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
     /**
-     * prueba el metodo crearFactura
+     * Prueba el metodo crearFactura.
      *
      * @throws BusinessLogicException
      */
@@ -341,26 +378,24 @@ public class CarritoLogicTest {
         double precioTotal = item1.getPrecio() + item2.getPrecio();
 
         assert (facturaGenerada.getDinero() == precioTotal);
-        
+
         try {
-           
-           CarritoEntity carrito4 = logic.findCarrito(Long.MAX_VALUE);
-           logic.crearFactura(carrito4.getId());
-           Assert.fail();
-        }
-        catch(Exception e){
-           Assert.assertNotNull(e);
-           Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
+
+            CarritoEntity carrito4 = logic.findCarrito(Long.MAX_VALUE);
+            logic.crearFactura(carrito4.getId());
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertNotNull(e);
+            Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
         }
         try {
-           
-           CarritoEntity carrito4 = data.get(0);
-           logic.crearFactura(carrito4.getId());
-           Assert.fail();
-        }
-        catch(Exception e){
-           Assert.assertNotNull(e);
-           Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
+
+            CarritoEntity carrito4 = data.get(0);
+            logic.crearFactura(carrito4.getId());
+            Assert.fail();
+        } catch (Exception e) {
+            Assert.assertNotNull(e);
+            Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
         }
 
     }

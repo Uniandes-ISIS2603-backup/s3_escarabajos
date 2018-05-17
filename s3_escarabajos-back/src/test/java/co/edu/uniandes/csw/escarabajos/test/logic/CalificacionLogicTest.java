@@ -30,23 +30,49 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class CalificacionLogicTest {
 
+    /**
+     * PodamFactory.
+     */
     private PodamFactory factory = new PodamFactoryImpl();
 
+    /**
+     * Inyecta la logica de calificacion.
+     */
     @Inject
     private CalificacionLogic calificacionLogic;
 
+    /**
+     * EntityManager.
+     */
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     * UserTransaction.
+     */
     @Inject
     private UserTransaction utx;
 
+    /**
+     * Datos de calificacion.
+     */
     private List<CalificacionEntity> data = new ArrayList<CalificacionEntity>();
 
+    /**
+     * Datos de modelo.
+     */
     private List<ModeloEntity> modelosData = new ArrayList<ModeloEntity>();
 
+    /**
+     * Datos de cliente.
+     */
     private List<ClienteEntity> clientesdata = new ArrayList<ClienteEntity>();
 
+    /**
+     * Creacion del deployment
+     *
+     * @return deployment
+     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -119,12 +145,12 @@ public class CalificacionLogicTest {
     }
 
     /**
-     * Prueba para crear un Calificacion
+     * Prueba para crear un Calificacion.
      *
      *
      */
     @Test
-    public void createCalificacionTest() throws BusinessLogicException{
+    public void createCalificacionTest() throws BusinessLogicException {
         CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
         newEntity.setPuntaje(3);
         newEntity.setCliente(clientesdata.get(3));
@@ -148,7 +174,7 @@ public class CalificacionLogicTest {
     }
 
     /**
-     * Prueba para consultar la lista de Calificacions
+     * Prueba para consultar la lista de Calificaciones.
      *
      *
      */
@@ -168,7 +194,7 @@ public class CalificacionLogicTest {
     }
 
     /**
-     * Prueba para consultar un Calificacion
+     * Prueba para consultar un Calificacion.
      *
      *
      */
@@ -186,7 +212,7 @@ public class CalificacionLogicTest {
     }
 
     /**
-     * Prueba para eliminar un Calificacion
+     * Prueba para eliminar un Calificacion.
      *
      *
      */
@@ -199,7 +225,7 @@ public class CalificacionLogicTest {
     }
 
     /**
-     * Prueba para actualizar una Calificacion
+     * Prueba para actualizar una Calificacion.
      *
      *
      */
@@ -238,6 +264,11 @@ public class CalificacionLogicTest {
         Assert.assertEquals(2, modelo0.size());
     }
 
+    /**
+     * Prueba el metodo getCalificacionesPorClienteAndModelo
+     *
+     * @throws BusinessLogicException
+     */
     @Test
     public void getCalificacionesPorClienteAndModeloTest() throws BusinessLogicException {
         List<CalificacionEntity> mc0 = calificacionLogic.getCalificacionesPorClienteAndModelo(clientesdata.get(0).getId(), modelosData.get(0).getId());

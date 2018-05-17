@@ -37,24 +37,50 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class BicicletaUsadaLogicTest {
-    
+
+    /**
+     * PodamFactory.
+     */
     private PodamFactory factory = new PodamFactoryImpl();
-    
+
+    /**
+     * Inyecta la logica de bicicleta usada.
+     */
     @Inject
     private BicicletaUsadaLogic logic;
-    
+
+    /**
+     * EntityManager.
+     */
     @PersistenceContext
     private EntityManager em;
-    
+
+    /**
+     * UserTransaction.
+     */
     @Inject
     private UserTransaction utx;
-    
+
+    /**
+     * Datos de bicicleta usada.
+     */
     private List<BicicletaUsadaEntity> data = new ArrayList<>();
-    
+
+    /**
+     * Datos de vendedor.
+     */
     private List<ClienteEntity> dataVendedor = new ArrayList<>();
-    
+
+    /**
+     * Datos de modelo.
+     */
     private List<ModeloEntity> dataModelo = new ArrayList<>();
-    
+
+    /**
+     * Creacion del deployment
+     *
+     * @return deployment
+     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -106,38 +132,41 @@ public class BicicletaUsadaLogicTest {
      *
      */
     private void insertData() {
-        
+
         for (int i = 0; i < 3; i++) {
             ModeloEntity entity = factory.manufacturePojo(ModeloEntity.class);
             entity.setTipoModelo("Bicicleta");
             em.persist(entity);
             dataModelo.add(entity);
         }
-        
+
         for (int i = 0; i < 3; i++) {
             ClienteEntity entity = factory.manufacturePojo(ClienteEntity.class);
             em.persist(entity);
             dataVendedor.add(entity);
         }
-        
+
         for (int i = 0; i < 3; i++) {
             BicicletaUsadaEntity entity = factory.manufacturePojo(BicicletaUsadaEntity.class);
             entity.setModeloId(dataModelo.get(0).getId());
             entity.setEstado("En proceso");
             entity.setCliente(dataVendedor.get(1));
-            
+
             em.persist(entity);
             data.add(entity);
         }
     }
-    
+
+    /**
+     * Prueba el metodo verificarBicicleta.
+     */
     @Test
     public void verificarBicicletaTest() {
-        
+
         BicicletaUsadaEntity newEntity = factory.manufacturePojo(BicicletaUsadaEntity.class);
         newEntity.setModeloId(dataModelo.get(0).getId());
         newEntity.setUsada(Boolean.FALSE);
-        
+
         try {
             logic.verificarBiciUsada(newEntity);
             Assert.fail();
@@ -200,7 +229,7 @@ public class BicicletaUsadaLogicTest {
         Assert.assertEquals(entity.getId(), resultEntity.getId());
         Assert.assertEquals(entity.getEstado(), resultEntity.getEstado());
         Assert.assertEquals(entity.getFacturaOriginal(), resultEntity.getFacturaOriginal());
-        
+
         try {
             logic.getBicicleta(Long.MIN_VALUE, Long.MIN_VALUE);
             Assert.fail();
@@ -232,24 +261,24 @@ public class BicicletaUsadaLogicTest {
     public void updateBicicletaUsadaTest() throws BusinessLogicException {
         BicicletaUsadaEntity entity = data.get(1);
         BicicletaUsadaEntity pojoEntity = factory.manufacturePojo(BicicletaUsadaEntity.class);
-        
+
         pojoEntity.setId(entity.getId());
         pojoEntity.setEstado("En proceso");
         pojoEntity.setModeloId(dataModelo.get(0).getId());
-        
+
         logic.updateBicicleta(dataVendedor.get(1).getId(), pojoEntity);
-        
+
         BicicletaUsadaEntity resp = em.find(BicicletaUsadaEntity.class, entity.getId());
-        
+
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
         Assert.assertEquals(pojoEntity.getEstado(), resp.getEstado());
         Assert.assertEquals(pojoEntity.getFacturaOriginal(), resp.getFacturaOriginal());
-        
+
         pojoEntity = factory.manufacturePojo(BicicletaUsadaEntity.class);
         pojoEntity.setId(entity.getId());
         pojoEntity.setEstado("En proceso");
         pojoEntity.setPrecio(-1.0);
-        
+
         try {
             logic.updateBicicleta(dataVendedor.get(1).getId(), pojoEntity);
             Assert.fail();
@@ -257,12 +286,12 @@ public class BicicletaUsadaLogicTest {
             Assert.assertNotNull(e);
             Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
         }
-        
+
         pojoEntity = factory.manufacturePojo(BicicletaUsadaEntity.class);
         pojoEntity.setId(entity.getId());
         pojoEntity.setEstado("En proceso");
         pojoEntity.setModeloId(Long.MIN_VALUE);
-        
+
         try {
             logic.updateBicicleta(dataVendedor.get(1).getId(), pojoEntity);
             Assert.fail();
@@ -270,6 +299,6 @@ public class BicicletaUsadaLogicTest {
             Assert.assertNotNull(e);
             Logger.getLogger(ModeloLogicTest.class.getName()).log(Level.SEVERE, null, e);
         }
-        
+
     }
 }
