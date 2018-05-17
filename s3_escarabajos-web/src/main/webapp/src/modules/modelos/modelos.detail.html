@@ -2,16 +2,16 @@
 <br>
 
 <div class="row" ng-if="itemActual !== null">
-    <div style="position: absolute;left: 100px; " ng-if="modelo.tipo === bicicletas">
-        <button type="button" ui-sref="adv({adv:true,tipo:'bicicletas',filtros:{marcas:[],categorias:[],colores:[],precioMin:0.0,precioMax:999999999.9,calificacionMin:0.0}})" class="btn btn-default">
-            <a ui-sref="adv({adv:true,tipo:'bicicletas',filtros:{marcas:[],categorias:[],colores:[],precioMin:0.0,precioMax:999999999.9,calificacionMin:0.0}})" class="glyphicon glyphicon-chevron-left"></a>
-        </button>
-    </div>
     <div style="position: absolute;left: 100px; " ng-if="modelo.tipo === accesorios">
-        <button type="button" ui-sref="adv({adv:true,tipo:'accesorios',filtros:{marcas:[],categorias:[],colores:[],precioMin:0.0,precioMax:999999999.9,calificacionMin:0.0}})" class="btn btn-default">
-            <a ui-sref="adv({adv:true,tipo:'accesorios',filtros:{marcas:[],categorias:[],colores:[],precioMin:0.0,precioMax:999999999.9,calificacionMin:0.0}})" class="glyphicon glyphicon-chevron-left"></a>
+        <button type="button" ng-click="irAccesorios()" class="btn btn-default">
+            <a ng-click="irAccesorios()" class="glyphicon glyphicon-chevron-left"></a>
         </button>
     </div>
+    <div style="position: absolute;left: 100px; " ng-if="modelo.tipo === bicicletas">
+        <button type="button" ng-click="irBicicletas()" class="btn btn-default">
+            <a ng-click="irBicicletas()" class="glyphicon glyphicon-chevron-left"></a>
+        </button>
+    </div> 
     <div class="row">
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
@@ -73,10 +73,10 @@
                             <h4>Categoria:      {{itemActual.categoria}} </h4>
                         </div>
                         <br>
-                        <div class="row text-center">
-                            <h4 style="color:DodgerBlue;font-size: 25px;height: 40px">{{modeloActual.precio|currency}}</h4>
-                            <div ng-if="usadas.length >= 0">
-                                <h5 ng-click="verUsadas(modeloActual.id)" style="color:DodgerBlue; height: 20px; text-decoration: underline; cursor: pointer;"> O {{usadas.length}} usadas desde: {{precioUsadas|currency}}</h5>
+                        <div class="row text-left">
+                            <h4 style="color:#82CD73;font-size: 25px;height: 40px">{{modeloActual.precio|currency}}</h4>
+                            <div ng-if="usadas.length > 0">
+                                <h5 ng-click="verUsadas(modeloActual.id)" style="color:#82CD73; height: 20px; text-decoration: underline; cursor: pointer;"> O {{usadas.length}} usadas desde: {{precioUsadas|currency}}</h5>
                             </div>
                         </div>
                         <h4>Color: </h4>
