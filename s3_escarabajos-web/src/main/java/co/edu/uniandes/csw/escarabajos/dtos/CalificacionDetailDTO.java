@@ -61,6 +61,7 @@ public class CalificacionDetailDTO extends CalificacionDTO {
      * Constructor por defecto
      */
     public CalificacionDetailDTO() {
+        //Empty
     }
 
     ;
@@ -69,7 +70,6 @@ public class CalificacionDetailDTO extends CalificacionDTO {
      * @param entity entidad que contiene la informacion
      */
     public CalificacionDetailDTO(CalificacionEntity entity) {
-        //TODO DONE entity podria ser null
         super(entity);
         if (entity != null) {
             if (entity.getCliente() != null) {
@@ -91,7 +91,6 @@ public class CalificacionDetailDTO extends CalificacionDTO {
      *
      * @return La entidad construida a partir del DTO.
      */
-    //TODO: DONE debe tener @Override, el Override solo se pone si la clase es implementada, mas no heredadas
     public CalificacionEntity toEntiy() {
         CalificacionEntity ent = super.toEntity();
         if (this.modelo != null) {

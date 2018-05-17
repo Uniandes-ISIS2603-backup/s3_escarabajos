@@ -88,28 +88,20 @@ public class ModeloDTO {
     // Métodos
     //-----------------------------------------------------------
 
-    public String getReferencia() {
-        return referencia;
-    }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public Double getCalificacionMedia() {
-        return calificacionMedia;
-    }
-
-    public void setReferencia(String referencia) {
-        this.referencia = referencia;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
-    public void setCalificacionMedia(Double cal) {
-        this.calificacionMedia = cal;
+   
+    /**
+     * Convertir DTO a Entity
+     *
+     * @return Un Entity con los valores del DTO
+     */
+    public ModeloEntity toEntity() {
+        ModeloEntity entity = new ModeloEntity();
+        entity.setId(this.getId());
+        entity.setCalificacionMedia(this.getCalificacionMedia());
+        entity.setMarca(this.getMarca());
+        entity.setReferencia(this.getReferencia());
+        entity.setTipoModelo(this.getTipoModelo());
+        return entity;
     }
 
     /**
@@ -127,6 +119,48 @@ public class ModeloDTO {
     }
 
     /**
+     * @return the marca
+     */
+    public String getMarca() {
+        return marca;
+    }
+
+    /**
+     * @param marca the marca to set
+     */
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    /**
+     * @return the referencia
+     */
+    public String getReferencia() {
+        return referencia;
+    }
+
+    /**
+     * @param referencia the referencia to set
+     */
+    public void setReferencia(String referencia) {
+        this.referencia = referencia;
+    }
+
+    /**
+     * @return the calificacionMedia
+     */
+    public Double getCalificacionMedia() {
+        return calificacionMedia;
+    }
+
+    /**
+     * @param calificacionMedia the calificacionMedia to set
+     */
+    public void setCalificacionMedia(Double calificacionMedia) {
+        this.calificacionMedia = calificacionMedia;
+    }
+
+    /**
      * @return the tipoModelo
      */
     public String getTipoModelo() {
@@ -138,20 +172,5 @@ public class ModeloDTO {
      */
     public void setTipoModelo(String tipoModelo) {
         this.tipoModelo = tipoModelo;
-    }
-
-    /**
-     * Convertir DTO a Entity
-     *
-     * @return Un Entity con los valores del DTO
-     */
-    public ModeloEntity toEntity() {
-        ModeloEntity entity = new ModeloEntity();
-        entity.setId(this.id);
-        entity.setCalificacionMedia(this.calificacionMedia);
-        entity.setMarca(this.marca);
-        entity.setReferencia(this.referencia);
-        entity.setTipoModelo(this.getTipoModelo());
-        return entity;
     }
 }
