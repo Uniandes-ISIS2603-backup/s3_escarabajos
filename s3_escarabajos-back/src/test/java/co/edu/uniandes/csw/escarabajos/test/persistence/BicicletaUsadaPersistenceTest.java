@@ -98,9 +98,13 @@ public class BicicletaUsadaPersistenceTest {
     }
 
     /**
-     *
+     * Datos de bicicleta usada.
      */
     private List<BicicletaUsadaEntity> data = new ArrayList<BicicletaUsadaEntity>();
+
+    /**
+     * Datos de vendedor.
+     */
     private List<ClienteEntity> dataVendedor = new ArrayList<ClienteEntity>();
 
     /**

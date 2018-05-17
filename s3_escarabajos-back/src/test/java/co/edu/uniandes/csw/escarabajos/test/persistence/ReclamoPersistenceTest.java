@@ -56,14 +56,14 @@ public class ReclamoPersistenceTest
     private ReclamoPersistence reclamoPersistence;
     
     /**
-     * Contexto de Persistencia que se va autilizar para acceder a la Base de
+     * Contexto de Persistencia que se va a utilizar para acceder a la Base de
      * datos por fuera de los métodos que se están probando.
      */
     @PersistenceContext
     private EntityManager em;
     
      /**
-     * Variable para martcar las transacciones del em anterior cuando se
+     * Variable para marcar las transacciones del em anterior cuando se
      * crean/borran datos para las pruebas.
      */
     @Inject
@@ -98,6 +98,9 @@ public class ReclamoPersistenceTest
         em.createQuery("delete from ReclamoEntity").executeUpdate();
     }
     
+    /**
+     * Datos de reclamo.
+     */
     private List<ReclamoEntity> data = new ArrayList<ReclamoEntity>();
 
     /**
@@ -117,6 +120,9 @@ public class ReclamoPersistenceTest
         }
     }
     
+    /**
+     * Prueba el metodo create.
+     */
     @Test
     public void createCalificacionTest()
     {
@@ -131,6 +137,10 @@ public class ReclamoPersistenceTest
         Assert.assertEquals(newEntity.getMensaje(), entity.getMensaje());
         Assert.assertEquals(newEntity.getRazon(),entity.getRazon());
     }
+    
+    /**
+     * Prueba el metodo find.
+     */
     @Test
     public void findCalificacionTest()
     {
@@ -142,12 +152,20 @@ public class ReclamoPersistenceTest
         Assert.assertEquals(entity.getMensaje(), resp.getMensaje());
         Assert.assertEquals(entity.getRazon(), resp.getRazon());
     }
+    
+    /**
+     * Prueba el metodo findAll.
+     */
     @Test
     public void findAllTest()
     {
         List<ReclamoEntity> list = reclamoPersistence.findAll();
         Assert.assertEquals(data.size(), list.size());
     }
+    
+    /**
+     * Prueba el metodo update.
+     */
     @Test
     public void updateReclamo()
     {
@@ -164,6 +182,10 @@ public class ReclamoPersistenceTest
         Assert.assertEquals(newEntity.getMensaje(), resp.getMensaje());
         Assert.assertEquals(newEntity.getRazon(), resp.getRazon());
     }
+    
+    /**
+     * Prueba el metodo getReclamosEnProceso.
+     */
     @Test
     public void getReclamosEnProcesoTest()
     { 
@@ -173,7 +195,11 @@ public class ReclamoPersistenceTest
         Assert.assertTrue(data.get(0).getId().equals(enProceso.get(0).getId()) || data.get(0).getId().equals(enProceso.get(1).getId()));
         Assert.assertTrue(data.get(2).getId().equals(enProceso.get(0).getId()) || data.get(2).getId().equals(enProceso.get(1).getId()));
     }
-     @Test
+    
+    /**
+     * Prueba el metodo getReclamosTerminados. 
+     */
+    @Test
     public void getReclamosTerminadosTest()
     { 
         List<ReclamoEntity> noEnProceso = reclamoPersistence.getReclamosTerminados();

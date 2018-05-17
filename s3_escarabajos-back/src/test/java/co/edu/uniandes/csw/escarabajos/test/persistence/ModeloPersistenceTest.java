@@ -102,7 +102,7 @@ public class ModeloPersistenceTest {
     }
 
     /**
-     * lista que tiene los datos de prueba
+     * Datos de modelo.
      */
     private List<ModeloEntity> data = new ArrayList<ModeloEntity>();
 
@@ -149,7 +149,7 @@ public class ModeloPersistenceTest {
      */
     @Test
     public void getModelosTest() {
-        List<ModeloEntity> list = modeloPersistence.findAll(null,null);
+        List<ModeloEntity> list = modeloPersistence.findAll(null, null);
         Assert.assertEquals(data.size(), list.size());
         for (ModeloEntity ent : list) {
             boolean found = false;

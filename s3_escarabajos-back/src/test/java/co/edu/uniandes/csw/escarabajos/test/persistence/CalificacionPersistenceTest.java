@@ -29,8 +29,8 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author n.gaitan
  */
 @RunWith(Arquillian.class)
-public class CalificacionPersistenceTest 
-{
+public class CalificacionPersistenceTest {
+
     /**
      *
      * @return Devuelve el jar que Arquillian va a desplegar en el Glassfish
@@ -46,34 +46,33 @@ public class CalificacionPersistenceTest
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
-   /**
-     * Inyección de la dependencia a la clase CalificacionPersistence cuyos métodos
-     * se van a probar.
+
+    /**
+     * Inyección de la dependencia a la clase CalificacionPersistence cuyos
+     * métodos se van a probar.
      */
     @Inject
     private CalificacionPersistence calificacionPersistence;
-    
+
     /**
      * Contexto de Persistencia que se va autilizar para acceder a la Base de
      * datos por fuera de los métodos que se están probando.
      */
     @PersistenceContext
     private EntityManager em;
-    
-     /**
+
+    /**
      * Variable para martcar las transacciones del em anterior cuando se
      * crean/borran datos para las pruebas.
      */
     @Inject
     UserTransaction utx;
-    
-     /**
+
+    /**
      * Configuración inicial de la prueba.
      */
     @Before
-    public void setUp() 
-    {
+    public void setUp() {
         try {
             utx.begin();
             em.joinTransaction();
@@ -89,35 +88,38 @@ public class CalificacionPersistenceTest
             }
         }
     }
-    
+
     /**
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
         em.createQuery("delete from CalificacionEntity").executeUpdate();
     }
-    
+
+    /**
+     * Datos de calificacion.
+     */
     private List<CalificacionEntity> data = new ArrayList<CalificacionEntity>();
 
     /**
      * Inserta los datos iniciales para el correcto funcionamiento de las
      * pruebas.
      */
-    private void insertData() 
-    {
+    private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
-        for (int i = 0; i < 3; i++) 
-        {
+        for (int i = 0; i < 3; i++) {
             CalificacionEntity entity = factory.manufacturePojo(CalificacionEntity.class);
             em.persist(entity);
-            System.out.println("i: " + i +" Entity: " + entity);
+            System.out.println("i: " + i + " Entity: " + entity);
             data.add(entity);
         }
     }
-    
+
+    /**
+     * Prueba el metodo create.
+     */
     @Test
-    public void createCalificacionTest()
-    {
+    public void createCalificacionTest() {
         PodamFactory factory = new PodamFactoryImpl();
         CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
         CalificacionEntity result = calificacionPersistence.create(newEntity);
@@ -128,33 +130,45 @@ public class CalificacionPersistenceTest
 
         Assert.assertEquals(newEntity.getComentario(), entity.getComentario());
     }
+
+    /**
+     * Prueba el metodo find.
+     */
     @Test
-    public void findCalificacionTest()
-    {
+    public void findCalificacionTest() {
         CalificacionEntity entity = data.get(0);
         System.out.println(entity);
         CalificacionEntity resp = em.find(CalificacionEntity.class, entity.getId());
-        
+
         Assert.assertNotNull(resp);
         Assert.assertEquals(entity.getComentario(), resp.getComentario());
     }
+
+    /**
+     * Prueba el metodo findAll.
+     */
     @Test
-    public void findAllTest()
-    {
+    public void findAllTest() {
         List<CalificacionEntity> list = calificacionPersistence.findAll();
         Assert.assertEquals(data.size(), list.size());
     }
+
+    /**
+     * Prueba el metodo delete.
+     */
     @Test
-    public void deleteCalificacionTest()
-    {
-       CalificacionEntity cal = data.get(0);
-       calificacionPersistence.delete(cal.getId());
-       CalificacionEntity resp = em.find(CalificacionEntity.class, cal.getId());
-       Assert.assertNull(resp);
+    public void deleteCalificacionTest() {
+        CalificacionEntity cal = data.get(0);
+        calificacionPersistence.delete(cal.getId());
+        CalificacionEntity resp = em.find(CalificacionEntity.class, cal.getId());
+        Assert.assertNull(resp);
     }
+
+    /**
+     * Prueba el metodo update.
+     */
     @Test
-    public void updateCalificacionTest()
-    {
+    public void updateCalificacionTest() {
         CalificacionEntity entity = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
         CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
@@ -167,5 +181,5 @@ public class CalificacionPersistenceTest
 
         Assert.assertEquals(newEntity.getComentario(), resp.getComentario());
     }
-    
+
 }

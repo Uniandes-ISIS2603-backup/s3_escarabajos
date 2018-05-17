@@ -21,7 +21,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
- * @author c.santacruza
+ * @author jp.carreno
  */
 @RunWith(Arquillian.class)
 public class FacturaPersistenceTest {
@@ -29,8 +29,8 @@ public class FacturaPersistenceTest {
     /**
      *
      * @return Devuelve el jar que Arquillian va a desplegar en el Glassfish
-     * embebido. El jar contiene las clases de Factura, el descriptor de la
-     * base de datos y el archivo beans.xml para resolver la inyección de
+     * embebido. El jar contiene las clases de Factura, el descriptor de la base
+     * de datos y el archivo beans.xml para resolver la inyección de
      * dependencias.
      */
     @Deployment
@@ -96,7 +96,7 @@ public class FacturaPersistenceTest {
     }
 
     /**
-     *
+     * Datos de factura.
      */
     private List<FacturaEntity> data = new ArrayList<FacturaEntity>();
 
@@ -108,17 +108,17 @@ public class FacturaPersistenceTest {
      */
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
-        
+
         for (int i = 0; i < 3; i++) {
             FacturaEntity entity = factory.manufacturePojo(FacturaEntity.class);
-         
+
             em.persist(entity);
             data.add(entity);
         }
     }
 
     /**
-     * Prueba para crear un Bicicleta.
+     * Prueba para crear una factura.
      */
     @Test
     public void createFacturaTest() {
@@ -131,7 +131,7 @@ public class FacturaPersistenceTest {
         FacturaEntity entity = em.find(FacturaEntity.class, result.getId());
 
         Assert.assertEquals(newEntity.getDinero(), entity.getDinero());
-        
+
     }
 
     /**
@@ -155,7 +155,7 @@ public class FacturaPersistenceTest {
     }
 
     /**
-     * Prueba para consultar un Factura.
+     * Prueba para consultar una Factura.
      *
      *
      */
@@ -165,11 +165,11 @@ public class FacturaPersistenceTest {
         FacturaEntity newEntity = persistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
 
-        Assert.assertEquals(newEntity.getDinero(),entity.getDinero());
+        Assert.assertEquals(newEntity.getDinero(), entity.getDinero());
     }
 
     /**
-     * Prueba para eliminar un Factura.
+     * Prueba para eliminar una Factura.
      *
      *
      */
@@ -182,7 +182,7 @@ public class FacturaPersistenceTest {
     }
 
     /**
-     * Prueba para actualizar un Factura.
+     * Prueba para actualizar una Factura.
      *
      *
      */

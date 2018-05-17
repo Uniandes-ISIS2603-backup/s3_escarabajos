@@ -23,13 +23,21 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
+
 /**
  *
  * @author s.beltran
  */
 @RunWith(Arquillian.class)
 public class ClientePersistenceTest {
-    
+
+    /**
+     *
+     * @return Devuelve el jar que Arquillian va a desplegar en el Glassfish
+     * embebido. El jar contiene las clases de Cliente, el descriptor de la base
+     * de datos y el archivo beans.xml para resolver la inyección de
+     * dependencias.
+     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -38,24 +46,28 @@ public class ClientePersistenceTest {
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
+
+    /**
+     * Inyección de la dependencia a la clase ClientePersistence cuyos métodos
+     * se van a probar.
+     */
     @Inject
     private ClientePersistence clientePersistence;
-    
+
     /**
      * Contexto de Persistencia que se va a utilizar para acceder a la Base de
      * datos por fuera de los métodos que se están probando.
      */
     @PersistenceContext
     private EntityManager em;
-    
+
     /**
      * Variable para martcar las transacciones del em anterior cuando se
      * crean/borran datos para las pruebas.
      */
     @Inject
     UserTransaction utx;
-    
+
     /**
      * Configuración inicial de la prueba.
      *
@@ -78,8 +90,7 @@ public class ClientePersistenceTest {
             }
         }
     }
-    
-    
+
     /**
      * Limpia las tablas que están implicadas en la prueba.
      *
@@ -90,7 +101,7 @@ public class ClientePersistenceTest {
     }
 
     /**
-     * lista que tiene los datos de prueba
+     * Datos de cliente.
      */
     private List<ClienteEntity> data = new ArrayList<ClienteEntity>();
 
@@ -103,17 +114,17 @@ public class ClientePersistenceTest {
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
-            
+
             ClienteEntity entity = factory.manufacturePojo(ClienteEntity.class);
 
             em.persist(entity);
-            
+
             data.add(entity);
         }
     }
 
-     /**
-     * Prueba para crear un Editorial.
+    /**
+     * Prueba para crear un Cliente.
      *
      *
      */
@@ -129,11 +140,11 @@ public class ClientePersistenceTest {
 
         Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
     }
-    
-        /**
+
+    /**
      * Prueba para consultar la lista de clientes.
      *
-     * 
+     *
      */
     @Test
     public void getClientesTest() {
@@ -151,9 +162,9 @@ public class ClientePersistenceTest {
     }
 
     /**
-     * Prueba para consultar un Editorial.
+     * Prueba para consultar un cliente.
      *
-     * 
+     *
      */
     @Test
     public void getClienteTest() {
@@ -163,6 +174,9 @@ public class ClientePersistenceTest {
         Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
     }
 
+    /**
+     * Prueba el metodo delete.
+     */
     @Test
     public void deleteClienteTest() {
         ClienteEntity entity = data.get(0);
@@ -170,12 +184,11 @@ public class ClientePersistenceTest {
         ClienteEntity deleted = em.find(ClienteEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
-    
 
     /**
-     * Prueba para actualizar un Editorial.
+     * Prueba para actualizar un cliente.
      *
-     * 
+     *
      */
     @Test
     public void updateClienteTest() {
