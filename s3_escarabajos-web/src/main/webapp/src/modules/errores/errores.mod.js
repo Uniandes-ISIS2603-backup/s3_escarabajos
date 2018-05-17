@@ -7,7 +7,10 @@
 
             $stateProvider.state('error', {
                 url: errorUrl,
-                views: {
+               params: {
+                    mensaje: null,
+                    status:null                    
+                },views: {
                     mainView: {
                         templateUrl: "src/modules/errores/erroresDeServidor.html",
                         controller: "errorCtrl"

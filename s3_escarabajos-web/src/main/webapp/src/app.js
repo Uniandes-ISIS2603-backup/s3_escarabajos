@@ -98,6 +98,20 @@
                 $state.go('adv', {adv: true, tipo: 'bicicletas', filtros: {marcas: [], categorias: [], colores: [], precioMin: 0.0, precioMax: 999999999.9, calificacionMin: 0.0}}, {reload: true});
                 alert('Se ha cerrado correctamente la sesión');
             };
+            $rootScope.showError = function (response) {
+                if (response.status !== 200)
+                {
+                    var stat = response.status;
+                    var msj = response.data;
+                    if (response.status === 412)
+                    {
+                        $state.go('error', {mensaje: msj, status: "ERROR"});
+                    } else
+                    {
+                        $state.go('error', {mensaje: response.statusText, status: "ERROR - " + stat});
+                    }
+                }
+            };
         }]);
 })(window.angular);
 
