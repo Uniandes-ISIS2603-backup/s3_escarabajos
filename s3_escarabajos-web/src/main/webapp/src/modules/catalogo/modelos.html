@@ -54,10 +54,10 @@
                         <br>
                         <br>
                         <div class="col-xs-3 "  ng-if="hasPermissions()">
-                            <a class="btn btn-default" ui-sref="biciUpdate({biciId: bici.id})"><span class="glyphicon glyphicon-edit"></span></a>
+                            <a class="btn btn-default" ui-sref="adminCategorias"><span class="glyphicon glyphicon-edit"></span></a>
                         </div>
                         <div class="col-xs-3 " ng-if="hasPermissions()">
-                            <a class="btn btn-danger" ui-sref="biciDelete({biciId: bici.id})"><span class="glyphicon glyphicon-trash"></span></a>
+                            <a class="btn btn-danger" ui-sref="adminCategorias"><span class="glyphicon glyphicon-trash"></span></a>
                         </div>
                         <div class="col-xs-3 " ng-if="hasPermissions()">
                             <a  ui-sref ="addItemCarrito({itemId: modelo.items[0].id})" class="btn btn-primary">

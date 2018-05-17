@@ -31,6 +31,18 @@
                         controllerAs: 'ctrl'
                     }
                 }
+            }).state('modeloUpdate', {
+                url: '/update/{modeloId:int}',
+                parent: 'modelos',
+                params: {
+                    modeloId: null
+                },
+                views: {
+                    'listView': {
+                        templateUrl: basePath + '/editar/bicis.edit.html',
+                        controller: 'biciEditCtrl'
+                    }
+                }
             });
         }]);
 })(window.angular);
