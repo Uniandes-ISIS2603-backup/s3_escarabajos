@@ -144,7 +144,6 @@ public class ModeloLogic {
         }
         modeloEntity.setItems(items);
         persistence.update(modeloEntity);
-        
         LOGGER.log(Level.INFO, "Finaliza proceso de borrar un modelo ");
     }
 

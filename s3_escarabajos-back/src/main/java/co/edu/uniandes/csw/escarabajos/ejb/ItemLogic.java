@@ -177,11 +177,8 @@ public class ItemLogic {
             }
             item.setDisponible(Boolean.FALSE);
             if (item instanceof AccesorioEntity) {
-                  LOGGER.info("@@@3"+item.getDisponible());
                 accPers.update((AccesorioEntity) item);
-                         LOGGER.info("@@@5"+item.getDisponible());
             } else if (item instanceof BicicletaEntity) {
-                  LOGGER.info("@@@4");
                 biciPers.update((BicicletaEntity) item);
             }
             return item;

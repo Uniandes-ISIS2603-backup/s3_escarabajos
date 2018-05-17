@@ -4,7 +4,6 @@
         function ($scope, $state, catalogoFactory) {
             $scope.pagina = $state.params.pagina;
             $scope.tipo = null;
-
             catalogoFactory.getPrincipal($scope.pagina, 12).then(function (response) {
                 $scope.mods = response.data.modelos;
                 $scope.pags = Math.ceil(response.data.numero / 12);

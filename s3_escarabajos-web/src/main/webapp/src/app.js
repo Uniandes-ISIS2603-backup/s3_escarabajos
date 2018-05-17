@@ -25,6 +25,7 @@
         }]);
     app.run(['$rootScope', "$state", function ($rootScope, $state) {
             var a = false;
+            $rootScope.busq = "";
             if (!a)
             {
                 a = true;
@@ -45,6 +46,17 @@
                     return true;
                 }
             };
+
+            /**
+             * @ngdoc function
+             * @name irBicicletas
+             * @methodOf mainApp.module:mainApp
+             * @description funcion que se encarga de buscar modelos.
+             */
+            $rootScope.buscar = function () {
+                $state.go('busqueda', {busqueda:$rootScope.busq}, {reload: true});
+            };
+
 
             /**
              * @ngdoc function
@@ -98,7 +110,7 @@
                 $state.go('adv', {adv: true, tipo: 'bicicletas', filtros: {marcas: [], categorias: [], colores: [], precioMin: 0.0, precioMax: 999999999.9, calificacionMin: 0.0}}, {reload: true});
                 alert('Se ha cerrado correctamente la sesión');
             };
-            $rootScope.showError = function (response) {
+			$rootScope.showError = function (response) {
                 if (response.status !== 200)
                 {
                     var stat = response.status;
@@ -114,4 +126,3 @@
             };
         }]);
 })(window.angular);
-
