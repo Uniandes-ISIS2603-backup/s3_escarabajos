@@ -39,11 +39,11 @@ public class CarritoDTO {
     // Atributos
     //-----------------------------------------------------------
     /**
-     * modela el id unico
+     * Modela el id unico.
      */
     private Long id;
     /**
-     * modela el precio de todos los itemps a comprar
+     * Modela el precio de todos los items a comprar.
      */
     private Double precioTotal = 0.0;
 
@@ -51,7 +51,7 @@ public class CarritoDTO {
     // Constructores
     //-----------------------------------------------------------
     /**
-     * Constructor por defecto
+     * Constructor por defecto.
      */
     public CarritoDTO() {
         // Do nothing because of JPA
@@ -74,7 +74,7 @@ public class CarritoDTO {
     // Getters and Setters
     //-----------------------------------------------------------
     /**
-     * retorna el precio de todos los items
+     * Devuelve el precio de todos los items.
      *
      * @return
      */
@@ -83,7 +83,7 @@ public class CarritoDTO {
     }
 
     /**
-     * asigna el precio total
+     * Modifica el precio total.
      *
      * @param precioTotal
      */
@@ -91,10 +91,20 @@ public class CarritoDTO {
         this.precioTotal = precioTotal;
     }
 
+    /**
+     * Devuelve el id.
+     *
+     * @return id
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Modifica el id.
+     *
+     * @param id nuevo id
+     */
     public void setId(Long id) {
         this.id = id;
     }
@@ -103,7 +113,7 @@ public class CarritoDTO {
     // Metodos
     //-----------------------------------------------------------
     /**
-     * lo convierte en un CarritoEntity
+     * lo convierte en un CarritoEntity.
      *
      * @return
      */

@@ -8,23 +8,20 @@ package co.edu.uniandes.csw.escarabajos.dtos;
 import java.util.List;
 
 /**
- * InfoDTO Objeto de transferencia de datos de los filtros. Los DTO contienen las
- * represnetaciones de los JSON que se transfieren entre el cliente y el
+ * InfoDTO Objeto de transferencia de datos de los filtros. Los DTO contienen
+ * las represnetaciones de los JSON que se transfieren entre el cliente y el
  * servidor.
- * 
+ *
  * Al serializarse como JSON esta clase implementa el siguiente item: <br>
  * <pre>
  *   {
  *      "marcas": [{@String}],
- *      "categorias": [{@String}],
- *      "colores": [{@String}],
- *      "precioMin": double,
- *      "precioMax": double,
- *      "calificacinoMin": double
- *   }
- * </pre>
- * Por ejemplo los filtros se representa asi:<br>
- * 
+ *      "categorias": [{
+ * @String}], "colores": [{
+ * @String}], "precioMin": double, "precioMax": double, "calificacinoMin":
+ * double }
+ * </pre> Por ejemplo los filtros se representa asi:<br>
+ *
  * <pre>
  *   {
  *      "marcas": [{BMx}],
@@ -35,108 +32,151 @@ import java.util.List;
  *      "calificacinoMin": double
  *   }
  * </pre>
+ *
  * @author Andres
  */
 public class FiltrosDTO {
-    
+
+    /**
+     * Modela las marcas.
+     */
     private List<String> marcas;
-    
+
+    /**
+     * Modela las categorias.
+     */
     private List<String> categorias;
-    
+
+    /**
+     * Modela los colores.
+     */
     private List<String> colores;
-    
+
+    /**
+     * Modela el precio minimo.
+     */
     private Double precioMin;
-    
+
+    /**
+     * Modela el precio maximo.
+     */
     private Double precioMax;
-    
+
+    /**
+     * Modela la calificacion minima.
+     */
     private Double calificacionMin;
-    
-     /**
-     * Constructor por defecto
+
+    /**
+     * Constructor por defecto.
      */
     public FiltrosDTO() {
         //Empty
     }
 
     /**
-     * @return the marcas
+     * Devuelve las marcas.
+     *
+     * @return marcas
      */
     public List<String> getMarcas() {
         return marcas;
     }
 
     /**
-     * @param marcas the marcas to set
+     * Modifica las marcas.
+     *
+     * @param marcas nuevas marcas
      */
     public void setMarcas(List<String> marcas) {
         this.marcas = marcas;
     }
 
     /**
-     * @return the categorias
+     * Devuelve las categorias.
+     *
+     * @return categorias
      */
     public List<String> getCategorias() {
         return categorias;
     }
 
     /**
-     * @param categorias the categorias to set
+     * Modifica las categorias.
+     *
+     * @param categorias nuevas categorias
      */
     public void setCategorias(List<String> categorias) {
         this.categorias = categorias;
     }
 
     /**
-     * @return the colores
+     * Devuelve los colores.
+     *
+     * @return colores
      */
     public List<String> getColores() {
         return colores;
     }
 
     /**
-     * @param colores the colores to set
+     * Modifica los colores.
+     *
+     * @param colores nuevos colores
      */
     public void setColores(List<String> colores) {
         this.colores = colores;
     }
 
     /**
-     * @return the precioMin
+     * Devuelve el precio minimo.
+     *
+     * @return precioMin
      */
     public Double getPrecioMin() {
         return precioMin;
     }
 
     /**
-     * @param precioMin the precioMin to set
+     * Modifica el precio minimo.
+     *
+     * @param precioMin nuevo precio Minimo
      */
     public void setPrecioMin(Double precioMin) {
         this.precioMin = precioMin;
     }
 
     /**
-     * @return the precioMax
+     * Devuelve el precio maximo.
+     *
+     * @return precioMax
      */
     public Double getPrecioMax() {
         return precioMax;
     }
 
     /**
-     * @param precioMax the precioMax to set
+     * Modifica el precio maximo.
+     *
+     * @param precioMax nuevo precio Maximo
      */
     public void setPrecioMax(Double precioMax) {
         this.precioMax = precioMax;
     }
 
     /**
-     * @return the calificacionMin
+     * Devuelve la calificacion minima.
+     *
+     * @return calificacionMin
      */
     public Double getCalificacionMin() {
         return calificacionMin;
     }
 
     /**
-     * @param calificacionMin the calificacionMin to set
+     * Modifica la calificacion minima.
+     *
+     * @param calificacionMin nueva calificacionMin
      */
     public void setCalificacionMin(Double calificacionMin) {
         this.calificacionMin = calificacionMin;

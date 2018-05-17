@@ -25,7 +25,7 @@ import co.edu.uniandes.csw.escarabajos.entities.BicicletaUsadaEntity;
  *      "album":[{@FotoDTO}],
  *      "modeloId":number,
  *      "facturaOriginal" : string
- *      
+ *
  *   }
  * </pre> Por ejemplo una bicicletaUsadaEnVenta se representa asi:<br>
  * <pre>
@@ -39,11 +39,11 @@ import co.edu.uniandes.csw.escarabajos.entities.BicicletaUsadaEntity;
  *      "modeloId": 1,
  *      "facturaOriginal" : "https://cloud10.todocoleccion.online/facturas-antiguas/tc/2010/05/15/19344998.jpg",
  *      "album" :[
- *                 
+ *
  *               ]
-
+ *
  *   }
- * 
+ *
  * </pre>
  *
  * @author c.santacruza
@@ -77,18 +77,38 @@ public class BicicletaUsadaDTO extends BicicletaDTO {
         }
     }
 
+    /**
+     * Devuelve el estado.
+     *
+     * @return estado
+     */
     public String getEstado() {
         return estado;
     }
 
+    /**
+     * Modifica el estado.
+     *
+     * @param estado nuevo estado
+     */
     public void setEstado(String estado) {
         this.estado = estado;
     }
 
+    /**
+     * Devuelve la factura original.
+     *
+     * @return facturaOriginal
+     */
     public String getFacturaOriginal() {
         return facturaOriginal;
     }
 
+    /**
+     * Modifica la factura original.
+     *
+     * @param facturaOriginal nueva factura original
+     */
     public void setFacturaOriginal(String facturaOriginal) {
         this.facturaOriginal = facturaOriginal;
     }
