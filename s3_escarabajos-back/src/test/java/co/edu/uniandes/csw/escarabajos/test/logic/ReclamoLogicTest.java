@@ -127,10 +127,8 @@ public class ReclamoLogicTest
     @Test
     public void createReclamoTest() throws BusinessLogicException {
         ReclamoEntity newEntity = factory.manufacturePojo(ReclamoEntity.class);
-        List<String> pics = new ArrayList<>();
-        pics.add(factory.manufacturePojo(String.class));
         //newEntity.setAlbum(pics);
-        ReclamoEntity result = reclamoLogic.createReclamo(newEntity, facturaData.get(0).getId(), clienteData.get(0).getId());
+        ReclamoEntity result = reclamoLogic.createReclamo(newEntity, facturaData.get(0).getId(), clienteData.get(2).getId());
         Assert.assertNotNull(result);
         ReclamoEntity entity = em.find(ReclamoEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
