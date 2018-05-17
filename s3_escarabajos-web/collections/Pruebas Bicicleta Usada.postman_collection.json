@@ -1,162 +1,177 @@
 {
-	"id": "ed884ad7-d32e-83f1-01e5-35df242543a4",
-	"name": "Pruebas Bicicleta Usada",
-	"description": "",
-	"order": [
-		"5ae30f14-e6dd-72a1-70cb-795facfac8af",
-		"ee01321d-cb16-a0e9-b725-17ab09995300",
-		"f275f229-5e08-62ba-7c82-c85ea1d3b377",
-		"f808ad6e-7cf2-b0ae-761e-ac33b5480f8a",
-		"cf2d6432-baee-2538-70ad-81684b9cd979"
-	],
-	"folders": [],
-	"folders_order": [],
-	"timestamp": 0,
-	"owner": "2856583",
-	"public": false,
-	"requests": [
+	"info": {
+		"name": "Pruebas Bicicleta Usada",
+		"_postman_id": "6ab34fb7-98fa-93e5-ca16-54d871557803",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
 		{
-			"id": "5ae30f14-e6dd-72a1-70cb-795facfac8af",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/clientes/1/bicis/100",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1524886189703,
 			"name": "Get bicicleta usada con id 100",
-			"description": null,
-			"collectionId": "ed884ad7-d32e-83f1-01e5-35df242543a4",
-			"responses": [],
-			"rawModeData": "{\r\n\t\"id\": 123,\r\n\t\"categoria\" : \"m\",\r\n       \"marca\": \"We the People\",\r\n       \"color\": \"Negro\",\r\n       \"precio\": 2.50,\r\n       \"modeloId\":1,\r\n       \"facturaOriginal\" : \"https://cloud10.todocoleccion.online/facturas-antiguas/tc/2010/05/15/19344998.jpg\",\r\n       \"album\" :[\r\n                  \r\n                ]\r\n}"
-		},
-		{
-			"id": "cf2d6432-baee-2538-70ad-81684b9cd979",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
+			"event": [
 				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
 				}
 			],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/clientes/1/bicis/200",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "PUT",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1524889574580,
-			"name": "Put de una bicicleta usada",
-			"description": "",
-			"collectionId": "ed884ad7-d32e-83f1-01e5-35df242543a4",
-			"responses": [],
-			"rawModeData": "{\r\n\t\"id\":200,\r\n\t\"categoria\" : \"M\",\r\n\t\"estado\":\"En proceso\",\r\n    \"color\": \"Negro\",\r\n    \"precio\": 3.50,\r\n    \"modeloId\":1,\r\n    \"usada\":true,\r\n    \"facturaOriginal\" : \"https://cloud10.todocoleccion.online/facturas-antiguas/tc/2010/05/15/19344998.jpg\",\r\n    \"album\" :[]\r\n}"
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"id\": 123,\r\n\t\"categoria\" : \"m\",\r\n       \"marca\": \"We the People\",\r\n       \"color\": \"Negro\",\r\n       \"precio\": 2.50,\r\n       \"modeloId\":1,\r\n       \"facturaOriginal\" : \"https://cloud10.todocoleccion.online/facturas-antiguas/tc/2010/05/15/19344998.jpg\",\r\n       \"album\" :[\r\n                  \r\n                ]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/bicis/1002",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"bicis",
+						"1002"
+					]
+				},
+				"description": null
+			},
+			"response": []
 		},
 		{
-			"id": "ee01321d-cb16-a0e9-b725-17ab09995300",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/clientes/1/bicis",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1524886215114,
 			"name": "Get todas las bicicletas usadas del vendedor 1",
-			"description": null,
-			"collectionId": "ed884ad7-d32e-83f1-01e5-35df242543a4",
-			"responses": [],
-			"rawModeData": "{\r\n\t\"id\": 123,\r\n\t\"categoria\" : \"m\",\r\n       \"marca\": \"We the People\",\r\n       \"color\": \"Negro\",\r\n       \"precio\": 2.50,\r\n       \"modeloId\":1,\r\n       \"facturaOriginal\" : \"https://cloud10.todocoleccion.online/facturas-antiguas/tc/2010/05/15/19344998.jpg\",\r\n       \"album\" :[\r\n                  \r\n                ]\r\n}"
-		},
-		{
-			"id": "f275f229-5e08-62ba-7c82-c85ea1d3b377",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
+			"event": [
 				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
 				}
 			],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/clientes/1/bicis",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1524886306979,
-			"name": "Post de una bicicleta usada",
-			"description": null,
-			"collectionId": "ed884ad7-d32e-83f1-01e5-35df242543a4",
-			"responses": [],
-			"rawModeData": "{\r\n\t\"id\": 101,\r\n\t\"categoria\" : \"M\",\r\n\t\"estado\":\"En proceso\",\r\n    \"color\": \"Negro\",\r\n    \"precio\": 3.50,\r\n    \"modeloId\":1,\r\n    \"usada\":true,\r\n    \"facturaOriginal\" : \"https://cloud10.todocoleccion.online/facturas-antiguas/tc/2010/05/15/19344998.jpg\",\r\n    \"album\" :[]\r\n}"
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"id\": 123,\r\n\t\"categoria\" : \"m\",\r\n       \"marca\": \"We the People\",\r\n       \"color\": \"Negro\",\r\n       \"precio\": 2.50,\r\n       \"modeloId\":1,\r\n       \"facturaOriginal\" : \"https://cloud10.todocoleccion.online/facturas-antiguas/tc/2010/05/15/19344998.jpg\",\r\n       \"album\" :[\r\n                  \r\n                ]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/bicis",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"bicis"
+					]
+				},
+				"description": null
+			},
+			"response": []
 		},
 		{
-			"id": "f808ad6e-7cf2-b0ae-761e-ac33b5480f8a",
-			"headers": "",
-			"headerData": [],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/clientes/1/bicis/100",
-			"queryParams": [],
-			"pathVariables": {},
-			"pathVariableData": [],
-			"preRequestScript": null,
-			"method": "DELETE",
-			"collectionId": "ed884ad7-d32e-83f1-01e5-35df242543a4",
-			"data": null,
-			"dataMode": "params",
+			"name": "Post de una bicicleta usada",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3d72b157-d0fc-4af7-bbed-bf27c18bbffe",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"bicicleta_id\",data.id)",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"id\": 101,\r\n\t\"categoria\" : \"M\",\r\n\t\"estado\":\"En proceso\",\r\n    \"color\": \"Negro\",\r\n    \"precio\": 3.50,\r\n    \"modeloId\":1000,\r\n    \"usada\":true,\r\n    \"facturaOriginal\" : \"https://cloud10.todocoleccion.online/facturas-antiguas/tc/2010/05/15/19344998.jpg\",\r\n    \"album\" :[]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/1/bicis",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"clientes",
+						"1",
+						"bicis"
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
 			"name": "Delete bicicleta usada con id 100",
-			"description": "",
-			"descriptionFormat": "html",
-			"time": 1524886400269,
-			"version": 2,
-			"responses": [],
-			"tests": "tests[\"Status code is 204\"] = responseCode.code === 204;",
-			"currentHelper": "normal",
-			"helperAttributes": {}
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 204\"] = responseCode.code === 204;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/bicis/{{bicicleta_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"bicis",
+						"{{bicicleta_id}}"
+					]
+				},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }

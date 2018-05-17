@@ -1,7 +1,7 @@
 {
 	"info": {
 		"name": "AccesorioCollection",
-		"_postman_id": "58582459-4178-e6ee-940b-ee1ff47f0748",
+		"_postman_id": "35c74f23-b2de-ce15-432a-67e4989de7fd",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -33,12 +33,12 @@
 					"raw": "{\r\n        \"type\": \"clienteConCarrito\",\r\n        \"cedula\": 2,\r\n        \"correo\": \"String\",\r\n        \"nombre\": \"String\",\r\n        \"usuario\": \"String\",\r\n        \"calificaciones\": [],\r\n        \"compras\": [],\r\n        \"listaDeseos\": [],\r\n        \"mediosPago\": [],\r\n        \"reclamos\": [],   \r\n        \"carrito\": {   \t   \t\r\n        \t\"precioTotal\" : 10, \t\r\n        \t\"items\": [ \t\t\r\n        \t{ \t\t\r\n        \t\t\"id\": 1, \t\t\r\n        \t\t\"categoria\": \"string\",     \t\r\n        \t\t\"marca\": \"string\", \t\r\n        \t\t\"color\": \"string\",     \t\r\n        \t\t\"precio\": 10,     \t\r\n        \t\t\"usada\": false \t\t\r\n        \t\t\r\n        \t}     \r\n        \t]   \r\n        }\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:18075/s3_escarabajos-web/api/accesorios?",
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/accesorios",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "18075",
+					"port": "8080",
 					"path": [
 						"s3_escarabajos-web",
 						"api",
@@ -62,11 +62,11 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "f4121188-15f3-4a67-bd76-14b79816c49f",
+						"id": "02c82c29-de76-4b26-b779-8246d14c0e8b",
 						"type": "text/javascript",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_modelo\",data.id);",
+							"postman.setGlobalVariable(\"modelo_id\",data.id);",
 							"tests[\"Status code is 200\"] = responseCode.code === 200;",
 							"console.log(data.id);"
 						]
@@ -83,15 +83,15 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": " {\r\n       \"id\": 1,\r\n       \"marca\": \"BMXTREME\",\r\n       \"referencia\": \"BMEXTREME-MTN-2017\",\r\n       \"calificacionMedia\": 4.50,\r\n       \"tipoModelo\": \"Accesorio\"\r\n }"
+					"raw": " {\r\n       \"id\": 1,\r\n       \"marca\": \"BMXTREME\",\r\n       \"referencia\": \"{{$guid}}}}\",\r\n       \"calificacionMedia\": 4.50,\r\n       \"tipoModelo\": \"Accesorio\"\r\n }"
 				},
 				"url": {
-					"raw": "http://localhost:18075/s3_escarabajos-web/api/modelos",
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/modelos",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "18075",
+					"port": "8080",
 					"path": [
 						"s3_escarabajos-web",
 						"api",
@@ -107,11 +107,11 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "dba226a4-2487-4fa2-bceb-4dfd5b8c0641",
+						"id": "9c8a90cd-292b-43a9-869d-7eb51a3b36b4",
 						"type": "text/javascript",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id\",data.id);",
+							"postman.setGlobalVariable(\"accesorio_id\",data.id);",
 							"tests[\"Status code is 200\"] = responseCode.code === 200;",
 							"console.log(data.id);"
 						]
@@ -128,15 +128,15 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n       \"id\": {{new_id_modelo}},\r\n       \"precio\": 1,\r\n       \"modeloId\": {{new_id_modelo}}, \r\n       \"color\": \"String\",\r\n       \"album\": [],\r\n       \"tipoAcessorio\": \"\",\r\n       \"descripcion\": \"String\"\r\n}"
+					"raw": "{\r\n\t\t\"id\": {{modelo_id}},\r\n       \"precio\": 1,\r\n       \"modeloId\": {{modelo_id}}, \r\n       \"color\": \"String\",\r\n       \"album\": [],\r\n       \"tipoAcessorio\": \"\",\r\n       \"descripcion\": \"String\"\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:18075/s3_escarabajos-web/api/accesorios?",
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/accesorios",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "18075",
+					"port": "8080",
 					"path": [
 						"s3_escarabajos-web",
 						"api",
@@ -178,20 +178,20 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n       \"id\": 1,\r\n       \"precio\": 1,\r\n       \"modeloId\": 1, \r\n       \"color\": \"Prueba actualizacion\",\r\n       \"album\": [],\r\n       \"tipoAcessorio\": \"String\",\r\n       \"descripcion\": \"String\"\r\n}"
+					"raw": "{\r\n       \"id\": {{accesorio_id}},\r\n       \"precio\": 1,\r\n       \"modeloId\": {{modelo_id}}, \r\n       \"color\": \"Prueba actualizacion\",\r\n       \"album\": [],\r\n       \"tipoAcessorio\": \"String\",\r\n       \"descripcion\": \"String\"\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:18075/s3_escarabajos-web/api/accesorios/{{new_id}}?",
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/accesorios/{{accesorio_id}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "18075",
+					"port": "8080",
 					"path": [
 						"s3_escarabajos-web",
 						"api",
 						"accesorios",
-						"{{new_id}}"
+						"{{accesorio_id}}"
 					],
 					"query": [
 						{
@@ -232,12 +232,12 @@
 					"raw": "{\r\n       \"id\": 1,\r\n       \"precio\": 1,\r\n       \"modeloId\": 1, \r\n       \"color\": \"Prueba actualizacion\",\r\n       \"album\": [],\r\n       \"tipoAcessorio\": \"String\",\r\n       \"descripcion\": \"String\"\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:18075/s3_escarabajos-web/api/accesorios/{{new_id}}?",
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/accesorios/{{new_id}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "18075",
+					"port": "8080",
 					"path": [
 						"s3_escarabajos-web",
 						"api",

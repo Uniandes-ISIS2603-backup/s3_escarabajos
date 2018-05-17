@@ -1,7 +1,7 @@
 {
 	"info": {
 		"name": "FacturaCollection",
-		"_postman_id": "4a8e2fbd-f728-30f1-a284-22a35be6af68",
+		"_postman_id": "beb4d418-8a38-e50d-6d5e-5260372eefab",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -44,8 +44,7 @@
 						"api",
 						"facturas"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -87,8 +86,7 @@
 						"api",
 						"facturas"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -119,7 +117,7 @@
 					"raw": "{\n\t\"dinero\":\"10000\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s3_escarabajos-web/api/facturas/1",
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/facturas/1000",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -129,54 +127,9 @@
 						"s3_escarabajos-web",
 						"api",
 						"facturas",
-						"1"
+						"1000"
 					]
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "Eliminar factura",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "4dec37d7-b438-45a8-b9ea-8b9a23399765",
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status code is 204\"] = responseCode.code === 204;"
-						]
-					}
 				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:8080/s3_escarabajos-web/api/facturas/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"s3_escarabajos-web",
-						"api",
-						"facturas",
-						"1"
-					]
-				},
-				"description": ""
 			},
 			"response": []
 		}

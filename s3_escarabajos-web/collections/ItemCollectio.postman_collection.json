@@ -1,7 +1,7 @@
 {
 	"info": {
 		"name": "ItemCollectio",
-		"_postman_id": "d2aad89d-5139-9347-ec45-e97a07df1cd6",
+		"_postman_id": "f2147901-f921-de11-8116-a0c6d7d2f7e4",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -32,7 +32,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n   \"id\": 0,\r\n   \"marca\": \"BMXTREME\",\r\n   \"referencia\": \"BMEXTREME-MTN-2017\",\r\n   \"calificacionMedia\": 0,\r\n   \"tipoModelo\": \"Accesorio\",\r\n   \"items\": [  \r\n   ],\r\n   \"calificaciones\": [\r\n   ]\r\n}"
+					"raw": "{\r\n   \"id\": 0,\r\n   \"marca\": \"BMXTREME\",\r\n   \"referencia\": \"{{$guid}}}\",\r\n   \"calificacionMedia\": 0,\r\n   \"tipoModelo\": \"Accesorio\",\r\n   \"items\": [  \r\n   ],\r\n   \"calificaciones\": [\r\n   ]\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/s3_escarabajos-web/api/modelos",
@@ -77,7 +77,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n   \"id\": 0,\r\n   \"marca\": \"BIANCHI\",\r\n   \"referencia\": \"ROAD-1999\",\r\n   \"calificacionMedia\": 0,\r\n   \"tipoModelo\": \"Bicicleta\",\r\n   \"items\": [  \r\n   ],\r\n   \"calificaciones\": [\r\n   ]\r\n}"
+					"raw": "{\r\n   \"id\": 0,\r\n   \"marca\": \"BIANCHI\",\r\n   \"referencia\": \"{{$guid}}\",\r\n   \"calificacionMedia\": 0,\r\n   \"tipoModelo\": \"Bicicleta\",\r\n   \"items\": [  \r\n   ],\r\n   \"calificaciones\": [\r\n   ]\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/s3_escarabajos-web/api/modelos",

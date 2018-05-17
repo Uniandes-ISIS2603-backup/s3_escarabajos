@@ -1,369 +1,247 @@
 {
-	"id": "064aca10-a553-600c-a7c2-3b7798fa7eed",
-	"name": "Pruebas Bicicleta ",
-	"description": "",
-	"order": [
-		"1c3dae02-0671-dff9-68ea-49a1abe68444",
-		"e4010326-3a32-03e0-03a2-55ac240c869b",
-		"09cc593a-14a9-2537-d44a-795e1d64c940",
-		"1a1484ab-e296-5025-9758-6240af975240",
-		"16797ff9-bd12-4fb4-9477-fbeac358ba85",
-		"34938529-a5ca-a387-7fcf-4a173cb645cb",
-		"884308f9-43c7-3c19-dbf3-b30f4f8879f1",
-		"ba0e3ec9-013d-96c5-1ecd-71cab6beae53",
-		"10905217-9c40-6fff-7c6e-1abf12e7a04a",
-		"4b6a9604-073d-4f9a-033a-801d46d72422",
-		"869f7301-59d6-1466-8840-e191833cb9da",
-		"0de2475d-af1c-6655-4ce5-e4af1a585176",
-		"8901d1d3-865c-325d-770a-66e442cb2fef"
-	],
-	"folders": [],
-	"folders_order": [],
-	"timestamp": 1520224586616,
-	"owner": "2856583",
-	"public": false,
-	"requests": [
+	"info": {
+		"name": "Pruebas Bicicleta ",
+		"_postman_id": "aa9453e7-af8e-f647-0151-57733ffe28e7",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
 		{
-			"id": "09cc593a-14a9-2537-d44a-795e1d64c940",
-			"headers": "",
-			"headerData": [],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/bicis/3",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "DELETE",
-			"data": null,
-			"dataMode": "params",
-			"version": 2,
-			"tests": "tests[\"Status code is 204\"] = responseCode.code === 204;",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1520227580505,
-			"name": "Delete bicicleta 3",
-			"description": "",
-			"collectionId": "064aca10-a553-600c-a7c2-3b7798fa7eed",
-			"responses": []
-		},
-		{
-			"id": "0de2475d-af1c-6655-4ce5-e4af1a585176",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/bicis/1",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "PUT",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "tests[\"Status code is 412\"] = responseCode.code === 412;",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1520229715655,
-			"name": "Put sin categoria",
-			"description": "Mostrando Excepción.",
-			"collectionId": "064aca10-a553-600c-a7c2-3b7798fa7eed",
-			"responses": [],
-			"rawModeData": "{\r\n\t\"id\": 50,\r\n\t\"precio\": 4000,\r\n\t\"modeloId\": 5,\r\n\t\"color\": \"Negro\",\r\n\t\"album\": [],\r\n\t\"usada\": false\r\n}"
-		},
-		{
-			"id": "10905217-9c40-6fff-7c6e-1abf12e7a04a",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/bicis/5",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1520229185343,
-			"name": "Get bicicleta con id 5 ",
-			"description": "Para verificar que la actualización fue exitosa",
-			"collectionId": "064aca10-a553-600c-a7c2-3b7798fa7eed",
-			"responses": [],
-			"rawModeData": "{\r\n\t\"id\": 50,\r\n\t\"precio\": 4000,\r\n\t\"modeloId\": 5,\r\n\t\"color\": \"Negro\",\r\n\t\"album\": [],\r\n\t\"usada\": false,\r\n    \"categoria\": \"Carretera\"\r\n}"
-		},
-		{
-			"id": "16797ff9-bd12-4fb4-9477-fbeac358ba85",
-			"headers": "",
-			"headerData": [],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/bicis/3",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "DELETE",
-			"data": null,
-			"dataMode": "params",
-			"version": 2,
-			"tests": "tests[\"Status code is 412\"] = responseCode.code === 412;",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1520227498650,
-			"name": "Delete bicicleta con id 3 ",
-			"description": "Mostrando Excepción.",
-			"collectionId": "064aca10-a553-600c-a7c2-3b7798fa7eed",
-			"responses": []
-		},
-		{
-			"id": "1a1484ab-e296-5025-9758-6240af975240",
-			"headers": "",
-			"headerData": [],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/bicis/3",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": null,
-			"dataMode": "params",
-			"version": 2,
-			"tests": "tests[\"Status code is 412\"] = responseCode.code === 412;",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1520227391359,
-			"name": "Get bicicleta con id 3 ",
-			"description": "Mostrando excepción.",
-			"collectionId": "064aca10-a553-600c-a7c2-3b7798fa7eed",
-			"responses": []
-		},
-		{
-			"id": "1c3dae02-0671-dff9-68ea-49a1abe68444",
-			"headers": "",
-			"headerData": [],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/bicis",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": null,
-			"dataMode": "params",
-			"version": 2,
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1520227351784,
 			"name": "Get todas las bicicletas ",
-			"description": "",
-			"collectionId": "064aca10-a553-600c-a7c2-3b7798fa7eed",
-			"responses": []
-		},
-		{
-			"id": "34938529-a5ca-a387-7fcf-4a173cb645cb",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
+			"event": [
 				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
 				}
 			],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/bicis",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1520228399887,
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/bicis",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"bicis"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get bicicleta con id 1000",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/bicis/1000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"bicis",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Post de una bicicleta",
-			"description": "",
-			"collectionId": "064aca10-a553-600c-a7c2-3b7798fa7eed",
-			"responses": [],
-			"rawModeData": "{\r\n\t\"id\": 0,\r\n\t\"precio\": 20000,\r\n\t\"modeloId\": 2,\r\n\t\"color\": \"Verde\",\r\n\t\"album\": [],\r\n\t\"usada\": false,\r\n    \"categoria\": \"Deportiva\"\r\n}"
-		},
-		{
-			"id": "4b6a9604-073d-4f9a-033a-801d46d72422",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
+			"event": [
 				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
+					"listen": "test",
+					"script": {
+						"id": "0d8fde45-8530-4f72-aa79-7ca5db0e3b0c",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"bicicleta_id\",data.id)",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
 				}
 			],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/bicis/99",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "PUT",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "tests[\"Status code is 412\"] = responseCode.code === 412;",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1520229961184,
-			"name": "Put de una bicicleta con id inexistente",
-			"description": "Mostrando Excepción.",
-			"collectionId": "064aca10-a553-600c-a7c2-3b7798fa7eed",
-			"responses": [],
-			"rawModeData": "{\r\n\t\"id\": 50,\r\n\t\"precio\": 4000,\r\n\t\"modeloId\": 5,\r\n\t\"color\": \"Negro\",\r\n\t\"album\": [],\r\n\t\"usada\": false,\r\n    \"categoria\": \"Carretera\"\r\n}"
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"id\": 130000,\r\n\t\"precio\": 20000,\r\n\t\"modeloId\": 1000,\r\n\t\"color\": \"Verde\",\r\n\t\"album\": [],\r\n\t\"usada\": false,\r\n    \"categoria\": \"Deportiva\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/bicis",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"bicis"
+					]
+				}
+			},
+			"response": []
 		},
 		{
-			"id": "869f7301-59d6-1466-8840-e191833cb9da",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
+			"name": "Put bicicleta con id 1002",
+			"event": [
 				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
+					"listen": "test",
+					"script": {
+						"id": "e4f49ea0-d044-4d36-a88c-02de6908b1a8",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
 				}
 			],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/bicis/1",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "PUT",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "tests[\"Status code is 412\"] = responseCode.code === 412;",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1520229703910,
-			"name": "Put con un precio negativo",
-			"description": "Mostrando Excepción.",
-			"collectionId": "064aca10-a553-600c-a7c2-3b7798fa7eed",
-			"responses": [],
-			"rawModeData": "{\r\n\t\"id\": 50,\r\n\t\"precio\": -4000,\r\n\t\"modeloId\": 5,\r\n\t\"color\": \"Negro\",\r\n\t\"album\": [],\r\n\t\"usada\": false,\r\n    \"categoria\": \"Carretera\"\r\n}"
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"id\": {{bicicleta_id}},\r\n\t\"precio\": 20000,\r\n\t\"modeloId\": 1000,\r\n\t\"color\": \"Negro\",\r\n\t\"album\": [],\r\n\t\"usada\": false,\r\n    \"categoria\": \"Deportiva\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/bicis/{{bicicleta_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"bicis",
+						"{{bicicleta_id}}"
+					]
+				}
+			},
+			"response": []
 		},
 		{
-			"id": "884308f9-43c7-3c19-dbf3-b30f4f8879f1",
-			"headers": "",
-			"headerData": [],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/bicis/5",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": null,
-			"dataMode": "params",
-			"version": 2,
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1520229180037,
 			"name": "Get bicicleta con id 5 ",
-			"description": "Para ver los datos antes de actualizar",
-			"collectionId": "064aca10-a553-600c-a7c2-3b7798fa7eed",
-			"responses": []
-		},
-		{
-			"id": "8901d1d3-865c-325d-770a-66e442cb2fef",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
+			"event": [
 				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
 				}
 			],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/bicis",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "tests[\"Status code is 412\"] = responseCode.code === 412;",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1520229749057,
-			"name": "Post con id existente",
-			"description": "Mostrando Excepción.",
-			"collectionId": "064aca10-a553-600c-a7c2-3b7798fa7eed",
-			"responses": [],
-			"rawModeData": "{\r\n\t\"id\": 5,\r\n\t\"precio\": 3330,\r\n\t\"modeloId\": 5,\r\n\t\"color\": \"Negro\",\r\n\t\"album\": [],\r\n\t\"usada\": false,\r\n    \"categoria\": \"Carretera\"\r\n}"
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"id\": 50,\r\n\t\"precio\": 4000,\r\n\t\"modeloId\": 5,\r\n\t\"color\": \"Negro\",\r\n\t\"album\": [],\r\n\t\"usada\": false,\r\n    \"categoria\": \"Carretera\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/bicis/{{bicicleta_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"bicis",
+						"{{bicicleta_id}}"
+					]
+				},
+				"description": "Para verificar que la actualización fue exitosa"
+			},
+			"response": []
 		},
 		{
-			"id": "ba0e3ec9-013d-96c5-1ecd-71cab6beae53",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
+			"name": "Delete bicicleta 1001",
+			"event": [
 				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 204\"] = responseCode.code === 204;"
+						]
+					}
 				}
 			],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/bicis/5",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "PUT",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1520229176135,
-			"name": "Put bicicleta con id 5",
-			"description": "",
-			"collectionId": "064aca10-a553-600c-a7c2-3b7798fa7eed",
-			"responses": [],
-			"rawModeData": "{\r\n\t\"id\": 50,\r\n\t\"precio\": 4000,\r\n\t\"modeloId\": 5,\r\n\t\"color\": \"Negro\",\r\n\t\"album\": [],\r\n\t\"usada\": false,\r\n    \"categoria\": \"Carretera\"\r\n}"
-		},
-		{
-			"id": "e4010326-3a32-03e0-03a2-55ac240c869b",
-			"headers": "",
-			"headerData": [],
-			"url": "http://localhost:8080/s3_escarabajos-web/api/bicis/3",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": null,
-			"dataMode": "params",
-			"version": 2,
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1520227357640,
-			"name": "Get bicicleta con id 3",
-			"description": "",
-			"collectionId": "064aca10-a553-600c-a7c2-3b7798fa7eed",
-			"responses": []
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/bicis/{{bicicleta_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"bicis",
+						"{{bicicleta_id}}"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

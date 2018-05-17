@@ -1,7 +1,7 @@
 {
 	"info": {
 		"name": "Escarabajos-ngaitan",
-		"_postman_id": "b540ce4d-8f7f-572d-9a4c-5ae5b3794fb0",
+		"_postman_id": "5f4caaf9-dfe6-57e9-e70d-f862e1b93e24",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -11,6 +11,20 @@
 			"item": [
 				{
 					"name": "CreateReclamo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "331a0367-4804-4fe4-9b38-2cdfc9bbbfd3",
+								"type": "text/javascript",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									"postman.setGlobalVariable(\"reclamo_id\",data.id)",
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -21,7 +35,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"id\" : 1,\n\t\"mensaje\": \"Modus Ponens es muy aleta\",\n\t\"razon\": \"Intento de Post\",\n\t\"enProceso\" : true,\n\t\"factura\" : {},\n\t\"cliente\" : {}\n}"
+							"raw": "{\n\t\"mensaje\": \"Modus Ponens es muy aleta\",\n\t\"razon\": \"Intento de Post\",\n\t\"enProceso\" : true,\n\t\"factura\" : {},\n\t\"cliente\" : {}\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/reclamos/1000/facturas/%202000",
@@ -45,12 +59,24 @@
 				},
 				{
 					"name": "GetReclamo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f5fe893-9e10-4d42-9a95-dcca60562604",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/reclamos/detail/2000",
+							"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/reclamos/detail/1000",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -62,7 +88,7 @@
 								"clientes",
 								"reclamos",
 								"detail",
-								"2000"
+								"1000"
 							]
 						}
 					},
@@ -70,6 +96,18 @@
 				},
 				{
 					"name": "getAllReclamos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1cea0db3-4b1b-4493-9c0b-a6aa0d8acbc0",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -94,6 +132,18 @@
 				},
 				{
 					"name": "upDateReclamo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "554e0ffd-b378-4759-92c2-ae6a8d3c9c73",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -107,7 +157,7 @@
 							"raw": "{\n\t\"mensaje\": \"Decir Hola es muy aleta\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/reclamos/1000",
+							"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/reclamos/{{reclamo_id}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -118,7 +168,7 @@
 								"api",
 								"clientes",
 								"reclamos",
-								"1000"
+								"{{reclamo_id}}"
 							]
 						}
 					},
@@ -126,6 +176,18 @@
 				},
 				{
 					"name": "getDespuesDelUpdate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0242f950-8bab-4730-99f4-fbf7ea379270",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -150,12 +212,24 @@
 				},
 				{
 					"name": "getByCliente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8459e2cf-6e78-4c1b-812a-06a991e5280f",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/reclamos/detail/2000",
+							"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/reclamos/detail/1000",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -167,7 +241,7 @@
 								"clientes",
 								"reclamos",
 								"detail",
-								"2000"
+								"1000"
 							]
 						}
 					},
@@ -178,7 +252,10 @@
 					"request": {
 						"method": "PUT",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/reclamos/1000/renaudar",
 							"protocol": "http",
@@ -203,7 +280,10 @@
 					"request": {
 						"method": "PUT",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/reclamos/1000/finalizar",
 							"protocol": "http",
@@ -267,7 +347,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:8080/s3_escarabajos-web/api/modelos/2000/clientes/calificaciones",
 							"protocol": "http",

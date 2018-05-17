@@ -1,8 +1,7 @@
 {
 	"info": {
 		"name": "MedioPagoCollection",
-		"_postman_id": "6d3ece74-b5a8-76e4-1722-7901ec1f2fa6",
-		"description": "",
+		"_postman_id": "54a3b2f6-a9cf-5660-b7ff-e294fb1a46ca",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -12,9 +11,11 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "6eb96e8c-02d1-4fab-8358-2cc81bef3e68",
+						"id": "f656956a-e0b9-4a46-a176-2d062d8b1579",
 						"type": "text/javascript",
 						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"mediopago_id\",data.id)",
 							"tests[\"Status code is 200\"] = responseCode.code === 200;"
 						]
 					}
@@ -44,13 +45,12 @@
 						"api",
 						"mediospago"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
 		{
-			"name": "Obtener medio de pago con id 1",
+			"name": "Obtener medio de pago creado",
 			"event": [
 				{
 					"listen": "test",
@@ -76,7 +76,7 @@
 					"raw": "{\n\t\"tipo\":\"tarjeta de credito\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/s3_escarabajos-web/api/mediospago/1",
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/mediospago/{{mediopago_id}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -86,10 +86,9 @@
 						"s3_escarabajos-web",
 						"api",
 						"mediospago",
-						"1"
+						"{{mediopago_id}}"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -132,8 +131,7 @@
 						"mediospago",
 						""
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -164,7 +162,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/s3_escarabajos-web/api/mediospago/1",
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/mediospago/{{mediopago_id}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -174,10 +172,9 @@
 						"s3_escarabajos-web",
 						"api",
 						"mediospago",
-						"1"
+						"{{mediopago_id}}"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		}

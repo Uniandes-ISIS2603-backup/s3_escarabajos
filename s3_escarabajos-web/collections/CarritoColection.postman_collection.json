@@ -1,7 +1,7 @@
 {
 	"info": {
 		"name": "CarritoColection",
-		"_postman_id": "3cc9dcd0-3b2f-009d-cf9a-3b4e6fdd3665",
+		"_postman_id": "3eb77c94-5481-bbb3-8ef1-04ba9c0fb620",
 		"description": "Estas son las pruebas del carrito",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -38,12 +38,12 @@
 					"raw": "{\r\n\t\"id\": 18,\r\n    \"precioTotal\": 0.0\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:18075/s3_escarabajos-web/api/carritos?",
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/carritos?",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "18075",
+					"port": "8080",
 					"path": [
 						"s3_escarabajos-web",
 						"api",
@@ -89,12 +89,12 @@
 					"raw": "{\r\n        \"type\": \"clienteConCarrito\",\r\n        \"cedula\": 2,\r\n        \"correo\": \"String\",\r\n        \"nombre\": \"String\",\r\n        \"usuario\": \"String\",\r\n        \"calificaciones\": [],\r\n        \"compras\": [],\r\n        \"listaDeseos\": [],\r\n        \"mediosPago\": [],\r\n        \"reclamos\": [],   \r\n        \"carrito\": {   \t   \t\r\n        \t\"precioTotal\" : 10, \t\r\n        \t\"items\": [ \t\t\r\n        \t{ \t\t\r\n        \t\t\"id\": 1, \t\t\r\n        \t\t\"categoria\": \"string\",     \t\r\n        \t\t\"marca\": \"string\", \t\r\n        \t\t\"color\": \"string\",     \t\r\n        \t\t\"precio\": 10,     \t\r\n        \t\t\"usada\": false \t\t\r\n        \t\t\r\n        \t}     \r\n        \t]   \r\n        }\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:18075/s3_escarabajos-web/api/carritos/{{new_id}}?",
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/carritos/{{new_id}}?",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "18075",
+					"port": "8080",
 					"path": [
 						"s3_escarabajos-web",
 						"api",
@@ -137,15 +137,15 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"id\": 1,\r\n    \"precioTotal\": 1.0\r\n}"
+					"raw": "{\r\n\t\"id\": {{new_id}},\r\n    \"precioTotal\": 1.0\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:18075/s3_escarabajos-web/api/carritos/{{new_id}}?",
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/carritos/{{new_id}}?",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "18075",
+					"port": "8080",
 					"path": [
 						"s3_escarabajos-web",
 						"api",
@@ -191,12 +191,12 @@
 					"raw": "{\r\n        \"type\": \"clienteConCarrito\",\r\n        \"cedula\": 2,\r\n        \"correo\": \"String\",\r\n        \"nombre\": \"String\",\r\n        \"usuario\": \"String\",\r\n        \"calificaciones\": [],\r\n        \"compras\": [],\r\n        \"listaDeseos\": [],\r\n        \"mediosPago\": [],\r\n        \"reclamos\": [],   \r\n        \"carrito\": {   \t   \t\r\n        \t\"precioTotal\" : 10, \t\r\n        \t\"items\": [ \t\t\r\n        \t{ \t\t\r\n        \t\t\"id\": 1, \t\t\r\n        \t\t\"categoria\": \"string\",     \t\r\n        \t\t\"marca\": \"string\", \t\r\n        \t\t\"color\": \"string\",     \t\r\n        \t\t\"precio\": 10,     \t\r\n        \t\t\"usada\": false \t\t\r\n        \t\t\r\n        \t}     \r\n        \t]   \r\n        }\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:18075/s3_escarabajos-web/api/carritos/{{new_id}}?",
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/carritos/{{new_id}}?",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "18075",
+					"port": "8080",
 					"path": [
 						"s3_escarabajos-web",
 						"api",
