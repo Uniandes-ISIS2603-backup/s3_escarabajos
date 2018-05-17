@@ -39,21 +39,44 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class ModeloLogicTest {
 
+    /**
+     * PodamFactory.
+     */
     private PodamFactory factory = new PodamFactoryImpl();
 
+    /**
+     * Inyecta la logica de modelo.
+     */
     @Inject
     private ModeloLogic modeloLogic;
 
+    /**
+     * EntityManager.
+     */
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     * UserTransaction.
+     */
     @Inject
     private UserTransaction utx;
 
+    /**
+     * Datos de modelo.
+     */
     private List<ModeloEntity> data = new ArrayList<>();
 
+    /**
+     * Datos de item.
+     */
     private List<ItemEntity> itemsData = new ArrayList();
 
+    /**
+     * Creacion del deployment
+     *
+     * @return deployment
+     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -120,7 +143,7 @@ public class ModeloLogicTest {
             data.add(entity);
 
         }
-        for (ModeloEntity modelo : modeloLogic.getModelos(null,null)) {
+        for (ModeloEntity modelo : modeloLogic.getModelos(null, null)) {
             for (ItemEntity item : modelo.getItems()) {
                 item.setModeloId(modelo.getId());
                 em.merge(item);
@@ -130,9 +153,7 @@ public class ModeloLogicTest {
     }
 
     /**
-     * Prueba para crear un Modelo
-     *
-     *
+     * Prueba para crear un Modelo.
      */
     @Test
     public void createModeloTest() {
@@ -152,13 +173,12 @@ public class ModeloLogicTest {
     }
 
     /**
-     * Prueba para consultar la lista de Modelos
-     *
+     * Prueba para consultar la lista de Modelos.
      */
     @Test
     public void getModelosTest() {
 
-        List<ModeloEntity> list = modeloLogic.getModelos(1,Integer.MAX_VALUE);
+        List<ModeloEntity> list = modeloLogic.getModelos(1, Integer.MAX_VALUE);
         Assert.assertEquals(data.size(), list.size());
         for (ModeloEntity entity : list) {
             boolean found = false;
@@ -172,8 +192,7 @@ public class ModeloLogicTest {
     }
 
     /**
-     * Prueba para consultar un Modelo
-     *
+     * Prueba para consultar un Modelo.
      */
     @Test
     public void getModeloTest() {
@@ -188,7 +207,7 @@ public class ModeloLogicTest {
     }
 
     /**
-     * Prueba para eliminar un Modelo
+     * Prueba para eliminar un Modelo.
      *
      * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
      */
@@ -198,14 +217,13 @@ public class ModeloLogicTest {
         modeloLogic.deleteModelo(entity.getId());
         ModeloEntity deleted = modeloLogic.getModelo(entity.getId());
         for (ItemEntity item : deleted.getItems()) {
-             Assert.assertFalse(item.getDisponible());
+            Assert.assertFalse(item.getDisponible());
         }
-        
-       
+
     }
 
     /**
-     * test que prueba el metodo de buscar item en modelo
+     * Prueba el metodo de buscar item en modelo.
      */
     @Test
     public void getItemModeloTest() {
@@ -219,7 +237,7 @@ public class ModeloLogicTest {
     }
 
     /**
-     * Prueba el metodo que retorna todos los items de un modelo
+     * Prueba el metodo que retorna todos los items de un modelo.
      */
     @Test
     public void listItemsModeloTest() {
@@ -234,7 +252,7 @@ public class ModeloLogicTest {
     }
 
     /**
-     * Prueba que agregue un item al modelo
+     * Prueba que agregue un item al modelo.
      */
     @Test
     public void addItem() {
@@ -259,8 +277,7 @@ public class ModeloLogicTest {
     }
 
     /**
-     * Prueba para actualizar un Modelo
-     *
+     * Prueba para actualizar un Modelo.
      */
     @Test
     public void updateModeloTest() {
