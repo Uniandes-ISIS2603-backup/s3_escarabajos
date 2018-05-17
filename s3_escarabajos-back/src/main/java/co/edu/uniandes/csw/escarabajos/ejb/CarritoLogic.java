@@ -34,13 +34,13 @@ public class CarritoLogic {
     private static final String NOEXISTE = "No existe un carrito con el id";
 
     /**
-     * Injecta la persistencia de carrito.
+     * Inyecta la persistencia de carrito.
      */
     @Inject
     private CarritoPersistence persistence;
 
     /**
-     * Injecta la logica de item.
+     * Inyecta la logica de item.
      */
     @Inject
     private ItemLogic itemLogic;

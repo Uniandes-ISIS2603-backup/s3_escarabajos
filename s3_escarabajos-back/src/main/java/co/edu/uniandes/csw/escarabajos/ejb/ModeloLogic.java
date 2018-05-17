@@ -57,25 +57,25 @@ public class ModeloLogic {
     private static final Logger LOGGER = Logger.getLogger(ModeloLogic.class.getName());
 
     /**
-     * Injecta la persistencia de modelo.
+     * Inyecta la persistencia de modelo.
      */
     @Inject
     private ModeloPersistence persistence;
 
     /**
-     * Injecta la logica de item.
+     * Inyecta la logica de item.
      */
     @Inject
     private ItemLogic itemLogic;
 
     /**
-     * Injecta la logica de accesorio.
+     * Inyecta la logica de accesorio.
      */
     @Inject
     private AccesorioLogic accLogic;
 
     /**
-     * Injecta la logica de bicicleta.
+     * Inyecta la logica de bicicleta.
      */
     @Inject
     private BicicletaLogic biciLogic;

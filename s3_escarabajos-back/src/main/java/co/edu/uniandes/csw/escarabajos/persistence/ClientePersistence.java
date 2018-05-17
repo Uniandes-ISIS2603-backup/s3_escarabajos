@@ -5,9 +5,7 @@
  */
 package co.edu.uniandes.csw.escarabajos.persistence;
 
-import co.edu.uniandes.csw.escarabajos.entities.CarritoEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
-import co.edu.uniandes.csw.escarabajos.entities.MedioPagoEntity;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,13 +20,20 @@ import javax.persistence.TypedQuery;
  */
 @Stateless
 public class ClientePersistence {
-    
+
+    /**
+     * LOGGER de la clase ClientePersistence.
+     */
     private static final Logger LOGGER = Logger.getLogger(ClientePersistence.class.getName());
 
+    /**
+     * Contexto de la persistencia.
+     */
     @PersistenceContext(unitName = "EscarabajosPU")
     protected EntityManager em;
-    
+
     /**
+     * Crea un nuevo cliente.
      *
      * @param entity objeto cliente que se creará en la base de datos
      * @return devuelve la entidad creada con un id dado por la base de datos.
@@ -39,9 +44,9 @@ public class ClientePersistence {
         LOGGER.info("Creando una cliente nuevo");
         return entity;
     }
-    
+
     /**
-     * Busca si hay algun cliente con el nombre que se envía de argumento
+     * Devuelve si hay algun cliente con el nombre que se envía de argumento.
      *
      * @param name: Nombre del cliente que se está buscando
      * @return null si no existe ningun cliente con el nombre del argumento. Si
@@ -63,27 +68,54 @@ public class ClientePersistence {
         }
     }
 
+    /**
+     * Devuelve todos los clientes en la base de datos.
+     *
+     * @return lista de clientes
+     */
     public List<ClienteEntity> findAll() {
         LOGGER.info("Consultando todos los clientes");
         TypedQuery query = em.createQuery("select u from ClienteEntity u", ClienteEntity.class);
         return query.getResultList();
     }
 
+    /**
+     * Devuelve un cliente especifico.
+     *
+     * @param id cliente buscado
+     * @return cliente encontrado
+     */
     public ClienteEntity find(Long id) {
         LOGGER.log(Level.INFO, "Consultando cliente con id={0}", id);
         return em.find(ClienteEntity.class, id);
     }
 
+    /**
+     * Actualiza un cliente especifico.
+     *
+     * @param entity cliente que se va a actualizar
+     * @return cliente actualizado
+     */
     public ClienteEntity update(ClienteEntity entity) {
-         return em.merge(entity);
+        return em.merge(entity);
     }
-    
+
+    /**
+     * Elimina un cliente especifico.
+     *
+     * @param id cliente que se va a eliminar
+     */
     public void delete(Long id) {
-         LOGGER.log(Level.INFO, "Borrando cliente con id={0}", id);
+        LOGGER.log(Level.INFO, "Borrando cliente con id={0}", id);
         ClienteEntity entity = em.find(ClienteEntity.class, id);
         em.remove(entity);
     }
-    
+
+    /**
+     * Devuelve todos los vendedores en la base de datos.
+     *
+     * @return lista de vendedores
+     */
     public List<ClienteEntity> findAllVendedores() {
         LOGGER.info("Consultando todos los clientes vendedores");
         TypedQuery query = em.createQuery("select u from ClienteEntity u where u.direccion IS NOT NULL", ClienteEntity.class);

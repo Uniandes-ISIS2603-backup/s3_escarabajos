@@ -42,16 +42,16 @@
                                 <div class=" col-xs-2" ng-if=" actuales[0] !== undefined && actuales[0] !== null" >
                                     <img ng-src="{{actuales[0]}}" class="img-thumbnail" ng-click="mostrarImagen(actuales[0])">
                                 </div>
+                                <div class=" col-xs-2" ng-if=" actuales[1] !== undefined && actuales[1] !== null" >
+                                    <img ng-src="{{actuales[1]}}" class="img-thumbnail" ng-click="mostrarImagen(actuales[1])">
+                                </div>
+                                <div class=" col-xs-2" ng-if=" actuales[2] !== undefined && actuales[2] !== null" >
+                                    <img ng-src="{{actuales[2]}}" class="img-thumbnail" ng-click="mostrarImagen(actuales[2])">
+                                </div>
+                                <div class=" col-xs-2" ng-if=" actuales[3] !== undefined && actuales[3] !== null" >
+                                    <img ng-src="{{actuales[3]}}" class="img-thumbnail" ng-click="mostrarImagen(actuales[3])">
+                                </div>
                             </div>
-                            <br>
-
-                            <div class=" col-xs-2" ng-if=" actuales[2] !== undefined && actuales[2] !== null" >
-                                <img ng-src="{{actuales[2]}}" class="img-thumbnail" ng-click="mostrarImagen(actuales[2])">
-                            </div>
-                            <div class=" col-xs-2" ng-if=" actuales[3] !== undefined && actuales[3] !== null" >
-                                <img ng-src="{{actuales[3]}}" class="img-thumbnail" ng-click="mostrarImagen(actuales[3])">
-                            </div>
-
                             <div class=" col-xs-2">
                                 <br>
                                 <a  ng-click ="nextImagen()" class="btn btn-primary" ng-disabled="fin === imagenes.length - 1" ng-if="imagenes.length > 4">
@@ -76,7 +76,7 @@
                         <div class="row text-left">
                             <h4 style="color:#82CD73;font-size: 25px;height: 40px">{{modeloActual.precio|currency}}</h4>
                             <div ng-if="usadas.length > 0">
-                                <h5 ng-click="verUsadas(modeloActual.id)" style="color:#82CD73; height: 20px; text-decoration: underline; cursor: pointer;"> O {{usadas.length}} usadas desde: {{precioUsadas|currency}}</h5>
+                                <h5 style="color:#82CD73; height: 20px; text-decoration: underline; cursor: pointer;"> O {{usadas.length}} usadas desde: {{precioUsadas|currency}}</h5>
                             </div>
                         </div>
                         <h4>Color: </h4>
@@ -99,15 +99,18 @@
                             <div class="col-sm-4">
                                 <a  ui-sref ="addItemCarrito({itemId: modeloActual.id, color: itemActual.color})" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart" style="color:white"></span></a>
                             </div>
-                            <div class="col-xs-6">
+                            <div class="col-xs-6" ng-if="isAuthenticated() && !hasPermissions()">
                                 <h6 style="font-size: 10px">Agregar Carrito</h6>
                             </div>
                         </div>
                         <div style="position: relative;" class="row" ng-if="!isAuthenticated()">
-                            <div class="col-sm-4">
+                            <div class="col-sm-4" >
                                 <a  ui-sref ="clientesSignIn" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart" style="color:white"></span></a>
                             </div>
-                            <div class="col-xs-6">
+                            <div class="col-xs-6" ng-if="isAuthenticated() && !hasPermissions()">
+                                <h6 style="font-size: 10px">Agregar Carrito</h6>
+                            </div>
+                             <div class="col-xs-6" ng-if="!isAuthenticated() && !hasPermissions()">
                                 <h6 style="font-size: 10px">Agregar Carrito</h6>
                             </div>
                         </div>
@@ -118,8 +121,12 @@
                                 <a  ui-sref ="addItemListaDeseos({itemId: modeloActual.id, color: itemActual.color})" class="btn btn-primary">
                                     <span class="glyphicon glyphicon-gift" ></span></a>
                             </div>
-
-                            <h6 style="font-size: 10px">Agregar Lista Deseos</h6>
+                            <div class="col-xs-6" ng-if="isAuthenticated() && !hasPermissions()">
+                                <h6 style="font-size: 10px">Agregar Lista Deseos</h6>
+                            </div>
+                            <div class="col-xs-6" ng-if="!isAuthenticated() && !hasPermissions()">
+                                <h6 style="font-size: 10px">Agregar Lista Deseos</h6>
+                            </div>
 
                         </div>
                         <div style="position:relative;" class="row" ng-if="!isAuthenticated()">
@@ -128,10 +135,15 @@
                                 <a  ui-sref ="clientesSignIn" class="btn btn-primary">
                                     <span class="glyphicon glyphicon-gift" ></span></a>
                             </div>
-
-                            <h6 style="font-size: 10px">Agregar Lista Deseos</h6>
+                            <div class="col-xs-6" ng-if="isAuthenticated() && !hasPermissions()">
+                                <h6 style="font-size: 10px">Agregar Lista Deseos</h6>
+                            </div>
+                            <div class="col-xs-6" ng-if="!isAuthenticated() && !hasPermissions()">
+                                <h6 style="font-size: 10px">Agregar Lista Deseos</h6>
+                            </div>
                         </div>
-                    </div> 
+
+                    </div>
                 </div>
             </div>
         </div>

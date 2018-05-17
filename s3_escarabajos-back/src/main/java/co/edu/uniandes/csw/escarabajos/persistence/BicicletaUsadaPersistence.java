@@ -20,8 +20,14 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class BicicletaUsadaPersistence {
 
+    /**
+     * LOGGER de la clase BicicletaUsadaPersistence.
+     */
     public static final Logger LOGGER = Logger.getLogger(BicicletaUsadaPersistence.class.getName());
 
+    /**
+     * Contexto de la persistencia.
+     */
     @PersistenceContext(unitName = "EscarabajosPU")
     protected EntityManager em;
 
@@ -37,7 +43,7 @@ public class BicicletaUsadaPersistence {
     }
 
     /**
-     * Encuentra una bicicleta usada asociada a un vendedor.
+     * Devuelve una bicicleta usada asociada a un vendedor.
      *
      * @param idVendedor vendedor especifico
      * @param idBici bicicleta especifica
@@ -61,7 +67,7 @@ public class BicicletaUsadaPersistence {
     }
 
     /**
-     * Borra una bicicleta usada asociacda a un vendedor.
+     * Elimina una bicicleta usada asociacda a un vendedor.
      *
      * @param id de la bicicleta a eliminar.
      */
@@ -71,7 +77,7 @@ public class BicicletaUsadaPersistence {
     }
 
     /**
-     * Encuentra todas las bicicletas usadas con el mismo estado.
+     * Devuelve todas las bicicletas usadas con el mismo estado.
      *
      * @param estado para poder filtrar
      * @return bicicleta usada con estado "estado".
@@ -103,9 +109,9 @@ public class BicicletaUsadaPersistence {
     }
 
     /**
-     * Modifica los datos de una bicicleta usada.
+     * Actualiza los datos de una bicicleta usada especifica.
      *
-     * @param bici datos nuevos de la bicicleta.
+     * @param bici datos nuevos de la bicicleta usada.
      * @return bicicleta usada con nuevos datos.
      */
     public BicicletaUsadaEntity update(BicicletaUsadaEntity bici) {

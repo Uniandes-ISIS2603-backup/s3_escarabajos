@@ -27,7 +27,7 @@ public class MedioPagoLogic {
     private static final Logger LOGGER = Logger.getLogger(MedioPagoLogic.class.getName());
 
     /**
-     * Injecta la persistencia de medio de pago.
+     * Inyecta la persistencia de medio de pago.
      */
     @Inject
     private MedioPagoPersistence persistence;

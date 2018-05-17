@@ -35,13 +35,13 @@ public class ListaDeseosLogic {
     private static final String NOEXISTE = "No existe un listadeseos con el id";
     
     /**
-     * Injecta la persistencia de lista de deseos.
+     * Inyecta la persistencia de lista de deseos.
      */
     @Inject
     private ListaDeseosPersistence persistence;
     
     /**
-     * Injecta la logica de item.
+     * Inyecta la logica de item.
      */
     @Inject
     private ItemLogic itemLogic;

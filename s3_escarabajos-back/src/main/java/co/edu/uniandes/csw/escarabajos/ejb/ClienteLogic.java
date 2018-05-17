@@ -28,13 +28,13 @@ public class ClienteLogic {
     private static final Logger LOGGER = Logger.getLogger(ClienteLogic.class.getName());
 
     /**
-     * Injecta la persistencia de cliente.
+     * Inyecta la persistencia de cliente.
      */
     @Inject
     private ClientePersistence persistence;
 
     /**
-     * Injecta la persistencia de carrito.
+     * Inyecta la persistencia de carrito.
      */
     @Inject
     private CarritoPersistence carritoPersistence;

@@ -21,8 +21,14 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class ModeloPersistence {
 
+    /**
+     * LOGGER de la clase ModeloPersistence.
+     */
     public static final Logger LOGGER = Logger.getLogger(ModeloPersistence.class.getName());
 
+    /**
+     * Contexto de la persistencia.
+     */
     @PersistenceContext(unitName = "EscarabajosPU")
     protected EntityManager em;
 
@@ -43,11 +49,11 @@ public class ModeloPersistence {
     }
 
     /**
-     * Actualiza un modelo.
+     * Actualiza un modelo especifico.
      *
      * @param entity: el modelo que viene con los nuevos cambios. Por ejemplo el
      * nombre pudo cambiar. En ese caso, se haria uso del método update.
-     * @return un modelo con los cambios aplicados.
+     * @return modelo actualizado
      */
     public ModeloEntity update(ModeloEntity entity) {
         LOGGER.log(Level.INFO, "Actualizando modelo con id={0}", entity.getId());
@@ -55,7 +61,7 @@ public class ModeloPersistence {
     }
 
     /**
-     * Borra un modelo de la base de datos recibiendo como argumento el id del
+     * Elimina un modelo de la base de datos recibiendo como argumento el id del
      * modelo
      *
      * @param id: id correspondiente a el modelo a borrar.
@@ -68,10 +74,10 @@ public class ModeloPersistence {
     }
 
     /**
-     * Busca si hay algun modelo con el id que se envía de argumento
+     * Devuelve si hay algun modelo con el id que se envía de argumento
      *
      * @param id: id correspondiente a el modelo buscado.
-     * @return un modelo.
+     * @return modelo encontrado
      */
     public ModeloEntity find(Long id) {
         LOGGER.log(Level.INFO, "Consultando modelo con id={0}", id);
@@ -83,9 +89,7 @@ public class ModeloPersistence {
      *
      * @param page pagina de modelos
      * @param maxRecords numero de modelos por pagina
-     * @return una lista con todos losmodelos que encuentre en la base de datos,
-     * "select u from ModeloEntity u" es como un "select * from ModeloEntity;" -
-     * "SELECT * FROM table_name" en SQL.
+     * @return lista de modelos
      */
     public List<ModeloEntity> findAll(Integer page, Integer maxRecords) {
         LOGGER.info("Consultando todos los modelos");
@@ -106,7 +110,7 @@ public class ModeloPersistence {
     }
 
     /**
-     * Busca si hay algun modelo con la referencia que se envía de argumento
+     * Devuelve si hay algun modelo con la referencia que se envía de argumento
      *
      * @param referencia: Referencia del modelo que se está buscando
      * @return null si no existe ningun modelo con el nombre del argumento. Si

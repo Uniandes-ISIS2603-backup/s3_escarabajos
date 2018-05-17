@@ -30,25 +30,25 @@ public class BicicletaUsadaLogic {
     private static final Logger LOGGER = Logger.getLogger(BicicletaLogic.class.getName());
 
     /**
-     * Injecta la persistencia de bicicleta usada.
+     * Inyecta la persistencia de bicicleta usada.
      */
     @Inject
     private BicicletaUsadaPersistence persistence;
     
     /**
-     * Injecta la logica de item.
+     * Inyecta la logica de item.
      */
     @Inject
     private ItemLogic logicItem;
     
     /**
-     * Injecta la logica de vendedor.
+     * Inyecta la logica de vendedor.
      */
     @Inject
     private ClienteLogic logicVendedor;
     
     /**
-     * Injecta la persistencia de modelo.
+     * Inyecta la persistencia de modelo.
      */
     @Inject
     private ModeloPersistence modeloPersistence;

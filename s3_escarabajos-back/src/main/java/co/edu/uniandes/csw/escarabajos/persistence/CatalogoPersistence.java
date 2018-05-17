@@ -23,19 +23,49 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class CatalogoPersistence {
 
+    /**
+     * LOGGER de la clase CatalogoPersistence.
+     */
     public static final Logger LOGGER = Logger.getLogger(CatalogoPersistence.class.getName());
+
+    /**
+     * Constante que modela el string calificacion minima.
+     */
     public static final String CALIF = "calificacionMin";
+
+    /**
+     * Constante que modela el string precio minimo.
+     */
     public static final String PRECIOMIN = "precioMin";
+
+    /**
+     * Constante que modela el string precio maximo.
+     */
     public static final String PRECIOMAX = "precioMax";
+
+    /**
+     * Constante que modela el string marcas.
+     */
     public static final String MARCAS = "marcas";
+
+    /**
+     * Constante que modela el string categorias.
+     */
     public static final String CATEGORIAS = "categorias";
+
+    /**
+     * Constante que modela el string colores.
+     */
     public static final String COLORES = "colores";
 
+    /**
+     * Contexto de la persistencia.
+     */
     @PersistenceContext(unitName = "EscarabajosPU")
     protected EntityManager em;
 
     /**
-     * Devuelve todas las marcas de la base da datos
+     * Devuelve todas las marcas de la base de datos.
      *
      * @param nombre del tipo de modelo a buscar
      * @return una lista con todas las marcas que encuentre en la base de datos;
@@ -43,14 +73,14 @@ public class CatalogoPersistence {
     public List<String> findMarcas(String nombre) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar marcas");
         String sql = "Select distinct(e.marca) From ModeloEntity e where e.tipoModelo = :name AND e.id in (SELECT a.modeloId FROM " + nombre + "Entity a WHERE a.disponible = TRUE)";
-        
+
         TypedQuery query = em.createQuery(sql, String.class);
         query.setParameter("name", nombre);
         return query.getResultList();
     }
 
     /**
-     * Devuelve todas las categorias de la base da datos
+     * Devuelve todas las categorias de la base de datos.
      *
      * @param nombre del tipo de modelo a buscar
      * @return una lista con todas las categorias de un tipo de item que
@@ -80,7 +110,7 @@ public class CatalogoPersistence {
     }
 
     /**
-     * Devuelve todas los colores de la base da datos
+     * Devuelve todas los colores de la base de datos.
      *
      * @param nombre del tipo de modelo a buscar
      * @return una lista con todas los colores de un tipo de item que encuentre
@@ -235,7 +265,7 @@ public class CatalogoPersistence {
      * Metodo que se encarga de consultar el precio del tipo mas caro de la
      * aplicacion.
      *
-     * @param tipo a busacar
+     * @param tipo a buscar
      * @return precio de la bicicleta mas cara;
      */
     public Double getPrecio(String tipo) {
@@ -285,6 +315,12 @@ public class CatalogoPersistence {
         return lista;
     }
 
+    /**
+     * Devuelve las propagandas que hay en la base de datos.
+     *
+     * @param tipo tipo de propaganda
+     * @return lista de propagandas
+     */
     public List<ModeloEntity> getPropagandas(String tipo) {
         String sql = "Select e From ModeloEntity e WHERE e.id IN (SELECT a.modeloId FROM " + tipo + "Entity a WHERE a.multiplicador < 1  AND a.disponible = TRUE";
         if (tipo.equals(ModeloLogic.BICICLETA)) {

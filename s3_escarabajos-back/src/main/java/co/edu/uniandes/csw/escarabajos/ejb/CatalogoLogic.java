@@ -28,19 +28,19 @@ public class CatalogoLogic {
     private static final String ERROR = "Los Filtros no estan en el formato adecuado!";
 
     /**
-     * Injecta la persistencia de catalogo.
+     * Inyecta la persistencia de catalogo.
      */
     @Inject
     private CatalogoPersistence persistence;
 
     /**
-     * Injecta la logica de modelo.
+     * Inyecta la logica de modelo.
      */
     @Inject
     private ModeloLogic modeloLogic;
 
     /**
-     * Injecta la logica de item.
+     * Inyecta la logica de item.
      */
     @Inject
     private ItemLogic itemLogic;
