@@ -22,15 +22,10 @@
     // Resuelve problemas de las promesas
     app.config(['$qProvider', function ($qProvider) {
             $qProvider.errorOnUnhandledRejections(false);
+
         }]);
     app.run(['$rootScope', "$state", function ($rootScope, $state) {
-            var a = false;
-            $rootScope.busq = "";
-            if (!a)
-            {
-                a = true;
-                $state.go('principal', {pagina: 1}, {reload: true});
-            }
+            $state.go('principal', {pagina: 1}, {reload: true});
             /**
              * @ngdoc function
              * @name isAuthenticated
@@ -54,7 +49,7 @@
              * @description funcion que se encarga de buscar modelos.
              */
             $rootScope.buscar = function () {
-                $state.go('busqueda', {busqueda:$rootScope.busq}, {reload: true});
+                $state.go('busqueda', {busqueda: $rootScope.busq}, {reload: true});
             };
 
 
@@ -107,10 +102,10 @@
                 sessionStorage.setItem("rol", null);
                 sessionStorage.setItem("id", null);
                 sessionStorage.setItem("name", null);
-                $state.go('adv', {adv: true, tipo: 'bicicletas', filtros: {marcas: [], categorias: [], colores: [], precioMin: 0.0, precioMax: 999999999.9, calificacionMin: 0.0}}, {reload: true});
+                $state.go('principal', {pagina: 1}, {reload: true});
                 alert('Se ha cerrado correctamente la sesión');
             };
-			$rootScope.showError = function (response) {
+            $rootScope.showError = function (response) {
                 if (response.status !== 200)
                 {
                     var stat = response.status;

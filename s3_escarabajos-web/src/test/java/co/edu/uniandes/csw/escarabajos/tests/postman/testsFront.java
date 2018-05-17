@@ -51,7 +51,6 @@ public class testsFront {
                 .addPackage(ModeloCalificacionResource.class.getPackage())
                 .addPackage(ModeloItemsResource.class.getPackage())
                 .addPackage(ModeloResource.class.getPackage())
-                .addPackage(ModeloCalificacionResource.class.getPackage())
 
 
                 // El archivo que contiene la configuracion a la base de datos.
@@ -67,7 +66,7 @@ public class testsFront {
     public void postman() throws IOException {
         
         PostmanTestBuilder tp = new PostmanTestBuilder();
-        tp.setTestWithoutLogin("paso5.postman_collection");
+        tp.setTestWithoutLogin("AccesorioCollection.postman_collection");
         String desiredResult = "0";
         if (tp.getAssertions_failed() != null) {
             Assert.assertEquals(desiredResult, tp.getAssertions_failed());

@@ -64,4 +64,10 @@
         "user": "testA",
         "name": "Test Admin",
         "password": "1234"
+    },{
+        "id": 11000,
+        "rol": "Vendedor", 
+        "user": "testV",
+        "name": "Test Vendedor",
+        "password": "1234"
     }]
