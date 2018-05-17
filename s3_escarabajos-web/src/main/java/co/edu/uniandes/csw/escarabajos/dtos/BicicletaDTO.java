@@ -17,12 +17,12 @@ import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
  *   {
  *      "id": number,
  *      "precio": double,
- *      "modeloId": number, 
+ *      "modeloId": number,
  *      "color": String,
  *      "categoria": String,
  *      "album": [{@FotoDTO}],
  *      "usada": boolean
- *      
+ *
  *   }
  * </pre> Por ejemplo una bicicleta se representa asi:<br>
  *
@@ -31,7 +31,7 @@ import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
  *   {
  *      "id": 123456,
  *      "precio": 30000,
- *      "modeloId": 1, 
+ *      "modeloId": 1,
  *      "color": Rojo,
  *      "categoria": "Deportiva",
  *      "album": [
@@ -54,6 +54,7 @@ import co.edu.uniandes.csw.escarabajos.entities.BicicletaEntity;
  * @author c.santacruza
  */
 public class BicicletaDTO extends ItemDTO {
+
     private Boolean usada;
 
     /**
@@ -75,11 +76,21 @@ public class BicicletaDTO extends ItemDTO {
             this.usada = bici.getUsada();
         }
     }
-    
+
+    /**
+     * Devuelve si es usada o no.
+     *
+     * @return usada
+     */
     public Boolean getUsada() {
         return usada;
     }
 
+    /**
+     * Modifica si es usada o no.
+     *
+     * @param usada nuevo usada
+     */
     public void setUsada(Boolean usada) {
         this.usada = usada;
     }

@@ -7,32 +7,30 @@ package co.edu.uniandes.csw.escarabajos.dtos;
 
 import co.edu.uniandes.csw.escarabajos.entities.*;
 
-
 /**
- * AccesorioDTO Objeto de transferencia de datos de Accesorios. Los DTO contienen las
- * represnetaciones de los JSON que se transfieren entre el cliente y el
- * servidor.
- * 
+ * AccesorioDTO Objeto de transferencia de datos de Accesorios. Los DTO
+ * contienen las represnetaciones de los JSON que se transfieren entre el
+ * cliente y el servidor.
+ *
  * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
  * <pre>
  *   {
  *      "id": number,
  *      "precio": double,
- *      "modeloId": number, 
+ *      "modeloId": number,
  *      "color": String,
  *      "categoria": String,
  *      "album": [{@FotoDTO}],
  *      "descripcion": String
  *   }
- * </pre>
- * Por ejemplo un accesorio se representa asi:<br>
- * 
+ * </pre> Por ejemplo un accesorio se representa asi:<br>
+ *
  * <pre>
- * 
+ *
  *   {
  *      "id": 123456,
  *      "precio": 30000,
- *      "modeloId": 1, 
+ *      "modeloId": 1,
  *      "color": Rojo,
  *      "categoria": "Casco",
  *      "album": [
@@ -51,43 +49,44 @@ import co.edu.uniandes.csw.escarabajos.entities.*;
  *   }
  *
  * </pre>
+ *
  * @author Andres
  */
 public class AccesorioDTO extends ItemDTO {
- 
+
     private String descripcion;
-    
-    
+
     /**
      * Constructor por defecto
      */
     public AccesorioDTO() {
         //empty
     }
-    
-     /**
+
+    /**
      * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
      * la entidad que viene de argumento.
      *
      * @param entity: Es la entidad que se va a convertir a DTO
      */
     public AccesorioDTO(AccesorioEntity entity) {
-       super(entity);
-       //DONE: entity podría ser null
-       
-       if(entity != null){
-        this.descripcion = entity.getDescripcion();
-       }
+        super(entity);
+
+        if (entity != null) {
+            this.descripcion = entity.getDescripcion();
+        }
     }
 
     /**
-     * @return the descripcion
+     * Devuelve la descripcion.
+     *
+     * @return descripcion
      */
     public String getDescripcion() {
         return descripcion;
     }
-    
-      /**
+
+    /**
      * Convertir DTO a Entity
      *
      * @return Un Entity con los valores del DTO

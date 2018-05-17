@@ -5,36 +5,81 @@
  */
 package co.edu.uniandes.csw.escarabajos.dtos;
 
-
-
-
 import co.edu.uniandes.csw.escarabajos.entities.FacturaEntity;
 
 /**
+ * FacturaDTO Objeto de transferencia de datos de Facturas. Los DTO contienen
+ * las representaciones de los JSON que se transfieren entre el cliente y el
+ * servidor.
+ *
+ * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ * <pre>
+ *   {
+ *      "id": number,
+ *      "dinero": double
+ *
+ *   }
+ * </pre> Por ejemplo una factura se representa asi:<br>
+ *
+ * <pre>
+ *
+ *   {
+ *      "id": 123456,
+ *      "dinero": 30000,
+ *   }
+ *
+ * </pre>
  *
  * @author jp.carreno
  */
-public class FacturaDTO{
+public class FacturaDTO {
 
+    /**
+     * Modela el id de factura.
+     */
     private Long id;
+
+    /**
+     * Modela el dinero de la factura.
+     */
     private Double dinero;
 
+    /**
+     * Devuelve el dinero.
+     *
+     * @return dinero
+     */
     public double getDinero() {
         return dinero;
     }
 
+    /**
+     * Modifica el dinero.
+     *
+     * @param dinero nuevo dinero
+     */
     public void setDinero(double dinero) {
         this.dinero = dinero;
     }
 
+    /**
+     * Devuelve el id.
+     *
+     * @return id
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Modifica el id.
+     *
+     * @param id nuevo id
+     */
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     /**
      * Constructor por defecto
      */
@@ -52,7 +97,7 @@ public class FacturaDTO{
         this.dinero = factura.getDinero();
         this.id = factura.getId();
     }
-    
+
     /**
      * Convertir DTO a Entity
      *
@@ -63,5 +108,5 @@ public class FacturaDTO{
         entity.setDinero(this.dinero);
         return entity;
     }
-    
+
 }

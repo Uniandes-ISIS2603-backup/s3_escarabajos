@@ -49,16 +49,16 @@ import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
 public class CalificacionDetailDTO extends CalificacionDTO {
 
     /**
-     * El cliente que hace la calificacion
+     * El cliente que hace la calificacion.
      */
     private ClienteDTO cliente;
     /**
-     * El modelo que es calificado
+     * El modelo que es calificado.
      */
     private ModeloDTO modelo;
 
     /**
-     * Constructor por defecto
+     * Constructor por defecto.
      */
     public CalificacionDetailDTO() {
         //Empty
@@ -66,7 +66,7 @@ public class CalificacionDetailDTO extends CalificacionDTO {
 
     ;
     /**
-     * Constructor a partir de una entity
+     * Constructor a partir de una entity.
      * @param entity entidad que contiene la informacion
      */
     public CalificacionDetailDTO(CalificacionEntity entity) {
@@ -87,7 +87,7 @@ public class CalificacionDetailDTO extends CalificacionDTO {
     }
 
     /**
-     * Transformar un DTO a un Entity
+     * Transformar un DTO a un Entity.
      *
      * @return La entidad construida a partir del DTO.
      */
@@ -103,7 +103,7 @@ public class CalificacionDetailDTO extends CalificacionDTO {
     }
 
     /**
-     * Retorna el cliente de la calificacion
+     * Devuelve el cliente de la calificacion.
      *
      * @return el cliente de la calificacion
      */
@@ -112,7 +112,7 @@ public class CalificacionDetailDTO extends CalificacionDTO {
     }
 
     /**
-     * Cambia el cliente de la calificacion
+     * Modifica el cliente de la calificacion.
      *
      * @param cliente el nuevo cliente
      */
@@ -121,7 +121,7 @@ public class CalificacionDetailDTO extends CalificacionDTO {
     }
 
     /**
-     * Retorna el modelo de la calificacion
+     * Devuelve el modelo de la calificacion.
      *
      * @return el modelo de la calificacion
      */
@@ -130,7 +130,7 @@ public class CalificacionDetailDTO extends CalificacionDTO {
     }
 
     /**
-     * Cambia el modelo de la calificacion
+     * Modifica el modelo de la calificacion.
      *
      * @param modelo el nuevo modelo de la calificacion
      */

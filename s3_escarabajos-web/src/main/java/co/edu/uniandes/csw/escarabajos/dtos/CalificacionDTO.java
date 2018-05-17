@@ -39,7 +39,7 @@ import co.edu.uniandes.csw.escarabajos.entities.CalificacionEntity;
 public class CalificacionDTO {
 
     /**
-     * Id de la calificacion
+     * Id de la calificacion.
      */
     private Long id;
 
@@ -53,7 +53,7 @@ public class CalificacionDTO {
     private Double puntaje;
 
     /**
-     * Constructor por defecto
+     * Constructor por defecto.
      */
     public CalificacionDTO() {
         //Empty
@@ -82,7 +82,7 @@ public class CalificacionDTO {
     }
 
     /**
-     * Método para obtener el comentario
+     * Método para obtener el comentario.
      *
      * @return el comentario
      */
@@ -91,7 +91,7 @@ public class CalificacionDTO {
     }
 
     /**
-     * Metodo para obtener el puntaje
+     * Metodo para obtener el puntaje.
      *
      * @return el puntaje
      */
@@ -100,7 +100,7 @@ public class CalificacionDTO {
     }
 
     /**
-     * Actualiza el puntaje
+     * Actualiza el puntaje.
      *
      * @param punt nuevo puntaje
      */
@@ -109,7 +109,7 @@ public class CalificacionDTO {
     }
 
     /**
-     * Actualiza el comentario
+     * Actualiza el comentario.
      *
      * @param com el nuevo comentario
      */
@@ -118,7 +118,7 @@ public class CalificacionDTO {
     }
 
     /**
-     * Convierte un DTO a un entity
+     * Convierte un DTO a un entity.
      *
      * @return el nuevo entity
      */
