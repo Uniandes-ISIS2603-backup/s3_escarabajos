@@ -16,7 +16,7 @@ delete from ClienteEntity;
 
 --Datos de prueba ModeloEntity con tipo modelo Bicicleta
 
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (1000, 'Firmstrong', 'Bruiser Man Beach Cruiser', 0, 'Bicicleta');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (1000, 'Firmstrong', 'Bruiser Man Beach Cruiser', 4.25, 'Bicicleta');
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (1000,'BicicletaEntity', 120000, '#000000', 0, 'Cruiser', 1000,1000,1,1);
 insert into Item_album (itemEntity_ID, album) values (1000, 'https://images-na.ssl-images-amazon.com/images/I/81kYoGzcLDL._SL1500_.jpg');
 insert into Item_album (itemEntity_ID, album) values (1000, 'https://images-na.ssl-images-amazon.com/images/I/913wgp0voNL._SL1500_.jpg');
@@ -27,7 +27,7 @@ insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod
 insert into Item_album (itemEntity_ID, album) values (1002, 'https://images-na.ssl-images-amazon.com/images/I/910U4s-J8-L._SL1500_.jpg');
 insert into Item_album (itemEntity_ID, album) values (1002, 'https://images-na.ssl-images-amazon.com/images/I/910U4s-J8-L._SL1500_.jpg');
 
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (2000, 'Firmstrong', 'Bella Womens Beach Cruiser', 0, 'Bicicleta');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (2000, 'Firmstrong', 'Bella Womens Beach Cruiser', 4.5, 'Bicicleta');
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (2000,'BicicletaEntity', 220000, '#FFC0CB', 0, 'Cruiser', 2000,2000,1,1);
 insert into Item_album (itemEntity_ID, album) values (2000, 'https://images-na.ssl-images-amazon.com/images/I/81mwnj%2B13nL._SL1500_.jpg');
 insert into Item_album (itemEntity_ID, album) values (2000, 'https://images-na.ssl-images-amazon.com/images/I/81brb9cDDkL._SL1500_.jpg');
@@ -38,17 +38,17 @@ insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod
 insert into Item_album (itemEntity_ID, album) values (2002, 'https://images-na.ssl-images-amazon.com/images/I/71JwkMdRB-L._SL1500_.jpg');
 insert into Item_album (itemEntity_ID, album) values (2002, 'https://images-na.ssl-images-amazon.com/images/I/51s9rabbtwL.jpg');
 
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (3000, 'GMC', 'Yukon Fat Bike', 0, 'Bicicleta');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (3000, 'GMC', 'Yukon Fat Bike', 3.0, 'Bicicleta');
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (3000,'BicicletaEntity', 1000000, '#0000FF', 0, 'Fitness', 3000,3000,1,1);
 insert into Item_album (itemEntity_ID, album) values (3000, 'https://images-na.ssl-images-amazon.com/images/I/91K66vIoTiL._SL1500_.jpg');
 insert into Item_album (itemEntity_ID, album) values (3000, 'https://images-na.ssl-images-amazon.com/images/I/811kN6KJBOL._SL1500_.jpg');
 
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (4000, 'GMC', 'Topkick Dual Suspension', 0, 'Bicicleta');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (4000, 'GMC', 'Topkick Dual Suspension', 3.25, 'Bicicleta');
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (4000,'BicicletaEntity', 4000000, '#0000FF', 0, 'Mountain', 4000,4000,1,1);
 insert into Item_album (itemEntity_ID, album) values (4000, 'https://images-na.ssl-images-amazon.com/images/I/91woc0SP1dL._SL1500_.jpg');
 insert into Item_album (itemEntity_ID, album) values (4000, 'https://images-na.ssl-images-amazon.com/images/I/81DraJbLizL._SL1500_.jpg');
 
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (5000,'Schwinn', ' Perla 7 Speed Cruiser', 0, 'Bicicleta');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (5000,'Schwinn', ' Perla 7 Speed Cruiser', 4.5, 'Bicicleta');
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (5000,'BicicletaEntity', 600000, '#12C3DD', 0, 'Cuiser', 5000,5000,1,1);
 insert into Item_album (itemEntity_ID, album) values (5000, 'https://images-na.ssl-images-amazon.com/images/I/91B%2BhcrJCKL._SL1500_.jpg');
 insert into Item_album (itemEntity_ID, album) values (5000, 'https://images-na.ssl-images-amazon.com/images/I/81t8EuABnFL._SL1500_.jpg');
@@ -63,29 +63,29 @@ insert into Item_album (itemEntity_ID, album) values (5002, 'https://images-na.s
 insert into Item_album (itemEntity_ID, album) values (5002, 'https://images-na.ssl-images-amazon.com/images/I/81KTXfpArhL._SL1500_.jpg');
 insert into Item_album (itemEntity_ID, album) values (5002, 'https://images-na.ssl-images-amazon.com/images/I/81BggFSoEzL._SL1500_.jpg');
 
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (6000, 'Schwinn', 'Sanctuary 7-Speed Cruiser', 0, 'Bicicleta');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (6000, 'Schwinn', 'Sanctuary 7-Speed Cruiser', 3.75, 'Bicicleta');
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (6000,'BicicletaEntity', 2000000, '#855a46', 0, 'Cuiser', 6000,6000,1,0.4);
 insert into Item_album (itemEntity_ID, album) values (6000, 'https://images-na.ssl-images-amazon.com/images/I/91LPyJRxmEL._SL1500_.jpg');
 insert into Item_album (itemEntity_ID, album) values (6000, 'https://images-na.ssl-images-amazon.com/images/I/91VXruOcu6L._SL1500_.jpg');
 insert into Item_album (itemEntity_ID, album) values (6000, 'https://images-na.ssl-images-amazon.com/images/I/81PwvMdj93L._SL1500_.jpg');
 insert into Item_album (itemEntity_ID, album) values (6000, 'https://images-na.ssl-images-amazon.com/images/I/61zySarb66L._SL1000_.jpg');
 
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (7000, 'Roadmaster', 'Granite Peak', 0, 'Bicicleta');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (7000, 'Roadmaster', 'Granite Peak', 3.25, 'Bicicleta');
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (7000,'BicicletaEntity', 200000, '#000000', 0, 'Mountain', 7000,7000,1,0.3);
 insert into Item_album (itemEntity_ID, album) values (7000, 'https://images-na.ssl-images-amazon.com/images/I/51s6wT7fDtL.jpg');
 insert into Item_album (itemEntity_ID, album) values (7000, 'https://images-na.ssl-images-amazon.com/images/I/41GFn3E8pxL.jpg');
 
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (8000, 'Dynacraft', 'Island Breeze Cruiser', 0, 'Bicicleta');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (8000, 'Dynacraft', 'Island Breeze Cruiser', 2.75, 'Bicicleta');
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (8000,'BicicletaEntity', 300000, '#800080', 0, 'Cuiser', 8000,8000,1,0.7);
 insert into Item_album (itemEntity_ID, album) values (8000, 'https://images-na.ssl-images-amazon.com/images/I/81os1AqAkEL._SL1500_.jpg');
 insert into Item_album (itemEntity_ID, album) values (8000, 'https://images-na.ssl-images-amazon.com/images/I/81DraJbLizL._SL1500_.jpg');
 
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (9000, 'Dynacraft', '7 speed Cityscape', 0, 'Bicicleta');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (9000, 'Dynacraft', '7 speed Cityscape', 2.75, 'Bicicleta');
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (9000,'BicicletaEntity', 5000000, '#000000', 0, 'E-Bike', 9000,9000,1,0.9);
 insert into Item_album (itemEntity_ID, album) values (9000, 'https://images-na.ssl-images-amazon.com/images/I/51cyoW5hSoL.jpg');
 insert into Item_album (itemEntity_ID, album) values (9000, 'https://images-na.ssl-images-amazon.com/images/I/71CT3fHO%2B5L._SL1500_.jpg');
 
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (10000, 'Raleigh', ' Venture Thru Comfort', 0, 'Bicicleta');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (10000, 'Raleigh', ' Venture Thru Comfort', 2.5, 'Bicicleta');
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (10000,'BicicletaEntity', 300000, '#000000', 0, 'Comfort', 10000,10000,1,0.3);
 insert into Item_album (itemEntity_ID, album) values (10000, 'https://images-na.ssl-images-amazon.com/images/I/81VP4QqmVDL._SL1500_.jpg');
 insert into Item_album (itemEntity_ID, album) values (10000, 'https://images-na.ssl-images-amazon.com/images/I/81sRoi1nKfL._SL1500_.jpg');
@@ -93,7 +93,7 @@ insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod
 insert into Item_album (itemEntity_ID, album) values (10001, 'https://images-na.ssl-images-amazon.com/images/I/816twdJdmeL._SL1500_.jpg');
 insert into Item_album (itemEntity_ID, album) values (10001, 'https://images-na.ssl-images-amazon.com/images/I/81aBmT%2BVgdL._SL1500_.jpg');
 
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (11000, 'Raleigh', 'Tristar 3-Speed', 0, 'Bicicleta');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (11000, 'Raleigh', 'Tristar 3-Speed', 2.0, 'Bicicleta');
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (11000,'BicicletaEntity', 4000000, '#0000FF', 0, 'TRIKE',11000,11000,1,1);
 insert into Item_album (itemEntity_ID, album) values (11000, 'https://images-na.ssl-images-amazon.com/images/I/71bLZAaU%2BXL._SL1500_.jpg');
 insert into Item_album (itemEntity_ID, album) values (11000, 'https://images-na.ssl-images-amazon.com/images/I/71EdRFl725L._SL1500_.jpg');
@@ -101,7 +101,7 @@ insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod
 insert into Item_album (itemEntity_ID, album) values (11001, 'https://images-na.ssl-images-amazon.com/images/I/71KE8dKB1PL._SL1500_.jpg');
 insert into Item_album (itemEntity_ID, album) values (11001, 'https://images-na.ssl-images-amazon.com/images/I/71QHKaKA7GL._SL1500_.jpg');
 
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (12000, 'Raleigh', 'Superbe City', 0, 'Bicicleta');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (12000, 'Raleigh', 'Superbe City', 2.25, 'Bicicleta');
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (12000,'BicicletaEntity', 400000, '#000000', 0, 'City',12000,12000,1,0.1);
 insert into Item_album (itemEntity_ID, album) values (12000, 'https://images-na.ssl-images-amazon.com/images/I/71BVDmJ1DbL._SL1500_.jpg');
 insert into Item_album (itemEntity_ID, album) values (12000, 'https://images-na.ssl-images-amazon.com/images/I/710BxXvDgxL._SL1500_.jpg');
@@ -109,70 +109,70 @@ insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod
 insert into Item_album (itemEntity_ID, album) values (12001, 'https://images-na.ssl-images-amazon.com/images/I/71B6tx6e2yL._SL1500_.jpg');
 insert into Item_album (itemEntity_ID, album) values (12001, 'https://images-na.ssl-images-amazon.com/images/I/71l5bpf7e-L._SL1500_.jpg');
 
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (13000, 'Raleigh', 'Revere 1 Endurance', 0, 'Bicicleta');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (13000, 'Raleigh', 'Revere 1 Endurance', 3.75, 'Bicicleta');
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (13000,'BicicletaEntity', 200000, '#12C3DD', 0, 'Fitness',13000,13000,1,1);
 insert into Item_album (itemEntity_ID, album) values (13000, 'https://images-na.ssl-images-amazon.com/images/I/718T9oodl8L._SL1500_.jpg');
 insert into Item_album (itemEntity_ID, album) values (13000, 'https://images-na.ssl-images-amazon.com/images/I/71dbRHQ-vTL._SL1500_.jpg');
 
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (14000, 'Kent', 'Dual Drive Tandem', 0, 'Bicicleta');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (14000, 'Kent', 'Dual Drive Tandem', 2.75, 'Bicicleta');
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (14000,'BicicletaEntity', 3000000, '#008000', 0, 'Tandem',14000,14000,1,1);
 insert into Item_album (itemEntity_ID, album) values (14000, 'https://images-na.ssl-images-amazon.com/images/I/81Fi6V7wciL._SL1500_.jpg');
 insert into Item_album (itemEntity_ID, album) values (14000, 'https://images-na.ssl-images-amazon.com/images/I/81CxTJ7K%2BeL._SL1500_.jpg');
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (14001,'BicicletaUsadaEntity', 2000000, '#FF0000', 1, 'Tandem',14000,14000,1,1);
 insert into Item_album (itemEntity_ID, album) values (14001, 'https://images-na.ssl-images-amazon.com/images/I/61pHAXzvC1L._SL1000_.jpg');
 
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (15000, 'Kent', '7-Speed Folding Bike', 0, 'Bicicleta');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (15000, 'Kent', '7-Speed Folding Bike', 2.25, 'Bicicleta');
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (15000,'BicicletaEntity', 200000, '#0000FF', 0, 'Folding',15000,15000,1,1);
 insert into Item_album (itemEntity_ID, album) values (15000, 'https://images-na.ssl-images-amazon.com/images/I/91BFfnDDBfL._SL1500_.jpg');
 insert into Item_album (itemEntity_ID, album) values (15000, 'https://images-na.ssl-images-amazon.com/images/I/81H5fp%2BwM6L._SL1500_.jpg');
 
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (16000, 'Kent', 'Lucky Star', 0, 'Bicicleta');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (16000, 'Kent', 'Lucky Star', 2.75, 'Bicicleta');
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (16000,'BicicletaEntity', 600000, '#FFC0CB', 0, 'Kids',16000,16000,1,1);
 insert into Item_album (itemEntity_ID, album) values (16000, 'https://images-na.ssl-images-amazon.com/images/I/81XZFO-XfOL._SL1500_.jpg');
 
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (17000, 'Gama', 'Hybrid Urban Commuter Road', 0, 'Bicicleta');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (17000, 'Gama', 'Hybrid Urban Commuter Road', 3.5, 'Bicicleta');
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (17000,'BicicletaEntity', 100000, '#000000', 0, 'City',17000,17000,1,1);
 insert into Item_album (itemEntity_ID, album) values (17000, 'https://images-na.ssl-images-amazon.com/images/I/81Y8TEMRxkL._SL1500_.jpg');
 insert into Item_album (itemEntity_ID, album) values (17000, 'https://images-na.ssl-images-amazon.com/images/I/81Z8209J-EL._SL1500_.jpg');
 
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (18000, 'Gama', '7 Speed Shimano Hybrid', 0, 'Bicicleta');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (18000, 'Gama', '7 Speed Shimano Hybrid', 4, 'Bicicleta');
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (18000,'BicicletaEntity', 900000, '#FF0000', 0, 'Fitness',18000,18000,1,1);
 insert into Item_album (itemEntity_ID, album) values (18000, 'https://images-na.ssl-images-amazon.com/images/I/711UkQj7ryL._SL1500_.jpg');
 insert into Item_album (itemEntity_ID, album) values (18000, 'https://images-na.ssl-images-amazon.com/images/I/81jJflySbWL._SL1500_.jpg');
 insert into Item_album (itemEntity_ID, album) values (18000, 'https://images-na.ssl-images-amazon.com/images/I/612hOF0x3NL._SL1500_.jpg');
 
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (19000, 'Public', 'Talus 1', 0, 'Bicicleta');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (19000, 'Public', 'Talus 1', 2.75, 'Bicicleta');
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (19000,'BicicletaEntity', 600000, '#000000', 0, 'Mountain',19000,19000,1,1);
 insert into Item_album (itemEntity_ID, album) values (19000, 'https://images-na.ssl-images-amazon.com/images/I/81eUeTRmxWL._SL1500_.jpg');
 insert into Item_album (itemEntity_ID, album) values (19000, 'https://images-na.ssl-images-amazon.com/images/I/81pICB6rMTL._SL1500_.jpg');
 
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (20000, 'Public', 'Cadent 1 Urban', 0, 'Bicicleta');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (20000, 'Public', 'Cadent 1 Urban', 2.25, 'Bicicleta');
 insert into ItemEntity (id, dtype, precio, color, usada, categoria, modeloId,mod_id,disponible,multiplicador) values (20000,'BicicletaEntity', 700000, '#D2B48C', 0, 'Fitness',20000,20000,1,1);
 insert into Item_album (itemEntity_ID, album) values (20000, 'https://images-na.ssl-images-amazon.com/images/I/815ZYVMF53L._SL1500_.jpg');
 insert into Item_album (itemEntity_ID, album) values (20000, 'https://images-na.ssl-images-amazon.com/images/I/81FMWzwT7cL._SL1500_.jpg');
 
 
 
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (21000, 'Firmstrong', 'CASCO ALETA', 0, 'Accesorio');
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (22000, 'Razor', 'CASCO BMX', 0, 'Accesorio');
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (23000, 'GMC', 'CASCO ULTIMATE', 0, 'Accesorio');
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (24000, 'Sthwinn', 'CASCO XTREME', 0, 'Accesorio');
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (25000, 'Dynatraft', 'CASCO CNY', 0, 'Accesorio');
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (26000, 'Roadmaster', 'RODILLERAS EUR', 0, 'Accesorio');
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (27000, 'Kent', 'RODILLERAS BMX', 0, 'Accesorio');
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (28000, 'GMC', 'RODILLERAS PRO', 0, 'Accesorio');
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (29000, 'Biking', 'RODILLERAS CARRETERA', 0, 'Accesorio');
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (30000, 'Kent', 'RODILLERAS USA', 0, 'Accesorio');
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (31000, 'Tony Hawk', 'PANTALONETA SENCILLA', 0, 'Accesorio');
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (32000, 'Planet Bike', 'PANTALONETA LIVIANA', 0, 'Accesorio');
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (33000, 'GMC', ' PANTALONETA EUR', 0, 'Accesorio');
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (34000, 'Nike', 'PANTALONETA NIKE', 0, 'Accesorio');
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (35000, 'Firmstrong', 'PANTALONETA XS', 0, 'Accesorio');
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (36000, 'Roadmaster', 'CAMISETA EQUIPO', 0, 'Accesorio');
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (37000, 'GMC', 'CAMISETA MUJER', 0, 'Accesorio');
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (38000, 'Cayman', 'CAMISETA', 0, 'Accesorio');
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (39000, 'Firmstrong', 'CAMISETA CLASICA', 0, 'Accesorio');
-insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (40000, 'Roadmaster', 'CAMISETA DEPORTIVA', 0, 'Accesorio');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (21000, 'Firmstrong', 'CASCO ALETA', 3.5, 'Accesorio');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (22000, 'Razor', 'CASCO BMX', 4.0, 'Accesorio');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (23000, 'GMC', 'CASCO ULTIMATE', 2.75, 'Accesorio');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (24000, 'Sthwinn', 'CASCO XTREME', 2.5, 'Accesorio');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (25000, 'Dynatraft', 'CASCO CNY', 4.0, 'Accesorio');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (26000, 'Roadmaster', 'RODILLERAS EUR', 2.5, 'Accesorio');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (27000, 'Kent', 'RODILLERAS BMX', 2.75, 'Accesorio');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (28000, 'GMC', 'RODILLERAS PRO', 2.5, 'Accesorio');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (29000, 'Biking', 'RODILLERAS CARRETERA', 2.5, 'Accesorio');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (30000, 'Kent', 'RODILLERAS USA', 2.5, 'Accesorio');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (31000, 'Tony Hawk', 'PANTALONETA SENCILLA', 3.0, 'Accesorio');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (32000, 'Planet Bike', 'PANTALONETA LIVIANA', 2.25, 'Accesorio');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (33000, 'GMC', ' PANTALONETA EUR', 2.5, 'Accesorio');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (34000, 'Nike', 'PANTALONETA NIKE', 2.75, 'Accesorio');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (35000, 'Firmstrong', 'PANTALONETA XS', 3.5, 'Accesorio');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (36000, 'Roadmaster', 'CAMISETA EQUIPO', 3.0, 'Accesorio');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (37000, 'GMC', 'CAMISETA MUJER', 2.5, 'Accesorio');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (38000, 'Cayman', 'CAMISETA', 2.5, 'Accesorio');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (39000, 'Firmstrong', 'CAMISETA CLASICA', 3.5, 'Accesorio');
+insert into ModeloEntity (id, marca, referencia, calificacionMedia, tipoModelo) values (40000, 'Roadmaster', 'CAMISETA DEPORTIVA', 3.75, 'Accesorio');
 
 
 --Datos de prueba AccesorioEntity
@@ -363,15 +363,6 @@ insert into listadeseosentity values(9000,0.0, 9000);
 insert into listadeseosentity values(10000,0.0, 10000);
 
 
---Datos calificacion
-insert into CalificacionEntity values(1000, 'Muy lindo color', 5, 1000, 1000);
-insert into CalificacionEntity values(2000, 'Perfecta para moverse por la ciudad', 5, 2000, 1000);
-insert into CalificacionEntity values(3000, 'Buena velocidad', 5, 3000, 2000);
-insert into CalificacionEntity values(4000, 'Se siente muy rico al andar', 5, 4000, 2000);
-insert into CalificacionEntity values(5000, 'Horrible', 3, 5000, 3000);
-insert into CalificacionEntity values(6000, 'Feo', 5, 6000, 3000);
-insert into CalificacionEntity values(7000, 'Bonito', 5, 7000, 4000);
-insert into CalificacionEntity values(8000, 'Muy buenos frenos', 5, 8000, 4000);
 
 -- calificaciones
 
