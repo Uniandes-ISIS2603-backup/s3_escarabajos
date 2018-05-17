@@ -20,7 +20,10 @@
                     $scope.paginas.push(j);
                 }
             });
-
+            /**
+             * Va el detalle del modelo que se quiere ver
+             * @param id del modelo que se quiere ver
+             */
             $scope.ir = function (id) {
                 $state.go('modeloDetail', {
                     modeloId: id
@@ -28,7 +31,9 @@
                     reload: true
                 });
             };
-
+            /**
+             * Va a la página anterior
+             */
             $scope.prev = function () {
                 if ($scope.pagina !== 1) {
                     $state.go('adv', {
@@ -40,6 +45,9 @@
                     });
                 }
             };
+            /**
+             * Va a la siguiente página
+             */
             $scope.next = function () {
                 if ($scope.pagina !== $scope.pags) {
                     $state.go('adv', {
@@ -52,7 +60,10 @@
                 }
             };
 
-
+            /**
+             * Va a una página dada por parametro
+             * @param temp la págnia indicada por parametro
+             */
             $scope.irPagina = function (temp) {
                 $state.go('adv', {
                     filtros: $scope.filtros,

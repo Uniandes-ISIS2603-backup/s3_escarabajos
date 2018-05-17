@@ -1,7 +1,7 @@
 (function (ng) {
     /**
      * @ngdoc overview
-     * @name accesorios.module:bicicletaModule
+     * @name bicicletas.module:bicicletaModule
      * @description
      * Definición del módulo de Angular de Bicicletas. El módulo encapsula todos los 
      * controladores y los templates HTML que estén relacionados con los Bicicletas 

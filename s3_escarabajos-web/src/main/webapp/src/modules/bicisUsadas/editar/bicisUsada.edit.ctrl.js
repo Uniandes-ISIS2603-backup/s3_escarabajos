@@ -36,8 +36,6 @@
                         input.disponible = true;
 
                         input.facturaOriginal = $scope.biciUsadaActual.facturaOriginal;
-
-                        console.log(input);
                         
                         $http.put(biciUsadaContext + '/' + $state.params.clienteId + '/bicis/' + $state.params.biciUsadaId, input).then(function (response) {
                             $state.go('bicisUsadaList', {biciUsadaId: response.data.id}, {reload: true});
