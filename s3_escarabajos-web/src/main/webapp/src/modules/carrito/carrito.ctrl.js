@@ -36,7 +36,7 @@
 
                     for (var i = 0; i < lista.length; i++) {
 
-                        total = total + lista[i].precio;
+                        total = total + lista[i].precio * lista[i].multiplicador;
 
                         var repetido = false;
 
