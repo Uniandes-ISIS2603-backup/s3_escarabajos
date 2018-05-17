@@ -42,6 +42,8 @@ public class MedioPagoLogic {
     public MedioPagoEntity createMedioPago(MedioPagoEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de medio de pago");
         String tipo = entity.getTipo();
+        LOGGER.info("AAAAAAAAAAAAAAAAA" + entity);
+        LOGGER.info("AAAAAAAAAAAAAAAAA" + tipo);
 
         if (!tipo.equalsIgnoreCase("pse") && !tipo.equalsIgnoreCase("paypal") && !tipo.equalsIgnoreCase("tarjeta de credito") && !tipo.equalsIgnoreCase("tarjeta debito")) {
             throw new BusinessLogicException("El tipo de medio de pago no es valido");
