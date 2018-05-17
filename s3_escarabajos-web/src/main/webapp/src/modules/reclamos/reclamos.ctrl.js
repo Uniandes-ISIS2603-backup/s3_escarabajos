@@ -2,10 +2,10 @@
     var mod = ng.module("reclamosModule");
     mod.constant("reclamosContext", "api/clientes/reclamos");
     mod.controller('reclamosCtrl', ['$scope', '$rootScope', '$http', 'reclamosContext',
-        function ($scope, $http, $rootScope, reclamosContext) {
+        function ($scope, $rootScope, $http , reclamosContext) {
             $http.get(reclamosContext + "/detail/" + sessionStorage.getItem("id")).then(function (response) {
                 $scope.reclamosRecords = response.data;
-            }, function (response) {
+            }, function(response){
                 $rootScope.showError(response);
             });
         }
