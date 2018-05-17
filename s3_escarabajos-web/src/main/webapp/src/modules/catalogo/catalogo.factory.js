@@ -1,4 +1,16 @@
 (function (ng) {
+    /**
+     * @ngdoc factory
+     * @name error.factory:errorFactory
+     * @description
+     * Define el objeto factory que se encarga de relacionar todos los cotrollers del front con el back 
+     * @param {Object} $scope Referencia injectada al Scope definida para este
+     * controlador, el scope es el objeto que contiene las variables o 
+     * funciones que se definen en este controlador y que son utilizadas 
+     * desde el HTML.
+     * @param {Object} $state Dependencia injectada en la que se recibe el 
+     * estado actual de la navegación definida en el módulo.
+     */
     var mod = ng.module("catalogoModule");
     mod.constant("catalogoContext", "api/catalogo");
     mod.factory('catalogoFactory', ['$http', 'catalogoContext', function ($http, catalogoContext) {
