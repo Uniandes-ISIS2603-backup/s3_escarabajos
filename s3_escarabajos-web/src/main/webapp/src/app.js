@@ -103,7 +103,6 @@
                 sessionStorage.setItem("id", null);
                 sessionStorage.setItem("name", null);
                 $state.go('principal', {pagina: 1}, {reload: true});
-                alert('Se ha cerrado correctamente la sesión');
             };
             $rootScope.showError = function (response) {
                 if (response.status !== 200)

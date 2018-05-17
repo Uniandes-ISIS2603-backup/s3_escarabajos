@@ -176,7 +176,7 @@
                                 <li ng-if = "isAuthenticated() && !hasPermissions()"><a ui-sref = "facturasCliente">Mis compras</a></li>
                                 <li ng-if = "isVendedor()"><a href="#" >Mis ventas</a></li>
                                 <li ng-if = "isAuthenticated() && !hasPermissions()"><a ui-sref="reclamosList">Mis reclamos</a></li>
-                                <li><a ng-click = "logOut()">Cerrar Sesión</a></li>
+                                <li><a ng-click = "logOut()" data-toggle="modal" data-target="#myModal1">Cerrar Sesión</a></li>
                             </ul>
                         </li>
                         <li ng-if = "isAuthenticated()"><a ui-sref="carrito" ><span class="glyphicon glyphicon-shopping-cart"></span> Carrito</a></li>
@@ -195,6 +195,20 @@
         <br>
         <br>
         <br>
-
+        <div class="modal fade" id="myModal1" role="dialog" ng-if = "!flag">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Vuelve Pronto</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p id = "modalError">La sesiòn se ha cerrado correctamente</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
