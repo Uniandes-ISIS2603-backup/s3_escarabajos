@@ -140,7 +140,7 @@ public class ClienteFacturaReclamoResource {
     }
     @GET
     @Path("/{reclamosId: \\d+}")
-    public ReclamoDetailDTO updatereclamo(@PathParam("reclamosId") Long id) throws BusinessLogicException {
+    public ReclamoDetailDTO getReclamo(@PathParam("reclamosId") Long id) throws BusinessLogicException {
         //TODO si no existe el recurso factura debe disparar WebApplicationException
         ReclamoEntity recl = this.reclamo.find(id);
         if (recl == null) {
