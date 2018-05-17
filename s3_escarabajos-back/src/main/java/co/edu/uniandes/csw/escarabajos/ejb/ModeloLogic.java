@@ -11,6 +11,7 @@ import co.edu.uniandes.csw.escarabajos.entities.ItemEntity;
 import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.persistence.ModeloPersistence;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 import java.util.logging.Level;
@@ -135,11 +136,15 @@ public class ModeloLogic {
         if (modeloEntity == null) {
             throw new BusinessLogicException(MODELONOEXISTE);
         }
+        List<ItemEntity> items = new ArrayList<>();
         for (ItemEntity item : modeloEntity.getItems()) {
             if (item.getDisponible()) {
-                itemLogic.comprarItem(item.getId());
+                items.add(itemLogic.comprarItem(item.getId()));
             }
         }
+        modeloEntity.setItems(items);
+        persistence.update(modeloEntity);
+        
         LOGGER.log(Level.INFO, "Finaliza proceso de borrar un modelo ");
     }
 

@@ -166,7 +166,7 @@ public class ItemLogicTest {
     }
 
     /**
-     * Prueba para consultar un Author
+     * Prueba para consultar un item
      *
      *
      */
@@ -178,6 +178,20 @@ public class ItemLogicTest {
         Assert.assertEquals(entity.getId(), resultEntity.getId());
     }
 
+     /**
+     * Prueba para comprar un item
+     *
+     *
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
+     */
+    @Test
+    public void comprarItemTest() throws BusinessLogicException {
+        ItemEntity entity = data.get(0);
+        ItemEntity resultEntity = itemLogic.comprarItem(entity.getId());
+        Assert.assertNotNull(resultEntity);
+        Assert.assertFalse(resultEntity.getDisponible());
+    }
+    
     /**
      * Prueba el metodo que verifica un item
      */

@@ -462,8 +462,8 @@ public class CatalogoResource {
      * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
      */
     @DELETE
-    @Path("/marcas/{marca}")
-    public void deleteMarca(@PathParam("marca") String marca) throws BusinessLogicException {
+    @Path("marcas/{marca}")
+    public void deleteMarca(@PathParam("marca")String marca) throws BusinessLogicException {
         catalogoLogic.deleteMarca(marca);
     }
 
@@ -486,7 +486,7 @@ public class CatalogoResource {
      * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
      */
     @DELETE
-    @Path("/categorias/{categoria}")
+    @Path("categorias/{categoria}")
     public void deleteCategoria(@PathParam("categoria") String categoria) throws BusinessLogicException {
         catalogoLogic.deleteCategoria(categoria);
     }

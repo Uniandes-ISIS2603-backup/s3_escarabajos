@@ -299,6 +299,7 @@ public class CatalogoLogic {
      * @throws BusinessLogicException si falla la busqueda
      */
     public void deleteMarca(String marca) throws BusinessLogicException {
+        LOGGER.info("@@@@@");
         List<List<String>> filtros = new ArrayList<>();
         ArrayList<String> marcas = new ArrayList<>();
         marcas.add(marca);

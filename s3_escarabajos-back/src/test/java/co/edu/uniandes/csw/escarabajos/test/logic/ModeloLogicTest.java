@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.csw.escarabajos.test.logic;
 
-import co.edu.uniandes.csw.escarabajos.ejb.AccesorioLogic;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -191,13 +190,18 @@ public class ModeloLogicTest {
     /**
      * Prueba para eliminar un Modelo
      *
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
      */
     @Test
     public void deleteModeloTest() throws BusinessLogicException {
         ModeloEntity entity = data.get(0);
         modeloLogic.deleteModelo(entity.getId());
         ModeloEntity deleted = modeloLogic.getModelo(entity.getId());
-        Assert.assertNull(deleted);
+        for (ItemEntity item : deleted.getItems()) {
+             Assert.assertFalse(item.getDisponible());
+        }
+        
+       
     }
 
     /**
