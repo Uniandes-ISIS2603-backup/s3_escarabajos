@@ -1,0 +1,150 @@
+{
+	"info": {
+		"name": "ClienteMedioPago",
+		"_postman_id": "5a1a242c-8bd9-0b40-703c-188db702ee33",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1d0b816e-5ef2-4cd8-88d0-feccbb55ee49",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"cliente_id\",data.id)",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Ariel\",\r\n  \"correo\": \"asnar0@discuz.net\",\r\n  \"usuario\": \"␣\",\r\n  \"cedula\": \"8643803030\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"clientes",
+						""
+					]
+				},
+				"description": "crea un cliente"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear medio de pago de un cliente copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "70a0c465-440e-4d69-bc5e-f30bfd2e3bd2",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"mediopago_id\",data.id)",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"tipo\": \"PSE\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/{{cliente_id}}/mediospago",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"clientes",
+						"{{cliente_id}}",
+						"mediospago"
+					]
+				},
+				"description": "crea un cliente"
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar medio de pago del cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "70a0c465-440e-4d69-bc5e-f30bfd2e3bd2",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"mediopago_id\",data.id)",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"tipo\": \"PSE\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/{{cliente_id}}/mediospago",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"clientes",
+						"{{cliente_id}}",
+						"mediospago"
+					]
+				},
+				"description": "crea un cliente"
+			},
+			"response": []
+		}
+	]
+}

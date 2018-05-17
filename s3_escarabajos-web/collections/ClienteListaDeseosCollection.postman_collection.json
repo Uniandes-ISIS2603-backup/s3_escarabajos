@@ -1,0 +1,134 @@
+{
+	"info": {
+		"name": "ClienteListaDeseosCollection",
+		"_postman_id": "29314828-de2f-6d03-c080-45d7109f582c",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1d0b816e-5ef2-4cd8-88d0-feccbb55ee49",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"cliente_id\",data.id)",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Ariel\",\r\n  \"correo\": \"asnar0@discuz.net\",\r\n  \"usuario\": \"␣\",\r\n  \"cedula\": \"8643803030\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"clientes",
+						""
+					]
+				},
+				"description": "crea un cliente"
+			},
+			"response": []
+		},
+		{
+			"name": "Le crea una lista de desos al cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ade29844-318e-4e1c-adca-8aa516ac98b3",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"carrito_id\",data.id)",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/{{cliente_id}}/listadeseos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"clientes",
+						"{{cliente_id}}",
+						"listadeseos"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta la lista de deseos  del cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ade29844-318e-4e1c-adca-8aa516ac98b3",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"carrito_id\",data.id)",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/{{cliente_id}}/listadeseos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s3_escarabajos-web",
+						"api",
+						"clientes",
+						"{{cliente_id}}",
+						"listadeseos"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
