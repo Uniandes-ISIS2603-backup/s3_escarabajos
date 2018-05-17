@@ -10,10 +10,10 @@
                 $scope.mods = response.data.modelos;
                 $scope.pags = Math.ceil(response.data.numero / 9);
                 $scope.modelos = [];
-                for (var i = 0; i < $scope.mods.length; i += 4) {
-                    $scope.modelos.push($scope.mods.slice(i, i + 4));
+                for (var i = 0; i < $scope.mods.length; i += 3) {
+                    $scope.modelos.push($scope.mods.slice(i, i + 3));
                 }
-                $scope.cols = 3;
+                $scope.cols = 4;
 
                 $scope.paginas = [];
                 for (var j = 1; j <= $scope.pags; j++) {

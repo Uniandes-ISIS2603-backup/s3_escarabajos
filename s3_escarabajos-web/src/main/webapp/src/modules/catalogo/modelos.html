@@ -3,25 +3,25 @@
 <div ng-if="modelos.length > 0">
     <div class="row" ng-repeat="chunk in modelos">
         <div class="col-xs-{{cols}}" ng-repeat="modelo in chunk">
-            <div class="panel panel-default" style="display: inline-block;">
+            <div class="panel panel-default" style="display: inline-block; cursor: pointer; max-width:280px; max-height: 300px;">
                 <div class="c-nuevo" ng-if="modelo.nuevo === true">
                     <div class="nuevo"> Nuevo</div>
                 </div>
-                <div class="panel-body">
-                        <div class="col-xs-8 col-xs-offset-2 Imagen">
+                <div class="panel-body" ng-click="ir(modelo.id)" style="max-width: 280px; max-height: 200px;">
+                        <div class="col-xs-12 Imagen">
                             <!--cambiar para que el tamaño sea fijo-->
                             <img class="img-responsive " ng-click="ir(modelo.id)" src="{{modelo.url}}" alt="{{modelo.referencia}}">
                         </div>
                 </div>
                 <!--cambiar para que el tamaño sea fijo-->
-                <div class="panel-footer" ng-mouseenter="modelo.options = true" ng-mouseleave="modelo.options = false"> 
+                <div class="panel-footer" style="max-width: 280px; max-height: 100px;" ng-mouseenter="modelo.options = true" ng-mouseleave="modelo.options = false" ng-click="ir(modelo.id)"> 
                     <div ng-hide="modelo.options">
-                        <div class="row" style="height: 30px">
-                            <p style=" font-weight: 200; text-transform: uppercase; font-size:150%; text-align: center">{{modelo.referencia}}</p>
+                        <div class="row" style="height: 36px">
+                            <b><p style="text-transform: uppercase; font-size:100%; text-align: center;" >{{modelo.referencia}}</p></b>
                             <br>
                         </div>
-                        <div class="row" style="height: 30px">
-                            <p style=" font-weight: 200; font-size:120%; ; text-align: center">${{modelo.precio}}</p>
+                        <div class="row" style="height: 25px">
+                            <p style="color:#82CD73; font-weight: 200; font-size:120%; ; text-align: center">{{modelo.precio|currency}}</p>
                             <br>
                         </div>
                         <div class="row" >
@@ -50,7 +50,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row text-center" style="display: inline-block" ng-show="modelo.options" >
+                    <div class="row text-center" style="display: inline-block; max-width: 280px; max-height: 200px;" ng-show="modelo.options" >
                         <br>
                         <br>
                         <div class="col-xs-3 "  ng-if="hasPermissions()">
