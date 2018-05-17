@@ -14,6 +14,13 @@
                     }
                 });
             }
+            $scope.ir = function (id) {
+                $state.go('modeloDetail', {
+                    modeloId: id
+                }, {
+                    reload: true
+                });
+            };
         }
     ]);
 }
