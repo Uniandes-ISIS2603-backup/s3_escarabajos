@@ -1,8 +1,7 @@
 {
 	"info": {
 		"name": "AccesorioCollection",
-		"_postman_id": "bea17755-42d4-3d6e-2f9a-5ffd00a70c8a",
-		"description": "",
+		"_postman_id": "58582459-4178-e6ee-940b-ee1ff47f0748",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -34,7 +33,7 @@
 					"raw": "{\r\n        \"type\": \"clienteConCarrito\",\r\n        \"cedula\": 2,\r\n        \"correo\": \"String\",\r\n        \"nombre\": \"String\",\r\n        \"usuario\": \"String\",\r\n        \"calificaciones\": [],\r\n        \"compras\": [],\r\n        \"listaDeseos\": [],\r\n        \"mediosPago\": [],\r\n        \"reclamos\": [],   \r\n        \"carrito\": {   \t   \t\r\n        \t\"precioTotal\" : 10, \t\r\n        \t\"items\": [ \t\t\r\n        \t{ \t\t\r\n        \t\t\"id\": 1, \t\t\r\n        \t\t\"categoria\": \"string\",     \t\r\n        \t\t\"marca\": \"string\", \t\r\n        \t\t\"color\": \"string\",     \t\r\n        \t\t\"precio\": 10,     \t\r\n        \t\t\"usada\": false \t\t\r\n        \t\t\r\n        \t}     \r\n        \t]   \r\n        }\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:18075/s3_escarabajos-web/api/accesorios",
+					"raw": "http://localhost:18075/s3_escarabajos-web/api/accesorios?",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -53,8 +52,7 @@
 							"disabled": true
 						}
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -99,8 +97,7 @@
 						"api",
 						"modelos"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -134,7 +131,7 @@
 					"raw": "{\r\n       \"id\": {{new_id_modelo}},\r\n       \"precio\": 1,\r\n       \"modeloId\": {{new_id_modelo}}, \r\n       \"color\": \"String\",\r\n       \"album\": [],\r\n       \"tipoAcessorio\": \"\",\r\n       \"descripcion\": \"String\"\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:18075/s3_escarabajos-web/api/accesorios",
+					"raw": "http://localhost:18075/s3_escarabajos-web/api/accesorios?",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -153,8 +150,7 @@
 							"disabled": true
 						}
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -185,7 +181,7 @@
 					"raw": "{\r\n       \"id\": 1,\r\n       \"precio\": 1,\r\n       \"modeloId\": 1, \r\n       \"color\": \"Prueba actualizacion\",\r\n       \"album\": [],\r\n       \"tipoAcessorio\": \"String\",\r\n       \"descripcion\": \"String\"\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:18075/s3_escarabajos-web/api/accesorios/{{new_id}}",
+					"raw": "http://localhost:18075/s3_escarabajos-web/api/accesorios/{{new_id}}?",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -205,8 +201,7 @@
 							"disabled": true
 						}
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -237,7 +232,7 @@
 					"raw": "{\r\n       \"id\": 1,\r\n       \"precio\": 1,\r\n       \"modeloId\": 1, \r\n       \"color\": \"Prueba actualizacion\",\r\n       \"album\": [],\r\n       \"tipoAcessorio\": \"String\",\r\n       \"descripcion\": \"String\"\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:18075/s3_escarabajos-web/api/accesorios/{{new_id}}",
+					"raw": "http://localhost:18075/s3_escarabajos-web/api/accesorios/{{new_id}}?",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -257,8 +252,7 @@
 							"disabled": true
 						}
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		}

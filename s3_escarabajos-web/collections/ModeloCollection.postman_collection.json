@@ -1,8 +1,7 @@
 {
 	"info": {
 		"name": "ModeloCollection",
-		"_postman_id": "8d524b36-3290-4fb6-956d-42cda986b30f",
-		"description": "",
+		"_postman_id": "b804defe-4725-a7a9-a3e8-89167a782424",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -47,8 +46,7 @@
 						"api",
 						"modelos"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -93,8 +91,7 @@
 						"api",
 						"modelos"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -139,8 +136,7 @@
 						"api",
 						"modelos"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -184,8 +180,7 @@
 						"api",
 						"modelos"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -228,8 +223,7 @@
 						"modelos",
 						"{{new_id_m3}}"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -274,8 +268,7 @@
 						"api",
 						"accesorios"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -319,8 +312,7 @@
 						"api",
 						"items"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -363,8 +355,7 @@
 						"modelos",
 						"{{new_id_m}}"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -407,8 +398,7 @@
 						"modelos",
 						"{{new_id_m2}}"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -452,8 +442,7 @@
 						"api",
 						"items"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		}

@@ -1,0 +1,293 @@
+{
+	"info": {
+		"name": "Escarabajos-ngaitan",
+		"_postman_id": "b540ce4d-8f7f-572d-9a4c-5ae5b3794fb0",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Reclamos",
+			"item": [
+				{
+					"name": "CreateReclamo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\" : 1,\n\t\"mensaje\": \"Modus Ponens es muy aleta\",\n\t\"razon\": \"Intento de Post\",\n\t\"enProceso\" : true,\n\t\"factura\" : {},\n\t\"cliente\" : {}\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/reclamos/1000/facturas/%202000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"s3_escarabajos-web",
+								"api",
+								"clientes",
+								"reclamos",
+								"1000",
+								"facturas",
+								"%202000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetReclamo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/reclamos/detail/2000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"s3_escarabajos-web",
+								"api",
+								"clientes",
+								"reclamos",
+								"detail",
+								"2000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllReclamos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/reclamos/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"s3_escarabajos-web",
+								"api",
+								"clientes",
+								"reclamos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upDateReclamo",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"mensaje\": \"Decir Hola es muy aleta\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/reclamos/1000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"s3_escarabajos-web",
+								"api",
+								"clientes",
+								"reclamos",
+								"1000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDespuesDelUpdate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/reclamos/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"s3_escarabajos-web",
+								"api",
+								"clientes",
+								"reclamos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByCliente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/reclamos/detail/2000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"s3_escarabajos-web",
+								"api",
+								"clientes",
+								"reclamos",
+								"detail",
+								"2000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reanudarReclamo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/reclamos/1000/renaudar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"s3_escarabajos-web",
+								"api",
+								"clientes",
+								"reclamos",
+								"1000",
+								"renaudar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "finalizarReclamo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/s3_escarabajos-web/api/clientes/reclamos/1000/finalizar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"s3_escarabajos-web",
+								"api",
+								"clientes",
+								"reclamos",
+								"1000",
+								"finalizar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Calificacion",
+			"item": [
+				{
+					"name": "CreateCalificacion",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\" : 1, \n\t\"comentario\" : \"Muy Fea\",\n\t\"puntaje\" : 1,\n\t\"cliente\" : {},\n\t\"modelo\" : {}\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/s3_escarabajos-web/api/modelos/2000/clientes/2000/calificaciones",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"s3_escarabajos-web",
+								"api",
+								"modelos",
+								"2000",
+								"clientes",
+								"2000",
+								"calificaciones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/s3_escarabajos-web/api/modelos/2000/clientes/calificaciones",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"s3_escarabajos-web",
+								"api",
+								"modelos",
+								"2000",
+								"clientes",
+								"calificaciones"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
