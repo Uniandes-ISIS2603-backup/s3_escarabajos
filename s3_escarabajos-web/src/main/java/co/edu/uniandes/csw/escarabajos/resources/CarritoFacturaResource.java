@@ -10,8 +10,11 @@ import co.edu.uniandes.csw.escarabajos.dtos.FacturaDTO;
 import co.edu.uniandes.csw.escarabajos.ejb.CarritoLogic;
 import co.edu.uniandes.csw.escarabajos.ejb.ClienteLogic;
 import co.edu.uniandes.csw.escarabajos.ejb.FacturaLogic;
+import co.edu.uniandes.csw.escarabajos.ejb.ItemLogic;
 import co.edu.uniandes.csw.escarabajos.entities.FacturaEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
+import java.util.ArrayList;
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -29,47 +32,66 @@ import javax.ws.rs.Produces;
 @Consumes("application/json")
 @RequestScoped
 public class CarritoFacturaResource {
-    
+
     @Inject
     CarritoLogic logicCarrito;
-    
+
     @Inject
     ClienteLogic logicCliente;
-    
+
     @Inject
     FacturaLogic logicFactura;
-    
+
+    @Inject
+    ItemLogic logicItem;
+
     @Inject
     ClienteCarritoResource clienteCarrito;
-    
+
     @Inject
     CarritoItemsResource carritoR;
-    
-     /**
-     * <h1>GET /api/clientes/{idCliente}/carrito/factura : Obtener el carrito del cliente.</h1>
-     * 
+
+    private static final Logger LOGGER = Logger.getLogger(CarritoFacturaResource.class.getName());
+
+    /**
+     * <h1>GET /api/clientes/{idCliente}/carrito/factura : Obtener el carrito
+     * del cliente.</h1>
+     *
      * <pre>Busca y devuelve el carrito del cliente.
-     * 
+     *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Devueve el carrito del cliente.</code> 
+     * 200 OK Devueve el carrito del cliente.</code>
      * <code style="color: #c7254e; background-color: #f9f2f4;">
      * 412 Precodition Failed: No existe el cliente.
      * </code>
      * </pre>
-     * @param idCliente Identificador del cliente dueño del carrito que se desa buscar. Este debe ser una cadena de dígitos.
-     * @return JSON {@link FacturaDetailDTO} - la factura generada por el carritp
-     * lanza excepcion si no hay items en el carrito.
+     *
+     * @param idCliente Identificador del cliente dueño del carrito que se desa
+     * buscar. Este debe ser una cadena de dígitos.
+     * @return JSON {@link FacturaDetailDTO} - la factura generada por el
+     * carritp lanza excepcion si no hay items en el carrito.
      */
     @POST
     public FacturaDTO getFacturaCarrito(@PathParam("idCliente") Long idCliente) throws BusinessLogicException {
         //DONE: Revisar este código. Es un GET pero hace un create?
         //asi es como queremos que sea para que cuando le den generar get factura se genere y se devuelve la factura que se genero
-            
+
         CarritoDetailDTO carrito = clienteCarrito.getCarrito(idCliente);
         FacturaEntity factura = logicCarrito.crearFactura(carrito.getId());
+
+        for (int i = 0; i < factura.getItems().size(); i++) {
+            
+            LOGGER.info("AAAAAAAAAAA" + factura.getItems().get(i).getId());
+
+            logicItem.comprarItem(factura.getItems().get(i).getId());
+        }
+
+        factura.setItems(new ArrayList<>());
+        
         factura.setCliente(logicCliente.getCliente(idCliente));
         FacturaEntity factura2 = logicFactura.createFactura(factura);
+
         carritoR.vaciarCarrito(carrito.getId());
         return new FacturaDTO(factura2);
     }

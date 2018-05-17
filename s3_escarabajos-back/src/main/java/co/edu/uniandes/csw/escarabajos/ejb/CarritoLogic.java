@@ -212,6 +212,8 @@ public class CarritoLogic {
         factura.setDinero(carrito.getPrecioTotal());
 
         factura.setCliente(carrito.getCliente());
+        
+        factura.setItems(carrito.getItems());
 
         return factura;
     }
