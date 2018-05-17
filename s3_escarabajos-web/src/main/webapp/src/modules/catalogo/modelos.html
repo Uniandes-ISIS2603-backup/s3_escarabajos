@@ -8,10 +8,10 @@
                     <div class="nuevo"> Nuevo</div>
                 </div>
                 <div class="panel-body" ng-click="ir(modelo.id)" style="width: auto; height: auto;">
-                        <div class="col-xs-12 Imagen" style=" max-height: 200px; max-width: 280px;">
-                            <!--cambiar para que el tamaño sea fijo-->
-                            <img class="img-responsive"  style="height: auto;" ng-click="ir(modelo.id)" src="{{modelo.url}}" alt="{{modelo.referencia}}">
-                        </div>
+                    <div class="col-xs-12 Imagen" style=" max-height: 200px; max-width: 280px;">
+                        <!--cambiar para que el tamaño sea fijo-->
+                        <img class="img-responsive"  style="height: auto;" ng-click="ir(modelo.id)" src="{{modelo.url}}" alt="{{modelo.referencia}}">
+                    </div>
                 </div>
                 <!--cambiar para que el tamaño sea fijo-->
                 <div class="panel-footer" style="max-width: 280px; max-height: 100px;" ng-mouseenter="modelo.options = true" ng-mouseleave="modelo.options = false" ng-click="ir(modelo.id)"> 
@@ -28,25 +28,24 @@
                             <div class="col-xs-12 text-center" >
                                 <!--1-->
                                 <i class="fa fa-star-o" aria-hidden="true" style="font-size: 120%" ng-if=" modelo.calificacionMedia < 0.25" ></i>
-                                <i class="fa fa-star-half-o" aria-hidden="true" style="font-size: 180%"ng-if=" modelo.calificacionMedia >= 0.25 && modelo.calificacionMedia < 0.75" ></i>
+                                <i class="fa fa-star-half-o" aria-hidden="true" style="font-size: 120%"ng-if=" modelo.calificacionMedia >= 0.25 && modelo.calificacionMedia < 0.75" ></i>
                                 <i class="fa fa-star" aria-hidden="true" style="font-size: 120%" ng-if="modelo.calificacionMedia >= 0.75"></i>
                                 <!--2-->
                                 <i class="fa fa-star-o" aria-hidden="true" style="font-size: 120%" ng-if=" modelo.calificacionMedia < 1.25" ></i>
-                                <i class="fa fa-star-half-o" aria-hidden="true" style="font-size: 180%"ng-if=" modelo.calificacionMedia >= 1.25 && modelo.calificacionMedia < 1.75" ></i>
+                                <i class="fa fa-star-half-o" aria-hidden="true" style="font-size: 120%"ng-if=" modelo.calificacionMedia >= 1.25 && modelo.calificacionMedia < 1.75" ></i>
                                 <i class="fa fa-star" aria-hidden="true" style="font-size: 120%" ng-if="modelo.calificacionMedia >= 1.75"></i>
                                 <!--3-->
                                 <i class="fa fa-star-o" aria-hidden="true" style="font-size: 120%" ng-if=" modelo.calificacionMedia < 2.25" ></i>
-                                <i class="fa fa-star-half-o" aria-hidden="true" style="font-size: 180%"ng-if=" modelo.calificacionMedia >= 2.25 && modelo.calificacionMedia < 2.75" ></i>
+                                <i class="fa fa-star-half-o" aria-hidden="true" style="font-size: 120%"ng-if=" modelo.calificacionMedia >= 2.25 && modelo.calificacionMedia < 2.75" ></i>
                                 <i class="fa fa-star" aria-hidden="true" style="font-size: 120%" ng-if="modelo.calificacionMedia >= 2.75"></i>
                                 <!--4-->
                                 <i class="fa fa-star-o" aria-hidden="true" style="font-size: 120%" ng-if=" modelo.calificacionMedia < 3.25" ></i>
-                                <i class="fa fa-star-half-o" aria-hidden="true" style="font-size: 180%"ng-if=" modelo.calificacionMedia >= 3.25 && modelo.calificacionMedia < 0.75" ></i>
+                                <i class="fa fa-star-half-o" aria-hidden="true" style="font-size: 120%"ng-if=" modelo.calificacionMedia >= 3.25 && modelo.calificacionMedia < 3.75" ></i>
                                 <i class="fa fa-star" aria-hidden="true" style="font-size: 120%" ng-if="modelo.calificacionMedia >= 3.75"></i>
                                 <!--5-->
                                 <i class="fa fa-star-o" aria-hidden="true" style="font-size: 120%" ng-if=" modelo.calificacionMedia < 4.25" ></i>
-                                <i class="fa fa-star-half-o" aria-hidden="true" style="font-size: 180%"ng-if=" modelo.calificacionMedia >= 4.25 && modelo.calificacionMedia < 4.75" ></i>
+                                <i class="fa fa-star-half-o" aria-hidden="true" style="font-size: 120%"ng-if=" modelo.calificacionMedia >= 4.25 && modelo.calificacionMedia < 4.75" ></i>
                                 <i class="fa fa-star" aria-hidden="true" style="font-size: 120%" ng-if="modelo.calificacionMedia >= 4.75"></i>
-
                             </div>
                         </div>
                     </div>
@@ -67,9 +66,9 @@
                             <a  ui-sref ="addItemListaDeseos({itemId: modelo.items[0].id})" class="btn btn-primary">
                                 <span class="glyphicon glyphicon-gift" style="color:white"></span></a>
                         </div>
-                        
+
                         <div class="col-xs-3 " ng-if="isAuthenticated() && !hasPermissions()"></div>
-                        
+
                         <div class="col-xs-3 " ng-if="isAuthenticated() && !hasPermissions()">
                             <a  ui-sref ="addItemCarrito({itemId: modelo.items[0].id})" class="btn btn-primary">
                                 <span class="glyphicon glyphicon-shopping-cart" style="color:white"></span></a>
@@ -79,7 +78,7 @@
                                 <span class="glyphicon glyphicon-gift" style="color:white"></span></a>
                         </div>
                         <div class="col-xs-3" ng-if="isAuthenticated() && !hasPermissions()"></div>
-                        
+
                         <div class="col-xs-3" ng-if="!isAuthenticated()"></div>
                         <div class="col-xs-3 " ng-if="!isAuthenticated()">
                             <a  ui-sref ="clientesSignIn" class="btn btn-primary">
@@ -95,7 +94,7 @@
             </div>
         </div>
     </div>
-    <div class="row" ng-if="pagina!==null">
+    <div class="row" ng-if="pagina !== null">
         <div class="col-xs-12 text-center" >
 
             <div class="pagination">

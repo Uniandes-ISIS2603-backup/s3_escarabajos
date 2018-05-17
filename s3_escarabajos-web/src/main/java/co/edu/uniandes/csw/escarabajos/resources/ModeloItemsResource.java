@@ -7,19 +7,13 @@ import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutorService;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.container.AsyncResponse;
-import javax.ws.rs.container.Suspended;
 
 /**
  * <pre>Clase que implementa el recurso "modelos/{id}/items".
@@ -94,58 +88,26 @@ public class ModeloItemsResource {
     }
 
     /**
-     * POST /api/modelos/{modelosId}/items/{itemsId} : Guarda un item dentro del
-     * modelo. No Debe Existir Se agrega automaticamente al crear el item.
-     */
-    /**
-     * PUT /api/modelos/{modelosId}/items/{itemsId} : Edita los items de un
-     * modelo.. No debe existir porque no se puede modificar toda la lista de
-     * items de un modelo.
-     */
-    /**
-     * <h1>DELETE /api/modelos/{modelosId}/items/{itemsId} : Elimina un item
-     * dentro del modelo.</h1>
+     * <h1>GET /api/modelos/{modelosId}/items : Obtener item por id
+     * del modelo por id.</h1>
      *
-     * <pre> Elimina la referencia del item asociado al ID dentro del modelo
-     * con la informacion que recibe el la URL.
+     * <pre>Busca el item con el id asociado dentro del modelo con id asociado.
      *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Se eliminó la referencia del item.
+     * 200 OK Devuelve el item correspondiente al id.
+     * </code>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 404 Not Found No existe un item con el id dado dentro del modelo.
      * </code>
      * </pre>
      *
      * @param modelosId Identificador del modelo que se esta buscando. Este debe
      * ser un cadena de dígitos.
-     * @param itemsId Identificador del item que se desea guardar. Este debe ser
-     * un cadena de dígitos.
-     * @throws BusinessLogicException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra el modelo.
+     * @return 
      */
-    @DELETE
-    @Path("{itemsId: \\d+}")
-    public void removeItems(@PathParam("modelosId") Long modelosId, @PathParam("itemsId") Long itemsId) throws BusinessLogicException {
-            modeloLogic.removeItem(itemsId);
-    }
-
-    private ExecutorService executorService = java.util.concurrent.Executors.newCachedThreadPool();
-
     @GET
-    public void listItems(@Suspended final AsyncResponse asyncResponse, @PathParam(value = "modelosId") final Long modelosId) {
-        executorService.submit(new Runnable() {
-            public void run() {
-                asyncResponse.resume(doListItems(modelosId));
-            }
-        });
+    public List<ItemDetailDTO> getItems(@PathParam("modelosId") Long modelosId) throws BusinessLogicException {
+       return itemsListEntity2DTO(modeloLogic.listItems(modelosId));
     }
-
-    private List<ItemDetailDTO> doListItems(@PathParam("modelosId") Long modelosId) {
-        try {
-            return itemsListEntity2DTO(modeloLogic.listItems(modelosId));
-        } catch (BusinessLogicException ex) {
-            Logger.getLogger(ModeloItemsResource.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return new ArrayList<>();
-    }
-
 }
