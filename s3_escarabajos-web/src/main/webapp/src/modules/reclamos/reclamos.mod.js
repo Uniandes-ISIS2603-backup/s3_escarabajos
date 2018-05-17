@@ -1,4 +1,18 @@
 (function (ng) {
+         /**
+     * @ngdoc overview
+     * @name reclamos.module:reclamosModule
+     * @description
+     * Definición del módulo de Angular de Reclamos. El módulo encapsula todos los 
+     * controladores y los templates HTML que estén relacionados con los Reclamos 
+     * directamente. En la configuración del módulo se injecta la dependencia de 
+     * ui.router que es la que se utiliza para la configuración de las URLs bajo las
+     * cuales se accede al módulo. Por ejemplo, para mostrar los vendedores en la 
+     * URL: 'localhost:8080/api/clientes/reclamos ' es necesario configurar el router por 
+     * medio del stateProvider que informa a AngularJS de la relación entre la URL, 
+     * un estado definido (estado de mostrar vendedores), el controlador y la vista 
+     * correspondiente.
+     */
     // Definición del módulo
     var mod = ng.module("reclamosModule", ['ui.router']);
     mod.constant("reclamosContext", "api/clientes/reclamos");

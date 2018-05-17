@@ -1,9 +1,41 @@
 (function (ng) {
     var mod = ng.module("modelosModule");
     mod.constant("modelosContext", "api/modelos");
+    /**
+     * @ngdoc controller
+     * @name modelo.controller:modeloDetailCtrl
+     * @description
+     * Definición del controlador de Angular del módulo modelos. 
+     * Se crea el controlador con el cual se maneja el módulo.
+     * En el controlador se definen los atributos y métodos que pueden
+     * ser accedidos desde el HTML utilizando el $scope.
+     * @param {Object} $scope Referencia injectada al Scope definida para este
+     * controlador, el scope es el objeto que contiene las variables o 
+     * funciones que se definen en este controlador y que son utilizadas 
+     * desde el HTML.
+     * @param {Object} $http Objeto injectado para la manejar consultas HTTP
+     * @param {Object} bicicletaContext Constante injectada que contiene la ruta
+     * donde se encuentra el API de Modelos en el Backend.
+     * @param {Object} $state Dependencia injectada en la que se recibe el 
+     * estado actual de la navegación definida en el módulo.
+     */
     mod.controller("modeloDetailCtrl", ['$scope', 'modelosContext', '$http', '$state',
         function ($scope, modeloContext, $http, $state) {
             if ($state.params.modeloId !== undefined && $state.params.modeloId !== null) {
+                /**
+                 * @ngdoc function
+                 * @name getModelo
+                 * @methodOf modelos.controller:modeloDetailCtrl
+                 * @description
+                 * Esta función utiliza el protocolo HTTP para obtener el recurso 
+                 * donde se encuentran los modelos en formato JSON. El recurso
+                 * puede ser un archivo o un API Rest. La función se ejecuta
+                 * automáticamente cuando el controlador es accedido desde el
+                 * navegador.
+                 * @param {String} URL Dirección donde se encuentra el recurso
+                 * de los modelos o API donde se puede consultar. Se utiliza el
+                 * contexto definido anteriormente.
+                 */
                 $http.get(modeloContext + '/' + $state.params.modeloId).then(function (response) {
                     $scope.modeloActual = response.data;
                     $scope.tipo = $scope.modeloActual.tipoModelo;
@@ -32,6 +64,20 @@
                         }
                         $scope.imagen = $scope.actuales[0];
                         if ($state.params.modeloId !== undefined && $state.params.modeloId !== null) {
+                            /**
+                             * @ngdoc function
+                             * @name getModelo
+                             * @methodOf modelos.controller:modeloDetailCtrl
+                             * @description
+                             * Esta función utiliza el protocolo HTTP para obtener el recurso 
+                             * donde se encuentran los modelos en formato JSON. El recurso
+                             * puede ser un archivo o un API Rest. La función se ejecuta
+                             * automáticamente cuando el controlador es accedido desde el
+                             * navegador.
+                             * @param {String} URL Dirección donde se encuentra el recurso
+                             * de los modelos o API donde se puede consultar. Se utiliza el
+                             * contexto definido anteriormente.
+                             */
                             $http.get(modeloContext + '/' + $state.params.modeloId).then(function (response) {
                                 $scope.modeloActual = response.data;
                                 if ($scope.modeloActual.items !== undefined && $scope.modeloActual.items !== null && $scope.modeloActual.items.length > 0) {
@@ -73,7 +119,7 @@
                                 }
                             }
                             if (!enc) {
-                              
+
                                 $scope.fin = i - 1;
                             }
                         }
