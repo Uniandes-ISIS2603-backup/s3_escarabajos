@@ -8,7 +8,6 @@ package co.edu.uniandes.csw.escarabajos.resources;
 import co.edu.uniandes.csw.escarabajos.dtos.MedioPagoDTO;
 import co.edu.uniandes.csw.escarabajos.dtos.MedioPagoDetailDTO;
 import co.edu.uniandes.csw.escarabajos.ejb.MedioPagoLogic;
-import co.edu.uniandes.csw.escarabajos.entities.ClienteEntity;
 import co.edu.uniandes.csw.escarabajos.entities.MedioPagoEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.escarabajos.mappers.BusinessLogicExceptionMapper;
@@ -31,16 +30,17 @@ import javax.ws.rs.WebApplicationException;
  * <pre>Clase que implementa el recurso "MedioPago".
  * URL: /api/mediospago
  * </pre>
- * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta "/api" y
- * este recurso tiene la ruta "mediospago".</i>
+ * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta
+ * "/api" y este recurso tiene la ruta "mediospago".</i>
  *
  * <h2>Anotaciones </h2>
  * <pre>
  * Path: indica la dirección después de "api" para acceder al recurso
  * Produces/Consumes: indica que los servicios definidos en este recurso reciben y devuelven objetos en formato JSON
- * RequestScoped: Inicia una transacción desde el llamado de cada método (servicio). 
+ * RequestScoped: Inicia una transacción desde el llamado de cada método (servicio).
  * </pre>
- * @author jp.carreno  
+ *
+ * @author jp.carreno
  * @version 1.0
  */
 @Path("mediospago")
@@ -53,10 +53,13 @@ import javax.ws.rs.WebApplicationException;
  * @author jp.carreno
  */
 public class MedioPagoResource {
-    
+
+    /**
+     * Inyecta la logica de medio de pago.
+     */
     @Inject
     MedioPagoLogic logic;
-    
+
     private List<MedioPagoDTO> listEntity2DTO(List<MedioPagoEntity> entityList) {
         List<MedioPagoDTO> list = new ArrayList<>();
         for (MedioPagoEntity entity : entityList) {
@@ -64,16 +67,16 @@ public class MedioPagoResource {
         }
         return list;
     }
-    
-     /**
+
+    /**
      * <h1>POST /api/mediospago : Crear un medio de pago.</h1>
-     * 
+     *
      * <pre>Cuerpo de petición: JSON {@link MedioPagoDetailDTO}.
-     * 
-     * Crea un nuevo medio de pago con la informacion que se recibe en el cuerpo 
-     * de la petición y se regresa un objeto identico con un id auto-generado 
+     *
+     * Crea un nuevo medio de pago con la informacion que se recibe en el cuerpo
+     * de la petición y se regresa un objeto identico con un id auto-generado
      * por la base de datos.
-     * 
+     *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Creó el nuevo medio de pago.
@@ -82,9 +85,13 @@ public class MedioPagoResource {
      * 412 Precodition Failed: Ya existe el medio de pago.
      * </code>
      * </pre>
-     * @param medioP {@link MedioPagoDetailDTO} - La ciudad que se desea guardar.
-     * @return JSON {@link MedioPagoDetailDTO}  - La ciudad guardada con el atributo id autogenerado.
-     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la ciudad.
+     *
+     * @param medioP {@link MedioPagoDetailDTO} - La ciudad que se desea
+     * guardar.
+     * @return JSON {@link MedioPagoDetailDTO} - La ciudad guardada con el
+     * atributo id autogenerado.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
+     * Error de lógica que se genera cuando ya existe la ciudad.
      */
     @POST
     public MedioPagoDTO createMedioPago(MedioPagoDTO medioP) throws BusinessLogicException {
@@ -94,14 +101,16 @@ public class MedioPagoResource {
 
     /**
      * <h1>GET /api/mediospago : Obtener todos los medios de pago.</h1>
-     * 
+     *
      * <pre>Busca y devuelve todos los medios de pago que existen en la aplicacion.
-     * 
+     *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Devuelve todos los medios de pago de la aplicacion.</code> 
+     * 200 OK Devuelve todos los medios de pago de la aplicacion.</code>
      * </pre>
-     * @return JSONArray {@link MedioPagoDetailDTO} - Los medios de pago encontrados en la aplicación. Si no hay ninguno retorna una lista vacía.
+     *
+     * @return JSONArray {@link MedioPagoDetailDTO} - Los medios de pago
+     * encontrados en la aplicación. Si no hay ninguno retorna una lista vacía.
      */
     @GET
     public List<MedioPagoDTO> getMediosPago() {
@@ -110,18 +119,20 @@ public class MedioPagoResource {
 
     /**
      * <h1>GET /api/mediospago/{id} : Obtener medio de pago por id.</h1>
-     * 
+     *
      * <pre>Busca el medio de pago con el id asociado recibido en la URL y la devuelve.
-     * 
+     *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Devuelve el medio de pago correspondiente al id.
-     * </code> 
+     * </code>
      * <code style="color: #c7254e; background-color: #f9f2f4;">
      * 404 Not Found No existe un medio de pago con el id dado.
-     * </code> 
+     * </code>
      * </pre>
-     * @param id Identificador del medio de pago que se esta buscando. Este debe ser una cadena de dígitos.
+     *
+     * @param id Identificador del medio de pago que se esta buscando. Este debe
+     * ser una cadena de dígitos.
      * @return JSON {@link MedioPagoDetailDTO} - El medio de pago buscado
      * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
      */
@@ -129,29 +140,35 @@ public class MedioPagoResource {
     @Path("{id: \\d+}")
     public MedioPagoDTO getMedioPago(@PathParam("id") Long id) throws BusinessLogicException {
         MedioPagoEntity entity = logic.getMedioPago(id);
-        if(entity == null){
+        if (entity == null) {
             throw new WebApplicationException("El recurso /mediospago/" + id + " no existe.", 404);
         }
         return new MedioPagoDTO(entity);
     }
-    
+
     /**
-     * <h1>PUT /api/mediospago/{id} : Actualizar medio de pago con el id dado.</h1>
+     * <h1>PUT /api/mediospago/{id} : Actualizar medio de pago con el id
+     * dado.</h1>
      * <pre>Cuerpo de petición: JSON {@link MedioPagoDetailDTO}.
-     * 
+     *
      * Actualiza el medio de pago con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
-     * 
+     *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Actualiza el medio de pago con el id dado con la información enviada como parámetro. Retorna un objeto identico.</code> 
+     * 200 OK Actualiza el medio de pago con el id dado con la información enviada como parámetro. Retorna un objeto identico.</code>
      * <code style="color: #c7254e; background-color: #f9f2f4;">
      * 404 Not Found. No existe un medio de pago con el id dado.
-     * </code> 
+     * </code>
      * </pre>
-     * @param id Identificador del medio de pago que se desea actualizar.Este debe ser una cadena de dígitos.
-     * @param medioP {@link MedioPagoDetailDTO} El medio de pago que se desea guardar.
+     *
+     * @param id Identificador del medio de pago que se desea actualizar.Este
+     * debe ser una cadena de dígitos.
+     * @param medioP {@link MedioPagoDetailDTO} El medio de pago que se desea
+     * guardar.
      * @return JSON {@link MedioPagoDetailDTO} - El medio de pago guardado.
-     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar el medio de pago porque ya existe una con ese nombre.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
+     * Error de lógica que se genera al no poder actualizar el medio de pago
+     * porque ya existe una con ese nombre.
      */
     @PUT
     @Path("{id: \\d+}")
@@ -159,18 +176,18 @@ public class MedioPagoResource {
         MedioPagoEntity entity = medioP.toEntity();
         entity.setId(id);
         MedioPagoEntity antes = logic.getMedioPago(id);
-        if(antes == null){
+        if (antes == null) {
             throw new WebApplicationException("El recurso /mediospago/" + id + " no existe.", 404);
         }
-     
+
         return new MedioPagoDTO(logic.updateMedioPago(id, entity));
     }
-    
+
     /**
      * <h1>DELETE /api/mediospago/{id} : Borrar medio de pago por id.</h1>
-     * 
+     *
      * <pre>Borra el medio de pago con el id asociado recibido en la URL.
-     * 
+     *
      * Códigos de respuesta:<br>
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Elimina el medio de pago correspondiente al id dado.</code>
@@ -178,33 +195,38 @@ public class MedioPagoResource {
      * 404 Not Found. No existe un medio de pago con el id dado.
      * </code>
      * </pre>
-     * @param id Identificador del medio de pago que se desea borrar. Este debe ser una cadena de dígitos.
+     *
+     * @param id Identificador del medio de pago que se desea borrar. Este debe
+     * ser una cadena de dígitos.
      * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
      */
     @DELETE
     @Path("{id: \\d+}")
-     public void deleteMedioPago(@PathParam("id") Long id) throws BusinessLogicException {
+    public void deleteMedioPago(@PathParam("id") Long id) throws BusinessLogicException {
         MedioPagoEntity entity = logic.getMedioPago(id);
-       if(entity == null){
-           throw new WebApplicationException("El recurso /mediospago/" + id + " no existe.", 404);
-       }
-       logic.deleteMedioPago(id);
+        if (entity == null) {
+            throw new WebApplicationException("El recurso /mediospago/" + id + " no existe.", 404);
+        }
+        logic.deleteMedioPago(id);
     }
-     
-     /**
-     * <h1>GET /api/mediospago/cliente/{id} : Obtener todos los medios de pago de un cliente.</h1>
-     * 
+
+    /**
+     * <h1>GET /api/mediospago/cliente/{id} : Obtener todos los medios de pago
+     * de un cliente.</h1>
+     *
      * <pre>Busca y devuelve todos los medios de pago de un cliente con id dado por parametro que existen en la aplicacion.
-     * 
+     *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Devuelve todos los medios de pago de un cliente de la aplicacion.</code> 
+     * 200 OK Devuelve todos los medios de pago de un cliente de la aplicacion.</code>
      * </pre>
-     * @return JSONArray {@link MedioPagoDTO} - Los medios de pago encontrados en la aplicación. Si no hay ninguno retorna una lista vacía.
+     *
+     * @return JSONArray {@link MedioPagoDTO} - Los medios de pago encontrados
+     * en la aplicación. Si no hay ninguno retorna una lista vacía.
      */
     @GET
     @Path("cliente/{idCliente: \\d+}")
-    public List<MedioPagoDTO> getMediosPagoCliente(@PathParam("idCliente") Long idCliente){
+    public List<MedioPagoDTO> getMediosPagoCliente(@PathParam("idCliente") Long idCliente) {
         return listEntity2DTO(logic.getMediosPagoCliente(idCliente));
     }
 }

@@ -24,7 +24,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 
-
 @Path("clientes/{idCliente: \\d+}/mediospago")
 @Produces("application/json")
 @Consumes("application/json")
@@ -35,15 +34,19 @@ import javax.ws.rs.WebApplicationException;
  * @author jp.carreno
  */
 public class ClienteMedioPagoResource {
-    
-    private static final Logger LOGGER = Logger.getLogger(ClienteMedioPagoResource.class.getName());
-    
+
+    /**
+     * Inyecta la logica de cliente.
+     */
     @Inject
     ClienteLogic logicCliente;
-    
+
+    /**
+     * Inyecta la logica de medio de pago.
+     */
     @Inject
     MedioPagoLogic logicMedio;
-    
+
     private List<MedioPagoDTO> listEntity2DTO(List<MedioPagoEntity> entityList) {
         List<MedioPagoDTO> list = new ArrayList<>();
         for (MedioPagoEntity entity : entityList) {
@@ -51,16 +54,17 @@ public class ClienteMedioPagoResource {
         }
         return list;
     }
-    
-     /**
-     * <h1>POST /api/clientes/{idCliente}/mediospago : Crear un medio de pago.</h1>
-     * 
+
+    /**
+     * <h1>POST /api/clientes/{idCliente}/mediospago : Crear un medio de
+     * pago.</h1>
+     *
      * <pre>Cuerpo de petición: JSON {@link MedioPagoDTO}.
-     * 
-     * Crea un nuevo medio de pago de un cliente con la informacion que se recibe en el cuerpo 
-     * de la petición y se regresa un objeto identico con un id auto-generado 
+     *
+     * Crea un nuevo medio de pago de un cliente con la informacion que se recibe en el cuerpo
+     * de la petición y se regresa un objeto identico con un id auto-generado
      * por la base de datos.
-     * 
+     *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Creó el nuevo medio de pago.
@@ -69,39 +73,44 @@ public class ClienteMedioPagoResource {
      * 412 Precodition Failed: No existe el cliente.
      * </code>
      * </pre>
-     * @param medioP {@link MedioPagoDTO} - El medio de pago que se desea guardar.
-     * @return JSON {@link MedioPagoDTO}  - El medio de pago guardado con el atributo id autogenerado.
-     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando no existe el cliente.
+     *
+     * @param medioP {@link MedioPagoDTO} - El medio de pago que se desea
+     * guardar.
+     * @return JSON {@link MedioPagoDTO} - El medio de pago guardado con el
+     * atributo id autogenerado.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
+     * Error de lógica que se genera cuando no existe el cliente.
      */
     @POST
-    public MedioPagoDTO createMedioPagoCliente(@PathParam("idCliente")Long idCliente, MedioPagoDTO medioP) throws BusinessLogicException{
+    public MedioPagoDTO createMedioPagoCliente(@PathParam("idCliente") Long idCliente, MedioPagoDTO medioP) throws BusinessLogicException {
         MedioPagoEntity temp = medioP.toEntity();
         ClienteEntity cliente = logicCliente.getCliente(idCliente);
-        if(cliente!=null){
+        if (cliente != null) {
             temp.setCliente(cliente);
             MedioPagoEntity medioPago = logicMedio.createMedioPago(temp);
-        }
-        else{
+        } else {
             throw new WebApplicationException("El recurso /clientes/" + idCliente + "no existe", 404);
         }
         return new MedioPagoDTO(temp);
     }
-    
-     /**
-     * <h1>GET /api/clientes/{id}/mediospago : Obtener todos los medios de pago de un cliente.</h1>
-     * 
+
+    /**
+     * <h1>GET /api/clientes/{id}/mediospago : Obtener todos los medios de pago
+     * de un cliente.</h1>
+     *
      * <pre>Busca y devuelve todos los medios de pago de un cliente con id dado por parametro que existen en la aplicacion.
-     * 
+     *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Devuelve todos los medios de pago de un cliente de la aplicacion.</code> 
+     * 200 OK Devuelve todos los medios de pago de un cliente de la aplicacion.</code>
      * </pre>
-     * @return JSONArray {@link MedioPagoDTO} - Los medios de pago encontrados en la aplicación. Si no hay ninguno retorna una lista vacía.
+     *
+     * @return JSONArray {@link MedioPagoDTO} - Los medios de pago encontrados
+     * en la aplicación. Si no hay ninguno retorna una lista vacía.
      */
     @GET
-    public List<MedioPagoDTO> getMediosPagoCliente(@PathParam("idCliente")Long idCliente){
+    public List<MedioPagoDTO> getMediosPagoCliente(@PathParam("idCliente") Long idCliente) {
         return listEntity2DTO(logicMedio.getMediosPagoCliente(idCliente));
     }
-    
-    
+
 }

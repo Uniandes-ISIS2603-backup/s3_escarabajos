@@ -13,7 +13,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 /**
  * <pre>Clase que implementa el recurso "modelos/{id}/items".
@@ -37,8 +36,9 @@ import java.util.logging.Logger;
 @Produces(MediaType.APPLICATION_JSON)
 public class ModeloItemsResource {
 
-    private static final Logger LOGGER = Logger.getLogger(ModeloItemsResource.class.getName());
-
+    /**
+     * Inyecta la logica de modelo.
+     */
     @Inject
     private ModeloLogic modeloLogic;
 
@@ -88,8 +88,8 @@ public class ModeloItemsResource {
     }
 
     /**
-     * <h1>GET /api/modelos/{modelosId}/items : Obtener item por id
-     * del modelo por id.</h1>
+     * <h1>GET /api/modelos/{modelosId}/items : Obtener item por id del modelo
+     * por id.</h1>
      *
      * <pre>Busca el item con el id asociado dentro del modelo con id asociado.
      *
@@ -104,10 +104,10 @@ public class ModeloItemsResource {
      *
      * @param modelosId Identificador del modelo que se esta buscando. Este debe
      * ser un cadena de dígitos.
-     * @return 
+     * @return
      */
     @GET
     public List<ItemDetailDTO> getItems(@PathParam("modelosId") Long modelosId) throws BusinessLogicException {
-       return itemsListEntity2DTO(modeloLogic.listItems(modelosId));
+        return itemsListEntity2DTO(modeloLogic.listItems(modelosId));
     }
 }

@@ -47,9 +47,15 @@ import javax.ws.rs.WebApplicationException;
 @RequestScoped
 public class AcessorioResource {
 
+    /**
+     * Inyecta la logica de accesorio.
+     */
     @Inject
     AccesorioLogic logic;
 
+    /**
+     * Inyecta la logica de modelo.
+     */
     @Inject
     ModeloLogic modeloLogic;
 
@@ -124,12 +130,12 @@ public class AcessorioResource {
     @Path("{id: \\d+}")
     public AccesorioDTO getAccesorio(@PathParam("id") Long id) {
         AccesorioEntity entity = logic.getAccesorio(id);
-        
-        if(entity == null){
-            
+
+        if (entity == null) {
+
             throw new WebApplicationException("El accesorio no existe");
         }
-        
+
         return new AccesorioDTO(logic.getAccesorio(id));
     }
 
@@ -159,14 +165,14 @@ public class AcessorioResource {
     @PUT
     @Path("{id: \\d+}")
     public AccesorioDTO updateAccesorio(@PathParam("id") Long id, AccesorioDTO accesorio) throws BusinessLogicException {
-        
+
         AccesorioEntity entity = logic.getAccesorio(id);
-        
-        if(entity == null){
-            
+
+        if (entity == null) {
+
             throw new WebApplicationException("El accesorio no existe");
         }
-        
+
         return new AccesorioDTO(logic.updateAccesorio(accesorio.toEntity()));
     }
 
@@ -191,11 +197,9 @@ public class AcessorioResource {
     @DELETE
     @Path("{id: \\d+}")
     public void deleteAccesorio(@PathParam("id") Long id) throws BusinessLogicException {
-        
-        logic.deleteAccesorio(id); 
-        
-        
-        
+
+        logic.deleteAccesorio(id);
+
     }
 
     private List<AccesorioDTO> listBookEntity2DetailDTO(List<AccesorioEntity> entityList) {

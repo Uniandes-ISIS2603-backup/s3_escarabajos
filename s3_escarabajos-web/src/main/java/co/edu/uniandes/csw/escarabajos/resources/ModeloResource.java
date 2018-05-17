@@ -11,7 +11,6 @@ import co.edu.uniandes.csw.escarabajos.entities.ModeloEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -48,7 +47,9 @@ import javax.ws.rs.core.MediaType;
 @RequestScoped
 public class ModeloResource {
 
-    private static final Logger LOGGER = Logger.getLogger(ModeloResource.class.getName());
+    /**
+     * Inyecta la logica de modelo.
+     */
     @Inject
     ModeloLogic modeloLogic;
 
@@ -170,7 +171,8 @@ public class ModeloResource {
      *
      * @param id Identificador del modelo que se desea borrar. Este debe ser una
      * cadena de dígitos.
-     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException si no encuentra el modelo
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
+     * si no encuentra el modelo
      */
     @DELETE
     @Path("/{id: \\d+}")

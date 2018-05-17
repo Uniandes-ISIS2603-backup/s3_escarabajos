@@ -52,6 +52,9 @@ import javax.ws.rs.core.MediaType;
 @RequestScoped
 public class CatalogoResource {
 
+    /**
+     * Inyecta la logica de catalogo.
+     */
     @Inject
     CatalogoLogic catalogoLogic;
 
@@ -463,7 +466,7 @@ public class CatalogoResource {
      */
     @DELETE
     @Path("marcas/{marca}")
-    public void deleteMarca(@PathParam("marca")String marca) throws BusinessLogicException {
+    public void deleteMarca(@PathParam("marca") String marca) throws BusinessLogicException {
         catalogoLogic.deleteMarca(marca);
     }
 

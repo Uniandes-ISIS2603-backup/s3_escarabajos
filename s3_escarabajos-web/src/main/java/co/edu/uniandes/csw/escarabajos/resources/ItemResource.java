@@ -36,6 +36,9 @@ import javax.ws.rs.WebApplicationException;
 @RequestScoped
 public class ItemResource {
 
+    /**
+     * Inyecta la logica de item.
+     */
     @Inject
     ItemLogic itemLogic;
 

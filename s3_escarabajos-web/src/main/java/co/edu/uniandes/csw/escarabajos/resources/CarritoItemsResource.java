@@ -29,42 +29,53 @@ import javax.ws.rs.WebApplicationException;
  * <pre> Clase que implementa el recurso "items" del recurso "carrito".
  * URL: /api/clientes/{idCliente}/carrito/items
  * </pre>
- * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta "/api" y
- * este recurso tiene la ruta "items".</i>
+ * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta
+ * "/api" y este recurso tiene la ruta "items".</i>
  *
  * <h2>Anotaciones </h2>
  * <pre>
  * Path: indica la dirección después de "api" para acceder al recurso
  * Produces/Consumes: indica que los servicios definidos en este recurso reciben y devuelven objetos en formato JSON
- * RequestScoped: Inicia una transacción desde el llamado de cada método (servicio). 
+ * RequestScoped: Inicia una transacción desde el llamado de cada método (servicio).
  * @author Mateo
  */
-//DONE: falta formato de idcliente
 @Path("carrito/{idCarrito: \\d+}/items")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
 public class CarritoItemsResource {
-    
-        
+
+    /**
+     * Inyecta la logica de item.
+     */
     @Inject
     ItemLogic itemLogic;
-    
+
+    /**
+     * Inyecta la logica de carrito.
+     */
     @Inject
     CarritoLogic carritoLogic;
-    
+
+    /**
+     * Inyecta la logica de cliente.
+     */
     @Inject
     ClienteLogic clienteLogic;
-    
+
+    /**
+     * Constante que modela el string no existe.
+     */
     private static final String NOEXISTE = "No existe el carrito con id ";
-    
-     /**
-     * <h1>POST /api/clientes/{idCLiente}/carrito/items/{idItem} : Agrega un item al carrito.</h1>
-     * 
+
+    /**
+     * <h1>POST /api/clientes/{idCLiente}/carrito/items/{idItem} : Agrega un
+     * item al carrito.</h1>
+     *
      * <pre>agrega el item con el id asociado recibido en la URL con el cliente con el id asociado recibido en la URL.
-     * 
+     *
      * Agrega un item al carrito y regresa el item agregado
-     * 
+     *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK se agrego el item.
@@ -73,50 +84,52 @@ public class CarritoItemsResource {
      * 412 Precodition Failed: No existe el item.
      * </code>
      * </pre>
-     * @param idItem Identificador del item que se desea agregar. Este debe ser una cadena de dígitos.
+     *
+     * @param idItem Identificador del item que se desea agregar. Este debe ser
+     * una cadena de dígitos.
      * @return JSON {@link ItemDetailDTO} - el item agregado.
      */
     @POST
     @Path("/{idItem: \\d+}")
-    public ItemDetailDTO addItemCarrito(@PathParam("idCarrito") Long idCarrito, @PathParam("idItem") Long idItem ){
+    public ItemDetailDTO addItemCarrito(@PathParam("idCarrito") Long idCarrito, @PathParam("idItem") Long idItem) {
         //DONE si no existe el recurso cliente con idCliente debe disparar WebApplicationException
         //DONE si no existe el recurso item con idItem debe disparar WebApplicationException
         //DONE: Este try catch está mal
         try {
-            
+
             CarritoEntity carritoEntity = carritoLogic.findCarrito(idCarrito);
-            
-            if(carritoEntity==null){
+
+            if (carritoEntity == null) {
                 throw new WebApplicationException(NOEXISTE + idCarrito, 404);
             }
-            
+
             ItemEntity itemEntity = itemLogic.getItem(idItem);
-            
-            if(itemEntity==null){
+
+            if (itemEntity == null) {
                 throw new WebApplicationException("El item " + idItem + " no existe.", 404);
             }
-            
-            List<ItemDetailDTO> items =getItemsCarrito(idCarrito);
-            
-            if (items.contains(new ItemDetailDTO(itemEntity,itemLogic.getReferenciaItem(itemEntity)))) {
+
+            List<ItemDetailDTO> items = getItemsCarrito(idCarrito);
+
+            if (items.contains(new ItemDetailDTO(itemEntity, itemLogic.getReferenciaItem(itemEntity)))) {
                 throw new WebApplicationException("El item ya esta en su carrito", 500);
             }
             itemEntity = itemLogic.getItem(idItem);
-            return new ItemDetailDTO( carritoLogic.addItem(idCarrito, idItem ),itemLogic.getReferenciaItem(itemEntity));
-        }
-        catch (BusinessLogicException ex) {
-            
+            return new ItemDetailDTO(carritoLogic.addItem(idCarrito, idItem), itemLogic.getReferenciaItem(itemEntity));
+        } catch (BusinessLogicException ex) {
+
             throw new WebApplicationException(ex, 500);
         }
     }
-    
+
     /**
-     * <h1>DELETE /api/clientes/{idCLiente}/carrito/items/{idItem} : Borra un item del carrito.</h1>
-     * 
+     * <h1>DELETE /api/clientes/{idCLiente}/carrito/items/{idItem} : Borra un
+     * item del carrito.</h1>
+     *
      * <pre>borra el item con el id asociado recibido en la URL con el cliente con el id asociado recibido en la URL.
-     * 
+     *
      * Borra un item del carrito y regresa el item borrado
-     * 
+     *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK se borro el item.
@@ -125,38 +138,41 @@ public class CarritoItemsResource {
      * 412 Precodition Failed: No existe el item.
      * </code>
      * </pre>
-     * @param idCliente Identificador del cliente dueño del carrito al que se desea agregar. Este debe ser una cadena de dígitos.
-     * @param idItem Identificador del item que se desea borrar. Este debe ser una cadena de dígitos.
+     *
+     * @param idCliente Identificador del cliente dueño del carrito al que se
+     * desea agregar. Este debe ser una cadena de dígitos.
+     * @param idItem Identificador del item que se desea borrar. Este debe ser
+     * una cadena de dígitos.
      * @return JSON {@link ItemDetailDTO} - el item borrado.
      */
     @DELETE
     @Path("{idItem: \\d+}")
-    public ItemDetailDTO deleteItemCarrito(@PathParam("idCarrito") Long idCarrito, @PathParam("idItem") Long idItem ){
+    public ItemDetailDTO deleteItemCarrito(@PathParam("idCarrito") Long idCarrito, @PathParam("idItem") Long idItem) {
         //DONE si no existe el recurso cliente con idCliente debe disparar WebApplicationException
         //DONE si no existe el recurso item con idItem debe disparar WebApplicationException
         //DONE: Este try catch está mal
         try {
-            
+
             CarritoEntity carritoEntity = carritoLogic.findCarrito(idCarrito);
-            
-            if(carritoEntity==null){
+
+            if (carritoEntity == null) {
                 throw new WebApplicationException(NOEXISTE + idCarrito, 404);
             }
-            
+
             ItemEntity itemEntity = itemLogic.getItem(idItem);
-            
-            if(itemEntity==null){
+
+            if (itemEntity == null) {
                 throw new WebApplicationException("El item " + idItem + " no existe.", 404);
             }
-            
-            return new ItemDetailDTO( carritoLogic.removeItem(idCarrito, idItem),itemLogic.getReferenciaItem(itemEntity) );
+
+            return new ItemDetailDTO(carritoLogic.removeItem(idCarrito, idItem), itemLogic.getReferenciaItem(itemEntity));
         } catch (BusinessLogicException ex) {
-            throw new WebApplicationException(ex,500);
+            throw new WebApplicationException(ex, 500);
         }
     }
-    
+
     @DELETE
-    public void vaciarCarrito(@PathParam("idCarrito") Long idCarrito){
+    public void vaciarCarrito(@PathParam("idCarrito") Long idCarrito) {
         //DONE si no existe el recurso cliente con idCliente debe disparar WebApplicationException
         //DONE si no existe el recurso item con idItem debe disparar WebApplicationException
         //DONE: Este try catch está mal
@@ -168,41 +184,44 @@ public class CarritoItemsResource {
             deleteItemCarrito(idCarrito, items.get(i).getId());
         }
     }
-    
-     /**
-     * <h1>GET /api/clientes/{idCliente}/carrito/items : Obtener los items del carrito del cliente.</h1>
-     * 
+
+    /**
+     * <h1>GET /api/clientes/{idCliente}/carrito/items : Obtener los items del
+     * carrito del cliente.</h1>
+     *
      * <pre>Busca y devuelve los items del carrito del cliente.
-     * 
+     *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Devueve los items del carrito del cliente.</code> 
+     * 200 OK Devueve los items del carrito del cliente.</code>
      * </pre>
+     *
      * @param idCarrito
-     * @return JSONArray {@link ItemDetailDTO} - los items del carrito del cliente. Si no hay ninguna retorna una lista vacía.
+     * @return JSONArray {@link ItemDetailDTO} - los items del carrito del
+     * cliente. Si no hay ninguna retorna una lista vacía.
      */
     @GET
-    public List<ItemDetailDTO> getItemsCarrito( @PathParam("idCarrito") Long idCarrito ) {
+    public List<ItemDetailDTO> getItemsCarrito(@PathParam("idCarrito") Long idCarrito) {
         try {
-            
+
             CarritoEntity carritoEntity = carritoLogic.findCarrito(idCarrito);
-            
-            if(carritoEntity==null){
+
+            if (carritoEntity == null) {
                 throw new WebApplicationException(NOEXISTE + idCarrito, 404);
             }
-            
+
             return listEntity2DTO(carritoLogic.getItems(idCarrito));
-            
+
         } catch (BusinessLogicException ex) {
             throw new WebApplicationException(ex, 500);
         }
     }
-    
+
     private List<ItemDetailDTO> listEntity2DTO(List<ItemEntity> entityList) {
         List<ItemDetailDTO> list = new ArrayList<>();
         for (ItemEntity entity : entityList) {
-            list.add(new ItemDetailDTO(entity,itemLogic.getReferenciaItem(entity)));
+            list.add(new ItemDetailDTO(entity, itemLogic.getReferenciaItem(entity)));
         }
         return list;
-    }   
- }
+    }
+}

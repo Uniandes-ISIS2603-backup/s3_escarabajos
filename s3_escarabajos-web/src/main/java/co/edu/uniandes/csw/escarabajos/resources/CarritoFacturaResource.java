@@ -14,7 +14,6 @@ import co.edu.uniandes.csw.escarabajos.ejb.ItemLogic;
 import co.edu.uniandes.csw.escarabajos.entities.FacturaEntity;
 import co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
-import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -33,25 +32,41 @@ import javax.ws.rs.Produces;
 @RequestScoped
 public class CarritoFacturaResource {
 
+    /**
+     * Inyecta la logica de carrito.
+     */
     @Inject
     CarritoLogic logicCarrito;
 
+    /**
+     * Inyecta la logica de cliente.
+     */
     @Inject
     ClienteLogic logicCliente;
 
+    /**
+     * Inyecta la logica de factura.
+     */
     @Inject
     FacturaLogic logicFactura;
 
+    /**
+     * Inyecta la logica de item.
+     */
     @Inject
     ItemLogic logicItem;
 
+    /**
+     * Inyecta el recurso ClienteCarrito.
+     */
     @Inject
     ClienteCarritoResource clienteCarrito;
 
+    /**
+     * Inyecta el recurso CarritoItems.
+     */
     @Inject
     CarritoItemsResource carritoR;
-
-    private static final Logger LOGGER = Logger.getLogger(CarritoFacturaResource.class.getName());
 
     /**
      * <h1>GET /api/clientes/{idCliente}/carrito/factura : Obtener el carrito
@@ -71,24 +86,21 @@ public class CarritoFacturaResource {
      * buscar. Este debe ser una cadena de dígitos.
      * @return JSON {@link FacturaDetailDTO} - la factura generada por el
      * carritp lanza excepcion si no hay items en el carrito.
+     * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
      */
     @POST
     public FacturaDTO getFacturaCarrito(@PathParam("idCliente") Long idCliente) throws BusinessLogicException {
-        //DONE: Revisar este código. Es un GET pero hace un create?
         //asi es como queremos que sea para que cuando le den generar get factura se genere y se devuelve la factura que se genero
 
         CarritoDetailDTO carrito = clienteCarrito.getCarrito(idCliente);
         FacturaEntity factura = logicCarrito.crearFactura(carrito.getId());
 
         for (int i = 0; i < factura.getItems().size(); i++) {
-            
-            LOGGER.info("AAAAAAAAAAA" + factura.getItems().get(i).getId());
-
             logicItem.comprarItem(factura.getItems().get(i).getId());
         }
 
         factura.setItems(new ArrayList<>());
-        
+
         factura.setCliente(logicCliente.getCliente(idCliente));
         FacturaEntity factura2 = logicFactura.createFactura(factura);
 

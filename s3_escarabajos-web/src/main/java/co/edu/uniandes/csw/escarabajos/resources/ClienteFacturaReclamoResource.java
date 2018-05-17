@@ -46,12 +46,21 @@ import javax.ws.rs.WebApplicationException;
 @Consumes("application/json")
 public class ClienteFacturaReclamoResource {
 
+    /**
+     * Inyecta la logica de reclamo.
+     */
     @Inject
     ReclamoLogic reclamo;
 
+    /**
+     * Inyecta la logica de factura.
+     */
     @Inject
     FacturaLogic factura;
 
+    /**
+     * Inyecta la logica de cliente.
+     */
     @Inject
     ClienteLogic cliente;
 
@@ -134,6 +143,7 @@ public class ClienteFacturaReclamoResource {
         }
         reclamo.renaudarReclamo(id);
     }
+
     @GET
     @Path("/{reclamosId: \\d+}")
     public ReclamoDetailDTO getReclamo(@PathParam("reclamosId") Long id) throws BusinessLogicException {
@@ -143,6 +153,7 @@ public class ClienteFacturaReclamoResource {
         }
         return new ReclamoDetailDTO(recl);
     }
+
     @GET
     @Path("/detail/{clientesId: \\d+}")
     public List<ReclamoDetailDTO> getByCliente(@PathParam("clientesId") Long idCliente) throws BusinessLogicException {
@@ -151,9 +162,10 @@ public class ClienteFacturaReclamoResource {
         }
         return list2DTO(reclamo.getReclamoByCliente(idCliente));
     }
+
     @GET
     public List<ReclamoDetailDTO> getEnProceso() throws BusinessLogicException {
-        
+
         return list2DTO(reclamo.findAll());
     }
 

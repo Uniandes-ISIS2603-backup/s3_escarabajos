@@ -35,35 +35,42 @@ import javax.ws.rs.WebApplicationException;
  * <pre>Clase que implementa el recurso "clientes".
  * URL: /api/clientes
  * </pre>
- * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta "/api" y
- * este recurso tiene la ruta "clientes".</i>
+ * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta
+ * "/api" y este recurso tiene la ruta "clientes".</i>
  *
  * <h2>Anotaciones </h2>
  * <pre>
  * Path: indica la dirección después de "api" para acceder al recurso
  * Produces/Consumes: indica que los servicios definidos en este recurso reciben y devuelven objetos en formato JSON
- * RequestScoped: Inicia una transacción desde el llamado de cada método (servicio). 
+ * RequestScoped: Inicia una transacción desde el llamado de cada método (servicio).
  * </pre>
- * @author s.beltran  
+ *
+ * @author s.beltran
  * @version 1.0
  */
 public class ClienteResource {
-    
+
+    /**
+     * Inyecta la logica de cliente.
+     */
     @Inject
     ClienteLogic logic;
-    
+
+    /**
+     * Inyecta la logica de carrito.
+     */
     @Inject
     CarritoLogic Carritologic;
-    
+
     /**
      * <h1>POST /api/clientes : Crear un cliente.</h1>
-     * 
+     *
      * <pre>Cuerpo de petición: JSON {@link ClienteDetailDTO}.
-     * 
-     * Crea un nuevo ciente con la informacion que se recibe en el cuerpo 
-     * de la petición y se regresa un objeto identico con un id auto-generado 
+     *
+     * Crea un nuevo ciente con la informacion que se recibe en el cuerpo
+     * de la petición y se regresa un objeto identico con un id auto-generado
      * por la base de datos.
-     * 
+     *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Creó el nuevo cliente .
@@ -72,36 +79,43 @@ public class ClienteResource {
      * 412 Precodition Failed: Ya existe el cliente.
      * </code>
      * </pre>
-     * @param cliente {@link ClienteDetailDTO} - El cliente que se desea guardar.
-     * @return JSON {@link ClienteDetailDTO}  - El cliente guardado con el atributo id autogenerado.
-     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe el cliente.
+     *
+     * @param cliente {@link ClienteDetailDTO} - El cliente que se desea
+     * guardar.
+     * @return JSON {@link ClienteDetailDTO} - El cliente guardado con el
+     * atributo id autogenerado.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
+     * Error de lógica que se genera cuando ya existe el cliente.
      */
     @POST
     public ClienteDetailDTO createCliente(ClienteDetailDTO cliente) throws BusinessLogicException {
         return new ClienteDetailDTO(logic.createCliente(cliente.toEntity()));
     }
+
     /**
      * <h1>GET /api/clientes : Obtener todos las clientes.</h1>
-     * 
+     *
      * <pre>Busca y devuelve todas los clientes que existen en la aplicacion.
-     * 
+     *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Devuelve todas los clientes de la aplicacion.</code> 
+     * 200 OK Devuelve todas los clientes de la aplicacion.</code>
      * </pre>
-     * @return JSONArray {@link ClienteDetailDTO} - Los clientes encontrados en la aplicación. Si no hay ninguna retorna una lista vacía.
+     *
+     * @return JSONArray {@link ClienteDetailDTO} - Los clientes encontrados en
+     * la aplicación. Si no hay ninguna retorna una lista vacía.
      */
     @GET
     public List<ClienteDetailDTO> getClientes() {
-        return listEntity2DTO(logic.getClientes());    
+        return listEntity2DTO(logic.getClientes());
     }
-    
+
     /**
      * Convierte una lista de ClienteEntity a una lista de ClienteDetailDTO.
      *
      * @param entityList Lista de ClienteEntity a convertir.
      * @return Lista de ClienteDetailDTO convertida.
-     * 
+     *
      */
     private List<ClienteDetailDTO> listEntity2DTO(List<ClienteEntity> entityList) {
         List<ClienteDetailDTO> list = new ArrayList<>();
@@ -110,20 +124,23 @@ public class ClienteResource {
         }
         return list;
     }
-     /**
+
+    /**
      * <h1>GET /api/clientes/{id} : Obtener cliente por id.</h1>
-     * 
+     *
      * <pre>Busca cliente con el id asociado recibido en la URL y la devuelve.
-     * 
+     *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Devuelve cliente correspondiente al id.
-     * </code> 
+     * </code>
      * <code style="color: #c7254e; background-color: #f9f2f4;">
      * 404 Not Found No existe un cliente con el id dado.
-     * </code> 
+     * </code>
      * </pre>
-     * @param id Identificador del cliente que se esta buscando. Este debe ser una cadena de dígitos.
+     *
+     * @param id Identificador del cliente que se esta buscando. Este debe ser
+     * una cadena de dígitos.
      * @return JSON {@link ClienteDetailDTO} - El cliente buscado
      */
     @GET
@@ -135,24 +152,28 @@ public class ClienteResource {
         }
         return new ClienteDetailDTO(entity);
     }
-    
-     /**
+
+    /**
      * <h1>PUT /api/clientes/{id} : Actualizar cliente con el id dado.</h1>
      * <pre>Cuerpo de petición: JSON {@link ClienteDetailDTO}.
-     * 
+     *
      * Actualiza el cliente con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
-     * 
+     *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Actualiza el cliente con el id dado con la información enviada como parámetro. Retorna un objeto identico.</code> 
+     * 200 OK Actualiza el cliente con el id dado con la información enviada como parámetro. Retorna un objeto identico.</code>
      * <code style="color: #c7254e; background-color: #f9f2f4;">
      * 404 Not Found. No existe un cliente con el id dado.
-     * </code> 
+     * </code>
      * </pre>
-     * @param id Identificador del cliente que se desea actualizar.Este debe ser una cadena de dígitos.
-     * @param cliente {@link ClienteDetailDTO} 
+     *
+     * @param id Identificador del cliente que se desea actualizar.Este debe ser
+     * una cadena de dígitos.
+     * @param cliente {@link ClienteDetailDTO}
      * @return JSON {@link ClienteDetailDTO} -
-     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar el cliente porque ya existe otro con ese nombre.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
+     * Error de lógica que se genera al no poder actualizar el cliente porque ya
+     * existe otro con ese nombre.
      */
     @PUT
     @Path("{id: \\d+}")
@@ -165,12 +186,12 @@ public class ClienteResource {
         }
         return new ClienteDetailDTO(logic.updateCliente(entity));
     }
-    
+
     /**
      * <h1>DELETE /api/clientes/{id} : Borrar cliente por id.</h1>
-     * 
+     *
      * <pre>Borra cliente con el id asociado recibido en la URL.
-     * 
+     *
      * Códigos de respuesta:<br>
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Elimina la ciudad correspondiente al id dado.</code>
@@ -178,11 +199,13 @@ public class ClienteResource {
      * 404 Not Found. No existe una ciudad con el id dado.
      * </code>
      * </pre>
-     * @param id Identificador de cliente que se desea borrar. Este debe ser una cadena de dígitos.
+     *
+     * @param id Identificador de cliente que se desea borrar. Este debe ser una
+     * cadena de dígitos.
      */
     @DELETE
     @Path("{id: \\d+}")
-     public void deleteCliente(@PathParam("id") Long id) throws BusinessLogicException {
+    public void deleteCliente(@PathParam("id") Long id) throws BusinessLogicException {
         // Void
         ClienteEntity entity = logic.getCliente(id);
         if (entity == null) {
@@ -190,21 +213,23 @@ public class ClienteResource {
         }
         logic.deleteCliente(id);
     }
-     
-     /**
+
+    /**
      * <h1>GET /api/clientes/{id} : Obtener carrito cliente por id.</h1>
-     * 
+     *
      * <pre>Busca cliente con el id asociado recibido en la URL y la devuelve con su carrito.
-     * 
+     *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Devuelve cliente correspondiente al id.
-     * </code> 
+     * </code>
      * <code style="color: #c7254e; background-color: #f9f2f4;">
      * 404 Not Found No existe un cliente con el id dado.
-     * </code> 
+     * </code>
      * </pre>
-     * @param id Identificador del cliente que se esta buscando. Este debe ser una cadena de dígitos.
+     *
+     * @param id Identificador del cliente que se esta buscando. Este debe ser
+     * una cadena de dígitos.
      * @return JSON {@link ClienteDetailDTO} - El cliente buscado
      */
     @Path("{idCliente: \\d+}/carrito")
@@ -215,22 +240,23 @@ public class ClienteResource {
         }
         return ClienteCarritoResource.class;
     }
-    
-    
+
     /**
      * <h1>GET /api/clientes/{id} : Obtener carrito cliente por id.</h1>
-     * 
+     *
      * <pre>Busca cliente con el id asociado recibido en la URL y la devuelve con su carrito.
-     * 
+     *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Devuelve cliente correspondiente al id.
-     * </code> 
+     * </code>
      * <code style="color: #c7254e; background-color: #f9f2f4;">
      * 404 Not Found No existe un cliente con el id dado.
-     * </code> 
+     * </code>
      * </pre>
-     * @param id Identificador del cliente que se esta buscando. Este debe ser una cadena de dígitos.
+     *
+     * @param id Identificador del cliente que se esta buscando. Este debe ser
+     * una cadena de dígitos.
      * @return JSON {@link ClienteDetailDTO} - El cliente buscado
      */
     @Path("{idCliente: \\d+}/listadeseos")
@@ -243,20 +269,23 @@ public class ClienteResource {
     }
 
     /**
-     * <h1>GET /api/clientes/vendedores : Obtener todos las clientes vendedores.</h1>
-     * 
+     * <h1>GET /api/clientes/vendedores : Obtener todos las clientes
+     * vendedores.</h1>
+     *
      * <pre>Busca y devuelve todas los clientes vendedores que existen en la aplicacion.
-     * 
+     *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Devuelve todas los clientes de la aplicacion.</code> 
+     * 200 OK Devuelve todas los clientes de la aplicacion.</code>
      * </pre>
-     * @return JSONArray {@link ClienteDetailDTO} - Los clientes encontrados en la aplicación. Si no hay ninguna retorna una lista vacía.
+     *
+     * @return JSONArray {@link ClienteDetailDTO} - Los clientes encontrados en
+     * la aplicación. Si no hay ninguna retorna una lista vacía.
      */
     @GET
     @Path("/vendedores")
     public List<ClienteDetailDTO> getVendedores() {
-        return listEntity2DTO(logic.getVendedores());    
+        return listEntity2DTO(logic.getVendedores());
     }
-    
+
 }

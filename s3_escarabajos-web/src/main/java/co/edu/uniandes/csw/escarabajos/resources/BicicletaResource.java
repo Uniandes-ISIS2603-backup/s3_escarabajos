@@ -23,49 +23,54 @@ import javax.ws.rs.WebApplicationException;
  * <pre>Clase que implementa el recurso "bicis".
  * URL: /api/bicis
  * </pre>
- * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta "/api" y
- * este recurso tiene la ruta "bicis".</i>
+ * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta
+ * "/api" y este recurso tiene la ruta "bicis".</i>
  *
  * <h2>Anotaciones </h2>
  * <pre>
  * Path: indica la dirección después de "api" para acceder al recurso
  * Produces/Consumes: indica que los servicios definidos en este recurso reciben y devuelven objetos en formato JSON
- * RequestScoped: Inicia una transacción desde el llamado de cada método (servicio). 
+ * RequestScoped: Inicia una transacción desde el llamado de cada método (servicio).
  * </pre>
-  * @author c.santacruza
+ *
+ * @author c.santacruza
  */
-
 @Path("bicis")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
 
 public class BicicletaResource {
-    
-    
+
+    /**
+     * Inyecta la logica de bicicleta.
+     */
     @Inject
     BicicletaLogic logic;
-    
+
+    /**
+     * Inyecta la logica de modelo.
+     */
     @Inject
     ModeloLogic modeloLogic;
-     
-     private List<BicicletaDTO> listEntity2DTO(List<BicicletaEntity> entityList) {
+
+    private List<BicicletaDTO> listEntity2DTO(List<BicicletaEntity> entityList) {
         List<BicicletaDTO> list = new ArrayList<>();
         for (BicicletaEntity entity : entityList) {
             list.add(new BicicletaDTO(entity));
         }
         return list;
     }
-    
+
     /**
      * <h1>POST /api/bicis : Crear una bicicleta.</h1>
-     * 
+     *
      * <pre>Cuerpo de petición: JSON {@link BicicletaDTO}.
-     * 
-     * Crea una nueva bicicleta con la informacion que se recibe en el cuerpo 
-     * de la petición y se regresa un objeto identico con un id auto-generado 
+     *
+     * Crea una nueva bicicleta con la informacion que se recibe en el cuerpo
+     * de la petición y se regresa un objeto identico con un id auto-generado
      * por la base de datos.
-     * 
+     *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Creó la nueva bicicleta .
@@ -74,93 +79,105 @@ public class BicicletaResource {
      * 412 Precodition Failed: Ya existe la bicicleta.
      * </code>
      * </pre>
-     * @param bicicleta {@link BicicletaDTO} - La bicicleta que se desea guardar.
-     * @return JSON {@link BicicletaDTO}  - La bicicleta guardada con el atributo id autogenerado.
-     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la bicicleta.
+     *
+     * @param bicicleta {@link BicicletaDTO} - La bicicleta que se desea
+     * guardar.
+     * @return JSON {@link BicicletaDTO} - La bicicleta guardada con el atributo
+     * id autogenerado.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
+     * Error de lógica que se genera cuando ya existe la bicicleta.
      */
     @POST
     public BicicletaDTO createBicicleta(BicicletaDTO bicicleta) throws BusinessLogicException {
         BicicletaEntity temp = logic.createBicicleta(bicicleta.toEntity());
-        return new BicicletaDTO((BicicletaEntity)modeloLogic.addItem(temp,temp.getModeloId()));
+        return new BicicletaDTO((BicicletaEntity) modeloLogic.addItem(temp, temp.getModeloId()));
     }
 
     /**
      * <h1>GET /api/bicis : Obtener todas las bicicletas.</h1>
-     * 
+     *
      * <pre>Busca y devuelve todas las bicicletas que existen en la aplicacion.
-     * 
+     *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Devuelve todas las bicicletas de la aplicacion.</code> 
+     * 200 OK Devuelve todas las bicicletas de la aplicacion.</code>
      * </pre>
-     * @return JSONArray {@link BicicletaDTO} - Las bicicletas encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
+     *
+     * @return JSONArray {@link BicicletaDTO} - Las bicicletas encontradas en la
+     * aplicación. Si no hay ninguna retorna una lista vacía.
      */
     @GET
     public List<BicicletaDTO> getBicicletas() {
         return listEntity2DTO(logic.getBicicletas());
     }
-    
-   /**
+
+    /**
      * <h1>GET /api/bicis/{id} : Obtener bicicleta por id.</h1>
-     * 
+     *
      * <pre>Busca la bicicleta con el id asociado recibido en la URL y la devuelve.
-     * 
+     *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Devuelve la bicicleta correspondiente al id.
-     * </code> 
+     * </code>
      * <code style="color: #c7254e; background-color: #f9f2f4;">
      * 404 Not Found No existe una bicicleta con el id dado.
-     * </code> 
+     * </code>
      * </pre>
-     * @param id Identificador de la bicicleta que se esta buscando. Este debe ser una cadena de dígitos.
+     *
+     * @param id Identificador de la bicicleta que se esta buscando. Este debe
+     * ser una cadena de dígitos.
      * @return JSON {@link BicicletaDTO} - La bicicleta buscada
      * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
      */
     @GET
     @Path("{id: \\d+}")
-    public BicicletaDTO getBicicleta(@PathParam("id") Long id) throws BusinessLogicException,WebApplicationException {
+    public BicicletaDTO getBicicleta(@PathParam("id") Long id) throws BusinessLogicException, WebApplicationException {
         BicicletaEntity entity = logic.getBicicleta(id);
-        if(entity == null){
+        if (entity == null) {
             throw new WebApplicationException("El recurso /bicis/" + id + " no existe.", 404);
         }
-        return new BicicletaDTO(entity) ;
+        return new BicicletaDTO(entity);
     }
-    
+
     /**
      * <h1>PUT /api/bicis/{id} : Actualizar bicicleta con el id dado.</h1>
      * <pre>Cuerpo de petición: JSON {@link BicicletaDTO}.
-     * 
+     *
      * Actualiza la bicicleta con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
-     * 
+     *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Actualiza la bicicleta con el id dado con la información enviada como parámetro. Retorna un objeto identico.</code> 
+     * 200 OK Actualiza la bicicleta con el id dado con la información enviada como parámetro. Retorna un objeto identico.</code>
      * <code style="color: #c7254e; background-color: #f9f2f4;">
      * 404 Not Found. No existe una bicicleta con el id dado.
-     * </code> 
+     * </code>
      * </pre>
-     * @param id Identificador de la bicicleta que se desea actualizar.Este debe ser una cadena de dígitos.
+     *
+     * @param id Identificador de la bicicleta que se desea actualizar.Este debe
+     * ser una cadena de dígitos.
      * @param bici {@link BicicletaDTO} La bicicleta que se desea guardar.
      * @return JSON {@link BicicletaDTO} - La bicicleta guardada.
-     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar la bicicleta porque ya existe una con ese nombre.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
+     * Error de lógica que se genera al no poder actualizar la bicicleta porque
+     * ya existe una con ese nombre.
      */
     @PUT
     @Path("{id: \\d+}")
     public BicicletaDTO updateBicicleta(@PathParam("id") Long id, BicicletaDTO bici) throws BusinessLogicException {
         bici.setId(id);
         BicicletaEntity entity = logic.getBicicleta(id);
-        if(entity == null){
+        if (entity == null) {
             throw new WebApplicationException("El recurso /bicis/" + id + " no existe.", 404);
         }
         return new BicicletaDTO(logic.updateBicicleta(id, bici.toEntity()));
     }
-    
+
     /**
      * <h1>DELETE /api/bicis/{id} : Borrar bicicleta por id.</h1>
-     * 
+     *
      * <pre>Borra la bicicleta con el id asociado recibido en la URL.
-     * 
+     *
      * Códigos de respuesta:<br>
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Elimina la bicicleta correspondiente al id dado.</code>
@@ -168,17 +185,19 @@ public class BicicletaResource {
      * 404 Not Found. No existe una bicicleta con el id dado.
      * </code>
      * </pre>
-     * @param id Identificador de la bicicleta que se desea borrar. Este debe ser una cadena de dígitos.
+     *
+     * @param id Identificador de la bicicleta que se desea borrar. Este debe
+     * ser una cadena de dígitos.
      * @throws co.edu.uniandes.csw.escarabajos.exceptions.BusinessLogicException
      */
     @DELETE
     @Path("{id: \\d+}")
-     public void deleteBicicleta(@PathParam("id") Long id) throws BusinessLogicException,WebApplicationException {
-       BicicletaEntity entity = logic.getBicicleta(id);
-       if(entity == null){
-           throw new WebApplicationException("El recurso /bicis/" + id + " no existe.", 404);
-       }
-       modeloLogic.removeItem(id);
+    public void deleteBicicleta(@PathParam("id") Long id) throws BusinessLogicException, WebApplicationException {
+        BicicletaEntity entity = logic.getBicicleta(id);
+        if (entity == null) {
+            throw new WebApplicationException("El recurso /bicis/" + id + " no existe.", 404);
+        }
+        modeloLogic.removeItem(id);
     }
-    
+
 }

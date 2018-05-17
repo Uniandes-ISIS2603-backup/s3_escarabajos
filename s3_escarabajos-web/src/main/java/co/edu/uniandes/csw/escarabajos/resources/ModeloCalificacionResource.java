@@ -44,10 +44,21 @@ import javax.ws.rs.WebApplicationException;
 @RequestScoped
 public class ModeloCalificacionResource {
 
+    /**
+     * Inyecta la logica de calificacion.
+     */
     @Inject
     CalificacionLogic cal;
+
+    /**
+     * Inyecta la logica de modelo.
+     */
     @Inject
     ModeloLogic mod;
+
+    /**
+     * Inyecta la logica de cliente.
+     */
     @Inject
     ClienteLogic cli;
 
